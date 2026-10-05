@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Dữ liệu thành phần của file data tổng.
+data/raw/tuoitre_articles.csv
+data/raw/vietnamnet_articles.csv
+data/raw/vnexpress_articles.csv
