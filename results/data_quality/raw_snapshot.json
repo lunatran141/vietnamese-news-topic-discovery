@@ -1,0 +1,90 @@
+{
+  "file": "data\\raw\\news_articles.csv",
+  "sha256": "548b35953368857373e8f26639531b96ab83b742ed6432bff0b6462661b5077a",
+  "size_bytes": 42506167,
+  "n_rows": 9304,
+  "n_cols": 7,
+  "columns": [
+    "article_id",
+    "title",
+    "content",
+    "published_at",
+    "source",
+    "url",
+    "category_gold"
+  ],
+  "dtypes": {
+    "article_id": "object",
+    "title": "object",
+    "content": "object",
+    "published_at": "datetime64[ns, UTC+07:00]",
+    "source": "object",
+    "url": "object",
+    "category_gold": "object"
+  },
+  "git_commit": "5c215c0130e00c7f80ffad021a7838fdd2ddc373",
+  "head_5": [
+    {
+      "article_id": "VNE_2abfa785dfe1",
+      "source": "vnexpress",
+      "category_gold": "Giải trí",
+      "published_at": "2026-09-01 00:00:00+07:00"
+    },
+    {
+      "article_id": "VNE_2c70cf04fe9b",
+      "source": "vnexpress",
+      "category_gold": "Giáo dục",
+      "published_at": "2026-09-01 00:02:00+07:00"
+    },
+    {
+      "article_id": "VNE_93e812f89078",
+      "source": "vnexpress",
+      "category_gold": "Giải trí",
+      "published_at": "2026-09-01 00:30:05+07:00"
+    },
+    {
+      "article_id": "TTR_4ae866118ba3",
+      "source": "tuoitre",
+      "category_gold": "Thể thao",
+      "published_at": "2026-09-01 00:32:00+07:00"
+    },
+    {
+      "article_id": "TTR_bea4a49add27",
+      "source": "tuoitre",
+      "category_gold": "Giải trí",
+      "published_at": "2026-09-01 00:36:00+07:00"
+    }
+  ],
+  "tail_5": [
+    {
+      "article_id": "TTR_70ea67be1dd4",
+      "source": "tuoitre",
+      "category_gold": "Kinh doanh",
+      "published_at": "2026-09-30 22:12:00+07:00"
+    },
+    {
+      "article_id": "TTR_9851f832246d",
+      "source": "tuoitre",
+      "category_gold": "Thể thao",
+      "published_at": "2026-09-30 22:18:00+07:00"
+    },
+    {
+      "article_id": "VNE_77a5c5c0691e",
+      "source": "vnexpress",
+      "category_gold": "Thể thao",
+      "published_at": "2026-09-30 23:01:15+07:00"
+    },
+    {
+      "article_id": "VNE_bb65accb980d",
+      "source": "vnexpress",
+      "category_gold": "Pháp luật",
+      "published_at": "2026-09-30 23:09:31+07:00"
+    },
+    {
+      "article_id": "VNE_1b97b40a8a4b",
+      "source": "vnexpress",
+      "category_gold": "Khoa học công nghệ",
+      "published_at": "2026-09-30 23:58:00+07:00"
+    }
+  ]
+}

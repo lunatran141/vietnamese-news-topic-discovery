@@ -1,0 +1,27 @@
+﻿article_id,issue_type,evidence,action
+VNN_5125d50d6f97,markup_html,Contains raw HTML tags,clean_in_p0
+VNN_6adc5075e331,title_exact_duplicate,"Giá bạc trong nước trái chiều, có loại giảm gần 1 triệu đồng/kg",dedup_in_d02
+TTR_fbd4a3a200cc,title_exact_duplicate,APEC 2027: Cột mốc tạo động lực cho Cảng Hàng không Quốc tế Gia Bình,dedup_in_d02
+VNE_131f838b834b,title_exact_duplicate,Sun Life đẩy mạnh mở rộng mạng lưới tại Việt Nam,dedup_in_d02
+VNN_621236c4d00c,title_exact_duplicate,Sun Life đẩy mạnh mở rộng mạng lưới tại Việt Nam,dedup_in_d02
+VNE_03e8594cb5a7,title_exact_duplicate,"Giá xăng, dầu cùng tăng",dedup_in_d02
+VNN_4de91baec3b9,title_exact_duplicate,APEC 2027: Cột mốc tạo động lực cho Cảng Hàng không Quốc tế Gia Bình,dedup_in_d02
+VNN_fd15fbdb95f4,title_exact_duplicate,Cựu Trưởng Công an Phú Quốc bị đề nghị 14-16 năm tù,dedup_in_d02
+VNE_caee9f2e1b46,title_exact_duplicate,Cựu trưởng Công an Phú Quốc bị đề nghị 14-16 năm tù,dedup_in_d02
+VNN_bd9bdce85826,title_exact_duplicate,Vietjet tổ chức chuỗi Ngày hội tuyển dụng tiếp viên hàng không năm 2026,dedup_in_d02
+VNE_a3a58bb1a4b6,title_exact_duplicate,Con gái bà Cao Thị Ngọc Dung đã bán 7 triệu cổ phiếu PNJ,dedup_in_d02
+TTR_d81ba52fcc71,title_exact_duplicate,Vietjet tổ chức chuỗi Ngày hội tuyển dụng tiếp viên hàng không năm 2026,dedup_in_d02
+TTR_9b8e05e9c007,title_exact_duplicate,Con gái bà Cao Thị Ngọc Dung đã bán 7 triệu cổ phiếu PNJ,dedup_in_d02
+TTR_d1f883def03c,title_exact_duplicate,Tiếp tục hoãn phiên tòa xét xử tài xế gây tai nạn làm chết nữ sinh 14 tuổi ở Vĩn,dedup_in_d02
+VNE_ba28867e9ff4,title_exact_duplicate,Meey Global Corp nộp hồ sơ đăng ký chứng khoán lên SEC,dedup_in_d02
+VNE_7c2cbcb5247f,title_exact_duplicate,"Giá xăng, dầu cùng tăng",dedup_in_d02
+VNN_022f14b5e956,title_exact_duplicate,Meey Global Corp nộp hồ sơ đăng ký chứng khoán lên SEC,dedup_in_d02
+TTR_3e51a50003ae,title_exact_duplicate,HDBank tiếp tục vào top 50 Forbes Việt Nam trong bước chuyển của thị trường vốn,dedup_in_d02
+TTR_9bceb37c3c7a,title_exact_duplicate,Bảng xếp hạng bóng đá nam Asiad 20: U23 Việt Nam nhì bảng C,dedup_in_d02
+VNN_9f82850e1f03,title_exact_duplicate,HDBank tiếp tục vào Top 50 Forbes Việt Nam trong bước chuyển của thị trường vốn,dedup_in_d02
+VNN_d6688747d536,title_exact_duplicate,"Giá bạc trong nước trái chiều, có loại giảm gần 1 triệu đồng/kg",dedup_in_d02
+TTR_e2836bdb6a4a,title_exact_duplicate,Bảng xếp hạng bóng đá nam Asiad 20: U23 Việt Nam nhì bảng C,dedup_in_d02
+VNE_a4eb34c2818e,title_exact_duplicate,"Giá xăng, dầu cùng tăng",dedup_in_d02
+TTR_f92fc5808092,title_exact_duplicate,Tiếp tục hoãn phiên tòa xét xử tài xế gây tai nạn làm chết nữ sinh 14 tuổi ở Vĩn,dedup_in_d02
+VNN_4f1135696f7b,title_near_duplicate,Techcom Life ra mắt chương trình Gieo Yêu Thương cùng Techcom Life,dedup_in_d02
+TTR_0af0cc97c349,title_near_duplicate,Techcom Life ra mắt chương trình 'Gieo Yêu Thương cùng Techcom Life”,dedup_in_d02
