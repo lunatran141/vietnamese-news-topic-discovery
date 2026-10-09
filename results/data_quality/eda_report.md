@@ -24,9 +24,11 @@
 
 ## 4. Trùng lặp & Nguy cơ Rò rỉ (Tầng 4)
 - 0 bài trùng URL hoặc trùng nội dung hoàn toàn.
-- Phát hiện **12 bài viết trùng tiêu đề chính xác** và **13 bài viết gần trùng tiêu đề**. Cần loại bỏ ở Task D02 trước khi chia tập Train/Test để tránh rò rỉ thông tin.
+- **Trùng tiêu đề chính xác:** 11 nhóm (23 bài viết liên quan, dự kiến loại 12 bài nếu mỗi nhóm giữ 1 bài).
+- **Gần trùng tiêu đề:** 1 nhóm (2 bài viết liên quan, dự kiến loại 1 bài nếu mỗi nhóm giữ 1 bài).
+- Tổng cộng 25 bài thuộc 12 nhóm nguy cơ rò rỉ được bàn giao cho Task D02 thẩm định.
 
 ## 5. Đề xuất cho Task D02 & D03
-1. **D02:** Khử trùng lặp dựa trên nhóm tiêu đề chuẩn hóa (25 bài); ưu tiên giữ bản ghi có nội dung dài và chi tiết hơn.
-2. **D03 (P0):** Bóc tách thẻ HTML tag còn sót lại (1 bài).
-3. **D03 (P1):** Loại bỏ boilerplate kêu gọi chia sẻ/theo dõi ở cuối bài và thay thế các URL thô bằng token `<URL>`.
+1. **D02 (Thẩm định trùng lặp):** Kiểm tra nội dung của 25 bài viết thuộc 12 nhóm trùng tiêu đề. Nếu bài viết phản ánh cùng sự kiện nhưng nội dung khác góc nhìn thì áp dụng `keep_both`; chỉ loại bỏ khi trùng lặp nội dung thực sự.
+2. **D03 (P0 - Text Sanitization):** Bóc tách triệt để các thẻ HTML còn sót lại.
+3. **D03 (P1 - Text Normalization):** Loại bỏ boilerplate chia sẻ/theo dõi ở cuối bài và chuẩn hóa các URL thô bằng token `<URL>`.
