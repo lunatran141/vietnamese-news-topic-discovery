@@ -1,0 +1,47 @@
+﻿article_id,issue_type,evidence,action
+VNN_5125d50d6f97,markup_html,Contains raw HTML tags,clean_in_p0
+VNN_ce6278a0ab93,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_fdf91743c133,inline_url,Contains raw URL in content,normalize_in_p1
+TTR_67ea093b6c63,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_8e87ca5d23a6,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_b56dc538cd15,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_186546149c6a,inline_url,Contains raw URL in content,normalize_in_p1
+TTR_514a38517b34,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_2b81727806bf,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_651dc8549991,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_d8cd2776d06b,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_250878ce7cb0,inline_url,Contains raw URL in content,normalize_in_p1
+VNE_ec49fd7790c3,inline_url,Contains raw URL in content,normalize_in_p1
+TTR_9b2da62819c6,inline_url,Contains raw URL in content,normalize_in_p1
+TTR_93224bf59259,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_1b3bf58a8d8b,inline_url,Contains raw URL in content,normalize_in_p1
+TTR_750941f59105,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_72fbb546123a,inline_url,Contains raw URL in content,normalize_in_p1
+TTR_bbcb02ae8505,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_94f4667a24e2,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_f6e93be0758e,inline_url,Contains raw URL in content,normalize_in_p1
+VNN_6adc5075e331,title_exact_duplicate,"Giá bạc trong nước trái chiều, có loại giảm gần 1 triệu đồng/kg",inspect_in_d02
+TTR_fbd4a3a200cc,title_exact_duplicate,APEC 2027: Cột mốc tạo động lực cho Cảng Hàng không Quốc tế Gia Bình,inspect_in_d02
+VNE_131f838b834b,title_exact_duplicate,Sun Life đẩy mạnh mở rộng mạng lưới tại Việt Nam,inspect_in_d02
+VNN_621236c4d00c,title_exact_duplicate,Sun Life đẩy mạnh mở rộng mạng lưới tại Việt Nam,inspect_in_d02
+VNE_03e8594cb5a7,title_exact_duplicate,"Giá xăng, dầu cùng tăng",inspect_in_d02
+VNN_4de91baec3b9,title_exact_duplicate,APEC 2027: Cột mốc tạo động lực cho Cảng Hàng không Quốc tế Gia Bình,inspect_in_d02
+VNN_fd15fbdb95f4,title_exact_duplicate,Cựu Trưởng Công an Phú Quốc bị đề nghị 14-16 năm tù,inspect_in_d02
+VNE_caee9f2e1b46,title_exact_duplicate,Cựu trưởng Công an Phú Quốc bị đề nghị 14-16 năm tù,inspect_in_d02
+VNN_bd9bdce85826,title_exact_duplicate,Vietjet tổ chức chuỗi Ngày hội tuyển dụng tiếp viên hàng không năm 2026,inspect_in_d02
+VNE_a3a58bb1a4b6,title_exact_duplicate,Con gái bà Cao Thị Ngọc Dung đã bán 7 triệu cổ phiếu PNJ,inspect_in_d02
+TTR_d81ba52fcc71,title_exact_duplicate,Vietjet tổ chức chuỗi Ngày hội tuyển dụng tiếp viên hàng không năm 2026,inspect_in_d02
+TTR_9b8e05e9c007,title_exact_duplicate,Con gái bà Cao Thị Ngọc Dung đã bán 7 triệu cổ phiếu PNJ,inspect_in_d02
+TTR_d1f883def03c,title_exact_duplicate,Tiếp tục hoãn phiên tòa xét xử tài xế gây tai nạn làm chết nữ sinh 14 tuổi ở Vĩn,inspect_in_d02
+VNE_ba28867e9ff4,title_exact_duplicate,Meey Global Corp nộp hồ sơ đăng ký chứng khoán lên SEC,inspect_in_d02
+VNE_7c2cbcb5247f,title_exact_duplicate,"Giá xăng, dầu cùng tăng",inspect_in_d02
+VNN_022f14b5e956,title_exact_duplicate,Meey Global Corp nộp hồ sơ đăng ký chứng khoán lên SEC,inspect_in_d02
+TTR_3e51a50003ae,title_exact_duplicate,HDBank tiếp tục vào top 50 Forbes Việt Nam trong bước chuyển của thị trường vốn,inspect_in_d02
+TTR_9bceb37c3c7a,title_exact_duplicate,Bảng xếp hạng bóng đá nam Asiad 20: U23 Việt Nam nhì bảng C,inspect_in_d02
+VNN_9f82850e1f03,title_exact_duplicate,HDBank tiếp tục vào Top 50 Forbes Việt Nam trong bước chuyển của thị trường vốn,inspect_in_d02
+VNN_d6688747d536,title_exact_duplicate,"Giá bạc trong nước trái chiều, có loại giảm gần 1 triệu đồng/kg",inspect_in_d02
+TTR_e2836bdb6a4a,title_exact_duplicate,Bảng xếp hạng bóng đá nam Asiad 20: U23 Việt Nam nhì bảng C,inspect_in_d02
+VNE_a4eb34c2818e,title_exact_duplicate,"Giá xăng, dầu cùng tăng",inspect_in_d02
+TTR_f92fc5808092,title_exact_duplicate,Tiếp tục hoãn phiên tòa xét xử tài xế gây tai nạn làm chết nữ sinh 14 tuổi ở Vĩn,inspect_in_d02
+VNN_4f1135696f7b,title_near_duplicate,Techcom Life ra mắt chương trình Gieo Yêu Thương cùng Techcom Life,inspect_in_d02
+TTR_0af0cc97c349,title_near_duplicate,Techcom Life ra mắt chương trình 'Gieo Yêu Thương cùng Techcom Life”,inspect_in_d02
