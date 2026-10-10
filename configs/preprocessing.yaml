@@ -1,0 +1,56 @@
+# Cấu hình tiền xử lý văn bản tiếng Việt Task D03 (P0 -> P3)
+
+pipeline:
+  input_path: "data/interim/news_articles_deduplicated.csv"
+  output_dir: "data/processed"
+  stats_output: "results/preprocessing_data/preprocessing_before_after.csv"
+  random_seed: 42
+  encoding: "utf-8-sig"
+
+p0_minimal:
+  unicode_form: "NFC"
+  remove_html: true
+  remove_control_chars: true
+  normalize_whitespace: true
+
+p1_normalized:
+  lowercase: true
+  url_token: "URL"
+  email_token: "EMAIL"
+  max_length_drop_ratio_warn: 0.20
+  boilerplate_patterns:
+    - '(?i)\b(xem\s+thêm|đọc\s+tiếp|xem\s+tiếp)\s*:?.*$'
+    - '(?i)\b(theo\s+dõi|chia\s+sẻ)\s+(chúng\s+tôi\s+)?(trên|qua)\s+(facebook|zalo|tiktok|youtube|google\s+news).*$'
+    - '(?i)\b(bấm\s+vào\s+đây|click\s+vào\s+đây|liên\s+hệ\s+quảng\s+cáo|mọi\s+ý\s+kiến\s+đóng\s+góp).*$'
+    - '(?i)\b(bản\s+quyền\s+thuộc\s+về|nguồn\s+tin\s*:|theo\s+nguồn\s*:).*$'
+    - '(?i)\b(ảnh\s*:|video\s*:|đồ\s+họa\s*:)\s*[^.\n]+$'
+
+p2_segmented:
+  library: "pyvi"
+  module: "pyvi.ViTokenizer"
+  function: "tokenize"
+  version: "0.1.1"
+  compound_word_delimiter: "_"
+
+p3_stopwords:
+  stopwords_file: "configs/vietnamese_stopwords.txt"
+  preserve_negations: true
+  protected_words:
+    - "không"
+    - "chưa"
+    - "chẳng"
+    - "chả"
+    - "không_thể"
+    - "chưa_thể"
+    - "chẳng_thể"
+    - "không_phải"
+    - "chưa_phải"
+    - "kinh_doanh"
+    - "công_nghệ"
+    - "thể_thao"
+    - "giáo_dục"
+    - "sức_khỏe"
+    - "pháp_luật"
+    - "giải_trí"
+  fallback_if_empty: true
+

@@ -1,0 +1,6 @@
+﻿variant,total_articles,empty_text_count,vocab_size,total_tokens,retention_rate_pct,mean_length_chars,median_length_chars,p5_length_chars,p95_length_chars,mean_word_count,median_word_count,p5_word_count,p95_word_count
+original,9274,0,115033,6756487,100.0,3362.39,3102.5,1431.0,6103.75,728.54,671.0,312.0,1331.0
+p0_minimal,9274,0,113175,6756482,100.0,3361.24,3101.0,1431.0,6096.35,728.54,671.0,312.0,1331.0
+p1_normalized,9274,0,100997,6742822,99.8,3353.31,3096.0,1420.65,6082.15,727.07,671.0,310.0,1328.0
+p2_segmented,9274,0,61108,5989915,88.65,3444.85,3179.0,1467.0,6262.4,645.88,593.0,284.0,1174.0
+p3_no_stopwords,9274,0,60861,4327312,64.05,2638.24,2452.0,1145.0,4772.0,466.61,432.5,212.0,831.0

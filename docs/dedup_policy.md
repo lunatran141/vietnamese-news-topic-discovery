@@ -1,4 +1,4 @@
-# Chính sách khử trùng lặp (Deduplication Policy)
+# Quy tắc khử trùng lặp - Task D02
 
 ## 1. Tổng quan
 
