@@ -9,47 +9,46 @@ Pipeline khử trùng lặp 2 tầng được áp dụng trên tập dữ liệu
 | Chỉ số | Giá trị |
 |---|---|
 | Tổng bài trước dedup | 9,304 |
-| Tổng bài sau dedup | 9,258 |
-| Exact duplicate loại bỏ | 13 |
-| Near duplicate loại bỏ | 33 |
-| **Tổng loại bỏ** | **46** |
-| **Tỷ lệ loại bỏ** | **0.49%** |
-| Candidate pairs (near-dup) | 2,098 |
+| Tổng bài sau dedup | 9,274 |
+| Exact duplicate loại bỏ | 0 |
+| Near duplicate loại bỏ | 30 |
+| **Tổng loại bỏ** | **30** |
+| **Tỷ lệ loại bỏ** | **0.32%** |
+| Candidate pairs (near-dup) | 2,122 |
 
 ## 2. Tầng 1: Exact Duplicate
 
-### 2.1 Chuẩn hóa văn bản
-- Chuyển bảng mã Unicode NFC
-- Chuyển chữ thường (lowercase)
-- Loại bỏ toàn bộ dấu câu
-- Gộp khoảng trắng thừa và cắt khoảng trắng hai đầu
+### 2.1 Chuẩn hóa văn bản & URL
+- Unicode NFC, lowercase, loại bỏ toàn bộ dấu câu, gộp khoảng trắng thừa.
+- URL: Bỏ scheme (http/https), tiền tố `www.`, các tham số theo dõi (query params) và dấu gạch chéo cuối.
 
-### 2.2 URL normalization
-- Bỏ scheme (http/https), tiền tố `www.`, các tham số theo dõi (query params) và dấu gạch chéo cuối.
-
-### 2.3 Ba khóa so sánh tuần tự
+### 2.2 Hai khóa so sánh tuần tự (Tuyệt đối không xóa theo tiêu đề ở Tầng 1)
 1. `exact_url`: Trùng URL sau chuẩn hóa.
 2. `exact_content`: Trùng SHA-256 hash của nội dung chuẩn hóa.
-3. `exact_title`: Trùng tiêu đề chuẩn hóa.
 
-Sau mỗi bước, các bài đã bị loại không tham gia vào các bước kế tiếp để tránh rò rỉ cụm trùng lặp (transitive leakage).
+> [!NOTE]
+> Không coi `exact_title` là exact duplicate ở Tầng 1 vì các bài báo định kỳ (giá xăng dầu, bản tin bảng xếp hạng thể thao, giá vàng hàng tuần) thường có tiêu đề lặp lại nhưng ngày đăng và nội dung khác nhau. Các bài trùng tiêu đề được chuyển sang Tầng 2 để thẩm định nội dung và khoảng cách ngày đăng.
 
 ## 3. Tầng 2: Near Duplicate
 
 ### 3.1 Sinh cặp ứng viên (Candidate Generation)
-- Phương pháp: MinHash LSH (`datasketch`)
-- Đặc trưng: Tập từ vựng (Word tokens) của nội dung chuẩn hóa
-- Số hàm băm: 128 permutations
-- Ngưỡng LSH: 0.70
+- MinHash LSH (`datasketch`, threshold 0.70, 128 permutations) kết hợp **Title Blocking** (toàn bộ các bài có cùng tiêu đề chuẩn hóa).
+- Tổng số cặp ứng viên: 2,122 cặp.
 
-### 3.2 Đánh giá kép (Dual-Scoring)
-- `title_similarity`: Jaccard trên tập từ vựng của tiêu đề.
-- `content_similarity`: Jaccard ước lượng từ MinHash signature.
+### 3.2 Xác thực chính xác (Exact Scoring & Temporal Verification)
+- `title_similarity`: Exact Word Jaccard trên tập từ vựng tiêu đề.
+- `content_similarity`: **Exact Word Jaccard** trên tập từ vựng nội dung thực tế (loại bỏ hoàn toàn sai số ước lượng của MinHash).
+- `days_diff`: Khoảng cách thời gian đăng bài (tính bằng ngày).
+- `category_conflict`: Cờ phát hiện xung đột nhãn `category_gold` giữa 2 bài báo.
 
 ### 3.3 Ma trận quyết định (Decision Matrix)
-- `remove`: `content_sim >= 0.85` HOẶC (`title_sim >= 0.60` VÀ `content_sim >= 0.70`).
-- `manual_review`: `0.80 <= content_sim < 0.85` (vùng biên nhạy cảm, mặc định giữ cả hai).
-- `keep_both`: `content_sim < 0.80` (giữ cả hai bài).
+- `keep_both`:
+  - Trùng hoặc giống tiêu đề nhưng đăng cách nhau > 2 ngày và nội dung khác biệt (`content_sim < 0.70`): Bảo tồn tin tức định kỳ (ví dụ 3 bài giá xăng các tuần).
+  - `content_sim < 0.80`: Giữ cả hai để bảo tồn đa dạng ngữ liệu.
+- `manual_review`:
+  - `category_conflict == True`: Hai bài trùng lặp cao nhưng khác chuyên mục (ví dụ FPT Retail thuộc Sức khỏe vs Kinh doanh; Vietcombank thuộc Giáo dục vs Kinh doanh). Không tự ý xóa để bảo toàn nhãn ground truth cho pha đánh giá mô hình.
+  - `0.80 <= content_sim < 0.85`: Vùng biên nhạy cảm.
+- `remove`: `content_sim >= 0.85` HOẶC (`title_sim >= 0.60` VÀ `content_sim >= 0.70` VÀ `days_diff <= 2 ngày`) không có xung đột chuyên mục.
 
 ### 3.4 Transitive Closure với Union-Find
 Các cặp bài có quyết định `remove` được gom cụm bằng cấu trúc Union-Find, mỗi cụm chỉ chọn 1 bài đại diện duy nhất theo Tie-breaking rule.
@@ -60,27 +59,19 @@ Các cặp bài có quyết định `remove` được gom cụm bằng cấu tr�
 3. Ưu tiên 3: Bài có `article_id` nhỏ hơn (ổn định, tái lập được).
 4. Tuyệt đối KHÔNG ưu tiên dựa trên nhãn `category_gold`.
 
-## 5. Giải thích quyết định `keep_both`
-Các cặp bài có độ tương đồng nội dung thấp hơn 0.85 được giữ lại cả hai vì:
-- Cùng đưa tin về một sự kiện thời sự nhưng cách hành văn và góc nhìn độc lập.
-- Bảo toàn tính đa dạng ngôn ngữ cho mô hình chủ đề (topic model).
+## 5. Xử lý xung đột chuyên mục (Category Conflict Resolution)
+Các trường hợp bài viết có nội dung trùng lặp cao nhưng mang nhãn `category_gold` khác nhau được nhận diện là tin bài đa chuyên mục (multi-label) và được chuyển sang `manual_review`, không tự động xóa để tránh thiên lệch nhãn đối sánh chuẩn.
 
-## 6. Hạn chế đã biết
-- Bài đa chuyên mục: Khi bài bị loại, thông tin `category_gold` của nó không được bảo toàn. Chấp nhận vì `category_gold` chỉ đóng vai trò ground truth khi đánh giá phân loại.
-- Sai số ước lượng MinHash: Sai số tiêu chuẩn xấp xỉ 1 / sqrt(128) ≈ 0.0884.
+## 6. Biểu đồ minh họa
 
-## 7. Biểu đồ minh họa
-
-### 7.1 Phân bố Similarity
+### 6.1 Phân bố Similarity
 ![Similarity Distribution](../results/dedup_data/figures/similarity_distribution.png)
 
-### 7.2 Trước và Sau Dedup
+### 6.2 Trước và Sau Dedup
 ![Before After](../results/dedup_data/figures/dedup_before_after.png)
 
-### 7.3 Số lượng và Tỷ lệ Trùng lặp theo Chuyên mục
-Chuyên mục Kinh doanh ghi nhận số lượng bài trùng lặp cao nhất (23 bài, tỷ lệ 1.15%), theo sau là Pháp luật (9 bài, 0.76%) và Giáo dục (6 bài, 0.58%). Ngược lại, chuyên mục Giải trí có 0 bài trùng lặp.
+### 6.3 Số lượng và Tỷ lệ Trùng lặp theo Chuyên mục
 ![Duplicates by Category](../results/dedup_data/figures/duplicates_by_category.png)
 
-### 7.4 Ma trận Trùng lặp giữa các Nguồn Báo (Cross-Source)
-Trùng lặp chủ yếu diễn ra giữa các nguồn báo khác nhau (đặc biệt giữa Tuổi Trẻ và VietNamNet với các thông cáo báo chí tài chính / doanh nghiệp) hơn là trùng lặp nội bộ cùng một báo.
+### 6.4 Ma trận Trùng lặp giữa các Nguồn Báo (Cross-Source)
 ![Cross-Source Heatmap](../results/dedup_data/figures/cross_source_heatmap.png)
