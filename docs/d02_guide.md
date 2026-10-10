@@ -1,8 +1,5 @@
 # Hướng dẫn thực thi Task D02: Duplicate Audit & Deduplication Pipeline
 
-Tài liệu này hướng dẫn chi tiết quy trình chạy, kiểm thử và phân tích kết quả của **Task D02 — Khử trùng lặp dữ liệu bài báo tiếng Việt** (Deduplication Pipeline).
-
----
 
 ## 1. Tổng quan & Cấu trúc thư mục
 
@@ -10,29 +7,6 @@ Task D02 triển khai đường ống khử trùng lặp 2 tầng (Exact Duplica
 
 ### Sơ đồ luồng xử lý:
 
-```
-data/interim/news_articles_validated.csv (9,304 bài)
-  │
-  ├──► Tầng 1: Exact Deduplication (URL -> Content Hash SHA256)
-  │      └── 0 bài trùng URL hoặc trùng nội dung 100%
-  │
-  ├──► Tầng 2: Near Deduplication (MinHash LSH + Title Blocking + Exact Jaccard Dual-Scoring)
-  │      ├── Đánh giá 2,122 cặp ứng viên
-  │      ├── Bảo tồn bài định kỳ (giá xăng, bóng đá Asiad) đăng khác ngày -> keep_both
-  │      ├── Bảo tồn bài xung đột chuyên mục (Sức khỏe vs Kinh doanh, Giáo dục vs Kinh doanh) -> manual_review
-  │      └── Loại 30 bài sao chép nguyên văn / PR doanh nghiệp cùng thời điểm
-  │
-  ├──► data/interim/news_articles_deduplicated.csv (9,274 bài sạch)
-  │
-  ├──► results/dedup_data/ (Báo cáo, danh sách loại bỏ, cặp ứng viên)
-  │      ├── dedup_removed.csv (30 bài bị loại)
-  │      ├── dedup_candidates_review.csv (2,122 cặp ứng viên)
-  │      ├── dedup_before_after.csv (Bảng phân bổ theo nguồn và chuyên mục)
-  │      ├── dedup_policy.md (Báo cáo chính sách)
-  │      └── figures/ (4 biểu đồ trực quan hóa)
-  │
-  └──► tests/test_deduplication.py (Bộ kiểm thử tự động 16 tests đạt 100%)
-```
 
 ### Vị trí các tệp liên quan:
 
@@ -41,13 +15,12 @@ data/interim/news_articles_validated.csv (9,304 bài)
 | **Dữ liệu đầu vào** | `data/interim/news_articles_validated.csv` | Dữ liệu thẩm định từ D01 (9,304 dòng). |
 | **Dữ liệu đầu ra sạch** | `data/interim/news_articles_deduplicated.csv` | Tập bài viết sạch sau dedup (9,274 dòng). |
 | **Mã nguồn chính** | `src/preprocessing/deduplicate.py` | Pipeline khử trùng lặp 2 tầng an toàn. |
-| **Mã trực quan hóa** | `scripts/run_d02_viz.py` | Script sinh biểu đồ, policy md và notebook. |
 | **Kiểm thử tự động** | `tests/test_deduplication.py` | Bộ Pytest xác thực 16 tiêu chí kỹ thuật. |
 | **Nhật ký loại bỏ** | `results/dedup_data/dedup_removed.csv` | 30 bài viết bị loại kèm bằng chứng truy vết. |
 | **Bảng ứng viên** | `results/dedup_data/dedup_candidates_review.csv` | 2,122 cặp ứng viên được phân loại quyết định và cờ xung đột category. |
 | **Thống kê trước/sau** | `results/dedup_data/dedup_before_after.csv` | Bảng phân bổ bài viết theo source và category. |
 | **Thư mục biểu đồ** | `results/dedup_data/figures/` | 4 đồ thị PNG phân tích tương đồng và phân phối. |
-| **Chính sách dedup** | `results/dedup_data/dedup_policy.md` | Tài liệu báo cáo chính sách và lý giải ngưỡng. |
+| **Chính sách dedup** | `results/dedup_data/dedup_policy.md` | Tài liệu báo cáo chính sách và lý giải chọn ngưỡng. |
 | **Notebook tương tác** | `notebooks/02_deduplication.ipynb` | Jupyter Notebook phân tích và trực quan hóa. |
 
 ---
@@ -65,8 +38,6 @@ Trước khi chạy, kích hoạt môi trường ảo Python của dự án và 
 pip install -r requirements.txt
 ```
 
-> [!NOTE]
-> Task D02 sử dụng thư viện `datasketch` để tạo chỉ mục MinHash LSH screening và `matplotlib`, `seaborn` cho trực quan hóa.
 
 ---
 
@@ -127,7 +98,7 @@ jupyter notebook notebooks/02_deduplication.ipynb
 | **`manual_review`** | `0.80 <= content_sim < 0.85` HOẶC có xung đột `category_conflict == True` | 18 cặp | Vùng biên nhạy cảm và xung đột nhãn. Hệ thống tự động **giữ lại cả hai** để bảo toàn ground truth. |
 | **`keep_both`** | `content_sim < 0.80` HOẶC trùng tiêu đề nhưng khác ngày đăng (`days_diff > 2d`, `content_sim < 0.70`) | 2,074 cặp | Bài viết cùng sự kiện hoặc tin tức định kỳ (giá xăng, thể thao). **Giữ cả hai bài**. |
 
-### Quy tắc chọn bản ghi giữ lại (Tie-breaking Rule):
+### Quy tắc chọn bản ghi giữ lại:
 Khi hai hoặc nhiều bài viết thuộc cùng một cụm trùng lặp, bài được giữ lại (`keeper_id`) được chọn theo thứ tự ưu tiên nghiêm ngặt:
 1. **Nội dung dài hơn:** `len(content)` giảm dần (ưu tiên bài viết đầy đủ, không bị cắt ngắn).
 2. **Có ngày xuất bản hợp lệ:** `published_at` không rỗng (ưu tiên bài có metadata thời gian chuẩn).
@@ -136,7 +107,7 @@ Khi hai hoặc nhiều bài viết thuộc cùng một cụm trùng lặp, bài 
 
 ---
 
-## 5. Xử lý sự cố thường gặp (Troubleshooting)
+## 5. Xử lý sự cố thường gặp
 
 ### 1. Thiếu thư viện `datasketch`
 - **Thông báo lỗi:** `ModuleNotFoundError: No module named 'datasketch'`
