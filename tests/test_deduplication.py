@@ -113,7 +113,13 @@ def test_row_count_integrity(validated_df, dedup_df, removed_df):
 
 
 def test_no_exact_duplicates_remaining(dedup_df):
-    """Tập sạch không còn exact duplicate trên URL, hash content hay norm title."""
+    """
+    Test 2: Kiểm tra sạch trùng lặp chính xác (No Exact Duplicates).
+    Đảm bảo trong tập sạch không còn bất kỳ bản ghi nào trùng nhau trên:
+      1. URL đã chuẩn hóa.
+      2. Mã băm SHA-256 của nội dung đã chuẩn hóa.
+    (Các bài trùng tiêu đề định kỳ nhưng khác ngày đăng được bảo tồn theo chính sách an toàn).
+    """
     urls = dedup_df["url"].apply(_normalize_url)
     n_url_dup = urls.duplicated().sum()
     assert n_url_dup == 0, f"Còn {n_url_dup} URL trùng lặp"
@@ -121,10 +127,6 @@ def test_no_exact_duplicates_remaining(dedup_df):
     hashes = dedup_df["content"].apply(_hash_content)
     n_hash_dup = hashes.duplicated().sum()
     assert n_hash_dup == 0, f"Còn {n_hash_dup} content hash trùng lặp"
-
-    norm_titles = dedup_df["title"].apply(_normalize_text)
-    n_title_dup = norm_titles.duplicated().sum()
-    assert n_title_dup == 0, f"Còn {n_title_dup} normalized title trùng lặp"
 
 
 def test_balanced_removal_rate(ba_df):
@@ -187,10 +189,11 @@ def test_removed_schema(removed_df):
 
 
 def test_candidates_schema(candidates_df):
-    """File candidates có đúng 6 cột bắt buộc."""
+    """File candidates có đầy đủ 8 cột bao gồm cờ và thông tin xung đột category."""
     expected = [
         "article_id_1", "article_id_2", "title_similarity",
         "content_similarity", "decision", "reason",
+        "category_conflict", "conflicting_categories",
     ]
     assert list(candidates_df.columns) == expected
 
@@ -219,12 +222,51 @@ def test_transitive_closure():
     assert members == {"A", "B", "C"}
 
 
-def test_no_false_positive_across_categories(dedup_df):
-    """Bài từ chuyên mục khác nhau vẫn còn trong tập sạch."""
-    sports = dedup_df[dedup_df["category_gold"] == "Thể thao"]
-    edu = dedup_df[dedup_df["category_gold"] == "Giáo dục"]
-    assert len(sports) > 0, "Toàn bộ bài Thể thao bị loại - false positive!"
-    assert len(edu) > 0, "Toàn bộ bài Giáo dục bị loại - false positive!"
+def test_no_unresolved_category_conflicts_removed(candidates_df, removed_df):
+    """
+    Kiểm tra thực chất xung đột chuyên mục (Reviewer feedback):
+    Tất cả các cặp bài mang nhãn chuyên mục khác nhau (category_conflict == True)
+    đều phải được đưa vào manual_review và KHÔNG được tự động xóa
+    để bảo toàn nhãn ground truth cho pha đánh giá mô hình.
+    """
+    conflict_pairs = candidates_df[candidates_df["category_conflict"] == True]
+    assert len(conflict_pairs) > 0, "Không phát hiện cặp xung đột category nào"
+    conflicts_removed = conflict_pairs[conflict_pairs["decision"] == "remove"]
+    assert conflicts_removed.empty, (
+        f"Có cặp xung đột chuyên mục bị tự động xóa:\n{conflicts_removed.to_string()}"
+    )
+
+
+def test_recurring_titles_preserved(dedup_df, validated_df):
+    """
+    Kiểm tra thực chất bài báo định kỳ (Reviewer feedback):
+    Các bài viết có cùng tiêu đề nhưng đăng vào các kỳ/thời điểm khác nhau
+    (ví dụ 3 bài 'Giá xăng, dầu cùng tăng' vào các ngày 10/09, 17/09, 24/09)
+    hoàn toàn KHÔNG bị xóa nhầm mà được bảo tồn trong tập sạch.
+    """
+    gas_before = validated_df[validated_df["title"] == "Giá xăng, dầu cùng tăng"]
+    gas_after = dedup_df[dedup_df["title"] == "Giá xăng, dầu cùng tăng"]
+    assert len(gas_before) == 3, f"Số bài giá xăng ban đầu phải là 3, có {len(gas_before)}"
+    assert len(gas_after) == 3, f"Số bài giá xăng sau dedup phải là 3, thực tế có {len(gas_after)}"
+
+
+def test_exact_jaccard_scoring(candidates_df, validated_df):
+    """
+    Kiểm tra tính an toàn Near-duplicate (Reviewer feedback):
+    Điểm content_similarity trong candidates_review là Exact Word Set Jaccard thực tế,
+    loại bỏ hoàn toàn sai số ước lượng ngẫu nhiên của MinHash.
+    """
+    from src.preprocessing.deduplicate import tokenize_words, jaccard_sets
+
+    content_map = dict(zip(validated_df["article_id"], validated_df["content"].fillna("")))
+    sample = candidates_df.head(10)
+    for _, r in sample.iterrows():
+        a1, a2 = str(r["article_id_1"]), str(r["article_id_2"])
+        sim_reported = float(r["content_similarity"])
+        sim_real = round(jaccard_sets(tokenize_words(content_map[a1]), tokenize_words(content_map[a2])), 4)
+        assert abs(sim_reported - sim_real) < 1e-4, (
+            f"content_similarity ({sim_reported}) lệch so với Exact Jaccard ({sim_real})"
+        )
 
 
 def test_article_id_uniqueness(dedup_df):
