@@ -1,7 +1,10 @@
 import pandas as pd
 import pytest
 
-from src.data.dataset_loader import validate_dataset
+from src.data.dataset_loader import (
+    load_split_dataset,
+    validate_dataset,
+)
 from src.features.article_text import build_article_text
 
 
@@ -39,7 +42,6 @@ def make_valid_dataset() -> pd.DataFrame:
 
 def test_valid_dataset_passes() -> None:
     dataset = make_valid_dataset()
-
     validate_dataset(dataset)
 
 
@@ -69,3 +71,16 @@ def test_build_text_preserves_row_order() -> None:
     assert len(text) == len(dataset)
     assert text.index.equals(dataset.index)
     assert "ngân hàng" in text.iloc[0]
+
+
+def test_load_train_split_from_dataset_v1() -> None:
+    """Kiểm tra dữ liệu train được ghép đúng theo split chính thức của D05."""
+    dataset = load_split_dataset(
+        "data/processed/p1_normalized.csv",
+        "data/splits/split_manifest.csv",
+        "train",
+    )
+
+    assert len(dataset) == 6493
+    assert dataset["article_id"].is_unique
+    assert dataset["split"].eq("train").all()

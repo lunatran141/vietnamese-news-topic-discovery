@@ -2,14 +2,20 @@
 # Các tham số tối ưu sẽ được thử riêng trong task M14.
 
 dataset:
-  # Dataset v1 đã được D04 kiểm tra và đóng băng.
+  # Dataset v1 và split chính thức đã được D04/D05 phê duyệt.
   path: "data/processed/p1_normalized.csv"
   manifest_path: "configs/dataset_manifest.json"
+  split_manifest_path: "data/splits/split_manifest.csv"
   version: "v1.0"
   preprocessing_variant: "p1_normalized"
 
-  # Manifest quy định cột text là đầu vào chính cho mô hình.
+  # Cột text là đầu vào chính theo Dataset v1 manifest.
   text_variant: "text"
+
+  # Chỉ fit trên train; validation dùng cho M14 và test được khóa.
+  fit_split: "train"
+  validation_split: "val"
+  test_split: "test"
 
 embedding:
   # Model multilingual baseline, phù hợp tiếng Việt và đủ nhẹ để chạy lại.
@@ -19,6 +25,7 @@ embedding:
 
   # Để code tự chọn CUDA nếu có, nếu không sẽ dùng CPU.
   device: null
+
 umap:
   # Giảm chiều embedding trước khi đưa vào HDBSCAN.
   n_neighbors: 15

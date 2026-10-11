@@ -60,3 +60,57 @@ def validate_dataset(dataset: pd.DataFrame) -> None:
         raise ValueError(
             f"Dataset có {int(empty_articles.sum())} bài bị rỗng"
         )
+
+def load_split_dataset(
+    dataset_path: str | Path,
+    split_manifest_path: str | Path,
+    split_name: str,
+) -> pd.DataFrame:
+    """Đọc một split và ánh xạ về Dataset v1."""
+    dataset = load_dataset(dataset_path)
+    split_path = Path(split_manifest_path)
+
+    if not split_path.exists():
+        raise FileNotFoundError(
+            f"Không tìm thấy split manifest: {split_path}"
+        )
+
+    split_manifest = pd.read_csv(
+        split_path,
+        encoding="utf-8-sig",
+    )
+
+    required_columns = {"article_id", "split"}
+    missing_columns = required_columns - set(split_manifest.columns)
+
+    if missing_columns:
+        raise ValueError(
+            f"Split manifest thiếu các cột: {sorted(missing_columns)}"
+        )
+
+    valid_splits = {"train", "val", "test"}
+
+    if split_name not in valid_splits:
+        raise ValueError(
+            f"Split không hợp lệ: {split_name}"
+        )
+
+    selected_ids = split_manifest.loc[
+        split_manifest["split"] == split_name,
+        ["article_id", "split"],
+    ]
+
+    split_dataset = selected_ids.merge(
+        dataset,
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    # Mọi ID trong split phải tồn tại trong Dataset v1.
+    if split_dataset["title"].isna().any():
+        raise ValueError(
+            f"Split {split_name} có article_id không tồn tại"
+        )
+
+    return split_dataset
