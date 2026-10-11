@@ -59,3 +59,43 @@ def build_bertopic_model(
         top_n_words=topic_config["top_n_words"],
         verbose=False,
     )
+
+def encode_documents(
+    embedding_model: Any,
+    documents: list[str],
+    config: dict[str, Any],
+) -> Any:
+    """Tạo embedding cho danh sách văn bản theo cấu hình M13."""
+    if not documents:
+        raise ValueError("Danh sách văn bản không được rỗng.")
+
+    embedding_config = config["embedding"]
+
+    return embedding_model.encode(
+        documents,
+        batch_size=embedding_config["batch_size"],
+        normalize_embeddings=embedding_config["normalize_embeddings"],
+        show_progress_bar=True,
+    )
+
+
+def fit_bertopic_model(
+    topic_model: Any,
+    documents: list[str],
+    embeddings: Any,
+) -> tuple[Any, Any]:
+    """Fit BERTopic bằng văn bản và embedding tương ứng."""
+    if not documents:
+        raise ValueError("Danh sách văn bản không được rỗng.")
+
+    if len(documents) != len(embeddings):
+        raise ValueError(
+            "Số văn bản phải bằng số embedding."
+        )
+
+    topics, probabilities = topic_model.fit_transform(
+        documents,
+        embeddings,
+    )
+
+    return topics, probabilities
