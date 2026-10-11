@@ -1,3 +1,5 @@
 ﻿run_id,description,embedding_model,train_count,validation_count,topic_count,train_outlier_rate,validation_outlier_rate,topic_diversity,runtime_seconds
 e0_multilingual_minilm,Baseline dùng multilingual MiniLM.,sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2,6493,1391,111,0.3114122901586323,0.4227174694464414,0.7,183.3
-e1_vietnamese_sbert,Thử embedding được huấn luyện cho tiếng Việt.,keepitreal/vietnamese-sbert,6493,1391,96,0.24611119667334053,0.35873472322070454,0.68125,911.34
+e1_vietnamese_sbert,Thử embedding được huấn luyện cho tiếng Việt.,keepitreal/vietnamese-sbert,6493,1391,96,0.2461111966733405,0.3587347232207045,0.68125,911.34
+e2_vietnamese_sbert_neighbors30,Thử UMAP n_neighbors bằng 30.,keepitreal/vietnamese-sbert,6493,1391,93,0.3360542122285538,0.5190510424155284,0.6978494623655914,905.39
+e3_vietnamese_sbert_cluster30,Thử HDBSCAN min_cluster_size bằng 30.,keepitreal/vietnamese-sbert,6493,1391,57,0.29585707685199447,0.39108554996405465,0.7456140350877193,997.85

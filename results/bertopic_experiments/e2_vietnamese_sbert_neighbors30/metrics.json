@@ -1,0 +1,12 @@
+{
+  "run_id": "e2_vietnamese_sbert_neighbors30",
+  "description": "Thử UMAP n_neighbors bằng 30.",
+  "embedding_model": "keepitreal/vietnamese-sbert",
+  "train_count": 6493,
+  "validation_count": 1391,
+  "topic_count": 93,
+  "train_outlier_rate": 0.3360542122285538,
+  "validation_outlier_rate": 0.5190510424155284,
+  "topic_diversity": 0.6978494623655914,
+  "runtime_seconds": 905.39
+}
