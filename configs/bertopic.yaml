@@ -1,0 +1,48 @@
+# Cấu hình BERTopic baseline cho task M13.
+# Các tham số tối ưu sẽ được thử riêng trong task M14.
+
+dataset:
+  # Tạm dùng P1 để kiểm tra pipeline, cập nhật khi Dataset v1 được chốt.
+  path: "data/processed/p1_normalized.csv"
+  version: "pending_dataset_v1"
+  preprocessing_variant: "p1"
+  text_variant: "processed_title_content"
+
+embedding:
+  # Chờ thống nhất model embedding với TV4 trước khi chạy chính thức.
+  model_name: null
+  batch_size: 32
+  normalize_embeddings: true
+  device: "auto"
+
+umap:
+  # Giảm chiều embedding trước khi đưa vào HDBSCAN.
+  n_neighbors: 15
+  n_components: 5
+  min_dist: 0.0
+  metric: "cosine"
+  random_state: 42
+
+hdbscan:
+  # Đây là cấu hình baseline, chưa phải bộ tham số tối ưu.
+  min_cluster_size: 15
+  min_samples: 5
+  metric: "euclidean"
+  cluster_selection_method: "eom"
+
+  # Lưu dữ liệu cần thiết để hỗ trợ bài báo mới.
+  prediction_data: true
+
+topic_representation:
+  # Số keyword và bài đại diện được lưu cho mỗi topic.
+  top_n_words: 10
+  representative_docs_per_topic: 5
+
+experiment:
+  # Seed và run_id được lưu để có thể chạy lại thí nghiệm.
+  seed: 42
+  run_id: "bertopic_baseline"
+  output_dir: "artifacts/bertopic/bertopic_baseline"
+
+  # API/Streamlit sẽ đọc model đã lưu, không train lại.
+  save_model: true
