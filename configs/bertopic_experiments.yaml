@@ -1,0 +1,59 @@
+# Cấu hình thí nghiệm embedding và tham số BERTopic cho task M14.
+
+experiment:
+  seed: 42
+  fit_split: "train"
+  evaluation_split: "val"
+  test_split_locked: true
+  output_dir: "results/bertopic_experiments"
+
+evaluation:
+  metrics:
+    - "topic_count"
+    - "train_outlier_rate"
+    - "validation_outlier_rate"
+    - "topic_diversity"
+    - "runtime_seconds"
+
+runs:
+  # Baseline của M13.
+  - run_id: "e0_multilingual_minilm"
+    description: "Baseline dùng multilingual MiniLM."
+    embedding:
+      model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+      batch_size: 32
+      normalize_embeddings: true
+      device: null
+    umap:
+      n_neighbors: 15
+      n_components: 5
+      min_dist: 0.0
+      metric: "cosine"
+      random_state: 42
+    hdbscan:
+      min_cluster_size: 15
+      min_samples: 5
+      metric: "euclidean"
+      cluster_selection_method: "eom"
+      prediction_data: true
+
+  # Chỉ thay embedding để so sánh công bằng với baseline.
+  - run_id: "e1_vietnamese_sbert"
+    description: "Thử embedding được huấn luyện cho tiếng Việt."
+    embedding:
+      model_name: "keepitreal/vietnamese-sbert"
+      batch_size: 32
+      normalize_embeddings: true
+      device: null
+    umap:
+      n_neighbors: 15
+      n_components: 5
+      min_dist: 0.0
+      metric: "cosine"
+      random_state: 42
+    hdbscan:
+      min_cluster_size: 15
+      min_samples: 5
+      metric: "euclidean"
+      cluster_selection_method: "eom"
+      prediction_data: true
