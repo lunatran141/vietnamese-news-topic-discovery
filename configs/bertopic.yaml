@@ -2,11 +2,14 @@
 # Các tham số tối ưu sẽ được thử riêng trong task M14.
 
 dataset:
-  # Tạm dùng P1 để kiểm tra pipeline, cập nhật khi Dataset v1 được chốt.
+  # Dataset v1 đã được D04 kiểm tra và đóng băng.
   path: "data/processed/p1_normalized.csv"
-  version: "pending_dataset_v1"
-  preprocessing_variant: "p1"
-  text_variant: "processed_title_content"
+  manifest_path: "configs/dataset_manifest.json"
+  version: "v1.0"
+  preprocessing_variant: "p1_normalized"
+
+  # Manifest quy định cột text là đầu vào chính cho mô hình.
+  text_variant: "text"
 
 embedding:
   # Chờ thống nhất model embedding với TV4 trước khi chạy chính thức.
