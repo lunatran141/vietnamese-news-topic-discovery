@@ -1,0 +1,68 @@
+# Cấu hình BERTopic baseline cho task M13.
+# Các tham số tối ưu sẽ được thử riêng trong task M14.
+
+dataset:
+  # Dataset v1 và split chính thức đã được D04/D05 phê duyệt.
+  path: "data/processed/p1_normalized.csv"
+  manifest_path: "configs/dataset_manifest.json"
+  split_manifest_path: "data/splits/split_manifest.csv"
+  version: "v1.0"
+  preprocessing_variant: "p1_normalized"
+
+  # Cột text là đầu vào chính theo Dataset v1 manifest.
+  text_variant: "text"
+
+  # Chỉ fit trên train; validation dùng cho M14 và test được khóa.
+  fit_split: "train"
+  validation_split: "val"
+  test_split: "test"
+
+embedding:
+  # Model multilingual baseline, phù hợp tiếng Việt và đủ nhẹ để chạy lại.
+  model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+  batch_size: 32
+  normalize_embeddings: true
+
+  # Để code tự chọn CUDA nếu có, nếu không sẽ dùng CPU.
+  device: null
+
+umap:
+  # Giảm chiều embedding trước khi đưa vào HDBSCAN.
+  n_neighbors: 15
+  n_components: 5
+  min_dist: 0.0
+  metric: "cosine"
+  random_state: 42
+
+hdbscan:
+  # Đây là cấu hình baseline, chưa phải bộ tham số tối ưu.
+  min_cluster_size: 15
+  min_samples: 5
+  metric: "euclidean"
+  cluster_selection_method: "eom"
+
+  # Lưu dữ liệu cần thiết để hỗ trợ bài báo mới.
+  prediction_data: true
+
+vectorizer:
+  # Loại hư từ khỏi keyword nhưng vẫn giữ từ phủ định và từ chuyên mục.
+  stopwords_file: "configs/vietnamese_stopwords.txt"
+  ngram_range:
+    - 1
+    - 2
+  min_df: 2
+  max_df: 0.95
+
+topic_representation:
+  # Số keyword và bài đại diện được lưu cho mỗi topic.
+  top_n_words: 10
+  representative_docs_per_topic: 5
+
+experiment:
+  # Seed và run_id được lưu để có thể chạy lại thí nghiệm.
+  seed: 42
+  run_id: "bertopic_baseline"
+  output_dir: "artifacts/bertopic/bertopic_baseline"
+
+  # API/Streamlit sẽ đọc model đã lưu, không train lại.
+  save_model: true
