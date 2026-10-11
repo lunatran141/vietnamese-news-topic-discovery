@@ -224,3 +224,6 @@ data/raw/vnexpress_articles.csv
 
 # Model và kết quả BERTopic sinh ra khi chạy thí nghiệm
 artifacts/bertopic/
+
+# Kết quả chạy thử M14
+results/bertopic_experiments/smoke_*/
