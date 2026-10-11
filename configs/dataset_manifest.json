@@ -1,9 +1,9 @@
 {
   "dataset_version": "v1.0",
-  "created_at": "2026-10-11T13:49:34.253433+07:00",
+  "created_at": "2026-10-11T15:34:53.149689+07:00",
   "review_status": "approved",
   "quality_gate": "PASSED",
-  "source_git_commit": "aefd071129c571db03f97764fa3378bffae85ee6",
+  "source_git_commit": "5dda355397fd2d30bbebc919a7afffa8626b1b2f",
   "random_seed": 42,
   "raw_data": {
     "file_path": "data/raw/news_articles.csv",
@@ -31,7 +31,7 @@
     },
     "split_yaml": {
       "file_path": "configs/split.yaml",
-      "sha256": "cf219a74009721d98ba7f2e36178edc69e22006f9255c363ccc0649e827ea8af"
+      "sha256": "ea545f534251addb82614bbd3565360d8c5989265cdc3e68838678211d150d74"
     },
     "tokenizer": {
       "name": "pyvi",

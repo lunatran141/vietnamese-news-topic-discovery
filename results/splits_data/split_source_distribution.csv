@@ -1,0 +1,5 @@
+﻿source,test,train,val,All,train_pct,val_pct,test_pct
+tuoitre,547,2649,572,3768,40.8,41.12,39.35
+vietnamnet,406,1738,401,2545,26.77,28.83,29.21
+vnexpress,437,2106,418,2961,32.43,30.05,31.44
+All,1390,6493,1391,9274,,,

@@ -1,0 +1,5 @@
+﻿split,count,percentage
+train,6493,70.01
+val,1391,15.0
+test,1390,14.99
+total,9274,100.0
