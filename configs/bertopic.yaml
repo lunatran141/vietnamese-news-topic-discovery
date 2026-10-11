@@ -12,12 +12,13 @@ dataset:
   text_variant: "text"
 
 embedding:
-  # Chờ thống nhất model embedding với TV4 trước khi chạy chính thức.
-  model_name: null
+  # Model multilingual baseline, phù hợp tiếng Việt và đủ nhẹ để chạy lại.
+  model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
   batch_size: 32
   normalize_embeddings: true
-  device: "auto"
 
+  # Để code tự chọn CUDA nếu có, nếu không sẽ dùng CPU.
+  device: null
 umap:
   # Giảm chiều embedding trước khi đưa vào HDBSCAN.
   n_neighbors: 15
