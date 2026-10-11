@@ -1,0 +1,3 @@
+﻿run_id,description,embedding_model,train_count,validation_count,topic_count,train_outlier_rate,validation_outlier_rate,topic_diversity,runtime_seconds
+e0_multilingual_minilm,Baseline dùng multilingual MiniLM.,sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2,6493,1391,111,0.3114122901586323,0.4227174694464414,0.7,183.3
+e1_vietnamese_sbert,Thử embedding được huấn luyện cho tiếng Việt.,keepitreal/vietnamese-sbert,6493,1391,96,0.24611119667334053,0.35873472322070454,0.68125,911.34
