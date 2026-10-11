@@ -59,3 +59,53 @@ def test_required_metrics_are_declared() -> None:
     }
 
     assert required_metrics.issubset(metrics)
+
+def test_e2_changes_only_umap_neighbors() -> None:
+    """E2 chỉ được đổi n_neighbors so với E1."""
+    runs = {
+        run["run_id"]: run
+        for run in load_experiment_config()["runs"]
+    }
+
+    selected = runs["e1_vietnamese_sbert"]
+    experiment = runs[
+        "e2_vietnamese_sbert_neighbors30"
+    ]
+
+    changed_umap_fields = {
+        key
+        for key in selected["umap"]
+        if selected["umap"][key] != experiment["umap"][key]
+    }
+
+    assert experiment["embedding"] == selected["embedding"]
+    assert experiment["hdbscan"] == selected["hdbscan"]
+    assert changed_umap_fields == {"n_neighbors"}
+    assert experiment["umap"]["n_neighbors"] == 30
+
+
+def test_e3_changes_only_hdbscan_cluster_size() -> None:
+    """E3 chỉ được đổi min_cluster_size so với E1."""
+    runs = {
+        run["run_id"]: run
+        for run in load_experiment_config()["runs"]
+    }
+
+    selected = runs["e1_vietnamese_sbert"]
+    experiment = runs[
+        "e3_vietnamese_sbert_cluster30"
+    ]
+
+    changed_hdbscan_fields = {
+        key
+        for key in selected["hdbscan"]
+        if (
+            selected["hdbscan"][key]
+            != experiment["hdbscan"][key]
+        )
+    }
+
+    assert experiment["embedding"] == selected["embedding"]
+    assert experiment["umap"] == selected["umap"]
+    assert changed_hdbscan_fields == {"min_cluster_size"}
+    assert experiment["hdbscan"]["min_cluster_size"] == 30
