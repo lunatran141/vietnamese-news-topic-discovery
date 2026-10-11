@@ -8,6 +8,14 @@ from src.models.bertopic_pipeline import (
     load_bertopic_config,
 )
 
+from src.models.bertopic_pipeline import (
+    build_bertopic_model,
+    encode_documents,
+    fit_bertopic_model,
+    load_bertopic_config,
+    load_stopwords,
+)
+
 CONFIG_PATH = Path("configs/bertopic.yaml")
 
 class FakeEmbeddingModel:
@@ -68,6 +76,9 @@ def test_build_bertopic_model_from_config() -> None:
     assert model.hdbscan_model.min_samples == 5
     assert model.hdbscan_model.prediction_data is True
 
+    assert model.vectorizer_model.ngram_range == (1, 2)
+    assert "và" in model.vectorizer_model.stop_words
+
     assert model.top_n_words == 10
 
 def test_encode_documents_uses_embedding_config() -> None:
@@ -103,3 +114,13 @@ def test_fit_bertopic_model_uses_documents_and_embeddings() -> None:
     assert probabilities == [0.8, 0.9]
     assert topic_model.documents == documents
     assert topic_model.embeddings == embeddings
+
+def test_load_vietnamese_stopwords() -> None:
+    """Kiểm tra hư từ bị loại nhưng từ phủ định vẫn được giữ."""
+    stopwords = load_stopwords(
+        "configs/vietnamese_stopwords.txt"
+    )
+
+    assert "và" in stopwords
+    assert "của" in stopwords
+    assert "không" not in stopwords

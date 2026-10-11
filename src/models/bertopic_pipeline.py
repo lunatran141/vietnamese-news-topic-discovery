@@ -5,7 +5,7 @@ import yaml
 from bertopic import BERTopic
 from hdbscan import HDBSCAN
 from umap import UMAP
-
+from sklearn.feature_extraction.text import CountVectorizer
 
 def load_bertopic_config(config_path: str | Path) -> dict[str, Any]:
     """Đọc cấu hình BERTopic từ file YAML."""
@@ -22,6 +22,21 @@ def load_bertopic_config(config_path: str | Path) -> dict[str, Any]:
 
     return config
 
+def load_stopwords(stopwords_path: str | Path) -> list[str]:
+    """Đọc stopword và bỏ qua dòng trống hoặc dòng chú thích."""
+    path = Path(stopwords_path)
+
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"Không tìm thấy file stopword: {path}"
+        )
+
+    with path.open("r", encoding="utf-8-sig") as file:
+        return [
+            line.strip()
+            for line in file
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
 
 def build_bertopic_model(
     config: dict[str, Any],
@@ -31,6 +46,18 @@ def build_bertopic_model(
     umap_config = config["umap"]
     hdbscan_config = config["hdbscan"]
     topic_config = config["topic_representation"]
+    vectorizer_config = config["vectorizer"]
+    stopwords = load_stopwords(
+        vectorizer_config["stopwords_file"]
+    )
+
+    # Vectorizer loại hư từ và cho phép keyword gồm một hoặc hai từ.
+    vectorizer_model = CountVectorizer(
+        stop_words=stopwords,
+        ngram_range=tuple(vectorizer_config["ngram_range"]),
+        min_df=vectorizer_config["min_df"],
+        max_df=vectorizer_config["max_df"],
+    )
 
     # UMAP giảm chiều embedding trước khi phân cụm.
     umap_model = UMAP(
@@ -56,6 +83,7 @@ def build_bertopic_model(
         embedding_model=embedding_model,
         umap_model=umap_model,
         hdbscan_model=hdbscan_model,
+        vectorizer_model=vectorizer_model,
         top_n_words=topic_config["top_n_words"],
         verbose=False,
     )

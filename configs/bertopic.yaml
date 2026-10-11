@@ -44,6 +44,15 @@ hdbscan:
   # Lưu dữ liệu cần thiết để hỗ trợ bài báo mới.
   prediction_data: true
 
+vectorizer:
+  # Loại hư từ khỏi keyword nhưng vẫn giữ từ phủ định và từ chuyên mục.
+  stopwords_file: "configs/vietnamese_stopwords.txt"
+  ngram_range:
+    - 1
+    - 2
+  min_df: 2
+  max_df: 0.95
+
 topic_representation:
   # Số keyword và bài đại diện được lưu cho mỗi topic.
   top_n_words: 10
