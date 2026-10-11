@@ -3,7 +3,7 @@ from collections.abc import Mapping, Sequence
 
 def calculate_outlier_rate(topics: Sequence[int]) -> float:
     """Tính tỷ lệ bài được BERTopic gán vào topic nhiễu -1."""
-    if not topics:
+    if len(topics) == 0:
         raise ValueError("Danh sách topic không được rỗng.")
 
     outlier_count = sum(topic == -1 for topic in topics)

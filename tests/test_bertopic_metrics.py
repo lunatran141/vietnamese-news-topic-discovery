@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 
 from src.evaluation.bertopic_metrics import (
@@ -50,3 +51,11 @@ def test_topic_diversity_ignores_outlier_topic() -> None:
     )
 
     assert diversity == pytest.approx(1.0)
+
+def test_outlier_rate_accepts_numpy_array() -> None:
+    """Metric phải nhận được output NumPy của BERTopic."""
+    topics = np.array([-1, 0, 1, -1])
+
+    outlier_rate = calculate_outlier_rate(topics)
+
+    assert outlier_rate == pytest.approx(0.5)
