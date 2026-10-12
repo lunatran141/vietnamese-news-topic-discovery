@@ -3,19 +3,15 @@ from typing import Any
 
 from src.models.bertopic_pipeline import (
     build_bertopic_model,
-    encode_documents,
-    fit_bertopic_model,
-    load_bertopic_config,
-)
-
-from src.models.bertopic_pipeline import (
-    build_bertopic_model,
+    build_ctfidf_model,
+    build_hdbscan_model,
+    build_umap_model,
+    build_vectorizer_model,
     encode_documents,
     fit_bertopic_model,
     load_bertopic_config,
     load_stopwords,
 )
-
 CONFIG_PATH = Path("configs/bertopic.yaml")
 
 class FakeEmbeddingModel:
@@ -78,6 +74,7 @@ def test_build_bertopic_model_from_config() -> None:
 
     assert model.vectorizer_model.ngram_range == (1, 2)
     assert "và" in model.vectorizer_model.stop_words
+    assert model.ctfidf_model is not None
 
     assert model.top_n_words == 10
 
@@ -124,3 +121,25 @@ def test_load_vietnamese_stopwords() -> None:
     assert "và" in stopwords
     assert "của" in stopwords
     assert "không" not in stopwords
+
+def test_build_pipeline_components() -> None:
+    """Kiểm tra từng thành phần nhận đúng cấu hình."""
+    config = load_bertopic_config(CONFIG_PATH)
+
+    vectorizer = build_vectorizer_model(config)
+    ctfidf = build_ctfidf_model(config)
+    umap_model = build_umap_model(config)
+    hdbscan_model = build_hdbscan_model(config)
+
+    assert vectorizer.ngram_range == (1, 2)
+    assert "và" in vectorizer.stop_words
+
+    assert ctfidf is not None
+
+    assert umap_model.n_neighbors == 15
+    assert umap_model.n_components == 5
+    assert umap_model.metric == "cosine"
+
+    assert hdbscan_model.min_cluster_size == 15
+    assert hdbscan_model.min_samples == 5
+    assert hdbscan_model.prediction_data is True

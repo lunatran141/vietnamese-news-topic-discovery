@@ -3,6 +3,7 @@ from typing import Any
 
 import yaml
 from bertopic import BERTopic
+from bertopic.vectorizers import ClassTfidfTransformer
 from hdbscan import HDBSCAN
 from umap import UMAP
 from sklearn.feature_extraction.text import CountVectorizer
@@ -38,29 +39,48 @@ def load_stopwords(stopwords_path: str | Path) -> list[str]:
             if line.strip() and not line.lstrip().startswith("#")
         ]
 
-def build_bertopic_model(
+def build_vectorizer_model(
     config: dict[str, Any],
-    embedding_model: Any | None = None,
-) -> BERTopic:
-    """Khởi tạo BERTopic theo cấu hình baseline của M13."""
-    umap_config = config["umap"]
-    hdbscan_config = config["hdbscan"]
-    topic_config = config["topic_representation"]
+) -> CountVectorizer:
+    """Tạo từ vựng dùng để biểu diễn nội dung của topic."""
     vectorizer_config = config["vectorizer"]
     stopwords = load_stopwords(
         vectorizer_config["stopwords_file"]
     )
 
-    # Vectorizer loại hư từ và cho phép keyword gồm một hoặc hai từ.
-    vectorizer_model = CountVectorizer(
+    return CountVectorizer(
         stop_words=stopwords,
-        ngram_range=tuple(vectorizer_config["ngram_range"]),
+        ngram_range=tuple(
+            vectorizer_config["ngram_range"]
+        ),
         min_df=vectorizer_config["min_df"],
         max_df=vectorizer_config["max_df"],
     )
 
-    # UMAP giảm chiều embedding trước khi phân cụm.
-    umap_model = UMAP(
+
+def build_ctfidf_model(
+    config: dict[str, Any],
+) -> ClassTfidfTransformer:
+    """Tạo c-TF-IDF để tìm từ khóa đặc trưng của topic."""
+    ctfidf_config = config["ctfidf"]
+
+    return ClassTfidfTransformer(
+        bm25_weighting=ctfidf_config[
+            "bm25_weighting"
+        ],
+        reduce_frequent_words=ctfidf_config[
+            "reduce_frequent_words"
+        ],
+    )
+
+
+def build_umap_model(
+    config: dict[str, Any],
+) -> UMAP:
+    """Giảm chiều embedding trước khi phân cụm."""
+    umap_config = config["umap"]
+
+    return UMAP(
         n_neighbors=umap_config["n_neighbors"],
         n_components=umap_config["n_components"],
         min_dist=umap_config["min_dist"],
@@ -68,22 +88,47 @@ def build_bertopic_model(
         random_state=umap_config["random_state"],
     )
 
-    # HDBSCAN tự xác định số topic và cho phép xuất hiện bài nhiễu.
-    hdbscan_model = HDBSCAN(
-        min_cluster_size=hdbscan_config["min_cluster_size"],
+
+def build_hdbscan_model(
+    config: dict[str, Any],
+) -> HDBSCAN:
+    """Phân cụm và phát hiện các bài outlier."""
+    hdbscan_config = config["hdbscan"]
+
+    return HDBSCAN(
+        min_cluster_size=hdbscan_config[
+            "min_cluster_size"
+        ],
         min_samples=hdbscan_config["min_samples"],
         metric=hdbscan_config["metric"],
         cluster_selection_method=hdbscan_config[
             "cluster_selection_method"
         ],
-        prediction_data=hdbscan_config["prediction_data"],
+        prediction_data=hdbscan_config[
+            "prediction_data"
+        ],
     )
+
+def build_bertopic_model(
+    config: dict[str, Any],
+    embedding_model: Any | None = None,
+) -> BERTopic:
+    """Ghép các thành phần thành pipeline BERTopic."""
+    topic_config = config["topic_representation"]
+
+    vectorizer_model = build_vectorizer_model(
+        config
+    )
+    ctfidf_model = build_ctfidf_model(config)
+    umap_model = build_umap_model(config)
+    hdbscan_model = build_hdbscan_model(config)
 
     return BERTopic(
         embedding_model=embedding_model,
         umap_model=umap_model,
         hdbscan_model=hdbscan_model,
         vectorizer_model=vectorizer_model,
+        ctfidf_model=ctfidf_model,
         top_n_words=topic_config["top_n_words"],
         verbose=False,
     )
