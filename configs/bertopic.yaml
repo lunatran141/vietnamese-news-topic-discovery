@@ -53,6 +53,11 @@ vectorizer:
   min_df: 2
   max_df: 0.95
 
+ctfidf:
+  # Tính từ khóa đặc trưng để diễn giải từng topic.
+  bm25_weighting: false
+  reduce_frequent_words: false
+
 topic_representation:
   # Số keyword và bài đại diện được lưu cho mỗi topic.
   top_n_words: 10

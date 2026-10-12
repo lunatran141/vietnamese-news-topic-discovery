@@ -8,12 +8,19 @@ import json
 import time
 from pathlib import Path
 from typing import Any
+from umap import UMAP
 
 import pandas as pd
 import yaml
 from sentence_transformers import SentenceTransformer
 
 from src.data.dataset_loader import load_split_dataset
+from src.evaluation.bertopic_artifacts import (
+    build_document_topics,
+    build_embedding_projection,
+    build_topic_keywords,
+    build_topic_summary,
+)
 from src.evaluation.bertopic_metrics import (
     calculate_outlier_rate,
     calculate_topic_diversity,
@@ -250,15 +257,17 @@ def main() -> None:
         embedding_model=embedding_model,
     )
 
-    train_topics, _ = fit_bertopic_model(
+    train_topics, train_probabilities = fit_bertopic_model(
         topic_model,
         train_documents,
         train_embeddings,
     )
 
-    validation_topics, _ = topic_model.transform(
-        validation_documents,
-        embeddings=validation_embeddings,
+    validation_topics, validation_probabilities = (
+        topic_model.transform(
+            validation_documents,
+            embeddings=validation_embeddings,
+        )
     )
 
     runtime_seconds = time.perf_counter() - start_time
@@ -326,6 +335,110 @@ def main() -> None:
 
     topic_model.get_topic_info().to_csv(
         run_output_dir / "topic_info.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    # Lưu topic và độ tin cậy của từng bài train.
+    train_document_topics = build_document_topics(
+        train_dataset,
+        train_topics,
+        train_probabilities,
+        split="train",
+    )
+
+    # Lưu kết quả áp dụng model lên validation.
+    validation_document_topics = build_document_topics(
+        validation_dataset,
+        validation_topics,
+        validation_probabilities,
+        split="val",
+    )
+
+    document_topics = pd.concat(
+        [
+            train_document_topics,
+            validation_document_topics,
+        ],
+        ignore_index=True,
+    )
+
+        # UMAP này chỉ phục vụ trực quan hóa embedding.
+    # Nó độc lập với UMAP bên trong pipeline BERTopic,
+    # nên không làm thay đổi kết quả phân cụm.
+    visualization_umap = UMAP(
+        n_neighbors=15,
+        n_components=2,
+        min_dist=0.1,
+        metric="cosine",
+        random_state=42,
+    )
+
+    train_embeddings_2d = (
+        visualization_umap.fit_transform(
+            train_embeddings
+        )
+    )
+
+    validation_embeddings_2d = (
+        visualization_umap.transform(
+            validation_embeddings
+        )
+    )
+
+    train_projection = build_embedding_projection(
+        article_ids=train_dataset["article_id"],
+        split="train",
+        topics=train_topics,
+        embeddings_2d=train_embeddings_2d,
+    )
+
+    validation_projection = build_embedding_projection(
+        article_ids=validation_dataset["article_id"],
+        split="val",
+        topics=validation_topics,
+        embeddings_2d=validation_embeddings_2d,
+    )
+
+    embedding_projection = pd.concat(
+        [
+            train_projection,
+            validation_projection,
+        ],
+        ignore_index=True,
+    )
+
+    # Xuất từ khóa c-TF-IDF của từng topic.
+    topic_keywords = build_topic_keywords(
+        topic_model
+    )
+
+    # Chỉ dùng train để tính kích thước và mô tả topic.
+    topic_summary = build_topic_summary(
+        train_document_topics,
+        topic_keywords,
+    )
+
+    document_topics.to_csv(
+        run_output_dir / "document_topics.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    embedding_projection.to_csv(
+        run_output_dir / "embedding_projection.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    topic_keywords.to_csv(
+        run_output_dir / "topic_keywords.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    topic_summary.to_csv(
+        run_output_dir / "topic_summary.csv",
         index=False,
         encoding="utf-8-sig",
     )
