@@ -2,13 +2,16 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from src.features.embeddings import create_embeddings
 from src.features.embeddings import (
+    create_embeddings,
+    load_embedding_artifact,
     save_embedding_artifact,
-    load_embedding_artifact)
+)
+
 
 class FakeEncoder:
     """Mô hình giả để test mà không cần tải mô hình thật."""
+
     def __init__(self):
         self.received_texts = None
 
@@ -72,6 +75,7 @@ def test_tu_choi_article_id_trung():
     with pytest.raises(ValueError, match="trùng"):
         create_embeddings(articles, FakeEncoder())
 
+
 def test_dung_cot_da_xu_ly_cua_p0():
     articles = pd.DataFrame({
         "article_id": ["BAI_1"],
@@ -105,13 +109,21 @@ def test_luu_va_tai_lai_artifact(tmp_path):
         data_version="test-v1",
     )
 
+    metadata = {
+        "embedding_run": "fake_title_content",
+        "content_words": 60,
+        "dataset": {"split": "train"},
+    }
+
     path = tmp_path / "embeddings.npz"
-    save_embedding_artifact(original, path)
+    save_embedding_artifact(original, path, metadata=metadata)
     loaded = load_embedding_artifact(path)
 
     assert loaded["article_id"].tolist() == ["BAI_B", "BAI_A"]
     assert loaded["model_name"].tolist() == ["fake-model", "fake-model"]
     assert loaded["data_version"].tolist() == ["test-v1", "test-v1"]
+    assert loaded.attrs["embedding_metadata"] == metadata
+
     np.testing.assert_allclose(
         np.stack(loaded["embedding"].to_numpy()),
         np.stack(original["embedding"].to_numpy()),

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-
+import json
 
 def create_embeddings(
     articles: pd.DataFrame,
@@ -79,77 +79,115 @@ def create_embeddings(
         "model_name": model_name,
         "data_version": data_version})
 
-def save_embedding_artifact(table: pd.DataFrame,path: str | Path) -> None:
-    """Lưu article_id và vector trong cùng một file .npz."""
+def save_embedding_artifact(
+    table: pd.DataFrame,
+    path: str | Path,
+    *,
+    metadata: dict | None = None,
+) -> None:
+    """Lưu ID, vector và thông tin cấu hình embedding."""
     required = {"article_id", "embedding", "model_name", "data_version"}
     missing = required - set(table.columns)
     if missing:
         raise ValueError(f"Thiếu cột artifact: {sorted(missing)}")
-
     if table.empty:
         raise ValueError("Bảng embedding rỗng")
 
-    if table["article_id"].isna().any():
+
+    ids = table["article_id"]
+    if ids.isna().any() or ids.astype(str).str.strip().eq("").any():
         raise ValueError("Có article_id bị thiếu")
 
-    if table["article_id"].duplicated().any():
+    article_ids = ids.astype(str).tolist()
+    if len(set(article_ids)) != len(article_ids):
         raise ValueError("Có article_id trùng")
 
-    if table["model_name"].nunique() != 1:
+    if table["model_name"].isna().any() or table["model_name"].nunique() != 1:
         raise ValueError("Artifact phải dùng cùng một model_name")
-
-    if table["data_version"].nunique() != 1:
+    if table["data_version"].isna().any() or table["data_version"].nunique() != 1:
         raise ValueError("Artifact phải dùng cùng một data_version")
 
     try:
-        vectors = np.stack([np.asarray(v, dtype=np.float32) for v in table["embedding"]])
-    except ValueError as exc:
-        raise ValueError("Các vector không cùng số chiều") from exc
+        vectors = np.stack([
+            np.asarray(vector, dtype=np.float32)
+            for vector in table["embedding"]
+        ])
+    except (ValueError, TypeError) as exc:
+        raise ValueError("Các vector không hợp lệ hoặc không cùng số chiều") from exc
 
     if vectors.ndim != 2 or vectors.shape[1] == 0:
         raise ValueError("Vector không hợp lệ")
-
     if not np.isfinite(vectors).all():
         raise ValueError("Vector chứa NaN hoặc Infinity")
+
+    if metadata is None:
+        metadata = table.attrs.get("embedding_metadata", {})
+    if not isinstance(metadata, dict):
+        raise ValueError("Metadata phải là dictionary")
+
+    metadata_json = json.dumps(
+        metadata, ensure_ascii=False, sort_keys=True
+    )
 
     path = Path(path)
     if path.suffix.lower() != ".npz":
         raise ValueError("Đường dẫn artifact phải kết thúc bằng .npz")
-
     path.parent.mkdir(parents=True, exist_ok=True)
 
     np.savez_compressed(
         path,
-        article_ids=np.asarray(
-        table["article_id"].astype(str).tolist(),
-        dtype=np.str_,),
+        article_ids=np.asarray(article_ids, dtype=np.str_),
         vectors=vectors,
-        model_name=np.array([table["model_name"].iloc[0]]),
-        data_version=np.array([table["data_version"].iloc[0]]))
+        model_name=np.asarray([table["model_name"].iloc[0]]),
+        data_version=np.asarray([table["data_version"].iloc[0]]),
+        embedding_metadata_json=np.asarray([metadata_json], dtype=np.str_),
+    )
+
 
 def load_embedding_artifact(path: str | Path) -> pd.DataFrame:
-    """Tải lại vector và kiểm tra article_id vẫn khớp với từng dòng."""
+    """Đọc artifact và đưa metadata vào thuộc tính của DataFrame."""
     with np.load(path, allow_pickle=False) as saved:
         article_ids = saved["article_ids"].copy()
         vectors = saved["vectors"].copy()
         model_name = str(saved["model_name"][0])
         data_version = str(saved["data_version"][0])
 
+        # Cho phép đọc artifact cũ để bổ sung metadata.
+        metadata = {}
+        if "embedding_metadata_json" in saved.files:
+            metadata = json.loads(
+                str(saved["embedding_metadata_json"][0])
+            )
+
+    if not isinstance(metadata, dict):
+        raise ValueError("Metadata artifact không hợp lệ")
     if vectors.ndim != 2 or vectors.shape[1] == 0:
         raise ValueError("Artifact không chứa ma trận vector hợp lệ")
-
     if len(article_ids) != len(vectors):
         raise ValueError("Số article_id không khớp số vector")
-
     if len(set(article_ids.tolist())) != len(article_ids):
         raise ValueError("Artifact có article_id trùng")
-
     if not np.isfinite(vectors).all():
         raise ValueError("Artifact chứa NaN hoặc Infinity")
 
-    return pd.DataFrame({
+    table = pd.DataFrame({
         "article_id": article_ids.tolist(),
         "embedding": list(vectors),
         "model_name": model_name,
         "data_version": data_version,
     })
+    table.attrs["embedding_metadata"] = metadata
+    return table
+
+
+def build_embedding_metadata(config: dict, run_name: str) -> dict:
+    """Mô tả cấu hình đã dùng để tạo một artifact embedding."""
+    run = config["runs"][run_name]
+    return {
+        "embedding_run": run_name,
+        "dataset": dict(config["dataset"]),
+        "encoding": dict(config["encoding"]),
+        "model_name": run["model_name"],
+        "content_words": run["content_words"],
+        "expected_dimensions": run["expected_dimensions"],
+    }
