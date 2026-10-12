@@ -1,3 +1,35 @@
+# M14 – Thí nghiệm và trực quan hóa BERTopic
+
+## 1. Mục tiêu
+
+M14 xây dựng và đánh giá pipeline khám phá chủ đề trên tập tin tức tiếng Việt đã được đóng băng ở các bước dữ liệu trước đó. Mục tiêu chính gồm:
+
+- biểu diễn nội dung bài báo dưới dạng embedding ngữ nghĩa;
+- tự động gom các bài có nội dung gần nhau thành topic mà không cần nhãn khi huấn luyện;
+- phát hiện các bài không thuộc cụm rõ ràng;
+- dùng c-TF-IDF để tìm từ khóa giải thích từng topic;
+- so sánh có kiểm soát các lựa chọn embedding, UMAP và HDBSCAN;
+- xuất dữ liệu trung gian và hình trực quan để kết quả có thể kiểm tra, giải thích và tái sử dụng.
+
+Tập dữ liệu chính thức gồm **6.493 bài train** và **1.391 bài validation**. Tập test không được sử dụng để lựa chọn cấu hình.
+
+## 2. Pipeline BERTopic
+
+![Pipeline BERTopic](../results/bertopic_visualization/07_bertopic_pipeline.png)
+
+Pipeline gồm sáu bước:
+
+1. **Dataset đã đóng băng:** sử dụng đúng split train và validation chính thức.
+2. **Tạo văn bản đầu vào:** ghép tiêu đề và nội dung đã xử lý, đồng thời giữ nguyên thứ tự bài báo.
+3. **Embedding:** chuyển mỗi bài báo thành vector ngữ nghĩa bằng Sentence Transformer.
+4. **UMAP:** giảm chiều embedding, cố gắng giữ cấu trúc lân cận để hỗ trợ phân cụm.
+5. **HDBSCAN:** tìm các vùng có mật độ cao để tạo cụm và gán `-1` cho các bài không thuộc cụm rõ ràng.
+6. **c-TF-IDF:** tìm các từ nổi bật trong từng cụm để mô tả và đặt tên topic.
+
+Đầu ra không chỉ là mô hình mà còn gồm topic của từng bài, xác suất gán topic, từ khóa đại diện, bảng tổng hợp topic, chỉ số đánh giá và các hình trực quan.
+
+## 3. Vai trò của các thành phần
+
 ### 3.1 Embedding
 
 Embedding mã hóa nội dung bài báo thành vector. Hai bài có ý nghĩa gần nhau được kỳ vọng có vector gần nhau, kể cả khi không dùng chính xác cùng một từ. Thí nghiệm so sánh embedding multilingual MiniLM với Vietnamese SBERT nhằm kiểm tra lợi ích của mô hình chuyên biệt cho tiếng Việt.
@@ -94,67 +126,3 @@ Ví dụ:
 - T1 có các từ `cáo`, `tội`, `điều tra`, `công an`, phù hợp nhóm tin pháp luật;
 - T2 có `ăn`, `uống`, `cơ thể`, `thực phẩm`, phù hợp nhóm sức khỏe và dinh dưỡng;
 - T3 có `iphone`, `pro`, `apple`, phù hợp nhóm sản phẩm công nghệ;
-- T4 có `bệnh`, `bệnh viện`, `khám`, `thuốc`, phù hợp nhóm y tế;
-- T5 có `asiad`, `vđv`, `nữ`, phù hợp nhóm thể thao.
-
-Một số từ còn bị tách hoặc chưa tự nhiên, chẳng hạn `doanh`, `mô`, `dung`. Đây là dấu hiệu cho thấy bước chuẩn hóa và biểu diễn từ tiếng Việt vẫn có thể được cải tiến.
-
-## 9. Đánh giá độ cân bằng và độ rõ của cụm
-
-![Đánh giá cụm E1](../results/bertopic_visualization/08_e1_cluster_evaluation.png)
-
-Dashboard đánh giá bốn khía cạnh:
-
-1. **Phân phối kích thước topic:** cho biết phần lớn topic có quy mô bao nhiêu và có topic quá lớn hay không.
-2. **Các topic lớn nhất:** giúp nhận diện cụm chi phối dữ liệu.
-3. **Topic probability:** so sánh độ tin cậy khi gán topic giữa train và validation.
-4. **Outlier rate:** đo tỷ lệ bài không thuộc cụm rõ ràng ở từng split.
-
-Outlier validation của E1 là 35,87%, cao hơn outlier train 24,61%. Khoảng cách này cho thấy cấu trúc cụm học từ train chưa bao phủ hoàn toàn các bài validation. Đây là hạn chế cần được trình bày thay vì chỉ báo cáo các topic đẹp.
-
-## 10. Các file kết quả
-
-| File | Ý nghĩa |
-|---|---|
-| `metrics.json` | Chỉ số tổng hợp của một lần chạy |
-| `config_used.yaml` | Cấu hình thực tế đã sử dụng |
-| `topic_info.csv` | Thông tin topic do BERTopic xuất |
-| `document_topics.csv` | Topic, xác suất và trạng thái outlier của từng bài |
-| `embedding_projection.csv` | Tọa độ UMAP 2D của từng bài để trực quan hóa |
-| `topic_keywords.csv` | Từ khóa và điểm c-TF-IDF theo topic |
-| `topic_summary.csv` | Kích thước, từ khóa, tiêu đề đại diện và nhãn chi phối của topic |
-| `summary.csv` | Bảng so sánh E0–E3 |
-
-Các file CSV giúp kết quả có thể kiểm tra ở mức từng bài báo thay vì chỉ tồn tại dưới dạng hình ảnh.
-
-## 11. Kiểm thử
-
-Các test bao phủ:
-
-- cấu hình và thành phần pipeline BERTopic;
-- việc encode và fit bằng embedding tương ứng;
-- tính outlier rate và topic diversity;
-- xuất topic assignment, từ khóa, topic summary và embedding projection;
-- tạo các biểu đồ đánh giá;
-- kiểm tra thiết kế thí nghiệm E0–E3.
-
-Kết quả hiện tại:
-
-```text
-33 passed in 38.81s
-```
-
-## 12. Kết luận
-
-Pipeline đã hoàn thành luồng từ dữ liệu tin tức tiếng Việt đến embedding, giảm chiều, phân cụm, giải thích topic, đánh giá và trực quan hóa. Vietnamese SBERT trong E1 đạt outlier validation thấp nhất trong bốn cấu hình, vì vậy được chọn làm cấu hình chính để phân tích sâu.
-
-Kết quả cho thấy nhiều topic có nội dung rõ và phù hợp với các nhóm tin như pháp luật, sức khỏe, công nghệ, thể thao và giáo dục. Tuy nhiên, mô hình vẫn có tỷ lệ outlier validation đáng kể, kích thước cụm không đồng đều và một số từ khóa chưa tự nhiên.
-
-## 13. Hướng cải tiến
-
-- đánh giá thêm topic coherence thay vì chỉ dùng topic diversity;
-- thử thêm embedding tiếng Việt hoặc embedding đa ngôn ngữ mới;
-- khảo sát có hệ thống các tham số UMAP và HDBSCAN;
-- cải thiện tách từ và chuẩn hóa cụm từ tiếng Việt;
-- kiểm tra thủ công một mẫu bài trong mỗi topic;
-- xem xét gộp các topic gần nhau hoặc tách topic quá lớn;
