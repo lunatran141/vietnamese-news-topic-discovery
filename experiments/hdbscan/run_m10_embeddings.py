@@ -11,6 +11,7 @@ from src.features.embeddings import (
     create_embeddings,
     load_embedding_artifact,
     save_embedding_artifact,
+    build_embedding_metadata,
 )
 
 CONFIG_PATH = Path("configs/embeddings.yaml")
@@ -80,7 +81,7 @@ def main() -> None:
             batch_size=encoding_config["batch_size"],
         )
 
-        save_embedding_artifact(embedding_table, artifact_path)
+        save_embedding_artifact(embedding_table, artifact_path, metadata=build_embedding_metadata(config, run_name),)
         loaded = load_embedding_artifact(artifact_path)
 
         vectors = np.stack(loaded["embedding"].to_numpy())
