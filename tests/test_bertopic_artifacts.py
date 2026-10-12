@@ -4,11 +4,11 @@ import pytest
 
 from src.evaluation.bertopic_artifacts import (
     build_document_topics,
+    build_embedding_projection,
     build_topic_keywords,
     build_topic_summary,
     prepare_topic_probabilities,
 )
-
 
 class FakeTopicModel:
     """Mô phỏng từ khóa topic để không cần tải model thật."""
@@ -141,3 +141,67 @@ def test_build_topic_summary() -> None:
         "Thể thao",
     }
     assert result["category_purity"].eq(1.0).all()
+
+def test_build_embedding_projection() -> None:
+    """Tọa độ 2D phải giữ đúng bài báo, topic và split."""
+    article_ids = pd.Series(
+        ["A001", "A002", "A003"]
+    )
+    topics = [0, -1, 1]
+    embeddings_2d = np.array(
+        [
+            [0.10, 0.20],
+            [0.30, 0.40],
+            [0.50, 0.60],
+        ]
+    )
+
+    result = build_embedding_projection(
+        article_ids=article_ids,
+        split="train",
+        topics=topics,
+        embeddings_2d=embeddings_2d,
+    )
+
+    assert list(result.columns) == [
+        "article_id",
+        "split",
+        "topic",
+        "x",
+        "y",
+        "is_outlier",
+    ]
+    assert len(result) == 3
+    assert result["article_id"].tolist() == [
+        "A001",
+        "A002",
+        "A003",
+    ]
+    assert result["topic"].tolist() == [0, -1, 1]
+    assert result["is_outlier"].tolist() == [
+        False,
+        True,
+        False,
+    ]
+    assert result["split"].eq("train").all()
+
+def test_embedding_projection_rejects_non_2d_data() -> None:
+    """Tọa độ trực quan hóa phải có đúng hai chiều."""
+    article_ids = pd.Series(["A001", "A002"])
+    embeddings_3d = np.array(
+        [
+            [0.1, 0.2, 0.3],
+            [0.4, 0.5, 0.6],
+        ]
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="đúng hai cột",
+    ):
+        build_embedding_projection(
+            article_ids=article_ids,
+            split="train",
+            topics=[0, 1],
+            embeddings_2d=embeddings_3d,
+        )

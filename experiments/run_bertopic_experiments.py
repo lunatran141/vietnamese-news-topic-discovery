@@ -8,6 +8,7 @@ import json
 import time
 from pathlib import Path
 from typing import Any
+from umap import UMAP
 
 import pandas as pd
 import yaml
@@ -16,6 +17,7 @@ from sentence_transformers import SentenceTransformer
 from src.data.dataset_loader import load_split_dataset
 from src.evaluation.bertopic_artifacts import (
     build_document_topics,
+    build_embedding_projection,
     build_topic_keywords,
     build_topic_summary,
 )
@@ -361,6 +363,51 @@ def main() -> None:
         ignore_index=True,
     )
 
+        # UMAP này chỉ phục vụ trực quan hóa embedding.
+    # Nó độc lập với UMAP bên trong pipeline BERTopic,
+    # nên không làm thay đổi kết quả phân cụm.
+    visualization_umap = UMAP(
+        n_neighbors=15,
+        n_components=2,
+        min_dist=0.1,
+        metric="cosine",
+        random_state=42,
+    )
+
+    train_embeddings_2d = (
+        visualization_umap.fit_transform(
+            train_embeddings
+        )
+    )
+
+    validation_embeddings_2d = (
+        visualization_umap.transform(
+            validation_embeddings
+        )
+    )
+
+    train_projection = build_embedding_projection(
+        article_ids=train_dataset["article_id"],
+        split="train",
+        topics=train_topics,
+        embeddings_2d=train_embeddings_2d,
+    )
+
+    validation_projection = build_embedding_projection(
+        article_ids=validation_dataset["article_id"],
+        split="val",
+        topics=validation_topics,
+        embeddings_2d=validation_embeddings_2d,
+    )
+
+    embedding_projection = pd.concat(
+        [
+            train_projection,
+            validation_projection,
+        ],
+        ignore_index=True,
+    )
+
     # Xuất từ khóa c-TF-IDF của từng topic.
     topic_keywords = build_topic_keywords(
         topic_model
@@ -374,6 +421,12 @@ def main() -> None:
 
     document_topics.to_csv(
         run_output_dir / "document_topics.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    embedding_projection.to_csv(
+        run_output_dir / "embedding_projection.csv",
         index=False,
         encoding="utf-8-sig",
     )

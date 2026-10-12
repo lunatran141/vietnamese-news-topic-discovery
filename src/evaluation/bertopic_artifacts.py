@@ -184,3 +184,57 @@ def build_topic_summary(
         ascending=False,
         ignore_index=True,
     )
+
+def build_embedding_projection(
+    article_ids: pd.Series,
+    split: str,
+    topics: list[int] | np.ndarray,
+    embeddings_2d: Any,
+) -> pd.DataFrame:
+    """Tạo bảng tọa độ 2D dùng để trực quan hóa cụm topic.
+
+    Mỗi dòng tương ứng với một bài báo:
+    - x, y: tọa độ sau khi giảm chiều embedding;
+    - topic: cụm được HDBSCAN gán;
+    - is_outlier: bài không thuộc cụm rõ ràng.
+    """
+    coordinates = np.asarray(embeddings_2d)
+    topic_values = np.asarray(topics)
+
+    if coordinates.ndim != 2:
+        raise ValueError(
+            "embeddings_2d phải là ma trận hai chiều."
+        )
+
+    if coordinates.shape[1] != 2:
+        raise ValueError(
+            "embeddings_2d phải có đúng hai cột x và y."
+        )
+
+    expected_length = len(article_ids)
+
+    if len(coordinates) != expected_length:
+        raise ValueError(
+            "Số tọa độ embedding không khớp số bài báo."
+        )
+
+    if len(topic_values) != expected_length:
+        raise ValueError(
+            "Số topic không khớp số bài báo."
+        )
+
+    projection = pd.DataFrame(
+        {
+            "article_id": article_ids.astype(str).to_numpy(),
+            "split": split,
+            "topic": topic_values.astype(int),
+            "x": coordinates[:, 0],
+            "y": coordinates[:, 1],
+        }
+    )
+
+    projection["is_outlier"] = (
+        projection["topic"] == -1
+    )
+
+    return projection
