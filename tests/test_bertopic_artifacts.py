@@ -1,0 +1,143 @@
+import numpy as np
+import pandas as pd
+import pytest
+
+from src.evaluation.bertopic_artifacts import (
+    build_document_topics,
+    build_topic_keywords,
+    build_topic_summary,
+    prepare_topic_probabilities,
+)
+
+
+class FakeTopicModel:
+    """Mô phỏng từ khóa topic để không cần tải model thật."""
+
+    def get_topics(
+        self,
+    ) -> dict[int, list[tuple[str, float]]]:
+        return {
+            -1: [("nhiễu", 0.1)],
+            0: [
+                ("ngân_hàng", 0.9),
+                ("lãi_suất", 0.8),
+                ("tín_dụng", 0.7),
+            ],
+            1: [
+                ("bóng_đá", 0.95),
+                ("đội_tuyển", 0.85),
+                ("trận_đấu", 0.75),
+            ],
+        }
+
+
+def make_dataset() -> pd.DataFrame:
+    """Tạo dataset nhỏ dùng để kiểm tra bảng kết quả."""
+    return pd.DataFrame(
+        {
+            "article_id": ["A001", "A002", "A003"],
+            "title": [
+                "Ngân hàng giảm lãi suất",
+                "Đội tuyển chuẩn bị thi đấu",
+                "Tin tổng hợp",
+            ],
+            "category_gold": [
+                "Kinh doanh",
+                "Thể thao",
+                "Đời sống",
+            ],
+        }
+    )
+
+
+def test_prepare_topic_probabilities_from_matrix() -> None:
+    """Kiểm tra ma trận xác suất được rút thành một giá trị mỗi bài."""
+    probabilities = np.array(
+        [
+            [0.8, 0.2],
+            [0.3, 0.7],
+        ]
+    )
+
+    result = prepare_topic_probabilities(
+        probabilities,
+        expected_length=2,
+    )
+
+    assert result.tolist() == [0.8, 0.7]
+
+
+def test_build_document_topics() -> None:
+    """Kiểm tra mỗi bài được gắn đúng topic và trạng thái outlier."""
+    result = build_document_topics(
+        make_dataset(),
+        topics=[0, 1, -1],
+        probabilities=[0.9, 0.8, 0.2],
+        split="train",
+    )
+
+    assert len(result) == 3
+    assert result["article_id"].tolist() == [
+        "A001",
+        "A002",
+        "A003",
+    ]
+    assert result["topic"].tolist() == [0, 1, -1]
+    assert result["is_outlier"].tolist() == [
+        False,
+        False,
+        True,
+    ]
+    assert result["split"].eq("train").all()
+
+
+def test_document_topics_rejects_wrong_length() -> None:
+    """Kiểm tra số topic phải khớp số bài."""
+    with pytest.raises(
+        ValueError,
+        match="Số topic",
+    ):
+        build_document_topics(
+            make_dataset(),
+            topics=[0, 1],
+            probabilities=None,
+            split="train",
+        )
+
+
+def test_build_topic_keywords_ignores_outlier() -> None:
+    """Kiểm tra bảng từ khóa không chứa topic nhiễu."""
+    result = build_topic_keywords(
+        FakeTopicModel()
+    )
+
+    assert set(result["topic"]) == {0, 1}
+    assert result.iloc[0]["word"] == "ngân_hàng"
+    assert result.iloc[0]["rank"] == 1
+    assert result.iloc[0]["ctfidf_score"] == 0.9
+
+
+def test_build_topic_summary() -> None:
+    """Kiểm tra bảng tổng hợp topic có đủ thông tin chính."""
+    document_topics = build_document_topics(
+        make_dataset(),
+        topics=[0, 1, -1],
+        probabilities=[0.9, 0.8, 0.2],
+        split="train",
+    )
+    topic_keywords = build_topic_keywords(
+        FakeTopicModel()
+    )
+
+    result = build_topic_summary(
+        document_topics,
+        topic_keywords,
+    )
+
+    assert len(result) == 2
+    assert result["document_count"].sum() == 2
+    assert set(result["dominant_category"]) == {
+        "Kinh doanh",
+        "Thể thao",
+    }
+    assert result["category_purity"].eq(1.0).all()

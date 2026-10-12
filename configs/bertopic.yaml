@@ -56,7 +56,7 @@ vectorizer:
 ctfidf:
   # Tính từ khóa đặc trưng để diễn giải từng topic.
   bm25_weighting: false
-  reduce_frequent_words: true
+  reduce_frequent_words: false
 
 topic_representation:
   # Số keyword và bài đại diện được lưu cho mỗi topic.
