@@ -11,6 +11,7 @@ M02
 - Xuất đầy đủ 6 artifacts chuẩn Handbook Mục E1 tại `artifacts/kmeans/` (`kmeans_model.joblib`, `document_topics.csv`, `topic_keywords.json`, `representative_docs.json`, `config.json`, `run_metadata.json`).
 - Tạo 5 biểu đồ trực quan hóa nghiên cứu tại `results/kmeans/figures/` (Elbow, Silhouette vs DBI, Silhouette Analysis từng mẫu, Cluster size distribution, 2D TruncatedSVD).
 - Tạo notebook trực quan tương tác `notebooks/05_kmeans_analysis.ipynb` phục vụ demo, phân tích ma trận chéo và đánh giá đóng góp cá nhân (Task 1.16).
+- Viết tài liệu kỹ thuật `docs/m02_kmeans_guide.md` hướng dẫn chi tiết, phân tích định lượng/định tính và báo cáo kết quả.
 - Bổ sung bộ kiểm thử 13 bài test tại `tests/test_kmeans.py`.
 
 ## How to Run and Test
