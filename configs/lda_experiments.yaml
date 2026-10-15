@@ -1,0 +1,30 @@
+
+# M08 - LDA Topic Experiments
+# TV3 - LDA
+
+dataset:
+  path: "data/processed/p2_segmented.csv"
+  split_manifest_path: "data/splits/split_manifest.csv"
+  data_version: "v1.0"
+  preprocessing_variant: "p2_segmented"
+  text_variant: "text"
+  train_split: "train"
+  val_split: "val"
+
+base_config: "configs/lda.yaml"
+
+experiments:
+  topic_numbers: [4, 6, 8, 10, 12, 15, 20]
+  top_n_words: 10
+  random_state: 42
+
+evaluation:
+  coherence_metrics:
+    - c_v
+    - c_npmi
+  topic_diversity: true
+  coherence_split: "val"
+
+outputs:
+  artifacts_dir: "artifacts/lda/m08"
+  results_dir: "results/lda/m08"
