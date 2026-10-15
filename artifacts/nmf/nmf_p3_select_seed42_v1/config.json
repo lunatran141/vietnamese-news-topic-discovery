@@ -1,0 +1,56 @@
+{
+  "data": {
+    "dataset_path": "data/processed/p3_no_stopwords.csv",
+    "dataset_manifest_path": "data/processed/dataset_manifest.json",
+    "split_manifest_path": "data/splits/split_manifest.csv",
+    "dataset_version": "v1.0",
+    "preprocessing_variant": "p3_no_stopwords",
+    "id_column": "article_id",
+    "text_column": "text",
+    "gold_column": "category_gold",
+    "encoding": "utf-8-sig"
+  },
+  "representation": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 3,
+    "max_df": 0.95,
+    "max_features": 50000,
+    "sublinear_tf": true,
+    "token_pattern": "(?u)\\b\\w\\w+\\b"
+  },
+  "topic_selection": {
+    "candidates": [
+      4,
+      6,
+      8,
+      10,
+      12
+    ],
+    "coherence_top_n": 10,
+    "selected_n_topics": null,
+    "primary_metric": "npmi_coherence"
+  },
+  "model": {
+    "init": "nndsvda",
+    "solver": "cd",
+    "beta_loss": "frobenius",
+    "max_iter": 500,
+    "tolerance": 0.0001,
+    "random_seed": 42
+  },
+  "analysis": {
+    "top_words": 10,
+    "representative_documents_per_topic": 5,
+    "secondary_topic_min_share": 0.2,
+    "max_topics_per_document": 3,
+    "multi_topic_cases_limit": 50,
+    "preview_characters": 500
+  },
+  "outputs": {
+    "artifact_root": "artifacts/nmf",
+    "result_root": "results/nmf"
+  }
+}
