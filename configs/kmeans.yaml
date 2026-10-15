@@ -1,0 +1,19 @@
+# Cấu hình K-Means clustering pipeline cho TV1 (Task M02 - M05).
+# Sử dụng trực tiếp TF-IDF sparse matrix từ Task M01.
+
+dataset:
+  split_manifest_path: "data/splits/split_manifest.csv"
+  tfidf_artifacts_dir: "artifacts/tfidf"
+  data_version: "v1.0"
+
+clustering:
+  algorithm: "kmeans"
+  n_clusters: 10
+  init: "k-means++"
+  n_init: 10
+  max_iter: 300
+  random_state: 42
+
+output:
+  artifacts_dir: "artifacts/kmeans"
+
