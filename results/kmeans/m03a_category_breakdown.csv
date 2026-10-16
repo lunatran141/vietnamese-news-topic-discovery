@@ -1,0 +1,15 @@
+﻿variant_id,k,category_gold,category_total_docs,dominant_cluster_id,category_docs_in_dominant_cluster,cluster_total_docs,category_recall_pct,cluster_purity_pct
+title_only,9,Giáo dục,156,2,130,982,83.33,13.24
+title_only,9,Giải trí,178,2,164,982,92.13,16.7
+title_only,9,Khoa học công nghệ,105,2,69,982,65.71,7.03
+title_only,9,Kinh doanh,297,2,176,982,59.26,17.92
+title_only,9,Pháp luật,177,2,144,982,81.36,14.66
+title_only,9,Sức khỏe,185,2,159,982,85.95,16.19
+title_only,9,Thể thao,293,2,140,982,47.78,14.26
+title_content,9,Giáo dục,156,7,126,129,80.77,97.67
+title_content,9,Giải trí,178,0,171,251,96.07,68.13
+title_content,9,Khoa học công nghệ,105,2,70,76,66.67,92.11
+title_content,9,Kinh doanh,297,6,171,229,57.58,74.67
+title_content,9,Pháp luật,177,5,164,188,92.66,87.23
+title_content,9,Sức khỏe,185,3,157,159,84.86,98.74
+title_content,9,Thể thao,293,4,174,174,59.39,100.0

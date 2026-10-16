@@ -1,0 +1,19 @@
+﻿variant_id,variant_name,cluster_id,size_val,dominant_gold_category,dominant_gold_share_pct,compound_words_top10,stopwords_polluted_top10,top10_keywords,nearest_article_title
+title_only,Chỉ tiêu đề,0,44,Kinh doanh,61.4,4,0,"giảm, tăng, lãi_suất, ngân_hàng, fed, mạnh, chứng_khoán, cao, hôm_nay, gần",Fed tăng lãi suất lần đầu tiên sau 3 năm
+title_only,Chỉ tiêu đề,1,69,Thể thao,47.8,3,0,"việt_nam, tuyển, lan, thái, hlv, u20, thắng, hợp_tác, nữ, cầu_thủ",HLV Thái Lan có thể bị sa thải nếu lại thua tuyển Việt Nam
+title_only,Chỉ tiêu đề,2,982,Kinh doanh,17.9,1,0,"không, trường, tuổi, tp, hcm, vụ, mới, 2026, hà_nội, nhất","Học sinh TP.HCM học đờn ca tài tử: Không lấy điểm, không thi, vẫn say mê"
+title_only,Chỉ tiêu đề,3,13,Thể thao,100.0,0,0,"asean, cup, fifa, 2026, tuyển, việt, lan, nam, thái, indonesia",Việt Nam có bản quyền FIFA ASEAN Cup 2026
+title_only,Chỉ tiêu đề,4,60,Thể thao,100.0,3,0,"asiad, 20, 2026, nam, u23, việt_nam, việt, lịch, huy_chương, thi_đấu",Lịch thi đấu của U23 Việt Nam tại ASIAD 2026
+title_only,Chỉ tiêu đề,5,84,Thể thao,50.0,0,0,"việt, nam, tuyển, u20, nữ, u23, lan, thái, hlv, thua",Tuyển Việt Nam thua Thái Lan lần đầu sau hơn 2 năm
+title_only,Chỉ tiêu đề,6,25,Kinh doanh,96.0,2,0,"giá, vàng, tăng, dầu, thế_giới, xăng, hôm_nay, nước, giảm, usd",Vì sao giá xăng dầu trong nước tăng liên tiếp dù giá thế giới tuần qua giảm?
+title_only,Chỉ tiêu đề,7,26,Khoa học công nghệ,92.3,1,0,"iphone, pro, 18, max, duo, apple, gập, ra_mắt, bán, 17",iPhone Duo khiến iPhone 18 Pro ế?
+title_only,Chỉ tiêu đề,8,88,Kinh doanh,33.0,1,0,"đồng, triệu, tỷ, tỉ, 000, gần, usd, phạt, trả, công_ty",Bịa bán 'con gà bằng đồng lạnh' từ 700 đến 3.000 tỉ đồng để lừa gần 400 triệu đồng
+title_content,Tiêu đề và nội dung,0,251,Giải trí,68.1,4,0,"cô, phim, anh, khán_giả, không, diễn_viên, tôi, nói, nghệ_sĩ, tác_phẩm",Mỹ Anh: Không đợi thành công trong nước rồi mới ra quốc tế
+title_content,Tiêu đề và nội dung,1,98,Thể thao,99.0,2,0,"asiad, nữ, u23, nam, giành, thi_đấu, việt_nam, trận, nhật, môn",Xác định 8 đội vào tứ kết bóng đá nữ Asiad 20
+title_content,Tiêu đề và nội dung,2,76,Khoa học công nghệ,92.1,4,0,"iphone, apple, pro, máy, dùng, màn_hình, max, hệ_thống, thiết_bị, sử_dụng","Toàn cảnh thông tin hot nhất về iPhone 18 Pro, 18 Pro Max, iPhone Duo gập trước giờ ra mắt"
+title_content,Tiêu đề và nội dung,3,159,Sức khỏe,98.7,5,0,"bác_sĩ, bệnh, điều_trị, bệnh_viện, người_bệnh, hoặc, khám, máu, thuốc, tình_trạng",5 điều cần biết để giữ thận khỏe
+title_content,Tiêu đề và nội dung,4,174,Thể thao,100.0,1,0,"trận, đội, bóng, cầu_thủ, hlv, cup, thắng, sân, fifa, bàn",HLV tuyển Philippines: 'Chúng tôi không đáng thua'
+title_content,Tiêu đề và nội dung,5,188,Pháp luật,87.2,5,0,"công_an, điều_tra, vụ, án, cơ_quan, hành_vi, tiền, cảnh_sát, tỉnh, đồng",Khởi tố nhóm thuê người vay ngân hàng mua ô tô rồi bán lại
+title_content,Tiêu đề và nội dung,6,229,Kinh doanh,74.7,10,0,"doanh_nghiệp, phát_triển, đầu_tư, công_nghệ, dự_án, thị_trường, việt_nam, xây_dựng, sản_phẩm, dịch_vụ",Việt Nam đang tạo ra những Doanh nghiệp Quốc gia thay đổi cả nền kinh tế thế nào?
+title_content,Tiêu đề và nội dung,7,129,Giáo dục,97.7,7,0,"trường, học_sinh, giáo_dục, học, đào_tạo, đại_học, nhà_trường, năm_học, giáo_viên, lớp",5 kỳ vọng lớn của ngành giáo dục năm học mới
+title_content,Tiêu đề và nội dung,8,87,Kinh doanh,96.6,3,0,"tăng, giá, đồng, lãi_suất, thị_trường, giảm, usd, cổ_phiếu, so, bán","VN-Index mất mốc 1.800 điểm, ông Phạm Nhật Vượng vẫn thăng hạng tỷ phú USD"
