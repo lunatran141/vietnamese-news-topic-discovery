@@ -1,0 +1,66 @@
+# Cấu hình thực nghiệm bóc tách tiền xử lý (Task M03 - Preprocessing Ablation P0 đến P3).
+
+dataset:
+  split_manifest_path: "data/splits/split_manifest.csv"
+  data_version: "v1.0"
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+
+  variants:
+    - id: "P0"
+      name: "P0_minimal"
+      path: "data/processed/p0_minimal.csv"
+      description: "Làm sạch tối thiểu (Unicode NFC, gỡ HTML, giữ chữ hoa/thường, không tách từ, giữ từ dừng)"
+    - id: "P1"
+      name: "P1_normalized"
+      path: "data/processed/p1_normalized.csv"
+      description: "Chuẩn hóa có kiểm soát (chữ thường, token URL/EMAIL, gỡ lặp tiêu đề, không tách từ, giữ từ dừng)"
+    - id: "P2"
+      name: "P2_segmented"
+      path: "data/processed/p2_segmented.csv"
+      description: "Tách từ tiếng Việt bằng PyVi (nối từ ghép bằng gạch dưới, giữ từ dừng)"
+    - id: "P3"
+      name: "P3_no_stopwords"
+      path: "data/processed/p3_no_stopwords.csv"
+      description: "Lọc bỏ 388 từ dừng tiếng Việt (bảo vệ từ phủ định và từ khóa chủ đề)"
+
+vectorizer:
+  ngram_range: [1, 1]
+  min_df: 2
+  max_df: 0.85
+  max_features: 20000
+  sublinear_tf: true
+  norm: "l2"
+  token_pattern: "(?u)\\b\\w\\w+\\b"
+  lowercase: false
+  stopwords_file: null
+
+reference:
+  stopwords_file: "configs/vietnamese_stopwords.txt" 
+
+clustering:
+  algorithm: "kmeans"
+  primary_k: 9 
+  sensitivity_k_list:
+    - 7
+    - 9
+  init: "k-means++"
+  n_init: 10
+  max_iter: 300
+  random_state: 42
+  stability_seeds:
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+
+topics:
+  top_n_keywords: 15
+  representative_docs_per_cluster: 5
+
+output:
+  results_dir: "results/kmeans"
+  figures_dir: "results/kmeans/figures"
+

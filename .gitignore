@@ -230,3 +230,6 @@ results/bertopic_experiments/smoke_*/
 
 # Matplotlib cache
 .matplotlib_cache/
+
+# Local task tracking
+docs/tv1_kmeans_tasks.csv
