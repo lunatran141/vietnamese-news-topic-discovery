@@ -1,12 +1,4 @@
-"""Thực thi pipeline thực nghiệm bóc tách tiền xử lý P0 đến P3 (Task M03).
-
-Đáp ứng Mục 10.3 và Phần B4/D3 của project_handbook.md.
-Nguyên tắc kiểm soát biến (Ceteris Paribus):
-  - Cùng tập bài báo (Train: 6,493 | Validation: 1,391 từ split_manifest.csv)
-  - Cùng mô hình K-Means và bộ tham số TF-IDF cố định
-  - Chỉ thay đổi duy nhất biến thể tiền xử lý đầu vào:
-      P0 (Minimal) -> P1 (Normalized) -> P2 (Segmented) -> P3 (No Stopwords)
-"""
+"""Thực thi pipeline thực nghiệm bóc tách tiền xử lý P0 đến P3 (Task M03)"""
 
 from __future__ import annotations
 
@@ -132,16 +124,14 @@ def plot_m03_visualizations(
     x = np.arange(len(variants))
     width = 0.22
 
-    # -------------------------------------------------------------
-    # 1. Biểu đồ so sánh các chỉ số ngoại vi & độ ổn định (K=9)
-    # -------------------------------------------------------------
+    # Biểu đồ so sánh các chỉ số ngoại vi & độ ổn định (K=9)
     fig, ax = plt.subplots(figsize=(9, 5.5))
     rects1 = ax.bar(x - 1.5 * width, metrics_k9_df["purity"] * 100, width, label="Purity (%)", color="#1f77b4")
     rects2 = ax.bar(x - 0.5 * width, metrics_k9_df["nmi"] * 100, width, label="NMI (x100)", color="#2ca02c")
     rects3 = ax.bar(x + 0.5 * width, metrics_k9_df["ari"] * 100, width, label="ARI (x100)", color="#ff7f0e")
     rects4 = ax.bar(x + 1.5 * width, metrics_k9_df["stability_ari_mean"] * 100, width, label="Stability ARI (x100)", color="#9467bd")
 
-    ax.set_title("So sánh Chỉ số Đánh giá Cụm Ngoại vi & Độ ổn định qua P0 -> P3 (K=9)", fontsize=12, fontweight="bold", pad=12)
+    ax.set_title("So sánh chỉ số đánh giá cụm ngoại vi và độ ổn định qua P0 -> P3 (K=9)", fontsize=12, fontweight="bold", pad=12)
     ax.set_ylabel("Điểm số (%)", fontsize=11)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=10)
@@ -165,9 +155,7 @@ def plot_m03_visualizations(
     fig.savefig(figures_dir / "m03_ablation_metrics_comparison.png", dpi=300)
     plt.close(fig)
 
-    # -------------------------------------------------------------
-    # 2. Biểu đồ Nghịch lý Chỉ số Nội tại vs Ngoại vi (Intrinsic vs Extrinsic Paradox)
-    # -------------------------------------------------------------
+    # Biểu đồ nghịch lý chỉ số nội tại vs ngoại vi
     fig, ax1 = plt.subplots(figsize=(9, 5.5))
     ax2 = ax1.twinx()
 
@@ -175,20 +163,20 @@ def plot_m03_visualizations(
     color_dbi = "#d62728"
     color_nmi = "#2ca02c"
 
-    l1 = ax1.plot(x, metrics_k9_df["purity"] * 100, marker="o", color=color_pur, linewidth=2.5, label="Purity (Ngoại vi - Cao hơn là tốt)")
-    l2 = ax1.plot(x, metrics_k9_df["nmi"] * 100, marker="s", color=color_nmi, linewidth=2.5, linestyle="--", label="NMI (Ngoại vi - Cao hơn là tốt)")
-    ax1.set_ylabel("Chỉ số Ngoại vi / Purity & NMI (%)", color=color_pur, fontsize=11, fontweight="bold")
+    l1 = ax1.plot(x, metrics_k9_df["purity"] * 100, marker="o", color=color_pur, linewidth=2.5, label="Purity")
+    l2 = ax1.plot(x, metrics_k9_df["nmi"] * 100, marker="s", color=color_nmi, linewidth=2.5, linestyle="--", label="NMI")
+    ax1.set_ylabel("Chỉ số ngoại vi: Purity & NMI (%)", color=color_pur, fontsize=11, fontweight="bold")
     ax1.tick_params(axis="y", labelcolor=color_pur)
     ax1.set_ylim(50, 95)
 
-    l3 = ax2.plot(x, metrics_k9_df["davies_bouldin_index"], marker="^", color=color_dbi, linewidth=2.5, linestyle="-.", label="Davies-Bouldin (Nội tại - Thấp hơn là tốt)")
-    ax2.set_ylabel("Davies-Bouldin Index (Thấp hơn là tốt)", color=color_dbi, fontsize=11, fontweight="bold")
+    l3 = ax2.plot(x, metrics_k9_df["davies_bouldin_index"], marker="^", color=color_dbi, linewidth=2.5, linestyle="-.", label="Davies-Bouldin")
+    ax2.set_ylabel("Davies-Bouldin Index", color=color_dbi, fontsize=11, fontweight="bold")
     ax2.tick_params(axis="y", labelcolor=color_dbi)
     ax2.set_ylim(5.0, 6.8)
 
     ax1.set_xticks(x)
     ax1.set_xticklabels(labels, fontsize=10)
-    ax1.set_title("Nghịch lý Chỉ số Nội tại (DBI) vs. Chất lượng Chủ đề Thực tế (Purity/NMI)", fontsize=12, fontweight="bold", pad=12)
+    ax1.set_title("So sánh chỉ số nội tại với chất lượng chủ đề thực tế", fontsize=12, fontweight="bold", pad=12)
 
     lines = l1 + l2 + l3
     leg_labels = [l.get_label() for l in lines]
@@ -198,16 +186,14 @@ def plot_m03_visualizations(
     fig.savefig(figures_dir / "m03_intrinsic_vs_extrinsic_paradox.png", dpi=300)
     plt.close(fig)
 
-    # -------------------------------------------------------------
-    # 3. Biểu đồ Chất lượng Từ vựng & Khả năng Diễn giải (Lexical Interpretability)
-    # -------------------------------------------------------------
+    # Biểu đồ chất lượng từ vựng & khả năng diễn giải
     fig, ax = plt.subplots(figsize=(9, 5.5))
     bar_width = 0.35
-    b1 = ax.bar(x - bar_width / 2, metrics_k9_df["compound_keyword_ratio_pct"], bar_width, label="Tỷ lệ từ ghép có nghĩa (%) [Tốt]", color="#2ca02c")
-    b2 = ax.bar(x + bar_width / 2, metrics_k9_df["stopword_keyword_ratio_pct"], bar_width, label="Tỷ lệ nhiễu từ dừng (%) [Xấu]", color="#d62728")
+    b1 = ax.bar(x - bar_width / 2, metrics_k9_df["compound_keyword_ratio_pct"], bar_width, label="Tỷ lệ từ ghép có nghĩa (%)", color="#2ca02c")
+    b2 = ax.bar(x + bar_width / 2, metrics_k9_df["stopword_keyword_ratio_pct"], bar_width, label="Tỷ lệ nhiễu stopwords (%)", color="#d62728")
 
-    ax.set_title("Chất lượng Diễn giải Từ khóa Tâm cụm: Tỷ lệ Từ ghép vs. Nhiễu Từ dừng (K=9)", fontsize=12, fontweight="bold", pad=12)
-    ax.set_ylabel("Tỷ lệ trong Top-15 Từ khóa (%)", fontsize=11)
+    ax.set_title("Chất lượng diễn giải từ khóa tâm cụm: Tỷ lệ từ ghép và nhiễu stopwords (K=9)", fontsize=12, fontweight="bold", pad=12)
+    ax.set_ylabel("Tỷ lệ trong top-15 từ khóa (%)", fontsize=11)
     ax.set_xticks(x)
     ax.set_xticklabels(labels, fontsize=10)
     ax.set_ylim(0, 105)
@@ -224,9 +210,7 @@ def plot_m03_visualizations(
     fig.savefig(figures_dir / "m03_lexical_interpretability.png", dpi=300)
     plt.close(fig)
 
-    # -------------------------------------------------------------
-    # 4. Biểu đồ Kiểm tra Độ nhạy trên cả K=7 (Mốc chuẩn) và K=9 (Cấu hình chọn)
-    # -------------------------------------------------------------
+    # 4. Biểu đồ kiểm tra độ nhạy trên cả K=7 (mốc chuẩn) và K=9 (cấu hình chọn)
     if not sensitivity_df.empty:
         fig, ax = plt.subplots(figsize=(9, 5.5))
         k7_data = sensitivity_df[sensitivity_df["k"] == 7].set_index("variant_id")
@@ -241,12 +225,12 @@ def plot_m03_visualizations(
         x_sens = np.arange(len(v_ids))
         w = 0.2
 
-        r1 = ax.bar(x_sens - 1.5 * w, k7_purity, w, label="Purity (K=7 Benchmark)", color="#6baed6")
-        r2 = ax.bar(x_sens - 0.5 * w, k9_purity, w, label="Purity (K=9 Selected)", color="#08519c")
-        r3 = ax.bar(x_sens + 0.5 * w, k7_nmi, w, label="NMI (K=7 Benchmark)", color="#74c476")
-        r4 = ax.bar(x_sens + 1.5 * w, k9_nmi, w, label="NMI (K=9 Selected)", color="#006d2c")
+        r1 = ax.bar(x_sens - 1.5 * w, k7_purity, w, label="Purity (mốc chuẩn K=7)", color="#6baed6")
+        r2 = ax.bar(x_sens - 0.5 * w, k9_purity, w, label="Purity (K=9 lựa chọn)", color="#08519c")
+        r3 = ax.bar(x_sens + 0.5 * w, k7_nmi, w, label="NMI (mốc chuẩn K=7)", color="#74c476")
+        r4 = ax.bar(x_sens + 1.5 * w, k9_nmi, w, label="NMI (K=9 lựa chọn)", color="#006d2c")
 
-        ax.set_title("Kiểm tra Tính nhất quán của Xu hướng Tiền xử lý trên cả K=7 và K=9", fontsize=12, fontweight="bold", pad=12)
+        ax.set_title("Kiểm tra tính nhất quán của xu hướng tiền xử lý trên cả K=7 và K=9", fontsize=12, fontweight="bold", pad=12)
         ax.set_ylabel("Điểm số (%)", fontsize=11)
         ax.set_xticks(x_sens)
         ax.set_xticklabels(v_ids, fontsize=11, fontweight="bold")
@@ -318,7 +302,7 @@ def main() -> None:
         print(f"    Mô tả: {var_desc}")
         t0 = time.time()
 
-        # 1. Nạp dữ liệu train và validation
+        # Nạp dữ liệu train và validation
         train_df = load_split_dataset(var_path, split_manifest_path, split_name="train")
         val_df = load_split_dataset(var_path, split_manifest_path, split_name="val")
 
@@ -326,7 +310,7 @@ def main() -> None:
         val_texts = val_df["text"].tolist()
         val_gold = val_df["category_gold"].tolist()
 
-        # 2. Khởi tạo và huấn luyện TfidfVectorizer (FIT DUY NHẤT TRÊN TRAIN)
+        # Khởi tạo và huấn luyện TfidfVectorizer 
         vec_config = {
             "ngram_range": vectorizer_cfg.get("ngram_range", [1, 1]),
             "min_df": vectorizer_cfg.get("min_df", 2),
@@ -345,13 +329,13 @@ def main() -> None:
         feature_names = list(vectorizer.get_feature_names_out())
         vocab_size = len(feature_names)
 
-        # 3. Đo lường không gian đặc trưng trên tập Validation
+        # Đo lường không gian đặc trưng trên tập Validation
         val_vocab_eval = evaluate_validation_vocabulary(vectorizer, val_texts)
 
         print(f"    Train shape: {X_train.shape} | Val shape: {X_val.shape} | Vocab: {vocab_size}")
         print(f"    Val Sparsity: {val_vocab_eval['val_sparsity_pct']}% | OOV Rate: {val_vocab_eval['val_oov_rate_pct']}% | Mean active terms: {val_vocab_eval['val_mean_active_terms']}")
 
-        # 4. Chạy phân cụm K-Means cho từng K trong sensitivity_k_list
+        # Chạy phân cụm K-Means cho từng K trong sensitivity_k_list
         for k in sensitivity_k_list:
             km_model = train_kmeans(
                 X_train,
@@ -496,7 +480,7 @@ def main() -> None:
                         "nearest_article_title": nearest_title,
                     })
 
-    # 5. Lưu trữ bảng kết quả
+    # Lưu trữ bảng kết quả
     primary_df = pd.DataFrame(primary_records)
     sensitivity_df = pd.DataFrame(sensitivity_records)
     qualitative_df = pd.DataFrame(qualitative_rows)
@@ -519,7 +503,7 @@ def main() -> None:
     print(f"Đã lưu bảng đối chiếu định tính từng cụm vào: {qual_csv_path}")
     print(f"Đã lưu từ khóa chi tiết vào: {kws_json_path}")
 
-    # 6. Vẽ 4 biểu đồ trực quan hóa nghiên cứu
+    # Vẽ 4 biểu đồ trực quan hóa nghiên cứu
     plot_m03_visualizations(primary_df, sensitivity_df, figures_dir)
 
     total_time = round(time.time() - start_total_time, 2)
@@ -528,3 +512,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

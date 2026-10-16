@@ -1,19 +1,19 @@
-# Báo cáo Nghiên cứu và Hướng dẫn Kỹ thuật Task M03: Bóc tách Tiền xử lý (Preprocessing Ablation)
+# Báo cáo Nghiên cứu và Hướng dẫn Kỹ thuật Task M03: Preprocessing Ablation
 
 ## 1. Mục tiêu Nghiên cứu và Cơ sở Phương pháp Luận
 
-Báo cáo này giải quyết **Câu hỏi Nghiên cứu RQ2** (theo quy định tại Mục 10.3 và Phần B4/D3 của `project_handbook.md`):
+Báo cáo này giải quyết **Câu hỏi Nghiên cứu RQ2**:
 > *"Tiền xử lý ảnh hưởng như thế nào đến chất lượng phân cụm tiếng Việt? Các kỹ thuật chuẩn hóa, tách từ ghép và lọc từ dừng đóng góp cụ thể ra sao vào độ thuần khiết của cụm và khả năng diễn giải ngữ nghĩa của con người?"*
 
 Đồng thời, báo cáo trực tiếp làm rõ và giải thích yêu cầu của giảng viên hướng dẫn:
 > *"Trường hợp điểm số tự động cao nhưng topic khó diễn giải: Phân tích nguyên nhân (ví dụ: từ dừng, đa nghĩa, kích thước cụm không đều, phân bố từ vựng bị lệch). Minh họa bằng ví dụ cụ thể từ kết quả mô hình. So sánh với các chủ đề có điểm số tốt và dễ diễn giải."*
 
-### Nguyên tắc Kiểm soát Biến Chặt chẽ (*Ceteris Paribus*)
+### Nguyên tắc kiểm soát biến chặt chẽ
 Để đảm bảo kết luận khoa học có độ tin cậy cao nhất, thực nghiệm được thiết kế tuân thủ nghiêm ngặt nguyên tắc kiểm soát biến:
 - **Cùng tập dữ liệu:** Giữ nguyên 100% phân chia văn bản cố định theo `data/splits/split_manifest.csv` (Train: 6,493 bài báo | Validation: 1,391 bài báo). Tuyệt đối không chạm vào tập Test (1,390 bài).
 - **Cùng thuật toán và siêu tham số phân cụm:** Thuật toán K-Means với $K = 9$ (cấu hình tối ưu được xác lập từ Task M02), khởi tạo `k-means++`, `n_init = 10`, `max_iter = 300`, `random_state = 42`.
 - **Cùng tham số trích xuất đặc trưng TF-IDF:** `ngram_range = (1, 1)`, `min_df = 2`, `max_df = 0.85`, `max_features = 20,000`, `sublinear_tf = True`, `norm = 'l2'`, `token_pattern = r"(?u)\b\w\w+\b"`.
-- **Cô lập biến thể kỹ thuật (*Technical Isolation Guard*):** Trong cấu hình TF-IDF, đặt bắt buộc `lowercase: false` và `stopwords_file: null`. Nếu để mặc định `lowercase: true` của scikit-learn, nó sẽ tự động hạ case văn bản của P0, triệt tiêu sự khác biệt giữa P0 và P1. Tương tự, nếu bật `stopwords_file` trong vectorizer, nó sẽ tự động lọc từ dừng ở P2, làm mất ranh giới giữa P2 và P3.
+- **Cô lập biến thể kỹ thuật:** Trong cấu hình TF-IDF, đặt bắt buộc `lowercase: false` và `stopwords_file: null`. Nếu để mặc định `lowercase: true` của scikit-learn, nó sẽ tự động hạ case văn bản của P0, triệt tiêu sự khác biệt giữa P0 và P1. Tương tự, nếu bật `stopwords_file` trong vectorizer, nó sẽ tự động lọc từ dừng ở P2, làm mất ranh giới giữa P2 và P3.
 - **Biến độc lập duy nhất:** 4 biến thể tiền xử lý văn bản đầu vào:
   1. **P0 (Tối giản - Minimal):** Giữ nguyên văn bản gốc, chỉ sửa mã Unicode NFC và gỡ thẻ HTML. Giữ nguyên chữ hoa/thường, dấu câu, số, emoji, không tách từ, không lọc từ dừng.
   2. **P1 (Chuẩn hóa cơ bản - Normalized):** Chuyển toàn bộ về chữ thường, thay thế URL/Email bằng token đặc biệt, chuẩn hóa khoảng trắng, loại bỏ dấu câu thừa, không tách từ, không lọc từ dừng.
@@ -22,7 +22,7 @@ Báo cáo này giải quyết **Câu hỏi Nghiên cứu RQ2** (theo quy định
 
 ---
 
-## 2. Bảng Tổng hợp Kết quả Định lượng trên Tập Validation ($K = 9$)
+## 2. Bảng tổng hợp kết quả định lượng trên tập Validation ($K = 9$)
 
 Toàn bộ dữ liệu đo lường được lưu trữ độc lập tại `results/kmeans/m03_preprocessing_ablation_metrics.csv`.
 
@@ -45,10 +45,10 @@ Toàn bộ dữ liệu đo lường được lưu trữ độc lập tại `resu
 
 ---
 
-## 3. Phân tích Hiện tượng Chuyên sâu
+## 3. Phân tích hiện tượng chuyên sâu
 
-### 3.1. Nghịch lý Chỉ số Nội tại (The Geometric / Internal Metric Paradox)
-Một trong những phát hiện quan trọng nhất của thực nghiệm (giải quyết trực tiếp câu hỏi của giảng viên) là sự phân kỳ giữa các chỉ số nội tại hình học (Davies-Bouldin, Calinski-Harabasz) và chất lượng phân cụm thực tế (Purity, NMI, ARI, tính dễ hiểu của từ khóa):
+### 3.1. Nghịch lý chỉ số nội tại
+Một trong những phát hiện quan trọng nhất của thực nghiệm là sự phân kỳ giữa các chỉ số nội tại hình học (Davies-Bouldin, Calinski-Harabasz) và chất lượng phân cụm thực tế (Purity, NMI, ARI, tính dễ hiểu của từ khóa):
 - **Hiện tượng:** Biến thể P1 đạt chỉ số Davies-Bouldin tốt nhất (5.5708 - thấp nhất) và Calinski-Harabasz cao nhất (14.17), trong khi P3 lại có DBI kém hơn (6.1566) và Calinski-Harabasz thấp hơn (11.38).
 - **Bản chất toán học và ngữ nghĩa:**
   1. Trong P0 và P1, ngôn ngữ tiếng Việt chưa được tách từ, văn bản bị phân rã thành hàng loạt các âm tiết đơn lẻ có tần suất xuất hiện cực cao (như `các`, `của`, `người`, `và`, `được`, `năm`).
@@ -56,7 +56,7 @@ Một trong những phát hiện quan trọng nhất của thực nghiệm (gi�
   3. Tuy nhiên, sự "chặt chẽ" này hoàn toàn là ảo giác hình học: các cụm tạo ra bị ô nhiễm nghiêm trọng bởi các từ dừng và từ vựng què cụt đa nghĩa, khiến con người không thể xác định được ranh giới chủ đề.
   4. Ngược lại, ở P3, khi toàn bộ 388 từ dừng được loại bỏ, các bài báo chỉ còn lại các thuật ngữ mang tính chuyên môn cao. Vector không gian lúc này tỏa rộng ra các hướng ngữ nghĩa đặc thù. Về mặt hình học, cụm có vẻ "nở rộng" hơn (làm DBI tăng nhẹ từ 5.57 lên 6.16), nhưng các bài báo phân tách cực kỳ chính xác theo nội dung chủ đề thực thụ. Minh chứng là **Purity tăng vọt từ 81.52% lên 87.28%**, **NMI tăng vọt từ 0.6503 lên 0.7004**, và **ARI tăng vọt từ 0.5161 lên 0.5925**.
 
-### 3.2. Sức mạnh của Tách từ Tiếng Việt (Word Segmentation - P2)
+### 3.2. Sức mạnh của tách từ tiếng Việt (Word Segmentation - P2)
 Tiếng Việt là ngôn ngữ đơn lập, ranh giới từ không trùng với khoảng trắng. Khi chuyển từ P1 sang P2:
 - Ở P0 và P1, các thực thể và thuật ngữ quan trọng bị băm nhỏ thành các âm tiết vô nghĩa hoặc đa nghĩa nghiêm trọng:
   - Cụm Y tế bị băm thành: `bác`, `sĩ`, `điều`, `trị`, `viện` (từ `sĩ` có thể là bác sĩ, tiến sĩ, chiến sĩ, nghệ sĩ; từ `viện` có thể là bệnh viện, viện nghiên cứu, viện kiểm sát).
@@ -64,7 +64,7 @@ Tiếng Việt là ngôn ngữ đơn lập, ranh giới từ không trùng với
 - Ở P2, công cụ `PyVi` đã kết hợp chính xác thành các từ ghép ngữ nghĩa hoàn chỉnh: `bác_sĩ`, `điều_trị`, `bệnh_viện`, `cổ_phiếu`, `lãi_suất`, `thị_trường`.
 - Tỷ lệ từ ghép trong Top 15 từ khóa tâm cụm tăng vọt từ **0.0% lên 32.59%**, giúp người đọc lập tức nhận diện được lĩnh vực chuyên môn của cụm bài báo mà không bị nhập nhằng ngữ nghĩa.
 
-### 3.3. Vai trò Quyết định của Lọc từ dừng (Stopword Filtering - P3)
+### 3.3. Vai trò quyết định của lọc stopwords (Stopword Filtering - P3)
 Mặc dù P2 đã tạo ra từ ghép, nhưng P2 lại mắc phải hiện tượng "ô nhiễm từ dừng":
 - Trong P2, tỷ lệ ô nhiễm từ dừng ở Top 15 từ khóa tâm cụm lên tới **18.52%**. Thậm chí ở cụm Giải trí (Cluster 2 của P2), có tới 6/10 từ khóa hàng đầu là từ dừng: `những, một, người, năm, không, nhiều, từ`.
 - Ở cụm Kinh doanh (Cluster 8 của P2), các từ như `theo, tại, năm, từ` chiếm chỗ của các thuật ngữ ngành, làm mờ nhạt đặc trưng của cụm.
@@ -75,7 +75,7 @@ Mặc dù P2 đã tạo ra từ ghép, nhưng P2 lại mắc phải hiện tư�
 
 ---
 
-## 4. Kiểm tra Độ nhạy với Mốc chuẩn $K = 7$ (Sensitivity Analysis)
+## 4. Kiểm tra độ nhạy với mốc chuẩn $K = 7$
 
 Bảng đối chiếu độ nhạy từ `results/kmeans/m03_preprocessing_ablation_k7_sensitivity.csv` khẳng định các kết luận trên không phụ thuộc vào giá trị $K$:
 
@@ -92,7 +92,7 @@ Bảng đối chiếu độ nhạy từ `results/kmeans/m03_preprocessing_ablati
 
 ---
 
-## 5. Dẫn chứng Minh họa Định tính Từng Cụm (Qualitative Case Studies)
+## 5. Dẫn chứng minh họa định tính từng Cụm
 
 Trích lục trực tiếp từ `results/kmeans/m03_qualitative_cluster_examples.csv` đối chiếu giữa P0 (chưa xử lý) và P3 (xử lý hoàn chỉnh):
 
@@ -122,7 +122,7 @@ Trích lục trực tiếp từ `results/kmeans/m03_qualitative_cluster_examples
 
 ---
 
-## 6. Danh mục Tài nguyên và Hướng dẫn Tái hiện (Reproducibility)
+## 6. Danh mục tài nguyên và hướng dẫn tái hiện
 
 Tất cả các cấu phần phục vụ tái hiện thực nghiệm đều được đóng gói đầy đủ:
 1. **File cấu hình:** `configs/m03_preprocessing_ablation.yaml`
@@ -145,3 +145,4 @@ Tất cả các cấu phần phục vụ tái hiện thực nghiệm đều đư
 python -m experiments.kmeans.run_m03_preprocessing_ablation
 pytest tests/test_m03_preprocessing_ablation.py -v
 ```
+

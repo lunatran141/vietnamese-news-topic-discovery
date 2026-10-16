@@ -1,14 +1,11 @@
 # Cấu hình thực nghiệm bóc tách tiền xử lý (Task M03 - Preprocessing Ablation P0 đến P3).
-# Đáp ứng Mục 10.3 và Phần B4/D3 của project_handbook.md.
-# Nguyên tắc: Giữ nguyên split, seed, thuật toán và toàn bộ siêu tham số (Ceteris Paribus).
-# Chỉ thay đổi duy nhất biến thể tiền xử lý đầu vào P0 -> P1 -> P2 -> P3.
 
 dataset:
   split_manifest_path: "data/splits/split_manifest.csv"
   data_version: "v1.0"
   train_split: "train"
   val_split: "val"
-  test_split: "test" # Khóa hoàn toàn, không dùng trong ablation
+  test_split: "test"
 
   variants:
     - id: "P0"
@@ -36,17 +33,16 @@ vectorizer:
   sublinear_tf: true
   norm: "l2"
   token_pattern: "(?u)\\b\\w\\w+\\b"
-  # Để cô lập triệt để giữa các biến thể, không để vectorizer tự động biến đổi thêm:
-  lowercase: false # P0 giữ nguyên hoa/thường; P1-P3 đã được lowercase ở D03
-  stopwords_file: null # Không lọc thêm từ dừng tại vectorizer (để P0, P1, P2 còn từ dừng, P3 đã lọc ở D03)
+  lowercase: false
+  stopwords_file: null
 
 reference:
-  stopwords_file: "configs/vietnamese_stopwords.txt" # Dùng làm từ điển quy chiếu tính tỷ lệ nhiễu từ dừng
+  stopwords_file: "configs/vietnamese_stopwords.txt" 
 
 clustering:
   algorithm: "kmeans"
-  primary_k: 9 # Cấu hình tối ưu từ M02
-  sensitivity_k_list: # Kiểm tra độ nhạy trên cả mốc chuẩn 7 chuyên mục và 9 cụm
+  primary_k: 9 
+  sensitivity_k_list:
     - 7
     - 9
   init: "k-means++"
@@ -67,3 +63,4 @@ topics:
 output:
   results_dir: "results/kmeans"
   figures_dir: "results/kmeans/figures"
+

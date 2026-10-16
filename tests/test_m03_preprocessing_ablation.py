@@ -1,11 +1,4 @@
-"""Kiểm thử tự động cho Task M03: Bóc tách tiền xử lý (Preprocessing Ablation P0 -> P3).
-
-Kiểm tra:
-1. Tính toàn vẹn cấu hình (Isolation config: lowercase=False, stopwords_file=null)
-2. Hàm đo lường khả năng diễn giải từ vựng (Lexical Interpretability metrics)
-3. Tính hợp lệ của cấu trúc dữ liệu kết quả thực nghiệm M03
-4. Tính bảo toàn nguyên tắc kiểm soát biến (Ceteris Paribus)
-"""
+"""Kiểm thử tự động cho Task M03: Preprocessing Ablation P0 -> P3"""
 
 from __future__ import annotations
 
@@ -36,12 +29,7 @@ def m03_config() -> dict[str, Any]:
 
 
 def test_m03_config_isolation(m03_config: dict[str, Any]) -> None:
-    """Đảm bảo cấu hình TF-IDF trong M03 duy trì tính cô lập biến thể.
-    
-    Cực kỳ quan trọng:
-    - `lowercase` PHẢI là False để không triệt tiêu sự khác biệt giữa P0 (chưa hạ case) và P1 (đã hạ case).
-    - `stopwords_file` PHẢI là null/None để vectorizer không tự động lọc từ dừng ở P2, làm mất ranh giới P2 vs P3.
-    """
+    """Đảm bảo cấu hình TF-IDF trong M03 duy trì tính cô lập biến thể"""
     vec_cfg = m03_config["vectorizer"]
     assert vec_cfg.get("lowercase") is False, "TF-IDF vectorizer phải có lowercase=False để bảo toàn phân biệt P0 vs P1"
     assert vec_cfg.get("stopwords_file") is None, "TF-IDF vectorizer phải có stopwords_file=None để bảo toàn phân biệt P2 vs P3"
@@ -118,20 +106,12 @@ def test_compute_lexical_interpretability_metrics() -> None:
 
     metrics = compute_lexical_interpretability_metrics(cluster_kws, stopwords)
 
-    # Tổng số từ khóa top-10 là 20, tất cả đều phân biệt -> diversity = 20/20 = 1.0
     assert 0.0 <= metrics["topic_diversity_top10"] <= 1.0
 
-    # Các từ ghép:
-    # Cụm 0: bác_sĩ, điều_trị, bệnh_viện, sức_khỏe, y_tế, bệnh_nhân (6)
-    # Cụm 1: chứng_khoán, cổ_phiếu, thị_trường, đầu_tư, doanh_nghiệp, lợi_nhuận (6)
-    # Tổng: 12/20 = 60.0%
     assert metrics["compound_keyword_ratio_pct"] == 60.0
 
-    # Các từ dừng:
-    # Cụm 0: và, của, trong (3)
-    # Cụm 1: là, có (2)
-    # Tổng: 5/20 = 25.0%
     assert metrics["stopword_keyword_ratio_pct"] == 25.0
+    
     assert metrics["stopword_pollution_count_top15"] == 5
 
 
