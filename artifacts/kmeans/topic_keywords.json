@@ -1,0 +1,560 @@
+{
+  "0": [
+    {
+      "term": "cô",
+      "weight": 0.0322
+    },
+    {
+      "term": "phim",
+      "weight": 0.0316
+    },
+    {
+      "term": "anh",
+      "weight": 0.0276
+    },
+    {
+      "term": "khán_giả",
+      "weight": 0.0243
+    },
+    {
+      "term": "không",
+      "weight": 0.0239
+    },
+    {
+      "term": "diễn_viên",
+      "weight": 0.0231
+    },
+    {
+      "term": "tôi",
+      "weight": 0.0221
+    },
+    {
+      "term": "nói",
+      "weight": 0.0186
+    },
+    {
+      "term": "nghệ_sĩ",
+      "weight": 0.0182
+    },
+    {
+      "term": "tác_phẩm",
+      "weight": 0.0182
+    },
+    {
+      "term": "nhân_vật",
+      "weight": 0.018
+    },
+    {
+      "term": "nhất",
+      "weight": 0.0177
+    },
+    {
+      "term": "biết",
+      "weight": 0.0176
+    },
+    {
+      "term": "hai",
+      "weight": 0.0175
+    },
+    {
+      "term": "đẹp",
+      "weight": 0.0175
+    }
+  ],
+  "1": [
+    {
+      "term": "asiad",
+      "weight": 0.1239
+    },
+    {
+      "term": "nữ",
+      "weight": 0.0699
+    },
+    {
+      "term": "u23",
+      "weight": 0.0694
+    },
+    {
+      "term": "nam",
+      "weight": 0.0657
+    },
+    {
+      "term": "giành",
+      "weight": 0.065
+    },
+    {
+      "term": "thi_đấu",
+      "weight": 0.0588
+    },
+    {
+      "term": "việt_nam",
+      "weight": 0.0584
+    },
+    {
+      "term": "trận",
+      "weight": 0.056
+    },
+    {
+      "term": "nhật",
+      "weight": 0.0549
+    },
+    {
+      "term": "môn",
+      "weight": 0.0534
+    },
+    {
+      "term": "việt",
+      "weight": 0.0533
+    },
+    {
+      "term": "đội",
+      "weight": 0.0516
+    },
+    {
+      "term": "huy_chương",
+      "weight": 0.0509
+    },
+    {
+      "term": "quốc",
+      "weight": 0.0494
+    },
+    {
+      "term": "bảng",
+      "weight": 0.0493
+    }
+  ],
+  "2": [
+    {
+      "term": "iphone",
+      "weight": 0.0679
+    },
+    {
+      "term": "apple",
+      "weight": 0.0545
+    },
+    {
+      "term": "pro",
+      "weight": 0.0501
+    },
+    {
+      "term": "máy",
+      "weight": 0.0394
+    },
+    {
+      "term": "dùng",
+      "weight": 0.0382
+    },
+    {
+      "term": "màn_hình",
+      "weight": 0.0369
+    },
+    {
+      "term": "max",
+      "weight": 0.0354
+    },
+    {
+      "term": "hệ_thống",
+      "weight": 0.0338
+    },
+    {
+      "term": "thiết_bị",
+      "weight": 0.0327
+    },
+    {
+      "term": "sử_dụng",
+      "weight": 0.0301
+    },
+    {
+      "term": "mẫu",
+      "weight": 0.0301
+    },
+    {
+      "term": "công_nghệ",
+      "weight": 0.0295
+    },
+    {
+      "term": "thiết_kế",
+      "weight": 0.0291
+    },
+    {
+      "term": "camera",
+      "weight": 0.0287
+    },
+    {
+      "term": "18",
+      "weight": 0.0287
+    }
+  ],
+  "3": [
+    {
+      "term": "bác_sĩ",
+      "weight": 0.0599
+    },
+    {
+      "term": "bệnh",
+      "weight": 0.0495
+    },
+    {
+      "term": "điều_trị",
+      "weight": 0.0473
+    },
+    {
+      "term": "bệnh_viện",
+      "weight": 0.045
+    },
+    {
+      "term": "người_bệnh",
+      "weight": 0.0446
+    },
+    {
+      "term": "hoặc",
+      "weight": 0.0385
+    },
+    {
+      "term": "khám",
+      "weight": 0.036
+    },
+    {
+      "term": "máu",
+      "weight": 0.0338
+    },
+    {
+      "term": "thuốc",
+      "weight": 0.0325
+    },
+    {
+      "term": "tình_trạng",
+      "weight": 0.0318
+    },
+    {
+      "term": "ăn",
+      "weight": 0.0314
+    },
+    {
+      "term": "nguy_cơ",
+      "weight": 0.0312
+    },
+    {
+      "term": "không",
+      "weight": 0.0307
+    },
+    {
+      "term": "cơ_thể",
+      "weight": 0.0298
+    },
+    {
+      "term": "bệnh_nhân",
+      "weight": 0.0287
+    }
+  ],
+  "4": [
+    {
+      "term": "trận",
+      "weight": 0.0641
+    },
+    {
+      "term": "đội",
+      "weight": 0.0593
+    },
+    {
+      "term": "bóng",
+      "weight": 0.0555
+    },
+    {
+      "term": "cầu_thủ",
+      "weight": 0.0546
+    },
+    {
+      "term": "hlv",
+      "weight": 0.0499
+    },
+    {
+      "term": "cup",
+      "weight": 0.0467
+    },
+    {
+      "term": "thắng",
+      "weight": 0.0453
+    },
+    {
+      "term": "sân",
+      "weight": 0.0428
+    },
+    {
+      "term": "fifa",
+      "weight": 0.0427
+    },
+    {
+      "term": "bàn",
+      "weight": 0.0423
+    },
+    {
+      "term": "asean",
+      "weight": 0.0415
+    },
+    {
+      "term": "trận_đấu",
+      "weight": 0.0409
+    },
+    {
+      "term": "league",
+      "weight": 0.0404
+    },
+    {
+      "term": "clb",
+      "weight": 0.0373
+    },
+    {
+      "term": "2026",
+      "weight": 0.0343
+    }
+  ],
+  "5": [
+    {
+      "term": "công_an",
+      "weight": 0.0648
+    },
+    {
+      "term": "điều_tra",
+      "weight": 0.0564
+    },
+    {
+      "term": "án",
+      "weight": 0.045
+    },
+    {
+      "term": "vụ",
+      "weight": 0.045
+    },
+    {
+      "term": "cơ_quan",
+      "weight": 0.0393
+    },
+    {
+      "term": "hành_vi",
+      "weight": 0.0372
+    },
+    {
+      "term": "tiền",
+      "weight": 0.0371
+    },
+    {
+      "term": "cảnh_sát",
+      "weight": 0.0371
+    },
+    {
+      "term": "tỉnh",
+      "weight": 0.0358
+    },
+    {
+      "term": "đồng",
+      "weight": 0.0357
+    },
+    {
+      "term": "tội",
+      "weight": 0.0312
+    },
+    {
+      "term": "xác_định",
+      "weight": 0.0304
+    },
+    {
+      "term": "tuổi",
+      "weight": 0.0304
+    },
+    {
+      "term": "khởi_tố",
+      "weight": 0.0292
+    },
+    {
+      "term": "phường",
+      "weight": 0.0283
+    }
+  ],
+  "6": [
+    {
+      "term": "doanh_nghiệp",
+      "weight": 0.0473
+    },
+    {
+      "term": "phát_triển",
+      "weight": 0.0356
+    },
+    {
+      "term": "đầu_tư",
+      "weight": 0.0316
+    },
+    {
+      "term": "công_nghệ",
+      "weight": 0.0294
+    },
+    {
+      "term": "dự_án",
+      "weight": 0.0283
+    },
+    {
+      "term": "thị_trường",
+      "weight": 0.026
+    },
+    {
+      "term": "việt_nam",
+      "weight": 0.0257
+    },
+    {
+      "term": "xây_dựng",
+      "weight": 0.0257
+    },
+    {
+      "term": "sản_phẩm",
+      "weight": 0.0255
+    },
+    {
+      "term": "dịch_vụ",
+      "weight": 0.0254
+    },
+    {
+      "term": "hoạt_động",
+      "weight": 0.0251
+    },
+    {
+      "term": "ông",
+      "weight": 0.0239
+    },
+    {
+      "term": "không",
+      "weight": 0.0236
+    },
+    {
+      "term": "quản_lý",
+      "weight": 0.0234
+    },
+    {
+      "term": "số",
+      "weight": 0.0234
+    }
+  ],
+  "7": [
+    {
+      "term": "trường",
+      "weight": 0.0872
+    },
+    {
+      "term": "học_sinh",
+      "weight": 0.0758
+    },
+    {
+      "term": "giáo_dục",
+      "weight": 0.0627
+    },
+    {
+      "term": "học",
+      "weight": 0.0577
+    },
+    {
+      "term": "đào_tạo",
+      "weight": 0.048
+    },
+    {
+      "term": "đại_học",
+      "weight": 0.0449
+    },
+    {
+      "term": "nhà_trường",
+      "weight": 0.0417
+    },
+    {
+      "term": "năm_học",
+      "weight": 0.04
+    },
+    {
+      "term": "giáo_viên",
+      "weight": 0.0387
+    },
+    {
+      "term": "lớp",
+      "weight": 0.0372
+    },
+    {
+      "term": "em",
+      "weight": 0.0346
+    },
+    {
+      "term": "thi",
+      "weight": 0.0345
+    },
+    {
+      "term": "học_tập",
+      "weight": 0.0341
+    },
+    {
+      "term": "phụ_huynh",
+      "weight": 0.034
+    },
+    {
+      "term": "sinh_viên",
+      "weight": 0.0329
+    }
+  ],
+  "8": [
+    {
+      "term": "tăng",
+      "weight": 0.0671
+    },
+    {
+      "term": "giá",
+      "weight": 0.0658
+    },
+    {
+      "term": "đồng",
+      "weight": 0.0638
+    },
+    {
+      "term": "lãi_suất",
+      "weight": 0.0534
+    },
+    {
+      "term": "thị_trường",
+      "weight": 0.0531
+    },
+    {
+      "term": "giảm",
+      "weight": 0.0515
+    },
+    {
+      "term": "usd",
+      "weight": 0.0493
+    },
+    {
+      "term": "cổ_phiếu",
+      "weight": 0.0491
+    },
+    {
+      "term": "so",
+      "weight": 0.0488
+    },
+    {
+      "term": "bán",
+      "weight": 0.0456
+    },
+    {
+      "term": "phiên",
+      "weight": 0.0456
+    },
+    {
+      "term": "giao_dịch",
+      "weight": 0.0409
+    },
+    {
+      "term": "tỷ",
+      "weight": 0.0395
+    },
+    {
+      "term": "chứng_khoán",
+      "weight": 0.0393
+    },
+    {
+      "term": "ngân_hàng",
+      "weight": 0.039
+    }
+  ]
+}

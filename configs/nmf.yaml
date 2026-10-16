@@ -21,8 +21,10 @@ representation:
 topic_selection:
   candidates: [4, 6, 8, 10, 12]
   coherence_top_n: 10
-  # K=10 được chốt từ run nmf_p3_select_seed42_v1 trên validation.
+  # K=10 được đề xuất từ validation; đánh giá dễ hiểu bằng người còn chờ review.
   selected_n_topics: 10
+  # Run validation có đủ từ khóa, trọng số và bài đại diện để review từng K.
+  selection_run_id: nmf_p3_select_review_seed42_v1
   primary_metric: npmi_coherence
 
 model:

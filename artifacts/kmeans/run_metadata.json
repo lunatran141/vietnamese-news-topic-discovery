@@ -1,0 +1,39 @@
+{
+  "pipeline_name": "M02_kmeans_baseline",
+  "created_at_utc": "2026-10-15T15:58:44.087488+00:00",
+  "execution_duration_seconds": 112.62,
+  "n_clusters": 9,
+  "random_state": 42,
+  "cluster_counts_train": {
+    "0": 1135,
+    "1": 395,
+    "2": 377,
+    "3": 722,
+    "4": 832,
+    "5": 882,
+    "6": 1109,
+    "7": 650,
+    "8": 391
+  },
+  "metrics_validation": {
+    "inertia": 5844.7727,
+    "silhouette_score": 0.019,
+    "davies_bouldin_index": 6.1566,
+    "calinski_harabasz_score": 11.3745,
+    "ari": 0.5925,
+    "nmi": 0.7004,
+    "purity": 0.8728
+  },
+  "k_search_summary": {
+    "status": "completed",
+    "k_range": [
+      3,
+      5,
+      7,
+      9,
+      11,
+      14,
+      18
+    ]
+  }
+}
