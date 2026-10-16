@@ -1,0 +1,30 @@
+{
+  "run_id": "nmf_p3_select_seed42_v1",
+  "method": "NMF",
+  "tasks": [
+    "M04",
+    "M05",
+    "M06"
+  ],
+  "stage": "select",
+  "created_at_utc": "2026-10-14T08:40:17.461306+00:00",
+  "dataset_version": "v1.0",
+  "preprocessing_variant": "p3_no_stopwords",
+  "dataset_sha256": "663a34f309ef1f6d8d2dc61a68fd041d5f7aac71aa930dccb74841847a7d6710",
+  "split_counts": {
+    "train": 6493,
+    "val": 1391,
+    "test": 1390
+  },
+  "random_seed": 42,
+  "versions": {
+    "python": "3.14.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0"
+  },
+  "recommended_n_topics": 10,
+  "selection_split": "val",
+  "test_accessed": false,
+  "selection_rule": "NPMI cao nhất; hòa điểm ưu tiên diversity cao, reconstruction error thấp rồi K nhỏ"
+}
