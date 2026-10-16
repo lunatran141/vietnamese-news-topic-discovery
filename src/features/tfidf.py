@@ -51,6 +51,7 @@ def create_tfidf_vectorizer(config: dict[str, Any]) -> TfidfVectorizer:
     sublinear_tf = bool(vec_cfg.get("sublinear_tf", True))
     norm = vec_cfg.get("norm", "l2")
     token_pattern = vec_cfg.get("token_pattern", r"(?u)\b\w\w+\b")
+    lowercase = bool(vec_cfg.get("lowercase", True))
 
     stopwords_file = vec_cfg.get("stopwords_file")
     stop_words = load_stopwords(stopwords_file) if stopwords_file else None
@@ -63,6 +64,7 @@ def create_tfidf_vectorizer(config: dict[str, Any]) -> TfidfVectorizer:
         sublinear_tf=sublinear_tf,
         norm=norm,
         token_pattern=token_pattern,
+        lowercase=lowercase,
         stop_words=stop_words,
     )
 
