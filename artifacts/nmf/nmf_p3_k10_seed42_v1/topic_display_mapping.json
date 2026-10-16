@@ -1,0 +1,18 @@
+{
+  "run_id": "nmf_p3_k10_seed42_v1",
+  "mapping_version": 1,
+  "review_status": "provisional",
+  "rules": "Chỉ thay nhãn hiển thị; không đổi topic_id, W/H hoặc metrics.",
+  "topics": [
+    {"topic_id": "NMF_00", "display_label": "Doanh nghiệp, đầu tư và công nghệ", "display_group_id": null},
+    {"topic_id": "NMF_01", "display_label": "Bóng đá câu lạc bộ", "display_group_id": null},
+    {"topic_id": "NMF_02", "display_label": "Điều tra và pháp luật", "display_group_id": null},
+    {"topic_id": "NMF_03", "display_label": "Sức khỏe và điều trị", "display_group_id": null},
+    {"topic_id": "NMF_04", "display_label": "Giáo dục và trường học", "display_group_id": null},
+    {"topic_id": "NMF_05", "display_label": "Giải trí và nghệ sĩ", "display_group_id": null},
+    {"topic_id": "NMF_06", "display_label": "Asiad và thể thao quốc tế", "display_group_id": null},
+    {"topic_id": "NMF_07", "display_label": "Đội tuyển Việt Nam và ASEAN Cup", "display_group_id": null},
+    {"topic_id": "NMF_08", "display_label": "Apple và iPhone", "display_group_id": null},
+    {"topic_id": "NMF_09", "display_label": "Giá cả và thị trường tài chính", "display_group_id": null}
+  ]
+}

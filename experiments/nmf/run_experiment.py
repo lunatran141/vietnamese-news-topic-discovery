@@ -27,7 +27,7 @@ from experiments.nmf.metrics import (
     npmi_coherence,
     topic_diversity,
 )
-from src.models.nmf import NMFConfig, NMFTopicModel
+from src.models.nmf import NMFConfig, NMFTopicModel, normalize_topic_weights
 
 
 LOGGER = logging.getLogger("nmf_experiment")
@@ -169,11 +169,13 @@ def evaluate_model(
     matrix,
     feature_names: np.ndarray,
     top_n: int,
-) -> tuple[dict[str, float | int | bool], list[float]]:
+) -> tuple[dict[str, float | int | bool], list[float], np.ndarray]:
     """Tính metric trên validation hoặc test mà không fit lại trên split đó."""
-    distributions = model.transform(matrix)
-    # Khôi phục scale W gốc từ phân phối chuẩn hóa chỉ dùng cho reconstruction.
+    if model.estimator_ is None or model.topic_word_weights_ is None:
+        raise RuntimeError("Cần fit NMF trước khi đánh giá")
+    # Chỉ suy diễn W một lần; reconstruction cần W gốc, giao diện cần W chuẩn hóa.
     raw_weights = model.estimator_.transform(matrix)
+    distributions = normalize_topic_weights(raw_weights)
     terms_by_topic, ids_by_topic = topic_feature_ids(model, feature_names, top_n)
     coherence, per_topic = npmi_coherence(matrix, ids_by_topic)
     metrics: dict[str, float | int | bool] = {
@@ -189,7 +191,7 @@ def evaluate_model(
         "n_iter": int(model.estimator_.n_iter_),
         "converged": int(model.estimator_.n_iter_) < model.config.max_iter,
     }
-    return metrics, per_topic
+    return metrics, per_topic, distributions
 
 
 def choose_topic_count(metrics: pd.DataFrame) -> int:
@@ -246,6 +248,74 @@ def save_selection_plot(metrics: pd.DataFrame, output_path: Path) -> None:
     plt.close(figure)
 
 
+def describe_candidate_topics(
+    validation: pd.DataFrame,
+    distributions: np.ndarray,
+    model: NMFTopicModel,
+    per_topic_coherence: list[float],
+    config: dict[str, Any],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], pd.DataFrame]:
+    """Tạo bằng chứng đọc hiểu từng K chỉ từ tập validation.
+
+    Returns:
+        Tóm tắt topic, bài đại diện và phân phối topic theo article_id.
+    """
+    analysis = config["analysis"]
+    id_column = config["data"]["id_column"]
+    representative_count = int(analysis["representative_documents_per_topic"])
+    preview_size = int(analysis["preview_characters"])
+    validation_rows = validation.reset_index(drop=True)
+    primary_indexes = distributions.argmax(axis=1)
+    topic_records: list[dict[str, Any]] = []
+    representative_records: list[dict[str, Any]] = []
+
+    for topic_index in range(model.config.n_topics):
+        topic_id = f"NMF_{topic_index:02d}"
+        top_terms = model.top_terms(topic_index, int(analysis["top_words"]))
+        topic_records.append(
+            {
+                "n_topics": model.config.n_topics,
+                "topic_id": topic_id,
+                "top_terms": " | ".join(term for term, _ in top_terms),
+                "top_term_weights": json.dumps(
+                    [round(weight, 6) for _, weight in top_terms]
+                ),
+                "npmi_coherence": per_topic_coherence[topic_index],
+                "mean_topic_share": float(distributions[:, topic_index].mean()),
+                "primary_document_count": int((primary_indexes == topic_index).sum()),
+                "evaluation_split": "val",
+            }
+        )
+        # Chỉ lấy đại diện từ validation: không dùng test để quyết định K.
+        representative_indexes = np.argsort(
+            -distributions[:, topic_index], kind="stable"
+        )[:representative_count]
+        for rank, document_index in enumerate(representative_indexes, start=1):
+            article = validation_rows.iloc[document_index]
+            representative_records.append(
+                {
+                    "n_topics": model.config.n_topics,
+                    "topic_id": topic_id,
+                    "rank": rank,
+                    "article_id": article[id_column],
+                    "topic_share": float(distributions[document_index, topic_index]),
+                    "title": article["title"],
+                    "text_excerpt": str(article[config["data"]["text_column"]])[
+                        :preview_size
+                    ],
+                    "evaluation_split": "val",
+                }
+            )
+
+    document_topics = validation_rows[[id_column]].copy()
+    document_topics["split"] = "val"
+    for topic_index in range(model.config.n_topics):
+        document_topics[f"topic_{topic_index:02d}_share"] = distributions[
+            :, topic_index
+        ]
+    return topic_records, representative_records, document_topics
+
+
 def run_selection(
     dataset: pd.DataFrame,
     config: dict[str, Any],
@@ -262,13 +332,24 @@ def run_selection(
     top_n = int(config["topic_selection"]["coherence_top_n"])
 
     records: list[dict[str, Any]] = []
+    candidate_topics: list[dict[str, Any]] = []
+    candidate_representatives: list[dict[str, Any]] = []
+    validation_topics_by_k: dict[int, pd.DataFrame] = {}
     for n_topics in config["topic_selection"]["candidates"]:
         LOGGER.info("Đang fit NMF K=%s trên train", n_topics)
         model = build_model(config, int(n_topics)).fit(train_matrix, feature_names)
-        metrics, _ = evaluate_model(model, validation_matrix, feature_names, top_n)
+        metrics, per_topic, distributions = evaluate_model(
+            model, validation_matrix, feature_names, top_n
+        )
         metrics["fit_split"] = "train"
         metrics["evaluation_split"] = "val"
         records.append(metrics)
+        topics, representatives, document_topics = describe_candidate_topics(
+            validation, distributions, model, per_topic, config
+        )
+        candidate_topics.extend(topics)
+        candidate_representatives.extend(representatives)
+        validation_topics_by_k[int(n_topics)] = document_topics
 
     metrics_frame = pd.DataFrame(records).sort_values("n_topics")
     recommended_k = choose_topic_count(metrics_frame)
@@ -279,6 +360,37 @@ def run_selection(
         result_dir / "topic_count_metrics.csv", index=False, encoding="utf-8-sig"
     )
     save_selection_plot(metrics_frame, result_dir / "topic_count_selection.png")
+    topic_summary = pd.DataFrame(candidate_topics)
+    topic_summary.to_csv(
+        result_dir / "candidate_topic_summary.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    pd.DataFrame(candidate_representatives).to_csv(
+        result_dir / "candidate_representative_docs.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    review = topic_summary[
+        ["n_topics", "topic_id", "top_terms", "npmi_coherence", "mean_topic_share"]
+    ].copy()
+    for column in (
+        "manual_label",
+        "interpretability_rating_1_to_5",
+        "overlap_or_noise_note",
+        "reviewer",
+    ):
+        review[column] = ""
+    review.to_csv(
+        result_dir / "candidate_topic_review.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    for n_topics, document_topics in validation_topics_by_k.items():
+        document_topics.to_parquet(
+            artifact_dir / f"validation_document_topics_k{n_topics:02d}.parquet",
+            index=False,
+        )
     metadata = base_metadata(selected_run_id, "select", dataset, config)
     metadata.update(
         {
@@ -289,6 +401,8 @@ def run_selection(
                 "NPMI cao nhất; hòa điểm ưu tiên diversity cao, "
                 "reconstruction error thấp rồi K nhỏ"
             ),
+            "human_review_status": "pending",
+            "candidate_review_split": "val",
         }
     )
     write_json(artifact_dir / "config.json", config)
@@ -426,13 +540,12 @@ def run_finalization(
     test_matrix = vectorizer.transform(test[text_column].astype(str))
     feature_names = vectorizer.get_feature_names_out()
     model = build_model(config, n_topics).fit(development_matrix, feature_names)
-    metrics, per_topic = evaluate_model(
+    metrics, per_topic, distributions = evaluate_model(
         model,
         test_matrix,
         feature_names,
         int(config["topic_selection"]["coherence_top_n"]),
     )
-    distributions = model.transform(test_matrix)
     document_topics, keywords, representatives, multi_topic_cases = build_document_outputs(
         test, distributions, model, config, per_topic
     )
@@ -489,6 +602,7 @@ def run_finalization(
     metadata.update(
         {
             "selected_n_topics": n_topics,
+            "selection_run_id": config["topic_selection"].get("selection_run_id"),
             "fit_split": "train+val",
             "evaluation_split": "test",
             "test_accessed": True,

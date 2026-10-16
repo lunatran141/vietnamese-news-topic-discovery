@@ -9,12 +9,14 @@ Chạy chọn K:
 python -m experiments.nmf.run_experiment --stage select
 ```
 
-Review `topic_count_metrics.csv` và `topic_count_selection.png`, sau đó chạy K
-đã chốt:
+Review `topic_count_metrics.csv`, `topic_count_selection.png`,
+`candidate_topic_summary.csv` và `candidate_representative_docs.csv` trên
+validation. Điền `candidate_topic_review.csv` sau khi đọc bài đại diện rồi
+chạy K đã chốt:
 
 ```powershell
-python -m experiments.nmf.run_experiment --stage finalize --n-topics 8
+python -m experiments.nmf.run_experiment --stage finalize --n-topics 10
 ```
 
 Không dùng stage `finalize` để thử nhiều K vì stage này đọc test set. Cấu hình,
-seed, dữ liệu và output được mô tả tại `docs/m04_m06_nmf_guide.md`.
+seed, dữ liệu và output được mô tả tại `docs/nmf_m04_m06_guide.md`.
