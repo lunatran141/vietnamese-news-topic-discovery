@@ -1,0 +1,191 @@
+{
+  "7:0": {
+    "manual_label": "Giải trí, nghệ sĩ và đời sống (lẫn nội dung quảng cáo)",
+    "coherence_1_5": 3,
+    "is_mixed_topic": "yes",
+    "notes": "Bài ngẫu nhiên có nội dung thương hiệu/tài trợ (Herbalife marathon, 'Thương hiệu tôi yêu') và ẩm thực, không thuần giải trí.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "7:1": {
+    "manual_label": "Sức khỏe, bệnh và điều trị",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Từ khóa và tiêu đề đều thuộc y tế, không thấy bài lạc chủ đề trong mẫu.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "7:2": {
+    "manual_label": "Pháp luật, điều tra và xét xử",
+    "coherence_1_5": 4,
+    "is_mixed_topic": "no",
+    "notes": "Có 1 bài thể thao lạc cụm trong mẫu ngẫu nhiên ('Man City vi phạm 114 cáo buộc tài chính').",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "7:3": {
+    "manual_label": "Doanh nghiệp, đầu tư, công nghệ (cụm chung chung)",
+    "coherence_1_5": 2,
+    "is_mixed_topic": "yes",
+    "notes": "Gom cả AI, trung tâm dữ liệu, điện, thu nhập vùng Đông Nam Á; công nghệ không tách riêng nên cụm giống 'thùng chứa'.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "7:4": {
+    "manual_label": "Giá cả và thị trường tài chính (vàng, lãi suất, chứng khoán)",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Bài giá vàng, lãi suất, chứng khoán; có thêm giá thịt lợn nhưng vẫn cùng nhóm giá cả.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "7:5": {
+    "manual_label": "Giáo dục và trường học",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Mầm non đến đại học, học phí, giáo viên; đồng nhất.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "7:6": {
+    "manual_label": "Thể thao (bóng đá là chính)",
+    "coherence_1_5": 4,
+    "is_mixed_topic": "no",
+    "notes": "Gồm bóng đá quốc tế, Asiad, bóng chuyền trong cùng một cụm nên mức chi tiết thấp.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "9:0": {
+    "manual_label": "Giải trí, nghệ sĩ và đời sống (lẫn quảng cáo)",
+    "coherence_1_5": 3,
+    "is_mixed_topic": "yes",
+    "notes": "Bài ngẫu nhiên gồm triển lãm cưới, Miss World, anime, show ca nhạc; bài gần tâm có cả ẩm thực.",
+    "review_status": "confirmed"
+  },
+  "9:1": {
+    "manual_label": "Thể thao: Asiad và đội tuyển Việt Nam đa môn",
+    "coherence_1_5": 4,
+    "is_mixed_topic": "no",
+    "notes": "Asiad, bóng chuyền, điền kinh, cờ vua; thêm 1 bài Cúp C1 châu lục của CLB nữ.",
+    "review_status": "confirmed"
+  },
+  "9:2": {
+    "manual_label": "Công nghệ: thiết bị Apple và AI",
+    "coherence_1_5": 4,
+    "is_mixed_topic": "no",
+    "notes": "Bài gần tâm là iPhone, bài ngẫu nhiên nghiêng về AI/UAV/chính sách AI; hai chủ đề con nhưng cùng mảng công nghệ.",
+    "review_status": "confirmed"
+  },
+  "9:3": {
+    "manual_label": "Sức khỏe, bệnh và điều trị",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Đồng nhất.",
+    "review_status": "confirmed"
+  },
+  "9:4": {
+    "manual_label": "Bóng đá: đội tuyển, V-League, FIFA",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Toàn bộ mẫu là bóng đá.",
+    "review_status": "confirmed"
+  },
+  "9:5": {
+    "manual_label": "Pháp luật hình sự và điều tra",
+    "coherence_1_5": 4,
+    "is_mixed_topic": "no",
+    "notes": "Một bài về bảo hiểm chi trả (dân sự) nằm lẫn trong mẫu ngẫu nhiên.",
+    "review_status": "confirmed"
+  },
+  "9:6": {
+    "manual_label": "Doanh nghiệp, đầu tư, dịch vụ (cụm chung chung)",
+    "coherence_1_5": 2,
+    "is_mixed_topic": "yes",
+    "notes": "Mẫu ngẫu nhiên gồm tư vấn du học, đường bay, thanh toán, bán dẫn, FDI; thiếu một trục chủ đề rõ.",
+    "review_status": "confirmed"
+  },
+  "9:7": {
+    "manual_label": "Giáo dục, đào tạo (cả y khoa)",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Bài về bác sĩ nội trú, Match Day Đại học Y vẫn là chủ đề giáo dục/đào tạo.",
+    "review_status": "confirmed"
+  },
+  "9:8": {
+    "manual_label": "Giá cả và thị trường tài chính",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Giá vàng, lãi suất, chứng khoán, giá rau củ.",
+    "review_status": "confirmed"
+  },
+  "11:0": {
+    "manual_label": "Thiết bị Apple (iPhone)",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Rất đồng nhất nhưng nhỏ (30 bài Val); mọi bài đều về iPhone.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:1": {
+    "manual_label": "Sức khỏe, bệnh và điều trị",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Đồng nhất.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:2": {
+    "manual_label": "Giáo dục và trường học",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Đồng nhất.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:3": {
+    "manual_label": "Pháp luật, điều tra và khởi tố",
+    "coherence_1_5": 4,
+    "is_mixed_topic": "no",
+    "notes": "Đánh giá dựa trên từ khóa và bài ngẫu nhiên; chưa đọc kỹ danh sách bài gần tâm.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:4": {
+    "manual_label": "Bóng đá CLB và giải châu Âu",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Champions League, La Liga, Ngoại hạng Anh; có thêm 1 bài quần vợt (Mỹ Mở rộng) trong mẫu.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:5": {
+    "manual_label": "Giá cả và thị trường tài chính",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Giá vàng, cổ phiếu, lãi suất, giá xăng.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:6": {
+    "manual_label": "Asiad (nhiều môn)",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Cụm theo sự kiện Asiad, khớp với dữ liệu thu thập trong một khoảng thời gian ngắn.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:7": {
+    "manual_label": "Đội tuyển Việt Nam tại FIFA ASEAN Cup",
+    "coherence_1_5": 5,
+    "is_mixed_topic": "no",
+    "notes": "Cụm theo một giải đấu cụ thể; chỉ 47 bài Val nên dễ không ổn định.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:8": {
+    "manual_label": "Quy định, pháp lý và hành chính (tạp)",
+    "coherence_1_5": 2,
+    "is_mixed_topic": "yes",
+    "notes": "Mẫu ngẫu nhiên gồm ngao chết hàng loạt, từ chối tiền mặt, hợp đồng lao động, gói thầu, nhân sự Bộ Y tế; không có chủ đề chung rõ.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:9": {
+    "manual_label": "Giải trí, nghệ sĩ và đời sống (lẫn nội dung lạc đề)",
+    "coherence_1_5": 3,
+    "is_mixed_topic": "yes",
+    "notes": "Mẫu ngẫu nhiên có anime, kiện đòi nợ, vườn cây, giá cau nông dân.",
+    "review_status": "draft_assistant_pending_confirmation"
+  },
+  "11:10": {
+    "manual_label": "Doanh nghiệp, công nghệ, đầu tư (cụm chung chung)",
+    "coherence_1_5": 2,
+    "is_mixed_topic": "yes",
+    "notes": "Mẫu ngẫu nhiên gồm CEO bị truy nã, du học Úc, laptop Acer, vốn hạ tầng, xe điện; thiếu trục chủ đề.",
+    "review_status": "draft_assistant_pending_confirmation"
+  }
+}

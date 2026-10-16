@@ -1,0 +1,425 @@
+{
+  "0": [
+    {
+      "rank": 1,
+      "article_id": "VNE_95cd82676193",
+      "title": "Mỹ Anh: Không đợi thành công trong nước rồi mới ra quốc tế",
+      "category_gold": "Giải trí",
+      "source": "vnexpress",
+      "published_at": "2026-09-21 00:00:00+07:00",
+      "distance_to_center": 0.9043
+    },
+    {
+      "rank": 2,
+      "article_id": "VNE_ec0869ae5d4d",
+      "title": "Lê Vũ Long: 'Vợ đồng hành tôi suốt chặng đường làm nghề'",
+      "category_gold": "Giải trí",
+      "source": "vnexpress",
+      "published_at": "2026-09-15 10:06:51+07:00",
+      "distance_to_center": 0.921
+    },
+    {
+      "rank": 3,
+      "article_id": "VNE_00fed519c712",
+      "title": "​Johnny Trí Nguyễn: 'Với Hộ linh tráng sĩ, êkíp vừa học vừa làm'",
+      "category_gold": "Giải trí",
+      "source": "vnexpress",
+      "published_at": "2026-09-13 00:00:00+07:00",
+      "distance_to_center": 0.9244
+    },
+    {
+      "rank": 4,
+      "article_id": "VNE_ab9541504635",
+      "title": "Khoai Lang Thang: Bữa cơm nghèo vét sạch gạo khiến tôi nhớ suốt đời",
+      "category_gold": "Giải trí",
+      "source": "vnexpress",
+      "published_at": "2026-09-16 00:00:00+07:00",
+      "distance_to_center": 0.9304
+    },
+    {
+      "rank": 5,
+      "article_id": "VNE_c10e13e447ef",
+      "title": "Xu hướng bình dân của điện ảnh Việt",
+      "category_gold": "Giải trí",
+      "source": "vnexpress",
+      "published_at": "2026-09-26 08:17:42+07:00",
+      "distance_to_center": 0.9316
+    }
+  ],
+  "1": [
+    {
+      "rank": 1,
+      "article_id": "TTR_f41aea345953",
+      "title": "Xác định 8 đội vào tứ kết bóng đá nữ Asiad 20",
+      "category_gold": "Thể thao",
+      "source": "tuoitre",
+      "published_at": "2026-09-21 20:46:00+07:00",
+      "distance_to_center": 0.7945
+    },
+    {
+      "rank": 2,
+      "article_id": "TTR_42e534c86c7e",
+      "title": "Đã xác định 6/8 đội vào tứ kết môn bóng đá nam Asiad 20",
+      "category_gold": "Thể thao",
+      "source": "tuoitre",
+      "published_at": "2026-09-22 15:46:00+07:00",
+      "distance_to_center": 0.7954
+    },
+    {
+      "rank": 3,
+      "article_id": "TTR_e2836bdb6a4a",
+      "title": "Bảng xếp hạng bóng đá nam Asiad 20: U23 Việt Nam nhì bảng C",
+      "category_gold": "Thể thao",
+      "source": "tuoitre",
+      "published_at": "2026-09-22 14:54:00+07:00",
+      "distance_to_center": 0.8001
+    },
+    {
+      "rank": 4,
+      "article_id": "TTR_d547c3438df8",
+      "title": "Lịch thi đấu bóng chuyền nữ Asiad 20: Việt Nam đấu Qatar",
+      "category_gold": "Thể thao",
+      "source": "tuoitre",
+      "published_at": "2026-09-15 17:20:00+07:00",
+      "distance_to_center": 0.8039
+    },
+    {
+      "rank": 5,
+      "article_id": "TTR_8b117715efce",
+      "title": "Lịch thi đấu bóng đá nữ Asiad 20: Việt Nam đấu Đài Bắc Trung Hoa",
+      "category_gold": "Thể thao",
+      "source": "tuoitre",
+      "published_at": "2026-09-14 06:00:00+07:00",
+      "distance_to_center": 0.8057
+    }
+  ],
+  "2": [
+    {
+      "rank": 1,
+      "article_id": "VNN_764e6baedca9",
+      "title": "Toàn cảnh thông tin hot nhất về iPhone 18 Pro, 18 Pro Max, iPhone Duo gập trước giờ ra mắt",
+      "category_gold": "Khoa học công nghệ",
+      "source": "vietnamnet",
+      "published_at": "2026-09-09 16:55:00+07:00",
+      "distance_to_center": 0.852
+    },
+    {
+      "rank": 2,
+      "article_id": "TTR_7f1d531a367a",
+      "title": "Chạm giá 2.000 USD: iPhone Duo đắt gần gấp đôi nhưng nhiều cái còn thua iPhone 18 pro max?",
+      "category_gold": "Khoa học công nghệ",
+      "source": "tuoitre",
+      "published_at": "2026-09-13 10:43:00+07:00",
+      "distance_to_center": 0.8561
+    },
+    {
+      "rank": 3,
+      "article_id": "VNN_86b8c2d77aa0",
+      "title": "3 iPhone cao cấp ra mắt tuần này: iPhone 18 Pro, 18 Pro Max, iPhone Ultra có gì?",
+      "category_gold": "Khoa học công nghệ",
+      "source": "vietnamnet",
+      "published_at": "2026-09-08 09:35:00+07:00",
+      "distance_to_center": 0.8593
+    },
+    {
+      "rank": 4,
+      "article_id": "VNN_34a8c20e1f5d",
+      "title": "Ai nên mua iPhone 18 Pro?",
+      "category_gold": "Khoa học công nghệ",
+      "source": "vietnamnet",
+      "published_at": "2026-09-18 07:46:00+07:00",
+      "distance_to_center": 0.8642
+    },
+    {
+      "rank": 5,
+      "article_id": "VNN_fc9ec356ef7e",
+      "title": "Thời lượng pin iPhone 18 Pro vượt iPhone 17 Pro, iPhone Duo gây bất ngờ",
+      "category_gold": "Khoa học công nghệ",
+      "source": "vietnamnet",
+      "published_at": "2026-09-10 08:00:00+07:00",
+      "distance_to_center": 0.8662
+    }
+  ],
+  "3": [
+    {
+      "rank": 1,
+      "article_id": "VNE_37944c4688f3",
+      "title": "5 điều cần biết để giữ thận khỏe",
+      "category_gold": "Sức khỏe",
+      "source": "vnexpress",
+      "published_at": "2026-09-28 00:04:00+07:00",
+      "distance_to_center": 0.8841
+    },
+    {
+      "rank": 2,
+      "article_id": "VNE_7135767a6aee",
+      "title": "5 vấn đề sức khỏe dễ làm chệch kế hoạch nghỉ hưu",
+      "category_gold": "Sức khỏe",
+      "source": "vnexpress",
+      "published_at": "2026-09-23 15:00:00+07:00",
+      "distance_to_center": 0.8865
+    },
+    {
+      "rank": 3,
+      "article_id": "VNE_d1ae4d246855",
+      "title": "Lợi ích khám sức khỏe định kỳ sau tuổi trung niên",
+      "category_gold": "Sức khỏe",
+      "source": "vnexpress",
+      "published_at": "2026-09-26 09:00:00+07:00",
+      "distance_to_center": 0.8888
+    },
+    {
+      "rank": 4,
+      "article_id": "VNE_beafc7a32a09",
+      "title": "Bác sĩ chỉ cách ăn uống, vận động tốt cho người viêm gan",
+      "category_gold": "Sức khỏe",
+      "source": "vnexpress",
+      "published_at": "2026-09-24 08:00:00+07:00",
+      "distance_to_center": 0.8961
+    },
+    {
+      "rank": 5,
+      "article_id": "VNN_c3e9c2d973f8",
+      "title": "Để tuổi 49-53 khỏe mạnh, 6 điều nên làm ngay",
+      "category_gold": "Sức khỏe",
+      "source": "vietnamnet",
+      "published_at": "2026-09-05 10:00:00+07:00",
+      "distance_to_center": 0.897
+    }
+  ],
+  "4": [
+    {
+      "rank": 1,
+      "article_id": "TTR_7feae2cbbd47",
+      "title": "HLV tuyển Philippines: 'Chúng tôi không đáng thua'",
+      "category_gold": "Thể thao",
+      "source": "tuoitre",
+      "published_at": "2026-09-26 21:30:00+07:00",
+      "distance_to_center": 0.8638
+    },
+    {
+      "rank": 2,
+      "article_id": "VNN_b404973833d6",
+      "title": "Tuyển Việt Nam thua Thái Lan, hết cơ hội tranh vô địch FIFA ASEAN Cup",
+      "category_gold": "Thể thao",
+      "source": "vietnamnet",
+      "published_at": "2026-09-29 21:33:00+07:00",
+      "distance_to_center": 0.8666
+    },
+    {
+      "rank": 3,
+      "article_id": "TTR_7afd55251c58",
+      "title": "Nỗi lo tuyến giữa đội tuyển Việt Nam",
+      "category_gold": "Thể thao",
+      "source": "tuoitre",
+      "published_at": "2026-09-19 16:54:00+07:00",
+      "distance_to_center": 0.8713
+    },
+    {
+      "rank": 4,
+      "article_id": "VNE_626899e3cc3a",
+      "title": "HLV Kim: 'Tôi xấu hổ vì Việt Nam không ghi bàn trước Thái Lan'",
+      "category_gold": "Thể thao",
+      "source": "vnexpress",
+      "published_at": "2026-09-29 21:48:42+07:00",
+      "distance_to_center": 0.873
+    },
+    {
+      "rank": 5,
+      "article_id": "VNE_ec495bc98300",
+      "title": "HLV Kim Sang-sik xin lỗi về chấn thương của Nguyễn Xuân Son",
+      "category_gold": "Thể thao",
+      "source": "vnexpress",
+      "published_at": "2026-09-28 17:54:30+07:00",
+      "distance_to_center": 0.8731
+    }
+  ],
+  "5": [
+    {
+      "rank": 1,
+      "article_id": "TTR_c3c0d75041fb",
+      "title": "Khởi tố nhóm thuê người vay ngân hàng mua ô tô rồi bán lại",
+      "category_gold": "Pháp luật",
+      "source": "tuoitre",
+      "published_at": "2026-09-07 19:47:00+07:00",
+      "distance_to_center": 0.9021
+    },
+    {
+      "rank": 2,
+      "article_id": "TTR_3f6f9dcd55fd",
+      "title": "Công an TP.HCM bắt nhóm bán đá cuội nhưng quảng cáo là ‘đá thiên thạch’",
+      "category_gold": "Pháp luật",
+      "source": "tuoitre",
+      "published_at": "2026-09-29 18:56:00+07:00",
+      "distance_to_center": 0.9041
+    },
+    {
+      "rank": 3,
+      "article_id": "TTR_a6e12c38d57a",
+      "title": "VKS đề nghị đến 20 năm tù với cựu viện trưởng và 30 năm tù cho 'bà trùm' vụ Viện Pháp y tâm thần",
+      "category_gold": "Pháp luật",
+      "source": "tuoitre",
+      "published_at": "2026-09-30 11:07:00+07:00",
+      "distance_to_center": 0.9061
+    },
+    {
+      "rank": 4,
+      "article_id": "TTR_da76d351d318",
+      "title": "Bắt tạm giam nghi phạm 'chạy' làm giấy tờ đất chiếm đoạt 17 tỉ",
+      "category_gold": "Pháp luật",
+      "source": "tuoitre",
+      "published_at": "2026-09-24 20:38:00+07:00",
+      "distance_to_center": 0.9061
+    },
+    {
+      "rank": 5,
+      "article_id": "TTR_a835a7d2dda6",
+      "title": "Hai ‘ông trùm’ vụ sữa giả lĩnh 30 năm tù, cựu công an lừa ‘chạy án’ và cựu chi cục trưởng cùng lĩnh 12 năm",
+      "category_gold": "Pháp luật",
+      "source": "tuoitre",
+      "published_at": "2026-09-28 17:08:00+07:00",
+      "distance_to_center": 0.9068
+    }
+  ],
+  "6": [
+    {
+      "rank": 1,
+      "article_id": "VNN_c1be84a11d11",
+      "title": "Việt Nam đang tạo ra những Doanh nghiệp Quốc gia thay đổi cả nền kinh tế thế nào?",
+      "category_gold": "Kinh doanh",
+      "source": "vietnamnet",
+      "published_at": "2026-09-23 11:50:00+07:00",
+      "distance_to_center": 0.8915
+    },
+    {
+      "rank": 2,
+      "article_id": "TTR_bbad9c8d162b",
+      "title": "Từ thương mại đến hút dòng vốn chất lượng cao: Củng cố niềm tin dài hạn từ Mỹ",
+      "category_gold": "Kinh doanh",
+      "source": "tuoitre",
+      "published_at": "2026-09-21 13:49:00+07:00",
+      "distance_to_center": 0.8927
+    },
+    {
+      "rank": 3,
+      "article_id": "VNN_306c58fbed88",
+      "title": "Dòng vốn 136,3 tỷ USD: Thị trường thiết bị năng lượng đón cơ hội lịch sử",
+      "category_gold": "Kinh doanh",
+      "source": "vietnamnet",
+      "published_at": "2026-09-26 11:40:00+07:00",
+      "distance_to_center": 0.8954
+    },
+    {
+      "rank": 4,
+      "article_id": "VNE_33d1847dbd0b",
+      "title": "VIB: 30 năm từ số hóa giao dịch đến cá nhân hóa trải nghiệm ngân hàng",
+      "category_gold": "Kinh doanh",
+      "source": "vnexpress",
+      "published_at": "2026-09-17 10:00:00+07:00",
+      "distance_to_center": 0.8962
+    },
+    {
+      "rank": 5,
+      "article_id": "TTR_8e27082f868f",
+      "title": "Thu hút vốn Mỹ và Canada: Chìa khóa từ công nghệ chiến lược, năng lượng sạch",
+      "category_gold": "Kinh doanh",
+      "source": "tuoitre",
+      "published_at": "2026-09-25 09:30:00+07:00",
+      "distance_to_center": 0.8971
+    }
+  ],
+  "7": [
+    {
+      "rank": 1,
+      "article_id": "VNE_faeae66f26f2",
+      "title": "5 kỳ vọng lớn của ngành giáo dục năm học mới",
+      "category_gold": "Giáo dục",
+      "source": "vnexpress",
+      "published_at": "2026-09-04 21:28:31+07:00",
+      "distance_to_center": 0.8782
+    },
+    {
+      "rank": 2,
+      "article_id": "TTR_84de77fed7ad",
+      "title": "Thứ trưởng Bộ GD&ĐT đề nghị Khánh Hòa cắt giảm các cuộc họp, cuộc thi không cần thiết",
+      "category_gold": "Giáo dục",
+      "source": "tuoitre",
+      "published_at": "2026-09-18 18:14:00+07:00",
+      "distance_to_center": 0.8836
+    },
+    {
+      "rank": 3,
+      "article_id": "TTR_aeafc4cbc413",
+      "title": "Tư vấn tuyển sinh - hướng nghiệp 2027: Tăng dữ liệu việc làm, tư vấn từ THCS",
+      "category_gold": "Giáo dục",
+      "source": "tuoitre",
+      "published_at": "2026-09-19 15:24:00+07:00",
+      "distance_to_center": 0.885
+    },
+    {
+      "rank": 4,
+      "article_id": "VNN_72de9dccfc24",
+      "title": "Bước chuyển quan trọng của giáo dục dân tộc",
+      "category_gold": "Giáo dục",
+      "source": "vietnamnet",
+      "published_at": "2026-09-05 06:03:00+07:00",
+      "distance_to_center": 0.8866
+    },
+    {
+      "rank": 5,
+      "article_id": "TTR_f717e065a9b0",
+      "title": "Bỏ điểm cộng học sinh giỏi, IELTS: Nếu từ 2027, có thiệt thòi cho học sinh đang lớp 12?",
+      "category_gold": "Giáo dục",
+      "source": "tuoitre",
+      "published_at": "2026-09-18 19:27:00+07:00",
+      "distance_to_center": 0.8868
+    }
+  ],
+  "8": [
+    {
+      "rank": 1,
+      "article_id": "VNN_df3e5b8dfc8b",
+      "title": "VN-Index mất mốc 1.800 điểm, ông Phạm Nhật Vượng vẫn thăng hạng tỷ phú USD",
+      "category_gold": "Kinh doanh",
+      "source": "vietnamnet",
+      "published_at": "2026-09-12 05:30:00+07:00",
+      "distance_to_center": 0.8429
+    },
+    {
+      "rank": 2,
+      "article_id": "VNN_b33b5903223f",
+      "title": "Giá vàng hôm nay 12/9/2026: Cuối tuần bật tăng, SJC và nhẫn lên cao",
+      "category_gold": "Kinh doanh",
+      "source": "vietnamnet",
+      "published_at": "2026-09-12 08:59:00+07:00",
+      "distance_to_center": 0.8478
+    },
+    {
+      "rank": 3,
+      "article_id": "VNN_583afb87bcff",
+      "title": "Giá vàng hôm nay 27/9/2026 lao dốc, vàng SJC giảm 3,2 triệu đồng/lượng",
+      "category_gold": "Kinh doanh",
+      "source": "vietnamnet",
+      "published_at": "2026-09-27 06:00:00+07:00",
+      "distance_to_center": 0.8492
+    },
+    {
+      "rank": 4,
+      "article_id": "VNN_cebf3a9abc36",
+      "title": "Giá vàng hôm nay 16/9/2026: SJC tăng 1,2 triệu đồng, thế giới vượt 4.330 USD",
+      "category_gold": "Kinh doanh",
+      "source": "vietnamnet",
+      "published_at": "2026-09-16 06:00:00+07:00",
+      "distance_to_center": 0.8504
+    },
+    {
+      "rank": 5,
+      "article_id": "VNN_3c6ab1529339",
+      "title": "Giá vàng hôm nay 4/9/2026: Bất ngờ rơi thẳng đứng gần 100 USD",
+      "category_gold": "Kinh doanh",
+      "source": "vietnamnet",
+      "published_at": "2026-09-04 19:40:00+07:00",
+      "distance_to_center": 0.8512
+    }
+  ]
+}
