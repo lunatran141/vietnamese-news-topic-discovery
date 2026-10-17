@@ -2,16 +2,16 @@
 
 ## 1. Mục tiêu
 
-M10 tạo vector ngữ nghĩa (*sentence embedding*) cho các bài báo thuộc tập train của Dataset v1.0. Mỗi bài được biểu diễn bằng một vector số để bước phân cụm có thể so sánh mức độ gần nhau về nội dung.
+Task M10 tạo vector ngữ nghĩa (*sentence embedding*) cho các bài báo thuộc tập train của Dataset v1.0. Mỗi bài được biểu diễn bằng một vector để các bước sau có thể so sánh nội dung và phân cụm.
 
 M10 thực hiện:
 
 1. Đọc đúng tập train theo split chính thức của nhóm.
 2. Tạo văn bản đầu vào từ tiêu đề và nội dung bài báo.
-3. Tạo embedding bằng hai mô hình MiniLM và MPNet.
-4. Với mỗi mô hình, thử hai kiểu đầu vào: chỉ tiêu đề và tiêu đề cộng 60 từ đầu nội dung.
+3. Mã hóa bằng hai mô hình MiniLM và MPNet.
+4. Với mỗi mô hình, tạo hai kiểu đầu vào: chỉ tiêu đề và tiêu đề cộng 60 từ đầu nội dung.
 5. Lưu vector cùng `article_id`, tên mô hình, phiên bản dữ liệu và metadata cấu hình.
-6. Tải lại artifact để kiểm tra dữ liệu được lưu đúng.
+6. Tải lại artifact để kiểm tra ID, vector và metadata.
 
 M10 tạo embedding. Việc giảm chiều bằng UMAP và phân cụm bằng HDBSCAN được thực hiện ở M11.
 
@@ -25,34 +25,32 @@ data/splits/split_manifest.csv
 configs/embeddings.yaml
 ```
 
-Ý nghĩa:
-
 - `p0_minimal.csv`: dữ liệu bài báo đã được xử lý ở mức P0.
 - `split_manifest.csv`: xác định mỗi `article_id` thuộc tập train, validation hay test.
-- `embeddings.yaml`: cấu hình dữ liệu, mô hình, kiểu đầu vào và vị trí lưu artifact.
+- `embeddings.yaml`: cấu hình dữ liệu, mô hình, kiểu đầu vào và đường dẫn lưu artifact.
 
-Hai cột văn bản được sử dụng:
+M10 sử dụng hai cột:
 
 ```text
 processed_title
 processed_content
 ```
 
-Runner dùng `load_split_dataset(..., "train")` để lấy đúng **6.493 bài thuộc tập train**. Mẫu lấy ngẫu nhiên từ toàn bộ dataset không được dùng làm kết quả M10 chính thức vì có thể chứa bài thuộc validation hoặc test.
+Runner gọi `load_split_dataset(..., "train")` để lấy đúng **6.493 bài thuộc tập train**. Mẫu lấy ngẫu nhiên từ toàn bộ dataset không được dùng làm kết quả M10 chính thức vì có thể chứa bài thuộc validation hoặc test.
 
 ## 3. Vì sao sử dụng dữ liệu P0?
 
-P0 đã xử lý các vấn đề văn bản cơ bản như Unicode, thẻ HTML, ký tự điều khiển và khoảng trắng thừa, đồng thời vẫn giữ cấu trúc câu tương đối tự nhiên.
+P0 xử lý các vấn đề văn bản cơ bản như Unicode, thẻ HTML, ký tự điều khiển và khoảng trắng thừa, đồng thời vẫn giữ cấu trúc câu tương đối tự nhiên.
 
 MiniLM và MPNet tạo embedding theo ngữ cảnh văn bản. Vì vậy, P0 là đầu vào tham chiếu phù hợp để bắt đầu thí nghiệm.
 
-Các biến thể khác có mục đích xử lý riêng:
+Các mức xử lý khác có mục đích riêng:
 
-- **P1:** chuẩn hóa thêm văn bản. Có thể thử sau, nhưng chưa thể kết luận tốt hơn P0 nếu chưa đánh giá.
-- **P2:** phân đoạn từ, có thể biểu diễn từ ghép bằng dấu gạch dưới. MiniLM và MPNet đã có tokenizer riêng nên không mặc nhiên cần kiểu biểu diễn này.
-- **P3:** loại từ dừng. Việc bỏ từ có thể làm thay đổi ngữ cảnh của câu.
+- **P1:** chuẩn hóa thêm văn bản; có thể thử sau nhưng chưa thể kết luận tốt hơn P0 nếu chưa đánh giá.
+- **P2:** phân đoạn từ và có thể biểu diễn từ ghép bằng dấu gạch dưới; hai mô hình embedding đã có tokenizer riêng.
+- **P3:** loại từ dừng; việc bỏ từ có thể làm thay đổi ngữ cảnh câu.
 
-Chọn P0 **không có nghĩa P0 chắc chắn tốt nhất**. Nếu thử P1, P2 hoặc P3, cần giữ nguyên tập bài, mô hình và các tham số khác, rồi so sánh theo cùng quy trình đánh giá.
+Chọn P0 **không có nghĩa P0 chắc chắn tốt nhất**. Nếu thử mức xử lý khác, cần giữ nguyên tập bài, mô hình và các tham số còn lại để so sánh có kiểm soát.
 
 ## 4. Hai mô hình được chọn
 
@@ -62,7 +60,7 @@ Chọn P0 **không có nghĩa P0 chắc chắn tốt nhất**. Nếu thử P1, P
 sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 ```
 
-MiniLM tạo vector **384 chiều** cho mỗi bài. Mô hình được dùng làm cấu hình tham chiếu với chi phí tính toán và lưu trữ thấp hơn MPNet trong lần chạy của nhóm.
+MiniLM tạo vector **384 chiều** cho mỗi bài. Trong lần chạy của nhóm, đây là cấu hình tham chiếu có chi phí tính toán và lưu trữ thấp hơn MPNet.
 
 ### MPNet
 
@@ -72,38 +70,34 @@ sentence-transformers/paraphrase-multilingual-mpnet-base-v2
 
 MPNet tạo vector **768 chiều** cho mỗi bài. Mô hình cung cấp một cách biểu diễn khác để đối chiếu với MiniLM.
 
-Vector nhiều chiều hơn **không tự động** có nghĩa chất lượng phân cụm tốt hơn. Việc chọn mô hình cần dựa trên nội dung các cụm, kết quả đánh giá, thời gian chạy và chi phí lưu trữ.
+Số chiều lớn hơn **không tự động** có nghĩa chất lượng phân cụm tốt hơn. Việc chọn mô hình cần xét nội dung cụm, kết quả đánh giá, thời gian chạy và chi phí lưu trữ.
 
-## 5. Bốn cấu hình embedding
+## 5. Bốn cấu hình embedding chính thức
 
-M10 có **hai mô hình × hai kiểu đầu vào = bốn cấu hình**:
+M10 sử dụng **hai mô hình × hai kiểu đầu vào = bốn cấu hình**:
 
-| Cấu hình | Mô hình | Văn bản đầu vào | Số chiều |
-| --- | --- | --- | ---: |
-| `minilm_title_content` | MiniLM | Tiêu đề + 60 từ đầu nội dung | 384 |
-| `mpnet_title_content` | MPNet | Tiêu đề + 60 từ đầu nội dung | 768 |
-| `minilm_title_only` | MiniLM | Chỉ tiêu đề | 384 |
-| `mpnet_title_only` | MPNet | Chỉ tiêu đề | 768 |
+- `minilm_title_content`: MiniLM; tiêu đề + 60 từ đầu nội dung; 384 chiều.
+- `mpnet_title_content`: MPNet; tiêu đề + 60 từ đầu nội dung; 768 chiều.
+- `minilm_title_only`: MiniLM; chỉ tiêu đề; 384 chiều.
+- `mpnet_title_only`: MPNet; chỉ tiêu đề; 768 chiều.
 
-Với cấu hình `title_content`, văn bản đầu vào được tạo từ:
+Với `title_content`, văn bản đầu vào được tạo theo dạng:
 
 ```text
 processed_title + ". " + 60 từ đầu của processed_content
 ```
 
-Với cấu hình `title_only`, đầu vào chỉ gồm:
+Với `title_only`, đầu vào chỉ gồm:
 
 ```text
 processed_title
 ```
 
-Trong code hiện tại, `content_words: 60` nghĩa là lấy tối đa 60 phần tử đầu sau khi tách nội dung theo khoảng trắng. Đây là **tham số thí nghiệm của nhóm**, không phải giá trị mặc định của mô hình và không phải toàn bộ bài báo.
-
-`content_words: 0` tạo đầu vào chỉ gồm tiêu đề.
+Trong code hiện tại, `content_words: 60` nghĩa là lấy tối đa 60 phần tử đầu sau khi tách nội dung theo khoảng trắng. Đây là **tham số thí nghiệm của nhóm**, không phải giá trị mặc định của mô hình và không phải toàn bộ bài báo. `content_words: 0` tạo đầu vào chỉ gồm tiêu đề.
 
 ## 6. Số bài và số chiều vector
 
-Tập train có **6.493 bài**, nên mỗi cấu hình tạo **6.493 vector**:
+Tập train có **6.493 bài**, nên mỗi cấu hình chính thức tạo **6.493 vector**:
 
 ```text
 MiniLM, title + content: (6493, 384)
@@ -115,25 +109,17 @@ MPNet, title-only:       (6493, 768)
 - `6.493` là số bài được mã hóa.
 - `384` và `768` là số giá trị trong mỗi vector, do mô hình tương ứng quyết định.
 
-Hai cấu hình dùng cùng một mô hình có cùng **số chiều**, nhưng giá trị trong vector khác nhau vì văn bản đầu vào khác nhau.
+Hai cấu hình dùng cùng một mô hình có cùng **số chiều**, nhưng giá trị vector khác nhau vì văn bản đầu vào khác nhau.
 
-`expected_dimensions` trong YAML chỉ dùng để **kiểm tra** đầu ra. Thay số này trong YAML không làm mô hình đổi số chiều vector.
+`expected_dimensions` trong YAML chỉ dùng để kiểm tra đầu ra. Đổi con số này trong YAML không làm mô hình đổi số chiều vector.
 
 ## 7. Quy trình so sánh có kiểm soát
 
 ### So sánh hai mô hình
 
-Có thể so sánh:
+Có thể so sánh MiniLM và MPNet khi cùng dùng tiêu đề + 60 từ đầu nội dung. Hai cấu hình dùng cùng Dataset v1.0, tập train, thứ tự `article_id`, mức xử lý P0 và cách ghép văn bản. Yếu tố thay đổi là **mô hình embedding**.
 
-```text
-MiniLM, tiêu đề + 60 từ nội dung
-với
-MPNet, tiêu đề + 60 từ nội dung
-```
-
-Hai mô hình sử dụng cùng Dataset v1.0, cùng tập train, thứ tự `article_id`, biến thể P0 và cách ghép văn bản. Yếu tố thay đổi là **mô hình embedding**.
-
-Cũng có thể so sánh MiniLM title-only với MPNet title-only theo cùng nguyên tắc.
+Cũng có thể so sánh MiniLM title-only với MPNet title-only theo nguyên tắc tương tự.
 
 ### So sánh hai kiểu đầu vào (*input ablation*)
 
@@ -148,7 +134,49 @@ Trong mỗi cặp, giữ nguyên mô hình, tập train và tham số mã hóa. 
 
 M10 tạo các bộ vector để phục vụ so sánh. Kết luận cấu hình nào tốt hơn cần dựa trên cùng quy trình phân cụm và đánh giá. Không dùng tập test để chọn cấu hình.
 
-## 8. Cấu hình dữ liệu và mã hóa
+## 8. Vì sao chọn 60 từ đầu nội dung?
+
+60 từ là một **lựa chọn thí nghiệm**, không phải độ dài tối ưu đã được chứng minh. Mục đích là bổ sung ngữ cảnh cho tiêu đề mà vẫn giữ đầu vào tương đối ngắn.
+
+`content_words` đếm từ bằng cách tách theo khoảng trắng, trong khi mô hình xử lý **token**. Một từ có thể được tách thành nhiều token; tiêu đề cũng chiếm một phần giới hạn đầu vào.
+
+Theo cấu hình công bố của [MiniLM](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2/blob/main/sentence_bert_config.json) và [MPNet](https://huggingface.co/sentence-transformers/paraphrase-multilingual-mpnet-base-v2/blob/main/sentence_bert_config.json), hai mô hình có `max_seq_length` mặc định là **128 token**. Đầu vào dài hơn giới hạn có thể bị cắt khi mã hóa.
+
+### Kiểm tra giới hạn token trên MPNet
+
+Nhóm đã đếm token của đầu vào MPNet trên cùng **6.493 bài train**, gồm cả tiêu đề và phần nội dung được chọn:
+
+```text
+Chỉ tiêu đề:             0/6493 bài vượt 128 token  (0,00%)
+Tiêu đề + 60 từ:        22/6493 bài vượt 128 token  (0,34%)
+Tiêu đề + 120 từ:     6473/6493 bài vượt 128 token (99,69%)
+```
+
+Kết quả cho thấy mức 60 từ chỉ làm một tỷ lệ nhỏ đầu vào vượt giới hạn. Mức 120 từ **không phù hợp để thử trực tiếp với thiết lập mô hình hiện tại**, vì gần như toàn bộ đầu vào vượt 128 token; số từ thêm vào không đồng nghĩa mô hình sẽ đọc được toàn bộ.
+
+Lần kiểm tra dùng `truncation=False` để đếm độ dài trước khi cắt. Cảnh báo về chuỗi dài hơn 128 token trong quá trình đếm là dự kiến, không phải lỗi của artifact đã lưu.
+
+### Thử thêm 30 từ trên MPNet
+
+Một phép thử bổ sung đã chạy **trong bộ nhớ**, dùng MPNet với tiêu đề + 30 từ đầu nội dung. Phép thử dùng cùng 6.493 bài train, P0 và các tham số UMAP/HDBSCAN M11. Kết quả được đối chiếu với MPNet tiêu đề + 60 từ đã lưu trước đó:
+
+```text
+eom_15_5
+- 30 từ:  93 cụm, 1.690 bài nhiễu (26,03%)
+- 60 từ: 110 cụm, 1.660 bài nhiễu (25,57%)
+
+leaf_15_5
+- 30 từ: 118 cụm, 2.524 bài nhiễu (38,87%)
+- 60 từ: 124 cụm, 2.148 bài nhiễu (33,08%)
+```
+
+Ở hai cấu hình này, đầu vào 60 từ tạo nhiều cụm hơn và ít bài bị gán `-1` hơn đầu vào 30 từ. Kết hợp với kết quả kiểm tra token, đây là **bằng chứng hỗ trợ giữ mức 60 từ làm cấu hình hiện tại**.
+
+Tuy nhiên, số cụm và tỷ lệ nhiễu **chưa chứng minh chất lượng chủ đề tốt hơn**. Cần đọc bài trong cụm và đánh giá theo quy trình chung để kết luận về chất lượng ngữ nghĩa.
+
+Phép thử 30 từ không được lưu thành `.npz`, CSV hoặc hình. Đây là kết quả thăm dò trong bộ nhớ, **không phải artifact M10/M11 chính thức**; muốn kiểm tra lại từng nhãn cụm của mức 30 từ thì phải chạy lại phép thử.
+
+## 9. Cấu hình dữ liệu và mã hóa
 
 Các thiết lập chính trong `configs/embeddings.yaml`:
 
@@ -172,16 +200,16 @@ encoding:
 
 - `split: "train"`: chỉ mã hóa bài thuộc tập train chính thức.
 - `sample_size: null`: dùng toàn bộ 6.493 bài train.
-- `sample_random_state: 42`: cố định cách lấy mẫu nếu dùng `sample_size` để chạy thử.
-- `batch_size: 16`: đưa văn bản vào mô hình theo từng nhóm 16 bài.
+- `sample_random_state: 42`: cố định cách lấy mẫu nếu chạy thử với `sample_size`.
+- `batch_size: 16`: mã hóa theo từng nhóm 16 bài.
 - `normalize_embeddings: true`: chuẩn hóa độ dài vector về gần 1.
 - `data_version: "v1.0"`: ghi nhận phiên bản dữ liệu trong artifact.
 
-Runner hiện yêu cầu `normalize_embeddings: true` vì hàm `create_embeddings()` luôn gọi bộ mã hóa với thiết lập chuẩn hóa này.
+Runner hiện yêu cầu `normalize_embeddings: true` vì hàm `create_embeddings()` luôn gọi mô hình với thiết lập chuẩn hóa này.
 
 Mẫu 300 bài trước đây chỉ dùng để kiểm tra kỹ thuật. Bốn artifact M10 chính thức được tạo trên **toàn bộ 6.493 bài train**.
 
-## 9. Code và luồng xử lý
+## 10. Code và luồng xử lý
 
 Các file liên quan:
 
@@ -214,29 +242,29 @@ P0 + split_manifest
 
 Dù runner nằm trong thư mục `experiments/hdbscan/`, M10 ở đây chỉ **tạo embedding**, chưa chạy HDBSCAN.
 
-## 10. Chạy test
+## 11. Chạy test
 
-Từ thư mục gốc repository, chạy:
+Từ thư mục gốc repository:
 
 ```powershell
 python -B -m pytest -p no:cacheprovider tests/test_embeddings.py -v
 ```
 
-Kết quả đã kiểm tra: **5 passed**.
+Kết quả đã ghi nhận: **5 passed**.
 
 Năm test kiểm tra:
 
 1. Số vector, số chiều và thứ tự `article_id`.
 2. Từ chối vector chứa `NaN`.
 3. Từ chối `article_id` trùng.
-4. Dùng đúng các cột P0 `processed_title` và `processed_content`.
-5. Lưu rồi tải lại artifact mà vẫn giữ đúng **ID, vector và metadata**.
+4. Sử dụng đúng hai cột P0 `processed_title` và `processed_content`.
+5. Lưu và tải lại artifact mà vẫn giữ đúng ID, vector và metadata.
 
 Các test dùng encoder giả nên chạy nhanh. Chúng kiểm tra logic code, chưa đánh giá chất lượng ngữ nghĩa của MiniLM hoặc MPNet.
 
 Khi chạy chung test M10 và M11, kết quả đã ghi nhận là **14 passed**.
 
-## 11. Chạy tạo embedding
+## 12. Chạy tạo embedding chính thức
 
 Trước khi chạy trên toàn bộ tập train, kiểm tra YAML có:
 
@@ -261,19 +289,19 @@ RUN_NAMES = (
 )
 ```
 
-**Lưu ý:** chạy lại lệnh với danh sách trên sẽ mã hóa lại cả bốn cấu hình và ghi lại bốn artifact. Vì artifact đã được tạo, không cần chạy lại chỉ để xem vector.
+**Lưu ý:** chạy lại lệnh trên sẽ mã hóa lại cả bốn cấu hình và ghi lại bốn artifact. Vì artifact chính thức đã được tạo, không cần chạy lại chỉ để xem vector hoặc tài liệu hóa kết quả thử 30 từ.
 
-Nếu chỉ muốn runner chạy một cấu hình, tuple một phần tử trong Python cần dấu phẩy:
+Nếu chỉ muốn runner chạy một cấu hình, tuple một phần tử trong Python phải có dấu phẩy:
 
 ```python
 RUN_NAMES = ("mpnet_title_only",)
 ```
 
-Viết `("mpnet_title_only")` khiến Python hiểu đây là chuỗi và vòng lặp đọc từng ký tự.
+Viết `("mpnet_title_only")` khiến Python hiểu đây là chuỗi và vòng lặp sẽ đọc từng ký tự.
 
-## 12. Bốn artifact đầu ra
+## 13. Bốn artifact đầu ra
 
-Các file chính:
+Các artifact chính thức:
 
 ```text
 artifacts/embeddings/m10_v1_train_minilm.npz
@@ -288,28 +316,19 @@ Mỗi file `.npz` chứa:
 - `vectors`: ma trận embedding kiểu `float32`.
 - `model_name`: mô hình tạo vector.
 - `data_version`: phiên bản dữ liệu.
-- `embedding_metadata_json`: thông tin cấu hình đã dùng để tạo artifact, được lưu dưới dạng chuỗi JSON.
+- `embedding_metadata_json`: thông tin cấu hình dùng để tạo artifact, lưu dưới dạng chuỗi JSON.
 
 Metadata ghi nhận tên cấu hình embedding, cấu hình dataset, cấu hình mã hóa, tên mô hình, `content_words` và số chiều mong đợi. Khi tải artifact bằng `load_embedding_artifact()`, metadata được đặt vào `DataFrame.attrs["embedding_metadata"]`.
 
-Kích thước mong đợi:
+Trong mỗi artifact, `article_ids[i]` phải tương ứng với `vectors[i]`. File `.npz` là dữ liệu nhị phân, không mở và chỉnh như file văn bản thông thường.
 
-```text
-m10_v1_train_minilm.npz:            (6493, 384)
-m10_v1_train_mpnet.npz:             (6493, 768)
-m10_v1_train_title_only_minilm.npz: (6493, 384)
-m10_v1_train_title_only_mpnet.npz:  (6493, 768)
-```
+## 14. Xem kích thước và chỉ số vector
 
-Trong một artifact, `article_ids[i]` phải tương ứng với `vectors[i]`. File `.npz` là dữ liệu nhị phân, nên không mở như file văn bản thông thường.
-
-## 13. Xem kích thước và các chỉ số của vector
-
-Các lệnh trong mục này **chỉ đọc artifact**. Chúng không tải mô hình, không tạo lại embedding và không tạo file mới.
+Các lệnh trong mục này **chỉ đọc artifact**. Chúng không tạo lại embedding hoặc file mới.
 
 ### Kiểm tra cả bốn artifact
 
-Chạy nguyên khối lệnh sau trong PowerShell tại thư mục gốc repository:
+Chạy nguyên khối sau trong PowerShell tại thư mục gốc repository:
 
 ```powershell
 @'
@@ -405,13 +424,13 @@ for index, value in enumerate(vector):
 
 Với MiniLM, lệnh in các vị trí từ `000` đến `383`. Muốn xem MPNet, đổi `path` sang artifact MPNet; khi đó lệnh in từ `000` đến `767`.
 
-Từng số trong vector là một tọa độ của cách biểu diễn văn bản, không có nhãn chủ đề riêng như “thể thao” hay “sức khỏe”.
+Từng số trong vector là một tọa độ của cách biểu diễn văn bản, không mang một nhãn chủ đề riêng như “thể thao” hay “sức khỏe”.
 
-## 14. Kiểm tra thủ công các bài gần nhau
+## 15. Kiểm tra thủ công các bài gần nhau
 
-Có thể chọn một bài thuộc tập train rồi tìm năm bài có vector gần nhất trong từng cấu hình. Việc này giúp phát hiện sớm những bài gần nhau về câu chữ nhưng không thật sự cùng chủ đề.
+Có thể chọn một bài thuộc tập train rồi tìm các bài có vector gần nhất trong từng cấu hình. Việc này giúp phát hiện những bài gần nhau về câu chữ nhưng không thật sự cùng chủ đề.
 
-Một bài gốc từng được xem là:
+Một bài gốc từng được xem:
 
 ```text
 article_id: TTR_00278e9af821
@@ -420,9 +439,9 @@ Tiêu đề: Đề xuất ‘quét’ cửa hàng trực tuyến, ngăn tận g�
 
 Trong lần xem mẫu trước, cả bốn cấu hình đều tìm được một số bài có liên quan. Một số bài khác gần về cách diễn đạt, chẳng hạn cùng dùng từ “đề xuất” hoặc “cấm”, nhưng không cùng chủ đề thuốc lá.
 
-Đây là **kiểm tra định tính trên một bài**, chưa đủ để kết luận MiniLM hay MPNet tốt hơn. Không so trực tiếp điểm cosine của hai mô hình như một thước đo chất lượng chung. Các artifact đã được đưa vào cùng quy trình UMAP/HDBSCAN của M11 để quan sát cụm và bài mang nhãn `-1`.
+Đây là **kiểm tra định tính trên một bài**, chưa đủ để kết luận MiniLM hay MPNet tốt hơn. Không so trực tiếp điểm cosine của hai mô hình như một thước đo chất lượng chung. Các artifact chính thức đã được đưa vào cùng quy trình UMAP/HDBSCAN của M11 để quan sát cụm và bài mang nhãn `-1`.
 
-## 15. Một số tình huống thường gặp
+## 16. Một số tình huống thường gặp
 
 ### MPNet chạy lâu hơn MiniLM
 
@@ -431,6 +450,10 @@ Dòng `Loading weights: 100%` chỉ cho biết trọng số đã được tải.
 ### Cảnh báo chưa có `HF_TOKEN`
 
 Nếu chương trình vẫn tải được mô hình và tiếp tục tạo vector, cảnh báo này không cho thấy artifact bị hỏng.
+
+### Cảnh báo chuỗi dài hơn 128 token khi kiểm tra độ dài
+
+Khi chủ động đếm token với `truncation=False`, chương trình có thể cảnh báo chuỗi dài hơn giới hạn. Đây là lý do của phép kiểm tra; nó không có nghĩa các artifact M10 hiện tại bị lỗi.
 
 ### `KeyError: 'mpnet_title_only'`
 
@@ -448,7 +471,7 @@ Viết `("mpnet_title_only")` khiến Python hiểu là chuỗi và vòng lặp 
 
 ### Artifact hiển thị ký tự lạ trong VS Code
 
-`.npz` là file nhị phân. Không chỉnh nội dung bằng trình soạn thảo văn bản; dùng NumPy như ví dụ ở mục 13 để xem ID và vector.
+`.npz` là file nhị phân. Dùng NumPy như ví dụ ở mục 14 để xem ID và vector.
 
 ### Terminal hiển thị sai tiếng Việt
 
@@ -458,9 +481,9 @@ Trong PowerShell, có thể đặt:
 $env:PYTHONUTF8 = "1"
 ```
 
-Sau đó chạy lại lệnh cần xem. Cách hiển thị chữ trong terminal không tự làm thay đổi vector đã lưu.
+Sau đó chạy lại lệnh cần xem. Lỗi hiển thị chữ trong terminal không tự làm thay đổi vector đã lưu.
 
-## 16. Trạng thái bàn giao và bước tiếp theo
+## 17. Trạng thái bàn giao
 
 Các file code, cấu hình, test và tài liệu M10:
 
@@ -472,4 +495,6 @@ tests/test_embeddings.py
 docs/m10_embeddings_guide.md
 ```
 
-M10 đã tạo embedding bằng **hai mô hình trên hai kiểu đầu vào** cho cùng tập train, kiểm tra ID, vector và metadata. M11 đã sử dụng bốn artifact này để chạy các cấu hình UMAP/HDBSCAN. Việc chọn cấu hình phù hợp cần dựa thêm trên nội dung cụm, phân tích bài nhãn `-1` và quy trình đánh giá chung của nhóm.
+M10 đã tạo embedding bằng **hai mô hình trên hai kiểu đầu vào** cho cùng tập train, kiểm tra ID, vector và metadata. M11 đã sử dụng bốn artifact chính thức này để chạy UMAP/HDBSCAN.
+
+Phép thử bổ sung 30 từ trên MPNet hỗ trợ việc giữ **60 từ** làm cấu hình hiện tại vì mức 60 từ tạo ít bài bị gán `-1` hơn trong hai run được so sánh, đồng thời chỉ 0,34% đầu vào vượt giới hạn token. Kết quả này **không thay thế đánh giá chất lượng cụm**. Phép thử 30 từ chỉ chạy trong bộ nhớ và không tạo artifact chính thức.
