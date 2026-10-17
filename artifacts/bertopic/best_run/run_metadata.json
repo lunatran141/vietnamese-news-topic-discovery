@@ -1,0 +1,17 @@
+{
+  "task_id": "M15",
+  "run_id": "e1_vietnamese_sbert",
+  "source_result_dir": "results\\bertopic_experiments\\e1_vietnamese_sbert",
+  "model_path": "artifacts\\bertopic\\experiments\\e1_vietnamese_sbert\\model",
+  "dataset_version": "v1.0",
+  "fit_split": "train",
+  "validation_split": "val",
+  "topic_count": 96,
+  "train_outlier_rate": 0.24611119667334053,
+  "validation_outlier_rate": 0.35873472322070454,
+  "topic_diversity": 0.68125,
+  "keywords_per_topic": 10,
+  "representative_docs_per_topic": 5,
+  "label_status": "provisional",
+  "selection_reason": "Run có đầy đủ artifact và tỷ lệ outlier validation thấp nhất trong các run M14."
+}

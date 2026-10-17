@@ -1,0 +1,1257 @@
+{
+  "-1": {
+    "display_label": "Outlier / Chưa xác định",
+    "suggested_label": "Outlier / Chưa xác định",
+    "top_keywords": [],
+    "status": "system",
+    "reviewed_by": []
+  },
+  "0": {
+    "display_label": "doanh – doanh nghiệp – phát triển",
+    "suggested_label": "doanh – doanh nghiệp – phát triển",
+    "top_keywords": [
+      "doanh",
+      "doanh nghiệp",
+      "phát triển",
+      "sản",
+      "việt nam"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "1": {
+    "display_label": "cáo – tội – điều tra",
+    "suggested_label": "cáo – tội – điều tra",
+    "top_keywords": [
+      "cáo",
+      "tội",
+      "điều tra",
+      "tra",
+      "công an"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "2": {
+    "display_label": "ăn – uống – cơ thể",
+    "suggested_label": "ăn – uống – cơ thể",
+    "top_keywords": [
+      "ăn",
+      "uống",
+      "cơ thể",
+      "thực phẩm",
+      "béo"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "3": {
+    "display_label": "iphone – pro – apple",
+    "suggested_label": "iphone – pro – apple",
+    "top_keywords": [
+      "iphone",
+      "pro",
+      "apple",
+      "18 pro",
+      "iphone 18"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "4": {
+    "display_label": "bệnh – bệnh viện – viện",
+    "suggested_label": "bệnh – bệnh viện – viện",
+    "top_keywords": [
+      "bệnh",
+      "bệnh viện",
+      "viện",
+      "khám",
+      "thuốc"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "5": {
+    "display_label": "asiad – vđv – nữ",
+    "suggested_label": "asiad – vđv – nữ",
+    "top_keywords": [
+      "asiad",
+      "vđv",
+      "nữ",
+      "nội dung",
+      "dung"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "6": {
+    "display_label": "nhạc – ca – âm",
+    "suggested_label": "nhạc – ca – âm",
+    "top_keywords": [
+      "nhạc",
+      "ca",
+      "âm",
+      "âm nhạc",
+      "hát"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "7": {
+    "display_label": "đức anh – công an – đức",
+    "suggested_label": "đức anh – công an – đức",
+    "top_keywords": [
+      "đức anh",
+      "công an",
+      "đức",
+      "vợ",
+      "dao"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "8": {
+    "display_label": "học sinh – trú – giáo",
+    "suggested_label": "học sinh – trú – giáo",
+    "top_keywords": [
+      "học sinh",
+      "trú",
+      "giáo",
+      "lớp",
+      "tiểu học"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "9": {
+    "display_label": "openai – anthropic – mô hình",
+    "suggested_label": "openai – anthropic – mô hình",
+    "top_keywords": [
+      "openai",
+      "anthropic",
+      "mô hình",
+      "mô",
+      "ceo"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "10": {
+    "display_label": "nữ việt – nữ – tuyển nữ",
+    "suggested_label": "nữ việt – nữ – tuyển nữ",
+    "top_keywords": [
+      "nữ việt",
+      "nữ",
+      "tuyển nữ",
+      "tuyển",
+      "đội"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "11": {
+    "display_label": "ăn – bán trú – thực phẩm",
+    "suggested_label": "ăn – bán trú – thực phẩm",
+    "top_keywords": [
+      "ăn",
+      "bán trú",
+      "thực phẩm",
+      "suất ăn",
+      "bữa"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "12": {
+    "display_label": "bệnh – máu – mạch",
+    "suggested_label": "bệnh – máu – mạch",
+    "top_keywords": [
+      "bệnh",
+      "máu",
+      "mạch",
+      "bệnh nhân",
+      "viện"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "13": {
+    "display_label": "đất – án – luật",
+    "suggested_label": "đất – án – luật",
+    "top_keywords": [
+      "đất",
+      "án",
+      "luật",
+      "dự án",
+      "cư"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "14": {
+    "display_label": "xe – xế – tài xế",
+    "suggested_label": "xe – xế – tài xế",
+    "top_keywords": [
+      "xe",
+      "xế",
+      "tài xế",
+      "giao thông",
+      "lái"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "15": {
+    "display_label": "thái lan – lan – asean cup",
+    "suggested_label": "thái lan – lan – asean cup",
+    "top_keywords": [
+      "thái lan",
+      "lan",
+      "asean cup",
+      "cup",
+      "asean"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "16": {
+    "display_label": "tuyển – xét tuyển – thí sinh",
+    "suggested_label": "tuyển – xét tuyển – thí sinh",
+    "top_keywords": [
+      "tuyển",
+      "xét tuyển",
+      "thí sinh",
+      "thí",
+      "tuyển sinh"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "17": {
+    "display_label": "giáo – sách – giáo dục",
+    "suggested_label": "giáo – sách – giáo dục",
+    "top_keywords": [
+      "giáo",
+      "sách",
+      "giáo dục",
+      "dục",
+      "sách giáo"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "18": {
+    "display_label": "tuyển việt – asean cup – asean",
+    "suggested_label": "tuyển việt – asean cup – asean",
+    "top_keywords": [
+      "tuyển việt",
+      "asean cup",
+      "asean",
+      "cup",
+      "tuyển"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "19": {
+    "display_label": "runner – marathon – chạy",
+    "suggested_label": "runner – marathon – chạy",
+    "top_keywords": [
+      "runner",
+      "marathon",
+      "chạy",
+      "cự ly",
+      "cự"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "20": {
+    "display_label": "da – bệnh – bác sĩ",
+    "suggested_label": "da – bệnh – bác sĩ",
+    "top_keywords": [
+      "da",
+      "bệnh",
+      "bác sĩ",
+      "bác",
+      "tổn thương"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "21": {
+    "display_label": "trang – áo – váy",
+    "suggested_label": "trang – áo – váy",
+    "top_keywords": [
+      "trang",
+      "áo",
+      "váy",
+      "cô",
+      "màu"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "22": {
+    "display_label": "hôn – cưới – cô",
+    "suggested_label": "hôn – cưới – cô",
+    "top_keywords": [
+      "hôn",
+      "cưới",
+      "cô",
+      "diễn viên",
+      "chồng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "23": {
+    "display_label": "đồng kg – kg – 000",
+    "suggested_label": "đồng kg – kg – 000",
+    "top_keywords": [
+      "đồng kg",
+      "kg",
+      "000",
+      "000 đồng",
+      "nuôi"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "24": {
+    "display_label": "miss – cô – đẹp",
+    "suggested_label": "miss – cô – đẹp",
+    "top_keywords": [
+      "miss",
+      "cô",
+      "đẹp",
+      "miss world",
+      "hoa hậu"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "25": {
+    "display_label": "sinh viên – đại học – giáo dục",
+    "suggested_label": "sinh viên – đại học – giáo dục",
+    "top_keywords": [
+      "sinh viên",
+      "đại học",
+      "giáo dục",
+      "giáo",
+      "dục"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "26": {
+    "display_label": "dầu – xăng – giá dầu",
+    "suggested_label": "dầu – xăng – giá dầu",
+    "top_keywords": [
+      "dầu",
+      "xăng",
+      "giá dầu",
+      "xăng dầu",
+      "giá xăng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "27": {
+    "display_label": "giáo – hiệu trưởng – giáo dục",
+    "suggested_label": "giáo – hiệu trưởng – giáo dục",
+    "top_keywords": [
+      "giáo",
+      "hiệu trưởng",
+      "giáo dục",
+      "dục",
+      "sắp xếp"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "28": {
+    "display_label": "u20 – u20 việt – u20 châu",
+    "suggested_label": "u20 – u20 việt – u20 châu",
+    "top_keywords": [
+      "u20",
+      "u20 việt",
+      "u20 châu",
+      "đội",
+      "vòng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "29": {
+    "display_label": "trận – man – thắng",
+    "suggested_label": "trận – man – thắng",
+    "top_keywords": [
+      "trận",
+      "man",
+      "thắng",
+      "mu",
+      "đội"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "30": {
+    "display_label": "phim – điện ảnh – rạp",
+    "suggested_label": "phim – điện ảnh – rạp",
+    "top_keywords": [
+      "phim",
+      "điện ảnh",
+      "rạp",
+      "doanh thu",
+      "phòng vé"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "31": {
+    "display_label": "anime – nhân vật – vật",
+    "suggested_label": "anime – nhân vật – vật",
+    "top_keywords": [
+      "anime",
+      "nhân vật",
+      "vật",
+      "câu chuyện",
+      "câu"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "32": {
+    "display_label": "u23 – u23 việt – kuwait",
+    "suggested_label": "u23 – u23 việt – kuwait",
+    "top_keywords": [
+      "u23",
+      "u23 việt",
+      "kuwait",
+      "việt nam",
+      "asiad"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "33": {
+    "display_label": "vàng – giá vàng – đồng lượng",
+    "suggested_label": "vàng – giá vàng – đồng lượng",
+    "top_keywords": [
+      "vàng",
+      "giá vàng",
+      "đồng lượng",
+      "usd",
+      "ounce"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "34": {
+    "display_label": "thai – tử cung – phôi",
+    "suggested_label": "thai – tử cung – phôi",
+    "top_keywords": [
+      "thai",
+      "tử cung",
+      "phôi",
+      "tinh",
+      "bác sĩ"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "35": {
+    "display_label": "cướp – công an – tài sản",
+    "suggested_label": "cướp – công an – tài sản",
+    "top_keywords": [
+      "cướp",
+      "công an",
+      "tài sản",
+      "phường",
+      "cảnh sát"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "36": {
+    "display_label": "ngủ – giấc – giấc ngủ",
+    "suggested_label": "ngủ – giấc – giấc ngủ",
+    "top_keywords": [
+      "ngủ",
+      "giấc",
+      "giấc ngủ",
+      "bệnh",
+      "vận động"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "37": {
+    "display_label": "real – madrid – mourinho",
+    "suggested_label": "real – madrid – mourinho",
+    "top_keywords": [
+      "real",
+      "madrid",
+      "mourinho",
+      "real madrid",
+      "trận"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "38": {
+    "display_label": "clb – trận – đội",
+    "suggested_label": "clb – trận – đội",
+    "top_keywords": [
+      "clb",
+      "trận",
+      "đội",
+      "league",
+      "bóng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "39": {
+    "display_label": "bóng – clb – đội",
+    "suggested_label": "bóng – clb – đội",
+    "top_keywords": [
+      "bóng",
+      "clb",
+      "đội",
+      "bàn",
+      "thắng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "40": {
+    "display_label": "doanh – tỷ – tỷ đồng",
+    "suggested_label": "doanh – tỷ – tỷ đồng",
+    "top_keywords": [
+      "doanh",
+      "tỷ",
+      "tỷ đồng",
+      "ngân sách",
+      "doanh nghiệp"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "41": {
+    "display_label": "thuế – doanh – nộp",
+    "suggested_label": "thuế – doanh – nộp",
+    "top_keywords": [
+      "thuế",
+      "doanh",
+      "nộp",
+      "kinh doanh",
+      "doanh nghiệp"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "42": {
+    "display_label": "tỷ đồng – tỷ – lợi nhuận",
+    "suggested_label": "tỷ đồng – tỷ – lợi nhuận",
+    "top_keywords": [
+      "tỷ đồng",
+      "tỷ",
+      "lợi nhuận",
+      "nhuận",
+      "lỗ"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "43": {
+    "display_label": "bà – tòa – bà ngọc",
+    "suggested_label": "bà – tòa – bà ngọc",
+    "top_keywords": [
+      "bà",
+      "tòa",
+      "bà ngọc",
+      "đất",
+      "chấp"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "44": {
+    "display_label": "thẩm – án – tòa",
+    "suggested_label": "thẩm – án – tòa",
+    "top_keywords": [
+      "thẩm",
+      "án",
+      "tòa",
+      "cáo",
+      "bà"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "45": {
+    "display_label": "vợt – tay vợt – zverev",
+    "suggested_label": "vợt – tay vợt – zverev",
+    "top_keywords": [
+      "vợt",
+      "tay vợt",
+      "zverev",
+      "tay",
+      "set"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "46": {
+    "display_label": "khoa – thủ khoa – đh",
+    "suggested_label": "khoa – thủ khoa – đh",
+    "top_keywords": [
+      "khoa",
+      "thủ khoa",
+      "đh",
+      "kỳ thi",
+      "đại học"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "47": {
+    "display_label": "sốt – bệnh – phổi",
+    "suggested_label": "sốt – bệnh – phổi",
+    "top_keywords": [
+      "sốt",
+      "bệnh",
+      "phổi",
+      "xuất huyết",
+      "huyết"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "48": {
+    "display_label": "barca – bàn – yamal",
+    "suggested_label": "barca – bàn – yamal",
+    "top_keywords": [
+      "barca",
+      "bàn",
+      "yamal",
+      "raphinha",
+      "thắng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "49": {
+    "display_label": "bác sĩ – bác – nội trú",
+    "suggested_label": "bác sĩ – bác – nội trú",
+    "top_keywords": [
+      "bác sĩ",
+      "bác",
+      "nội trú",
+      "sĩ nội",
+      "chuyên ngành"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "50": {
+    "display_label": "index – cổ phiếu – vn index",
+    "suggested_label": "index – cổ phiếu – vn index",
+    "top_keywords": [
+      "index",
+      "cổ phiếu",
+      "vn index",
+      "giảm",
+      "vn"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "51": {
+    "display_label": "phim – đạo diễn – diễn viên",
+    "suggested_label": "phim – đạo diễn – diễn viên",
+    "top_keywords": [
+      "phim",
+      "đạo diễn",
+      "diễn viên",
+      "vai",
+      "đạo"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "52": {
+    "display_label": "bệnh – khoa – viện",
+    "suggested_label": "bệnh – khoa – viện",
+    "top_keywords": [
+      "bệnh",
+      "khoa",
+      "viện",
+      "bệnh viện",
+      "điều trị"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "53": {
+    "display_label": "tên lửa – lửa – bay",
+    "suggested_label": "tên lửa – lửa – bay",
+    "top_keywords": [
+      "tên lửa",
+      "lửa",
+      "bay",
+      "tên",
+      "máy bay"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "54": {
+    "display_label": "đời – presley – cô",
+    "suggested_label": "đời – presley – cô",
+    "top_keywords": [
+      "đời",
+      "presley",
+      "cô",
+      "chết",
+      "levy"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "55": {
+    "display_label": "trái đất – mặt trăng – trăng",
+    "suggested_label": "trái đất – mặt trăng – trăng",
+    "top_keywords": [
+      "trái đất",
+      "mặt trăng",
+      "trăng",
+      "mặt trời",
+      "trời"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "56": {
+    "display_label": "lãi – lãi suất – suất",
+    "suggested_label": "lãi – lãi suất – suất",
+    "top_keywords": [
+      "lãi",
+      "lãi suất",
+      "suất",
+      "fed",
+      "ngân hàng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "57": {
+    "display_label": "phim – diễn viên – cô",
+    "suggested_label": "phim – diễn viên – cô",
+    "top_keywords": [
+      "phim",
+      "diễn viên",
+      "cô",
+      "vai",
+      "nữ"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "58": {
+    "display_label": "u23 – u23 việt – asiad",
+    "suggested_label": "u23 – u23 việt – asiad",
+    "top_keywords": [
+      "u23",
+      "u23 việt",
+      "asiad",
+      "việt nam",
+      "cầu thủ"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "59": {
+    "display_label": "khẩu – xuất khẩu – ngạch",
+    "suggested_label": "khẩu – xuất khẩu – ngạch",
+    "top_keywords": [
+      "khẩu",
+      "xuất khẩu",
+      "ngạch",
+      "usd",
+      "kim ngạch"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "60": {
+    "display_label": "messi – miami – argentina",
+    "suggested_label": "messi – miami – argentina",
+    "top_keywords": [
+      "messi",
+      "miami",
+      "argentina",
+      "inter",
+      "bóng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "61": {
+    "display_label": "vợt – tay vợt – tay",
+    "suggested_label": "vợt – tay vợt – tay",
+    "top_keywords": [
+      "vợt",
+      "tay vợt",
+      "tay",
+      "zheng",
+      "set"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "62": {
+    "display_label": "khánh – hè ấy – mẹ",
+    "suggested_label": "khánh – hè ấy – mẹ",
+    "top_keywords": [
+      "khánh",
+      "hè ấy",
+      "mẹ",
+      "bà ngọc",
+      "mùa hè"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "63": {
+    "display_label": "indonesia – malaysia – fifa",
+    "suggested_label": "indonesia – malaysia – fifa",
+    "top_keywords": [
+      "indonesia",
+      "malaysia",
+      "fifa",
+      "asean",
+      "asean cup"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "64": {
+    "display_label": "u23 – u23 nhật – u23 thái",
+    "suggested_label": "u23 – u23 nhật – u23 thái",
+    "top_keywords": [
+      "u23",
+      "u23 nhật",
+      "u23 thái",
+      "nhật bản",
+      "nhật"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "65": {
+    "display_label": "đăng – vi – mạng",
+    "suggested_label": "đăng – vi – mạng",
+    "top_keywords": [
+      "đăng",
+      "vi",
+      "mạng",
+      "công an",
+      "công khai"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "66": {
+    "display_label": "man – chuyển nhượng – cầu thủ",
+    "suggested_label": "man – chuyển nhượng – cầu thủ",
+    "top_keywords": [
+      "man",
+      "chuyển nhượng",
+      "cầu thủ",
+      "nhượng",
+      "chelsea"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "67": {
+    "display_label": "nghệ thuật – văn – nghệ",
+    "suggested_label": "nghệ thuật – văn – nghệ",
+    "top_keywords": [
+      "nghệ thuật",
+      "văn",
+      "nghệ",
+      "văn hóa",
+      "di"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "68": {
+    "display_label": "tín dụng – tín – nợ",
+    "suggested_label": "tín dụng – tín – nợ",
+    "top_keywords": [
+      "tín dụng",
+      "tín",
+      "nợ",
+      "ngân hàng",
+      "vay"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "69": {
+    "display_label": "chợ – khách – cửa hàng",
+    "suggested_label": "chợ – khách – cửa hàng",
+    "top_keywords": [
+      "chợ",
+      "khách",
+      "cửa hàng",
+      "phẩm",
+      "sản phẩm"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "70": {
+    "display_label": "bay – airlines – hãng",
+    "suggested_label": "bay – airlines – hãng",
+    "top_keywords": [
+      "bay",
+      "airlines",
+      "hãng",
+      "hành khách",
+      "khách"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "71": {
+    "display_label": "arsenal – bàn – rashford",
+    "suggested_label": "arsenal – bàn – rashford",
+    "top_keywords": [
+      "arsenal",
+      "bàn",
+      "rashford",
+      "bóng",
+      "man"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "72": {
+    "display_label": "em – nữ sinh – cô",
+    "suggested_label": "em – nữ sinh – cô",
+    "top_keywords": [
+      "em",
+      "nữ sinh",
+      "cô",
+      "tuệ anh",
+      "thi"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "73": {
+    "display_label": "tiêm – vaccine – chân miệng",
+    "suggested_label": "tiêm – vaccine – chân miệng",
+    "top_keywords": [
+      "tiêm",
+      "vaccine",
+      "chân miệng",
+      "tay chân",
+      "miệng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "74": {
+    "display_label": "cổ phiếu – phiếu – cổ",
+    "suggested_label": "cổ phiếu – phiếu – cổ",
+    "top_keywords": [
+      "cổ phiếu",
+      "phiếu",
+      "cổ",
+      "phiên",
+      "chứng khoán"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "75": {
+    "display_label": "nam sinh – học sinh – em",
+    "suggested_label": "nam sinh – học sinh – em",
+    "top_keywords": [
+      "nam sinh",
+      "học sinh",
+      "em",
+      "sinh lớp",
+      "nhà trường"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "76": {
+    "display_label": "mắt – thị lực – võng mạc",
+    "suggested_label": "mắt – thị lực – võng mạc",
+    "top_keywords": [
+      "mắt",
+      "thị lực",
+      "võng mạc",
+      "mạc",
+      "võng"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "77": {
+    "display_label": "phụ huynh – huynh – khoản",
+    "suggested_label": "phụ huynh – huynh – khoản",
+    "top_keywords": [
+      "phụ huynh",
+      "huynh",
+      "khoản",
+      "khoản thu",
+      "phụ"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "78": {
+    "display_label": "văn hậu – thẻ – tấn sinh",
+    "suggested_label": "văn hậu – thẻ – tấn sinh",
+    "top_keywords": [
+      "văn hậu",
+      "thẻ",
+      "tấn sinh",
+      "thẻ đỏ",
+      "hậu"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "79": {
+    "display_label": "phiếu – cổ phiếu – cổ",
+    "suggested_label": "phiếu – cổ phiếu – cổ",
+    "top_keywords": [
+      "phiếu",
+      "cổ phiếu",
+      "cổ",
+      "triệu cổ",
+      "pnj"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "80": {
+    "display_label": "tài xế – xế – grab",
+    "suggested_label": "tài xế – xế – grab",
+    "top_keywords": [
+      "tài xế",
+      "xế",
+      "grab",
+      "xe",
+      "cuốc"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "81": {
+    "display_label": "fifa – fifa asean – cup",
+    "suggested_label": "fifa – fifa asean – cup",
+    "top_keywords": [
+      "fifa",
+      "fifa asean",
+      "cup",
+      "cup 2026",
+      "asean cup"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "82": {
+    "display_label": "lãi suất – lãi – suất",
+    "suggested_label": "lãi suất – lãi – suất",
+    "top_keywords": [
+      "lãi suất",
+      "lãi",
+      "suất",
+      "kỳ hạn",
+      "tiền gửi"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "83": {
+    "display_label": "tội – thẩm – luật",
+    "suggested_label": "tội – thẩm – luật",
+    "top_keywords": [
+      "tội",
+      "thẩm",
+      "luật",
+      "án",
+      "thẩm phán"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "84": {
+    "display_label": "robot – robot hình – trung quốc",
+    "suggested_label": "robot – robot hình – trung quốc",
+    "top_keywords": [
+      "robot",
+      "robot hình",
+      "trung quốc",
+      "sản xuất",
+      "điều khiển"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "85": {
+    "display_label": "cà phê – cà – phê",
+    "suggested_label": "cà phê – cà – phê",
+    "top_keywords": [
+      "cà phê",
+      "cà",
+      "phê",
+      "robusta",
+      "hòa tan"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "86": {
+    "display_label": "vinfast – nhiệm – phạm nhật",
+    "suggested_label": "vinfast – nhiệm – phạm nhật",
+    "top_keywords": [
+      "vinfast",
+      "nhiệm",
+      "phạm nhật",
+      "chủ tịch",
+      "tịch"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "87": {
+    "display_label": "man – haaland – man utd",
+    "suggested_label": "man – haaland – man utd",
+    "top_keywords": [
+      "man",
+      "haaland",
+      "man utd",
+      "utd",
+      "trọng tài"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "88": {
+    "display_label": "game – pubg – phát hành",
+    "suggested_label": "game – pubg – phát hành",
+    "top_keywords": [
+      "game",
+      "pubg",
+      "phát hành",
+      "pc",
+      "chơi"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "89": {
+    "display_label": "dịch – giao dịch – doanh",
+    "suggested_label": "dịch – giao dịch – doanh",
+    "top_keywords": [
+      "dịch",
+      "giao dịch",
+      "doanh",
+      "doanh nghiệp",
+      "thanh toán"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "90": {
+    "display_label": "hoa hậu – hoa – hậu",
+    "suggested_label": "hoa hậu – hoa – hậu",
+    "top_keywords": [
+      "hoa hậu",
+      "hoa",
+      "hậu",
+      "cô",
+      "đẹp"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "91": {
+    "display_label": "bệnh – xe – bệnh viện",
+    "suggested_label": "bệnh – xe – bệnh viện",
+    "top_keywords": [
+      "bệnh",
+      "xe",
+      "bệnh viện",
+      "cấp cứu",
+      "vận chuyển"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "92": {
+    "display_label": "hcv – huy chương – hcđ",
+    "suggested_label": "hcv – huy chương – hcđ",
+    "top_keywords": [
+      "hcv",
+      "huy chương",
+      "hcđ",
+      "asiad",
+      "hcb"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "93": {
+    "display_label": "tình dục – nạn nhân – gary",
+    "suggested_label": "tình dục – nạn nhân – gary",
+    "top_keywords": [
+      "tình dục",
+      "nạn nhân",
+      "gary",
+      "cảnh sát",
+      "điều tra"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "94": {
+    "display_label": "toán – bài toán – toán học",
+    "suggested_label": "toán – bài toán – toán học",
+    "top_keywords": [
+      "toán",
+      "bài toán",
+      "toán học",
+      "bài",
+      "nghiên cứu"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  },
+  "95": {
+    "display_label": "doanh – doanh nghiệp – hdbank",
+    "suggested_label": "doanh – doanh nghiệp – hdbank",
+    "top_keywords": [
+      "doanh",
+      "doanh nghiệp",
+      "hdbank",
+      "ngân hàng",
+      "forbes"
+    ],
+    "status": "provisional",
+    "reviewed_by": []
+  }
+}

@@ -1,0 +1,3554 @@
+{
+  "0": [
+    {
+      "article_id": "TTR_097e0d9b9680",
+      "title": "TP.HCM muốn cùng Đông Nam Bộ, ĐBSCL lập 'bản đồ cơ hội đầu tư' toàn vùng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_0a28c0c1b215",
+      "title": "Vốn ngoại đổ vào kỷ lục, bất động sản công nghiệp 'cháy hàng' nhà xưởng xây sẵn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_0bf715556d39",
+      "title": "Vietjet và CFM hợp tác phát triển bảo dưỡng động cơ tại Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_0e9758ccde90",
+      "title": "Thủ tướng: Cầu thị, lắng nghe ý kiến người dân về thời hạn sử dụng nhà chung cư",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_0ecc010f647e",
+      "title": "Khu công nghệ cao hơn 5.000 tỉ đồng ở Cần Thơ đặt ở phường nào?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "1": [
+    {
+      "article_id": "TTR_014cf7ac9165",
+      "title": "140.000 USD hay hai hộp xì gà trong chiếc túi ‘chạy án’ vụ sữa giả?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_06d434163f42",
+      "title": "Bắt tạm giam Phó chủ tịch UBND tỉnh Phú Thọ Nguyễn Huy Ngọc",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_0edd6e428b09",
+      "title": "Xem xét trách nhiệm hàng loạt cán bộ Yên Bái cũ trong vụ án Đinh Tiến Hùng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_14d24a5c85c3",
+      "title": "Làm giả 37 hồ sơ thiết kế xe cơ giới, một cán bộ kỹ thuật bị bắt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_187e91ef13c5",
+      "title": "Cựu Trưởng Công an TP Phú Quốc Lê Văn Mót bị phạt 18 năm tù về tội lừa đảo chiếm đoạt tài sản",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "2": [
+    {
+      "article_id": "TTR_182f33ff8c12",
+      "title": "Có nhân tuyến giáp là phải kiêng iod, đậu phụ, đậu nành, cải bắp, súp lơ?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_1b133b09aedd",
+      "title": "Vitamin D cần thiết, nhưng làm sao để tăng cường khả năng hấp thụ?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_1b197b9b775f",
+      "title": "Các loại thịt cá thường dùng mang lại dinh dưỡng như thế nào?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_22f4b859d300",
+      "title": "Cẩn trọng khi ăn bông bí, dưa chuột có vị đắng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_33c8f244cbb8",
+      "title": "Những thói quen âm thầm có thể ảnh hưởng đến sức khỏe tim mạch của bạn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "3": [
+    {
+      "article_id": "TTR_207368b3e867",
+      "title": "Những thông tin rò rỉ về iPhone 18 màn hình gập",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_273e1d301406",
+      "title": "Trung Quốc chế tạo máy CT 'cỡ lòng bàn tay', nặng chỉ 6kg",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_2e70edee952f",
+      "title": "iPhone 18 chưa lên kệ, phụ kiện đã ‘đua’ ra mắt rầm rộ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_3a35e7cc91a1",
+      "title": "Hàng chục ngàn iPhone 18 đã đến tay khách Việt chỉ sau 3 ngày, màu máy nào áp đảo?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_6320fa94d3e2",
+      "title": "Giá bán iPhone 18 Pro, Pro Max và iPhone Duo tại Việt Nam: Bản cao nhất vượt mốc 100 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "4": [
+    {
+      "article_id": "TTR_073a012f24ac",
+      "title": "TP.HCM: Phát triển cơ sở 2 của nhiều bệnh viện tuyến cuối tại khu vực xa trung tâm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_0f0e48f324ec",
+      "title": "Bệnh viện Phụ sản TP Cần Thơ là bệnh viện hạt nhân lĩnh vực Sản khoa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_1d61eb8e014a",
+      "title": "Vụ nghi ngộ độc thực phẩm ở khu công nghiệp tại Huế: Đã có hơn 95 người nhập viện",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_20daf5d8cd01",
+      "title": "Sáp nhập BV Giao thông vận tải TP.HCM vào BV Phục hồi chức năng - Điều trị bệnh nghề nghiệp",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_232cde070948",
+      "title": "Một ngày ở 'khu phố' bệnh viện điều trị ung thư",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "5": [
+    {
+      "article_id": "TTR_011d257b58b1",
+      "title": "Lời khen cho Nhật Bản: Không tìm cách 'lạm phát' huy chương ở Asiad",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_04877a022700",
+      "title": "Châu Tuyết Vân giành HCB taekwondo thế giới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_0f748109e22a",
+      "title": "Nhân tố mới sẽ giúp taekwondo Việt Nam giành huy chương ở Asiad 2026?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_1787a0fbb340",
+      "title": "Lịch thi đấu Asiad ngày 22-9 của đoàn Việt Nam: Chờ HCV đầu tiên",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_196856ca31dc",
+      "title": "Lịch thi đấu Asiad ngày 21-9 của đoàn Việt Nam: Sôi động đường đua xanh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "6": [
+    {
+      "article_id": "TTR_40eef11ae0ac",
+      "title": "Saigon Soul Revival đưa t'rưng, sáo trúc hòa cùng soul, rock trong 'Chốn ta về'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_461e30aa6d5f",
+      "title": "OSAD từ ‘thánh thả thính’ Người âm phủ đến bất ngờ ở Anh trai vượt ngàn chông gai",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_52981a5ac7d8",
+      "title": "Anh em Touliver, Soobin, Rhymastic ‘về nhà’",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_830cc8e03a8f",
+      "title": "Soobin bắt tay với nhà sản xuất âm nhạc đoạt giải Grammy làm album mới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_aec587837be1",
+      "title": "Tùng Dương sắp tổ chức concert thứ 15 ở sân vận động",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "7": [
+    {
+      "article_id": "TTR_17ef1dcf7f0a",
+      "title": "Bắt người dùng dao rọc giấy đâm 'tình địch' bị thương tích",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_1e11275bd8ff",
+      "title": "Vụ đánh phụ nữ 32 tuổi chết: Vì sao khởi tố tội cố ý gây thương tích?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_2f3a4b2052e2",
+      "title": "Ngày 6-10 xét xử công khai vụ sát hại 3 mẹ con ở Đồng Nai",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_3097ef57e806",
+      "title": "Tử hình người dùng dao đâm chiến sĩ công an tử vong, chị dâu bị thương",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_3419d89a6d3f",
+      "title": "Bắt nam thanh niên sát hại vợ và chị vợ ở xã Củ Chi",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "8": [
+    {
+      "article_id": "TTR_0edbaddb9a6d",
+      "title": "Xuyên đêm hoàn thiện trường nội trú ở rẻo cao Huế, kịp đón học sinh ngày khai giảng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_3b596d702bc2",
+      "title": "Những ngôi trường mang tên 2-9",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_52596f045c21",
+      "title": "Trường học TP.HCM tất bật 'thay áo mới' trước ngày khai giảng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_d841763a0130",
+      "title": "Học sinh vùng biên đón năm học mới ở ngôi trường gần 400 tỉ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_f2fa47f58acb",
+      "title": "Quỹ Thiện Tâm Tập đoàn Vingroup trao 300 suất học bổng cho học sinh khuyết tật",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "9": [
+    {
+      "article_id": "TTR_29cdefb53f61",
+      "title": "Ông Obama ra cảnh báo về AI, kêu gọi Đảng Dân chủ hành động",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_a41b0bd5ef9d",
+      "title": "Chuyên gia cảnh báo: Trí tuệ nhân tạo có hơn 10% khả năng 'hủy diệt toàn bộ nhân loại'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_c80a18195155",
+      "title": "CEO Nvidia: Xác suất AI khiến thế giới diệt vong vào năm 2030 là 0%",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_e4fd05fe4787",
+      "title": "Thượng nghị sĩ Mỹ: Phải cấm siêu AI trước khi quá muộn!",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNE_72f550c20531",
+      "title": "'Cảnh báo đỏ' khi AI vượt vòng kiểm soát",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    }
+  ],
+  "10": [
+    {
+      "article_id": "TTR_1d0f1933342d",
+      "title": "Đội tuyển nữ Việt Nam gặp khó trước trận gặp Nhật Bản",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_1f27fc627077",
+      "title": "Tạm biệt sân cỏ buôn làng, đội bóng nữ xã Đak Đoa 'tiến về' CLB Hoàng Anh Gia Lai",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_3f6f46cb18db",
+      "title": "Tuyển nữ Việt Nam thua Đài Bắc Trung Hoa ở trận ra quân Asiad 20",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_3fcc2c9d4bb3",
+      "title": "HLV Hoàng Văn Phúc nói gì về màn trình diễn của đội tuyển nữ Việt Nam trước Trung Quốc?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_430848e390af",
+      "title": "Tuyển nữ Việt Nam đổi lên giờ tập sớm hơn, chịu nóng để chuẩn bị đấu tuyển Trung Quốc",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "11": [
+    {
+      "article_id": "TTR_0d37545e4b0b",
+      "title": "Sau vụ suất ăn bán trú lèo tèo, Hà Nội giao 3 phó giám đốc sở làm trưởng đoàn đi kiểm tra",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_11cbbff719da",
+      "title": "Thủ tướng: Chủ tịch tỉnh chịu trách nhiệm bữa ăn bán trú, không chọn nhà cung cấp vì giá rẻ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_1230083af969",
+      "title": "Tin tức sáng 18-9: TP.HCM sẽ kiểm tra đột xuất an toàn thực phẩm khi có phản ánh của người dân",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_1251b30b16c7",
+      "title": "Sau phản ánh bữa ăn kém chất lượng, trường ở TP.HCM đổi nhà cung cấp, phụ huynh cùng giám sát",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_1ffaf02ea056",
+      "title": "Phụ huynh kiểm tra đột xuất thấy cơm bán trú 'toàn tóp mỡ', nhà trường nói gì?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "12": [
+    {
+      "article_id": "TTR_614b7ffacbd0",
+      "title": "Lần đầu cấy ghép ‘trái tim cơ học’ phù hợp với lồng ngực người Việt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_87f239f3e51e",
+      "title": "Cấp cứu bệnh nhân đột quỵ trong 30 phút 'giờ vàng' tại Vĩnh Long",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_9019953fec9f",
+      "title": "Bệnh viện Nhân dân Gia Định cứu sống người đàn ông ngừng tim hơn 60 phút",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_e49154372ff5",
+      "title": "Cứu sống nữ bệnh nhân vỡ tim nguy kịch, gia đình đã chuẩn bị hậu sự",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_2842f5a6d7b8",
+      "title": "Nữ nhân viên y tế chết não hiến tạng cứu 3 người",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "13": [
+    {
+      "article_id": "TTR_087c5872db76",
+      "title": "Phạt đến 30 triệu nếu sử dụng nhà ở sai mục đích, hiểu sao cho đúng và khi nào bị phạt?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_1212f1176a30",
+      "title": "Tin tức sáng 30-9: Luật Đất đai sửa đổi đề xuất về sổ đỏ hộ gia đình thế nào?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_1257e1f6132e",
+      "title": "VKSND khu vực 5 TP.HCM thắng kiện vụ đòi lại nhà xe cho thuê ở cư xá Thanh Đa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_148553f716cc",
+      "title": "2 công ty Hoàn Cầu ‘con’ ở Sông Lô Nha Trang kiện nhau để đòi nợ hơn 56,83 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_1906749f69f2",
+      "title": "Cần lưu ý gì khi mua chung cư 'có thời hạn'?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "14": [
+    {
+      "article_id": "TTR_124dc949b46f",
+      "title": "Vụ lật xe khách chết 4 người: Xe chạy vào đoạn đường chưa khai thác, trách nhiệm thuộc về ai?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_353e2f9efea2",
+      "title": "Tài xế say xỉn chạy ô tô tông vào dải phân cách ở Đắk Lắk, vẫn đòi tiếp tục lái xe",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_3a8f42a71017",
+      "title": "Xe khách và taxi chèn ép, đuổi nhau sau va chạm giao thông ở Hà Nội",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_3b2d5aea0a1b",
+      "title": "Kéo giường lưu động chở bệnh nhân 'đi bão', người đàn ông bị công an xử phạt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_503ebf5facf0",
+      "title": "Xe đầu kéo 'văng' thùng sang làn đối diện, 2 người trên xe khách tử vong",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "15": [
+    {
+      "article_id": "TTR_1135788f5cc4",
+      "title": "Tuyển Việt Nam thua Thái Lan lần đầu sau hơn 2 năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_20f46424e5f1",
+      "title": "Trùng hợp khó tin ở 2 trận thua của tuyển Việt Nam trước Thái Lan",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_644a61d435a8",
+      "title": "Dự đoán tỉ số FIFA ASEAN Cup: Việt Nam và Thái Lan tạo nên trận cầu kịch tính",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_9018959f8d6c",
+      "title": "Dọn rác sau trận tuyển Việt Nam đấu Thái Lan, CĐV Việt Nam để lại hình ảnh đẹp",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_faa86c2769c6",
+      "title": "Việt Nam - Thái Lan: Chờ tài HLV Kim Sang Sik",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "16": [
+    {
+      "article_id": "TTR_0ab3d0416f80",
+      "title": "Bỏ điểm cộng IELTS: Công bằng hay mất động lực học ngoại ngữ?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_3256e108821a",
+      "title": "Bỏ cộng điểm IELTS, thí sinh vẫn còn nhiều lợi thế",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_9d2bace02879",
+      "title": "Nhiều đại học đồng tình bỏ cộng điểm IELTS khi xét tuyển",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_bf8bd180aff4",
+      "title": "Bỏ điểm cộng học sinh giỏi, IELTS trong xét tuyển đại học: Có gây 'sốc' cho thí sinh?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_f717e065a9b0",
+      "title": "Bỏ điểm cộng học sinh giỏi, IELTS: Nếu từ 2027, có thiệt thòi cho học sinh đang lớp 12?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "17": [
+    {
+      "article_id": "TTR_0778eeb6fbe8",
+      "title": "Nhà xuất bản Giáo Dục đề nghị các trường rà soát từng học sinh còn thiếu sách giáo khoa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_38ec0e1f596b",
+      "title": "Thiếu sách giáo khoa: Cần thay đổi cách đặt hàng và phân phối sách",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_7c33c2b49c94",
+      "title": "Thiếu sách giáo khoa, trách nhiệm phải rõ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_891381fd14af",
+      "title": "Học sinh Khánh Hòa thiếu sách giáo khoa: Có thể dùng sách cũ, sách điện tử",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_a79b377aeae5",
+      "title": "Thiếu sách giáo khoa, TP.HCM huy động sách thư viện, sách cũ cho học sinh mượn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "18": [
+    {
+      "article_id": "TTR_0b4e14ee54b2",
+      "title": "Tuyển Việt Nam có 8 cầu thủ nhập tịch lẫn Việt kiều: Ai có cơ hội đá chính?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_11ba80c5d633",
+      "title": "Hoàng Đức là đội trưởng tuyển Việt Nam nhưng chưa ráp quân được vì chấn thương",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_41df90963b5d",
+      "title": "Lo Hoàng Đức và mừng Tiến Linh, HLV Kim Sang Sik làm gì đây?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_619db1b03a5e",
+      "title": "HLV Kim Sang Sik về Hàn Quốc chịu tang cha, VFF và người hâm mộ Việt Nam chia buồn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_7afd55251c58",
+      "title": "Nỗi lo tuyến giữa đội tuyển Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "19": [
+    {
+      "article_id": "TTR_b5dc798c35f5",
+      "title": "5.300 VĐV chinh phục Giải chạy địa hình khốc liệt nhất Việt Nam tại Sa Pa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_fbdcbc71facc",
+      "title": "7.000 người tham dự Giải chạy marathon Cà Mau 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_036eb0779d7f",
+      "title": "8.000 runner phủ kín những cung đường ven biển Quy Nhơn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_0bd09fe6f928",
+      "title": "Ngày cuối mua vé ưu đãi giải VM Hanoi Midnight",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_18d8eb263e47",
+      "title": "VnExpress Marathon Hải Phòng trở lại cuối tháng 12",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "20": [
+    {
+      "article_id": "TTR_0f1145dd4252",
+      "title": "Nam giới cũng bị ung thư vú: Ai có nguy cơ cao?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_4ebd91283671",
+      "title": "Nam sinh lớp 9 nhập viện vì 'nghịch dại', đưa quả dưa chuột dài 20cm vào hậu môn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_69caba96f3c4",
+      "title": "Chăm sóc da kỹ, tốn tiền triệu nhưng da càng xấu, nổi mụn: Có gì sai sai?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_a674800a04af",
+      "title": "Nữ sinh mặt sưng 'như ong đốt’ vì làm đẹp cấp tốc để tựu trường",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_aee165077653",
+      "title": "Tiểu ra máu, coi chừng phải cắt bỏ bàng quang",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "21": [
+    {
+      "article_id": "TTR_539e453750e5",
+      "title": "Công chúa ngầu nhất châu Âu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_6fa8a5df8170",
+      "title": "'Váy trả thù' của Công nương Diana trở lại sàn đấu giá",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_7c27f949165d",
+      "title": "Céline Dion diện hơn 500 carat đá quý cho màn tái xuất sau 6 năm mắc bệnh lạ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_85e97b95ca27",
+      "title": "5 chiếc vương miện gắn bó với Hoàng hậu Rania xứ Jordan",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_be768b3adc13",
+      "title": "Ivanka Trump diện váy nhà mốt Trung Quốc đón tiếp ông Tập Cận Bình",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "22": [
+    {
+      "article_id": "TTR_9c66fa2a9d51",
+      "title": "Hẹn hò thời 4.0: Từ quẹt app đến thuê người mai mối nhưng vẫn kết hôn muộn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_bea4a49add27",
+      "title": "Nam thần màn ảnh Nhan Phúc Vinh cầu hôn Khả Ngân làm cõi mạng dậy sóng cả đêm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNE_1df0664a21ca",
+      "title": "Vợ chồng nghệ sĩ Công Lý cùng dàn sao dự đám cưới Ngọc Quỳnh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNE_22d402d2097c",
+      "title": "Hoài Lâm sắp cưới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNE_2a1b5ca67615",
+      "title": "Ngọc Quỳnh - Thùy Anh: Hạnh phúc sau đổ vỡ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "23": [
+    {
+      "article_id": "TTR_1ce9f2fb2d61",
+      "title": "Giá cả đầu ngày: Rau Trung Quốc giá rẻ đổ về, nông dân miền Tây lo rau màu rớt giá",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_2fd500fcbd95",
+      "title": "Giá cả đầu ngày: Khoai mì, cam sành đồng loạt tăng giá, người trồng phấn khởi; rau xanh vẫn đắt lên",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_36422daedfc6",
+      "title": "Dừa tươi miền Tây bán tại vườn chỉ 6.500 đồng/trái, sao ra chợ lại 15.000 đồng?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_3aa2fb7a93db",
+      "title": "Tin tức sáng 7-9: Khó mua bông cải Đà Lạt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_555b65da4136",
+      "title": "Giá cả đầu ngày: Cá đồng, chuột đồng miền Tây giá cao giữa mùa nước nổi",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "24": [
+    {
+      "article_id": "TTR_54aa76387dc0",
+      "title": "Từ cú hụt chân bắt vương miện đến top 15 tài năng của Emoura Phạm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_69e5fbbff818",
+      "title": "Miss Earth Water từng bị tước danh hiệu vì thi hoa hậu khác, Trịnh Mỹ Anh thì sao?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_762e66944570",
+      "title": "Chung kết Miss World 2026: Bảo Ngọc vào top 20",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_7e0cd444620a",
+      "title": "Miss Universe Vietnam 2026: Ba cái tên quen cùng trở lại",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_d4062c7fea58",
+      "title": "Cô gái gốc Cameroon từng thi Hoa hậu Hoàn vũ Việt Nam bất ngờ thi sắc đẹp quốc tế",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "25": [
+    {
+      "article_id": "TTR_2d8f19dd49f3",
+      "title": "TP.HCM khen thưởng hơn 700 học sinh và giáo viên giỏi",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_2fbe991ea724",
+      "title": "Kết nối doanh nghiệp ngay trong Ngày hội tân sinh viên Đại học Cần Thơ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_352e7c5e1549",
+      "title": "Đỗ Cẩm Ly mang dự án giáo dục ‘Caravan cho em’ đến Miss Cosmo 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_7010e268a0f2",
+      "title": "Hiệu trưởng Trường ĐH Tài nguyên và Môi trường: Sinh viên hãy chủ động nuôi dưỡng lối sống xanh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_85adcd38dfa3",
+      "title": "Học viện Hàng không Việt Nam học làm truyền thông tuyển sinh từ người làm báo",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "26": [
+    {
+      "article_id": "TTR_128c26627731",
+      "title": "Đọc nhanh: Vàng, chứng khoán 'đỏ rực' khi chờ tin từ Fed; Lãi suất qua đêm vọt lên 5,2%",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_14fd0be8bb8c",
+      "title": "Vì sao cú sốc dầu mỏ Trung Đông không còn làm khó được Trung Quốc?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_3ef03127e259",
+      "title": "Khả năng ông Trump dùng luật thời chiến để tăng sản xuất xăng dầu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_43839fb4a2a3",
+      "title": "Đọc nhanh 7-9: Giá dầu tăng vọt gần 10% chỉ trong một tuần, vàng vẫn trên 4.400 USD",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_4f2736df0c81",
+      "title": "Vì sao giá xăng dầu trong nước tăng liên tiếp dù giá thế giới tuần qua giảm?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "27": [
+    {
+      "article_id": "TTR_0ab1d397fcf7",
+      "title": "Hiệu trưởng trường hơn 10.500 học sinh, 287 lớp: Hạn chế hội họp, quản trị bằng chuyển đổi số",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_1cb95db5bcd5",
+      "title": "Dự kiến chuyển 19 cơ sở giáo dục nghề nghiệp từ bộ, ngành về địa phương",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_2b8520abe860",
+      "title": "Nha Trang nói gì về việc nhập 13 trường tiểu học thành trường 287 lớp, 10.565 học sinh?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_2b989b1f254c",
+      "title": "388 cán bộ quản lý giáo dục ở Tây Ninh chuyển làm giáo viên",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_444f5d77b957",
+      "title": "Gộp xong trường học, vẫn thiếu thầy và phòng học",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "28": [
+    {
+      "article_id": "TTR_53502db35bb1",
+      "title": "Lịch trực tiếp vòng loại U20 châu Á 2026: U20 Việt Nam quyết đấu U20 Iran",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_7f665785b072",
+      "title": "U20 Việt Nam phải thắng dàn cầu thủ châu Âu của U20 Palestine",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_89087aef868a",
+      "title": "Lịch trực tiếp vòng loại U20 châu Á 2027: Việt Nam đối đầu Palestine",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_a07afe3f21b6",
+      "title": "Thua hai trận liên tiếp, U20 Việt Nam đi tiếp trong trường hợp nào?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_a72542a4e861",
+      "title": "U20 Triều Tiên báo tin cực vui cho U20 Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "29": [
+    {
+      "article_id": "TTR_78deb1915666",
+      "title": "Dự đoán tỉ số Ngoại hạng Anh: Liverpool chật vật, Chelsea thắng tưng bừng tân binh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_7d5d52b0236a",
+      "title": "Dự đoán tỉ số Ngoại hạng Anh: Haaland 'nhấn chìm' Man United tại Old Trafford",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_b62bebf12bd9",
+      "title": "Dự đoán tỉ số Champions League: Liverpool bất lực trước Atletico Madrid",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_c3ad4a1d872b",
+      "title": "Man United thắng đậm trong ngày trở lại Champions League",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_f5624e8ce8c7",
+      "title": "Dự đoán tỉ số Ngoại hạng Anh: Man United 'ôm hận' trước Everton",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "30": [
+    {
+      "article_id": "TTR_0d9ba5eb253d",
+      "title": "Đoàn phim Trại buôn người 'chơi lớn', tài trợ luôn một lễ hội đua bò để quay phim",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_62a1010d28b9",
+      "title": "Nữ giám đốc đứng sau ‘Trại buôn người’: Lập công ty vốn 1 tỉ, phim đầu tay thu trăm tỉ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_7d2bbd64be63",
+      "title": "Phim Việt đang 'hốt bạc' nhờ suất chiếu sớm?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_a0182c3d43a5",
+      "title": "Hậu Tây Du Ký: Mở ra hành trình 'thỉnh kinh' AI",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_d5ec26baf41b",
+      "title": "Hộ linh tráng sĩ nợ một phim cổ trang xứng tầm hay khán giả nợ ê kíp một tâm thế khác?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "31": [
+    {
+      "article_id": "TTR_2bd579e88f4c",
+      "title": "Vì sao 'Lúc đó, tôi đã chuyển sinh thành slime' được fan anime yêu đến vậy?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_2fc22d4f7abd",
+      "title": "Dragon Ball GT vẫn là anime đáng nhớ về Goku sau 30 năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_33d479855167",
+      "title": "Dabura trở lại sau cái kết Jujutsu Kaisen Modulo",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_3c69151e5adb",
+      "title": "Vì sao Jujutsu Kaisen không đi theo công thức thành công của Thanh gươm diệt quỷ?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_6b12a135562a",
+      "title": "5 anime ngắn dành cho người mới bắt đầu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "32": [
+    {
+      "article_id": "TTR_05730e084214",
+      "title": "U23 Kuwait có gì đáng ngại?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_411476851a50",
+      "title": "Hàn Quốc cẩn trọng trước U23 Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_5bf2f1c3aaaa",
+      "title": "HLV Đinh Hồng Vinh: Gặp ai ở tứ kết Asiad 2026, U23 Việt Nam cũng sẵn sàng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_841b68c84aaf",
+      "title": "Lịch thi đấu của U23 Việt Nam ở môn bóng đá nam Asiad 20",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_b0913cf2684e",
+      "title": "Asiad 2026: Chờ tin chiến thắng của U23 Việt Nam trước U23 Kuwait",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "33": [
+    {
+      "article_id": "TTR_63ea4457bf26",
+      "title": "Giá vàng 'quay xe', sẽ tăng tiếp nếu Fed nâng lãi suất vào tuần tới?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_1aa6221a2a36",
+      "title": "Giá vàng miếng xuống thấp nhất một tháng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_46c9b0a0a37b",
+      "title": "Giá vàng miếng về dưới 145 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_d6e0201cbca0",
+      "title": "Mỗi lượng vàng tăng gần hai triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_d9f8c33582f2",
+      "title": "Giá vàng miếng xuống thấp nhất hai tháng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "34": [
+    {
+      "article_id": "TTR_44a1d4f73c30",
+      "title": "Song thai hai lần liên tiếp: Bác sĩ nói không phải 'hời', là thất bại khi hỗ trợ sinh sản",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_a1d1c6887fea",
+      "title": "Bác sĩ Chợ Rẫy kể khoảnh khắc nghẹt thở đỡ sinh em bé trên máy bay, hạ cánh ở Myanmar",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_b879f18bb16d",
+      "title": "Phản ứng nhanh cứu sản phụ và em bé bị sa dây rốn nguy kịch",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_d91ed27d376a",
+      "title": "Khởi tố người phụ nữ tổ chức mang thai hộ vì mục đích thương mại hơn 1 tỉ đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "VNE_088888f6fe17",
+      "title": "Giải pháp ngừa thai 'vô hình' từ màng phim VCF",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "35": [
+    {
+      "article_id": "TTR_39ad76f5119d",
+      "title": "Bắt 4 người trộm tài sản tại trụ sở HĐND, Sở Nội vụ và báo Hậu Giang cũ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_52c76c5d8357",
+      "title": "Nguồn gốc chiếc xe hơi chở 4 người nước ngoài trộm tiệm vàng ở Đắk Lắk",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_658bb7d87d8e",
+      "title": "Hai phụ nữ đang đi trên đường bị hai người mặc áo dài áp sát, cướp dây chuyền",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_75aa764713cb",
+      "title": "Nam thanh niên cầm dao dọa giết nhân viên siêu thị để cướp tài sản",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_ad880d45536d",
+      "title": "Mang xe đi cầm rồi báo bị 'cướp xe và 42 triệu đồng', người phụ nữ bị công an phạt 3,5 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "36": [
+    {
+      "article_id": "TTR_6537346c85d0",
+      "title": "Loạt công nghệ 'đối phó' với tiếng ngáy",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_71d22824ec13",
+      "title": "Động tác tập đơn giản giúp nam giới U50 tăng cường khả năng tình dục",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_903f2cd18471",
+      "title": "Tại sao có người nói mớ khi ngủ, có người không?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_023b59ede468",
+      "title": "Đi bộ đúng cách tốt cho sức khỏe thế nào",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_097eb430b510",
+      "title": "Ba thói quen thường ngày có thể khiến bạn già nhanh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "37": [
+    {
+      "article_id": "TTR_5916376e5dc4",
+      "title": "Lịch trực tiếp Champions League: Real Madrid đấu Inter Milan",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_79d27786ff65",
+      "title": "Dự đoán tỉ số: Atletico bất lực trước 'Người đặc biệt' Mourinho",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_7abcc7714699",
+      "title": "Real Madrid thắng may Inter Milan ở ngày mở màn Champions League",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_9a6d23ea6541",
+      "title": "Tranh cãi nảy lửa khi Mbappe không được đá lại quả 11m trong trận Real Madrid gặp Real Betis",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_9c85253ed106",
+      "title": "'Siêu dự bị' của HLV Mourinho giải cứu Real Madrid",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "38": [
+    {
+      "article_id": "TTR_135f4b1838c2",
+      "title": "Có tuyển thủ Việt Nam trong đội, Becamex TP.HCM gây thất vọng ngày ra quân Giải hạng nhất 2026 - 2027",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_2712a9de4332",
+      "title": "Derby nóng bỏng trên sân Hàng Đẫy",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_299630bf99d7",
+      "title": "Hoàng Hên, Hai Long dễ 'gieo sầu' cho CLB Công An TP.HCM",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_31da5d904adb",
+      "title": "Thể Công - Viettel đấu Melbourne Victory: Ngày trở lại sân chơi châu Á của HLV Popov",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_61f711796287",
+      "title": "Lịch trực tiếp vòng 1 Giải hạng nhất: Công An Nhân Dân, Becamex TP.HCM ra sân",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "39": [
+    {
+      "article_id": "TTR_14f2fa3257cf",
+      "title": "Dùng ‘chiêu’ thay thủ môn, Quy Nhơn United vẫn thua trên chấm luân lưu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_3da204111c45",
+      "title": "Câu lạc bộ Hưng Yên khởi đầu như mơ ở Giải hạng nhất",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_54c9cb4209b8",
+      "title": "Tân binh Bắc Ninh gây sốc ở V-League 2026-2027",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_5e1c09ac4b1e",
+      "title": "Đại diện TP.HCM khởi đầu thuận lợi ở Giải hạng nhất",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_7134f1b1d47b",
+      "title": "Video: Tiền vệ Sông Lam Nghệ An lập cú đúp trong 4 phút",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "40": [
+    {
+      "article_id": "TTR_741d7fb2a216",
+      "title": "Coteccons đặt mục tiêu lãi 1.050 tỉ đồng năm tài chính 2027, không chia cổ tức dù lãi tăng gần 73%",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_76998a34ae5d",
+      "title": "Doanh thu MCH tăng 15%, động lực tăng trưởng mở rộng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_9aa2d8ac9d2c",
+      "title": "TP.HCM giao chỉ tiêu xổ số Bình Dương doanh thu hơn 32.000 tỉ đồng trong 5 năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_a2e57ed2bcb3",
+      "title": "Cùng làm bất động sản công nghiệp nhưng nơi lãi đậm, nơi giảm sâu?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_baf7edb6bb32",
+      "title": "Tỉnh Đồng Tháp giao nhiệm vụ cho 2 công ty xổ số của tỉnh đạt doanh thu hơn 18.000 tỉ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "41": [
+    {
+      "article_id": "TTR_43706f3f1f7d",
+      "title": "Trường không xuất hóa đơn học phí: Quýt làm, cam chịu?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_556c0132516d",
+      "title": "Thời gian hoàn thuế kéo dài, doanh nghiệp mong sớm được tháo gỡ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_6e39bf965e3d",
+      "title": "Bán nhà 30 tỉ nhưng 'lỡ' khai chỉ 10 tỉ, chủ động nộp thuế bổ sung thì có thoát án hình sự?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_893a7848832e",
+      "title": "Đối diện khoản phạt khi đóng mã số thuế, nhiều doanh nghiệp đành bỏ cuộc",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_ded7e2ae9f06",
+      "title": "Bị mạo danh lập doanh nghiệp, làm sao để người dân không 'bị phạt' oan?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "42": [
+    {
+      "article_id": "TTR_513133e5e3d5",
+      "title": "Vinasun lần đầu tiên báo lỗ kể từ sau COVID-19",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_580023910107",
+      "title": "PNJ điều chỉnh kế hoạch năm 2026, dự kiến lỗ 6.271 tỉ đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_87ca99539f6b",
+      "title": "Công ty sở hữu khu nghỉ dưỡng có giá phòng 181 triệu đồng/đêm lãi lớn nhất từ khi niêm yết",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_294766acb5b0",
+      "title": "VETC vẫn lỗ lũy kế hơn 400 tỷ đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_3f8f55b8cc49",
+      "title": "Chủ đầu tư Aqua City lỗ hơn 120 tỷ đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "43": [
+    {
+      "article_id": "TTR_3187c582006f",
+      "title": "Người đàn ông 63 tuổi kiện bạn gái 48 tuổi, đòi hơn 5 tỉ đồng sau chia tay",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_3a95b47388a6",
+      "title": "Ngôi nhà bán giá 1 triệu đồng, kết quả thẩm định hơn 1 triệu đô la Mỹ: Bị đơn kháng cáo",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_84e923f271ff",
+      "title": "Vì sao hậu chia tay, vợ cũ khởi kiện bác sĩ Chiêm Quốc Thái?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_a257238a7d72",
+      "title": "Sui gia kiện nhau từ chuyện cho ở nhờ trên đất",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_a2aec7c38642",
+      "title": "Tòa tuyên 'vợ cũ' phải trả cho ông Chiêm Quốc Thái 301.000 USD, được nhận lại 743 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "44": [
+    {
+      "article_id": "TTR_077c75fbcdf8",
+      "title": "Cựu Bộ trưởng Y tế Nguyễn Thị Kim Tiến đã khắc phục xong 108 tỉ đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_231996c67f82",
+      "title": "Cựu hiệu trưởng bị tuyên 3 năm tù nói ‘không tư lợi cá nhân, không tham ô’",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_324268bb35ea",
+      "title": "Bà Nguyễn Thị Kim Tiến điều trị bệnh, không thể di chuyển, xin xét xử vắng mặt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_525f010bfb29",
+      "title": "Cựu Bộ trưởng Y tế Nguyễn Thị Kim Tiến được đề nghị giảm 6 tháng đến 1 năm tù",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_5c1e6ba0331c",
+      "title": "Vụ cựu Hiệu trưởng Trường THCS Ba Đình: Từ 15.000 đồng/tiết dạy thêm 13 năm trước đến bản án 3 năm tù",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "45": [
+    {
+      "article_id": "TTR_51dbb638336d",
+      "title": "Zverev phản ứng lạ khi nhận ra mình vừa vô địch Mỹ mở rộng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_dc717f6cb668",
+      "title": "Lịch trực tiếp chung kết US Open 2026: Shelton quyết đấu Zverev",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_0200b671ea66",
+      "title": "Zverev chỉ ra sai lầm của Alcaraz khi đấu Shelton",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_193689754e59",
+      "title": "Alcaraz bị loại trong trận đấu muộn nhất lịch sử Mỹ Mở rộng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_650a549b1632",
+      "title": "Toni Nadal: 'Zverev đã xích lại gần hơn với Alcaraz và Sinner'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "46": [
+    {
+      "article_id": "TTR_27b0d3065a78",
+      "title": "Cặp song sinh giành 'vàng' Olympic toán quốc tế Hiền - Hậu được tuyển thẳng ngành toán",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_79f4b081c9ad",
+      "title": "Lần đầu Đại học Bách khoa Hà Nội có 3 thủ khoa tốt nghiệp đạt GPA 4.0",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_8dc8a576c6fc",
+      "title": "Thủ khoa 108,33 điểm của Trường đại học Công nghệ thông tin bắt đầu học lập trình từ lớp 8",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_efe2d92508fe",
+      "title": "Bốn thủ khoa vào Trường đại học Bách khoa TP.HCM cùng đạt điểm 10 môn toán",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_f4c6504dc638",
+      "title": "Thủ khoa tốt nghiệp ĐH Kinh tế quốc dân sở hữu 11 công bố quốc tế về trí tuệ nhân tạo",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "47": [
+    {
+      "article_id": "TTR_0a84125614b8",
+      "title": "Đắk Lắk đã có 3 người chết vì sốt xuất huyết",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_2a909acaaa98",
+      "title": "Cô gái 16 tuổi nguy kịch vì mắc sốt xuất huyết, chi phí điều trị gần 1 tỉ đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_6528d6e002d2",
+      "title": "Viêm phổi tái phát, bác sĩ bất ngờ lấy ra... răng sâu trong phế quản",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_c43b6db6a0c3",
+      "title": "Nguy cơ sặc sữa ở trẻ và những điều ba mẹ cần biết",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_eb589e866051",
+      "title": "Bé trai 1 tháng tuổi bị cho uống nhầm 5 giọt axit, bác sĩ khuyến cáo gì?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "48": [
+    {
+      "article_id": "TTR_13b6b0ad0237",
+      "title": "Raphinha lập hat-trick giúp Barca khởi đầu hoàn hảo ở La Liga",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_24e2f5f97182",
+      "title": "Các đại gia ra quân thuận lợi ở Champions League",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_2b39591bccdd",
+      "title": "Barca lại khiến Real Madrid và Mourinho 'mất vui'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_5e00ab9399d7",
+      "title": "Yamal lại rực sáng trước khi công bố Quả bóng vàng 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_3126bfa0b63e",
+      "title": "Raphinha lập cột mốc hiếm trong lịch sử Barca",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "49": [
+    {
+      "article_id": "TTR_3a34455b9737",
+      "title": "Bác sĩ nội trú nói về lương, 41 tuổi mới có khoản tiền tiết kiệm đầu tiên",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_3d4daed4f6b7",
+      "title": "Vượt kỳ thi khắc nghiệt và màn hô chọn chuyên ngành, bác sĩ nội trú tiếp tục thử thách gì?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_509e0124e2a8",
+      "title": "Vì sao Y Hà Nội giữ 'đặc sản' hô tên, chọn chuyên ngành bác sĩ nội trú suốt 11 năm?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_7bd6309efd3b",
+      "title": "PGS.TS Nguyễn Lân Hiếu: Hô tên, chọn chuyên ngành cho BS nội trú tạo ra cuộc chạy đua điểm số",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_c21396c3c931",
+      "title": "Nếu không thay đổi mô hình đào tạo, thế giới sẽ không công nhận bằng bác sĩ Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "50": [
+    {
+      "article_id": "TTR_2672f2c25ca4",
+      "title": "Tăng bốc hơn 17 điểm rồi quay đầu, VN-Index kết phiên trong sắc đỏ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_365d4150b6e7",
+      "title": "Chứng khoán 23-9: Hồi phục nhờ nhóm Vingroup, VN-Index dự báo có thể rung lắc",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_8a483d1c2da9",
+      "title": "Chứng khoán 22-9: Câu chuyện nâng hạng hạ nhiệt, dòng tiền tìm kiếm động lực mới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_8bf5cbc3953e",
+      "title": "VN-Index gần như ‘bất động’ trước giờ G nâng hạng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_927a11e90432",
+      "title": "2 cổ phiếu trụ kéo VN-Index mất 18 điểm, một cổ phiếu sữa ngược dòng tăng kịch trần",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "51": [
+    {
+      "article_id": "TTR_3f540d92d906",
+      "title": "Phim có Jo In Sung 'tuyệt đối điện ảnh', gây chấn động Venice",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_62ca3a6db3b5",
+      "title": "Phim của Jo In Sung giành chiến thắng đầu tiên tại Liên hoan phim Venice",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_9cf0b3d8b394",
+      "title": "Lý Hiện bị cuốn vào phi vụ báo thù trong phim mới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_ad93c1bff311",
+      "title": "Robert Pattinson rộng cửa đến Oscar",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_b852730c5455",
+      "title": "Elon Musk nổi giận vì bị 'soi' suốt 4 giờ trên màn ảnh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "52": [
+    {
+      "article_id": "TTR_34d1ebcc4a6d",
+      "title": "Nghiên cứu, ứng dụng tế bào gốc để người cao tuổi không cần ra nước ngoài điều trị",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_6d1b6b5ad14d",
+      "title": "1.000 chuyên gia quốc tế, trong nước bàn y học thế giới tại Bệnh viện Tâm Anh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_687c50520738",
+      "title": "Bác sĩ Việt - Trung hợp tác hội chẩn điều trị ung thư từ xa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_70345aad1ecb",
+      "title": "Liệu pháp nội tiết mới trong quản lý cường kinh và tránh thai",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_7240006ed3ab",
+      "title": "Hơn 1.000 chuyên gia y tế Việt Nam và thế giới chia sẻ kinh nghiệm y khoa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "53": [
+    {
+      "article_id": "VNN_022465b932f7",
+      "title": "UAV đánh chặn Sokol-I, ‘chim ưng’ xốp giá rẻ thay đổi tác chiến drone trên bầu trời Ukraine",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNN_22aede91b627",
+      "title": "Tên lửa Squall lộ diện, ‘ác mộng’ mới của mọi hệ thống phòng không",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNN_37c4fead7481",
+      "title": "Ukraine thay ‘mắt thần’ kép cho tên lửa FP-7.x ‘chọi’ Iskander Nga",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNN_649912263210",
+      "title": "Tác chiến điện tử Ukraine ‘bịt mắt’ 20.000 UAV Nga, tung đòn kết liễu bằng sát thủ giấu mặt RAM-2X",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNN_672a41719349",
+      "title": "‘Sát thủ tàng hình điện’ SkyStriker, bước ngoặt đạn tuần kích tầm xa mới của châu Âu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    }
+  ],
+  "54": [
+    {
+      "article_id": "VNE_1c58b54089a3",
+      "title": "Bê bối tình ái quanh cái chết bí ẩn của nữ thực tập sinh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "VNE_45a1bc196f79",
+      "title": "Tài xế Uber bỏ mặc khách nữ say rượu bên đường cao tốc, gây tử vong",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "VNE_8a5971e2bdff",
+      "title": "Nỗ lực thoát hiểm của cô gái bị kẻ sát nhân nhốt trong cốp xe",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "VNE_a2e4e87b80a9",
+      "title": "Con trai Cindy Crawford tử vong ở tuổi 27",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNE_f6994212e684",
+      "title": "Bí ẩn cái chết của triệu phú Anh sau tin nhắn 'Đừng tin ai'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "55": [
+    {
+      "article_id": "TTR_23358035a348",
+      "title": "Lần đầu máy tính lượng tử hoạt động ngoài không gian",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_28ce216c58db",
+      "title": "Google sắp giải được bài toán đưa trung tâm dữ liệu AI lên không gian",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_5698489a6978",
+      "title": "Trung Quốc phóng 4 vệ tinh có thể 'lọc' dữ liệu ngay trên quỹ đạo",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNE_1bcdce22a58b",
+      "title": "Lần đầu phát hiện tín hiệu vô tuyến từ ngoại hành tinh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNE_5d7bcde1ab58",
+      "title": "Thử hạt nhân Triều Tiên có thể kích hoạt đứt gãy địa chấn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    }
+  ],
+  "56": [
+    {
+      "article_id": "TTR_0e2fccad82ea",
+      "title": "Fed tăng lãi suất, thị trường chứng khoán Việt Nam thường diễn biến ra sao?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_8bbcf9a81f1d",
+      "title": "Fed tăng lãi suất lần đầu tiên sau 3 năm, chuyện gì tiếp theo?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_a937c4e92216",
+      "title": "Úc xem xét kéo dài thuế chống bán phá giá với thép mạ Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_f9b02e6e8176",
+      "title": "Nhật Bản nâng lãi suất lên mức cao nhất trong 31 năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_01c1881dda9a",
+      "title": "Goldman ‌Sachs, JP Morgan dự báo Fed nâng lãi tuần này",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "57": [
+    {
+      "article_id": "TTR_609f1ffb7f61",
+      "title": "Cù Thị Trà thoát mác 'mỹ nhân' giật chồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_794128574fb8",
+      "title": "Trên phim làm 'trùm', đời thường khép kín",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_ae897e9933b6",
+      "title": "Triệu Lộ Tư nay đã khác",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_c07839b24258",
+      "title": "Từ con ông trùm đến nữ cầu thủ bóng đá, cô ấy là ai?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_c498a2946e2e",
+      "title": "Chi Pu tái xuất Chị chị em em sau 7 năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "58": [
+    {
+      "article_id": "TTR_41f06ba20cab",
+      "title": "Bóng đá trẻ Việt Nam học được gì ở Asiad 2026?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_8a10836dd30c",
+      "title": "Cậu bé 13 tuổi cao 2m10 gây sốt ở Giải bóng chuyền nam châu Á",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_b8935b7dbb94",
+      "title": "Tuyển U23 Việt Nam công bố danh sách 23 cầu thủ dự Asiad 2026, Đình Bắc có tên không?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_d7b39044744e",
+      "title": "Vì sao toàn bộ cầu thủ Việt kiều vắng mặt ở tuyển U23 Việt Nam dự Asiad 2026?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_dd8093dea50c",
+      "title": "U23 Việt Nam chia tay cầu thủ đẳng cấp trước thềm Asiad 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "59": [
+    {
+      "article_id": "TTR_12d53ec7c2e2",
+      "title": "Việt Nam chi gần 1,6 tỉ USD nhập ô tô Trung Quốc trong 8 tháng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_35b20e5a78e2",
+      "title": "Vì sao sản lượng sầu riêng Việt Nam vượt Thái Lan nhưng giá trị thu về lại thấp hơn?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_8c13782922ea",
+      "title": "Châu Âu siết hạn ngạch thép, doanh nghiệp Việt chịu tác động ra sao?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_d1877845cd5f",
+      "title": "Chuyên gia nói gì về con số nhập siêu hơn 20 tỉ USD?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_1167201f5d6f",
+      "title": "Xuất khẩu rau quả 3 tháng liên tiếp vượt một tỷ USD",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "60": [
+    {
+      "article_id": "TTR_0b788b5a20d6",
+      "title": "Son Heung Min phát biểu 'sốc': Ronaldo là thần tượng của tôi nhưng Messi là GOAT",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_48dda74dd93e",
+      "title": "Cả thế giới tiếc nuối, tri ân Messi trừ... Barca, người hâm mộ lên tiếng chỉ trích",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_4ae866118ba3",
+      "title": "Liên đoàn Bóng đá Argentina cảm ơn Messi, người dân cảm thấy tiếc nuối và 'không muốn tin'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_4dd43920db5b",
+      "title": "Chiến dịch tri ân trên toàn đất nước Argentina tôn vinh siêu sao Messi",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_665aa5bdc471",
+      "title": "Vì sao Messi khẳng định 'hoàn tất bóng đá' cùng tuyển Argentina?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "61": [
+    {
+      "article_id": "TTR_02ccca6bf0fd",
+      "title": "'Hot girl cầu lông' Thái Lan tạo địa chấn, vào chung kết Vietnam Open",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_22db7d9ce53d",
+      "title": "'Hot girl cầu lông' Thái Lan xúc động trước tình cảm của người hâm mộ Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_2ba7378980c7",
+      "title": "Em gái Kunlavut Vitidsarn: 'Tôi từng chịu áp lực vì phải giống anh trai'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_52555587bd8e",
+      "title": "Nữ kỳ thủ 11 tuổi gây sốt tại Olympiad cờ vua 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_976165ed08d2",
+      "title": "Đánh bại Sabalenka, Rybakina lần đầu vô địch Mỹ mở rộng và đoạt luôn ngôi số 1 thế giới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "62": [
+    {
+      "article_id": "VNE_86108a27d446",
+      "title": "Vai người mẹ của Vân Dung trong 'Mùa hè năm ấy' gây tranh luận",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNN_2255082a138e",
+      "title": "'Mùa hè năm ấy' tập 17: Khánh từ chối nhận tiền của Phương sau biến cố gia đình",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNN_2dbe0228255a",
+      "title": "'Mùa hè năm ấy' tập 13: Khánh xuống nước, lấy chuyện tình cảm để nhờ Phương giúp",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNN_2e225c0bd68d",
+      "title": "'Mùa hè năm ấy' tập 19: Phương cầu cứu Khánh giữa đêm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNN_35bf95be9de1",
+      "title": "'Mùa hè năm ấy' tập 21: Tùng tái mặt khi biết Phương đã quay lại với Khánh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "63": [
+    {
+      "article_id": "TTR_418a53535095",
+      "title": "Dư luận Đông Nam Á chê Indonesia 'dùng toàn cầu thủ châu Âu, rồi cũng đá hệt xưa'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_4efde3cd3e2f",
+      "title": "HLV Indonesia bị nhắc ngay trong bữa sáng phải thắng Malaysia",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_696c2e0b4d50",
+      "title": "CĐV Indonesia hỏi: 'Đây là sức mạnh thực sự khi Indonesia đá bằng đội hình A'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_70a99b9a7c57",
+      "title": "Truyền thông Indonesia gửi thông điệp cho HLV John Herdman: 'Phải đánh bại Malaysia bằng mọi giá'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_af3d0266508a",
+      "title": "Dự đoán tỉ số: Indonesia thắng sát nút Malaysia",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "64": [
+    {
+      "article_id": "TTR_0aed3ea422a4",
+      "title": "Đánh bại U23 Philippines, U23 Việt Nam mở toang cánh cửa đi tiếp ở Asiad 20",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_4a44f2d827ff",
+      "title": "Nhọc nhằn vượt qua Trung Quốc, U23 Hàn Quốc giành vé vào chung kết Asiad 20",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_862394e58147",
+      "title": "Tìm ra đội bóng đầu tiên vào bán kết bóng đá nam Asiad 20",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_8adc9c0cbd2c",
+      "title": "Thắng kịch tính trên chấm luân lưu, U23 Nhật Bản giành vé chung kết Asiad 20",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_acdf332191a1",
+      "title": "Lịch trực tiếp bóng đá nam Asiad 20 ngày 20-9: U23 Thái Lan đấu U23 Hong Kong",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "65": [
+    {
+      "article_id": "TTR_2893afbbf5ad",
+      "title": "Khởi tố người đăng bài xúc phạm nhà văn Gào trên mạng xã hội",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_317b67197fda",
+      "title": "Tung tin 'vỡ đê', người đàn ông bị phạt 15 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_4b115af0c1f8",
+      "title": "Bị phạt 20 triệu đồng vì đăng căn cước của người khác lên mạng khi chưa được đồng ý",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_8ce7d0825a62",
+      "title": "Từng gây chú ý trên mạng, người đàn ông bị phạt 12,5 triệu đồng vì livestream sai sự thật",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_9608c57fd0e9",
+      "title": "Dùng chế độ ẩn danh đăng tin vu khống người khác trên mạng xã hội, bị phạt 12,5 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "66": [
+    {
+      "article_id": "TTR_a04daddea358",
+      "title": "Các ngôi sao World Cup 2026 tạo ra hơn 3,3 tỉ USD phí chuyển nhượng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_a73f8d226dcd",
+      "title": "Ngoại hạng Anh tạo kỷ lục chuyển nhượng không tưởng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_b7b7bb2c8e27",
+      "title": "Man City tạo 'bom tấn' trong những giờ cuối của thị trường chuyển nhượng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_f1eb91eac66b",
+      "title": "Xuất hiện bê bối mới liên quan Chủ tịch FIFA Infantino và một siêu sao làng bóng đá",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_24eb8bb56e4d",
+      "title": "Giggs bẽ mặt khi thuyết phục Anderson từ chối Man City",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "67": [
+    {
+      "article_id": "TTR_23e5bf9f2f1f",
+      "title": "Nhạc sĩ nào 'ăn khách' nhất giai đoạn 1934 - 1954?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_6bc455ed8ecf",
+      "title": "Võ Minh Lâm đến Đình Sơn Trà làm MV mừng Trung thu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_c9c049170d63",
+      "title": "Thương hiệu tôi yêu: Tủ thờ Gò Công, thương hiệu Việt trăm năm vẫn tràn đầy sức trẻ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_19f27659eb29",
+      "title": "Chuyện phố cổ Hà Nội",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNE_4f3f6345b8c4",
+      "title": "Hành trình 33 năm Techcombank qua những tác phẩm nghệ thuật",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "68": [
+    {
+      "article_id": "TTR_08de26f4b914",
+      "title": "Hé lộ dư nợ bất động sản lĩnh vực du lịch trên địa bàn TP.HCM",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_8bbc8b24092f",
+      "title": "Agribank giảm tới 1% lãi suất cho vay, hỗ trợ doanh nghiệp xây dựng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_a9eb400b1c5c",
+      "title": "Một công ty được cấp hạn mức tín dụng 11.150 tỉ, mượn nhà đất của tổng giám đốc để thế chấp",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_09034f9b37a2",
+      "title": "Chính phủ yêu cầu ngân hàng chấm dứt cho vay tập trung vào doanh nghiệp 'sân sau'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_10957292586b",
+      "title": "Bà Cao Thị Ngọc Dung và gia đình đã cho PNJ vay 700 tỷ đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "69": [
+    {
+      "article_id": "TTR_12802137adcb",
+      "title": "Mùa nước nổi đưa ghe, xuồng lên 'chợ mạng' hút khách",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_161eebbe1017",
+      "title": "Grab đưa đặc sản Đà Nẵng lên ứng dụng, thêm kênh tiếp cận khách hàng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_2044094fbc08",
+      "title": "Huế tính phương án làm thêm phố đêm Đông Ba - Bạch Đằng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_6a8b3caed1b1",
+      "title": "TP.HCM có thêm cửa hàng cà phê do người khiếm thính vận hành",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_7ae5bf26267c",
+      "title": "Không chỉ ‘hút view’, nhà sáng tạo bán hàng cần sự chuẩn mực",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "70": [
+    {
+      "article_id": "TTR_00df197b0215",
+      "title": "Vietnam Airlines thông tin chuyến bay từ TP.HCM đi London gặp sự cố không lưu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_09ea34fec3db",
+      "title": "Vietnam Airlines tăng chuyến đến, đi Jakarta sau sự cố tro bụi núi lửa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_494c8776478f",
+      "title": "Các hãng đua nhận máy bay, sẽ tăng thêm chuyến dịp Tết",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_73490fade395",
+      "title": "Tân Sơn Nhất, Nội Bài, Đà Nẵng cải thiện kết nối hàng không nổi bật châu Á",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_9a7cf434aba6",
+      "title": "Vietjet thực hiện chuyến bay thẳng đầu tiên từ Matxcơva đến Khánh Hòa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "71": [
+    {
+      "article_id": "TTR_bbcdb27d93b8",
+      "title": "Man United thoát hiểm phút chót",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_bcb1aeeef786",
+      "title": "Liverpool ngược dòng thắng Atletico Madrid",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_bf8bf07f4c2b",
+      "title": "Saka giúp Arsenal thắng tuyệt đối ở Premier League",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_dd17792dfd2c",
+      "title": "Man United đánh rơi chiến thắng trước Everton ở phút 90+6",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_29dad3628a1f",
+      "title": "Arteta lý giải sự thăng hoa của Odegaard",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "72": [
+    {
+      "article_id": "TTR_bb665be9fe55",
+      "title": "29,75 điểm, á khoa toàn quốc chọn thiết kế vi mạch vì tò mò",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_dc265e9b34dc",
+      "title": "5 học kỳ đạt xuất sắc, nữ sinh TP.HCM giành học bổng toàn phần thạc sĩ tại Ý",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_fc05e115f5a1",
+      "title": "Mẹ đi mua ve chai, con gái vừa học vừa làm tốt nghiệp xuất sắc",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "VNE_1ba6128f4d41",
+      "title": "Nữ sinh Lạng Sơn đầu tiên vào top 3 cuộc thi Hán ngữ lớn nhất thế giới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "VNE_4ed6caac56d5",
+      "title": "Cô gái khiếm thị đỗ đầu kỳ thi thẩm phán",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "73": [
+    {
+      "article_id": "TTR_0c9db40c659b",
+      "title": "Mạng xã hội lan tin chưa kiểm chứng về Ebola, bác sĩ khuyến cáo",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_1052181c0165",
+      "title": "Gần 25.000 trẻ Việt Nam đã tiêm vắc xin phòng tay chân miệng tại VNVC",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_480b2604192c",
+      "title": "VNVC triển khai tiêm vắc xin tay chân miệng đầu tiên tại Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_8dfb7b511364",
+      "title": "4 người ở Đắk Lắk bị chó mắc bệnh dại cắn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_14982ef76955",
+      "title": "Có nên để trẻ một tuổi mắc thủy đậu thay vì tiêm vaccine?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "74": [
+    {
+      "article_id": "TTR_3cf2d4b5176b",
+      "title": "Làn sóng giảm giá nhà ở Mỹ lan rộng do dư cung và sức ép lãi suất",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_5f3a6ce5f54b",
+      "title": "Đọc nhanh 29-9: Dow Jones mất 347 điểm khi lợi suất Mỹ tăng tiếp, Masan đăng ký bán 10% vốn MSR",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_7eaf79afd03e",
+      "title": "Khối ngoại liên tục mua ròng, một mã ngân hàng tăng gần 50% trong một tháng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_90fcc1468ea9",
+      "title": "PNJ, Khang Điền cùng loạt cổ phiếu xuống đáy nhiều năm dù VN-Index vẫn quanh 1.800 điểm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_a3863e374b11",
+      "title": "Khối ngoại bỏ nghìn tỉ 'gom hàng' trước ngày chứng khoán nâng hạng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "75": [
+    {
+      "article_id": "TTR_0c419d8e9baa",
+      "title": "Tân sinh viên rơi xuống cống thoát nước tử vong: Mồ côi cha, mới đi học 2 tuần",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_4d7567175ca1",
+      "title": "Một người Hàn Quốc tử vong sau khi rơi từ tầng 17 khách sạn ở Lào Cai",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_53c5961fd8e3",
+      "title": "Vụ nam sinh bị đánh hội đồng ở Trường cao đẳng Kỹ thuật - Công nghệ Vĩnh Phúc: Tạm giữ khẩn cấp một người",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_5b075a16a5d8",
+      "title": "Lâm Đồng nói gì về tin học sinh ồ ạt chuyển trường vì vụ bạo lực học đường ở Di Linh?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_61eb7b123c06",
+      "title": "Học sinh lớp 8 bị nhóm bạn đánh bằng nón bảo hiểm trước cổng trường",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "76": [
+    {
+      "article_id": "TTR_438c6246e7d1",
+      "title": "Cụ bà 70 tuổi nhìn mờ, bất ngờ phát hiện đục thủy tinh thể ‘hình cây thông Noel’",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_a8df33a3878a",
+      "title": "Con liên tục tăng độ cận, đổi kính thôi đã đủ?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "VNE_192c1b9d7730",
+      "title": "5 thay đổi ở mắt có thể cảnh báo rối loạn tuyến giáp",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_26e4f5923914",
+      "title": "Tăng nhãn áp do viêm màng bồ đào",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_35b9446aa1f1",
+      "title": "Phẫu thuật '2 trong 1' chữa cận, lão thị",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "77": [
+    {
+      "article_id": "TTR_39cd21ad5c3b",
+      "title": "Nhiều trường ở TP.HCM không thu quỹ lớp, quỹ trường, quỹ hội phụ huynh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_47b03e4663f8",
+      "title": "Có bao nhiêu khoản thu ngoài học phí ở trường công TP.HCM?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_4a922a861f3f",
+      "title": "Trường công lập Hà Nội được phép thu những khoản tiền nào?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_4ce9525bd488",
+      "title": "Không còn quỹ lớp: Phụ huynh tự bàn bạc cách hoạt động cho con",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_568ae68cef74",
+      "title": "Bộ Giáo dục và Đào tạo: Công khai tên trường vi phạm lạm thu trong 3 ngày",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "78": [
+    {
+      "article_id": "TTR_0212aff7b28a",
+      "title": "Chính thức: Huỳnh Tấn Sinh bị 'treo giò' 2 trận vì đá thô bạo với Đình Bắc",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_177aca45535c",
+      "title": "Thợ lái xe lu mặt sân Thai League 1 cán qua chân ngôi sao bóng đá Anh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_27c417a57870",
+      "title": "Người hâm mộ lên án lối đá bạo lực của Huỳnh Tấn Sinh, đề nghị phạt nặng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_3a3c8177bc4f",
+      "title": "Bị Văn Hậu đạp thẳng vào chân, Doãn Ngọc Tân chấn thương nặng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_661a57cbff53",
+      "title": "NÓNG: Ban kỷ luật của VFF sẽ họp vụ Huỳnh Tấn Sinh đá thô bạo vào chân Đình Bắc",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "79": [
+    {
+      "article_id": "TTR_06bcdc5bfbc9",
+      "title": "PNJ muốn chào bán riêng lẻ tối đa 550 triệu cổ phiếu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_16601a7b851e",
+      "title": "Hai con gái bà Cao Thị Ngọc Dung bán xong 25 triệu cổ phiếu PNJ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_26488de6eb1f",
+      "title": "‘Sơ suất’ đặt lệnh, sếp SeABank mua nhầm hơn 3.000 cổ phiếu khi đang bán",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_2bad7f9251a2",
+      "title": "18 cổ đông đang nắm hơn 56% vốn ABBank",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_5e3fe227231d",
+      "title": "Một đại gia vừa rời danh sách tỉ phú USD, Việt Nam còn 7 người",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "80": [
+    {
+      "article_id": "TTR_4a2208982960",
+      "title": "Tài xế Grab kêu gọi tắt app 2 ngày: 'Chạy cuốc xe 18,5km chỉ nhận được 46.900 đồng'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_5b51ca32df0d",
+      "title": "Vụ kêu gọi tắt app Grab: Tài xế chạy một cuốc xe được hưởng bao nhiêu trên doanh thu?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_70a1c6166ea2",
+      "title": "Cho tài xế tự chọn quốc lộ hoặc cao tốc, doanh nghiệp vẫn ‘đỏ mắt’ tìm người lái",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_72378548578d",
+      "title": "Tài xế công nghệ kể góc khuất đằng sau thu nhập 15 triệu đồng/tháng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_769160c0013a",
+      "title": "Tài xế Grab chạy cuốc xe 18,5km nhận 46.900 đồng: App muốn phát triển phải để tài xế có thu nhập đủ sống",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "81": [
+    {
+      "article_id": "TTR_1695fc14b492",
+      "title": "Tuyển Việt Nam đá 3 trận giao hữu trước Asian Cup 2027",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_2ff49e4b1dd3",
+      "title": "Việt Nam có bản quyền FIFA ASEAN Cup 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_34d32c0eccc4",
+      "title": "Hoàng Hên bị giữ lại kiểm tra an ninh trước giờ đội tuyển Việt Nam đi Indonesia",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_5193fa0462ff",
+      "title": "Chính thức: Việt Nam không có bản quyền FIFA ASEAN Cup 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_9155e8231a0f",
+      "title": "FIFA ASEAN Cup 2026 giảm tiền thưởng từ 1 triệu USD xuống còn 650.000 USD",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "82": [
+    {
+      "article_id": "TTR_52379f7668bf",
+      "title": "Lãi suất huy động tiền gửi cán mốc 9,46%/năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_b012074a9921",
+      "title": "Lãi suất cho vay bình quân lên 10,7% một năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNN_00ff07fa6494",
+      "title": "Lãi suất ngân hàng hôm nay 24/9/2026: Thận trọng với lời chào lãi suất 14%/năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNN_14522c45f5f2",
+      "title": "Chứng chỉ tiền gửi lãi suất cao hơn tiết kiệm, có nơi niêm yết 9%/năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNN_2f82794b2a96",
+      "title": "Chủ khu du lịch quốc tế Đồi Rồng tăng lãi suất lên 13,6%, kéo dài kỳ hạn trái phiếu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "83": [
+    {
+      "article_id": "TTR_0568193e0a28",
+      "title": "Từ vụ dì kiện cháu đòi 240 triệu, luật sư khuyến cáo cách tạo và lưu giữ chứng cứ ghi âm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_145537ee49ae",
+      "title": "Giám sát điện tử là biện pháp ngăn chặn độc lập thay vì chỉ thay thế tạm giam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_1b4c696af2fd",
+      "title": "HĐXX vụ ma túy VN10: Sai sót trong một số biên bản điều tra không làm thay đổi bản chất vụ án",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_213eb52213f6",
+      "title": "Tiêu hủy 35.735 cuốn sách vi phạm liên quan vụ án Nguyễn Trung Luật và đồng phạm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_25b4b5a63bec",
+      "title": "Chính phủ nêu lý do đề xuất bỏ tử hình với tội mua bán trái phép chất ma túy, hiếp dâm người dưới 16 tuổi",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "84": [
+    {
+      "article_id": "TTR_642fb2aac298",
+      "title": "Trung Quốc mở bán robot cá nhân biến hình, giá từ gần 3.000 USD, lắp ráp 2,5 phút",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_82de3b4f6a8e",
+      "title": "Robot 1,8m đấu YouTuber Mỹ, tung cú đá khiến đối thủ văng xa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_a40b0689867f",
+      "title": "Robot kêu gọi bảo vệ việc làm của con người",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_b418ca82902f",
+      "title": "Nhật Bản làm nhà có robot chạy trên trần, tự làm việc nhà",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNE_211d44f559c4",
+      "title": "Sam Altman: OpenAI sẽ chế tạo robot hình người",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    }
+  ],
+  "85": [
+    {
+      "article_id": "TTR_0b58029fb10a",
+      "title": "Khám phá 'chuẩn hoa hậu' của Robusta",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_13d6b4bd4c4d",
+      "title": "Lên men cà phê: Ở đâu, khi nào và vì sao?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_25f27e9bc790",
+      "title": "Khi sự không hoàn hảo làm nên bản sắc của phin cà phê Việt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_3a46a0fd3919",
+      "title": "Tạp chí du lịch Mỹ nói gì về trải nghiệm uống cà phê ở Việt Nam?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_75ba5cab1a69",
+      "title": "Vì sao Robusta gắn với cà phê hòa tan?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "86": [
+    {
+      "article_id": "TTR_24e4947499da",
+      "title": "Ông Lê Thái Sâm trở lại ghế Chủ tịch Bamboo Airways",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_a2f46826b71d",
+      "title": "Nữ trợ lý cao cấp bất ngờ lên làm chủ tịch công ty chứng khoán 10 năm đổi tên 5 lần",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_bb2eb77b91e2",
+      "title": "Chủ tịch và 6 lãnh đạo một doanh nghiệp niêm yết đồng loạt xin từ nhiệm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_fb6b1caad63f",
+      "title": "Giầy Thượng Đình có tổng giám đốc mới từ Vinaconex",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_0fb076bf4213",
+      "title": "Ông Lê Thái Sâm trở lại làm Chủ tịch Bamboo Airways",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "87": [
+    {
+      "article_id": "TTR_0ef1ce047fe7",
+      "title": "Cơ quan trọng tài Anh: Công nhận bàn thắng của Haaland là sai",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_9aa6c7c8a574",
+      "title": "HLV Arbeloa: Man United được hưởng lợi từ trọng tài",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_120ca0ca3489",
+      "title": "8 điểm nhấn vòng 4 Ngoại hạng Anh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_5a32c9b11489",
+      "title": "Khi Haaland đang là thủ lĩnh của Man City",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "VNE_65def785beea",
+      "title": "Haaland: 'Tôi coi việc bị VAR nghi việt vị là chuyện cá nhân'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "88": [
+    {
+      "article_id": "TTR_0cd77f559f28",
+      "title": "Trước khi bị phát hiện dùng doping, 'thiên thần cầu lông' Thái Lan chơi hay thế nào?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_17333921dc87",
+      "title": "Himass viết tâm thư xúc động sau án phạt gây tranh cãi của PUBG",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_495bddaa6503",
+      "title": "Game PUBG PC chưa được cấp phép, người chơi có bị phạt?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_9e8775a904c5",
+      "title": "Hai tuyển thủ PUBG Việt Nam bị cấm thi đấu vĩnh viễn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_a177f6453b18",
+      "title": "Vì sao Giải PUBG châu Á nhanh chóng trở thành ‘thảm họa’?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "89": [
+    {
+      "article_id": "TTR_144f29baea3e",
+      "title": "Giải pháp giữ chân nhân tài, sao thị trường bảo hiểm hưu trí tự nguyện vẫn vắng?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_51b698b822fd",
+      "title": "Đăng ký tài khoản hộ kinh doanh Agribank, nhận ngay loa báo giao dịch",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_79847618f4ac",
+      "title": "VPBank SME CEO Bootcamp giúp doanh nghiệp tìm chỗ 'rò rỉ' tiền mỗi ngày",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_2cc462afdea9",
+      "title": "Cách tối ưu mỗi khoản chi với thẻ tín dụng VIB",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_37c3fca6e8d3",
+      "title": "Sacombank hỗ trợ doanh nghiệp giảm chi phí, đơn giản hóa giao dịch",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ],
+  "90": [
+    {
+      "article_id": "TTR_595932944ef8",
+      "title": "Khép lại chung kết Hoa hậu Doanh nhân Hương sắc Việt Nam 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_61da6a157bd6",
+      "title": "Vì sao Nhật Bản không dùng tình nguyện viên Asiad trẻ đẹp như Trung Quốc?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_8ec9e4cf9574",
+      "title": "Hoa hậu Đại dương Nguyễn Thanh Thảo làm gì sau một năm đội vương miện?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "TTR_ae4cf855cc7a",
+      "title": "Miss Universe bị một hoa hậu kiện sau cú ngã xuyên sân khấu",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    },
+    {
+      "article_id": "VNE_2e7e10b71bf3",
+      "title": "Minh tinh Hoa ngữ tỏa sáng trong váy áo của NTK Việt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giải trí"
+    }
+  ],
+  "91": [
+    {
+      "article_id": "TTR_0f41a8a40c7a",
+      "title": "Giá xe cấp cứu mỗi nơi một kiểu, người bệnh lãnh đủ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_1c1160093f41",
+      "title": "Vụ đưa bệnh nhân về nhà 16km trả 9 triệu đồng: Bệnh viện giải thích lý do xe tư nhân vào trong",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_7c7938b8dcb2",
+      "title": "Vụ đưa bệnh nhân về nhà 16km trả 9 triệu đồng: Công an đang xác minh xe cấp cứu từ bên ngoài lấy logo, gắn còi hú của bệnh viện",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_b7962258ea53",
+      "title": "Đi 16km về nhà, gia đình bệnh nhân trả hơn 9 triệu đồng tiền xe cấp cứu và thuốc, Bộ Y tế yêu cầu làm rõ",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_c07ec2c5721a",
+      "title": "Bệnh viện nói gì vụ gia đình trả hơn 9 triệu đồng tiền xe cấp cứu, thuốc đưa bệnh nhân về nhà 16km?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    }
+  ],
+  "92": [
+    {
+      "article_id": "TTR_1ae05a25e265",
+      "title": "Bảng xếp hạng huy chương Asiad 20 ngày 28-9: Trung Quốc cán mốc 130 HCV, Việt Nam hạng 21",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_2feecbd83c23",
+      "title": "Bảng xếp hạng huy chương Asiad 20 ngày 29-9: Trung Quốc vượt mốc 250 huy chương, Thái Lan vững vàng tốp 5",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_5d661f4670ba",
+      "title": "Bảng xếp hạng huy chương Asiad 19: Trung Quốc dẫn đầu, hơn Nhật Bản gần 150 HCV",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_6214f308b653",
+      "title": "Cuộc đua cường quốc ở Asiad: Đến lúc Nhật Bản vượt Trung Quốc?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_7bfe4215e086",
+      "title": "Thể thao Việt Nam đứng ở đâu trong lịch sử Asiad?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    }
+  ],
+  "93": [
+    {
+      "article_id": "TTR_1e763cf0c949",
+      "title": "Hàng triệu trẻ vị thành niên bị phát tán hình ảnh nhạy cảm trên mạng xã hội",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_a161bb24927c",
+      "title": "Từ vụ án ma túy, phát hiện nam thanh niên quan hệ và cưới người chưa đủ 16 tuổi",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "VNE_0bb904a9b4fd",
+      "title": "Mẹ lĩnh án vì vô ý để con ngã tử vong từ cửa sổ tầng 5",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "VNE_1e1cbc73f2e8",
+      "title": "6 tuần bị 'bạn trai online' giam cầm trên gác mái",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "VNE_1f16447d2b47",
+      "title": "Dụ thiếu nữ sang Lào rồi trốn truy nã",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    }
+  ],
+  "94": [
+    {
+      "article_id": "TTR_00bd66dceca4",
+      "title": "OpenAI tuyên bố AI đã giải được 1 trong 7 bài toán khó nhất thế giới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_2d276e7b3a7b",
+      "title": "Robot AI Hàn Quốc tự tìm đường ở chỗ lạ, đi nhầm còn biết tìm lại",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNE_1079496ebec9",
+      "title": "AI giải bài toán Thiên niên kỷ 1 triệu USD",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "VNE_3028576a7afe",
+      "title": "Nhà vật lý đoạt giải Nobel: 'Tiến bộ khoa học bắt đầu từ việc đặt câu hỏi mới'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "VNE_3ab57702fba4",
+      "title": "Tranh cãi AI 'hớt tay trên' lời giải bài toán Thiên niên kỷ của con người",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    }
+  ],
+  "95": [
+    {
+      "article_id": "TTR_70964c8d767b",
+      "title": "FRT lần thứ 2 liên tiếp được Forbes vinh danh trong top 50 công ty niêm yết tốt nhất 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_99b16830c22f",
+      "title": "Danh hiệu “Ngân hàng Bán lẻ tốt nhất châu Á” lần đầu tiên được trao cho một ngân hàng Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_1683fc7cc46d",
+      "title": "Cake nhận giải Ngân hàng số tốt nhất Việt Nam 2026",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_43cfbfe85c69",
+      "title": "VietinBank năm thứ tư được nhà đầu tư yêu thích về hoạt động IR",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "VNE_59c0dd054d55",
+      "title": "HDBank tiếp tục vào Top 50 Forbes Việt Nam",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    }
+  ]
+}
