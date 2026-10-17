@@ -1,39 +1,39 @@
-# Hướng dẫn chạy HDBSCAN semantic clustering — Task M11
+# Hướng dẫn HDBSCAN semantic clustering — Task M11
 
 ## 1. Mục tiêu
 
 M11 thử nghiệm quy trình phân cụm ngữ nghĩa:
 
-**Sentence embedding → UMAP → HDBSCAN**
+**Sentence embedding → UMAP 5 chiều → HDBSCAN**
 
-Embedding được lấy từ bốn artifact đã tạo ở M10. Mỗi bài báo nhận một nhãn cụm; nhãn `-1` biểu thị bài chưa được gán vào cụm.
+Embedding được lấy từ bốn artifact M10. Mỗi bài báo nhận một nhãn cụm; nhãn `-1` biểu thị bài không được gán vào cụm trong lần chạy đó.
 
 Thí nghiệm nhằm:
 
-- So sánh kết quả của bốn cấu hình embedding.
-- Khảo sát `min_cluster_size` và `min_samples`.
-- So sánh hai cách chọn cụm `eom` và `leaf`.
-- Lưu nhãn cụm, bài nhiễu và cấu hình tương ứng với từng `article_id`.
+- So sánh MiniLM và MPNet.
+- So sánh văn bản đầu vào chỉ có tiêu đề với tiêu đề cộng 60 từ đầu nội dung.
+- Khảo sát `min_cluster_size`, `min_samples` và hai cách chọn cụm `eom`, `leaf`.
+- Lưu nhãn cụm và thông tin cấu hình theo từng `article_id`.
 - Kiểm tra tính đầy đủ và nhất quán của kết quả.
 
-Theo sheet phân công TV4, M11 tương ứng **mục 4.4 — HDBSCAN experiments**, với đầu ra là **clusters/outliers/configs**.
+Theo phần phân công TV4, M11 tương ứng **mục 4.4 — HDBSCAN experiments**, với đầu ra là **clusters/outliers/configs**.
 
 ## 2. Các file chính
 
-- `configs/hdbscan.yaml`: đường dẫn dữ liệu, artifact embedding, tham số UMAP, các cấu hình HDBSCAN và thư mục đầu ra.
-- `configs/embeddings.yaml`: cấu hình tạo bốn artifact embedding ở M10.
+- `configs/hdbscan.yaml`: đường dẫn dữ liệu, embedding, tham số UMAP và HDBSCAN.
+- `configs/embeddings.yaml`: cấu hình tạo embedding ở M10.
 - `src/features/embeddings.py`: đọc artifact embedding và metadata.
-- `src/models/hdbscan.py`: hàm giảm chiều và phân cụm dùng chung.
-- `experiments/hdbscan/run_m11_hdbscan.py`: chạy thí nghiệm và lưu CSV.
-- `experiments/hdbscan/plot_m11_results.py`: tạo ba biểu đồ từ kết quả.
-- `tests/test_embeddings.py`: kiểm tra tạo, lưu và tải lại embedding.
+- `src/models/hdbscan.py`: các hàm giảm chiều và phân cụm dùng chung.
+- `experiments/hdbscan/run_m11_hdbscan.py`: chạy thí nghiệm và xuất CSV.
+- `experiments/hdbscan/plot_m11_results.py`: tạo lại 10 hình kết quả M11.
+- `tests/test_embeddings.py`: kiểm tra embedding M10.
 - `tests/test_hdbscan.py`: kiểm tra hàm phân cụm.
-- `tests/test_m11_outputs.py`: kiểm tra các CSV đầu ra.
+- `tests/test_m11_outputs.py`: kiểm tra các CSV đầu ra M11.
 - `docs/m11_hdbscan_guide.md`: hướng dẫn chạy và ghi nhận kết quả.
 
-Runner gọi `reduce_embeddings()` **một lần cho mỗi embedding**, rồi dùng cùng ma trận đã giảm chiều cho tám lần chạy HDBSCAN. Nhờ vậy, khi so sánh tám cấu hình trên cùng một embedding, đầu vào của HDBSCAN được giữ như nhau.
+Runner giảm chiều **một lần cho mỗi embedding**, rồi dùng cùng ma trận 5 chiều để chạy tám cấu hình HDBSCAN. Nhờ vậy, tám cấu hình trên cùng một embedding được so sánh với cùng đầu vào đã giảm chiều.
 
-## 3. Dữ liệu đầu vào
+## 3. Dữ liệu và embedding đầu vào
 
 M11 sử dụng **Dataset v1.0**:
 
@@ -42,24 +42,22 @@ M11 sử dụng **Dataset v1.0**:
 - Tập sử dụng: `train`.
 - Số bài: **6.493**.
 
-Runner dùng `load_split_dataset()` để lấy đúng tập train. Sau đó, runner đối chiếu số bài, `article_id` và thứ tự bài giữa tập train với artifact embedding.
+Runner dùng `load_split_dataset()` để lấy tập train. Sau đó, runner đối chiếu số bài, `article_id` và thứ tự bài với artifact embedding.
 
-Bốn cấu hình embedding từ M10:
+| Embedding run | Văn bản đưa vào mô hình | Kích thước ma trận |
+| --- | --- | ---: |
+| `minilm_title_content` | Tiêu đề + 60 từ đầu nội dung | `6493 × 384` |
+| `mpnet_title_content` | Tiêu đề + 60 từ đầu nội dung | `6493 × 768` |
+| `minilm_title_only` | Chỉ tiêu đề | `6493 × 384` |
+| `mpnet_title_only` | Chỉ tiêu đề | `6493 × 768` |
 
-| Cấu hình | Văn bản đưa vào mô hình | Kích thước vector |
-| --- | --- | --- |
-| `minilm_title_content` | Tiêu đề + 60 từ đầu nội dung | `(6493, 384)` |
-| `mpnet_title_content` | Tiêu đề + 60 từ đầu nội dung | `(6493, 768)` |
-| `minilm_title_only` | Chỉ tiêu đề | `(6493, 384)` |
-| `mpnet_title_only` | Chỉ tiêu đề | `(6493, 768)` |
+`title_content` dùng **60 từ đầu của nội dung**, không dùng toàn bộ bài báo. M11 đọc vector từ các file `.npz` của M10; runner M11 không tạo lại embedding.
 
-Hai cấu hình `title_content` sử dụng **60 từ đầu của nội dung**, không sử dụng toàn bộ bài báo. M11 đọc vector từ các file `.npz`; runner không tạo lại embedding.
+Trước khi phân cụm, runner kiểm tra metadata của artifact với cấu hình M10, gồm tên run, mô hình, `content_words`, cột văn bản, tập dữ liệu và các thiết lập mã hóa.
 
-Trước khi phân cụm, runner so sánh metadata của artifact với `configs/embeddings.yaml`, gồm tên cấu hình, mô hình, `content_words`, cột văn bản, split và các thiết lập mã hóa.
+## 4. Giảm chiều bằng UMAP
 
-## 4. Cấu hình UMAP
-
-Các thí nghiệm dùng tham số UMAP sau:
+Tham số trong `configs/hdbscan.yaml`:
 
 ```yaml
 umap:
@@ -72,43 +70,34 @@ umap:
 
 UMAP chuyển vector embedding từ 384 hoặc 768 chiều xuống **5 chiều** để đưa vào HDBSCAN. File embedding M10 vẫn giữ số chiều gốc.
 
-Mỗi embedding được giảm chiều riêng. Tám cấu hình HDBSCAN của cùng một embedding dùng chung kết quả UMAP.
+Mỗi embedding được giảm chiều riêng. Tám cấu hình HDBSCAN của cùng một embedding dùng chung kết quả UMAP 5 chiều.
+
+Khi chạy, UMAP có thể hiện cảnh báo `n_jobs value 1 overridden to 1 by setting random_state`. Đây là cảnh báo về chạy song song khi đặt seed cố định, không phải thông báo thí nghiệm thất bại.
 
 ## 5. Cấu hình HDBSCAN
 
-HDBSCAN dùng `metric: "euclidean"` trên vector 5 chiều sau UMAP.
+HDBSCAN sử dụng khoảng cách `euclidean` trên vector UMAP 5 chiều.
 
-Ý nghĩa các tham số chính:
-
-- `min_cluster_size`: kích thước tối thiểu để một nhóm được xem là cụm.
-- `min_samples`: tham số ảnh hưởng đến mức độ chặt khi xác định vùng có đủ mật độ.
+- `min_cluster_size`: kích thước tối thiểu của một cụm.
+- `min_samples`: tham số ảnh hưởng tới mức độ chặt khi xác định vùng có đủ mật độ.
 - `cluster_selection_method`: cách chọn cụm từ cấu trúc phân cấp, gồm `eom` và `leaf`.
 
-Sáu cấu hình EOM:
+| Cấu hình | `min_cluster_size` | `min_samples` | Cách chọn cụm |
+| --- | ---: | ---: | --- |
+| `eom_15_5` | 15 | 5 | `eom` |
+| `eom_15_10` | 15 | 10 | `eom` |
+| `eom_30_5` | 30 | 5 | `eom` |
+| `eom_30_10` | 30 | 10 | `eom` |
+| `eom_50_5` | 50 | 5 | `eom` |
+| `eom_50_10` | 50 | 10 | `eom` |
+| `leaf_15_5` | 15 | 5 | `leaf` |
+| `leaf_30_10` | 30 | 10 | `leaf` |
 
-| Tên | `min_cluster_size` | `min_samples` |
-| --- | ---: | ---: |
-| `eom_15_5` | 15 | 5 |
-| `eom_15_10` | 15 | 10 |
-| `eom_30_5` | 30 | 5 |
-| `eom_30_10` | 30 | 10 |
-| `eom_50_5` | 50 | 5 |
-| `eom_50_10` | 50 | 10 |
+Tổng cộng có **4 embedding × 8 cấu hình = 32 thí nghiệm**. Các giá trị này được dùng để khảo sát; kết quả M11 chưa chứng minh cấu hình nào là tối ưu.
 
-Hai cấu hình Leaf:
+## 6. Cách chạy phân cụm
 
-| Tên | `min_cluster_size` | `min_samples` |
-| --- | ---: | ---: |
-| `leaf_15_5` | 15 | 5 |
-| `leaf_30_10` | 30 | 10 |
-
-Tổng cộng có **4 embedding × 8 cấu hình HDBSCAN = 32 thí nghiệm**.
-
-Đây là các giá trị được chọn để khảo sát. Kết quả M11 chưa chứng minh một cấu hình là tối ưu.
-
-## 6. Cách chạy
-
-Mở PowerShell tại thư mục gốc `vietnamese-news-topic-discovery`. Chạy từng lệnh và đợi lệnh hiện tại hoàn tất trước khi chạy lệnh tiếp theo:
+Mở PowerShell tại thư mục gốc `vietnamese-news-topic-discovery`. Chạy từng lệnh và đợi lệnh hiện tại hoàn tất:
 
 ```powershell
 python -B -m experiments.hdbscan.run_m11_hdbscan --embedding minilm_title_content
@@ -120,25 +109,25 @@ python -B -m experiments.hdbscan.run_m11_hdbscan --embedding mpnet_title_only
 Với mỗi embedding, runner:
 
 1. Đọc cấu hình M10 và M11.
-2. Kiểm tra bảng tổng hợp cũ, nếu có.
+2. Kiểm tra bảng tổng hợp cũ nếu bảng đã tồn tại.
 3. Đọc tập train và artifact embedding.
-4. Kiểm tra metadata, số bài, kích thước vector, ID và thứ tự ID.
-5. Giảm chiều bằng UMAP một lần.
-6. Chạy tám cấu hình HDBSCAN.
+4. Kiểm tra metadata, số bài, kích thước vector và thứ tự `article_id`.
+5. Chạy UMAP 5 chiều một lần.
+6. Chạy tám cấu hình HDBSCAN trên cùng ma trận đã giảm chiều.
 7. Lưu một file assignments cho embedding đó.
 8. Cập nhật các dòng tương ứng trong bảng tổng hợp chung.
 
-Nếu chạy lại một embedding, runner thay kết quả assignments và các dòng summary của embedding đó. Các dòng của embedding khác chỉ được giữ lại khi `config_hash` tương thích.
+Nếu chạy lại một embedding, runner thay assignments và các dòng summary của embedding đó. Các dòng của embedding khác chỉ được giữ lại khi `config_hash` tương thích.
 
-### `config_hash` dùng để làm gì?
+### Vai trò của `config_hash`
 
-`config_hash` là mã SHA-256 được tính từ cấu hình dataset M11, UMAP, HDBSCAN và metadata cấu hình của bốn embedding M10. Nó giúp phát hiện trường hợp định gộp kết quả từ **hai cấu hình thí nghiệm khác nhau** vào cùng một bảng summary.
+`config_hash` là mã SHA-256 tính từ cấu hình dataset M11, UMAP, HDBSCAN và metadata cấu hình của bốn embedding M10. Nó giúp phát hiện trường hợp gộp kết quả từ **các cấu hình thí nghiệm khác nhau** vào cùng một bảng summary.
 
-Nếu summary cũ thiếu `config_hash` hoặc có hash khác, runner báo lỗi trước khi chạy UMAP. Khi bắt đầu một đợt thí nghiệm với cấu hình mới, cần lưu riêng kết quả cũ rồi dùng thư mục đầu ra phù hợp cho đợt mới.
+Nếu summary cũ thiếu `config_hash` hoặc có hash khác, runner báo lỗi trước khi chạy UMAP.
 
-`config_hash` nhận diện **cấu hình được khai báo**; nó không kiểm tra nội dung từng byte của dataset hay vector. Nếu dữ liệu hoặc artifact thay đổi mà YAML không đổi, cần chạy lại các kết quả chịu ảnh hưởng.
+`config_hash` nhận diện **cấu hình được khai báo**; nó không kiểm tra nội dung từng byte của dataset hay vector. Nếu dữ liệu hoặc embedding artifact thay đổi mà YAML không đổi, cần tạo lại các kết quả chịu ảnh hưởng và tránh trộn kết quả cũ với mới.
 
-## 7. Kết quả đầu ra
+## 7. Kết quả CSV
 
 `configs/hdbscan.yaml` đặt:
 
@@ -159,9 +148,7 @@ results/hdbscan/
 
 ### Bốn file assignments
 
-Mỗi file chứa:
-
-**6.493 bài × 8 cấu hình = 51.944 dòng dữ liệu.**
+Mỗi file có **6.493 bài × 8 cấu hình = 51.944 dòng dữ liệu**.
 
 Các cột:
 
@@ -172,127 +159,168 @@ Các cột:
 - `data_version`: phiên bản dữ liệu.
 - `embedding_run`: tên cấu hình embedding.
 - `experiment`: tên cấu hình HDBSCAN.
-- `config_hash`: mã nhận diện cấu hình thí nghiệm dùng để tạo kết quả.
+- `config_hash`: mã nhận diện cấu hình thí nghiệm.
 
 Một `article_id` xuất hiện tám lần trong cùng một file vì bài đó được phân cụm dưới tám cấu hình. Cặp `experiment` + `article_id` phải duy nhất.
 
-`membership_strength` **không phải** độ chính xác của chủ đề hay điểm đánh giá chất lượng toàn bộ cụm.
-
-Nhãn cụm chỉ có ý nghĩa **trong từng lần chạy**. Ví dụ, cụm `1` của EOM không mặc nhiên tương ứng với cụm `1` của Leaf hoặc của embedding khác.
+`membership_strength` **không phải** độ chính xác của chủ đề. `cluster_id` chỉ có ý nghĩa **trong một run**: cụm `1` của EOM không mặc nhiên tương ứng với cụm `1` của Leaf hoặc của embedding khác.
 
 ### File `m11_summary.csv`
 
-Bảng tổng hợp có **32 dòng dữ liệu**, mỗi dòng ứng với một cặp embedding và cấu hình HDBSCAN.
+Bảng tổng hợp có **32 dòng dữ liệu**, mỗi dòng ứng với một embedding và một cấu hình HDBSCAN.
 
 Các cột:
 
-- `embedding_run`: tên cấu hình embedding.
-- `experiment`: tên cấu hình HDBSCAN.
-- `config_hash`: mã nhận diện cấu hình thí nghiệm.
+- `embedding_run`, `experiment`, `config_hash`: định danh run và cấu hình.
 - `min_cluster_size`, `min_samples`, `cluster_selection_method`: tham số HDBSCAN.
 - `n_articles`: số bài được phân cụm.
 - `n_clusters`: số cụm, không tính nhãn `-1`.
 - `n_noise`: số bài mang nhãn `-1`.
-- `noise_percent`: tỷ lệ bài nhiễu tính theo phần trăm.
-- `smallest_cluster`: số bài trong cụm nhỏ nhất.
-- `largest_cluster`: số bài trong cụm lớn nhất.
+- `noise_percent`: tỷ lệ bài nhiễu.
+- `smallest_cluster`, `largest_cluster`: kích thước cụm nhỏ nhất và lớn nhất.
 
-M11 hiện lưu **nhãn phân cụm và số liệu thí nghiệm** trong CSV. Quy trình hiện tại chưa lưu mô hình UMAP/HDBSCAN đã fit vào `artifacts/hdbscan/`.
+M11 hiện lưu **nhãn phân cụm và số liệu thí nghiệm** trong CSV. Quy trình hiện tại chưa lưu mô hình UMAP hoặc HDBSCAN đã fit vào `artifacts/hdbscan/`.
 
 ## 8. Kiểm tra
 
-Chạy cả test M10 và M11:
+Chạy test M10 và M11:
 
 ```powershell
 python -B -m pytest -p no:cacheprovider tests/test_embeddings.py tests/test_hdbscan.py tests/test_m11_outputs.py -v
 ```
 
-Kết quả đã chạy: **14 passed**, gồm:
+Lần kiểm tra đã ghi nhận **14 passed**, gồm:
 
-- **5 test M10** trong `tests/test_embeddings.py`: kiểm tra số vector, thứ tự ID, NaN, ID trùng, cột P0 và việc lưu/tải lại vector **cùng metadata**.
-- **4 test hàm phân cụm** trong `tests/test_hdbscan.py`: kiểm tra việc giữ đúng ID, dùng lại ma trận đã giảm chiều, từ chối số dòng không khớp và từ chối giá trị NaN không hợp lệ.
-- **5 test đầu ra M11** trong `tests/test_m11_outputs.py`: kiểm tra 32 cặp cấu hình, số bài và thứ tự ID, nhãn và membership hợp lệ, số liệu summary khớp assignments. Các test này cũng kiểm tra `config_hash` của summary khớp YAML hiện tại và hash của assignments khớp summary.
+- **5 test M10** trong `tests/test_embeddings.py`: kiểm tra số vector, thứ tự ID, NaN, ID trùng, dữ liệu P0 và lưu/tải vector cùng metadata.
+- **4 test** trong `tests/test_hdbscan.py`: kiểm tra hàm giảm chiều, phân cụm và dữ liệu đầu vào không hợp lệ.
+- **5 test đầu ra M11** trong `tests/test_m11_outputs.py`: kiểm tra 32 run, assignments, summary và `config_hash`.
 
-Các test xác nhận **cấu trúc dữ liệu và cách ghép kết quả**. Chúng chưa chứng minh các bài trong mỗi cụm thực sự cùng chủ đề.
+Các test kiểm tra **tính đúng đắn của cấu trúc dữ liệu và cách ghép kết quả**; chúng không chứng minh mọi cụm đều có một chủ đề ngữ nghĩa rõ ràng.
 
-## 9. Kết quả và nhận xét sơ bộ
+## 9. Kết quả ở hai cấu hình được xem kỹ
 
-### MiniLM title + content
+Bảng dưới lấy từ `results/hdbscan/m11_summary.csv`. Mỗi run có **6.493 bài**.
 
-- `eom_15_5`: **101 cụm**, **1.608 bài nhiễu**.
-- `leaf_15_5`: **126 cụm**, **2.310 bài nhiễu**.
+| Embedding run | Cấu hình | Số cụm | Bài nhiễu | Tỷ lệ nhiễu | Cụm lớn nhất |
+| --- | --- | ---: | ---: | ---: | ---: |
+| `minilm_title_content` | `eom_15_5` | 101 | 1.608 | 24,77% | 854 |
+| `minilm_title_content` | `leaf_15_5` | 126 | 2.310 | 35,58% | 116 |
+| `mpnet_title_content` | `eom_15_5` | 110 | 1.660 | 25,57% | 227 |
+| `mpnet_title_content` | `leaf_15_5` | 124 | 2.148 | 33,08% | 104 |
+| `minilm_title_only` | `eom_15_5` | 100 | 1.956 | 30,12% | 492 |
+| `minilm_title_only` | `leaf_15_5` | 116 | 2.540 | 39,12% | 132 |
+| `mpnet_title_only` | `eom_15_5` | 106 | 2.082 | 32,07% | 329 |
+| `mpnet_title_only` | `leaf_15_5` | 120 | 2.602 | 40,07% | 93 |
 
-### MPNet title + content — `eom_15_5`
+Ở cùng mô hình và cấu hình 15/5, `title_content` có tỷ lệ nhiễu thấp hơn `title_only` trong cả bốn cặp so sánh trên. Điều này **chưa đủ để kết luận** rằng thêm 60 từ làm chất lượng chủ đề tốt hơn; cần đọc nội dung các cụm và các ca outlier.
 
-- **110 cụm**.
-- **1.660 bài nhiễu**, tương ứng **25,57%**.
-- Cụm lớn nhất: **227 bài**.
+Với cả bốn embedding, Leaf ở tham số 15/5 tạo nhiều cụm hơn EOM và có tỷ lệ nhiễu cao hơn. Ở MiniLM `title_content`, EOM còn tạo một cụm rất lớn gồm **854 bài**. Cần đọc các bài trong cụm này để xem liệu nhiều chủ đề đã bị gom chung hay không.
 
-Trong mẫu tiêu đề đã xem, cụm về thành tích thể thao Việt Nam tại ASIAD khá nhất quán. Cụm sức khỏe rộng hơn, gồm cả dinh dưỡng và trị liệu tâm lý. Một cụm nhỏ về câu chuyện con người có dấu hiệu trộn các bài hiến tạng, tai nạn và hoàn cảnh gia đình.
+### Nhận xét thủ công đã thực hiện
 
-### MPNet title + content — `leaf_15_5`
+Trong mẫu tiêu đề đã xem của MPNet `title_content`:
 
-- **124 cụm**.
-- **2.148 bài nhiễu**, tương ứng **33,08%**.
-- Cụm lớn nhất: **104 bài**.
+- `eom_15_5`: cụm về thành tích thể thao Việt Nam tại ASIAD khá nhất quán. Một cụm sức khỏe rộng hơn, gồm cả dinh dưỡng và trị liệu tâm lý. Một cụm nhỏ về câu chuyện con người có dấu hiệu trộn các bài khác chủ đề.
+- `leaf_15_5`: cụm bóng đá câu lạc bộ Việt Nam khá nhất quán. Cụm ngành điện trải rộng từ doanh nghiệp điện đến chính sách giá điện. Một cụm nhỏ vẫn có dấu hiệu trộn nội dung.
 
-Trong mẫu đã xem, cụm bóng đá câu lạc bộ Việt Nam khá nhất quán. Cụm ngành điện trải rộng từ doanh nghiệp điện đến chính sách giá điện. Một cụm nhỏ vẫn có dấu hiệu trộn nội dung.
+Đây là **nhận xét từ một số bài mẫu**, không phải đánh giá ngữ nghĩa đầy đủ của 32 run.
 
-### Đánh đổi quan sát được
+Tỷ lệ nhiễu thấp cũng không tự động là kết quả tốt. Ví dụ, MPNet `title_only` với `eom_50_10` có tỷ lệ nhiễu **0,11%**, nhưng cụm lớn nhất chứa **3.862 bài**. Cần xem nội dung trước khi đánh giá một cụm lớn như vậy.
 
-Ở hai cấu hình MPNet title + content với tham số 15/5, Leaf tạo nhiều cụm hơn, cụm lớn nhất nhỏ hơn, đồng thời có nhiều bài nhiễu hơn EOM.
+Bài mang nhãn `-1` vẫn có thể là bài hợp lệ, chủ đề hiếm hoặc bài liên quan đến nhiều chủ đề. Nhãn nhiễu không tự động có nghĩa dữ liệu sai; việc phân tích từng trường hợp thuộc M12.
 
-Tỷ lệ nhiễu thấp **không đủ** để chọn cấu hình tốt nhất. Ví dụ, MPNet title-only với `eom_50_10` chỉ có **0,11%** bài nhiễu, nhưng cụm lớn nhất chứa tới **3.862 bài**. Cụm quá lớn có thể gom nhiều chủ đề khác nhau; cần xem nội dung trước khi đánh giá.
+## 10. Biểu đồ kết quả
 
-Bài mang nhãn `-1` vẫn có thể là bài báo hợp lệ, thuộc chủ đề hiếm hoặc nằm giữa nhiều chủ đề. Nhãn nhiễu không tự động có nghĩa dữ liệu sai.
-
-Các nhận xét về nội dung cụm trên đây dựa trên **một số mẫu tiêu đề đã kiểm tra**, chưa đại diện cho toàn bộ 32 thí nghiệm và chưa xác định cấu hình tốt nhất.
-
-## 10. Biểu đồ
-
-Tạo hình từ CSV đã lưu:
+Chạy lệnh sau tại thư mục gốc đồ án để **tạo lại cả 10 hình** trong `results/hdbscan/figures/`:
 
 ```powershell
 python -B -m experiments.hdbscan.plot_m11_results
 ```
 
-Lệnh tạo ba hình trong `results/hdbscan/figures/`.
+Lệnh tạo hai hình tổng quan, bốn hình phân bố kích thước cụm và bốn hình UMAP 2D. Nó đọc kết quả M11 đã lưu và **không chạy lại HDBSCAN**. Bốn hình 2D tạo phép chiếu UMAP riêng để minh họa, sau đó tô màu bằng nhãn cụm đã lưu trong assignments.
 
-### Tỷ lệ bài nhiễu
+Chạy lệnh này sẽ ghi lại các PNG cùng tên. Khi dùng `random_state` cố định, UMAP có thể hiện cảnh báo về `n_jobs`; nếu chương trình vẫn lưu đủ hình thì cảnh báo đó không phải lỗi.
 
-![Tỷ lệ bài nhiễu](../results/hdbscan/figures/m11_noise_ratio.png)
+### 10.1. Tỷ lệ bài nhiễu của 32 run
 
-Ở cùng tham số 15/5, Leaf có tỷ lệ nhiễu cao hơn EOM trên cả bốn embedding. Con số hiển thị trên hình được làm tròn đến **một chữ số thập phân**; CSV giữ giá trị đến **hai chữ số thập phân**. Vì vậy, tỷ lệ **0,11%** trong CSV hiển thị thành **0,1%** trên hình.
+![Tỷ lệ bài nhiễu của 32 run](../results/hdbscan/figures/m11_noise_ratio.png)
 
-### Số cụm
+Hình so sánh cả bốn embedding trên tám cấu hình. Số trên cột được làm tròn đến **một chữ số thập phân**; CSV giữ tỷ lệ đến **hai chữ số thập phân**. Chẳng hạn **0,11%** trong CSV hiển thị thành **0,1%** trên hình.
 
-![Số cụm](../results/hdbscan/figures/m11_cluster_count.png)
+### 10.2. Số cụm của 32 run
 
-Trong các cấu hình EOM đã thử, khi tăng `min_cluster_size` từ 15 lên 50 và giữ cùng `min_samples`, số cụm giảm trên cả bốn embedding. Cần xem nội dung để biết các cụm còn giữ được chủ đề rõ ràng hay đã bị gom quá rộng.
+![Số cụm của 32 run](../results/hdbscan/figures/m11_cluster_count.png)
 
-### Phân bố kích thước cụm
+Trong các cấu hình EOM đã thử, tăng `min_cluster_size` từ 15 lên 50 trong khi giữ cùng `min_samples` làm số cụm giảm ở các kết quả hiện tại. Cần xem nội dung để biết các cụm còn giữ chủ đề rõ ràng hay đã bị gom quá rộng.
 
-![Phân bố kích thước cụm](../results/hdbscan/figures/m11_cluster_size_distribution.png)
+### 10.3. Phân bố kích thước cụm
 
-Hình so sánh MPNet title + content ở tham số 15/5:
+Mỗi hình dưới đây so sánh `eom_15_5` và `leaf_15_5` của **cùng một embedding**. Nhãn `-1` không được tính là một cụm.
 
-- EOM: **110 cụm**, cụm lớn nhất **227 bài**.
-- Leaf: **124 cụm**, cụm lớn nhất **104 bài**.
+#### MiniLM — tiêu đề + 60 từ nội dung
 
-Leaf tạo các cụm nhỏ hơn trong trường hợp này, nhưng tỷ lệ nhiễu tăng từ **25,57%** lên **33,08%**. Hình không tính nhãn `-1` như một cụm.
+![MiniLM title content: phân bố kích thước cụm](../results/hdbscan/figures/m11_minilm_cluster_size_distribution.png)
 
-## 11. Giới hạn và bước tiếp theo
+EOM có **101 cụm**, cụm lớn nhất **854 bài**. Leaf có **126 cụm**, cụm lớn nhất **116 bài**. Cụm EOM 854 bài làm trục ngang trải rộng; phần lớn các cụm còn lại tập trung ở vùng kích thước nhỏ hơn.
+
+#### MPNet — tiêu đề + 60 từ nội dung
+
+![MPNet title content: phân bố kích thước cụm](../results/hdbscan/figures/m11_cluster_size_distribution.png)
+
+EOM có **110 cụm**, cụm lớn nhất **227 bài**. Leaf có **124 cụm**, cụm lớn nhất **104 bài**.
+
+#### MiniLM — chỉ tiêu đề
+
+![MiniLM title only: phân bố kích thước cụm](../results/hdbscan/figures/m11_minilm_title_only_cluster_size_distribution.png)
+
+EOM có **100 cụm**, cụm lớn nhất **492 bài**. Leaf có **116 cụm**, cụm lớn nhất **132 bài**.
+
+#### MPNet — chỉ tiêu đề
+
+![MPNet title only: phân bố kích thước cụm](../results/hdbscan/figures/m11_mpnet_title_only_cluster_size_distribution.png)
+
+EOM có **106 cụm**, cụm lớn nhất **329 bài**. Leaf có **120 cụm**, cụm lớn nhất **93 bài**.
+
+Các hình dùng khoảng chia kích thước cụm rộng **20 bài**. Phạm vi trục ngang có thể khác giữa các hình vì kích thước cụm lớn nhất khác nhau. Khi so sánh hai hình, cần đọc giá trị trên trục thay vì chỉ so sánh vị trí cột trên màn hình.
+
+### 10.4. Minh họa cụm và bài nhiễu trên mặt phẳng 2D
+
+Bốn hình sau gắn **nhãn HDBSCAN M11 đã có** vào vị trí bài báo trên phép chiếu UMAP **2 chiều**. Các cụm lớn được tô màu; các cụm còn lại và bài nhiễu được hiển thị bằng các sắc độ xám khác nhau.
+
+#### MiniLM — tiêu đề + 60 từ nội dung
+
+![MiniLM EOM 15/5 trên UMAP 2D](../results/hdbscan/figures/m11_minilm_eom_15_5_umap2d.png)
+
+![MiniLM Leaf 15/5 trên UMAP 2D](../results/hdbscan/figures/m11_minilm_leaf_15_5_umap2d.png)
+
+#### MPNet — tiêu đề + 60 từ nội dung
+
+![MPNet EOM 15/5 trên UMAP 2D](../results/hdbscan/figures/m11_mpnet_eom_15_5_umap2d.png)
+
+![MPNet Leaf 15/5 trên UMAP 2D](../results/hdbscan/figures/m11_mpnet_leaf_15_5_umap2d.png)
+
+**Cách đọc hình 2D:**
+
+- Mỗi điểm là một bài báo.
+- Màu sắc phân biệt tám cụm lớn nhất của run được vẽ.
+- Điểm `cluster_id == -1` là bài nhiễu; xem chú giải để phân biệt với các cụm không được tô màu nổi bật.
+- Nhãn cụm đến từ HDBSCAN chạy **trên UMAP 5 chiều**. Phép chiếu 2 chiều chỉ dùng để vẽ và không thay đổi assignments.
+- Vị trí, khoảng cách và sự chồng lấn trên mặt phẳng 2D chỉ mang tính minh họa. Không thể suy ra ranh giới chính xác của phân cụm 5 chiều từ hình này.
+- Không đối chiếu trực tiếp vị trí điểm hoặc số `cluster_id` giữa hai embedding khác nhau.
+- `cluster_id` là mã cụm, **chưa phải tên chủ đề**. Muốn gọi một cụm là “thể thao”, “giáo dục”... cần đọc bài đại diện trong cụm.
+
+## 11. Giới hạn và công việc liên quan
 
 M11 đã có:
 
-- Code giảm chiều và phân cụm dùng chung.
-- Cấu hình cho bốn embedding và tám cách phân cụm.
-- Năm CSV chứa kết quả của **32 thí nghiệm**.
-- Nhãn cụm gắn với `article_id`.
-- Ba biểu đồ mô tả kết quả.
-- **9 test liên quan trực tiếp đến M11 đạt**; tính cả 5 test M10 thì **14 test đạt**.
-- Nhận xét sơ bộ về một số cụm.
+- Bốn embedding từ M10 làm đầu vào.
+- Tám cấu hình HDBSCAN cho mỗi embedding.
+- Năm CSV chứa kết quả **32 thí nghiệm**.
+- Nhãn cụm gắn với `article_id` và mã cấu hình.
+- Script tạo lại **10 hình** từ CSV và embedding artifact đã lưu.
+- Test cấu trúc dữ liệu và tính nhất quán đã đạt trong lần chạy ghi nhận.
+- Nhận xét thủ công sơ bộ về một số cụm.
 
-Các chỉ số như số cụm, tỷ lệ nhiễu và kích thước cụm giúp mô tả kết quả, nhưng **chưa đủ để khẳng định chất lượng ngữ nghĩa**. Việc chọn cấu hình cuối cùng cần xem thêm nội dung cụm và theo quy trình đánh giá chung của nhóm.
+Số cụm, tỷ lệ nhiễu và kích thước cụm mô tả kết quả phân cụm nhưng **không đủ để kết luận chất lượng ngữ nghĩa**. Việc chọn cấu hình cuối cùng cần kiểm tra thêm nội dung các cụm và theo quy trình đánh giá chung của nhóm.
 
-Phần thí nghiệm HDBSCAN của **M11/mục 4.4** đã sẵn sàng để nhóm review. Công việc tiếp theo của TV4 là **mục 4.5 — Outlier analysis**: xem các bài nhãn `-1`, phân biệt bài lỗi hoặc không liên quan, bài thuộc chủ đề hiếm, bài có nhiều chủ đề và bài hợp lệ bị coi là ngoại lệ; ghi ví dụ kèm nhận xét.
+M11 đáp ứng phần thí nghiệm **mục 4.4**. Việc đọc bài nhiễu và phân biệt `data_noise`, `rare_valid`, `multi_topic`, `valid_outlier` được ghi riêng trong tài liệu **M12 — Outlier analysis**.
