@@ -1,0 +1,59 @@
+# Cấu hình thực nghiệm bóc tách phạm vi đầu vào: chỉ tiêu đề vs tiêu đề cộng nội dung (Task M03A).
+
+dataset:
+  split_manifest_path: "data/splits/split_manifest.csv"
+  processed_dataset_path: "data/processed/p3_no_stopwords.csv"
+  data_version: "v1.0"
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+
+  input_variants:
+    - id: "title_only"
+      name: "Chỉ tiêu đề"
+      text_column: "processed_title"
+      description: "Chỉ sử dụng tiêu đề bài báo đã được tách từ và loại bỏ từ dừng"
+    - id: "title_content"
+      name: "Tiêu đề và nội dung"
+      text_column: "text"
+      description: "Sử dụng toàn bộ tiêu đề và nội dung bài báo đã được tách từ và loại bỏ từ dừng"
+
+vectorizer:
+  ngram_range: [1, 1]
+  min_df: 2
+  max_df: 0.85
+  max_features: 20000
+  sublinear_tf: true
+  norm: "l2"
+  token_pattern: "(?u)\\b\\w\\w+\\b"
+  lowercase: false
+  stopwords_file: null
+
+reference:
+  stopwords_file: "configs/vietnamese_stopwords.txt"
+
+clustering:
+  algorithm: "kmeans"
+  primary_k: 9
+  sensitivity_k_list:
+    - 7
+    - 9
+  init: "k-means++"
+  n_init: 10
+  max_iter: 300
+  random_state: 42
+  stability_seeds:
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+
+topics:
+  top_n_keywords: 15
+  representative_docs_per_cluster: 5
+
+output:
+  results_dir: "results/kmeans"
+  figures_dir: "results/kmeans/figures"
+

@@ -1,0 +1,37 @@
+﻿variant_id,variant_name,cluster_id,size_val,dominant_gold_category,dominant_gold_share_pct,compound_words_top10,stopwords_polluted_top10,top10_keywords,nearest_article_title
+P0,P0_minimal,0,90,Kinh doanh,95.6,0,1,"tăng, phiếu, lãi, USD, giảm, mức, giá, so, thị, đồng","Lãi suất vay lên 16%: Doanh nghiệp ôm tiền mặt hưởng lợi, bên vay nợ chịu sức ép"
+P0,P0_minimal,1,31,Khoa học công nghệ,93.5,0,0,"iPhone, Apple, Pro, Max, gập, 18, Duo, màn, camera, mẫu","3 iPhone cao cấp ra mắt tuần này: iPhone 18 Pro, 18 Pro Max, iPhone Ultra có gì?"
+P0,P0_minimal,2,261,Giải trí,65.5,0,4,"diễn, những, phim, người, cô, năm, ảnh, sự, viên, anh",Mỹ Anh: Không đợi thành công trong nước rồi mới ra quốc tế
+P0,P0_minimal,3,133,Giáo dục,92.5,0,0,"học, giáo, sinh, dục, trường, Trường, viên, Giáo, lớp, tạo",5 kỳ vọng lớn của ngành giáo dục năm học mới
+P0,P0_minimal,4,260,Kinh doanh,65.8,0,0,"doanh, triển, nghiệp, công, sản, động, phát, tế, hàng, hợp",Từ thương mại đến hút dòng vốn chất lượng cao: Củng cố niềm tin dài hạn từ Mỹ
+P0,P0_minimal,5,116,Thể thao,100.0,0,0,"trận, bóng, đội, thắng, đấu, League, thủ, sân, bàn, CLB",8 điểm nhấn vòng 4 Ngoại hạng Anh
+P0,P0_minimal,6,154,Sức khỏe,98.7,0,0,"bệnh, bác, sĩ, viện, Bệnh, máu, hoặc, khoa, thể, cơ",5 vấn đề sức khỏe dễ làm chệch kế hoạch nghỉ hưu
+P0,P0_minimal,7,195,Pháp luật,84.6,0,2,"an, tra, Công, bị, tội, phạm, vi, án, vụ, người",Giám sát điện tử là biện pháp ngăn chặn độc lập thay vì chỉ thay thế tạm giam
+P0,P0_minimal,8,151,Thể thao,99.3,0,0,"đấu, trận, đội, Việt, Nam, tuyển, Asiad, bảng, Lan, HLV","Tuyển U23 Việt Nam công bố danh sách 23 cầu thủ dự Asiad 2026, Đình Bắc có tên không?"
+P1,P1_normalized,0,90,Kinh doanh,95.6,0,1,"phiếu, lãi, tăng, giảm, giá, usd, mức, so, suất, đồng","Lãi suất vay lên 16%: Doanh nghiệp ôm tiền mặt hưởng lợi, bên vay nợ chịu sức ép"
+P1,P1_normalized,1,281,Kinh doanh,59.4,0,0,"doanh, triển, công, sản, nghiệp, hệ, động, hàng, phát, dụng",Từ thương mại đến hút dòng vốn chất lượng cao: Củng cố niềm tin dài hạn từ Mỹ
+P1,P1_normalized,2,101,Thể thao,99.0,0,0,"asiad, đấu, nam, đội, việt, trận, u23, giành, nữ, bóng",Bảng xếp hạng bóng đá nam Asiad 20: U23 Việt Nam nhì bảng C
+P1,P1_normalized,3,245,Giải trí,69.0,0,4,"cô, phim, diễn, người, những, anh, năm, ảnh, sự, viên",Mỹ Anh: Không đợi thành công trong nước rồi mới ra quốc tế
+P1,P1_normalized,4,149,Sức khỏe,99.3,0,1,"bệnh, bác, sĩ, viện, máu, hoặc, khoa, thể, người, thuốc",5 vấn đề sức khỏe dễ làm chệch kế hoạch nghỉ hưu
+P1,P1_normalized,5,208,Pháp luật,80.3,0,2,"an, tra, bị, vụ, vi, công, phạm, án, tội, người",Giám sát điện tử là biện pháp ngăn chặn độc lập thay vì chỉ thay thế tạm giam
+P1,P1_normalized,6,46,Thể thao,100.0,0,0,"asean, fifa, cup, tuyển, trận, đội, đấu, sik, hlv, lan","HLV Kim Sang Sik: 'Tuyển Thái Lan có kỹ thuật tốt, tuyến giữa sáng tạo'"
+P1,P1_normalized,7,144,Giáo dục,86.1,0,0,"học, giáo, sinh, dục, trường, đào, viên, lớp, tạo, đại",5 kỳ vọng lớn của ngành giáo dục năm học mới
+P1,P1_normalized,8,127,Thể thao,100.0,0,0,"trận, bóng, đội, đấu, thắng, league, thủ, sân, bàn, clb",Fabian Ruiz: 'Không ứng viên Quả Bóng Vàng nào hơn tôi về danh hiệu tập thể'
+P2,P2_segmented,0,154,Sức khỏe,99.4,5,1,"bác_sĩ, bệnh, điều_trị, người_bệnh, bệnh_viện, hoặc, có_thể, khám, máu, thuốc",5 điều cần biết để giữ thận khỏe
+P2,P2_segmented,1,121,Thể thao,100.0,2,1,"bóng, trận, đội, league, bàn, cầu_thủ, thắng, sân, phút, trận_đấu",8 trận được chờ đợi nhất lượt đầu Champions League
+P2,P2_segmented,2,301,Giải trí,56.8,0,6,"những, một, người, năm, cô, phim, không, nhiều, anh, từ",Mỹ Anh: Không đợi thành công trong nước rồi mới ra quốc tế
+P2,P2_segmented,3,54,Thể thao,100.0,2,0,"asean, cup, fifa, trận, hlv, đội_tuyển, lan, thái, cầu_thủ, đội","Hai Long: Tuyển Việt Nam sẽ chiến đấu thay Xuân Son, quyết thắng Thái Lan"
+P2,P2_segmented,4,96,Thể thao,99.0,2,0,"asiad, nữ, u23, nam, giành, thi_đấu, việt_nam, trận, nhật, môn",Xác định 8 đội vào tứ kết bóng đá nữ Asiad 20
+P2,P2_segmented,5,90,Kinh doanh,95.6,3,1,"tăng, giá, đồng, thị_trường, mức, giảm, lãi_suất, usd, so, cổ_phiếu","VN-Index mất mốc 1.800 điểm, ông Phạm Nhật Vượng vẫn thăng hạng tỷ phú USD"
+P2,P2_segmented,6,187,Pháp luật,86.6,5,2,"công_an, điều_tra, án, vụ, cơ_quan, bị, người, cảnh_sát, tiền, hành_vi",Khởi tố nhóm thuê người vay ngân hàng mua ô tô rồi bán lại
+P2,P2_segmented,7,126,Giáo dục,97.6,7,0,"trường, học_sinh, giáo_dục, học, đào_tạo, đại_học, nhà_trường, năm_học, giáo_viên, lớp",5 kỳ vọng lớn của ngành giáo dục năm học mới
+P2,P2_segmented,8,262,Kinh doanh,64.9,6,4,"doanh_nghiệp, phát_triển, công_nghệ, theo, đầu_tư, tại, năm, từ, dự_án, hoạt_động",Việt Nam đang tạo ra những Doanh nghiệp Quốc gia thay đổi cả nền kinh tế thế nào?
+P3,P3_no_stopwords,0,251,Giải trí,68.1,4,0,"cô, phim, anh, khán_giả, không, diễn_viên, tôi, nói, nghệ_sĩ, tác_phẩm",Mỹ Anh: Không đợi thành công trong nước rồi mới ra quốc tế
+P3,P3_no_stopwords,1,98,Thể thao,99.0,2,0,"asiad, nữ, u23, nam, giành, thi_đấu, việt_nam, trận, nhật, môn",Xác định 8 đội vào tứ kết bóng đá nữ Asiad 20
+P3,P3_no_stopwords,2,76,Khoa học công nghệ,92.1,4,0,"iphone, apple, pro, máy, dùng, màn_hình, max, hệ_thống, thiết_bị, sử_dụng","Toàn cảnh thông tin hot nhất về iPhone 18 Pro, 18 Pro Max, iPhone Duo gập trước giờ ra mắt"
+P3,P3_no_stopwords,3,159,Sức khỏe,98.7,5,0,"bác_sĩ, bệnh, điều_trị, bệnh_viện, người_bệnh, hoặc, khám, máu, thuốc, tình_trạng",5 điều cần biết để giữ thận khỏe
+P3,P3_no_stopwords,4,174,Thể thao,100.0,1,0,"trận, đội, bóng, cầu_thủ, hlv, cup, thắng, sân, fifa, bàn",HLV tuyển Philippines: 'Chúng tôi không đáng thua'
+P3,P3_no_stopwords,5,188,Pháp luật,87.2,5,0,"công_an, điều_tra, vụ, án, cơ_quan, hành_vi, tiền, cảnh_sát, tỉnh, đồng",Khởi tố nhóm thuê người vay ngân hàng mua ô tô rồi bán lại
+P3,P3_no_stopwords,6,229,Kinh doanh,74.7,10,0,"doanh_nghiệp, phát_triển, đầu_tư, công_nghệ, dự_án, thị_trường, việt_nam, xây_dựng, sản_phẩm, dịch_vụ",Việt Nam đang tạo ra những Doanh nghiệp Quốc gia thay đổi cả nền kinh tế thế nào?
+P3,P3_no_stopwords,7,129,Giáo dục,97.7,7,0,"trường, học_sinh, giáo_dục, học, đào_tạo, đại_học, nhà_trường, năm_học, giáo_viên, lớp",5 kỳ vọng lớn của ngành giáo dục năm học mới
+P3,P3_no_stopwords,8,87,Kinh doanh,96.6,3,0,"tăng, giá, đồng, lãi_suất, thị_trường, giảm, usd, cổ_phiếu, so, bán","VN-Index mất mốc 1.800 điểm, ông Phạm Nhật Vượng vẫn thăng hạng tỷ phú USD"
