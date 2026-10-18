@@ -3,6 +3,7 @@
 from src.artifacts.adapters import (
     export_bertopic_artifacts,
     export_kmeans_artifacts,
+    export_lda_artifacts,
 )
 
 from src.artifacts.loader import (
@@ -28,5 +29,6 @@ __all__ = [
     "TopicSummary",
     "export_bertopic_artifacts",
     "export_kmeans_artifacts",
+    "export_lda_artifacts",
     "load_artifact_bundle",
 ]

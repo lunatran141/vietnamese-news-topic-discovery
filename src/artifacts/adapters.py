@@ -15,6 +15,12 @@ from src.artifacts.loader import (
     load_artifact_bundle,
 )
 
+import joblib
+import numpy as np
+
+from src.data.dataset_loader import load_dataset
+from src.features.article_text import build_article_text
+from src.models.lda_pipeline import transform_lda_pipeline
 
 def _read_json(path: Path) -> dict[str, Any]:
     """Đọc file JSON."""
@@ -597,6 +603,258 @@ def export_bertopic_artifacts(
         "topic_keywords_path": "topic_keywords.csv",
         "config_path": "config_used.yaml",
     }
+
+    _write_json(
+        output_dir / "model_summary.json",
+        model_summary,
+    )
+    _write_json(
+        output_dir / "manifest.json",
+        manifest,
+    )
+
+    return load_artifact_bundle(output_dir)
+
+
+def export_lda_artifacts(
+    source_dir: str | Path = "artifacts/lda/final",
+    output_dir: str | Path = "artifacts/common/lda/lda_k15_seed42",
+    dataset_path: str | Path = "data/processed/p2_segmented.csv",
+    split_manifest_path: str | Path = "data/splits/split_manifest.csv",
+) -> ArtifactBundle:
+    """Export frozen LDA K=15 into the shared artifact schema."""
+    source_dir = Path(source_dir)
+    output_dir = Path(output_dir)
+
+    _require_files(
+        [
+            source_dir / "lda_pipeline.joblib",
+            source_dir / "run_metadata.json",
+            source_dir / "config.json",
+            Path(dataset_path),
+            Path(split_manifest_path),
+        ],
+        model_label="LDA Final",
+    )
+
+    if output_dir.exists():
+        raise FileExistsError(
+            f"Output already exists: {output_dir}"
+        )
+
+    metadata = _read_json(source_dir / "run_metadata.json")
+    final_config = _read_json(source_dir / "config.json")
+
+    pipeline = joblib.load(source_dir / "lda_pipeline.joblib")
+    model = pipeline["lda_model"]
+    vectorizer = pipeline["vectorizer"]
+
+    k = int(metadata["selected_n_topics"])
+    seed = int(metadata["random_state"])
+
+    if k != 15 or model.n_components != 15 or seed != 42:
+        raise ValueError("Expected frozen LDA K15 seed42")
+
+    if metadata["dataset_version"] != "v1.0":
+        raise ValueError("Dataset version mismatch")
+    if metadata["preprocessing_variant"] != "p2_segmented":
+        raise ValueError("Preprocessing mismatch")
+    if metadata["fit_split"] != "train+val":
+        raise ValueError("Fit split mismatch")
+
+    dataset = load_dataset(dataset_path)
+    splits = pd.read_csv(
+        split_manifest_path,
+        encoding="utf-8-sig",
+    )
+
+    if not {"article_id", "split"}.issubset(splits.columns):
+        raise ValueError("Invalid split manifest")
+
+    if dataset["article_id"].duplicated().any():
+        raise ValueError("Duplicate dataset IDs")
+    if splits["article_id"].duplicated().any():
+        raise ValueError("Duplicate split IDs")
+
+    if len(dataset) != 9274 or len(splits) != 9274:
+        raise ValueError("Expected Dataset v1.0: 9274 rows")
+
+    dataset = dataset.copy()
+    splits = splits.copy()
+
+    dataset["article_id"] = dataset["article_id"].astype(str)
+    splits["article_id"] = splits["article_id"].astype(str)
+
+    if set(dataset["article_id"]) != set(splits["article_id"]):
+        raise ValueError("Dataset and split IDs mismatch")
+
+    if set(splits["split"]) != {"train", "val", "test"}:
+        raise ValueError("Invalid split names")
+
+    dataset = dataset.merge(
+        splits[["article_id", "split"]],
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    if dataset["split"].isna().any():
+        raise ValueError("Missing split assignment")
+
+    texts = build_article_text(dataset, "text").tolist()
+    bow = vectorizer.transform(texts)
+    probabilities = transform_lda_pipeline(model, bow)
+
+    if probabilities.shape != (len(dataset), k):
+        raise ValueError("Invalid LDA distribution shape")
+
+    topic_ids = probabilities.argmax(axis=1)
+    topic_probs = probabilities.max(axis=1)
+
+    if not np.isfinite(topic_probs).all():
+        raise ValueError("Invalid topic probabilities")
+    if ((topic_probs < 0) | (topic_probs > 1)).any():
+        raise ValueError("Topic probabilities outside [0,1]")
+
+    document_topics = dataset[
+        ["article_id", "split", "title", "source", "published_at"]
+    ].copy()
+
+    document_topics["topic_id"] = topic_ids.astype(int)
+    document_topics["topic_probability"] = topic_probs
+    document_topics["is_outlier"] = False
+
+    document_topics = document_topics[
+        [
+            "article_id",
+            "split",
+            "topic_id",
+            "topic_probability",
+            "is_outlier",
+            "title",
+            "source",
+            "published_at",
+        ]
+    ]
+
+    feature_names = vectorizer.get_feature_names_out()
+    keyword_rows = []
+
+    for topic_id, weights in enumerate(model.components_):
+        indices = np.argsort(weights)[::-1][:10]
+
+        for rank, index in enumerate(indices, start=1):
+            keyword_rows.append({
+                "topic_id": topic_id,
+                "rank": rank,
+                "keyword": str(feature_names[index]),
+                "weight": float(weights[index]),
+            })
+
+    topic_keywords = pd.DataFrame(keyword_rows)
+
+    topic_counts = document_topics["topic_id"].value_counts()
+    summary_rows = []
+
+    for topic_id in range(k):
+        keywords = topic_keywords.loc[
+            topic_keywords["topic_id"] == topic_id,
+            "keyword",
+        ].tolist()
+
+        count = int(topic_counts.get(topic_id, 0))
+
+        summary_rows.append({
+            "topic_id": topic_id,
+            "topic_name": f"Topic {topic_id}",
+            "document_count": count,
+            "percentage": count / len(document_topics),
+            "top_keywords": json.dumps(
+                keywords, ensure_ascii=False
+            ),
+        })
+
+    topic_summary = pd.DataFrame(summary_rows)
+
+    run_id = "lda_k15_seed42"
+    model_name = "LDA K15"
+
+    model_summary = {
+        "model_name": model_name,
+        "run_id": run_id,
+        "algorithm": "LDA",
+        "representation": "Bag-of-Words",
+        "topic_count": k,
+        "outlier_rate": 0.0,
+        "runtime_seconds": None,
+        "metrics": {
+            "topic_diversity": _compute_topic_diversity(
+                topic_keywords
+            ),
+            "document_count": len(document_topics),
+            "train_count": int(
+                (document_topics["split"] == "train").sum()
+            ),
+            "validation_count": int(
+                (document_topics["split"] == "val").sum()
+            ),
+            "test_count": int(
+                (document_topics["split"] == "test").sum()
+            ),
+        },
+        "config": final_config,
+    }
+
+    manifest = {
+        "schema_version": "1.0",
+        "model_name": model_name,
+        "run_id": run_id,
+        "model_summary_path": "model_summary.json",
+        "topic_summary_path": "topic_summary.csv",
+        "document_topics_path": "document_topics.csv",
+        "topic_keywords_path": "topic_keywords.csv",
+        "config_path": "config_used.yaml",
+    }
+
+    if document_topics["article_id"].nunique() != 9274:
+        raise ValueError("Incomplete document assignment")
+
+    if not document_topics["topic_id"].between(0, 14).all():
+        raise ValueError("Invalid topic ID")
+
+    if len(topic_summary) != k or len(topic_keywords) != k * 10:
+        raise ValueError("Topic summary/keywords mismatch")
+
+    if topic_summary["document_count"].sum() != 9274:
+        raise ValueError("Topic counts mismatch")
+
+    output_dir.mkdir(parents=True, exist_ok=False)
+
+    topic_summary.to_csv(
+        output_dir / "topic_summary.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    document_topics.to_csv(
+        output_dir / "document_topics.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    topic_keywords.to_csv(
+        output_dir / "topic_keywords.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    with (output_dir / "config_used.yaml").open(
+        "w", encoding="utf-8"
+    ) as file:
+        yaml.safe_dump(
+            final_config,
+            file,
+            allow_unicode=True,
+            sort_keys=False,
+        )
 
     _write_json(
         output_dir / "model_summary.json",
