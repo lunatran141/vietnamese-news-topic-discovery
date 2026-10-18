@@ -1,0 +1,45 @@
+dataset:
+  path: data/processed/p1_normalized.csv
+  manifest_path: configs/dataset_manifest.json
+  split_manifest_path: data/splits/split_manifest.csv
+  version: v1.0
+  preprocessing_variant: p1_normalized
+  text_variant: text
+  fit_split: train
+  validation_split: val
+  test_split: test
+embedding:
+  model_name: keepitreal/vietnamese-sbert
+  batch_size: 32
+  normalize_embeddings: true
+  device: null
+umap:
+  n_neighbors: 15
+  n_components: 5
+  min_dist: 0.0
+  metric: cosine
+  random_state: 42
+hdbscan:
+  min_cluster_size: 15
+  min_samples: 5
+  metric: euclidean
+  cluster_selection_method: eom
+  prediction_data: true
+vectorizer:
+  stopwords_file: configs/vietnamese_stopwords.txt
+  ngram_range:
+  - 1
+  - 2
+  min_df: 2
+  max_df: 0.95
+ctfidf:
+  bm25_weighting: false
+  reduce_frequent_words: false
+topic_representation:
+  top_n_words: 10
+  representative_docs_per_topic: 5
+experiment:
+  seed: 42
+  run_id: e1_vietnamese_sbert
+  output_dir: artifacts/bertopic/bertopic_baseline
+  save_model: true
