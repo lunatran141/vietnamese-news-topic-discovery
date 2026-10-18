@@ -1,0 +1,5 @@
+﻿embedding_run,experiment,split,n_articles,n_noise,noise_percent,coverage_percent,ari,nmi,config_hash
+mpnet_title_content,eom_15_5,val,1391,528,37.96,62.04,0.0464,0.4101,1d34fba560e9253b1cd98f572f5fefd48b4072283118e41701580e3cc247ccf4
+mpnet_title_content,leaf_15_5,val,1391,677,48.67,51.33,0.0098,0.3562,1d34fba560e9253b1cd98f572f5fefd48b4072283118e41701580e3cc247ccf4
+minilm_title_content,eom_15_5,val,1391,484,34.8,65.2,0.1303,0.4218,1d34fba560e9253b1cd98f572f5fefd48b4072283118e41701580e3cc247ccf4
+minilm_title_content,leaf_15_5,val,1391,682,49.03,50.97,0.0093,0.3592,1d34fba560e9253b1cd98f572f5fefd48b4072283118e41701580e3cc247ccf4
