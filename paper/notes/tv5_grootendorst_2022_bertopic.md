@@ -21,6 +21,7 @@
 - Bài toán và mục tiêu: Khám phá các chủ đề tiềm ẩn trong tập văn bản bằng cách gom cụm các biểu diễn ngữ nghĩa của tài liệu, sau đó tạo biểu diễn từ khóa dễ diễn giải cho từng cụm.
 - Phương pháp: BERTopic gồm ba bước chính: tạo document embedding, giảm chiều và gom cụm, rồi tạo topic representation bằng class-based TF-IDF (c-TF-IDF).
 - Representation — cách biểu diễn dữ liệu: Sentence-BERT tạo dense document embeddings; UMAP giảm chiều; HDBSCAN gom các tài liệu tương tự và nhận diện outlier; c-TF-IDF tạo phân phối từ đại diện cho từng topic.
+- Phạm vi của pipeline: Chuỗi SBERT → UMAP → HDBSCAN → c-TF-IDF là pipeline được sử dụng và đánh giá trong nghiên cứu gốc của Grootendorst (2022). Đây không phải cấu hình bắt buộc cho mọi triển khai BERTopic. Kiến trúc BERTopic có tính mô-đun: embedding model, phương pháp giảm chiều, thuật toán phân cụm, vectorizer và representation model có thể được thay thế nếu vẫn bảo đảm mục tiêu biểu diễn, phân cụm và mô tả topic của bài toán cụ thể.
 - Ý tưởng/cơ chế chính: Mỗi cụm được xem như một lớp. Các tài liệu trong một cụm được nối thành một “tài liệu lớp”, rồi TF-IDF được điều chỉnh để đo độ quan trọng của từ đối với lớp thay vì đối với từng tài liệu. Việc tách bước embedding/clustering khỏi bước biểu diễn topic cho phép thay đổi embedding hoặc tinh chỉnh biểu diễn mà không nhất thiết phải thiết kế lại toàn bộ mô hình.
 
 ## 4. Dataset — Dữ liệu
@@ -73,7 +74,8 @@
 
 ## 10. Trạng thái và bàn giao
 
-- Trạng thái: `Ready for TV3 review`.
-- Link file hoặc PR bàn giao: Chưa tạo — bổ sung sau khi push branch và mở PR.
-- Nhận xét của TV3 sau review:
+- Trạng thái: `Revised after TV3 review`.
+- Commit bàn giao ban đầu: https://github.com/lunatran141/vietnamese-news-topic-discovery/commit/a0c8866
+- PR bàn giao ban đầu: https://github.com/lunatran141/vietnamese-news-topic-discovery/pull/11
+- Nhận xét của TV3 sau review: Đã làm rõ pipeline SBERT → UMAP → HDBSCAN → c-TF-IDF là cấu hình trong nghiên cứu gốc, không phải cấu hình bắt buộc của mọi BERTopic.
 
