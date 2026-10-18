@@ -34,6 +34,7 @@
 
 - Chỉ số và cách đánh giá: NPMI Topic Coherence, Topic Diversity, số outlier, runtime và token usage đối với phương pháp dùng LLM.
 - Kết quả/phát hiện chính: Tăng `min_cluster_size` thường giữ coherence tốt; giảm gián tiếp thường tăng diversity, đặc biệt trên dữ liệu ngắn, nhưng có thể đánh đổi coherence trên văn bản dài. Trong các embedding cho Agglomerative Clustering, c-TF-IDF có hiệu quả tốt và chi phí thấp. LLM prompting có thể đạt coherence/diversity tốt hơn nhưng chậm hơn và tốn tài nguyên/token.
+- Giới hạn diễn giải kết quả LLM: Kết quả thuận lợi của LLM prompting chỉ được ghi nhận trên ba dataset, các cấu hình reduction và các metric NPMI/topic diversity/runtime/token usage của nghiên cứu này. Kết quả đó không chứng minh LLM luôn tốt hơn c-TF-IDF, Agglomerative Clustering hoặc các phương pháp topic modeling khác trên mọi corpus. Hiệu quả có thể thay đổi theo ngôn ngữ, độ dài văn bản, prompt, mô hình LLM, số topic mục tiêu, metric và tiêu chí đánh giá của người dùng.
 - Điều kiện đi kèm số liệu: Kết luận được tổng hợp trên ba dataset và nhiều cấu hình HDBSCAN. Ví dụ runtime/token trong Section V.D giảm từ 50 xuống 25 topic trên Trump Tweets, chạy trên laptop có NVIDIA RTX 4050, Intel Core Ultra 7 và 32 GB RAM; các LLM reduction trong thí nghiệm này gọi OpenAI API. Không so trực tiếp số liệu này với kết quả đồ án nếu khác dữ liệu hoặc cấu hình.
 
 ## 6. Gap — Hạn chế hoặc khoảng trống
@@ -74,7 +75,8 @@
 
 ## 10. Trạng thái và bàn giao
 
-- Trạng thái: `Ready for TV3 review`.
-- Link file hoặc PR bàn giao: Chưa tạo — bổ sung sau khi push branch và mở PR.
-- Nhận xét của TV3 sau review:
+- Trạng thái: `Revised after TV3 review`.
+- Commit bàn giao ban đầu: https://github.com/lunatran141/vietnamese-news-topic-discovery/commit/a0c8866
+- PR bàn giao ban đầu: https://github.com/lunatran141/vietnamese-news-topic-discovery/pull/11
+- Nhận xét của TV3 sau review: Đã giới hạn kết luận về LLM prompting theo dataset, cấu hình và metric; không diễn giải thành LLM luôn vượt trội hơn các phương pháp khác.
 
