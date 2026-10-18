@@ -30,11 +30,15 @@ def test_k_matches_m08_m09_candidate():
     assert config["model"]["random_state"] == 42
 
 
+
 def test_final_test_is_locked():
     config, _ = load_config("configs/lda_final.yaml")
 
-    assert config["selection"]["approval_status"] == "pending"
+    assert config["selection"]["selected_n_topics"] == 15
+    assert config["selection"]["comparison_k"] == 20
+    assert config["selection"]["approval_status"] == "approved"
     assert config["safety"]["allow_test"] is False
+
 
 
 def test_disjoint_splits_are_accepted():

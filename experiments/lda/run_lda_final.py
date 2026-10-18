@@ -181,8 +181,29 @@ def finalize(config, base, train, val):
         int(config["model"]["top_n_words"]),
     )
 
+    if len(distributions) != len(test):
+        raise ValueError("Test document-topic count mismatch")
+
+    if distributions.shape[1] != lda_config["n_components"]:
+        raise ValueError("Unexpected number of LDA topics")
+
+    if not np.isfinite(distributions).all():
+        raise ValueError("Invalid document-topic probabilities")
+
+    if not np.allclose(
+        distributions.sum(axis=1), 1.0, atol=1e-6
+    ):
+        raise ValueError("Document-topic probabilities must sum to 1")
+
+    if len(topics) != lda_config["n_components"]:
+        raise ValueError("Topic keyword count mismatch")
+
+    if len(topic_npmi) != len(topics):
+        raise ValueError("Per-topic NPMI count mismatch")
+
     artifact_dir.mkdir(parents=True)
     result_dir.mkdir(parents=True)
+
 
     joblib.dump(
         {"vectorizer": vectorizer, "lda_model": model},

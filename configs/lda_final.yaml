@@ -20,7 +20,7 @@ selection:
   selection_source: "docs/m08_lda_experiments.md"
   stability_source: "docs/m09_lda_stability.md"
   comparison_k: 20
-  approval_status: "pending"
+  approval_status: "approved"
 
 model:
   random_state: 42
