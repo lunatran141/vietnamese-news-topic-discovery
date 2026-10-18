@@ -2,6 +2,7 @@
 
 from src.artifacts.adapters import (
     export_bertopic_artifacts,
+    export_kmeans_artifacts,
 )
 
 from src.artifacts.loader import (
@@ -25,5 +26,7 @@ __all__ = [
     "ModelSummary",
     "TopicKeyword",
     "TopicSummary",
+    "export_bertopic_artifacts",
+    "export_kmeans_artifacts",
     "load_artifact_bundle",
 ]

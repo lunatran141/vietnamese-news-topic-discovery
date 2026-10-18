@@ -1,0 +1,66 @@
+{
+  "model_name": "KMeans kmeans_baseline",
+  "run_id": "kmeans_baseline",
+  "algorithm": "KMeans",
+  "representation": "TF-IDF",
+  "topic_count": 9,
+  "outlier_rate": 0.0,
+  "runtime_seconds": 112.62,
+  "metrics": {
+    "topic_diversity": 0.9556,
+    "train_outlier_rate": 0.0,
+    "validation_outlier_rate": 0.0,
+    "train_count": 6493,
+    "validation_count": 1391,
+    "inertia": 5844.7727,
+    "silhouette_score": 0.019,
+    "davies_bouldin_index": 6.1566,
+    "calinski_harabasz_score": 11.3745,
+    "ari": 0.5925,
+    "nmi": 0.7004,
+    "purity": 0.8728
+  },
+  "config": {
+    "dataset": {
+      "split_manifest_path": "data/splits/split_manifest.csv",
+      "processed_dataset_path": "data/processed/p2_segmented.csv",
+      "tfidf_artifacts_dir": "artifacts/tfidf",
+      "data_version": "v1.0",
+      "train_split": "train",
+      "val_split": "val",
+      "test_split": "test"
+    },
+    "clustering": {
+      "algorithm": "kmeans",
+      "k_search_range": [
+        3,
+        5,
+        7,
+        9,
+        11,
+        14,
+        18
+      ],
+      "default_k": 7,
+      "selected_k": 9,
+      "stability_seeds": [
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "small_cluster_threshold": 30,
+      "init": "k-means++",
+      "n_init": 10,
+      "max_iter": 300,
+      "random_state": 42,
+      "n_clusters": 9
+    },
+    "topics": {
+      "top_n_keywords": 15,
+      "representative_docs_per_cluster": 5
+    },
+    "selected_at": "2026-10-15T15:58:44.087514+00:00"
+  }
+}
