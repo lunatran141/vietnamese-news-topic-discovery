@@ -49,6 +49,9 @@ def test_manifest_content_schema():
 
     assert manifest["schema"]["columns"] == EXPECTED_SCHEMA
     assert manifest["schema"]["model_input_column"] == "text"
+    assert manifest["schema"]["formula_for_text"] == (
+        "processed_title + ' ' + processed_content"
+    )
 
 
 def test_manifest_verification_function():

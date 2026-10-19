@@ -19,4 +19,18 @@ python -m experiments.nmf.run_experiment --stage finalize --n-topics 10
 ```
 
 Không dùng stage `finalize` để thử nhiều K vì stage này đọc test set. Cấu hình,
-seed, dữ liệu và output được mô tả tại `docs/nmf_m04_m06_guide.md`.
+seed và dữ liệu được mô tả tại:
+
+- `docs/m04_nmf_guide.md` — pipeline và model artifacts.
+- `docs/m05_nmf_experiments.md` — chọn K trên validation.
+- `docs/m06_nmf_multi_topic_analysis.md` — case đa chủ đề trên test.
+
+Xuất run cuối sang common artifact schema:
+
+```powershell
+python -m experiments.export_common_artifacts --model nmf
+```
+
+Exporter đọc Parquet gốc, tạo bundle tại
+`artifacts/common/nmf/<run_id>/` và kiểm tra bundle bằng
+`load_artifact_bundle()`.
