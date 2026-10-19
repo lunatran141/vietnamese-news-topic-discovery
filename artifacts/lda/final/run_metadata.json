@@ -1,0 +1,15 @@
+{
+  "task": "3.7",
+  "created_at_utc": "2026-10-18T14:43:25.379745+00:00",
+  "dataset_version": "v1.0",
+  "preprocessing_variant": "p2_segmented",
+  "fit_split": "train+val",
+  "evaluation_split": "test",
+  "train_documents": 6493,
+  "val_documents": 1391,
+  "test_documents": 1390,
+  "selected_n_topics": 15,
+  "random_state": 42,
+  "selection_source": "docs/m08_lda_experiments.md",
+  "npmi_definition": "document_binary_common"
+}

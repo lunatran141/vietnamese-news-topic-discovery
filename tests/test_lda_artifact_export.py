@@ -197,7 +197,7 @@ def test_extended_metrics():
 def test_extended_representatives():
     """Check representative documents and development-only split."""
     root = Path(
-        "artifacts/common/lda/lda_k15_seed42_validation"
+        "artifacts/common/lda/lda_k15_seed42"
     )
 
     reps = pd.read_csv(root / "representative_docs.csv")
@@ -219,9 +219,7 @@ def test_extended_representatives():
 
 def test_extended_projection():
     """Check projection consistency with document assignments."""
-    root = Path(
-        "artifacts/common/lda/lda_k15_seed42_validation"
-    )
+    root = COMMON_DIR
 
     bundle = load_artifact_bundle(root)
     projection = pd.read_csv(root / "projection_2d.csv")

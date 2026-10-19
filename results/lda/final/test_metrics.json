@@ -1,0 +1,9 @@
+{
+  "n_topics": 15,
+  "npmi_coherence": 0.14709446410016874,
+  "npmi_definition": "document_binary_common",
+  "topic_diversity": 0.6533333333333333,
+  "adjusted_rand_index": 0.40646609063623057,
+  "normalized_mutual_info": 0.5727127152837649,
+  "test_documents": 1390
+}

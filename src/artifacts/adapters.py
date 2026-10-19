@@ -631,6 +631,11 @@ def export_lda_artifacts(
     source_dir = Path(source_dir)
     output_dir = Path(output_dir)
 
+    if output_dir.exists():
+        raise FileExistsError(
+            f"Output already exists: {output_dir}"
+        )
+
     _require_files(
         [
             source_dir / "lda_pipeline.joblib",
@@ -643,11 +648,6 @@ def export_lda_artifacts(
         ],
         model_label="LDA Final",
     )
-
-    if output_dir.exists():
-        raise FileExistsError(
-            f"Output already exists: {output_dir}"
-        )
 
     metadata = _read_json(source_dir / "run_metadata.json")
     final_config = _read_json(source_dir / "config.json")
@@ -887,8 +887,6 @@ def export_lda_artifacts(
     if topic_summary["document_count"].sum() != 9274:
         raise ValueError("Topic counts mismatch")
 
-    output_dir.mkdir(parents=True, exist_ok=False)
-
 
     # Load representatives selected from Train + Validation.
     representatives = pd.read_csv(
@@ -958,6 +956,7 @@ def export_lda_artifacts(
         representative_splits["split"].to_numpy()
     )
 
+    output_dir.mkdir(parents=True, exist_ok=False)
 
     topic_summary.to_csv(
         output_dir / "topic_summary.csv",
