@@ -22,8 +22,7 @@ EMBEDDING_CONFIG_PATH = ROOT / "configs/embeddings.yaml"
 HDBSCAN_CONFIG_PATH = ROOT / "configs/hdbscan.yaml"
 
 OUTPUT_DIR = (
-    ROOT
-    / "artifacts/common/hdbscan/minilm_title_content_eom_15_5"
+    ROOT / "artifacts/common/hdbscan/minilm_title_content_eom_15_5"
 )
 DOCUMENT_TOPICS_PATH = OUTPUT_DIR / "document_topics.csv"
 TOPIC_KEYWORDS_PATH = OUTPUT_DIR / "topic_keywords.csv"
@@ -31,6 +30,7 @@ TOPIC_SUMMARY_PATH = OUTPUT_DIR / "topic_summary.csv"
 CONFIG_USED_PATH = OUTPUT_DIR / "config_used.yaml"
 MODEL_SUMMARY_PATH = OUTPUT_DIR / "model_summary.json"
 MANIFEST_PATH = OUTPUT_DIR / "manifest.json"
+RUN_METADATA_PATH = OUTPUT_DIR / "run_metadata.json"
 
 EMBEDDING_RUN = "minilm_title_content"
 EXPERIMENT = "eom_15_5"
@@ -114,7 +114,7 @@ def build_topic_summary(
     document_topics: pd.DataFrame,
     topic_keywords: pd.DataFrame,
 ) -> pd.DataFrame:
-    """Tạo thống kê cho từng cụm, gồm cả dòng outlier -1."""
+    """Tạo thống kê từng cụm, gồm cả dòng outlier -1."""
     counts = document_topics.groupby("topic_id", sort=True).size()
     keyword_lookup = (
         topic_keywords.sort_values(["topic_id", "rank"])
@@ -139,7 +139,7 @@ def build_topic_summary(
                     f"Cụm {topic_id} không có từ khóa"
                 )
 
-            # Đây là tên tự động, chưa được duyệt thủ công.
+            # Tên tự động; chưa được duyệt thủ công.
             topic_name = " / ".join(words[:3])
             top_keywords = ", ".join(words)
 
@@ -148,7 +148,7 @@ def build_topic_summary(
                 "topic_id": topic_id,
                 "topic_name": topic_name,
                 "document_count": int(document_count),
-                # Schema chung quy định tỷ phần trong khoảng 0–1.
+                # Tỷ phần trong khoảng 0–1.
                 "percentage": document_count / total_articles,
                 "top_keywords": top_keywords,
             }
@@ -243,7 +243,7 @@ def write_bundle_metadata(
     n_clusters: int,
     n_outliers: int,
 ) -> None:
-    """Xuất config, model summary và manifest theo schema chung."""
+    """Xuất ba file metadata bắt buộc của bundle chung."""
     with CONFIG_USED_PATH.open(
         "w", encoding="utf-8"
     ) as file:
@@ -262,7 +262,7 @@ def write_bundle_metadata(
         "representation": config_used["embedding"]["model_name"],
         "topic_count": n_clusters,
         "outlier_rate": n_outliers / n_articles,
-        # Không tự ước lượng runtime khi M11 chưa lưu số này.
+        # M11 chưa lưu runtime của run này.
         "runtime_seconds": None,
         "metrics": {
             "train_count": n_articles,
@@ -306,6 +306,59 @@ def write_bundle_metadata(
     ) as file:
         json.dump(
             manifest,
+            file,
+            ensure_ascii=False,
+            indent=2,
+        )
+
+
+def write_run_metadata(
+    summary_row: pd.Series,
+    config_used: dict,
+    n_articles: int,
+    n_clusters: int,
+    n_outliers: int,
+) -> None:
+    """Lưu nguồn và kết quả của đúng run M11 được xuất."""
+    metadata = {
+        "run_id": RUN_ID,
+        "embedding_run": EMBEDDING_RUN,
+        "experiment": EXPERIMENT,
+        "split": "train",
+        "config_hash": str(summary_row["config_hash"]),
+        "source_files": {
+            "assignments": (
+                ASSIGNMENTS_PATH.relative_to(ROOT).as_posix()
+            ),
+            "m11_summary": (
+                SUMMARY_PATH.relative_to(ROOT).as_posix()
+            ),
+            "articles": ARTICLES_PATH.relative_to(
+                ROOT
+            ).as_posix(),
+            "split_manifest": (
+                SPLIT_MANIFEST_PATH.relative_to(ROOT).as_posix()
+            ),
+            "embedding_artifact": config_used["embedding"][
+                "artifact_path"
+            ],
+        },
+        "n_articles": n_articles,
+        "n_clusters": n_clusters,
+        "n_outliers": n_outliers,
+        "outlier_rate": n_outliers / n_articles,
+        "n_assigned": n_articles - n_outliers,
+        "keyword_method": (
+            "TF-IDF trên processed_title và 60 từ đầu "
+            "processed_content, gom theo cụm; không gồm -1"
+        ),
+    }
+
+    with RUN_METADATA_PATH.open(
+        "w", encoding="utf-8"
+    ) as file:
+        json.dump(
+            metadata,
             file,
             ensure_ascii=False,
             indent=2,
@@ -385,9 +438,7 @@ def main() -> None:
     )
 
     if int(expected["n_articles"]) != len(run):
-        raise ValueError(
-            "Số bài không khớp M11 summary"
-        )
+        raise ValueError("Số bài không khớp M11 summary")
     if int(expected["n_noise"]) != n_outliers:
         raise ValueError(
             "Số bài -1 không khớp M11 summary"
@@ -395,6 +446,21 @@ def main() -> None:
     if int(expected["n_clusters"]) != n_clusters:
         raise ValueError(
             "Số cụm không khớp M11 summary"
+        )
+    if "config_hash" not in run.columns:
+        raise ValueError(
+            "Assignments thiếu cột config_hash"
+        )
+    if pd.isna(expected["config_hash"]):
+        raise ValueError(
+            "M11 summary thiếu config_hash"
+        )
+    if not run["config_hash"].eq(
+        expected["config_hash"]
+    ).all():
+        raise ValueError(
+            "config_hash trong assignments "
+            "không khớp M11 summary"
         )
 
     articles = pd.read_csv(
@@ -512,6 +578,13 @@ def main() -> None:
         n_clusters=n_clusters,
         n_outliers=n_outliers,
     )
+    write_run_metadata(
+        summary_row=expected,
+        config_used=config_used,
+        n_articles=len(document_topics),
+        n_clusters=n_clusters,
+        n_outliers=n_outliers,
+    )
 
     # Dùng chính loader mà Streamlit sử dụng để kiểm tra bundle.
     bundle = load_artifact_bundle(OUTPUT_DIR)
@@ -536,6 +609,7 @@ def main() -> None:
     print("Đã lưu:", CONFIG_USED_PATH)
     print("Đã lưu:", MODEL_SUMMARY_PATH)
     print("Đã lưu:", MANIFEST_PATH)
+    print("Đã lưu:", RUN_METADATA_PATH)
     print("Số bài:", len(bundle.document_topics))
     print("Số cụm:", n_clusters)
     print("Số bài -1:", n_outliers)
