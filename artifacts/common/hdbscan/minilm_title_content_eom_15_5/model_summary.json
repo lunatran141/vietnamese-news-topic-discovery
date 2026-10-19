@@ -1,0 +1,59 @@
+{
+  "model_name": "HDBSCAN minilm_title_content_eom_15_5",
+  "run_id": "minilm_title_content_eom_15_5",
+  "algorithm": "HDBSCAN",
+  "representation": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "topic_count": 101,
+  "outlier_rate": 0.2476513168027106,
+  "runtime_seconds": null,
+  "metrics": {
+    "train_count": 6493,
+    "train_outlier_count": 1608,
+    "train_assigned_count": 4885
+  },
+  "config": {
+    "dataset": {
+      "path": "data/processed/p0_minimal.csv",
+      "split_manifest_path": "data/splits/split_manifest.csv",
+      "split": "train",
+      "expected_articles": 6493
+    },
+    "embedding": {
+      "run_id": "minilm_title_content",
+      "model_name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "content_words": 60,
+      "expected_dimensions": 384,
+      "artifact_path": "artifacts/embeddings/m10_v1_train_minilm.npz",
+      "normalize_embeddings": true
+    },
+    "umap": {
+      "n_neighbors": 15,
+      "n_components": 5,
+      "min_dist": 0.0,
+      "metric": "cosine",
+      "random_state": 42
+    },
+    "hdbscan": {
+      "metric": "euclidean",
+      "name": "eom_15_5",
+      "min_cluster_size": 15,
+      "min_samples": 5,
+      "cluster_selection_method": "eom"
+    },
+    "keyword_extraction": {
+      "method": "TF-IDF trên văn bản gom theo cụm",
+      "text": "processed_title + 60 từ đầu processed_content",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "max_df": 0.9,
+      "sublinear_tf": true,
+      "max_features": 50000,
+      "top_n_keywords": 10,
+      "exclude_outlier_topic": true
+    }
+  },
+  "topic_probability_meaning": "membership_strength của HDBSCAN trong [0, 1]; không phải xác suất đã hiệu chuẩn",
+  "topic_name_method": "Tên tự động ghép từ ba từ khóa TF-IDF đầu; chưa được duyệt thủ công"
+}
