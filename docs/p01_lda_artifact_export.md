@@ -54,16 +54,19 @@ Nếu thư mục đích đã tồn tại, exporter sẽ từ chối ghi đè nh�
 
 ## 5. Các file đầu ra
 
-Bộ common artifact của LDA bao gồm sáu file theo schema thống nhất của nhóm:
+Bộ common artifact của LDA bao gồm tám file, trong đó sáu file thuộc common artifact schema v1.0 và hai file mở rộng phục vụ trực quan hóa, phân tích kết quả.
 
 | File | Nội dung |
 |---|---|
-| `document_topics.csv` | Gán topic cho toàn bộ 9,274 bài báo |
-| `topic_keywords.csv` | Top 10 từ khóa đại diện cho mỗi topic trong 15 topic |
-| `topic_summary.csv` | Thống kê số lượng bài và tỷ lệ phân bố theo từng topic |
-| `model_summary.json` | Thông tin tổng quan về mô hình, cấu hình và metadata |
-| `config_used.yaml` | Cấu hình được sử dụng trong quá trình xây dựng và export mô hình |
-| `manifest.json` | Danh mục các file đầu ra theo common artifact schema |
+| `document_topics.csv` | Gán topic cho toàn bộ 9.274 bài báo |
+| `topic_keywords.csv` | Top 10 từ khóa của mỗi topic, tổng cộng 150 từ khóa |
+| `topic_summary.csv` | Thống kê số lượng bài và tỷ lệ của 15 topic |
+| `model_summary.json` | Metadata và các chỉ số đánh giá Final Test |
+| `config_used.yaml` | Cấu hình LDA Final đã sử dụng |
+| `manifest.json` | Danh mục sáu file theo common artifact schema v1.0 |
+| `representative_docs.csv` | 45 bài đại diện, 3 bài/topic, chỉ thuộc Train+Validation |
+| `projection_2d.csv` | Tọa độ PCA 2D của toàn bộ 9.274 bài báo |
+
 
 File `document_topics.csv` bao gồm các trường dữ liệu sau:
 
@@ -158,3 +161,53 @@ Common artifact chứa kết quả gán topic cho toàn bộ các bài báo thu�
 Các assignment trên Test không được sử dụng để lựa chọn lại K, tinh chỉnh mô hình hoặc báo cáo thêm kết quả Final Test như một thí nghiệm độc lập. K=15 là cấu hình chính thức đã được phê duyệt trước khi thực hiện đánh giá cuối.
 
 Các file mô hình cục bộ và artifact trung gian thuộc M07–M09 không nằm trong bộ common artifact export. Những file này được lưu riêng để phục vụ việc tái lập và kiểm tra các thực nghiệm trước đó.
+
+
+## 10. Extended Artifacts — Metrics, Representatives và Projection
+
+### 10.1. Final Test Metrics
+
+Các chỉ số đánh giá được lấy trực tiếp từ `results/lda/final/test_metrics.json` và lưu trong trường `metrics` của `model_summary.json`. Quá trình export không tính lại các chỉ số và không thực hiện thêm thí nghiệm trên Final Test.
+
+| Metric | Giá trị |
+|---|---:|
+| NPMI Coherence | 0.147094 |
+| Topic Diversity | 0.653333 |
+| Adjusted Rand Index (ARI) | 0.406466 |
+| Normalized Mutual Information (NMI) | 0.572713 |
+
+Các chỉ số trên tương ứng với cấu hình LDA K=15, seed=42 đã được phê duyệt và đánh giá trên Final Test gồm 1.390 bài báo.
+
+### 10.2. Representative Documents
+
+File `representative_docs.csv` chứa 45 bài báo đại diện, với ba bài cho mỗi topic. Các bài đại diện được kế thừa từ kết quả đã lưu tại `results/lda/final/representative_docs_development.csv`, không chọn lại từ Final Test.
+
+Dữ liệu gồm 36 bài thuộc Train và 9 bài thuộc Validation, không có bài thuộc Test. Mỗi bản ghi chứa `topic_id`, `rank`, `article_id`, `title`, `topic_probability` và `split`.
+
+### 10.3. PCA 2D Projection
+
+File `projection_2d.csv` lưu tọa độ hai chiều của toàn bộ 9.274 bài báo, phục vụ trực quan hóa phân bố chủ đề trên giao diện ứng dụng.
+
+PCA sử dụng vector phân phối xác suất 15 topic của từng bài báo. Phép biến đổi PCA được fit trên 7.884 bài thuộc Train+Validation, sau đó áp dụng cho toàn bộ Train, Validation và Test.
+
+File gồm các trường `article_id`, `split`, `topic_id`, `x` và `y`. Mỗi bài báo có duy nhất một cặp tọa độ 2D, với `topic_id` và `split` nhất quán với `document_topics.csv`.
+
+Projection chỉ phục vụ trực quan hóa, không thay đổi mô hình LDA, kết quả topic assignments hoặc các chỉ số Final Test.
+
+### 10.4. Schema Compatibility
+
+Sáu file bắt buộc tiếp tục tuân theo common artifact schema v1.0. Hai file `representative_docs.csv` và `projection_2d.csv` là artifact mở rộng, chưa được khai báo trong `manifest.json` và chưa được đọc trực tiếp bởi `load_artifact_bundle()`.
+
+Việc tích hợp hai file mở rộng vào API hoặc Streamlit cần được thực hiện riêng theo quy ước chung của nhóm.
+
+### 10.5. Validation
+
+Bộ artifact mở rộng đã được xác minh với kết quả:
+
+- 9.274 document assignments và 9.274 projection coordinates.
+- 9.274 `article_id` duy nhất, không có assignment trùng lặp.
+- 45 representative documents, đủ ba bài cho mỗi topic và không có bài thuộc Test.
+- Các giá trị `x`, `y` đều hữu hạn và có độ biến thiên.
+- `split` và `topic_id` của projection khớp với document assignments.
+- Final Test metrics khớp với kết quả đã lưu của Task 3.7.
+- Bộ kiểm thử artifact gồm 28 tests đều PASSED.

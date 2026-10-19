@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 import pytest
+import numpy as np
 
 from src.artifacts.adapters import export_lda_artifacts
 from src.artifacts.loader import load_artifact_bundle
@@ -170,3 +171,89 @@ def test_export_does_not_overwrite_existing_files(tmp_path):
         export_lda_artifacts(output_dir=output)
 
     assert marker.read_text(encoding="utf-8") == "KEEP ORIGINAL"
+
+
+def test_extended_metrics():
+    """Check that exported metrics match frozen Final Test results."""
+    root = Path(
+        "artifacts/common/lda/lda_k15_seed42"
+    )
+
+    bundle = load_artifact_bundle(root)
+    metrics = bundle.model_summary.metrics
+
+    expected = {
+        "npmi_coherence": 0.14709446410016874,
+        "topic_diversity": 0.6533333333333333,
+        "adjusted_rand_index": 0.40646609063623057,
+        "normalized_mutual_info": 0.5727127152837649,
+    }
+
+    for name, value in expected.items():
+        assert name in metrics
+        assert metrics[name] == pytest.approx(value)
+
+
+def test_extended_representatives():
+    """Check representative documents and development-only split."""
+    root = Path(
+        "artifacts/common/lda/lda_k15_seed42_validation"
+    )
+
+    reps = pd.read_csv(root / "representative_docs.csv")
+
+    assert len(reps) == 45
+    assert reps["article_id"].is_unique
+    assert reps["split"].isin(["train", "val"]).all()
+
+    expected_pairs = {
+        (topic_id, rank)
+        for topic_id in range(15)
+        for rank in (1, 2, 3)
+    }
+
+    assert set(
+        zip(reps["topic_id"], reps["rank"])
+    ) == expected_pairs
+
+
+def test_extended_projection():
+    """Check projection consistency with document assignments."""
+    root = Path(
+        "artifacts/common/lda/lda_k15_seed42_validation"
+    )
+
+    bundle = load_artifact_bundle(root)
+    projection = pd.read_csv(root / "projection_2d.csv")
+
+    assert len(projection) == 9274
+    assert projection["article_id"].is_unique
+
+    merged = projection.merge(
+        bundle.document_topics[
+            ["article_id", "split", "topic_id"]
+        ],
+        on="article_id",
+        validate="one_to_one",
+        suffixes=("_projection", "_assignment"),
+    )
+
+    assert len(merged) == 9274
+
+    assert (
+        merged["split_projection"]
+        == merged["split_assignment"]
+    ).all()
+
+    assert (
+        merged["topic_id_projection"]
+        == merged["topic_id_assignment"]
+    ).all()
+
+    coordinates = projection[
+        ["x", "y"]
+    ].to_numpy(dtype=float)
+
+    assert np.isfinite(coordinates).all()
+    assert np.std(coordinates[:, 0]) > 0
+    assert np.std(coordinates[:, 1]) > 0
