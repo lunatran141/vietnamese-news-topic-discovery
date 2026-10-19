@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 import yaml
+import json
 
 from src.artifacts.loader import load_artifact_bundle
 
@@ -157,3 +158,31 @@ def test_topic_summary_va_keywords_khop_bai(bundle):
 
     for _, group in keywords.groupby("topic_id"):
         assert sorted(group["rank"].tolist()) == list(range(1, 11))
+
+def test_run_metadata_khop_m11(bundle):
+    path = ARTIFACT_DIR / "run_metadata.json"
+    assert path.is_file()
+
+    metadata = json.loads(path.read_text(encoding="utf-8"))
+    assert metadata["run_id"] == bundle.manifest.run_id
+    assert metadata["embedding_run"] == "minilm_title_content"
+    assert metadata["experiment"] == "eom_15_5"
+    assert metadata["split"] == "train"
+    assert metadata["n_articles"] == 6493
+    assert metadata["n_clusters"] == 101
+    assert metadata["n_outliers"] == 1608
+    assert metadata["n_assigned"] == 4885
+    assert metadata["outlier_rate"] == pytest.approx(1608 / 6493)
+
+    source = pd.read_csv(
+        ROOT / metadata["source_files"]["m11_summary"]
+    )
+    selected = source.loc[
+        source["embedding_run"].eq("minilm_title_content")
+        & source["experiment"].eq("eom_15_5")
+    ]
+    assert len(selected) == 1
+    assert metadata["config_hash"] == selected.iloc[0]["config_hash"]
+
+    for relative_path in metadata["source_files"].values():
+        assert (ROOT / relative_path).is_file()
