@@ -1,0 +1,46 @@
+﻿topic_id,rank,article_id,title,topic_probability,split
+0,1,VNN_b475d7f70aea,Thủ khoa của ngành có điểm chuẩn cao nhất cả nước,0.9979,train
+0,2,VNN_41d4dc5d45a8,"Loạt thí sinh 1600 điểm SAT, có huy chương quốc tế chọn Đại học Bách khoa Hà Nội",0.9967,train
+0,3,TTR_79f4b081c9ad,Lần đầu Đại học Bách khoa Hà Nội có 3 thủ khoa tốt nghiệp đạt GPA 4.0,0.996,train
+1,1,TTR_a3863e374b11,Khối ngoại bỏ nghìn tỉ 'gom hàng' trước ngày chứng khoán nâng hạng,0.9986,train
+1,2,VNE_ca3dca5ed351,Người Việt chi hơn 300 tỷ đồng 'đặt cọc' iPhone 18 Pro,0.9982,train
+1,3,VNN_447bb6d20d6f,"Lãi suất ngân hàng hôm nay 10/9/2026: Cao nhất 10%/năm, phải gửi cả nghìn tỷ",0.998,train
+2,1,TTR_4ddc2c7d8971,6 loại thực phẩm nên hạn chế kết hợp,0.9986,val
+2,2,VNE_465ea809b97e,Mẹo ăn sáng hỗ trợ ổn định đường huyết,0.9983,train
+2,3,TTR_1b197b9b775f,Các loại thịt cá thường dùng mang lại dinh dưỡng như thế nào?,0.9983,train
+3,1,VNN_1babe304b210,Asiad 2026 ngày 28/9: Việt Nam giành 1 HCĐ,0.9992,val
+3,2,VNN_dab46cfdd86e,Asiad 2026 ngày 27/9: Chạy 4x100m nữ Việt Nam vào chung kết,0.9992,train
+3,3,VNN_64d78336b45a,Asiad 2026 hôm nay 23/9: Việt Nam giành thêm 5 HCĐ,0.9991,val
+4,1,VNE_caee9f2e1b46,Cựu trưởng Công an Phú Quốc bị đề nghị 14-16 năm tù,0.9984,train
+4,2,TTR_20e0e6f3bd40,Cựu Trưởng Công an TP Phú Quốc bị đề nghị mức án 14 - 16 năm tù về tội lừa đảo chiếm đoạt tài sản,0.9982,train
+4,3,VNE_5a0319b5d94c,Người đánh chủ nhà hàng Hàn Quốc tử vong: 'Không tỉnh táo lúc gây án',0.9981,train
+5,1,VNE_358ec101e356,Cung đường VnExpress Marathon Quy Nhơn 2026 ôm trọn tuyến ven biển,0.998,train
+5,2,VNE_dd6c465d73a7,Mốc thời gian cần nhớ tại VnExpress Marathon Quy Nhơn 2026,0.998,train
+5,3,VNE_94cbf20580da,VnExpress Marathon Nghệ An phát bib ở Nhà Văn hóa Lao động tỉnh,0.93,train
+6,1,VNN_f4ad49ae28a1,"Đình Bắc lập đại công, Việt Nam thắng nhọc trận ra quân FIFA ASEAN Cup",0.999,train
+6,2,VNN_85a5b84664ba,Malaysia thắng ‘3 sao’ trận mở màn FIFA ASEAN Cup 2026,0.9988,train
+6,3,VNE_587a367c9378,Raphinha lại lập hat-trick cho Barca,0.9987,train
+7,1,VNE_d74d542c81d2,Đặt ba stent khơi thông động mạch tắc hẹp,0.9986,val
+7,2,VNE_6c4b508a3939,5 biến chứng viêm phổi thường gặp,0.9985,train
+7,3,VNE_7e633c5f8c11,Những bệnh hô hấp dễ mắc sau tuổi 50,0.9984,train
+8,1,TTR_c658c8c78858,Giá vàng tuần này sẽ lặp lại kịch bản tuần trước?,0.9982,train
+8,2,TTR_6157b00b385e,Giá vàng chịu sức ép khi nhiều ngân hàng trung ương lớn bước vào chu kỳ thắt chặt,0.9975,train
+8,3,TTR_543493db8420,"Bớt lo Fed tăng lãi suất, giá vàng hồi phục mạnh",0.997,train
+9,1,TTR_d87109d69c2d,"Trường nội trú hơn 123 tỉ đồng đã sạch đẹp, HS vùng biên xứ Thanh háo hức chờ khai giảng",0.997,train
+9,2,VNE_8c1efc902271,Hà Tĩnh công bố 235 trường học sau sáp nhập,0.9939,val
+9,3,TTR_c123bed55d37,Lãnh đạo tỉnh Nghệ An chỉ đạo giải quyết vụ 127 học sinh chưa tới trường,0.9898,val
+10,1,VNE_783e52453541,Brooklyn Beckham chỉnh váy cho vợ trên thảm đỏ,0.9973,train
+10,2,VNN_c6f224ddfab7,Mỹ nhân phim nóng '50 sắc thái' mặc váy ren xuyên thấu khoe dáng đẹp,0.9971,train
+10,3,VNN_ae2a561e4a87,Con dâu diễn viên nhà tỷ phú của Beckham hôn chồng đắm đuối trên thảm đỏ,0.9962,train
+11,1,TTR_92a12e7147e2,Kép trẻ Trọng Nhân làm MV Dấu nghệ tri ân tổ nghiệp,0.9972,train
+11,2,TTR_d4d3a8b63354,"Tạ Minh Tâm, Đan Trường, Isaac, Trang Pháp hát mừng Quốc khánh 2-9",0.9774,train
+11,3,VNN_93ccd31f35f5,Hòa nhạc Quốc gia Điều còn mãi 2026,0.9672,val
+12,1,VNN_d4bf21d5a738,Sai lầm phổ biến khi 'tâm sự' với ChatGPT,0.9823,train
+12,2,VNE_2dd93c097ca2,"Gemini tấn công mạng, đoán mật khẩu người dùng",0.9707,train
+12,3,TTR_d78c65d3165b,OpenAI phát hiện AI agent tự ý đưa 53 ảnh người dùng ChatGPT lên mạng,0.9552,val
+13,1,VNN_cbd1b2a820a1,Từ chuỗi giá trị dầu khí đến hệ sinh thái công nghiệp - năng lượng,0.9215,train
+13,2,TTR_46c252ad5514,"AgriS triển khai OneHR cùng EY, xây nền nhân lực cho chiến lược toàn cầu",0.9211,train
+13,3,VNE_2ad4c4281433,Sắp diễn ra hội nghị đầu tư Techcombank tại Hà Nội,0.9058,train
+14,1,VNN_0fbfc699d785,Công bố kết luận thanh tra Ngân hàng Nhà nước chi nhánh Khu vực 8,0.9967,val
+14,2,TTR_1e5fee700c03,Thu hồi đất của Công ty Thúy Sơn - HG đem cho thuê,0.9958,train
+14,3,TTR_f3aa80ec7f88,UBND TP.HCM cho bổ sung 2.141m² tại dự án khu nhà ở phường Tân Phú theo kết luận thanh tra,0.9931,train

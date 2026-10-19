@@ -21,6 +21,7 @@ import numpy as np
 from src.data.dataset_loader import load_dataset
 from src.features.article_text import build_article_text
 from src.models.lda_pipeline import transform_lda_pipeline
+from sklearn.decomposition import PCA
 
 def _read_json(path: Path) -> dict[str, Any]:
     """Đọc file JSON."""
@@ -621,6 +622,10 @@ def export_lda_artifacts(
     output_dir: str | Path = "artifacts/common/lda/lda_k15_seed42",
     dataset_path: str | Path = "data/processed/p2_segmented.csv",
     split_manifest_path: str | Path = "data/splits/split_manifest.csv",
+    final_metrics_path: str | Path = "results/lda/final/test_metrics.json",
+    representatives_path: str | Path = (
+        "results/lda/final/representative_docs_development.csv"
+    ),
 ) -> ArtifactBundle:
     """Export frozen LDA K=15 into the shared artifact schema."""
     source_dir = Path(source_dir)
@@ -633,6 +638,8 @@ def export_lda_artifacts(
             source_dir / "config.json",
             Path(dataset_path),
             Path(split_manifest_path),
+            Path(final_metrics_path),
+            Path(representatives_path),
         ],
         model_label="LDA Final",
     )
@@ -644,6 +651,17 @@ def export_lda_artifacts(
 
     metadata = _read_json(source_dir / "run_metadata.json")
     final_config = _read_json(source_dir / "config.json")
+
+    final_metrics = _read_json(Path(final_metrics_path))
+
+    if int(final_metrics["n_topics"]) != 15:
+        raise ValueError("Final Test metrics K mismatch")
+
+    if int(final_metrics["test_documents"]) != 1390:
+        raise ValueError("Final Test document count mismatch")
+
+    if final_metrics["npmi_definition"] != "document_binary_common":
+        raise ValueError("Unexpected NPMI definition")
 
     pipeline = joblib.load(source_dir / "lda_pipeline.joblib")
     model = pipeline["lda_model"]
@@ -710,6 +728,37 @@ def export_lda_artifacts(
 
     topic_ids = probabilities.argmax(axis=1)
     topic_probs = probabilities.max(axis=1)
+
+
+    # PCA projection for visualization only.
+    # Fit on Train + Validation to keep Test held out.
+    development_mask = dataset["split"].isin(
+        ["train", "val"]
+    ).to_numpy()
+
+    if development_mask.sum() != 7884:
+        raise ValueError("Invalid development split count")
+
+    pca = PCA(n_components=2, svd_solver="full")
+
+    pca.fit(probabilities[development_mask])
+
+    coordinates = pca.transform(probabilities)
+
+    if coordinates.shape != (len(dataset), 2):
+        raise ValueError("Invalid projection shape")
+
+    if not np.isfinite(coordinates).all():
+        raise ValueError("Non-finite projection coordinates")
+
+    projection_2d = pd.DataFrame({
+        "article_id": dataset["article_id"].to_numpy(),
+        "split": dataset["split"].to_numpy(),
+        "topic_id": topic_ids.astype(int),
+        "x": coordinates[:, 0],
+        "y": coordinates[:, 1],
+    })
+
 
     if not np.isfinite(topic_probs).all():
         raise ValueError("Invalid topic probabilities")
@@ -788,8 +837,17 @@ def export_lda_artifacts(
         "outlier_rate": 0.0,
         "runtime_seconds": None,
         "metrics": {
-            "topic_diversity": _compute_topic_diversity(
-                topic_keywords
+            "topic_diversity": float(
+                final_metrics["topic_diversity"]
+            ),
+            "npmi_coherence": float(
+                final_metrics["npmi_coherence"]
+            ),
+            "adjusted_rand_index": float(
+                final_metrics["adjusted_rand_index"]
+            ),
+            "normalized_mutual_info": float(
+                final_metrics["normalized_mutual_info"]
             ),
             "document_count": len(document_topics),
             "train_count": int(
@@ -802,6 +860,7 @@ def export_lda_artifacts(
                 (document_topics["split"] == "test").sum()
             ),
         },
+
         "config": final_config,
     }
 
@@ -830,6 +889,76 @@ def export_lda_artifacts(
 
     output_dir.mkdir(parents=True, exist_ok=False)
 
+
+    # Load representatives selected from Train + Validation.
+    representatives = pd.read_csv(
+        representatives_path,
+        encoding="utf-8-sig",
+    )
+
+    required_rep_columns = {
+        "topic_id",
+        "rank",
+        "article_id",
+        "title",
+        "topic_probability",
+    }
+
+    if not required_rep_columns.issubset(representatives.columns):
+        raise ValueError("Invalid representative columns")
+
+    if len(representatives) != k * 3:
+        raise ValueError("Expected 3 representatives per topic")
+
+    if representatives["article_id"].duplicated().any():
+        raise ValueError("Duplicate representative article IDs")
+
+    for column in ("topic_id", "rank", "topic_probability"):
+        representatives[column] = pd.to_numeric(
+            representatives[column],
+            errors="raise",
+        )
+
+    expected_pairs = {
+        (topic_id, rank)
+        for topic_id in range(k)
+        for rank in (1, 2, 3)
+    }
+
+    actual_pairs = set(
+        zip(
+            representatives["topic_id"],
+            representatives["rank"],
+        )
+    )
+
+    if actual_pairs != expected_pairs:
+        raise ValueError("Incomplete representative topic/rank pairs")
+
+    if not representatives["topic_probability"].between(0, 1).all():
+        raise ValueError("Invalid representative probabilities")
+
+    representative_splits = representatives[
+        ["article_id"]
+    ].merge(
+        document_topics[["article_id", "split"]],
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    if not representative_splits["split"].isin(
+        ["train", "val"]
+    ).all():
+        raise ValueError(
+            "Representatives must belong to Train/Validation"
+        )
+
+    representatives["split"] = (
+        representative_splits["split"].to_numpy()
+    )
+
+
     topic_summary.to_csv(
         output_dir / "topic_summary.csv",
         index=False,
@@ -842,6 +971,18 @@ def export_lda_artifacts(
     )
     topic_keywords.to_csv(
         output_dir / "topic_keywords.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    representatives.to_csv(
+        output_dir / "representative_docs.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    projection_2d.to_csv(
+        output_dir / "projection_2d.csv",
         index=False,
         encoding="utf-8-sig",
     )

@@ -7,7 +7,10 @@
   "outlier_rate": 0.0,
   "runtime_seconds": null,
   "metrics": {
-    "topic_diversity": 0.6533,
+    "topic_diversity": 0.6533333333333333,
+    "npmi_coherence": 0.14709446410016874,
+    "adjusted_rand_index": 0.40646609063623057,
+    "normalized_mutual_info": 0.5727127152837649,
     "document_count": 9274,
     "train_count": 6493,
     "validation_count": 1391,
