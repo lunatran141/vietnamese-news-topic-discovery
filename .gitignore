@@ -233,3 +233,6 @@ results/bertopic_experiments/smoke_*/
 
 # Local task tracking
 docs/tv1_kmeans_tasks.csv
+
+# Human Evaluation — keep blind mapping and reviewer data private
+/results/human_eval/
