@@ -1,0 +1,107 @@
+{
+  "model_name": "LDA K15",
+  "run_id": "lda_k15_seed42",
+  "algorithm": "LDA",
+  "representation": "Bag-of-Words",
+  "topic_count": 15,
+  "outlier_rate": 0.0,
+  "runtime_seconds": null,
+  "metrics": {
+    "topic_diversity": 0.6533333333333333,
+    "npmi_coherence": 0.14709446410016874,
+    "adjusted_rand_index": 0.40646609063623057,
+    "normalized_mutual_info": 0.5727127152837649,
+    "document_count": 9274,
+    "train_count": 6493,
+    "validation_count": 1391,
+    "test_count": 1390
+  },
+  "config": {
+    "final": {
+      "base_config": "configs/lda.yaml",
+      "dataset": {
+        "path": "data/processed/p2_segmented.csv",
+        "split_manifest_path": "data/splits/split_manifest.csv",
+        "data_version": "v1.0",
+        "preprocessing_variant": "p2_segmented",
+        "text_variant": "text",
+        "train_split": "train",
+        "val_split": "val",
+        "test_split": "test"
+      },
+      "selection": {
+        "selected_n_topics": 15,
+        "selection_source": "docs/m08_lda_experiments.md",
+        "stability_source": "docs/m09_lda_stability.md",
+        "comparison_k": 20,
+        "approval_status": "approved"
+      },
+      "model": {
+        "random_state": 42,
+        "top_n_words": 10
+      },
+      "evaluation": {
+        "fit_split": "train+val",
+        "evaluation_split": "test",
+        "metrics": [
+          "c_v",
+          "c_npmi",
+          "topic_diversity",
+          "ari",
+          "nmi"
+        ]
+      },
+      "safety": {
+        "allow_test": true
+      },
+      "outputs": {
+        "artifacts_dir": "artifacts/lda/final",
+        "results_dir": "results/lda/final"
+      }
+    },
+    "base": {
+      "dataset": {
+        "path": "data/processed/p2_segmented.csv",
+        "split_manifest_path": "data/splits/split_manifest.csv",
+        "data_version": "v1.0",
+        "preprocessing_variant": "p2_segmented",
+        "text_variant": "text",
+        "train_split": "train",
+        "val_split": "val",
+        "test_split": "test"
+      },
+      "vectorizer": {
+        "max_features": 15000,
+        "min_df": 3,
+        "max_df": 0.85,
+        "ngram_range": [
+          1,
+          1
+        ],
+        "token_pattern": "(?u)\\b\\w\\w+\\b"
+      },
+      "lda": {
+        "n_components": 10,
+        "learning_method": "batch",
+        "max_iter": 20,
+        "random_state": 42,
+        "evaluate_every": -1,
+        "n_jobs": -1
+      },
+      "artifacts": {
+        "output_dir": "artifacts/lda"
+      },
+      "results": {
+        "output_dir": "results/lda"
+      }
+    },
+    "effective_lda": {
+      "n_components": 15,
+      "learning_method": "batch",
+      "max_iter": 20,
+      "random_state": 42,
+      "evaluate_every": -1,
+      "n_jobs": -1
+    }
+  }
+}

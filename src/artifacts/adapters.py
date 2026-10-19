@@ -15,6 +15,13 @@ from src.artifacts.loader import (
     load_artifact_bundle,
 )
 
+import joblib
+import numpy as np
+
+from src.data.dataset_loader import load_dataset
+from src.features.article_text import build_article_text
+from src.models.lda_pipeline import transform_lda_pipeline
+from sklearn.decomposition import PCA
 
 def _read_json(path: Path) -> dict[str, Any]:
     """Đọc file JSON."""
@@ -42,7 +49,10 @@ def _write_json(
         )
 
 
-def _require_files(paths: list[Path]) -> None:
+def _require_files(
+    paths: list[Path],
+    model_label: str = "BERTopic",
+) -> None:
     """Kiểm tra các file đầu vào bắt buộc."""
     missing_files = [
         path
@@ -56,9 +66,375 @@ def _require_files(paths: list[Path]) -> None:
             for path in missing_files
         )
         raise FileNotFoundError(
-            "Thiếu file BERTopic đầu vào: "
+            f"Thiếu file {model_label} đầu vào: "
             f"{missing_text}"
         )
+
+
+def _compute_topic_diversity(
+    topic_keywords: pd.DataFrame,
+    top_n: int = 10,
+) -> float | None:
+    """Tính độ đa dạng từ khóa giữa các topic trên top-N từ khóa đầu."""
+    if topic_keywords.empty:
+        return None
+
+    top_rows = topic_keywords[
+        topic_keywords["rank"] <= top_n
+    ]
+    keywords = [
+        str(word).strip()
+        for word in top_rows["keyword"].tolist()
+        if str(word).strip()
+    ]
+    if not keywords:
+        return None
+
+    return round(len(set(keywords)) / len(keywords), 4)
+
+
+def _build_kmeans_topic_summary(
+    document_topics: pd.DataFrame,
+    topic_keywords: pd.DataFrame,
+    representative_titles: int = 3,
+) -> pd.DataFrame:
+    """Tạo bảng topic_summary.csv cho kết quả phân cụm K-Means."""
+    total_documents = len(document_topics)
+    topic_ids = sorted(
+        set(
+            document_topics["topic_id"]
+            .dropna()
+            .astype(int)
+            .tolist()
+        )
+        | set(
+            topic_keywords["topic_id"]
+            .dropna()
+            .astype(int)
+            .tolist()
+        )
+    )
+
+    rows: list[dict[str, Any]] = []
+    for topic_id in topic_ids:
+        if topic_id == -1:
+            continue
+
+        group = document_topics[
+            document_topics["topic_id"] == topic_id
+        ]
+        topic_words = (
+            topic_keywords[
+                topic_keywords["topic_id"] == topic_id
+            ]
+            .sort_values("rank", ascending=True)
+            .head(5)["keyword"]
+            .astype(str)
+            .tolist()
+        )
+
+        if topic_words:
+            topic_name = (
+                f"{int(topic_id)}_"
+                + "_".join(topic_words[:3])
+            )
+        else:
+            topic_name = f"topic_{int(topic_id)}"
+
+        doc_count = int(len(group))
+        percentage = (
+            doc_count / total_documents
+            if total_documents > 0
+            else 0.0
+        )
+
+        row: dict[str, Any] = {
+            "topic_id": int(topic_id),
+            "topic_name": topic_name,
+            "document_count": doc_count,
+            "percentage": percentage,
+            "top_keywords": ", ".join(topic_words),
+        }
+
+        if "title" in group.columns:
+            ordered_group = group
+            if "distance_to_center" in group.columns:
+                ordered_group = group.sort_values(
+                    "distance_to_center",
+                    ascending=True,
+                )
+            titles = (
+                ordered_group["title"]
+                .fillna("")
+                .astype(str)
+            )
+            titles = (
+                titles[titles != ""]
+                .head(representative_titles)
+                .tolist()
+            )
+            row["representative_titles"] = " | ".join(
+                titles
+            )
+
+        if "category_gold" in group.columns:
+            categories = (
+                group["category_gold"]
+                .fillna("")
+                .astype(str)
+            )
+            categories = categories[categories != ""]
+            if not categories.empty:
+                category_counts = categories.value_counts()
+                row["dominant_category"] = str(
+                    category_counts.index[0]
+                )
+                row["category_purity"] = float(
+                    category_counts.iloc[0]
+                    / category_counts.sum()
+                )
+            else:
+                row["dominant_category"] = ""
+                row["category_purity"] = None
+
+        rows.append(row)
+
+    summary_df = pd.DataFrame(rows)
+    if summary_df.empty:
+        return pd.DataFrame(
+            columns=[
+                "topic_id",
+                "topic_name",
+                "document_count",
+                "percentage",
+                "top_keywords",
+            ]
+        )
+
+    return summary_df.sort_values(
+        by=["document_count", "topic_id"],
+        ascending=[False, True],
+    ).reset_index(drop=True)
+
+
+def export_kmeans_artifacts(
+    source_dir: str | Path,
+    output_dir: str | Path,
+    run_id: str | None = None,
+) -> ArtifactBundle:
+    """Chuyển kết quả K-Means sang artifact schema chung."""
+    source_dir = Path(source_dir)
+    output_dir = Path(output_dir)
+
+    document_topics_path = (
+        source_dir / "document_topics.csv"
+    )
+    topic_keywords_path = (
+        source_dir / "topic_keywords.json"
+    )
+    run_metadata_path = (
+        source_dir / "run_metadata.json"
+    )
+    config_path = source_dir / "config.json"
+
+    _require_files(
+        [
+            document_topics_path,
+            topic_keywords_path,
+            run_metadata_path,
+            config_path,
+        ],
+        model_label="KMeans",
+    )
+
+    raw_documents = pd.read_csv(
+        document_topics_path,
+        encoding="utf-8-sig",
+    )
+    raw_keywords = _read_json(topic_keywords_path)
+    run_metadata = _read_json(run_metadata_path)
+    config = _read_json(config_path)
+
+    document_topics = raw_documents.rename(
+        columns={
+            "cluster_id": "topic_id",
+        }
+    ).copy()
+
+    if "topic_id" not in document_topics.columns:
+        raise ValueError(
+            "document_topics.csv của KMeans phải có cột "
+            "cluster_id hoặc topic_id"
+        )
+
+    document_topics["topic_id"] = document_topics[
+        "topic_id"
+    ].astype(int)
+    document_topics["topic_probability"] = None
+    document_topics["is_outlier"] = False
+
+    if "title" not in document_topics.columns:
+        document_topics["title"] = ""
+
+    base_columns = [
+        "article_id",
+        "split",
+        "topic_id",
+        "topic_probability",
+        "is_outlier",
+        "title",
+    ]
+    extra_columns = [
+        col
+        for col in document_topics.columns
+        if col not in base_columns
+    ]
+    document_topics = document_topics[
+        base_columns + extra_columns
+    ]
+
+    keyword_rows: list[dict[str, Any]] = []
+    sorted_cluster_keys = sorted(
+        raw_keywords.keys(),
+        key=lambda key: int(key),
+    )
+    for cluster_key in sorted_cluster_keys:
+        topic_id = int(cluster_key)
+        items = raw_keywords[cluster_key]
+        for rank, item in enumerate(items, start=1):
+            keyword_rows.append(
+                {
+                    "topic_id": topic_id,
+                    "rank": rank,
+                    "keyword": str(
+                        item.get(
+                            "term",
+                            item.get("keyword", ""),
+                        )
+                    ),
+                    "weight": float(item["weight"]),
+                }
+            )
+
+    topic_keywords = pd.DataFrame(
+        keyword_rows,
+        columns=[
+            "topic_id",
+            "rank",
+            "keyword",
+            "weight",
+        ],
+    )
+
+    topic_summary = _build_kmeans_topic_summary(
+        document_topics=document_topics,
+        topic_keywords=topic_keywords,
+    )
+
+    output_dir.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    topic_summary.to_csv(
+        output_dir / "topic_summary.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    document_topics.to_csv(
+        output_dir / "document_topics.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    topic_keywords.to_csv(
+        output_dir / "topic_keywords.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    with (output_dir / "config_used.yaml").open(
+        "w",
+        encoding="utf-8",
+    ) as file:
+        yaml.safe_dump(
+            config,
+            file,
+            allow_unicode=True,
+            sort_keys=False,
+        )
+
+    resolved_run_id = str(
+        run_id
+        or output_dir.name
+        or run_metadata.get(
+            "pipeline_name",
+            "kmeans_baseline",
+        )
+    )
+
+    metrics_validation = run_metadata.get(
+        "metrics_validation",
+        {},
+    )
+    train_count = int(
+        (document_topics["split"] == "train").sum()
+    )
+    validation_count = int(
+        document_topics["split"]
+        .isin(["val", "validation"])
+        .sum()
+    )
+    topic_diversity = _compute_topic_diversity(
+        topic_keywords
+    )
+
+    model_summary: dict[str, Any] = {
+        "model_name": f"KMeans {resolved_run_id}",
+        "run_id": resolved_run_id,
+        "algorithm": "KMeans",
+        "representation": "TF-IDF",
+        "topic_count": int(
+            run_metadata.get(
+                "n_clusters",
+                len(topic_summary),
+            )
+        ),
+        "outlier_rate": 0.0,
+        "runtime_seconds": run_metadata.get(
+            "execution_duration_seconds"
+        ),
+        "metrics": {
+            "topic_diversity": topic_diversity,
+            "train_outlier_rate": 0.0,
+            "validation_outlier_rate": 0.0,
+            "train_count": train_count,
+            "validation_count": validation_count,
+            **metrics_validation,
+        },
+        "config": config,
+    }
+
+    manifest = {
+        "schema_version": "1.0",
+        "model_name": model_summary["model_name"],
+        "run_id": resolved_run_id,
+        "model_summary_path": "model_summary.json",
+        "topic_summary_path": "topic_summary.csv",
+        "document_topics_path": "document_topics.csv",
+        "topic_keywords_path": "topic_keywords.csv",
+        "config_path": "config_used.yaml",
+    }
+
+    _write_json(
+        output_dir / "model_summary.json",
+        model_summary,
+    )
+    _write_json(
+        output_dir / "manifest.json",
+        manifest,
+    )
+
+    return load_artifact_bundle(output_dir)
 
 
 def export_bertopic_artifacts(
@@ -228,6 +604,398 @@ def export_bertopic_artifacts(
         "topic_keywords_path": "topic_keywords.csv",
         "config_path": "config_used.yaml",
     }
+
+    _write_json(
+        output_dir / "model_summary.json",
+        model_summary,
+    )
+    _write_json(
+        output_dir / "manifest.json",
+        manifest,
+    )
+
+    return load_artifact_bundle(output_dir)
+
+
+def export_lda_artifacts(
+    source_dir: str | Path = "artifacts/lda/final",
+    output_dir: str | Path = "artifacts/common/lda/lda_k15_seed42",
+    dataset_path: str | Path = "data/processed/p2_segmented.csv",
+    split_manifest_path: str | Path = "data/splits/split_manifest.csv",
+    final_metrics_path: str | Path = "results/lda/final/test_metrics.json",
+    representatives_path: str | Path = (
+        "results/lda/final/representative_docs_development.csv"
+    ),
+) -> ArtifactBundle:
+    """Export frozen LDA K=15 into the shared artifact schema."""
+    source_dir = Path(source_dir)
+    output_dir = Path(output_dir)
+
+    _require_files(
+        [
+            source_dir / "lda_pipeline.joblib",
+            source_dir / "run_metadata.json",
+            source_dir / "config.json",
+            Path(dataset_path),
+            Path(split_manifest_path),
+            Path(final_metrics_path),
+            Path(representatives_path),
+        ],
+        model_label="LDA Final",
+    )
+
+    if output_dir.exists():
+        raise FileExistsError(
+            f"Output already exists: {output_dir}"
+        )
+
+    metadata = _read_json(source_dir / "run_metadata.json")
+    final_config = _read_json(source_dir / "config.json")
+
+    final_metrics = _read_json(Path(final_metrics_path))
+
+    if int(final_metrics["n_topics"]) != 15:
+        raise ValueError("Final Test metrics K mismatch")
+
+    if int(final_metrics["test_documents"]) != 1390:
+        raise ValueError("Final Test document count mismatch")
+
+    if final_metrics["npmi_definition"] != "document_binary_common":
+        raise ValueError("Unexpected NPMI definition")
+
+    pipeline = joblib.load(source_dir / "lda_pipeline.joblib")
+    model = pipeline["lda_model"]
+    vectorizer = pipeline["vectorizer"]
+
+    k = int(metadata["selected_n_topics"])
+    seed = int(metadata["random_state"])
+
+    if k != 15 or model.n_components != 15 or seed != 42:
+        raise ValueError("Expected frozen LDA K15 seed42")
+
+    if metadata["dataset_version"] != "v1.0":
+        raise ValueError("Dataset version mismatch")
+    if metadata["preprocessing_variant"] != "p2_segmented":
+        raise ValueError("Preprocessing mismatch")
+    if metadata["fit_split"] != "train+val":
+        raise ValueError("Fit split mismatch")
+
+    dataset = load_dataset(dataset_path)
+    splits = pd.read_csv(
+        split_manifest_path,
+        encoding="utf-8-sig",
+    )
+
+    if not {"article_id", "split"}.issubset(splits.columns):
+        raise ValueError("Invalid split manifest")
+
+    if dataset["article_id"].duplicated().any():
+        raise ValueError("Duplicate dataset IDs")
+    if splits["article_id"].duplicated().any():
+        raise ValueError("Duplicate split IDs")
+
+    if len(dataset) != 9274 or len(splits) != 9274:
+        raise ValueError("Expected Dataset v1.0: 9274 rows")
+
+    dataset = dataset.copy()
+    splits = splits.copy()
+
+    dataset["article_id"] = dataset["article_id"].astype(str)
+    splits["article_id"] = splits["article_id"].astype(str)
+
+    if set(dataset["article_id"]) != set(splits["article_id"]):
+        raise ValueError("Dataset and split IDs mismatch")
+
+    if set(splits["split"]) != {"train", "val", "test"}:
+        raise ValueError("Invalid split names")
+
+    dataset = dataset.merge(
+        splits[["article_id", "split"]],
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    if dataset["split"].isna().any():
+        raise ValueError("Missing split assignment")
+
+    texts = build_article_text(dataset, "text").tolist()
+    bow = vectorizer.transform(texts)
+    probabilities = transform_lda_pipeline(model, bow)
+
+    if probabilities.shape != (len(dataset), k):
+        raise ValueError("Invalid LDA distribution shape")
+
+    topic_ids = probabilities.argmax(axis=1)
+    topic_probs = probabilities.max(axis=1)
+
+
+    # PCA projection for visualization only.
+    # Fit on Train + Validation to keep Test held out.
+    development_mask = dataset["split"].isin(
+        ["train", "val"]
+    ).to_numpy()
+
+    if development_mask.sum() != 7884:
+        raise ValueError("Invalid development split count")
+
+    pca = PCA(n_components=2, svd_solver="full")
+
+    pca.fit(probabilities[development_mask])
+
+    coordinates = pca.transform(probabilities)
+
+    if coordinates.shape != (len(dataset), 2):
+        raise ValueError("Invalid projection shape")
+
+    if not np.isfinite(coordinates).all():
+        raise ValueError("Non-finite projection coordinates")
+
+    projection_2d = pd.DataFrame({
+        "article_id": dataset["article_id"].to_numpy(),
+        "split": dataset["split"].to_numpy(),
+        "topic_id": topic_ids.astype(int),
+        "x": coordinates[:, 0],
+        "y": coordinates[:, 1],
+    })
+
+
+    if not np.isfinite(topic_probs).all():
+        raise ValueError("Invalid topic probabilities")
+    if ((topic_probs < 0) | (topic_probs > 1)).any():
+        raise ValueError("Topic probabilities outside [0,1]")
+
+    document_topics = dataset[
+        ["article_id", "split", "title", "source", "published_at"]
+    ].copy()
+
+    document_topics["topic_id"] = topic_ids.astype(int)
+    document_topics["topic_probability"] = topic_probs
+    document_topics["is_outlier"] = False
+
+    document_topics = document_topics[
+        [
+            "article_id",
+            "split",
+            "topic_id",
+            "topic_probability",
+            "is_outlier",
+            "title",
+            "source",
+            "published_at",
+        ]
+    ]
+
+    feature_names = vectorizer.get_feature_names_out()
+    keyword_rows = []
+
+    for topic_id, weights in enumerate(model.components_):
+        indices = np.argsort(weights)[::-1][:10]
+
+        for rank, index in enumerate(indices, start=1):
+            keyword_rows.append({
+                "topic_id": topic_id,
+                "rank": rank,
+                "keyword": str(feature_names[index]),
+                "weight": float(weights[index]),
+            })
+
+    topic_keywords = pd.DataFrame(keyword_rows)
+
+    topic_counts = document_topics["topic_id"].value_counts()
+    summary_rows = []
+
+    for topic_id in range(k):
+        keywords = topic_keywords.loc[
+            topic_keywords["topic_id"] == topic_id,
+            "keyword",
+        ].tolist()
+
+        count = int(topic_counts.get(topic_id, 0))
+
+        summary_rows.append({
+            "topic_id": topic_id,
+            "topic_name": f"Topic {topic_id}",
+            "document_count": count,
+            "percentage": count / len(document_topics),
+            "top_keywords": json.dumps(
+                keywords, ensure_ascii=False
+            ),
+        })
+
+    topic_summary = pd.DataFrame(summary_rows)
+
+    run_id = "lda_k15_seed42"
+    model_name = "LDA K15"
+
+    model_summary = {
+        "model_name": model_name,
+        "run_id": run_id,
+        "algorithm": "LDA",
+        "representation": "Bag-of-Words",
+        "topic_count": k,
+        "outlier_rate": 0.0,
+        "runtime_seconds": None,
+        "metrics": {
+            "topic_diversity": float(
+                final_metrics["topic_diversity"]
+            ),
+            "npmi_coherence": float(
+                final_metrics["npmi_coherence"]
+            ),
+            "adjusted_rand_index": float(
+                final_metrics["adjusted_rand_index"]
+            ),
+            "normalized_mutual_info": float(
+                final_metrics["normalized_mutual_info"]
+            ),
+            "document_count": len(document_topics),
+            "train_count": int(
+                (document_topics["split"] == "train").sum()
+            ),
+            "validation_count": int(
+                (document_topics["split"] == "val").sum()
+            ),
+            "test_count": int(
+                (document_topics["split"] == "test").sum()
+            ),
+        },
+
+        "config": final_config,
+    }
+
+    manifest = {
+        "schema_version": "1.0",
+        "model_name": model_name,
+        "run_id": run_id,
+        "model_summary_path": "model_summary.json",
+        "topic_summary_path": "topic_summary.csv",
+        "document_topics_path": "document_topics.csv",
+        "topic_keywords_path": "topic_keywords.csv",
+        "config_path": "config_used.yaml",
+    }
+
+    if document_topics["article_id"].nunique() != 9274:
+        raise ValueError("Incomplete document assignment")
+
+    if not document_topics["topic_id"].between(0, 14).all():
+        raise ValueError("Invalid topic ID")
+
+    if len(topic_summary) != k or len(topic_keywords) != k * 10:
+        raise ValueError("Topic summary/keywords mismatch")
+
+    if topic_summary["document_count"].sum() != 9274:
+        raise ValueError("Topic counts mismatch")
+
+    output_dir.mkdir(parents=True, exist_ok=False)
+
+
+    # Load representatives selected from Train + Validation.
+    representatives = pd.read_csv(
+        representatives_path,
+        encoding="utf-8-sig",
+    )
+
+    required_rep_columns = {
+        "topic_id",
+        "rank",
+        "article_id",
+        "title",
+        "topic_probability",
+    }
+
+    if not required_rep_columns.issubset(representatives.columns):
+        raise ValueError("Invalid representative columns")
+
+    if len(representatives) != k * 3:
+        raise ValueError("Expected 3 representatives per topic")
+
+    if representatives["article_id"].duplicated().any():
+        raise ValueError("Duplicate representative article IDs")
+
+    for column in ("topic_id", "rank", "topic_probability"):
+        representatives[column] = pd.to_numeric(
+            representatives[column],
+            errors="raise",
+        )
+
+    expected_pairs = {
+        (topic_id, rank)
+        for topic_id in range(k)
+        for rank in (1, 2, 3)
+    }
+
+    actual_pairs = set(
+        zip(
+            representatives["topic_id"],
+            representatives["rank"],
+        )
+    )
+
+    if actual_pairs != expected_pairs:
+        raise ValueError("Incomplete representative topic/rank pairs")
+
+    if not representatives["topic_probability"].between(0, 1).all():
+        raise ValueError("Invalid representative probabilities")
+
+    representative_splits = representatives[
+        ["article_id"]
+    ].merge(
+        document_topics[["article_id", "split"]],
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    if not representative_splits["split"].isin(
+        ["train", "val"]
+    ).all():
+        raise ValueError(
+            "Representatives must belong to Train/Validation"
+        )
+
+    representatives["split"] = (
+        representative_splits["split"].to_numpy()
+    )
+
+
+    topic_summary.to_csv(
+        output_dir / "topic_summary.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    document_topics.to_csv(
+        output_dir / "document_topics.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    topic_keywords.to_csv(
+        output_dir / "topic_keywords.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    representatives.to_csv(
+        output_dir / "representative_docs.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    projection_2d.to_csv(
+        output_dir / "projection_2d.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    with (output_dir / "config_used.yaml").open(
+        "w", encoding="utf-8"
+    ) as file:
+        yaml.safe_dump(
+            final_config,
+            file,
+            allow_unicode=True,
+            sort_keys=False,
+        )
 
     _write_json(
         output_dir / "model_summary.json",
