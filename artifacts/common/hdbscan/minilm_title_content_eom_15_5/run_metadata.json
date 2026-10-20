@@ -2,19 +2,33 @@
   "run_id": "minilm_title_content_eom_15_5",
   "embedding_run": "minilm_title_content",
   "experiment": "eom_15_5",
-  "split": "train",
+  "fit_split": "train",
+  "exported_splits": [
+    "train",
+    "val"
+  ],
   "config_hash": "1d34fba560e9253b1cd98f572f5fefd48b4072283118e41701580e3cc247ccf4",
+  "n_articles": 7884,
+  "n_clusters": 101,
+  "n_outliers": 2092,
+  "n_assigned": 5792,
+  "outlier_rate": 0.26534753932014205,
+  "split_counts": {
+    "train": 6493,
+    "val": 1391
+  },
+  "split_outlier_counts": {
+    "train": 1608,
+    "val": 484
+  },
   "source_files": {
-    "assignments": "results/hdbscan/minilm_title_content_assignments.csv",
+    "train_assignments": "results/hdbscan/minilm_title_content_assignments.csv",
+    "val_assignments": "results/hdbscan/validation/minilm_title_content_eom_15_5_val_assignments.csv",
     "m11_summary": "results/hdbscan/m11_summary.csv",
     "articles": "data/processed/p0_minimal.csv",
     "split_manifest": "data/splits/split_manifest.csv",
     "embedding_artifact": "artifacts/embeddings/m10_v1_train_minilm.npz"
   },
-  "n_articles": 6493,
-  "n_clusters": 101,
-  "n_outliers": 1608,
-  "outlier_rate": 0.2476513168027106,
-  "n_assigned": 4885,
-  "keyword_method": "TF-IDF trên processed_title và 60 từ đầu processed_content, gom theo cụm; không gồm -1"
+  "keyword_method": "TF-IDF trên processed_title và 60 từ đầu processed_content của train + val; loại -1",
+  "projection_2d_method": "UMAP 2D fit train, transform val; topic_id lấy từ HDBSCAN M11 5D"
 }
