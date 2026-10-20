@@ -1,0 +1,6 @@
+﻿blind_topic_id,embedding_run,experiment,split,cluster_id,n_val_in_cluster,keywords
+T01,minilm_title_content,eom_15_5,val,11,5,"iphone, duo, iphone duo, apple, gập, của apple, macbook, hình gập, john ternus, ternus"
+T02,minilm_title_content,eom_15_5,val,83,6,"kim tiến, cựu hiệu, cựu bộ, tòa phúc, thị bình, phúc thẩm, ba đình, thị kim, bình cựu, thcs ba"
+T03,minilm_title_content,eom_15_5,val,92,8,"metro, triển đô, luật phát, metro số, đường sắt, thuê đất, đô thị, ubnd tp, hodeco, sắt đô"
+T04,minilm_title_content,eom_15_5,val,3,13,"giá vàng, vàng thế, đồng lượng, ounce, vàng hôm, sjc, giá bạc, usd ounce, vàng miếng, vàng nhẫn"
+T05,minilm_title_content,eom_15_5,val,1,194,"tâm anh, khoa tâm, người bệnh, ung thư, béo, huyết áp, tiêu hóa, đường huyết, vitamin, bhyt"

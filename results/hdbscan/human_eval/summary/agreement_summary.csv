@@ -1,0 +1,7 @@
+﻿level,criterion,n_items,mean_R1,mean_R2,exact_agreement_percent,mean_absolute_difference
+topic,consistency_1_5,5,3.0,3.0,100.0,0.0
+topic,specificity_1_5,5,3.4,3.2,80.0,0.2
+topic,naming_1_5,5,3.6,2.8,20.0,0.8
+topic,usefulness_1_5,5,3.6,3.2,60.0,0.4
+topic,boundary_1_5,5,2.8,2.2,40.0,0.6
+document,document_relevance_1_5,25,3.92,3.88,88.0,0.12
