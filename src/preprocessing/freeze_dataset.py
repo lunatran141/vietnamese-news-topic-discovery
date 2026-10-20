@@ -240,7 +240,7 @@ def generate_dataset_manifest(
             "id_column": "article_id",
             "model_input_column": "text",
             "gold_label_column": "category_gold",
-            "formula_for_text": "title + ' ' + processed_content",
+            "formula_for_text": "processed_title + ' ' + processed_content",
         },
         "variants": variants_meta,
         "model_recommendations": {

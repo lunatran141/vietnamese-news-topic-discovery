@@ -6,9 +6,9 @@ Nguồn chuẩn là `data/processed/dataset_manifest.json` của Dataset V1. Man
 ghi `dataset_version=v1.0`, `review_status=approved`, `quality_gate=PASSED`.
 NMF dùng `data/processed/p3_no_stopwords.csv` với 9.274 bài và SHA-256
 `663a34f309ef1f6d8d2dc61a68fd041d5f7aac71aa930dccb74841847a7d6710`.
-Khóa nối là `article_id`; đầu vào mô hình là cột `text`. Manifest định nghĩa
-`text = title + ' ' + processed_content`, nên đây **không phải** hai cột
-`processed_title` và `processed_content` nối lại. P3 kế thừa chuẩn hóa P1,
+Khóa nối là `article_id`; đầu vào mô hình là cột `text`. Cột `text` được tạo từ
+`processed_title + ' ' + processed_content`. Manifest Dataset V1 hiện ghi đúng
+công thức này. P3 kế thừa chuẩn hóa P1,
 tách từ PyVi ở P2 và loại 391 stopword. Cấu hình dùng trong
 `configs/nmf.yaml`.
 

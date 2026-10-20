@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 
 from src.artifacts.adapters import (
     export_bertopic_artifacts,
+    export_nmf_artifacts,
 )
 
 
@@ -20,6 +22,14 @@ DEFAULT_OUTPUT_DIR = Path(
     "e1_vietnamese_sbert"
 )
 
+DEFAULT_NMF_SOURCE_DIR = Path(
+    "artifacts/nmf/nmf_p3_k10_seed42_v1"
+)
+
+DEFAULT_NMF_OUTPUT_DIR = Path(
+    "artifacts/common/nmf/nmf_p3_k10_seed42_v1"
+)
+
 
 def parse_arguments() -> argparse.Namespace:
     """Đọc tham số dòng lệnh."""
@@ -31,16 +41,23 @@ def parse_arguments() -> argparse.Namespace:
     )
 
     parser.add_argument(
+        "--model",
+        choices=["bertopic", "nmf"],
+        default="bertopic",
+        help="Phương pháp cần xuất sang common artifact schema.",
+    )
+
+    parser.add_argument(
         "--source-dir",
         type=Path,
-        default=DEFAULT_SOURCE_DIR,
+        default=None,
         help="Thư mục kết quả BERTopic đầu vào.",
     )
 
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=DEFAULT_OUTPUT_DIR,
+        default=None,
         help="Thư mục common artifact đầu ra.",
     )
 
@@ -49,12 +66,23 @@ def parse_arguments() -> argparse.Namespace:
 
 def main() -> None:
     """Xuất và kiểm tra bộ artifact BERTopic."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     arguments = parse_arguments()
-
-    bundle = export_bertopic_artifacts(
-        source_dir=arguments.source_dir,
-        output_dir=arguments.output_dir,
-    )
+    if arguments.model == "nmf":
+        source_dir = arguments.source_dir or DEFAULT_NMF_SOURCE_DIR
+        output_dir = arguments.output_dir or DEFAULT_NMF_OUTPUT_DIR
+        bundle = export_nmf_artifacts(
+            source_dir=source_dir,
+            output_dir=output_dir,
+        )
+    else:
+        source_dir = arguments.source_dir or DEFAULT_SOURCE_DIR
+        output_dir = arguments.output_dir or DEFAULT_OUTPUT_DIR
+        bundle = export_bertopic_artifacts(
+            source_dir=source_dir,
+            output_dir=output_dir,
+        )
 
     print("Đã xuất common artifact thành công")
     print(
@@ -81,7 +109,7 @@ def main() -> None:
     )
     print(
         f"- Thư mục đầu ra: "
-        f"{arguments.output_dir}"
+        f"{output_dir}"
     )
 
 

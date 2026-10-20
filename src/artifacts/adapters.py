@@ -3,25 +3,28 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 from pathlib import Path
 from typing import Any
 
+import joblib
+import numpy as np
 import pandas as pd
+from sklearn.decomposition import PCA
 import yaml
 
 from src.artifacts.loader import (
     ArtifactBundle,
     load_artifact_bundle,
 )
-
-import joblib
-import numpy as np
-
+from src.artifacts.nmf_parquet import (
+    normalize_nmf_topic_id,
+    read_nmf_parquet_assignments,
+)
 from src.data.dataset_loader import load_dataset
 from src.features.article_text import build_article_text
 from src.models.lda_pipeline import transform_lda_pipeline
-from sklearn.decomposition import PCA
 
 def _read_json(path: Path) -> dict[str, Any]:
     """Đọc file JSON."""
@@ -1005,4 +1008,262 @@ def export_lda_artifacts(
         manifest,
     )
 
+    return load_artifact_bundle(output_dir)
+
+
+def export_nmf_artifacts(
+    source_dir: str | Path = "artifacts/nmf/nmf_p3_k10_seed42_v1",
+    output_dir: str | Path = "artifacts/common/nmf/nmf_p3_k10_seed42_v1",
+    result_dir: str | Path | None = None,
+) -> ArtifactBundle:
+    """Xuất Parquet NMF sang common artifact schema mà không sửa kết quả gốc."""
+    source_dir = Path(source_dir)
+    output_dir = Path(output_dir)
+    result_dir = (
+        Path(result_dir)
+        if result_dir is not None
+        else Path("results/nmf") / source_dir.name
+    )
+    _require_files(
+        [
+            source_dir / "config.json",
+            source_dir / "run_metadata.json",
+            source_dir / "topic_keywords.json",
+            source_dir / "representative_docs.json",
+            result_dir / "test_metrics.json",
+        ],
+        model_label="NMF",
+    )
+    if output_dir.exists():
+        raise FileExistsError(f"Output already exists: {output_dir}")
+
+    config = _read_json(source_dir / "config.json")
+    metadata = _read_json(source_dir / "run_metadata.json")
+    metrics = _read_json(result_dir / "test_metrics.json")
+    assignments = read_nmf_parquet_assignments(source_dir)
+    topic_count = int(metadata.get("selected_n_topics", 0))
+    run_id = str(metadata.get("run_id", source_dir.name))
+    if topic_count < 2 or run_id != source_dir.name:
+        raise ValueError("NMF metadata phải có topic count và run_id khớp thư mục")
+    if set(assignments["split"].astype(str)) != {"train", "val", "test"}:
+        raise ValueError("NMF common artifacts cần đủ train, val và test")
+    expected_split_counts = metadata.get("split_counts")
+    if expected_split_counts:
+        actual_split_counts = {
+            split: int(count)
+            for split, count in assignments["split"].value_counts().items()
+        }
+        if actual_split_counts != expected_split_counts:
+            raise ValueError("Số bài theo split không khớp NMF run metadata")
+
+    all_topic_ids = set(assignments["topic_id"].astype(int))
+    valid_topic_ids = {
+        topic_id
+        for topic_id in all_topic_ids
+        if topic_id == -1 or 0 <= topic_id < topic_count
+    }
+    if valid_topic_ids != all_topic_ids:
+        raise ValueError("topic_id NMF nằm ngoài số topic đã khai báo")
+    regular_topic_ids = list(range(topic_count))
+
+    raw_keywords = _read_json(source_dir / "topic_keywords.json")
+    if not isinstance(raw_keywords, list):
+        raise ValueError("topic_keywords.json của NMF phải là danh sách")
+    keyword_rows: list[dict[str, Any]] = []
+    keywords_by_topic: dict[int, list[str]] = {}
+    for topic in raw_keywords:
+        topic_id = normalize_nmf_topic_id(topic.get("topic_id"))
+        if topic_id == -1 or topic_id not in regular_topic_ids:
+            raise ValueError("topic_keywords.json chứa topic_id không hợp lệ")
+        if topic_id in keywords_by_topic:
+            raise ValueError(f"topic_keywords.json lặp topic_id {topic_id}")
+        terms = topic.get("keywords")
+        if not isinstance(terms, list) or not terms:
+            raise ValueError(f"Topic {topic_id} thiếu keyword")
+        keywords_by_topic[topic_id] = []
+        for rank, item in enumerate(terms, start=1):
+            keyword = str(item.get("term", "")).strip()
+            weight = float(item.get("weight"))
+            if not keyword or not np.isfinite(weight) or weight < 0:
+                raise ValueError(f"Keyword không hợp lệ trong topic {topic_id}")
+            keywords_by_topic[topic_id].append(keyword)
+            keyword_rows.append(
+                {
+                    "topic_id": topic_id,
+                    "rank": rank,
+                    "keyword": keyword,
+                    "weight": weight,
+                }
+            )
+    if set(keywords_by_topic) != set(regular_topic_ids):
+        raise ValueError("topic_keywords.json phải có đúng một danh sách cho mỗi topic")
+    topic_keywords = pd.DataFrame(keyword_rows)
+
+    display_mapping_path = source_dir / "topic_display_mapping.json"
+    labels: dict[int, str] = {}
+    mapping_is_reviewed = False
+    if display_mapping_path.is_file():
+        display_mapping = _read_json(display_mapping_path)
+        display_topics = display_mapping.get("topics", [])
+        mapping_is_reviewed = display_mapping.get("review_status") == "approved"
+        for topic in display_topics:
+            topic_id = normalize_nmf_topic_id(topic.get("topic_id"))
+            label = str(topic.get("display_label", "")).strip()
+            if topic_id in regular_topic_ids and label:
+                labels[topic_id] = label
+
+    total_documents = len(assignments)
+    counts = assignments["topic_id"].value_counts()
+    summary_rows = []
+    for topic_id in regular_topic_ids:
+        display_name = labels.get(topic_id)
+        if display_name and not mapping_is_reviewed:
+            topic_name = f"NMF_{topic_id:02d} — {display_name} (nhãn tạm)"
+        else:
+            topic_name = display_name or f"Topic {topic_id}"
+        summary_rows.append(
+            {
+                "topic_id": topic_id,
+                "topic_name": topic_name,
+                "document_count": int(counts.get(topic_id, 0)),
+                "percentage": float(counts.get(topic_id, 0) / total_documents),
+                "top_keywords": ", ".join(keywords_by_topic[topic_id]),
+            }
+        )
+    if -1 in all_topic_ids:
+        outlier_count = int(counts.get(-1, 0))
+        summary_rows.append(
+            {
+                "topic_id": -1,
+                "topic_name": "Outlier / Unassigned",
+                "document_count": outlier_count,
+                "percentage": outlier_count / total_documents,
+                "top_keywords": "",
+            }
+        )
+    topic_summary = pd.DataFrame(summary_rows)
+    if int(topic_summary["document_count"].sum()) != total_documents:
+        raise ValueError("Topic summary không bao phủ đủ assignments")
+
+    representative_rows = _read_json(source_dir / "representative_docs.json")
+    if not isinstance(representative_rows, list):
+        raise ValueError("representative_docs.json của NMF phải là danh sách")
+    representatives = pd.DataFrame(representative_rows)
+    required_rep_columns = {"topic_id", "rank", "article_id", "title", "topic_share"}
+    if not required_rep_columns.issubset(representatives.columns):
+        raise ValueError("representative_docs.json thiếu trường bắt buộc")
+    if representatives.empty:
+        raise ValueError("NMF chưa có bài đại diện")
+    representatives["topic_id"] = representatives["topic_id"].map(
+        normalize_nmf_topic_id
+    )
+    representatives["article_id"] = representatives["article_id"].astype(str)
+    if not representatives["topic_id"].isin(regular_topic_ids).all():
+        raise ValueError("Bài đại diện có topic_id không hợp lệ")
+    if not representatives["article_id"].isin(assignments["article_id"]).all():
+        raise ValueError("Bài đại diện không có trong document assignments")
+    representatives["topic_share"] = pd.to_numeric(
+        representatives["topic_share"], errors="raise"
+    )
+    if (
+        not np.isfinite(representatives["topic_share"]).all()
+        or not representatives["topic_share"].between(0, 1).all()
+    ):
+        raise ValueError("topic_share của bài đại diện phải nằm trong [0, 1]")
+    representative_splits = assignments[
+        ["article_id", "split", "source", "published_at"]
+    ].drop_duplicates("article_id")
+    representatives = representatives.merge(
+        representative_splits,
+        on="article_id",
+        how="left",
+        validate="many_to_one",
+    )
+    representatives = representatives.rename(
+        columns={"topic_share": "primary_topic_share"}
+    )
+    representatives["topic_probability"] = pd.NA
+    representatives["display_label"] = representatives["topic_id"].map(labels)
+
+    share_columns = [
+        column
+        for column in assignments.columns
+        if re.fullmatch(r"topic_\d+_share", str(column))
+    ]
+    share_columns = sorted(share_columns, key=lambda name: int(name.split("_")[1]))
+    share_topic_ids = {int(name.split("_")[1]) for name in share_columns}
+    if share_topic_ids != set(regular_topic_ids):
+        raise ValueError("Số cột topic share không khớp topic count")
+    feature_values = assignments[share_columns].to_numpy(dtype=np.float64)
+    development_mask = assignments["split"].isin(["train", "val"]).to_numpy()
+    if int(development_mask.sum()) < 2:
+        raise ValueError("Cần ít nhất hai bài development để tạo PCA projection")
+    projection = PCA(n_components=2, svd_solver="full")
+    projection.fit(feature_values[development_mask])
+    coordinates = projection.transform(feature_values)
+    projection_2d = pd.DataFrame(
+        {
+            "article_id": assignments["article_id"],
+            "split": assignments["split"],
+            "topic_id": assignments["topic_id"],
+            "x": coordinates[:, 0],
+            "y": coordinates[:, 1],
+        }
+    )
+
+    output_dir.mkdir(parents=True)
+    topic_summary.to_csv(
+        output_dir / "topic_summary.csv", index=False, encoding="utf-8-sig"
+    )
+    assignments.to_csv(
+        output_dir / "document_topics.csv", index=False, encoding="utf-8-sig"
+    )
+    topic_keywords.to_csv(
+        output_dir / "topic_keywords.csv", index=False, encoding="utf-8-sig"
+    )
+    representatives.to_csv(
+        output_dir / "representative_docs.csv", index=False, encoding="utf-8-sig"
+    )
+    projection_2d.to_csv(
+        output_dir / "projection_2d.csv", index=False, encoding="utf-8-sig"
+    )
+    with (output_dir / "config_used.yaml").open("w", encoding="utf-8") as file:
+        yaml.safe_dump(config, file, allow_unicode=True, sort_keys=False)
+
+    model_name = f"NMF {run_id}"
+    numeric_metrics = {
+        key: value
+        for key, value in metrics.items()
+        if isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        and np.isfinite(value)
+    }
+    numeric_metrics["train_count"] = int((assignments["split"] == "train").sum())
+    numeric_metrics["validation_count"] = int(
+        (assignments["split"] == "val").sum()
+    )
+    numeric_metrics["test_count"] = int((assignments["split"] == "test").sum())
+    model_summary = {
+        "model_name": model_name,
+        "run_id": run_id,
+        "algorithm": "NMF",
+        "representation": "TF-IDF",
+        "topic_count": topic_count,
+        "outlier_rate": float(assignments["is_outlier"].mean()),
+        "runtime_seconds": metadata.get("runtime_seconds"),
+        "metrics": numeric_metrics,
+        "config": config,
+    }
+    manifest = {
+        "schema_version": "1.0",
+        "model_name": model_name,
+        "run_id": run_id,
+        "model_summary_path": "model_summary.json",
+        "topic_summary_path": "topic_summary.csv",
+        "document_topics_path": "document_topics.csv",
+        "topic_keywords_path": "topic_keywords.csv",
+        "config_path": "config_used.yaml",
+    }
+    _write_json(output_dir / "model_summary.json", model_summary)
+    _write_json(output_dir / "manifest.json", manifest)
     return load_artifact_bundle(output_dir)
