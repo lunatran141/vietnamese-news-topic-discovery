@@ -1,0 +1,11 @@
+﻿embedding_run,experiment,split,umap_seed,n_articles,n_noise,noise_percent,coverage_percent
+minilm_title_content,eom_15_5,val,42,1391,484,34.8,65.2
+minilm_title_content,eom_15_5,val,43,1391,575,41.34,58.66
+minilm_title_content,eom_15_5,val,44,1391,550,39.54,60.46
+minilm_title_content,eom_15_5,val,45,1391,551,39.61,60.39
+minilm_title_content,eom_15_5,val,46,1391,491,35.3,64.7
+minilm_title_content,eom_15_5,val,47,1391,571,41.05,58.95
+minilm_title_content,eom_15_5,val,48,1391,565,40.62,59.38
+minilm_title_content,eom_15_5,val,49,1391,487,35.01,64.99
+minilm_title_content,eom_15_5,val,50,1391,568,40.83,59.17
+minilm_title_content,eom_15_5,val,51,1391,603,43.35,56.65
