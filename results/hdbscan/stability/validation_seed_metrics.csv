@@ -1,0 +1,4 @@
+﻿embedding_run,experiment,split,umap_seed,n_articles,n_noise,noise_percent,coverage_percent
+minilm_title_content,eom_15_5,val,42,1391,484,34.8,65.2
+minilm_title_content,eom_15_5,val,43,1391,575,41.34,58.66
+minilm_title_content,eom_15_5,val,44,1391,550,39.54,60.46

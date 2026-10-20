@@ -1,0 +1,4 @@
+﻿embedding_run,experiment,split,seed_a,seed_b,n_articles,pairwise_ari
+minilm_title_content,eom_15_5,val,42,43,1391,0.4192680318211822
+minilm_title_content,eom_15_5,val,42,44,1391,0.4325432870038459
+minilm_title_content,eom_15_5,val,43,44,1391,0.5380381003485731
