@@ -1,0 +1,11 @@
+﻿topic_id,topic_name,document_count,percentage,top_keywords
+0,"NMF_00 — Doanh nghiệp, đầu tư và công nghệ (nhãn tạm)",1186,0.1278844080224283,"doanh_nghiệp, phát_triển, công_nghệ, đầu_tư, dự_án, xây_dựng, sản_phẩm, mở_rộng, việt_nam, hệ_thống"
+1,NMF_01 — Bóng đá câu lạc bộ (nhãn tạm),755,0.08141039465171447,"bóng, bàn, trận, đội, thắng, sân, league, cầu_thủ, trận_đấu, bàn thắng"
+2,NMF_02 — Điều tra và pháp luật (nhãn tạm),1451,0.15645891740349363,"công_an, điều_tra, vụ, án, cơ_quan, cảnh_sát, hành_vi, vụ án, tỉnh, tiền"
+3,NMF_03 — Sức khỏe và điều trị (nhãn tạm),1162,0.12529652792753937,"bác_sĩ, bệnh, người_bệnh, điều_trị, bệnh_viện, hoặc, máu, khám, nguy_cơ, thuốc"
+4,NMF_04 — Giáo dục và trường học (nhãn tạm),1026,0.11063187405650204,"trường, học_sinh, giáo_dục, học, đào_tạo, nhà_trường, giáo_viên, năm_học, đại_học, lớp"
+5,NMF_05 — Giải trí và nghệ sĩ (nhãn tạm),1529,0.16486952771188268,"cô, phim, anh, tôi, khán_giả, diễn_viên, nói, nghệ_sĩ, không, nhân_vật"
+6,NMF_06 — Asiad và thể thao quốc tế (nhãn tạm),707,0.0762346344619366,"asiad, nữ, asiad 20, nam, giành, nhật bản, asiad 2026, u23, nhật, việt nam"
+7,NMF_07 — Đội tuyển Việt Nam và ASEAN Cup (nhãn tạm),357,0.03849471641147294,"asean cup, asean, cup, fifa, cup 2026, fifa asean, thái lan, thái, lan, tuyển"
+8,NMF_08 — Apple và iPhone (nhãn tạm),332,0.03579900797929696,"iphone, pro, apple, 18 pro, iphone 18, pro max, max, màn_hình, máy, 18"
+9,NMF_09 — Giá cả và thị trường tài chính (nhãn tạm),769,0.08291999137373302,"giá, tăng, đồng, usd, thị_trường, giảm, lãi_suất, bán, phiên, so"
