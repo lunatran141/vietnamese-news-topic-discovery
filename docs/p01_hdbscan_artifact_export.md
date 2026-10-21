@@ -1,92 +1,90 @@
-# P01 — Chuẩn hóa artifact HDBSCAN cho giao diện
+# P01 — Xuất common artifact cho HDBSCAN
 
 ## 1. Mục tiêu
 
-Task P01 chuẩn hóa kết quả HDBSCAN theo common artifact schema của nhóm để loader chung, API và Streamlit có thể sử dụng. Phần đóng góp này xuất kết quả của run `minilm_title_content_eom_15_5` cùng dữ liệu bổ sung cho bản đồ 2D và bài báo đại diện.
+Xuất kết quả của run HDBSCAN `minilm_title_content_eom_15_5` theo common artifact schema để loader chung và giao diện có thể đọc dữ liệu. Bundle gồm thông tin bài viết, cụm, từ khóa, bài đại diện, tọa độ 2D và metadata.
 
-Mô hình HDBSCAN được fit trên **train**. Nhãn của bài **validation** được gán bằng pipeline đã fit trên train; không fit lại HDBSCAN trên validation. Bundle xuất kết quả của cả hai split để phục vụ hiển thị.
+HDBSCAN được fit trên tập train. Validation dùng để chốt run đại diện. Sau đó, cả validation và test được đưa qua UMAP/HDBSCAN đã fit; test không dùng để chọn lại cấu hình.
 
-## 2. Run và dữ liệu đầu vào
+## 2. Run và phạm vi dữ liệu
 
-- Embedding run: `minilm_title_content`.
-- Biểu diễn: MiniLM, dùng tiêu đề và 60 từ đầu của nội dung đã xử lý.
-- HDBSCAN experiment: `eom_15_5`, với `min_cluster_size=15`, `min_samples=5` và cách chọn cụm `eom`.
+- Embedding model: `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`.
+- Văn bản đầu vào: tiêu đề và 60 từ đầu của nội dung.
+- Cấu hình run: UMAP 5 chiều, `n_neighbors=15`, `metric=cosine`, `random_state=42`; HDBSCAN `min_cluster_size=15`, `min_samples=5`, `cluster_selection_method=eom`.
 - Train: 6.493 bài.
 - Validation: 1.391 bài.
-- Tổng số bài trong bundle: 7.884.
+- Test độc lập: 1.390 bài.
+- Tổng số bài trong `document_topics.csv`: 9.274 bài, với 9.274 `article_id` duy nhất.
+- Số cụm thường: 101.
+- Số bài outlier (`topic_id=-1`): 2.603, gồm 1.608 train, 484 validation và 511 test.
+- Số bài được gán vào cụm thường: 6.671.
 
-Các nguồn chính:
+`topic_probability` chứa **membership strength của HDBSCAN** trong khoảng `[0, 1]`. Đây không phải xác suất đã hiệu chuẩn.
 
-- `results/hdbscan/minilm_title_content_assignments.csv`: nhãn và membership strength trên train.
-- `results/hdbscan/validation/minilm_title_content_eom_15_5_val_assignments.csv`: nhãn và membership strength trên validation.
-- `results/hdbscan/m11_summary.csv`: thông tin run và `config_hash`.
-- `data/processed/p0_minimal.csv`: văn bản đã xử lý và tiêu đề.
-- `data/splits/split_manifest.csv`: xác định split theo `article_id`.
-- `artifacts/embeddings/m10_v1_train_minilm.npz`: embedding train dùng cho phép chiếu 2D.
+## 3. Mã nguồn và vị trí đầu ra
 
-Exporter đối chiếu `article_id`, split, run và `config_hash` trước khi ghi kết quả.
-
-## 3. Mã nguồn và thư mục đầu ra
-
-Mã xuất artifact:
+Exporter:
 
 ```text
 experiments/hdbscan/export_p01_hdbscan.py
 ```
 
-Thư mục đầu ra:
+Benchmark runtime:
+
+```text
+experiments/hdbscan/benchmark_p01_hdbscan.py
+results/hdbscan/benchmark_p01_runtime.json
+```
+
+Đánh giá test độc lập:
+
+```text
+experiments/hdbscan/evaluate_p01_hdbscan_test.py
+results/hdbscan/test/minilm_title_content_eom_15_5_test_assignments.csv
+results/hdbscan/test/minilm_title_content_eom_15_5_test_metrics.json
+```
+
+Common bundle được xuất tại:
 
 ```text
 artifacts/common/hdbscan/minilm_title_content_eom_15_5/
+├── manifest.json
+├── model_summary.json
+├── config_used.yaml
+├── run_metadata.json
+├── runtime_summary.json
+├── document_topics.csv
+├── topic_summary.csv
+├── topic_keywords.csv
+├── representative_docs.csv
+└── projection_2d.csv
 ```
 
-Bundle hiện có chín file:
+`manifest.json` khai báo các file bắt buộc theo common artifact schema. `run_metadata.json`, `runtime_summary.json`, `representative_docs.csv` và `projection_2d.csv` là dữ liệu bổ sung cho run và giao diện. `runtime_summary.json` liên kết benchmark train/validation với kết quả test, đồng thời giữ phạm vi của hai lần đo riêng. File benchmark gốc vẫn được lưu trong `results/hdbscan/`.
 
-```text
-manifest.json
-model_summary.json
-config_used.yaml
-run_metadata.json
-document_topics.csv
-topic_summary.csv
-topic_keywords.csv
-representative_docs.csv
-projection_2d.csv
-```
-
-`manifest.json` khai báo sáu file thuộc common artifact schema v1.0: chính nó, `model_summary.json`, `config_used.yaml`, `document_topics.csv`, `topic_summary.csv` và `topic_keywords.csv`. Ba file `run_metadata.json`, `representative_docs.csv` và `projection_2d.csv` là dữ liệu bổ sung. Loader chung hiện đọc các bảng chuẩn; ứng dụng cần đọc riêng các CSV bổ sung khi dùng chúng.
-
-## 4. Nội dung từng artifact
+## 4. Nội dung các artifact
 
 ### `document_topics.csv`
 
-Mỗi dòng ứng với một `article_id`. File chứa 7.884 bài, gồm 6.493 bài train và 1.391 bài validation, với các cột:
+Các cột:
 
 ```text
 article_id,split,topic_id,topic_probability,is_outlier,title
 ```
 
-`topic_id` lấy từ `cluster_id` của HDBSCAN. Bài có `topic_id=-1` được đánh dấu `is_outlier=True`.
-
-`topic_probability` chứa `membership_strength` gốc của HDBSCAN trong khoảng `[0, 1]`. Đây là độ mạnh thành viên cụm, **không phải xác suất đã hiệu chuẩn**.
-
-Validation được gộp trực tiếp vào `document_topics.csv`; bundle không sử dụng file `validation_document_topics.csv` riêng.
+File chứa train, validation và test. `topic_id` là ID cụm HDBSCAN; `is_outlier` đúng khi `topic_id=-1`. Mỗi `article_id` chỉ xuất hiện một lần.
 
 ### `topic_summary.csv`
 
-File có 102 dòng: 101 cụm thường và một dòng outlier `-1`. Các cột:
+Các cột:
 
 ```text
 topic_id,topic_name,document_count,percentage,top_keywords
 ```
 
-`document_count` và `percentage` được tính trên **toàn bộ 7.884 bài train + validation**. `percentage` được lưu dưới dạng tỷ phần từ `0` đến `1`; giao diện có thể nhân `100` khi hiển thị phần trăm. Tổng `document_count` bằng 7.884.
-
-Tên cụm được tạo tự động bằng cách ghép ba từ khóa TF-IDF đứng đầu. Các tên này chưa được duyệt hoặc đặt lại thủ công.
+File có 102 dòng: 101 cụm thường và một dòng outlier `-1`. Tổng `document_count` là 9.274. `percentage` là tỷ phần trong khoảng `[0, 1]` trên toàn bộ 9.274 bài. Tên cụm thường được tạo tự động từ ba từ khóa đứng đầu và chưa được duyệt thủ công.
 
 ### `topic_keywords.csv`
-
-File có 1.010 dòng: 10 từ khóa cho mỗi cụm trong 101 cụm thường. Cụm outlier `-1` không được trích từ khóa.
 
 Các cột:
 
@@ -94,75 +92,136 @@ Các cột:
 topic_id,rank,keyword,weight
 ```
 
-Exporter gom văn bản của các bài train và validation đã được gán vào từng cụm, dùng `processed_title` và 60 từ đầu của `processed_content`, sau đó tính TF-IDF để lấy 10 từ khóa đứng đầu. File này tổng hợp theo cụm nên không có cột `split`.
-
-Việc trích từ khóa trên train + validation được thực hiện sau khi đã chốt cấu hình HDBSCAN, nhằm chuẩn bị nội dung hiển thị; không dùng các từ khóa này để chọn lại mô hình trên validation.
+Mỗi cụm thường có 10 từ khóa TF-IDF; cụm `-1` không có danh sách từ khóa. File có 1.010 dòng cho 101 cụm. Từ khóa được trích từ văn bản đã xử lý của train, validation và test sau khi cấu hình mô hình đã được chốt; bước này chỉ phục vụ mô tả cụm, không dùng để chọn lại mô hình hoặc tính lại metric test.
 
 ### `representative_docs.csv`
 
-File có 505 dòng, tương ứng 5 bài đại diện cho mỗi cụm thường. Các cột:
+Các cột:
 
 ```text
 topic_id,rank,article_id,title,topic_probability,split
 ```
 
-Bài đại diện được chọn từ cả train và validation bằng cách sắp xếp `membership_strength` giảm dần; các bài hòa điểm được sắp theo `article_id`. Bản artifact hiện có 447 bài train và 58 bài validation trong tập bài đại diện.
+File có 505 dòng, tương ứng năm bài đại diện cho mỗi cụm thường: 397 train, 55 validation và 53 test. Trong mỗi cụm, exporter ưu tiên `membership_strength` giảm dần; nếu hòa điểm thì sắp theo `article_id`.
 
-Trong run này, cả 505 bài được chọn đều có `topic_probability=1.0`, vì mỗi cụm có ít nhất năm bài đạt giá trị đó. Giá trị này được giữ nguyên từ HDBSCAN, không phải điểm do exporter tự tạo. Cách chọn hiện tại ưu tiên membership_strength; khi nhiều bài cùng đạt 1.0, thứ tự article_id quyết định bài được chọn, nên chưa bảo đảm đó là các bài tiêu biểu nhất về nội dung.
+Cả 505 bài được chọn trong artifact hiện tại có `topic_probability=1.0` vì mỗi cụm có ít nhất năm bài đạt mức membership strength đó. Exporter giữ nguyên giá trị HDBSCAN, không tự tạo điểm mới. Khi nhiều bài cùng đạt 1.0, thứ tự `article_id` chỉ giúp kết quả ổn định; nó không bảo đảm năm bài đó đại diện tốt nhất về mặt nội dung.
 
 ### `projection_2d.csv`
 
-File có 7.884 điểm, gồm 6.493 train và 1.391 validation. Các cột:
+File có 9.274 điểm, gồm 6.493 train, 1.391 validation và 1.390 test. UMAP 2D được fit trên train, sau đó transform validation và test lên cùng bản đồ. Tọa độ 2D dùng để trực quan hóa; HDBSCAN của run này được fit trên biểu diễn UMAP 5D, không phải tọa độ 2D này.
+
+### Metadata
+
+- `config_used.yaml`: cấu hình thực sự dùng cho run.
+- `model_summary.json`: thông tin mô hình, số liệu bundle, runtime và các metrics.
+- `run_metadata.json`: nguồn dữ liệu, split, cấu hình, phạm vi runtime và đường dẫn benchmark.
+- `manifest.json`: schema và tên các file mà loader chung yêu cầu.
+
+Loader chung đã đọc thành công bundle P01. Việc có `projection_2d.csv` và `representative_docs.csv` trong bundle không tự làm chúng xuất hiện trên Streamlit; phần giao diện cần đọc và hiển thị hai file bổ sung này.
+
+## 5. Topic diversity
+
+`model_summary.json` ghi `metrics.topic_diversity=0.9327`. Giá trị được tính từ `topic_keywords.csv`:
 
 ```text
-article_id,split,topic_id,x,y
+topic diversity = số từ khóa khác nhau / tổng số vị trí từ khóa
+                = 942 / 1.010
+                ≈ 0,9327
 ```
 
-UMAP 2D được fit trên embedding train, sau đó transform embedding validation lên cùng bản đồ. `topic_id` được ghép theo `article_id` từ assignments HDBSCAN M11. Tọa độ 2D chỉ phục vụ trực quan hóa; HDBSCAN của run này không được fit trên bản đồ 2D.
+Đây là metric của **bundle train + validation + test**, vì từ khóa của bundle được tạo từ cả ba split. Giá trị gần 1 cho thấy danh sách từ khóa giữa các cụm ít trùng lặp hơn; riêng metric này không chứng minh các cụm nhất quán về nội dung. Đây không phải metric riêng của split đang chọn trên giao diện.
 
-### Các file metadata
+## 6. Benchmark runtime
 
-- `config_used.yaml`: ghi cấu hình embedding, UMAP, HDBSCAN, trích từ khóa, chọn bài đại diện và phép chiếu 2D.
-- `model_summary.json`: ghi tên mô hình, số cụm, tỷ lệ outlier, số bài theo split và ý nghĩa của các trường hiển thị.
-- `run_metadata.json`: ghi run ID, `config_hash`, nguồn dữ liệu, split dùng để fit, các split được xuất và số bài/outlier theo split.
-- `manifest.json`: chỉ đến các file bắt buộc của common artifact schema v1.0.
+Runtime được đo riêng cho đúng run `minilm_title_content_eom_15_5`, với `time.perf_counter()` và lưu trong:
 
-## 5. Kết quả kiểm tra
+```text
+results/hdbscan/benchmark_p01_runtime.json
+```
 
-Bundle hiện có:
+Phạm vi đo gồm:
 
-- 7.884 `article_id` duy nhất.
-- 6.493 bài train và 1.391 bài validation.
-- 101 cụm thường.
-- 2.092 bài outlier: 1.608 train và 484 validation.
-- 5.792 bài được gán vào cụm thường.
-- 102 dòng `topic_summary.csv`, tổng `document_count` bằng 7.884.
-- 1.010 dòng `topic_keywords.csv`.
-- 505 dòng `representative_docs.csv`.
-- 7.884 dòng `projection_2d.csv`.
+1. Tạo embedding MiniLM cho train.
+2. Fit UMAP 5D và HDBSCAN trên train.
+3. Tạo embedding MiniLM cho validation.
+4. UMAP transform và `approximate_predict` cho validation.
 
-Loader chung đọc thành công bundle chuẩn. Test đối chiếu nhãn và membership strength của cả train lẫn validation với assignments nguồn; đồng thời kiểm tra ID, outlier, số bài theo split, topic summary, keywords, bài đại diện, phép chiếu 2D và metadata.
+Phép đo không gồm tải mô hình, đọc/ghi file, tính metric, trích từ khóa hoặc xuất dữ liệu giao diện và bản đồ 2D.
 
-Kết quả kiểm thử tại thời điểm viết tài liệu: **8 test P01 passed**; khi chạy cùng test loader và schema: **18 passed**.
+| Phạm vi | Thời gian |
+| --- | ---: |
+| Train | 226,20 giây |
+| Validation | 53,31 giây |
+| Train + validation | 279,50 giây |
 
-## 6. Cách chạy lại
+Trong `model_summary.json`:
 
-Chạy tại thư mục gốc của repository:
+- `runtime_seconds` là runtime **train + validation**, khoảng 279,50 giây; không bao gồm test.
+- `metrics.train_runtime_seconds` khoảng 226,20 giây.
+- `metrics.val_runtime_seconds` khoảng 53,31 giây.
+- Test được đo riêng: encode + transform/dự đoán khoảng 44,86 giây, trong đó `test_predict_seconds` khoảng 6,64 giây. Đây là số từ lần chạy test gần nhất; không cộng hai phép đo độc lập rồi gọi là một lần đo toàn run.
+
+Benchmark ghi cấu hình, môi trường chạy, các giai đoạn đo và `n_repeats=1`. Đây là **một lần đo**. Chỉ so sánh tốc độ trực tiếp với các mô hình khác khi phạm vi đo và điều kiện máy tương đương.
+
+Nếu trang so sánh mô hình đang lọc `train`, `val` hoặc `test`, giao diện cần chủ động đọc metric runtime tương ứng. `runtime_seconds` ở cấp model summary chỉ là phép đo train + validation.
+
+Exporter đọc benchmark train + validation và kết quả test riêng, kiểm tra run, cấu hình và split trước khi ghi metadata. Không dùng `0` cho thời gian chưa đo.
+
+## 7. Đánh giá test độc lập
+
+Run `minilm_title_content_eom_15_5` được chốt trước khi mở test. Script test nạp UMAP và HDBSCAN đã fit trên train, kiểm tra nhãn train của model lưu sẵn khớp assignments M11, rồi encode và dự đoán 1.390 bài test. `category_gold` chỉ được ghép sau khi dự đoán. ARI/NMI tính trên toàn bộ test, bao gồm nhãn `-1`.
+
+- Outlier test: 511/1.390 bài (**36,76%**); coverage **63,24%**.
+- ARI test: **0,1244**; NMI test: **0,4214**.
+- Assignments và chi tiết thời gian đo nằm ở `results/hdbscan/test/`.
+
+Các kết quả test không dùng để chọn lại embedding, UMAP, HDBSCAN hoặc seed. Việc tạo từ khóa và bài đại diện trên cả ba split là bước mô tả artifact sau đánh giá.
+
+## 8. Kiểm tra
+
+Chạy đánh giá test bằng model đã lưu:
+
+```powershell
+python -X utf8 -B -m experiments.hdbscan.evaluate_p01_hdbscan_test
+```
+
+Chạy exporter:
 
 ```powershell
 python -B -m experiments.hdbscan.export_p01_hdbscan
 ```
 
-Exporter sẽ ghi lại chín file trong thư mục bundle và gọi loader chung để kiểm tra các bảng bắt buộc. Bước tạo `projection_2d.csv` mã hóa validation bằng MiniLM, fit UMAP 2D trên train và transform validation, nên có thể mất thời gian.
-
-Kiểm tra riêng P01:
+Chạy test P01:
 
 ```powershell
 python -B -m pytest -p no:cacheprovider tests/test_p01_hdbscan_export.py -v
 ```
 
-Kiểm tra cùng loader và schema chung:
+Kết quả đã ghi nhận: **11 test P01 passed; 21 test P01 + loader + schema passed**. Các test kiểm tra common bundle, ID ba split, assignments train/validation/test, topic summary và keywords, metadata, representative docs, projection 2D, runtime benchmark và file tổng hợp runtime.
+
+Có thể kiểm tra các giá trị qua loader:
+
+```powershell
+python -B -c "from src.artifacts.loader import load_artifact_bundle; b=load_artifact_bundle('artifacts/common/hdbscan/minilm_title_content_eom_15_5'); print('total:', b.model_summary.runtime_seconds); print('train:', b.model_summary.metrics['train_runtime_seconds']); print('val:', b.model_summary.metrics['val_runtime_seconds']); print('topic diversity:', b.model_summary.metrics['topic_diversity'])"
+```
+
+Để kiểm tra cùng loader và schema sau thay đổi mới, chạy:
 
 ```powershell
 python -B -m pytest -p no:cacheprovider tests/test_p01_hdbscan_export.py tests/test_artifact_loader.py tests/test_artifact_schemas.py -v
 ```
+
+Đã chạy bộ kết hợp sau khi xuất bundle ba split: 21 passed.
+
+Nếu cần **đo lại** runtime trên máy hiện tại, chạy benchmark trước rồi chạy lại exporter. Kết quả đo mới sẽ phụ thuộc vào máy, môi trường và trạng thái cache:
+
+```powershell
+python -B -m experiments.hdbscan.benchmark_p01_hdbscan
+python -B -m experiments.hdbscan.export_p01_hdbscan
+```
+
+## 9. Phạm vi tích hợp giao diện
+
+P01 đã cung cấp dữ liệu HDBSCAN theo common artifact schema, gồm train, validation và test, từ khóa, bài đại diện, bản đồ 2D và metrics runtime. Trang Streamlit cần đọc các file và chọn đúng metric theo split để hiển thị.
+
+`topic_probability` phải được chú thích là membership strength của HDBSCAN. `topic_diversity` là metric toàn run. Khi so sánh runtime giữa các mô hình, giao diện cần nêu rõ phạm vi đo vì các số hiện có có thể được thu thập theo protocol khác nhau.
