@@ -30,7 +30,7 @@ from app.data_service import (
     load_representatives,
 )
 from app.nmf_dashboard import render_nmf_details
-
+from app.hdbscan_dashboard import render_hdbscan_details
 
 API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000").rstrip("/")
 PASTEL_COLORS = [
@@ -204,6 +204,10 @@ def render_overview(run: ArtifactRun, bundle, split: str) -> None:
         st.divider()
         st.subheader("Phân tích chi tiết NMF")
         render_nmf_details(bundle, str(run.path))
+    if run.method == "hdbscan":
+        st.divider()
+        st.subheader("Phân tích chi tiết HDBSCAN")
+        render_hdbscan_details(bundle, str(run.path))
 
 
 def render_topic_detail(run: ArtifactRun, bundle, split: str) -> None:
@@ -809,7 +813,6 @@ def main() -> None:
         render_new_article()
     else:
         render_contributions(runs)
-
 
 if __name__ == "__main__":
     main()

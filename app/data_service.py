@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import re
 from dataclasses import dataclass
@@ -385,3 +386,610 @@ def load_optional_table(
         if path.is_file()
         else pd.DataFrame()
     )
+
+
+def _as_boolean_series(series: pd.Series) -> pd.Series:
+    """Chuẩn hóa cột boolean đọc từ CSV."""
+
+    if pd.api.types.is_bool_dtype(series):
+        return series.fillna(False)
+
+    return (
+        series.astype(str)
+        .str.strip()
+        .str.lower()
+        .isin({"true", "1", "yes"})
+    )
+
+
+def _resolve_linked_file(
+    artifact_dir: str | Path,
+    value: str | Path,
+) -> Path:
+    """Tìm file được khai báo bằng đường dẫn tương đối trong metadata."""
+
+    linked = Path(value)
+
+    if linked.is_absolute():
+        return linked
+
+    artifact_path = Path(artifact_dir).resolve()
+
+    search_roots = [
+        Path.cwd(),
+        artifact_path,
+        *artifact_path.parents,
+    ]
+
+    for root in search_roots:
+        candidate = root / linked
+        if candidate.is_file():
+            return candidate
+
+    return Path.cwd() / linked
+
+
+def load_hdbscan_run_metadata(
+    artifact_dir: str | Path,
+) -> dict:
+    """Đọc run_metadata.json của HDBSCAN."""
+
+    path = Path(artifact_dir) / "run_metadata.json"
+
+    if not path.is_file():
+        return {}
+
+    return json.loads(
+        path.read_text(encoding="utf-8-sig")
+    )
+
+
+def load_hdbscan_runtime(
+    artifact_dir: str | Path,
+) -> dict:
+    """Đọc runtime_summary.json mà không tạo số thay thế."""
+
+    path = Path(artifact_dir) / "runtime_summary.json"
+
+    if not path.is_file():
+        return {}
+
+    return json.loads(
+        path.read_text(encoding="utf-8-sig")
+    )
+
+
+def get_hdbscan_split_summary(
+    bundle: ArtifactBundle,
+) -> pd.DataFrame:
+    """Tính coverage và outlier theo split từ document_topics.csv."""
+
+    documents = bundle.document_topics.copy()
+    documents["is_outlier"] = _as_boolean_series(
+        documents["is_outlier"]
+    )
+
+    rows = []
+
+    for split, group in documents.groupby(
+        "split",
+        sort=False,
+    ):
+        document_count = int(len(group))
+        outlier_count = int(group["is_outlier"].sum())
+        assigned_count = document_count - outlier_count
+
+        rows.append(
+            {
+                "split": split,
+                "document_count": document_count,
+                "assigned_count": assigned_count,
+                "outlier_count": outlier_count,
+                "coverage": (
+                    assigned_count / document_count
+                    if document_count
+                    else None
+                ),
+                "outlier_rate": (
+                    outlier_count / document_count
+                    if document_count
+                    else None
+                ),
+            }
+        )
+
+    return pd.DataFrame(rows)
+
+
+def load_hdbscan_stability(
+    artifact_dir: str | Path,
+) -> pd.DataFrame:
+    """Đọc stability summary theo đường dẫn được khai báo."""
+
+    metadata = load_hdbscan_run_metadata(artifact_dir)
+
+    value = metadata.get("stability_summary_path")
+
+    if not value:
+        value = (
+            metadata.get("source_files", {})
+            .get("stability_summary")
+        )
+
+    if not value:
+        return pd.DataFrame()
+
+    path = _resolve_linked_file(
+        artifact_dir,
+        value,
+    )
+
+    if not path.is_file():
+        return pd.DataFrame()
+
+    return pd.read_csv(
+        path,
+        encoding="utf-8-sig",
+    )
+
+
+def load_hdbscan_projection(
+    bundle: ArtifactBundle,
+    artifact_dir: str | Path,
+) -> pd.DataFrame:
+    """Ghép tọa độ 2D với metadata phục vụ tooltip."""
+
+    projection_path = (
+        Path(artifact_dir) / "projection_2d.csv"
+    )
+
+    if not projection_path.is_file():
+        return pd.DataFrame()
+
+    projection = pd.read_csv(
+        projection_path,
+        encoding="utf-8-sig",
+        dtype={"article_id": str},
+    )
+
+    documents = bundle.document_topics.copy()
+    documents["article_id"] = (
+        documents["article_id"].astype(str)
+    )
+
+    document_columns = [
+        column
+        for column in (
+            "article_id",
+            "title",
+            "membership_strength",
+            "soft_primary_topic_id",
+            "soft_primary_membership_strength",
+            "second_topic_id",
+            "second_membership_strength",
+            "top_two_share_gap",
+            "is_multi_topic",
+            "is_outlier",
+            "category_gold",
+        )
+        if column in documents.columns
+    ]
+
+    projection = projection.merge(
+        documents[document_columns],
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    metadata = load_hdbscan_run_metadata(
+        artifact_dir
+    )
+
+    manifest_value = (
+        metadata.get("source_files", {})
+        .get(
+            "split_manifest",
+            "data/splits/split_manifest.csv",
+        )
+    )
+
+    manifest_path = _resolve_linked_file(
+        artifact_dir,
+        manifest_value,
+    )
+
+    if manifest_path.is_file():
+        manifest = pd.read_csv(
+            manifest_path,
+            encoding="utf-8-sig",
+            dtype={"article_id": str},
+        )
+
+        metadata_columns = [
+            column
+            for column in (
+                "article_id",
+                "source",
+                "published_at",
+            )
+            if column in manifest.columns
+        ]
+
+        projection = projection.merge(
+            manifest[metadata_columns],
+            on="article_id",
+            how="left",
+            validate="one_to_one",
+        )
+
+    if "source" not in projection.columns:
+        projection["source"] = None
+
+    if "published_at" not in projection.columns:
+        projection["published_at"] = None
+
+    projection["published_at"] = pd.to_datetime(
+        projection["published_at"],
+        errors="coerce",
+    )
+
+    projection["is_outlier"] = _as_boolean_series(
+        projection["is_outlier"]
+    )
+
+    projection["topic_label"] = projection[
+        "topic_id"
+    ].map(
+        lambda value: (
+            "Outlier (-1)"
+            if int(value) == -1
+            else f"Topic {int(value)}"
+        )
+    )
+
+    return projection
+
+
+def load_hdbscan_human_reviews(
+    artifact_dir: str | Path,
+) -> pd.DataFrame:
+    """Đọc kết quả human evaluation nếu đã hoàn thành."""
+
+    relative_path = Path(
+        "results/hdbscan/human_eval/normalized/"
+        "human_eval_reviews.csv"
+    )
+
+    path = _resolve_linked_file(
+        artifact_dir,
+        relative_path,
+    )
+
+    if not path.is_file():
+        return pd.DataFrame()
+
+    return pd.read_csv(
+        path,
+        encoding="utf-8-sig",
+        dtype={"article_id": str},
+    )
+
+def load_hdbscan_experiment_comparison(
+    artifact_dir: str | Path,
+) -> pd.DataFrame:
+    """Đọc kết quả so sánh MiniLM/MPNet và EOM/Leaf."""
+
+    summary_path = _resolve_linked_file(
+        artifact_dir,
+        "results/hdbscan/m11_summary.csv",
+    )
+    validation_path = _resolve_linked_file(
+        artifact_dir,
+        (
+            "results/hdbscan/validation/"
+            "m11_validation_metrics.csv"
+        ),
+    )
+
+    if (
+        not summary_path.is_file()
+        or not validation_path.is_file()
+    ):
+        return pd.DataFrame()
+
+    train_summary = pd.read_csv(
+        summary_path,
+        encoding="utf-8-sig",
+    )
+    validation = pd.read_csv(
+        validation_path,
+        encoding="utf-8-sig",
+    )
+
+    target_embeddings = {
+        "minilm_title_content",
+        "mpnet_title_content",
+    }
+    target_experiments = {
+        "eom_15_5",
+        "leaf_15_5",
+    }
+
+    train_summary = train_summary.loc[
+        train_summary["embedding_run"].isin(
+            target_embeddings
+        )
+        & train_summary["experiment"].isin(
+            target_experiments
+        )
+    ].copy()
+
+    validation = validation.loc[
+        validation["embedding_run"].isin(
+            target_embeddings
+        )
+        & validation["experiment"].isin(
+            target_experiments
+        )
+        & validation["split"].eq("val")
+    ].copy()
+
+    merged = validation.merge(
+        train_summary,
+        on=[
+            "embedding_run",
+            "experiment",
+            "config_hash",
+        ],
+        how="inner",
+        validate="one_to_one",
+        suffixes=("_validation", "_train"),
+    )
+
+    if merged.empty:
+        return pd.DataFrame()
+
+    embedding_names = {
+        "minilm_title_content": "MiniLM",
+        "mpnet_title_content": "MPNet",
+    }
+
+    result = pd.DataFrame(
+        {
+            "embedding": merged[
+                "embedding_run"
+            ].map(embedding_names),
+            "embedding_run": merged[
+                "embedding_run"
+            ],
+            "selection_method": merged[
+                "cluster_selection_method"
+            ].astype(str).str.upper(),
+            "experiment": merged["experiment"],
+            "min_cluster_size": merged[
+                "min_cluster_size"
+            ],
+            "min_samples": merged[
+                "min_samples"
+            ],
+            "train_count": merged[
+                "n_articles_train"
+            ],
+            "topic_count": merged["n_clusters"],
+            "train_outlier_count": merged[
+                "n_noise_train"
+            ],
+            "train_outlier_rate": (
+                merged["noise_percent_train"] / 100
+            ),
+            "validation_count": merged[
+                "n_articles_validation"
+            ],
+            "validation_outlier_count": merged[
+                "n_noise_validation"
+            ],
+            "validation_outlier_rate": (
+                merged[
+                    "noise_percent_validation"
+                ]
+                / 100
+            ),
+            "validation_coverage": (
+                merged["coverage_percent"] / 100
+            ),
+            "validation_ari": merged["ari"],
+            "validation_nmi": merged["nmi"],
+        }
+    )
+
+    result["configuration"] = (
+        result["embedding"]
+        + " · "
+        + result["selection_method"]
+    )
+
+    return result.sort_values(
+        [
+            "embedding",
+            "selection_method",
+        ],
+        kind="stable",
+    ).reset_index(drop=True)
+
+
+def load_hdbscan_error_cases(
+    artifact_dir: str | Path,
+) -> pd.DataFrame:
+    """Đọc các hard cases đã được phân tích thủ công."""
+
+    path = _resolve_linked_file(
+        artifact_dir,
+        (
+            "results/hdbscan/error_analysis/"
+            "hdbscan_error_cases.csv"
+        ),
+    )
+
+    if not path.is_file():
+        return pd.DataFrame()
+
+    return pd.read_csv(
+        path,
+        encoding="utf-8-sig",
+        dtype={"article_id": str},
+    )
+
+
+def load_hdbscan_transition_hard_cases(
+    bundle: ArtifactBundle,
+    artifact_dir: str | Path,
+) -> pd.DataFrame:
+    """Tổng hợp bài đổi trạng thái cluster/outlier giữa các seed."""
+
+    metadata = load_hdbscan_run_metadata(
+        artifact_dir
+    )
+
+    stability_value = metadata.get(
+        "stability_summary_path"
+    )
+
+    if not stability_value:
+        stability_value = (
+            metadata.get("source_files", {})
+            .get("stability_summary")
+        )
+
+    if not stability_value:
+        return pd.DataFrame()
+
+    stability_summary_path = _resolve_linked_file(
+        artifact_dir,
+        stability_value,
+    )
+
+    stability_dir = stability_summary_path.parent
+
+    transition_paths = [
+        stability_dir / "train_transition_cases.csv",
+        stability_dir / "val_transition_cases.csv",
+    ]
+
+    frames = []
+
+    for path in transition_paths:
+        if path.is_file():
+            frames.append(
+                pd.read_csv(
+                    path,
+                    encoding="utf-8-sig",
+                    dtype={"article_id": str},
+                )
+            )
+
+    if not frames:
+        return pd.DataFrame()
+
+    transitions = pd.concat(
+        frames,
+        ignore_index=True,
+    )
+
+    identity_columns = [
+        "split",
+        "article_id",
+    ]
+
+    counts = (
+        transitions.groupby(
+            identity_columns,
+            as_index=False,
+        )
+        .size()
+        .rename(
+            columns={"size": "transition_count"}
+        )
+    )
+
+    direction_counts = (
+        transitions.pivot_table(
+            index=identity_columns,
+            columns="direction",
+            values="seed_a",
+            aggfunc="count",
+            fill_value=0,
+        )
+        .reset_index()
+    )
+
+    direction_counts.columns.name = None
+
+    result = counts.merge(
+        direction_counts,
+        on=identity_columns,
+        how="left",
+        validate="one_to_one",
+    )
+
+    for column in (
+        "noise_to_cluster",
+        "cluster_to_noise",
+    ):
+        if column not in result.columns:
+            result[column] = 0
+
+    seeds = sorted(
+        set(transitions["seed_a"].tolist())
+        | set(transitions["seed_b"].tolist())
+    )
+
+    pair_count = (
+        len(seeds) * (len(seeds) - 1) // 2
+    )
+
+    result["compared_seed_pairs"] = pair_count
+
+    result["instability_rate"] = (
+        result["transition_count"] / pair_count
+        if pair_count
+        else None
+    )
+
+    documents = bundle.document_topics.copy()
+    documents["article_id"] = (
+        documents["article_id"].astype(str)
+    )
+
+    document_columns = [
+        column
+        for column in (
+            "article_id",
+            "title",
+            "topic_id",
+            "membership_strength",
+            "soft_primary_topic_id",
+            "second_topic_id",
+            "top_two_share_gap",
+            "is_multi_topic",
+            "is_outlier",
+            "category_gold",
+        )
+        if column in documents.columns
+    ]
+
+    result = result.merge(
+        documents[document_columns],
+        on="article_id",
+        how="left",
+        validate="many_to_one",
+    )
+
+    return result.sort_values(
+        [
+            "transition_count",
+            "article_id",
+        ],
+        ascending=[False, True],
+        kind="stable",
+    ).reset_index(drop=True)
