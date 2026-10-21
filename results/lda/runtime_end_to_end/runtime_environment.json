@@ -1,0 +1,29 @@
+{
+  "created_at_utc": "2026-10-21T03:08:55.603313+00:00",
+  "benchmark_type": "extended_end_to_end",
+  "dataset_version": "v1.0",
+  "preprocessing_variant": "p2_segmented",
+  "n_topics": 15,
+  "random_state": 42,
+  "repeats": 5,
+  "python_version": "3.11.9",
+  "os": "Windows-10-10.0.26200-SP0",
+  "runtime_scope": {
+    "included": [
+      "dataset_loading",
+      "text_extraction",
+      "bow_fit",
+      "bow_transform",
+      "lda_fit",
+      "lda_prediction",
+      "npmi_diversity_ari_nmi",
+      "model_and_metrics_serialization"
+    ],
+    "excluded": [
+      "common_artifact_projection_2d",
+      "representative_docs_export",
+      "benchmark_summary_write"
+    ],
+    "note": "New benchmark fit, not the original Final training run. Temporary output serialization is measured, not full common adapter export."
+  }
+}
