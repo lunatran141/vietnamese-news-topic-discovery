@@ -169,12 +169,14 @@ def evaluate_model(
     matrix,
     feature_names: np.ndarray,
     top_n: int,
+    raw_weights: np.ndarray | None = None,
 ) -> tuple[dict[str, float | int | bool], list[float], np.ndarray]:
     """Tính metric trên validation hoặc test mà không fit lại trên split đó."""
     if model.estimator_ is None or model.topic_word_weights_ is None:
         raise RuntimeError("Cần fit NMF trước khi đánh giá")
     # Chỉ suy diễn W một lần; reconstruction cần W gốc, giao diện cần W chuẩn hóa.
-    raw_weights = model.estimator_.transform(matrix)
+    if raw_weights is None:
+        raw_weights = model.estimator_.transform(matrix)
     distributions = normalize_topic_weights(raw_weights)
     terms_by_topic, ids_by_topic = topic_feature_ids(model, feature_names, top_n)
     coherence, per_topic = npmi_coherence(matrix, ids_by_topic)
@@ -191,6 +193,9 @@ def evaluate_model(
         "n_iter": int(model.estimator_.n_iter_),
         "converged": int(model.estimator_.n_iter_) < model.config.max_iter,
     }
+    metrics["reconstruction_error"] = float(
+        metrics["normalized_reconstruction_error"] * np.sqrt(matrix.multiply(matrix).sum())
+    )
     return metrics, per_topic, distributions
 
 
@@ -343,6 +348,14 @@ def run_selection(
         )
         metrics["fit_split"] = "train"
         metrics["evaluation_split"] = "val"
+        gold_column = config["data"]["gold_column"]
+        if gold_column in validation:
+            metrics["adjusted_rand_index"] = float(
+                adjusted_rand_score(validation[gold_column], distributions.argmax(axis=1))
+            )
+            metrics["normalized_mutual_info"] = float(
+                normalized_mutual_info_score(validation[gold_column], distributions.argmax(axis=1))
+            )
         records.append(metrics)
         topics, representatives, document_topics = describe_candidate_topics(
             validation, distributions, model, per_topic, config

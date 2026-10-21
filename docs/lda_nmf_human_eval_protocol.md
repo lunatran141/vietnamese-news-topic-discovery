@@ -117,6 +117,12 @@ Chấm riêng từng cặp bài–topic.
 
 Reviewer ghi lý do trong `topic_notes` khi chọn `yes`.
 
+### 4.5. Topic quá rộng và khó đặt tên
+
+- `too_broad_yes_no`: chọn `yes` nếu topic gộp phạm vi quá rộng khiến nhãn chung khó phân biệt các bài; `no` nếu phạm vi vẫn hợp lý. Đây là tiêu chí khác với pha trộn các nội dung không liên quan.
+- `hard_to_name_yes_no`: chọn `yes` nếu sau khi đọc keywords và bài mẫu vẫn khó đặt nhãn ngắn gọn, rõ nghĩa; `no` nếu đặt tên được. Không tự quy đổi điểm interpretability thành cờ này.
+- Reviewer chấm độc lập và giải thích các trường hợp `yes` trong `topic_notes`.
+
 ## 5. Phiếu đánh giá
 
 Mỗi reviewer được cung cấp hai file:
@@ -177,8 +183,16 @@ Script tạo mẫu:
 Nguồn dữ liệu:
 
 - `artifacts/common/lda/lda_k15_seed42/`
-- `artifacts/nmf/nmf_p3_k10_seed42_v1/`
+- `artifacts/nmf/nmf_p3_k10_seed42_dashboard_v2/` (bộ phiếu bàn giao giao diện; run nguồn được ghi trong metadata)
 - `data/processed/p2_segmented.csv`
 - `data/splits/split_manifest.csv`
 
 Bộ mẫu phải được tạo lại với cùng seed và cùng artifact trước khi đánh giá chính thức.
+
+Lệnh cho bộ phiếu NMF dashboard, không ghi đè bộ đã có:
+
+```powershell
+.venv/Scripts/python.exe -m experiments.human_eval.build_lda_nmf_samples --nmf-dir artifacts/nmf/nmf_p3_k10_seed42_dashboard_v2 --output-dir results/human_eval/lda_nmf_new
+```
+
+Hai cờ `too_broad_yes_no` và `hard_to_name_yes_no` cũng chỉ nhận `yes`/`no`. Script tổng hợp là `experiments/human_eval/summarize_lda_nmf.py`; chỉ công bố điểm khi cả hai reviewer chấm đủ. Xem `docs/nmf_dashboard.md` để biết trạng thái bộ phiếu hiện tại và phạm vi so sánh.

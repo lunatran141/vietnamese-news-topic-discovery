@@ -11,7 +11,8 @@ from typing import Any
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import PCA
+from scipy.sparse import vstack
+from sklearn.decomposition import PCA, TruncatedSVD
 import yaml
 
 from src.artifacts.loader import (
@@ -24,6 +25,7 @@ from src.artifacts.nmf_parquet import (
 )
 from src.data.dataset_loader import load_dataset
 from src.features.article_text import build_article_text
+from src.features.tfidf import load_tfidf_artifacts
 from src.models.lda_pipeline import transform_lda_pipeline
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -220,6 +222,292 @@ def _build_kmeans_topic_summary(
     ).reset_index(drop=True)
 
 
+def _build_kmeans_representative_docs(
+    source_dir: Path,
+    document_topics: pd.DataFrame,
+    top_n: int = 5,
+) -> pd.DataFrame:
+    """Tạo bảng representative_docs.csv sắp xếp theo khoảng cách tới tâm cụm."""
+    rep_columns = [
+        "topic_id",
+        "rank",
+        "article_id",
+        "distance_to_center",
+        "title",
+        "split",
+        "category_gold",
+        "source",
+        "published_at",
+    ]
+    split_lookup = (
+        document_topics[
+            [
+                col
+                for col in (
+                    "article_id",
+                    "split",
+                    "title",
+                    "distance_to_center",
+                    "category_gold",
+                    "source",
+                    "published_at",
+                )
+                if col in document_topics.columns
+            ]
+        ]
+        .drop_duplicates("article_id")
+        .set_index("article_id")
+        .to_dict("index")
+    )
+
+    rep_json_path = source_dir / "representative_docs.json"
+    rows: list[dict[str, Any]] = []
+
+    if rep_json_path.is_file():
+        raw_reps = _read_json(rep_json_path)
+        for cluster_key in sorted(
+            raw_reps.keys(),
+            key=lambda key: int(key),
+        ):
+            topic_id = int(cluster_key)
+            items = raw_reps[cluster_key]
+            sorted_items = sorted(
+                items,
+                key=lambda item: (
+                    float(item.get("distance_to_center", 0.0)),
+                    int(item.get("rank", 1)),
+                    str(item.get("article_id", "")),
+                ),
+            )[:top_n]
+            for rank, item in enumerate(sorted_items, start=1):
+                aid = str(item.get("article_id", ""))
+                doc_meta = split_lookup.get(aid, {})
+                rows.append(
+                    {
+                        "topic_id": topic_id,
+                        "rank": rank,
+                        "article_id": aid,
+                        "distance_to_center": round(
+                            float(
+                                item.get(
+                                    "distance_to_center",
+                                    doc_meta.get(
+                                        "distance_to_center",
+                                        0.0,
+                                    ),
+                                )
+                            ),
+                            4,
+                        ),
+                        "title": str(
+                            item.get(
+                                "title",
+                                doc_meta.get("title", ""),
+                            )
+                        ),
+                        "split": str(
+                            item.get(
+                                "split",
+                                doc_meta.get("split", "train"),
+                            )
+                        ),
+                        "category_gold": str(
+                            item.get(
+                                "category_gold",
+                                doc_meta.get("category_gold", ""),
+                            )
+                        ),
+                        "source": str(
+                            item.get(
+                                "source",
+                                doc_meta.get("source", ""),
+                            )
+                        ),
+                        "published_at": str(
+                            item.get(
+                                "published_at",
+                                doc_meta.get("published_at", ""),
+                            )
+                        ),
+                    }
+                )
+    else:
+        dev_docs = document_topics[
+            document_topics["split"].isin(
+                ["train", "val", "validation"]
+            )
+        ].copy()
+        if dev_docs.empty:
+            dev_docs = document_topics.copy()
+        for topic_id in sorted(
+            dev_docs["topic_id"].dropna().astype(int).unique()
+        ):
+            if topic_id == -1:
+                continue
+            group = dev_docs[dev_docs["topic_id"] == topic_id].copy()
+            if "distance_to_center" in group.columns:
+                group = group.sort_values(
+                    by=["distance_to_center", "article_id"],
+                    ascending=[True, True],
+                )
+            for rank, (_, doc_row) in enumerate(
+                group.head(top_n).iterrows(),
+                start=1,
+            ):
+                rows.append(
+                    {
+                        "topic_id": int(topic_id),
+                        "rank": rank,
+                        "article_id": str(doc_row["article_id"]),
+                        "distance_to_center": round(
+                            float(
+                                doc_row.get(
+                                    "distance_to_center",
+                                    0.0,
+                                )
+                            ),
+                            4,
+                        ),
+                        "title": str(doc_row.get("title", "")),
+                        "split": str(doc_row.get("split", "train")),
+                        "category_gold": str(
+                            doc_row.get("category_gold", "")
+                        ),
+                        "source": str(doc_row.get("source", "")),
+                        "published_at": str(
+                            doc_row.get("published_at", "")
+                        ),
+                    }
+                )
+
+    if not rows:
+        return pd.DataFrame(columns=rep_columns)
+
+    return pd.DataFrame(rows, columns=rep_columns)
+
+
+def _build_kmeans_projection_2d(
+    source_dir: Path,
+    document_topics: pd.DataFrame,
+    config: dict[str, Any],
+) -> pd.DataFrame:
+    """Tạo bảng projection_2d.csv cho K-Means bằng TruncatedSVD trên TF-IDF."""
+    precomputed_path = source_dir / "projection_2d.csv"
+    if precomputed_path.is_file():
+        precomputed_df = pd.read_csv(
+            precomputed_path,
+            encoding="utf-8-sig",
+        )
+        required_cols = {
+            "article_id",
+            "split",
+            "topic_id",
+            "x",
+            "y",
+        }
+        if required_cols.issubset(precomputed_df.columns) and len(
+            precomputed_df
+        ) == len(document_topics):
+            return precomputed_df[
+                ["article_id", "split", "topic_id", "x", "y"]
+            ].copy()
+
+    dataset_cfg = config.get("dataset", {})
+    tfidf_dir_str = dataset_cfg.get("tfidf_artifacts_dir")
+    if tfidf_dir_str:
+        tfidf_dir = Path(tfidf_dir_str)
+        if not tfidf_dir.is_Absolute() if hasattr(tfidf_dir, "is_Absolute") else not tfidf_dir.is_absolute():
+            project_root = Path(__file__).resolve().parents[2]
+            candidate_dir = project_root / tfidf_dir
+            if candidate_dir.is_dir():
+                tfidf_dir = candidate_dir
+
+        if (tfidf_dir / "tfidf_train.npz").is_file():
+            train_bundle = load_tfidf_artifacts(
+                tfidf_dir,
+                split="train",
+            )
+            svd = TruncatedSVD(
+                n_components=2,
+                random_state=int(
+                    config.get("clustering", {}).get(
+                        "random_state",
+                        42,
+                    )
+                ),
+            )
+            svd.fit(train_bundle["matrix"])
+
+            coord_lookup: dict[str, tuple[float, float]] = {}
+            for split_name in ("train", "val", "test"):
+                matrix_file = (
+                    tfidf_dir / f"tfidf_{split_name}.npz"
+                )
+                if not matrix_file.is_file():
+                    continue
+                split_bundle = load_tfidf_artifacts(
+                    tfidf_dir,
+                    split=split_name,
+                )
+                coords = svd.transform(split_bundle["matrix"])
+                for aid, xy in zip(
+                    split_bundle["article_ids"],
+                    coords,
+                ):
+                    coord_lookup[str(aid)] = (
+                        float(xy[0]),
+                        float(xy[1]),
+                    )
+
+            if set(
+                document_topics["article_id"].astype(str)
+            ).issubset(coord_lookup.keys()):
+                xs = [
+                    coord_lookup[str(aid)][0]
+                    for aid in document_topics["article_id"]
+                ]
+                ys = [
+                    coord_lookup[str(aid)][1]
+                    for aid in document_topics["article_id"]
+                ]
+                return pd.DataFrame(
+                    {
+                        "article_id": document_topics[
+                            "article_id"
+                        ].astype(str),
+                        "split": document_topics[
+                            "split"
+                        ].astype(str),
+                        "topic_id": document_topics[
+                            "topic_id"
+                        ].astype(int),
+                        "x": xs,
+                        "y": ys,
+                    }
+                )
+
+    angles = (
+        document_topics["topic_id"].astype(float)
+        * (2.0 * np.pi / max(len(document_topics["topic_id"].unique()), 2))
+    )
+    radii = (
+        document_topics["distance_to_center"].astype(float)
+        if "distance_to_center" in document_topics.columns
+        else np.ones(len(document_topics), dtype=float)
+    )
+    return pd.DataFrame(
+        {
+            "article_id": document_topics["article_id"].astype(
+                str
+            ),
+            "split": document_topics["split"].astype(str),
+            "topic_id": document_topics["topic_id"].astype(int),
+            "x": np.round(radii * np.cos(angles), 6),
+            "y": np.round(radii * np.sin(angles), 6),
+        }
+    )
+
+
 def export_kmeans_artifacts(
     source_dir: str | Path,
     output_dir: str | Path,
@@ -270,6 +558,9 @@ def export_kmeans_artifacts(
             "cluster_id hoặc topic_id"
         )
 
+    document_topics["article_id"] = document_topics[
+        "article_id"
+    ].astype(str)
     document_topics["topic_id"] = document_topics[
         "topic_id"
     ].astype(int)
@@ -334,6 +625,24 @@ def export_kmeans_artifacts(
         topic_keywords=topic_keywords,
     )
 
+    top_n_reps = int(
+        config.get("topics", {}).get(
+            "representative_docs_per_cluster",
+            5,
+        )
+    )
+    representative_docs = _build_kmeans_representative_docs(
+        source_dir=source_dir,
+        document_topics=document_topics,
+        top_n=top_n_reps,
+    )
+
+    projection_2d = _build_kmeans_projection_2d(
+        source_dir=source_dir,
+        document_topics=document_topics,
+        config=config,
+    )
+
     output_dir.mkdir(
         parents=True,
         exist_ok=True,
@@ -351,6 +660,16 @@ def export_kmeans_artifacts(
     )
     topic_keywords.to_csv(
         output_dir / "topic_keywords.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    representative_docs.to_csv(
+        output_dir / "representative_docs.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    projection_2d.to_csv(
+        output_dir / "projection_2d.csv",
         index=False,
         encoding="utf-8-sig",
     )
@@ -375,10 +694,19 @@ def export_kmeans_artifacts(
         )
     )
 
-    metrics_validation = run_metadata.get(
-        "metrics_validation",
-        {},
+    metrics_validation = dict(
+        run_metadata.get("metrics_validation", {})
     )
+    metrics_test = dict(
+        run_metadata.get("metrics_test", {})
+    )
+    runtime_breakdown = dict(
+        run_metadata.get("runtime_breakdown", {})
+    )
+    stability_info = dict(
+        run_metadata.get("stability", {})
+    )
+
     train_count = int(
         (document_topics["split"] == "train").sum()
     )
@@ -387,9 +715,156 @@ def export_kmeans_artifacts(
         .isin(["val", "validation"])
         .sum()
     )
+    test_count = int(
+        (document_topics["split"] == "test").sum()
+    )
     topic_diversity = _compute_topic_diversity(
         topic_keywords
     )
+
+    val_ari = metrics_validation.get(
+        "validation_ari",
+        metrics_validation.get("ari"),
+    )
+    val_nmi = metrics_validation.get(
+        "validation_nmi",
+        metrics_validation.get("nmi"),
+    )
+    val_purity = metrics_validation.get(
+        "validation_purity",
+        metrics_validation.get("purity"),
+    )
+    val_silhouette = metrics_validation.get(
+        "silhouette_score"
+    )
+    val_ch = metrics_validation.get(
+        "calinski_harabasz_score"
+    )
+    val_db = metrics_validation.get(
+        "davies_bouldin_score",
+        metrics_validation.get("davies_bouldin_index"),
+    )
+
+    test_ari = metrics_test.get(
+        "test_ari",
+        metrics_test.get("ari"),
+    )
+    test_nmi = metrics_test.get(
+        "test_nmi",
+        metrics_test.get("nmi"),
+    )
+    test_purity = metrics_test.get(
+        "test_purity",
+        metrics_test.get("purity"),
+    )
+    test_silhouette = metrics_test.get(
+        "silhouette_score"
+    )
+    test_ch = metrics_test.get(
+        "calinski_harabasz_score"
+    )
+    test_db = metrics_test.get(
+        "davies_bouldin_score",
+        metrics_test.get("davies_bouldin_index"),
+    )
+
+    representation_seconds = runtime_breakdown.get(
+        "representation_seconds"
+    )
+    fit_seconds = runtime_breakdown.get("fit_seconds")
+    validation_predict_seconds = runtime_breakdown.get(
+        "validation_predict_seconds"
+    )
+    test_predict_seconds = runtime_breakdown.get(
+        "test_predict_seconds"
+    )
+    evaluation_seconds = runtime_breakdown.get(
+        "evaluation_seconds"
+    )
+    runtime_seconds = runtime_breakdown.get(
+        "runtime_seconds",
+        run_metadata.get("execution_duration_seconds"),
+    )
+    runtime_scope = runtime_breakdown.get(
+        "runtime_scope",
+        run_metadata.get(
+            "runtime_scope",
+            (
+                "TF-IDF fit/transform (train/val/test) + "
+                "KMeans (K=9, seed=42) fit trên train + "
+                "predict trên val và test + tính metric đánh giá; "
+                "không gồm đọc/ghi ổ đĩa, quét lưới K-search và vẽ biểu đồ."
+            ),
+        ),
+    )
+
+    combined_metrics: dict[str, float | int | None] = {
+        "topic_diversity": topic_diversity,
+        "validation_topic_diversity": topic_diversity,
+        "test_topic_diversity": (
+            topic_diversity if test_count > 0 else None
+        ),
+        "validation_ari": val_ari,
+        "validation_nmi": val_nmi,
+        "validation_purity": val_purity,
+        "test_ari": test_ari,
+        "test_nmi": test_nmi,
+        "test_purity": test_purity,
+        "silhouette_score": val_silhouette,
+        "validation_silhouette_score": val_silhouette,
+        "test_silhouette_score": test_silhouette,
+        "calinski_harabasz_score": val_ch,
+        "validation_calinski_harabasz_score": val_ch,
+        "test_calinski_harabasz_score": test_ch,
+        "davies_bouldin_score": val_db,
+        "davies_bouldin_index": val_db,
+        "validation_davies_bouldin_score": val_db,
+        "test_davies_bouldin_score": test_db,
+        "stability_mean": stability_info.get(
+            "stability_mean",
+            run_metadata.get("stability_mean"),
+        ),
+        "stability_std": stability_info.get(
+            "stability_std",
+            run_metadata.get("stability_std"),
+        ),
+        "inertia": metrics_validation.get("inertia"),
+        "train_inertia": metrics_validation.get(
+            "train_inertia",
+            metrics_validation.get("inertia"),
+        ),
+        "validation_inertia": metrics_validation.get(
+            "validation_inertia"
+        ),
+        "test_inertia": metrics_test.get(
+            "test_inertia",
+            metrics_test.get("inertia"),
+        ),
+        "ari": val_ari,
+        "nmi": val_nmi,
+        "purity": val_purity,
+        "adjusted_rand_index": (
+            test_ari if test_ari is not None else val_ari
+        ),
+        "normalized_mutual_info": (
+            test_nmi if test_nmi is not None else val_nmi
+        ),
+        "representation_seconds": representation_seconds,
+        "fit_seconds": fit_seconds,
+        "validation_predict_seconds": validation_predict_seconds,
+        "test_predict_seconds": test_predict_seconds,
+        "evaluation_seconds": evaluation_seconds,
+        "runtime_seconds": runtime_seconds,
+        "k_search_pipeline_seconds": run_metadata.get(
+            "k_search_execution_duration_seconds",
+            run_metadata.get("execution_duration_seconds"),
+        ),
+        "document_count": len(document_topics),
+        "train_count": train_count,
+        "validation_count": validation_count,
+        "val_count": validation_count,
+        "test_count": test_count,
+    }
 
     model_summary: dict[str, Any] = {
         "model_name": f"KMeans {resolved_run_id}",
@@ -402,18 +877,40 @@ def export_kmeans_artifacts(
                 len(topic_summary),
             )
         ),
-        "outlier_rate": 0.0,
-        "runtime_seconds": run_metadata.get(
-            "execution_duration_seconds"
+        "outlier_rate": None,
+        "outlier_applicable": False,
+        "outlier_label": "Không áp dụng",
+        "outlier_note": (
+            "Không áp dụng (K-Means phân hoạch cứng toàn bộ bài báo, "
+            "không có cơ chế từ chối bài)"
         ),
-        "metrics": {
-            "topic_diversity": topic_diversity,
-            "train_outlier_rate": 0.0,
-            "validation_outlier_rate": 0.0,
-            "train_count": train_count,
-            "validation_count": validation_count,
-            **metrics_validation,
+        "runtime_seconds": runtime_seconds,
+        "representation_seconds": representation_seconds,
+        "fit_seconds": fit_seconds,
+        "validation_predict_seconds": validation_predict_seconds,
+        "test_predict_seconds": test_predict_seconds,
+        "evaluation_seconds": evaluation_seconds,
+        "runtime_scope": runtime_scope,
+        "evaluation_protocol": {
+            "validation": {
+                "fit_split": "train",
+                "evaluation_split": "val",
+                "model": "KMeans K9 seed42 (locked on validation)",
+            },
+            "test": {
+                "fit_split": "train",
+                "evaluation_split": "test",
+                "model": "KMeans K9 seed42 (frozen model inference only)",
+            },
+            "stability": {
+                "metric": "pairwise_ari_across_seeds",
+                "seeds": config.get("clustering", {}).get(
+                    "stability_seeds",
+                    [42, 43, 44, 45, 46],
+                ),
+            },
         },
+        "metrics": combined_metrics,
         "config": config,
     }
 
@@ -729,8 +1226,38 @@ def export_lda_artifacts(
     if probabilities.shape != (len(dataset), k):
         raise ValueError("Invalid LDA distribution shape")
 
-    topic_ids = probabilities.argmax(axis=1)
-    topic_probs = probabilities.max(axis=1)
+
+    # Main and second topic probabilities from frozen LDA K15.
+    sorted_topic_indices = np.argsort(
+        probabilities, axis=1
+    )[:, ::-1]
+
+    topic_ids = sorted_topic_indices[:, 0]
+    second_topic_ids = sorted_topic_indices[:, 1]
+
+    row_indices = np.arange(len(dataset))
+
+    topic_probs = probabilities[row_indices, topic_ids]
+    second_topic_probs = probabilities[
+        row_indices, second_topic_ids
+    ]
+
+    # Difference between first and second topic probabilities.
+    top_two_share_gap = topic_probs - second_topic_probs
+
+    # Shannon entropy, using natural logarithm.
+    # Clip only for numerical stability in log().
+    safe_probs = np.clip(probabilities, 1e-12, 1.0)
+    topic_entropy = -np.sum(
+        probabilities * np.log(safe_probs), axis=1
+    )
+
+    if not np.isfinite(topic_entropy).all():
+        raise ValueError("Invalid LDA topic entropy")
+
+    if (top_two_share_gap < -1e-10).any():
+        raise ValueError("Invalid top-two topic probability gap")
+
 
 
     # PCA projection for visualization only.
@@ -768,12 +1295,47 @@ def export_lda_artifacts(
     if ((topic_probs < 0) | (topic_probs > 1)).any():
         raise ValueError("Topic probabilities outside [0,1]")
 
+
+    # Additional LDA probability fields required by the leader.
     document_topics = dataset[
-        ["article_id", "split", "title", "source", "published_at"]
+        [
+            "article_id",
+            "split",
+            "title",
+            "source",
+            "published_at",
+            "category_gold",
+        ]
     ].copy()
 
     document_topics["topic_id"] = topic_ids.astype(int)
     document_topics["topic_probability"] = topic_probs
+
+    document_topics["second_topic_id"] = (
+        second_topic_ids.astype(int)
+    )
+
+    document_topics["second_topic_probability"] = (
+        second_topic_probs
+    )
+
+    document_topics["top_two_share_gap"] = (
+        top_two_share_gap
+    )
+
+    document_topics["topic_entropy"] = topic_entropy
+
+    # Leader-approved multi-topic threshold.
+    # A document is multi-topic if its second topic
+    # has a probability of at least 0.20.
+    MULTI_TOPIC_THRESHOLD = 0.20
+
+    document_topics["is_multi_topic"] = (
+        document_topics["second_topic_probability"]
+        >= MULTI_TOPIC_THRESHOLD
+    )
+
+    # LDA has no explicit outlier label.
     document_topics["is_outlier"] = False
 
     document_topics = document_topics[
@@ -782,12 +1344,19 @@ def export_lda_artifacts(
             "split",
             "topic_id",
             "topic_probability",
-            "is_outlier",
+            "second_topic_id",
+            "second_topic_probability",
+            "top_two_share_gap",
+            "topic_entropy",
+            "is_multi_topic",
             "title",
+            "category_gold",
+            "is_outlier",
             "source",
             "published_at",
         ]
     ]
+
 
     feature_names = vectorizer.get_feature_names_out()
     keyword_rows = []
@@ -828,6 +1397,226 @@ def export_lda_artifacts(
 
     topic_summary = pd.DataFrame(summary_rows)
 
+    # Load the LDA Final runtime benchmark when available.
+    # Resolve relative to the repository, not the current directory.
+    project_root = Path(__file__).resolve().parents[2]
+    runtime_path = (
+        project_root
+        / "results"
+        / "lda"
+        / "runtime"
+        / "runtime_summary.csv"
+    )
+
+    runtime_seconds = None
+
+    if runtime_path.is_file():
+        runtime_df = pd.read_csv(runtime_path)
+
+        required_columns = {
+            "run",
+            "fit_split",
+            "inference_split",
+            "stage",
+            "repeats",
+            "mean_seconds",
+        }
+
+        missing_columns = required_columns - set(runtime_df.columns)
+        if missing_columns:
+            raise ValueError(
+                f"Missing LDA runtime columns: {sorted(missing_columns)}"
+            )
+
+        runtime_rows = runtime_df.loc[
+            (runtime_df["run"] == "lda_k15_seed42_final_benchmark")
+            & (runtime_df["fit_split"] == "train+val")
+            & (runtime_df["inference_split"] == "test")
+            & (runtime_df["stage"] == "runtime_seconds")
+            & (runtime_df["repeats"] == 5)
+        ]
+
+        if len(runtime_rows) != 1:
+            raise ValueError(
+                "Expected exactly one LDA Final runtime benchmark row"
+            )
+
+        runtime_seconds = float(
+            runtime_rows.iloc[0]["mean_seconds"]
+        )
+
+        if not np.isfinite(runtime_seconds) or runtime_seconds <= 0:
+            raise ValueError("Invalid LDA Final runtime")
+
+    # Runtime breakdown from reproducible LDA benchmarks.
+    runtime_details = {
+        "representation_seconds": None,
+        "fit_seconds": None,
+        "validation_inference_seconds": None,
+        "test_inference_seconds": None,
+        "evaluation_seconds": None,
+        "runtime_scope": (
+            "Final Train+Val -> Test: BoW representation, "
+            "LDA fit, Test inference and evaluation; "
+            "excludes data loading and artifact export. "
+            "Validation inference is reported separately "
+            "from the Development Train -> Validation benchmark."
+        ),
+        "runtime_mean": None,
+        "runtime_std": None,
+    }
+
+    if runtime_path.is_file():
+        def get_runtime(run_name, stage, field):
+            matches = runtime_df.loc[
+                (runtime_df["run"] == run_name)
+                & (runtime_df["stage"] == stage)
+                & (runtime_df["repeats"] == 5)
+            ]
+
+            if len(matches) != 1:
+                raise ValueError(
+                    f"Expected one benchmark row: {run_name}, {stage}"
+                )
+
+            value = float(matches.iloc[0][field])
+
+            if not np.isfinite(value) or value < 0:
+                raise ValueError(
+                    f"Invalid benchmark value: {run_name}, {stage}"
+                )
+
+            return value
+
+        development_run = "lda_k15_seed42_development_benchmark"
+        final_run = "lda_k15_seed42_final_benchmark"
+
+        runtime_details.update({
+            "representation_seconds": get_runtime(
+                final_run, "representation_seconds", "mean_seconds"
+            ),
+            "fit_seconds": get_runtime(
+                final_run, "fit_seconds", "mean_seconds"
+            ),
+            "validation_inference_seconds": get_runtime(
+                development_run, "predict_seconds", "mean_seconds"
+            ),
+            "test_inference_seconds": get_runtime(
+                final_run, "predict_seconds", "mean_seconds"
+            ),
+            "evaluation_seconds": get_runtime(
+                final_run, "evaluation_seconds", "mean_seconds"
+            ),
+            "runtime_mean": get_runtime(
+                final_run, "runtime_seconds", "mean_seconds"
+            ),
+            "runtime_std": get_runtime(
+                final_run, "runtime_seconds", "std_seconds"
+            ),
+        })
+
+
+    # Read supplementary Development Validation metrics.
+    validation_metrics_path = (
+        project_root
+        / "results"
+        / "lda"
+        / "validation_supplement"
+        / "validation_metrics.json"
+    )
+
+    validation_metrics = _read_json(validation_metrics_path)
+
+    if (
+        validation_metrics["fit_split"] != "train"
+        or validation_metrics["evaluation_split"] != "val"
+        or int(validation_metrics["n_topics"]) != 15
+        or int(validation_metrics["random_state"]) != 42
+        or validation_metrics["npmi_definition"]
+        != "document_binary_common"
+    ):
+        raise ValueError("Invalid LDA Validation evaluation protocol")
+
+    # Read M09 stability using reference seed 42.
+    stability_path = (
+        project_root
+        / "results"
+        / "lda"
+        / "m09"
+        / "stability_metrics.csv"
+    )
+
+    stability_df = pd.read_csv(stability_path)
+
+    required_stability_columns = {
+        "reference_seed",
+        "candidate_seed",
+        "k",
+        "mean_matched_jaccard",
+        "mean_document_cosine",
+    }
+
+    missing = required_stability_columns - set(stability_df.columns)
+    if missing:
+        raise ValueError(
+            f"Missing LDA stability columns: {sorted(missing)}"
+        )
+
+    stability_rows = stability_df.loc[
+        (stability_df["reference_seed"] == 42)
+        & (stability_df["candidate_seed"] != 42)
+        & (stability_df["k"] == 15)
+    ].copy()
+
+    if (
+        len(stability_rows) != 4
+        or stability_rows["candidate_seed"].nunique() != 4
+    ):
+        raise ValueError("Expected 4 M09 candidate seeds")
+
+    stability_mean = float(
+        stability_rows["mean_matched_jaccard"].mean()
+    )
+    stability_std = float(
+        stability_rows["mean_matched_jaccard"].std(ddof=1)
+    )
+
+    document_cosine_mean = float(
+        stability_rows["mean_document_cosine"].mean()
+    )
+    document_cosine_std = float(
+        stability_rows["mean_document_cosine"].std(ddof=1)
+    )
+
+    metric_details = {
+        "validation_ari": float(
+            validation_metrics["validation_ari"]
+        ),
+        "validation_nmi": float(
+            validation_metrics["validation_nmi"]
+        ),
+        "validation_npmi": float(
+            validation_metrics["validation_npmi"]
+        ),
+        "test_ari": float(final_metrics["adjusted_rand_index"]),
+        "test_nmi": float(final_metrics["normalized_mutual_info"]),
+        "test_npmi": float(final_metrics["npmi_coherence"]),
+        "perplexity": float(
+            validation_metrics["validation_perplexity"]
+        ),
+        "topic_diversity": float(
+            final_metrics["topic_diversity"]
+        ),
+        "stability_mean": stability_mean,
+        "stability_std": stability_std,
+        "document_cosine_mean": document_cosine_mean,
+        "document_cosine_std": document_cosine_std,
+    }
+
+    for key, value in metric_details.items():
+        if isinstance(value, float) and not np.isfinite(value):
+            raise ValueError(f"Invalid LDA metric: {key}")
+
     run_id = "lda_k15_seed42"
     model_name = "LDA K15"
 
@@ -837,11 +1626,45 @@ def export_lda_artifacts(
         "algorithm": "LDA",
         "representation": "Bag-of-Words",
         "topic_count": k,
+        "evaluation_protocol": {
+            "validation": {
+                "fit_split": "train",
+                "evaluation_split": "val",
+                "model": "LDA Development K15 seed42",
+                "npmi_definition": "document_binary_common",
+                "perplexity_scope": "Development Train -> Validation",
+            },
+            "test": {
+                "fit_split": "train+val",
+                "evaluation_split": "test",
+                "model": "LDA Final K15 seed42",
+                "npmi_definition": "document_binary_common",
+            },
+            "stability": {
+                "metric": "matched_jaccard",
+                "reference_seed": 42,
+                "candidate_seeds": [52, 62, 72, 82],
+                "std_definition": "sample_std_ddof_1",
+            },
+        },
         "outlier_rate": 0.0,
-        "runtime_seconds": None,
+        "runtime_seconds": runtime_seconds,
+        **runtime_details,
+        "multi_topic": {
+            "definition": "second_topic_probability >= threshold",
+            "threshold": 0.20,
+            "total_documents": len(document_topics),
+            "multi_topic_count": int(
+                document_topics["is_multi_topic"].sum()
+            ),
+            "multi_topic_rate": float(
+                document_topics["is_multi_topic"].mean()
+            ),
+        },
         "metrics": {
-            "topic_diversity": float(
-                final_metrics["topic_diversity"]
+            **metric_details,
+            "npmi_coherence": float(
+                final_metrics["npmi_coherence"]
             ),
             "npmi_coherence": float(
                 final_metrics["npmi_coherence"]
@@ -1041,6 +1864,10 @@ def export_nmf_artifacts(
     metadata = _read_json(source_dir / "run_metadata.json")
     metrics = _read_json(result_dir / "test_metrics.json")
     assignments = read_nmf_parquet_assignments(source_dir)
+    threshold = float(config.get("analysis", {}).get("secondary_topic_min_share", 0.20))
+    gap_threshold = float(config.get("analysis", {}).get("top_two_gap_filter", 0.10))
+    assignments["is_multi_topic"] = assignments["second_topic_share"].ge(threshold)
+    assignments["is_close_top_two"] = assignments["top_two_share_gap"].le(gap_threshold)
     topic_count = int(metadata.get("selected_n_topics", 0))
     run_id = str(metadata.get("run_id", source_dir.name))
     if topic_count < 2 or run_id != source_dir.name:
@@ -1243,6 +2070,13 @@ def export_nmf_artifacts(
         (assignments["split"] == "val").sum()
     )
     numeric_metrics["test_count"] = int((assignments["split"] == "test").sum())
+    dashboard_metrics_path = result_dir / "dashboard_metrics.json"
+    if dashboard_metrics_path.is_file():
+        numeric_metrics.update({
+            key: value for key, value in _read_json(dashboard_metrics_path).items()
+            if isinstance(value, (int, float)) and not isinstance(value, bool)
+            and np.isfinite(value)
+        })
     model_summary = {
         "model_name": model_name,
         "run_id": run_id,
@@ -1251,6 +2085,9 @@ def export_nmf_artifacts(
         "topic_count": topic_count,
         "outlier_rate": float(assignments["is_outlier"].mean()),
         "runtime_seconds": metadata.get("runtime_seconds"),
+        "runtime_scope": metadata.get("runtime_scope"),
+        "evaluation_split": "test",
+        "representative_split": metadata.get("representative_split", "source_artifact"),
         "metrics": numeric_metrics,
         "config": config,
     }

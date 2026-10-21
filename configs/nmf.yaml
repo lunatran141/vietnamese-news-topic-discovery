@@ -39,6 +39,8 @@ analysis:
   top_words: 10
   representative_documents_per_topic: 5
   secondary_topic_min_share: 0.20
+  # Bộ lọc giao diện, không thay thế quy tắc is_multi_topic ở trên.
+  top_two_gap_filter: 0.10
   max_topics_per_document: 3
   multi_topic_cases_limit: 50
   preview_characters: 500

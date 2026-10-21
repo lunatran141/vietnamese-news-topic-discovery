@@ -1,0 +1,506 @@
+﻿topic_id,rank,article_id,title,topic_probability,split
+0,1,TTR_4b300441eb71,Thiết bị thông minh mất 'trí thông minh' sau khi hãng đóng máy chủ,1.0,train
+0,2,TTR_8165fb4ca4e4,Samsung thử nghiệm công nghệ 6G cho phép mạng 'cảm nhận' môi trường,1.0,test
+0,3,TTR_b3903c3caa9b,"Cuộc đua smartphone cuối năm: Camera tự xoay, pin 'khủng' 10.000mAh",1.0,train
+0,4,VNE_354e8b08277c,Tính năng hút người dùng của dòng smartphone gập Samsung,1.0,test
+0,5,VNE_428008029a56,Dòng smartphone bán chạy nhất thế giới,1.0,train
+1,1,TTR_004994da7bee,Bổ sung cà rốt vào thực đơn giúp cải thiện thị lực như thế nào?,1.0,train
+1,2,TTR_0133b65c04fc,288 sinh viên Đại học Duy Tân thực tập lâm sàng tại Bệnh viện Trung ương Huế,1.0,train
+1,3,TTR_0163d27cea5b,"Ca tử vong do bệnh dại ở TP.HCM tăng, áp lực phơi nhiễm trong cộng đồng ở mức cao",1.0,train
+1,4,TTR_024499057bfc,Tiền vệ tuyển Mỹ kiện bác sĩ sau khi ngừng tim trên sân,1.0,test
+1,5,TTR_02e6c53cad15,Phó bí thư thường trực Thành ủy Lê Quốc Phong: Thành tựu y khoa phải đi cùng lòng nhân ái,1.0,val
+2,1,TTR_99af8b891067,Khởi động giải ‘chạy giữa kỳ quan’ - Global Gate Hạ Long ESG Marathon 2026,1.0,train
+2,2,TTR_a61c84eee646,Hơn 7.000 vận động viên sẵn sàng chinh phục Marathon Cà Mau 2026,1.0,train
+2,3,TTR_ea6adc6d6db2,Vận động viên tham gia giải chạy ở Đắk Lắk tố bị kẻ gian rạch túi lấy mất đồ,1.0,train
+2,4,TTR_fbdcbc71facc,7.000 người tham dự Giải chạy marathon Cà Mau 2026,1.0,train
+2,5,VNE_021cf89c7202,Plusssz mang tinh thần 'chủ động sức khỏe' đến VM Quy Nhơn,1.0,train
+3,1,TTR_1505bc4e7ede,Giá vàng hôm nay 30-9: Vàng tăng gần 50 USD sau cú lao dốc,1.0,train
+3,2,TTR_292880869f97,Giá vàng thế giới giảm mạnh trước thềm cuộc họp của Fed,1.0,train
+3,3,TTR_43b08580f22b,"Giá vàng hôm nay: Vàng tiếp tục giảm, rời xa mốc 4.300 USD",1.0,train
+3,4,TTR_53835a677676,"Giá vàng thế giới lại rơi khỏi ngưỡng 4.400 USD/ounce, trong nước tăng mạnh",1.0,train
+3,5,TTR_543493db8420,"Bớt lo Fed tăng lãi suất, giá vàng hồi phục mạnh",1.0,train
+4,1,TTR_43839fb4a2a3,"Đọc nhanh 7-9: Giá dầu tăng vọt gần 10% chỉ trong một tuần, vàng vẫn trên 4.400 USD",1.0,train
+4,2,TTR_dbb879c2bffc,Xăng dầu tiêu chuẩn cao mức V có giá thế nào?,1.0,test
+4,3,VNN_14df1b7276f0,"Giá xăng dầu hôm nay 2/9: Thế giới tăng cao, trong nước điều chỉnh vào ngày mai",1.0,train
+4,4,VNN_1935ec5ae6aa,"Giá xăng dầu hôm nay 22/9: Thế giới giảm mạnh, trong nước sắp điều chỉnh",1.0,test
+4,5,VNN_3b562964f807,"Giá xăng dầu hôm nay 7/9: Thế giới tiếp đà tăng, trong nước vượt 23.000 đồng/lít",1.0,val
+5,1,TTR_2038c496f30c,Thị trường chùng xuống chờ iPhone 18 ra mắt,1.0,train
+5,2,TTR_3a35e7cc91a1,"Hàng chục ngàn iPhone 18 đã đến tay khách Việt chỉ sau 3 ngày, màu máy nào áp đảo?",1.0,train
+5,3,TTR_78b52aac827d,Quan tâm iPhone Duo nhưng nhiều người Việt muốn mua iPhone 18 Pro Max,1.0,train
+5,4,TTR_f5fc3b5b6079,"Hơn 220.000 iPhone 18 đã được người dùng Việt đặt mua, 90% chọn Pro Max",1.0,train
+5,5,VNE_318668071fdf,"Người Việt chi hơn 1.500 tỷ đồng mua iPhone 18 Pro Max, 18 Pro ngày đầu",1.0,train
+6,1,TTR_164f0fc7cc15,Ronaldo không ra sân trong chiến thắng của Bồ Đào Nha trước Na Uy,1.0,val
+6,2,TTR_5947f914c4ed,Ronaldo đòi cấm vĩnh viễn CĐV xúc phạm Diogo Jota,1.0,train
+6,3,TTR_abc1123164ad,Ronaldo được triệu tập lên tuyển Bồ Đào Nha,1.0,val
+6,4,TTR_b3c76285320f,Ronaldo thua tan nát trong ngày trở lại 'Champions League châu Á',1.0,train
+6,5,TTR_be28fd6eff80,Ronaldo hóa 'diễn viên hài' trong trận thua đầu tiên của Al Nassr ở mùa giải này,1.0,train
+7,1,TTR_0b788b5a20d6,Son Heung Min phát biểu 'sốc': Ronaldo là thần tượng của tôi nhưng Messi là GOAT,1.0,train
+7,2,TTR_2deec2509859,Sự kiện 'có một không hai': Ronaldo và Messi nhận lời đá chung một đội,1.0,test
+7,3,TTR_48dda74dd93e,"Cả thế giới tiếc nuối, tri ân Messi trừ... Barca, người hâm mộ lên tiếng chỉ trích",1.0,train
+7,4,TTR_4ae866118ba3,"Liên đoàn Bóng đá Argentina cảm ơn Messi, người dân cảm thấy tiếc nuối và 'không muốn tin'",1.0,train
+7,5,TTR_4b9b4bca6129,Bất ngờ cái tên thay Messi làm đội trưởng tuyển Argentina,1.0,train
+8,1,TTR_2062cfe6aa3f,Harry Kane tiến gần đến cột mốc lịch sử tại Bundesliga,1.0,train
+8,2,TTR_a083e7e7312a,Harry Kane áp sát kỷ lục vĩ đại của Ronaldo tại Champions League,1.0,train
+8,3,VNE_10e15e8e3c9d,Harry Kane: 'Quả Bóng Vàng ư? Tôi không thích nói về mình',1.0,test
+8,4,VNE_1683d5e57cb3,Bayern mất chuỗi 67 vòng liên tiếp đứng đầu Bundesliga,1.0,train
+8,5,VNE_2402e64ce9e5,Klopp siết kỷ luật ở đội tuyển Đức,1.0,train
+9,1,TTR_21316e76118d,HLV Việt Thắng sẽ thắng Polking?,1.0,train
+9,2,TTR_299630bf99d7,"Hoàng Hên, Hai Long dễ 'gieo sầu' cho CLB Công An TP.HCM",1.0,train
+9,3,TTR_54c9cb4209b8,Tân binh Bắc Ninh gây sốc ở V-League 2026-2027,1.0,train
+9,4,TTR_5e1c09ac4b1e,Đại diện TP.HCM khởi đầu thuận lợi ở Giải hạng nhất,1.0,train
+9,5,TTR_6fbcf1f90820,"Mặt sân Pleiku như ruộng lầy, CLB Hoàng Anh Gia Lai phải đổi sân nhà ở Cúp quốc gia",1.0,train
+10,1,TTR_054aeb1cba11,Thương hiệu tôi yêu: Ấm lòng chiếc bánh bao của chị,1.0,val
+10,2,TTR_09ca33ef925f,Thương hiệu tôi yêu: Trọn bữa cơm nhà với nước mắm nhỉ cá cơm Bà Hai,1.0,val
+10,3,TTR_12b3098bc54b,"Thương hiệu tôi yêu: Bánh nghệ Kiến Xương, thức quà vàng của đất lúa",1.0,train
+10,4,TTR_3fb4330a6e7b,Thương hiệu tôi yêu: Bát cháo Vifon hôm ấy,1.0,train
+10,5,TTR_4920df87d815,Thương hiệu tôi yêu: Bánh gạo An trong ký ức bình yên của tuổi học trò,1.0,train
+11,1,VNE_30a9b1b17fad,Ảnh cầm iPhone Duo của Apple bị nghi 'photoshop',1.0,train
+11,2,VNE_3a07aac21dd7,Cha mẹ bị bắt vì bỏ 3 con ở nhà để đi chơi pickleball,1.0,train
+11,3,VNE_3e9b2116e799,Sếp Apple: Tỷ lệ màn hình iPhone Duo bị lộ và 'tình cờ có trên sản phẩm khác',1.0,test
+11,4,VNE_57088982fa86,Màn hình gập của iPhone Duo có giá 250 USD,1.0,train
+11,5,VNE_73bdcb6f0427,Loạt thương hiệu 'ăn theo' iPhone Duo,1.0,train
+12,1,VNE_6b608c9f4568,'Chân dung' iPhone 18 Pro trước lễ ra mắt,1.0,train
+12,2,VNE_afa8cd1069a5,iPhone 18 Pro Max lộ màu đỏ đậm và xanh dương,1.0,test
+12,3,VNN_145f97683fa9,iPhone 18 Pro Max: Rò rỉ bất ngờ về các bản màu khi máy chính thức ra mắt,1.0,train
+12,4,VNN_1937f9f68235,iPhone 18 Pro chỉ còn 5 ngày: Tất cả những gì đã biết về siêu phẩm sắp ra mắt,1.0,val
+12,5,VNN_1db28b8001a7,iPhone 20 Pro mới là mẫu iPhone thực sự đáng chờ đợi?,1.0,train
+13,1,TTR_3256e108821a,"Bỏ cộng điểm IELTS, thí sinh vẫn còn nhiều lợi thế",1.0,train
+13,2,TTR_9d2bace02879,Nhiều đại học đồng tình bỏ cộng điểm IELTS khi xét tuyển,1.0,train
+13,3,TTR_a00ef39d2f8d,Bỏ điểm cộng IELTS có thực sự kéo lùi mặt bằng trình độ tiếng Anh không?,1.0,val
+13,4,TTR_e1ceeb13255b,"Mới: Thi IELTS trên máy tính, thí sinh vẫn có thể làm bài viết trên giấy",1.0,train
+13,5,TTR_ee763844b9d0,"Bộ Giáo dục nêu lý do bỏ cộng IELTS: Một IELTS 6.0, 26 mức điểm cộng khác nhau",1.0,train
+14,1,TTR_4a2208982960,"Tài xế Grab kêu gọi tắt app 2 ngày: 'Chạy cuốc xe 18,5km chỉ nhận được 46.900 đồng'",1.0,train
+14,2,TTR_5b51ca32df0d,Vụ kêu gọi tắt app Grab: Tài xế chạy một cuốc xe được hưởng bao nhiêu trên doanh thu?,1.0,train
+14,3,TTR_70a1c6166ea2,"Cho tài xế tự chọn quốc lộ hoặc cao tốc, doanh nghiệp vẫn ‘đỏ mắt’ tìm người lái",1.0,train
+14,4,TTR_769160c0013a,"Tài xế Grab chạy cuốc xe 18,5km nhận 46.900 đồng: App muốn phát triển phải để tài xế có thu nhập đủ sống",1.0,train
+14,5,TTR_881b8f235d07,Đã đến lúc cần có tỉ lệ ăn chia thống nhất cho các hãng xe công nghệ?,1.0,test
+15,1,TTR_15a199f739f3,"Arsenal giữ mạch toàn thắng, HLV Arteta vẫn chỉ trích trọng tài vì 'quả phạt đền ngớ ngẩn'",1.0,train
+15,2,TTR_4985c98bbe03,Arsenal thua sốc Brighton ở vòng 5 Premier League,1.0,test
+15,3,TTR_bf8bf07f4c2b,Saka giúp Arsenal thắng tuyệt đối ở Premier League,1.0,train
+15,4,VNE_3f03dbf0b7c6,Havertz giúp Arsenal thắng ngược Chelsea,1.0,train
+15,5,VNE_91009fe67c2e,Vì sao Arsenal thua thảm Brighton?,1.0,train
+16,1,TTR_0ef1ce047fe7,Cơ quan trọng tài Anh: Công nhận bàn thắng của Haaland là sai,1.0,train
+16,2,TTR_2095439bbc86,"Haaland là cơn ác mộng của Man United, 10 người Man City 'đánh sập' Old Trafford",1.0,train
+16,3,TTR_526405d54933,"Haaland lập cú đúp, Man City đánh bại Porto trên sân khách ở Champions League",1.0,test
+16,4,TTR_5404d86ed61f,"Lịch trực tiếp bóng đá châu Âu 6-9: Xem Chelsea đấu Arsenal, Man United thi đấu kênh nào?",1.0,val
+16,5,TTR_5e02ed2b6c5c,Dự đoán tỉ số Champions League: Đội bóng 'tí hon' của Azerbaijan gây sốc cho Man United,1.0,train
+17,1,TTR_2d276e7b3a7b,"Robot AI Hàn Quốc tự tìm đường ở chỗ lạ, đi nhầm còn biết tìm lại",1.0,train
+17,2,TTR_3abe4da6b2bc,"Robot hình người học làm thợ lợp mái: Đi trên mái dốc, cầm búa, bắn đinh",1.0,val
+17,3,TTR_82de3b4f6a8e,"Robot 1,8m đấu YouTuber Mỹ, tung cú đá khiến đối thủ văng xa",1.0,train
+17,4,TTR_a40b0689867f,Robot kêu gọi bảo vệ việc làm của con người,1.0,train
+17,5,TTR_a415d477dfc8,'Đội quân robot' của Ukraine khi nào xung trận?,1.0,test
+18,1,TTR_235d55a297a2,HLV Mourinho nổi giận chỉ trích trọng tài sau trận thua Atletico,1.0,train
+18,2,TTR_f6dbf14fc4ab,HLV Mourinho phản ứng 'kỳ lạ' sau trận thua đầu tiên cùng Real Madrid,1.0,train
+18,3,VNE_11830fd1c01c,Mourinho mang ảnh cầu thủ Real bị phạm lỗi vào họp báo,1.0,train
+18,4,VNE_3241f15eb617,Atletico đáp trả Mourinho,1.0,train
+18,5,VNE_42fe316e5c8c,Phóng viên tặng Mourinho vòi phun nước,1.0,train
+19,1,TTR_13b6b0ad0237,Raphinha lập hat-trick giúp Barca khởi đầu hoàn hảo ở La Liga,1.0,train
+19,2,TTR_24e2f5f97182,Các đại gia ra quân thuận lợi ở Champions League,1.0,train
+19,3,TTR_2b39591bccdd,Barca lại khiến Real Madrid và Mourinho 'mất vui',1.0,train
+19,4,VNE_0f3ea350f2d7,Flick xô đổ kỷ lục của Johan Cruyff tại Barca,1.0,train
+19,5,VNE_0fdbc5399313,Barca đè bẹp Feyenoord trận ra quân Champions League,1.0,train
+20,1,TTR_12067cbd396b,Đối thủ lớn nhất của U23 Việt Nam ở Asiad 20 triệu tập đội hình mạnh,1.0,train
+20,2,TTR_28e06e7d0a16,HLV Đinh Hồng Vinh: Trải nghiệm Asiad 2026 sẽ giúp U23 Việt Nam trưởng thành,1.0,train
+20,3,TTR_41f06ba20cab,Bóng đá trẻ Việt Nam học được gì ở Asiad 2026?,1.0,train
+20,4,TTR_88320c985a0d,Ai là ngôi sao sáng nhất của U23 Việt Nam tại Asiad 2026?,1.0,test
+20,5,TTR_b8935b7dbb94,"Tuyển U23 Việt Nam công bố danh sách 23 cầu thủ dự Asiad 2026, Đình Bắc có tên không?",1.0,train
+21,1,TTR_00bd66dceca4,OpenAI tuyên bố AI đã giải được 1 trong 7 bài toán khó nhất thế giới,1.0,train
+21,2,TTR_0175f6c128ac,"Meta ra mắt trợ lý ảo AI biết gửi email, đặt phòng, mua sắm… thay người dùng",1.0,test
+21,3,TTR_083c953d1283,"Microsoft ra bộ quy tắc AI, nhấn mạnh 'con người quan trọng hơn AI'",1.0,train
+21,4,TTR_196bcbb3bd8f,"ChatGPT, Claude và Grok đồng loạt... sập",1.0,test
+21,5,TTR_1ee2eb27ee90,Giáo dục AI phổ thông: Đừng biến 12 tiết thành 'học cách viết prompt',1.0,train
+22,1,TTR_528a2a2e17d4,Dubai phát triển AI phát hiện deepfake 'ẩn' trong video thật,1.0,val
+22,2,TTR_640485245b15,Cục Điện ảnh ra văn bản ‘nóng’ về phim ngắn tràn ngập trên mạng,1.0,train
+22,3,TTR_877dc46d67a7,HTV 'tấn công' vào phim ngắn AI,1.0,train
+22,4,TTR_87dedcb3271a,"Kido đầu tư làm phim ngắn AI, sẽ kiếm tiền thế nào?",1.0,train
+22,5,TTR_a0182c3d43a5,Hậu Tây Du Ký: Mở ra hành trình 'thỉnh kinh' AI,1.0,train
+23,1,TTR_337a9f056153,Alcaraz bị loại tại Giải Mỹ mở rộng trong trận đấu kéo dài đến 3h sáng,1.0,val
+23,2,TTR_51dbb638336d,Zverev phản ứng lạ khi nhận ra mình vừa vô địch Mỹ mở rộng,1.0,train
+23,3,TTR_75614701cdca,Alcaraz thua set đầu tiên tại Giải Mỹ mở rộng 2026,1.0,val
+23,4,TTR_dc717f6cb668,Lịch trực tiếp chung kết US Open 2026: Shelton quyết đấu Zverev,1.0,train
+23,5,VNE_0200b671ea66,Zverev chỉ ra sai lầm của Alcaraz khi đấu Shelton,1.0,train
+24,1,TTR_50a9dd6ea2f0,CĐV Việt Nam bùng nổ khi 'hot girl cầu lông' Thái Lan vô địch Vietnam Open,1.0,test
+24,2,TTR_739aace67b39,"Đối thủ bỏ cuộc, Hải Đăng đi tiếp ở Vietnam Open 2026",1.0,test
+24,3,TTR_976165ed08d2,"Đánh bại Sabalenka, Rybakina lần đầu vô địch Mỹ mở rộng và đoạt luôn ngôi số 1 thế giới",1.0,train
+24,4,TTR_bb97fb7f52dd,Vì sao Vietnam Open 2026 có số tay vợt mạnh tăng cao đột biến?,1.0,val
+24,5,TTR_dd232bc41c7e,"Hai trận bị dẫn 0-5, tay vợt Trung Quốc vẫn ngược dòng tại Giải Mỹ mở rộng",1.0,train
+25,1,TTR_0be6eb033bf5,Tìm thấy ngôi trường Aristotle từng dạy Alexander Đại đế?,1.0,val
+25,2,TTR_36c53db56779,"Khởi nghiệp nơi miền đất đỏ, sáng tạo cao Cascara từ vòng tuần hoàn của quả cà phê",1.0,train
+25,3,VNN_04cdff288de8,Vụ trống đồng mất tích 32 năm ở Ninh Bình: Đề nghị công an vào cuộc,1.0,train
+25,4,VNN_22690f067de2,Chiêm ngưỡng suối đá hai màu đặc biệt ở Ngọa Vân Yên Tử,1.0,train
+25,5,VNN_2a26d812d882,Ba bảo tháp xá lợi triều Trần ở Ninh Bình có nguy cơ biến mất,1.0,train
+26,1,TTR_e1f610c6e576,"Triển lãm quốc phòng dự kiến có máy bay C-130J, pháo phản lực HIMARS, xe chiến đấu Stryker của Mỹ",1.0,train
+26,2,VNN_022465b932f7,"UAV đánh chặn Sokol-I, ‘chim ưng’ xốp giá rẻ thay đổi tác chiến drone trên bầu trời Ukraine",1.0,train
+26,3,VNN_08a4e5d463f9,Tên lửa đạn đạo DF-15 Trung Quốc 'khủng' thế nào?,1.0,train
+26,4,VNN_0f0274ca1c86,Tàu lặn không người lái Mỹ lợi hại ra sao vẫn bị bẫy tác chiến điện tử Iran ở Hormuz bắt giữ?,1.0,train
+26,5,VNN_22aede91b627,"Tên lửa Squall lộ diện, ‘ác mộng’ mới của mọi hệ thống phòng không",1.0,train
+27,1,TTR_514a38517b34,Video: Bàn thắng đầu tiên của U20 Việt Nam tại vòng loại châu Á,1.0,train
+27,2,TTR_51da48c27ba8,"Tình hình Đông Nam Á trước lượt cuối vòng loại U20 châu Á 2027: Ai đi tiếp, ai bị loại?",1.0,train
+27,3,TTR_7f665785b072,U20 Việt Nam phải thắng dàn cầu thủ châu Âu của U20 Palestine,1.0,train
+27,4,TTR_a07afe3f21b6,"Thua hai trận liên tiếp, U20 Việt Nam đi tiếp trong trường hợp nào?",1.0,train
+27,5,TTR_a78f2ae6cc36,"HLV U20 Việt Nam: 'Chừng nào còn hy vọng, chúng tôi sẽ chiến đấu đến cùng'",1.0,train
+28,1,TTR_4d58eeee7cde,Trung vệ Duy Mạnh phẫu thuật thành công tại Mỹ,1.0,train
+28,2,TTR_a3d55dd4fd5f,Tổng thư ký VFF thăm cầu thủ Đỗ Duy Mạnh,1.0,train
+28,3,TTR_a797b6e7b77e,Tuyển Việt Nam chia tay thêm một cầu thủ sau trận thua Thái Lan,1.0,train
+28,4,TTR_b2d92ce4fd92,"Xuân Son về Việt Nam hôm nay, chữa trị chấn thương tại CLB Nam Định",1.0,train
+28,5,TTR_c5fd827962ca,"Lê Giang Patrik phải khâu 2 mũi, bỏ ngỏ trận gặp Pakistan",1.0,train
+29,1,TTR_0386d615cb1b,Trung Quốc gặp cú sốc ở môn cầu lông Asiad,1.0,train
+29,2,TTR_0970a934345e,Bảng xếp hạng huy chương Asiad 20 ngày 21-9: Trung Quốc có số HCV gần gấp 3 lần Nhật Bản,1.0,test
+29,3,TTR_0e36a6dd0250,Trung Quốc - nền thể thao số 1 trong lịch sử Asiad,1.0,test
+29,4,TTR_1ae05a25e265,"Bảng xếp hạng huy chương Asiad 20 ngày 28-9: Trung Quốc cán mốc 130 HCV, Việt Nam hạng 21",1.0,train
+29,5,TTR_240364ab8630,Bóng bàn Trung Quốc 'trút giận' sau khi bị Nhật Bản phá thế thống trị ở Asiad 20,1.0,train
+30,1,TTR_01a88c56ce12,"Đè bẹp U23 Thái Lan, Trung Quốc lần đầu tiên vào bán kết Asiad sau 28 năm",1.0,train
+30,2,TTR_411476851a50,Hàn Quốc cẩn trọng trước U23 Việt Nam,1.0,train
+30,3,TTR_5a69a1392206,Lịch trực tiếp tứ kết bóng đá nam Asiad 20: Trung Quốc gặp Thái Lan,1.0,train
+30,4,TTR_acdf332191a1,Lịch trực tiếp bóng đá nam Asiad 20 ngày 20-9: U23 Thái Lan đấu U23 Hong Kong,1.0,train
+30,5,TTR_d722d8e7499d,U23 Việt Nam gặp Hàn Quốc ở tứ kết bóng đá nam Asiad 20,1.0,train
+31,1,TTR_05730e084214,U23 Kuwait có gì đáng ngại?,1.0,train
+31,2,TTR_2129c51171a5,U23 Việt Nam vẫn ổn dù cổ động viên cứ gọi tên Đình Bắc?,1.0,test
+31,3,TTR_460b7b71e7bc,U23 Uzbekistan báo thêm tin vui cho U23 Việt Nam,1.0,test
+31,4,TTR_52c26227a225,"Phung phí cơ hội, U23 Việt Nam chia điểm với Kuwait ngày ra quân Asiad",1.0,train
+31,5,TTR_5bab7613287a,Đội hình xuất phát: U23 Việt Nam đưa ẩn số đấu U23 Uzbekistan,1.0,test
+32,1,TTR_1d61eb8e014a,Vụ nghi ngộ độc thực phẩm ở khu công nghiệp tại Huế: Đã có hơn 95 người nhập viện,1.0,train
+32,2,TTR_3cc6a084adaa,Huế kiểm tra cơ sở ‘thần y’ sau điều tra của Tuổi Trẻ,1.0,train
+32,3,TTR_645590e21b22,Vụ 46 người nghi ngộ độc bánh mì tại Quảng Trị: Mẹ và vợ chủ tiệm cũng nhập viện,1.0,train
+32,4,TTR_64fd196d3453,"20 người nhập viện sau khi ăn bánh mì bán trên xe lưu động tại Lái Thiêu, TP.HCM",1.0,train
+32,5,TTR_ae1ff04c5080,"222 công nhân Huế ngộ độc thực phẩm, tìm thấy 2 loại vi khuẩn trong thức ăn",1.0,train
+33,1,TTR_0d718761e11a,"Với đội hình toàn cầu thủ đá ở châu Âu, Indonesia thắng nhẹ nhàng 10 người Singapore",1.0,train
+33,2,TTR_43949643eb64,"Đá hơn người trong gần 60 phút, Malaysia vẫn bị Indonesia cầm hòa 0-0",1.0,val
+33,3,TTR_4efde3cd3e2f,HLV Indonesia bị nhắc ngay trong bữa sáng phải thắng Malaysia,1.0,train
+33,4,TTR_5ee60031115b,Báo Indonesia nói về khả năng U20 Indonesia 'bắt tay' Úc để loại Malaysia,1.0,train
+33,5,TTR_68847a6b8038,Kịch bản khiến Indonesia vỡ mộng vô địch FIFA ASEAN Cup 2026,1.0,train
+34,1,TTR_0f70b2b5ebf8,Tuyển cờ vua Israel bị xử thua tại Olympiad 2026 vì lý do hy hữu,1.0,train
+34,2,TTR_298aeb4f2a40,"Tuyển nữ cờ vua Việt Nam bay cao, vươn lên hạng 5 thế giới",1.0,train
+34,3,TTR_34cbb3f710f8,Đẳng cấp đến từ sự bền bỉ của nữ kỳ thủ Nguyễn Thị Mai Hưng,1.0,train
+34,4,TTR_38a2ebd4e38a,Chiến tích ấn tượng của tuyển nữ cờ vua Việt Nam tại Olympiad,1.0,train
+34,5,TTR_3ab3d307421e,"Bà mẹ trở lại đội tuyển, lần đầu giành huy chương Asiad sau 19 năm bắn súng",1.0,val
+35,1,TTR_630cff19686e,Nhan sắc Joheirry Mola Miss World 2026,1.0,train
+35,2,TTR_69e5fbbff818,"Miss Earth Water từng bị tước danh hiệu vì thi hoa hậu khác, Trịnh Mỹ Anh thì sao?",1.0,train
+35,3,TTR_7c1c06426e8b,Quán quân Sao Mai Huyền Trang nhận giải tại Hy Lạp,1.0,train
+35,4,TTR_8819a9f2f013,Bảo Ngọc tiếp tục được Sash Factor đánh giá cao trước chung kết Miss World,1.0,test
+35,5,TTR_ae4cf855cc7a,Miss Universe bị một hoa hậu kiện sau cú ngã xuyên sân khấu,1.0,train
+36,1,TTR_04877a022700,Châu Tuyết Vân giành HCB taekwondo thế giới,1.0,train
+36,2,TTR_0f748109e22a,Nhân tố mới sẽ giúp taekwondo Việt Nam giành huy chương ở Asiad 2026?,1.0,train
+36,3,TTR_1787a0fbb340,Lịch thi đấu Asiad ngày 22-9 của đoàn Việt Nam: Chờ HCV đầu tiên,1.0,train
+36,4,TTR_2153466747ac,Ngày thi đấu 23-9 Asiad 20: Việt Nam giành 5 HCĐ,1.0,test
+36,5,TTR_21ebbd50293e,Teqball mang về huy chương đầu tiên cho Việt Nam ở Asiad 20,1.0,train
+37,1,VNE_804ff765ed77,Lịch đấu ngày 23/9 của Việt Nam tại ASIAD 2026,1.0,train
+37,2,VNE_bab1875c8889,Lịch đấu ASIAD 2026 ngày 24/9: Chờ HC vàng thứ hai,1.0,train
+37,3,VNE_bd9072d02377,Lịch đấu ASIAD 2026 ngày 30/9: Cầu mây bắt đầu bảo vệ HC vàng,1.0,train
+37,4,VNE_ca9da5a76183,Lịch đấu ngày 25/9 của Việt Nam ở ASIAD 2026,1.0,train
+37,5,VNE_e6e3df6e81e3,Lịch đấu ngày 29/9 của Việt Nam tại ASIAD 2026,1.0,train
+38,1,TTR_0e8e57c72bbb,Thủ tướng bổ nhiệm ông Lương Hoàng Thái làm Thứ trưởng Bộ Công Thương,1.0,train
+38,2,TTR_24e4947499da,Ông Lê Thái Sâm trở lại ghế Chủ tịch Bamboo Airways,1.0,train
+38,3,TTR_314dbbf9c382,Phó giám đốc ĐHQGHN được giới thiệu để bầu giữ chức Phó chủ tịch UBND tỉnh Hưng Yên,1.0,train
+38,4,TTR_703729225879,"Phó bí thư Thành ủy TP.HCM Nguyễn Phước Lộc: Đầu tư trường phổ thông nội trú, đảm bảo giáo dục công bằng",1.0,val
+38,5,TTR_784c998e014c,Cựu huấn luyện viên trưởng tuyển Việt Nam tiếp tục được đề cử vào hội đồng quản trị Cảng Phước An,1.0,val
+39,1,TTR_071c0a680af4,TP.HCM tăng cường kiểm soát an toàn thực phẩm cuối năm với 'Tick xanh trách nhiệm',1.0,val
+39,2,TTR_1ffaf02ea056,"Phụ huynh kiểm tra đột xuất thấy cơm bán trú 'toàn tóp mỡ', nhà trường nói gì?",1.0,train
+39,3,TTR_3872b8fd4890,"Nhà trường nói gì việc học sinh ăn sáng bên ngoài, cạnh thùng rác?",1.0,train
+39,4,TTR_4bce8aa1120d,Hà Nội kiểm tra đột xuất bếp ăn trường sau phản ánh 'toàn tóp mỡ',1.0,train
+39,5,TTR_52803960d080,Vụ 'cơm bán trú toàn tóp mỡ': Trường báo cáo là 'nhầm lẫn về thị giác',1.0,train
+40,1,TTR_031586dfd80f,Bóng chuyền nam Việt Nam suýt gây bất ngờ tại Asiad 20,1.0,val
+40,2,TTR_0a7acb07c3eb,Lịch thi đấu bóng chuyền Asiad 20 ngày 28-9: Việt Nam đấu Qatar,1.0,val
+40,3,TTR_0e4e279ccc72,Bóng chuyền Thái Lan gây thất vọng lớn sau khi tạo 'địa chấn',1.0,train
+40,4,TTR_2cd44cd0ed61,Bảng xếp hạng môn bóng chuyền nữ Asiad 20,1.0,train
+40,5,TTR_32a6e856dee0,Bóng chuyền nữ Việt Nam thua Trung Quốc ở Asiad 20,1.0,train
+41,1,TTR_09d218b18a56,Chuyên gia Phạm Hải Anh: Tuyển nữ Việt Nam chơi không quá tệ,1.0,train
+41,2,TTR_1082320e7831,Dư luận Trung Quốc giận dữ sau trận đấu của đội nhà với tuyển nữ Việt Nam,1.0,val
+41,3,TTR_1d0f1933342d,Đội tuyển nữ Việt Nam gặp khó trước trận gặp Nhật Bản,1.0,train
+41,4,TTR_1f3f9a18fcef,"Tuyển nữ Việt Nam đến Nhật Bản, sẵn sàng cho Asiad 2026",1.0,val
+41,5,TTR_281fed83ce21,Kịch bản để tuyển nữ Việt Nam đi tiếp ở Asiad: Phải thắng Thái Lan,1.0,train
+42,1,TTR_211afcbee31f,Ủy ban cạnh tranh cảnh báo một số sản phẩm của trung quốc bị thu hồi ở nước ngoài,1.0,train
+42,2,TTR_361c1ddcb707,"Công an triệt phá đường dây lớn sản xuất thuốc An Cung giả từ bột mì, hóa chất",1.0,train
+42,3,TTR_5d18cfc404ba,"TP.HCM: Phát hiện hơn 40.000 sản phẩm giày dép, nước xả vải... vi phạm, hé lộ đường dây sản xuất hàng giả",1.0,train
+42,4,TTR_ccd37e0b44fb,TP.HCM cảnh báo thuốc Getino-B Tablets 300mg trị viêm gan B nghi ngờ giả,1.0,train
+42,5,TTR_df8b3fbd4144,"Hãng Roche-Posay Việt Nam: Kem chống nắng Anthelios thu hồi ở châu Âu là hàng giả, nhái bao bì",1.0,test
+43,1,TTR_3ed89d0df2f4,Nguyễn Phúc Tuấn mang ký ức cơn mưa xứ Huế đến Paris,1.0,train
+43,2,TTR_3ef50c35f071,6 phong cách đường phố từ Tuần lễ thời trang New York cho mùa thu,1.0,test
+43,3,TTR_655618177c84,"Diệp Linh Châu mang yếm Việt, rèm tái sinh đến Manila Fashion Week",1.0,train
+43,4,TTR_780a44935daf,Mạnh Tử Nghĩa diện đầm Phan Huy,1.0,train
+43,5,TTR_8a179b6925c7,Tin vui cho nhà thiết kế thời trang chạy xe ôm gây sốt mạng xã hội tháng trước,1.0,train
+44,1,TTR_0dd001735700,HLV Kim Sang Sik đứt chuỗi bất bại kỷ lục cùng tuyển Việt Nam,1.0,train
+44,2,TTR_415bbe8f2629,Thái Lan thắng đậm Pakistan trận ra quân FIFA ASEAN Cup,1.0,train
+44,3,TTR_4b247f1cb0eb,"Chanathip: Việt Nam rất mạnh, nhưng Thái Lan tự tin giành chiến thắng",1.0,train
+44,4,TTR_7b3b35b9bb5d,HLV Kim Sang Sik hết 'phép'?,1.0,train
+44,5,TTR_ce7e0761e71e,Đình Bắc: Thua Thái Lan giúp tuyển Việt Nam trở nên mạnh mẽ hơn,1.0,val
+45,1,TTR_317b67197fda,"Tung tin 'vỡ đê', người đàn ông bị phạt 15 triệu đồng",1.0,train
+45,2,TTR_4b115af0c1f8,Bị phạt 20 triệu đồng vì đăng căn cước của người khác lên mạng khi chưa được đồng ý,1.0,train
+45,3,TTR_6b3e5a6effd3,Thu thập dữ liệu làm lộ thông tin nhạy cảm bị phạt tới 60 triệu đồng,1.0,train
+45,4,TTR_8079cb745077,Công khai dữ liệu cá nhân của người khác: Ranh giới nào để không bị phạt?,1.0,train
+45,5,TTR_8ce7d0825a62,"Từng gây chú ý trên mạng, người đàn ông bị phạt 12,5 triệu đồng vì livestream sai sự thật",1.0,train
+46,1,TTR_539e453750e5,Công chúa ngầu nhất châu Âu,1.0,train
+46,2,TTR_6fa8a5df8170,'Váy trả thù' của Công nương Diana trở lại sàn đấu giá,1.0,train
+46,3,TTR_85e97b95ca27,5 chiếc vương miện gắn bó với Hoàng hậu Rania xứ Jordan,1.0,train
+46,4,TTR_afe819c723e6,10 lần Hoàng tử George mặc giống hệt cha,1.0,train
+46,5,TTR_cc0c694dace2,Hoàng tử Harry ấp ủ làm phim về Công nương Diana,1.0,train
+47,1,TTR_4384b3a465bf,Cựu Viện trưởng Viện Pháp y tâm thần khai tài sản tiền vàng ‘đa số do phạm tội mà có’,1.0,train
+47,2,TTR_67dee6e1586c,Những cọc tiền được ghi ký hiệu và cuộc truy vấn cựu viện trưởng về chuyện nhận tiền khắp viện,1.0,train
+47,3,TTR_748d4beea5b0,Cựu lãnh đạo Viện Pháp y tâm thần Trung ương Biên Hòa giám định từ không có bệnh thành ‘mất khả năng nhận thức’,1.0,train
+47,4,TTR_9af84551366c,"Xét xử vụ Viện Pháp y tâm thần: Thu giữ thùng các tông 4,5 tỉ đồng, 11 sổ tiết kiệm, 8 sổ đỏ của cựu viện trưởng",1.0,val
+47,5,TTR_a35102344ef5,"Cách bà ‘trùm’ thao túng 39 bác sĩ, điều dưỡng, biến Viện Pháp y tâm thần thành ‘chốn trú ẩn’ của tội phạm",1.0,val
+48,1,TTR_1e9df63f8a93,"Khó hiểu mức cát sê của Tỉnh Bách Nhiên, Tôn Thiên trong Đầu xuân tươi sáng",1.0,val
+48,2,TTR_481c42890cf5,'Đầu xuân tươi sáng' hay nhưng lắm thị phi,1.0,train
+48,3,TTR_4d4a6e2dd790,Tỉnh Bách Nhiên không 'dầu mỡ' vẫn hot rần rần trong Đầu xuân tươi sáng,1.0,test
+48,4,TTR_57c58aa862cf,Dua Lipa và dàn sao lăng xê mốt mùa thu nào?,1.0,test
+48,5,TTR_5f7e8a12f053,"Tranh cãi ai nên coi Đầu xuân tươi sáng: 'Ai mơ mộng thì cứ coi, tôi nghỉ coi rồi'",1.0,test
+49,1,TTR_0f91250de6bd,Trung vệ Việt kiều Pháp đủ điều kiện vào tuyển Việt Nam dự FIFA ASEAN Cup 2026,1.0,train
+49,2,TTR_2e55aab975a0,Lịch thi đấu FIFA ASEAN Cup 2026: Việt Nam chạm trán Philippines,1.0,val
+49,3,TTR_301480428e65,"'Chuyên gia cùi chỏ' bị loại, fan Thái Lan thảng thốt: 'Lấy ai chống cự Việt Nam?'",1.0,train
+49,4,TTR_3d3d55265d43,Đội hình xuất phát FIFA ASEAN Cup 2026: Tuyển Việt Nam xếp đội hình lạ đấu Philippines,1.0,train
+49,5,TTR_7afd55251c58,Nỗi lo tuyến giữa đội tuyển Việt Nam,1.0,train
+50,1,TTR_1e11d406467e,HLV Kim Sang Sik thừa nhận thắng may mắn Philippines,1.0,train
+50,2,TTR_25560ba5dff4,Dự đoán tỉ số: Tuyển Việt Nam 'vùi dập' Philippines ngày ra quân FIFA ASEAN Cup,1.0,val
+50,3,TTR_382ba4a28d87,Thủ môn Lê Giang Patrik: Tôi muốn trải nghiệm cảm giác vô địch FIFA ASEAN Cup 2026,1.0,test
+50,4,TTR_680c6c92aab9,Thái Lan vẫn không dùng đội A ở FIFA ASEAN Cup?,1.0,train
+50,5,TTR_7aef7ceffa0c,FIFA ASEAN Cup 2026: Tuyến giữa nào đủ sức giúp tuyển Việt Nam đấu Thái Lan?,1.0,train
+51,1,TTR_125f6515c9af,Top 5 cái chết gây sốc và ám ảnh nhất thế giới anime,1.0,val
+51,2,TTR_134749a7f926,5 phản diện anime từng chiến đấu vì chính nghĩa,1.0,test
+51,3,TTR_37053757f3cf,"Tác giả Attack on Titan trở lại, Blue Lock là cái tên được chọn",1.0,train
+51,4,TTR_3c69151e5adb,Vì sao Jujutsu Kaisen không đi theo công thức thành công của Thanh gươm diệt quỷ?,1.0,train
+51,5,TTR_48b5b52265e7,Anime hành động có thể lấp khoảng trống của Solo Leveling,1.0,train
+52,1,TTR_24f9fec92209,"Nộp thuế chậm bị phạt từng ngày, sao thu thuế sai gần 1,5 năm không trả tiền lãi cho dân?",1.0,train
+52,2,TTR_37e059115741,Đề xuất hộ kinh doanh được trừ 1 tỉ đồng khi tính thuế giá trị gia tăng,1.0,val
+52,3,TTR_3eb03577071c,Thuế Đà Nẵng: Gặp khó với gần 28.000 doanh nghiệp 'không hoạt động tại địa chỉ đăng ký',1.0,val
+52,4,TTR_556c0132516d,"Thời gian hoàn thuế kéo dài, doanh nghiệp mong sớm được tháo gỡ",1.0,train
+52,5,TTR_893a7848832e,"Đối diện khoản phạt khi đóng mã số thuế, nhiều doanh nghiệp đành bỏ cuộc",1.0,train
+53,1,TTR_00df197b0215,Vietnam Airlines thông tin chuyến bay từ TP.HCM đi London gặp sự cố không lưu,1.0,train
+53,2,TTR_09ea34fec3db,"Vietnam Airlines tăng chuyến đến, đi Jakarta sau sự cố tro bụi núi lửa",1.0,train
+53,3,TTR_252bdb63edc1,"Vietravel Airlines thỏa thuận mua 50 máy bay Airbus, nhận từ năm 2029",1.0,test
+53,4,TTR_494c8776478f,"Các hãng đua nhận máy bay, sẽ tăng thêm chuyến dịp Tết",1.0,train
+53,5,TTR_5b6a10523ca3,Cuộc đua mới của hàng không Việt sau gần 5 năm bay thẳng đến Mỹ,1.0,train
+54,1,TTR_03322ede4e7a,"Đôi bạn thân cùng đỗ Bách khoa Hà Nội, cùng tốt nghiệp thủ khoa GPA 4.0",1.0,test
+54,2,TTR_79f4b081c9ad,Lần đầu Đại học Bách khoa Hà Nội có 3 thủ khoa tốt nghiệp đạt GPA 4.0,1.0,train
+54,3,TTR_dc265e9b34dc,"5 học kỳ đạt xuất sắc, nữ sinh TP.HCM giành học bổng toàn phần thạc sĩ tại Ý",1.0,train
+54,4,TTR_fc05e115f5a1,"Mẹ đi mua ve chai, con gái vừa học vừa làm tốt nghiệp xuất sắc",1.0,train
+54,5,VNE_1834602160bf,Ba sinh viên Bách khoa Hà Nội tốt nghiệp với điểm tuyệt đối 4.0,1.0,train
+55,1,TTR_07a00f212300,"Ngồi ở Mỹ, điều khiển thiết bị cấy trong não chuột ở Hàn Quốc",1.0,train
+55,2,TTR_1a81045bbd3f,Máy tính làm từ DNA tính toán 100 bit trong một giọt nước muối,1.0,train
+55,3,TTR_273e1d301406,"Trung Quốc chế tạo máy CT 'cỡ lòng bàn tay', nặng chỉ 6kg",1.0,train
+55,4,VNE_2dd1806d2fa2,Dự án mật có thể giúp CXMT nắm công nghệ DRAM của Samsung,1.0,train
+55,5,VNE_36076e628a24,Công nghệ giúp tăng độ bền chip nhớ,1.0,train
+56,1,TTR_06f13576808b,Thương hiệu tôi yêu: Mỹ phẩm làm cho những nguyên liệu Việt trở nên 'sang' hơn,1.0,test
+56,2,TTR_0b58029fb10a,Khám phá 'chuẩn hoa hậu' của Robusta,1.0,train
+56,3,TTR_12e351c9dfb3,"Hơn 800 cửa hàng Starbucks đóng cửa trong chưa đầy một năm, chuyện gì đang xảy ra?",1.0,train
+56,4,TTR_13d6b4bd4c4d,"Lên men cà phê: Ở đâu, khi nào và vì sao?",1.0,train
+56,5,TTR_23c86f4e437b,"Mù tạt chỉ có một, nhưng 'anh em họ hàng' thì nhiều",1.0,train
+57,1,TTR_02e63f75f4be,"Nam sinh Lâm Đồng, nạn nhân bạo lực học đường đã hồi phục kỳ diệu, được xét lên lớp",1.0,test
+57,2,TTR_03e31f4d29ff,"Vụ nam học sinh ở Phú Quốc siết cổ, đánh người thân trong gia đình: Địa phương yêu cầu làm rõ",1.0,test
+57,3,TTR_0c41d414193d,TP.HCM yêu cầu trường học phát hiện sớm nguy cơ bạo lực học đường,1.0,train
+57,4,TTR_18a5cec851ef,"Bạo lực học đường: TP.HCM yêu cầu trường không tự giải quyết nội bộ, không trì hoãn báo công an",1.0,train
+57,5,TTR_5b075a16a5d8,Lâm Đồng nói gì về tin học sinh ồ ạt chuyển trường vì vụ bạo lực học đường ở Di Linh?,1.0,train
+58,1,TTR_20586eb49437,"Lắp điện mặt trời mái nhà, có nơi hỗ trợ tới 6 triệu đồng",1.0,train
+58,2,TTR_221f8c335824,EVNHCMC trả lời về khả năng cắt điện một số trung tâm dữ liệu,1.0,test
+58,3,TTR_5bc557057e1d,Bộ Công Thương điều chỉnh loạt dự án điện mặt trời trên hồ quy mô lớn ở Điện Biên,1.0,test
+58,4,TTR_77487b36b84a,Sở Công Thương TP.HCM: Điện mặt trời mái nhà có xu hướng tăng,1.0,val
+58,5,TTR_9214bc67b7e3,Nguy cơ thiếu điện và bài toán 'vũ khí cạnh tranh' cho nền kinh tế,1.0,train
+59,1,TTR_347f313d78d1,Campuchia trao trả qua Tây Ninh hàng trăm người Việt xuất nhập cảnh trái phép,1.0,train
+59,2,TTR_3e71de48c72c,'Hiệp sĩ Minh Sang' nhận hàng trăm triệu để giải cứu người ở Campuchia rồi chặn liên lạc,1.0,train
+59,3,TTR_6b017151d11e,Triệt phá đường dây đưa người Lào nhập cảnh trái phép vào Việt Nam để tìm việc làm,1.0,val
+59,4,TTR_6d07c7af82b8,Tiếp nhận 86 người Việt nghi hoạt động lừa đảo ở Campuchia,1.0,val
+59,5,TTR_7cf23654e5bd,Phát hiện 1 đối tượng truy nã khi tiếp nhận 23 người được Campuchia trao trả,1.0,train
+60,1,TTR_446e40efad44,Chính phủ yêu cầu quy định rõ thời hạn sử dụng nhà chung cư theo niên hạn,1.0,train
+60,2,TTR_473aa8b38b46,"Cho chuyển nhượng nhà chưa có sổ hồng, người mua thứ cấp có gánh hết rủi ro?",1.0,train
+60,3,TTR_54a113474356,"Dự thảo về quyền sở hữu nhà ở, sử dụng đất ở tại Việt Nam của người gốc Việt ra sao?",1.0,train
+60,4,TTR_54c9f87e5e05,"Thanh tra một số dự án Nam Long: Bán bất động sản trước khi công khai, bán căn hộ khi chưa có bảo lãnh",1.0,train
+60,5,TTR_7237d37787b7,Cấp xã được quyết định giá bán nhà tái định cư tại TP.HCM,1.0,train
+61,1,TTR_2a1e272a8e9e,Obsession mở đường đến Oscar cho sao trẻ Inde Navarrette,1.0,train
+61,2,TTR_4e7c79a523bf,"Cô gái 16 tuổi thắng America’s Got Talent, nhận 1 triệu USD",1.0,test
+61,3,TTR_598d3e5705bf,Vì sao Robert Downey Jr. lại vào vai Doctor Doom?,1.0,test
+61,4,TTR_62a1010d28b9,"Nữ giám đốc đứng sau ‘Trại buôn người’: Lập công ty vốn 1 tỉ, phim đầu tay thu trăm tỉ",1.0,train
+61,5,TTR_8a5b0552b04c,Hollywood 'vạch trần' các ông trùm công nghệ,1.0,train
+62,1,TTR_0532ebc15f48,"Ani Choying Drolma: 'Khi tụng ca, tôi cũng đang thiền định'",1.0,train
+62,2,TTR_44726335e19e,Giọng hát lành của ni cô Ani Choying Drolma vang lên ở Nhà hát Hồ Gươm,1.0,test
+62,3,VNE_185e119bccae,Người hát thiền ca Ani Choying Drolma: 'Yêu Việt Nam ở điều giản dị',1.0,train
+62,4,VNE_42004c533a87,Tam ca Áo trắng quây quần bên các con,1.0,train
+62,5,VNE_5268b2840c08,"Lisa đưa Muay Thái, xe tuk-tuk vào bài hát 'Sawadika'",1.0,train
+63,1,TTR_108b99b0bdb4,Hoàng Dũng không còn yếu đuối vì nay có cả vạn khán giả thương,1.0,val
+63,2,TTR_3e3be9a986f2,Tùng Dương: 'Tôi chưa bao giờ nghĩ mình đang ở trên đỉnh',1.0,train
+63,3,TTR_69a8686ce869,Orange không còn sợ hãi,1.0,val
+63,4,TTR_70dbb070228e,BlackPink ra sao sau kỷ niệm 10 năm ồn ào?,1.0,val
+63,5,TTR_7b51a368e2de,Cha con nghệ sĩ Quyền Văn Minh và các nghệ sĩ hâm nóng Hà Nội mưa lạnh bằng jazz,1.0,test
+64,1,VNE_0626cf6b928d,Cô gái Anh sang Việt Nam may váy cưới,1.0,train
+64,2,VNE_07709097faa9,Ảnh cưới dưới hoàng hôn của nhà thiết kế Anh Thư,1.0,train
+64,3,VNE_124302902198,Hai váy cưới trăm triệu đồng của vợ Akira Phan,1.0,train
+64,4,VNE_279020c4b879,Quách Ngọc Tuyên: Tôi hạnh phúc khi xây nhà báo hiếu cha mẹ,1.0,test
+64,5,VNE_2a1b5ca67615,Ngọc Quỳnh - Thùy Anh: Hạnh phúc sau đổ vỡ,1.0,train
+65,1,TTR_36b6fb8741b0,Green Lantern Hal Jordan có thực sự chết trong Lanterns?,1.0,train
+65,2,VNE_1c58b54089a3,Bê bối tình ái quanh cái chết bí ẩn của nữ thực tập sinh,1.0,train
+65,3,VNE_1f3f4d5d73b4,Danh ca Lưu Hoan qua đời,1.0,train
+65,4,VNE_22ab37db9cff,"Nhạc sĩ Sông Trà, tác giả 'Chiều sân ga' qua đời",1.0,test
+65,5,VNE_23092486557a,George Clooney an ủi gia đình Cindy Crawford,1.0,train
+66,1,TTR_124dc949b46f,"Vụ lật xe khách chết 4 người: Xe chạy vào đoạn đường chưa khai thác, trách nhiệm thuộc về ai?",1.0,train
+66,2,TTR_3107a5e64b15,3 người đi xe máy tử vong sau cú tông vào đuôi xe tải,1.0,test
+66,3,TTR_353e2f9efea2,"Tài xế say xỉn chạy ô tô tông vào dải phân cách ở Đắk Lắk, vẫn đòi tiếp tục lái xe",1.0,train
+66,4,TTR_3a8f42a71017,"Xe khách và taxi chèn ép, đuổi nhau sau va chạm giao thông ở Hà Nội",1.0,train
+66,5,TTR_503ebf5facf0,"Xe đầu kéo 'văng' thùng sang làn đối diện, 2 người trên xe khách tử vong",1.0,train
+67,1,TTR_0d8bddbaa26b,"Vị cao thủ tài ba, chịu nỗi oan lớn ở đời thật nhưng lại bị Kim Dung viết thành phản diện",1.0,train
+67,2,TTR_0db03788d533,Bà mẹ Vân Dung 'ngây thơ vô số tội của Táo quân' trong Mùa hè năm ấy,1.0,train
+67,3,TTR_14ca215bfed1,Gia tộc võ thuật lừng danh truyện Kim Dung từng bại trận ở Việt Nam,1.0,train
+67,4,TTR_70d3ad0a1cc5,"Quách Tĩnh có thật trong lịch sử, nhưng có anh hùng như Kim Dung miêu tả?",1.0,train
+67,5,TTR_b046c2d26892,KOL 'tà độc' trong Thiên Long Bát Bộ,1.0,train
+68,1,TTR_2b989b1f254c,388 cán bộ quản lý giáo dục ở Tây Ninh chuyển làm giáo viên,1.0,train
+68,2,TTR_444f5d77b957,"Gộp xong trường học, vẫn thiếu thầy và phòng học",1.0,train
+68,3,TTR_47b03e4663f8,Có bao nhiêu khoản thu ngoài học phí ở trường công TP.HCM?,1.0,train
+68,4,TTR_7ce764ed8a2d,"TP.HCM giảm 50% trường nghề công lập, chọn 16 trường phát triển chất lượng cao",1.0,train
+68,5,TTR_85435cfb1447,"Lớp có tivi 25 triệu, sắm thêm máy chiếu 20 triệu, phụ huynh vẫn 'đồng thuận' vì sợ con lạc lõng",1.0,train
+69,1,TTR_3f540d92d906,"Phim có Jo In Sung 'tuyệt đối điện ảnh', gây chấn động Venice",1.0,train
+69,2,TTR_5809db7d5171,"Lương Thế Thành làm gì cũng đẹp, trừ khóc",1.0,train
+69,3,TTR_609f1ffb7f61,Cù Thị Trà thoát mác 'mỹ nhân' giật chồng,1.0,train
+69,4,TTR_62ca3a6db3b5,Phim của Jo In Sung giành chiến thắng đầu tiên tại Liên hoan phim Venice,1.0,train
+69,5,TTR_794128574fb8,"Trên phim làm 'trùm', đời thường khép kín",1.0,train
+70,1,TTR_11f02196cf97,Bình Tinh hóa nàng Lưu Kim Đính mừng giỗ tổ sân khấu; Ba phim Việt đối đầu,1.0,train
+70,2,TTR_1b4b917c71b4,Không nhận ra quán quân Tuyệt đỉnh song ca nhí,1.0,train
+70,3,TTR_69714c979adc,4 phim Studio Ghibli ra rạp Việt trong mùa thu 2026,1.0,train
+70,4,TTR_7d2bbd64be63,Phim Việt đang 'hốt bạc' nhờ suất chiếu sớm?,1.0,train
+70,5,TTR_87c148633897,Đạo diễn Trại buôn người nói gì khi bị so sánh với Thiên đường máu?,1.0,val
+71,1,TTR_0778eeb6fbe8,Nhà xuất bản Giáo Dục đề nghị các trường rà soát từng học sinh còn thiếu sách giáo khoa,1.0,train
+71,2,TTR_22973a0c231e,"Sách giáo khoa vẫn thiếu, phụ huynh xếp hàng từ 4h sáng, chạy 7-10 nhà sách",1.0,train
+71,3,TTR_891381fd14af,"Học sinh Khánh Hòa thiếu sách giáo khoa: Có thể dùng sách cũ, sách điện tử",1.0,train
+71,4,TTR_a79b377aeae5,"Thiếu sách giáo khoa, TP.HCM huy động sách thư viện, sách cũ cho học sinh mượn",1.0,train
+71,5,TTR_b14bd6b12d6e,Huế lùi thời gian miễn phí sách giáo khoa vì thiếu sách và đợi điều chỉnh chương trình,1.0,train
+72,1,TTR_4675831c0d78,"Bắt nghi phạm 23 tuổi môi giới mại dâm theo 'tour du lịch', giá 10-15 triệu đồng/lượt",1.0,train
+72,2,TTR_614dab501a52,Bắt 2 người ở Phú Quốc về tội chứa mại dâm,1.0,train
+72,3,VNE_03faf2b64640,Gã côn đồ bắn cô gái từ chối quan hệ tình dục sau cuộc nhậu,1.0,train
+72,4,VNE_8ad90a0283c7,Cựu tiền đạo Liverpool tiết lộ bị xâm hại tình dục năm 2021,1.0,train
+72,5,VNE_cf8ad96b21f8,Đường dây môi giới mại dâm theo 'tour du lịch',1.0,train
+73,1,TTR_0351f0baf0aa,"Tin tức sáng 25-9: Lãi suất liên ngân hàng qua đêm còn 2,5%; TP.HCM thúc giải ngân đầu tư công",1.0,train
+73,2,TTR_113610bd5635,Lãi suất có đang tăng nóng?,1.0,train
+73,3,TTR_50d2cea4c775,"Không chỉ đua lãi suất, ngân hàng còn treo thưởng vàng, biệt thự để hút tiền gửi",1.0,val
+73,4,TTR_51d3a1c1f143,"Tin tức sáng 13-9: Lãi suất qua đêm về 1,5%; Em trai Chủ tịch SSI chi hơn 100 tỉ đồng mua cổ phiếu",1.0,train
+73,5,TTR_52379f7668bf,"Lãi suất huy động tiền gửi cán mốc 9,46%/năm",1.0,train
+74,1,TTR_0e2fccad82ea,"Fed tăng lãi suất, thị trường chứng khoán Việt Nam thường diễn biến ra sao?",1.0,train
+74,2,TTR_8bbcf9a81f1d,"Fed tăng lãi suất lần đầu tiên sau 3 năm, chuyện gì tiếp theo?",1.0,train
+74,3,TTR_add6dd12bb91,"Chứng khoán 17-9: Fed tăng lãi suất, kịch bản nào cho VN-Index?",1.0,train
+74,4,TTR_e044645b0a03,Giá Bitcoin tăng vọt bất chấp Fed tăng lãi suất,1.0,train
+74,5,TTR_ea318d26b8ec,Fed có hạ lãi suất trước sức ép từ ông Trump?,1.0,val
+75,1,TTR_131584374951,Trường nghề đầu tiên thuộc Bộ Công an khai giảng năm học mới,1.0,train
+75,2,TTR_4caecc1d5923,Thi chọn đội tuyển thi HS giỏi quốc gia ở TP.HCM: Môn tiếng Anh đông thí sinh nhất,1.0,train
+75,3,TTR_77afa28335ba,Tin tức sáng 8-9: TP.HCM thí điểm dạy tiếng Anh tích hợp cho trẻ mầm non,1.0,val
+75,4,TTR_a04c9e490345,Tuyển sinh 2026: Khi STEM thu hút một lượng lớn thí sinh,1.0,train
+75,5,TTR_a314d117b6c9,Khai giảng trường đào tạo nghề cho nhóm đối tượng đặc thù,1.0,train
+76,1,TTR_0b7037d67c1f,"Thêm một đường lên đại học cho người học nghề, nhưng phải chờ 24-36 tháng?",1.0,val
+76,2,TTR_11432b1649a9,"Bộ GD-ĐT sửa đổi 4 môn trong chương trình giáo dục thường xuyên cấp THCS, THPT",1.0,train
+76,3,TTR_189b04724ee6,Sửa Chương trình giáo dục phổ thông 2018: 'Đừng để học sinh chọn môn theo giáo viên',1.0,train
+76,4,TTR_1c749fd01010,"Thi lớp 10 chỉ còn toán, văn: Tiếng Anh rồi sẽ thế nào?",1.0,train
+76,5,TTR_2ebfa366cf77,"Nhiều trường đại học đề nghị lộ trình thay đổi tuyển sinh phải 3 năm, bảo đảm quyền lợi thí sinh",1.0,train
+77,1,TTR_35bbce90686e,"Phụ nữ Đà Nẵng huy động hơn 1,3 tỉ đồng tiếp bước đến trường",1.0,train
+77,2,TTR_5e89daf20a0a,"19h ngày 24-9, Trường Quốc tế Việt Nam - Phần Lan lên sóng Khám phá trường học",1.0,train
+77,3,TTR_602bf1d0c98c,"Trường Sa: Sách vở, trường lớp đã sẵn sàng cho năm học mới",1.0,train
+77,4,TTR_75997d7dfad6,Cà Mau biến trụ sở dôi dư sau sáp nhập thành trường học khang trang,1.0,train
+77,5,TTR_befdf8440856,"Một câu nhắn, một bài đăng mạng và những tổn thương thầy cô không ngờ tới",1.0,val
+78,1,TTR_035d67e7954a,"Hà Nội mưa ngập, nhiều trường cho học sinh nghỉ, chuyển sang học online",1.0,train
+78,2,TTR_06e6c5a7badd,Hơn 300 học sinh nghỉ học do điểm trường bị ngập,1.0,test
+78,3,TTR_0edbaddb9a6d,"Xuyên đêm hoàn thiện trường nội trú ở rẻo cao Huế, kịp đón học sinh ngày khai giảng",1.0,train
+78,4,TTR_10e05a30ffb3,"Hà Nội vận hành 'bản đồ mưa ngập', người dân nhận cảnh báo qua điện thoại",1.0,val
+78,5,TTR_2dc750de4ebf,"Lũ rút, thầy cô Quảng Trị tất tả dọn trường, hàng ngàn học sinh tạm nghỉ học",1.0,train
+79,1,TTR_0fbe0bc43ebb,"Sau khai giảng, trường mới sáp nhập báo chưa tổ chức bán trú, phụ huynh chới với",1.0,train
+79,2,TTR_3da26c10554b,"Học sinh ngày càng cao, trường học xoay xở chuyện bàn ghế ra sao?",1.0,train
+79,3,TTR_52596f045c21,Trường học TP.HCM tất bật 'thay áo mới' trước ngày khai giảng,1.0,train
+79,4,TTR_79cc14aafa65,"Nhiều trường dừng bán trú, phụ huynh vất vả đưa đón con ngày 4 lượt",1.0,train
+79,5,TTR_87636d91f417,"Ngày 1-10, lãnh đạo tỉnh Nghệ An đối thoại với phụ huynh vụ 127 học sinh chưa tới trường",1.0,train
+80,1,TTR_2350437f332e,"Từ 8 đơn trình báo mất 160 triệu đồng, công an bóc gỡ đường dây lừa đảo hơn 1.000 tỉ",1.0,train
+80,2,TTR_2b18d26eeed0,"Lấy hình ảnh ‘Huấn Hoa Hồng’ câu khách vay tiền, lừa cả trăm người: Lộ thủ đoạn rửa tiền",1.0,train
+80,3,TTR_88a792256a7b,Triệt phá đường dây đánh bạc trực tuyến hơn 1.000 tỉ đồng qua website Net.win.,1.0,train
+80,4,TTR_8b4d37d3b0a8,"Cảnh báo chiêu giả mạo HoSE, dụ nhà đầu tư chuyển tiền",1.0,train
+80,5,TTR_8e11edfb0a54,Hồng Trà Ngô Gia được giới trẻ yêu thích ra sao trước thông tin nợ thuế chục tỉ?,1.0,train
+81,1,TTR_40ef5952e6b6,"CAEX gia nhập Liên minh Niềm tin Số, lan tỏa giá trị tích cực trên không gian số",1.0,train
+81,2,TTR_7cd7a3b554f3,"Nhiều công nghệ, thiết bị mới tại triển lãm phòng cháy chữa cháy quốc tế",1.0,train
+81,3,TTR_a21fab137eba,PVCFC vào Top 3 doanh nghiệp phi tài chính tại IR Awards 2026,1.0,test
+81,4,TTR_a90ed8aea9e5,Techcom Life đồng hành cùng Kids Run và giải thưởng phá kỷ lục quốc gia 42km,1.0,train
+81,5,TTR_ab7dfccb0b2d,Techcombank lần thứ 6 liên tiếp được Euromoney vinh danh “Ngân hàng Tốt nhất Việt Nam”,1.0,val
+82,1,TTR_007cfe04f107,"Vụ cha 86 tuổi kiện con trai đòi lại đất: 'Cái mất lớn nhất là tình cảm cha con, ông cháu, anh em'",1.0,val
+82,2,TTR_1c590cbf40f2,Viện kiểm sát đề nghị chấp nhận một phần yêu cầu chia tài sản của bà Hồng Ngọc và một phần phản tố của ông Chiêm Quốc Thái,1.0,test
+82,3,TTR_3187c582006f,"Người đàn ông 63 tuổi kiện bạn gái 48 tuổi, đòi hơn 5 tỉ đồng sau chia tay",1.0,train
+82,4,TTR_3df181f6ee7f,Vụ cha 86 tuổi kiện con trai đòi lại đất sau hơn 30 năm giao cho ở riêng: Tranh chấp chưa có hồi kết,1.0,train
+82,5,TTR_65ecfb15673f,"Không chứng minh được có người mua chung 3 công mía, bị đơn phải tự trả hết tiền",1.0,test
+83,1,TTR_231996c67f82,"Cựu hiệu trưởng bị tuyên 3 năm tù nói ‘không tư lợi cá nhân, không tham ô’",1.0,train
+83,2,TTR_3cc96427bf78,5 nội dung khiến tòa hủy án vụ cựu hiệu trưởng Trường THCS Ba Đình bị tuyên 3 năm tù,1.0,test
+83,3,TTR_5c1e6ba0331c,Vụ cựu Hiệu trưởng Trường THCS Ba Đình: Từ 15.000 đồng/tiết dạy thêm 13 năm trước đến bản án 3 năm tù,1.0,train
+83,4,TTR_6244cb150379,"Cựu hiệu trưởng bị tuyên 3 năm tù khóc nấc, nói lời sau cùng: ‘Tôi trong sạch’",1.0,train
+83,5,TTR_6a8ac108fbe1,"Hôm nay, tòa phúc thẩm xét đơn kêu oan của cựu hiệu trưởng ở Hà Nội bị tuyên 3 năm tù",1.0,train
+84,1,TTR_187e91ef13c5,Cựu Trưởng Công an TP Phú Quốc Lê Văn Mót bị phạt 18 năm tù về tội lừa đảo chiếm đoạt tài sản,1.0,train
+84,2,TTR_20e0e6f3bd40,Cựu Trưởng Công an TP Phú Quốc bị đề nghị mức án 14 - 16 năm tù về tội lừa đảo chiếm đoạt tài sản,1.0,train
+84,3,TTR_210cc33ec004,Lãnh 20 năm tù vì đâm chết một thành viên bảo vệ an ninh trật tự cơ sở,1.0,train
+84,4,TTR_434941631a81,"Cựu Tổng giám đốc Tập đoàn Vàng bạc đá quý ATV lừa hơn 12 tỉ, lãnh 21 năm tù",1.0,val
+84,5,TTR_b0015f569d61,Người chấp hành xong án phạt tù có thể được vay tới 200 triệu,1.0,train
+85,1,TTR_18ffe3adadb8,"5 năm mở dây hụi uy tín, 1 năm nảy lòng tham, chủ hụi chiếm đoạt hơn 12 tỉ đồng",1.0,train
+85,2,TTR_405ced3f9b63,Xử vụ cưỡng đoạt tài sản từ việc nữ nhân viên ngân hàng làm giả hồ sơ vay 7 tỉ đồng,1.0,train
+85,3,TTR_546505398664,"Chiếm đoạt tiền tỉ rồi đem tiêu xài, cá độ bóng đá, lãnh hơn 26 năm tù",1.0,train
+85,4,TTR_6bfd9421945a,"Đầu tư online mất 1,5 tỉ, bèn lợi dụng người quen để chiếm đoạt tiền",1.0,train
+85,5,TTR_ac971d4e7062,"Bán hơn 65.000 bóng cười thu lợi gần 7 tỉ đồng, chủ quán bar Destiny lãnh 10 năm tù",1.0,train
+86,1,TTR_0ff8b22dcba1,Độc đáo ‘khu chợ’ chỉ bán 1 món khiến khách đi hàng chục kilômet tìm mua,1.0,train
+86,2,TTR_12802137adcb,"Mùa nước nổi đưa ghe, xuồng lên 'chợ mạng' hút khách",1.0,train
+86,3,TTR_14b479fd74ab,Vì sao gần 100 ki ốt tại dự án chợ đầu mối đầu tư cả trăm tỉ đồng vẫn bỏ trống?,1.0,train
+86,4,TTR_161eebbe1017,"Grab đưa đặc sản Đà Nẵng lên ứng dụng, thêm kênh tiếp cận khách hàng",1.0,train
+86,5,TTR_7b84899af0a0,"Báo chí góp sức tạo thị trường, nâng chất lượng điểm đến du lịch",1.0,train
+87,1,TTR_3eba72d4258a,Anh ruột hai chị em bị sát hại ở Củ Chi: 'Chồng nó thường xuyên dọa giết vợ',1.0,train
+87,2,TTR_a23cc2f3e9b6,"Đâm chết em trai rồi trốn vào rừng sâu, ăn quả rừng và uống nước suối cả tháng",1.0,train
+87,3,TTR_e5db81df5616,Vụ án mạng ở Phước Hải: Mang dao đến nhà người yêu cũ chém 3 người sau khi nhậu say,1.0,train
+87,4,VNE_0a3176ec22fb,Lời khai trước toà của kẻ nổ súng gây thảm án vì giận vợ,1.0,train
+87,5,VNE_0b3051f6ee44,"Đến nhà vợ đánh ghen, người đàn ông bị đâm tử vong",1.0,train
+88,1,TTR_8cb74d6deb1b,Hà Nội đón hơn 500 nhà mua hàng quốc tế tại Hanoi MIP Fair,1.0,train
+88,2,TTR_99f0b985b576,SCG Home Việt Nam khai trương showroom nội thất hơn 5.500m² tại Hà Nội,1.0,train
+88,3,TTR_a596ad95189a,Doanh nghiệp Việt 'du học' bán lẻ ở thị trường Thái Lan,1.0,train
+88,4,TTR_c2fa0a1ed43a,"Chính thức thí điểm mở outlet tại nhiều địa phương, khu rộng nhất quy mô tới 50.000m²",1.0,train
+88,5,VNE_122a1842b18d,Dàn sao trải nghiệm cửa hàng Messika Việt Nam ngày khai trương,1.0,train
+89,1,TTR_1ada0ce73400,Chủ doanh nghiệp khai số tiền chung chi mỗi tháng cho cán bộ quản lý rừng,1.0,train
+89,2,TTR_3cb64aaebac8,"Nguyên kế toán trưởng ở An Giang rút hơn 1,5 tỉ đồng của cơ quan để trả nợ, tiêu xài",1.0,train
+89,3,TTR_8ea642d5adde,Khởi tố một giám đốc ở An Giang mua trái phép 13 hóa đơn,1.0,test
+89,4,TTR_9a648d84c97d,Ba giám đốc công ty ở Phú Thọ làm giả hồ sơ để mua nhà ở xã hội,1.0,train
+89,5,TTR_a1430f190ecc,"Khởi tố người trốn thuế hơn 1,1 tỉ đồng trong mua bán đất ở Phú Quốc",1.0,train
+90,1,TTR_01606ef9ac7f,"Vì sao giang hồ 'Dũng trọc Hà Đông', YouTuber 'Thật Mạnh' bị khởi tố?",1.0,train
+90,2,TTR_13e54eab926f,"Tạm giữ 8 người dàn dựng, đăng gần 800 video đánh bạc để quảng cáo, bán thiết bị 'cờ bạc bịp'",1.0,train
+90,3,TTR_14d24a5c85c3,"Làm giả 37 hồ sơ thiết kế xe cơ giới, một cán bộ kỹ thuật bị bắt",1.0,train
+90,4,TTR_1f78362bdcdd,Bắt giam đăng kiểm viên thuộc Chi cục Đăng kiểm Vĩnh Long nhận hối lộ,1.0,train
+90,5,TTR_25ae5c653b25,Bắt phó giám đốc chỉ đạo chôn lấp gần 48 tấn chất thải ngay trong nhà xưởng,1.0,train
+91,1,TTR_14fd0be8bb8c,Vì sao cú sốc dầu mỏ Trung Đông không còn làm khó được Trung Quốc?,1.0,train
+91,2,TTR_16618c3dce71,Ông Trump dọa áp thuế nặng EU vì muốn kết nạp Canada là thành viên liên kết,1.0,train
+91,3,TTR_8e27082f868f,"Thu hút vốn Mỹ và Canada: Chìa khóa từ công nghệ chiến lược, năng lượng sạch",1.0,train
+91,4,TTR_8e652437c357,"Tờ 20 đô Canada mới dùng công nghệ bảo mật chưa từng có, dải màu tím bí ẩn",1.0,train
+91,5,VNE_4345945c064e,"Burger, trà sữa kéo kinh tế Mỹ - Trung xích lại gần nhau",1.0,train
+92,1,TTR_0a19e5c51d5a,"TP.HCM lấy ý kiến giải phóng mặt bằng metro số 2 TP Thủ Dầu Một - TP.HCM, dự kiến cần 34.300 tỉ đồng",1.0,val
+92,2,TTR_0eec4ebee787,"Luật Phát triển đô thị mở hướng mới cho bãi xe ngầm, cao tầng ở TP.HCM",1.0,val
+92,3,TTR_176e758c4f2f,Tập đoàn của tỉ phú Nguyễn Thị Phương Thảo đề xuất giữ hướng tuyến metro số 5 nối sân vận động Rạch Chiếc,1.0,train
+92,4,TTR_1a2d3a8b1ea6,Tin tức sáng 14-9: Ai được phê duyệt vị trí việc làm tại các đơn vị sự nghiệp TP.HCM?,1.0,train
+92,5,TTR_2d7620fe3a4c,TP.HCM và các địa phương được ‘góp vốn’ làm dự án chung nhờ Luật Phát triển đô thị,1.0,train
+93,1,TTR_0ecc010f647e,Khu công nghệ cao hơn 5.000 tỉ đồng ở Cần Thơ đặt ở phường nào?,1.0,train
+93,2,TTR_2a525d66ba5b,TP.HCM thu hút dự án logistics gần 1 tỉ USD từ hệ sinh thái TikTok,1.0,train
+93,3,TTR_5f2796c095d0,"Đại học Quốc gia TP.HCM dành 1.875 tỉ đồng, chạy đua AI, chip, robot, công nghệ lượng tử",1.0,train
+93,4,TTR_6cac8a15e794,"Đà Nẵng chuyển lợi thế từ vị trí, đất đai qua 'tốc độ ra quyết định'",1.0,train
+93,5,TTR_835af955c0e0,"Quảng Ngãi tìm động lực tăng trưởng mới từ Dung Quất, logistics và năng lượng",1.0,train
+94,1,TTR_31d04b0b66cf,"Chứng khoán 8-9: Sau phiên bất ngờ rơi 31 điểm, VN-Index có tiếp tục rung lắc?",1.0,val
+94,2,TTR_365d4150b6e7,"Chứng khoán 23-9: Hồi phục nhờ nhóm Vingroup, VN-Index dự báo có thể rung lắc",1.0,train
+94,3,TTR_5f3a6ce5f54b,"Đọc nhanh 29-9: Dow Jones mất 347 điểm khi lợi suất Mỹ tăng tiếp, Masan đăng ký bán 10% vốn MSR",1.0,train
+94,4,TTR_7257f911869b,"Chứng khoán 24-9: Áp lực bán trở lại, thị trường tìm gì sau câu chuyện nâng hạng?",1.0,train
+94,5,TTR_8a483d1c2da9,"Chứng khoán 22-9: Câu chuyện nâng hạng hạ nhiệt, dòng tiền tìm kiếm động lực mới",1.0,train
+95,1,TTR_42e6f53c5b4d,"Sức mua tăng, cùng lúc người Việt ngày càng 'soi' nguồn gốc thực phẩm",1.0,train
+95,2,TTR_481068aba531,Người Việt chi gần 160 tỉ đồng mua bánh trung thu online,1.0,train
+95,3,TTR_4d8392ffdf9c,"Bánh trung thu cao cấp tiền triệu/hộp, không cần ra phố vẫn ‘cháy hàng’",1.0,val
+95,4,TTR_5d421c6d5273,"Đèn Trung thu giá 30.000-50.000 đồng hút khách chợ mạng, doanh thu hàng tỉ đồng",1.0,train
+95,5,TTR_723625fea4d2,Cửa hàng tiện lợi Ohmee Trung Quốc trong cây xăng: Không thể bê nguyên mẫu để tránh 'vết xe đổ',1.0,val
+96,1,TTR_0bf715556d39,Vietjet và CFM hợp tác phát triển bảo dưỡng động cơ tại Việt Nam,1.0,train
+96,2,TTR_2b4edf2eaf4a,"Nhờ livestream, người trồng hoa ở Sa Đéc bán hàng tăng gấp 10 lần",1.0,train
+96,3,TTR_3960fcd4666c,Ông Đinh Bá Thành - Chủ tịch DatVietVAC: 'Chúng tôi IPO khi công nghiệp văn hóa hội tụ thiên thời - địa lợi - nhân hòa',1.0,train
+96,4,TTR_3a777eb03a70,Dự án LNG Long Sơn: Hợp tác Việt - Pháp mở thêm nguồn lực cho năng lượng,1.0,train
+96,5,TTR_3d655ae52bf0,Hợp tác Pháp - Việt chuẩn bị nhân lực cho ngành hạt nhân,1.0,train
+97,1,TTR_2624bb475af8,"Vingroup ưu đãi tới 9% khi đổi xe xăng sang xe điện, tài xế công nghệ hưởng 100% doanh thu",1.0,train
+97,2,TTR_54e421624c33,"Sun Life ghi nhận tăng trưởng tích cực, doanh thu phí bảo hiểm tại Việt Nam đạt 1.480 tỉ đồng",1.0,val
+97,3,TTR_6226ec6a9425,Vingroup khởi công Bệnh viện Đa khoa Quốc tế Vinmec Cần Giờ 500 giường chuẩn quốc tế,1.0,train
+97,4,TTR_70964c8d767b,FRT lần thứ 2 liên tiếp được Forbes vinh danh trong top 50 công ty niêm yết tốt nhất 2026,1.0,train
+97,5,TTR_7d2e5a1152b0,Vingroup nhận chuyển nhượng 100% vốn VinFast Úc,1.0,train
+98,1,TTR_1ce9f2fb2d61,"Giá cả đầu ngày: Rau Trung Quốc giá rẻ đổ về, nông dân miền Tây lo rau màu rớt giá",1.0,train
+98,2,TTR_2491029fa86b,"Định hướng đưa bò Mông, nhung hươu thành các sản phẩm tầm cỡ như bò Kobe",1.0,train
+98,3,TTR_2fd500fcbd95,"Giá cả đầu ngày: Khoai mì, cam sành đồng loạt tăng giá, người trồng phấn khởi; rau xanh vẫn đắt lên",1.0,train
+98,4,TTR_555b65da4136,"Giá cả đầu ngày: Cá đồng, chuột đồng miền Tây giá cao giữa mùa nước nổi",1.0,train
+98,5,TTR_853c52c30708,"Giá cả đầu ngày: Giá lươn, khoai lang nhích lên, heo hơi ổn định nhưng lo thiếu hàng Tết",1.0,train
+99,1,TTR_2d16e59e716a,"Lãnh đạo Sở Giao dịch chứng khoán London, Nasdaq, Morgan Stanley... nói gì trước giờ Việt Nam nâng hạng?",1.0,test
+99,2,TTR_4a212c9b69d7,DNSE lọt Top 10 công ty chứng khoán tư nhân nộp ngân sách lớn nhất Việt Nam,1.0,train
+99,3,TTR_545bd81812ec,Đánh cồng đón chứng khoán Việt Nam vào nhóm mới nổi thứ cấp,1.0,train
+99,4,TTR_6280e1b653dc,30 năm chứng khoán khơi thông dòng vốn cho Việt Nam thịnh vượng,1.0,train
+99,5,TTR_6cbef9a1a321,Giám đốc Vanguard: Thật vui khi thấy cổ phiếu Việt trở thành một phần trong 'đống rơm' của chúng tôi,1.0,train
+100,1,TTR_1414382601c3,"Công ty xây dựng Hòa Bình bán dự án ở Khu công nghệ cao, nửa năm lãi 50 tỉ đồng",1.0,train
+100,2,TTR_1f9fabd5eab3,"Công ty Ba Huân nợ hơn 600 tỉ đồng, bị xiết nợ hàng chục 'dãy chuồng gà'",1.0,train
+100,3,TTR_2ccd94fbe6af,"Dừng đào tạo, doanh thu của công ty chuyên bán khóa học làm giàu giảm... 90%",1.0,train
+100,4,TTR_33c82925ccfa,"Bị PYN Elite Fund phản đối, Sá xị Chương Dương không được gia hạn khoản vay gần 520 tỉ đồng từ Sabeco",1.0,train
+100,5,TTR_371d9a002b9b,"Được Vinhomes hỗ trợ hơn 1.100 tỉ, Pomina đang kinh doanh ra sao?",1.0,train

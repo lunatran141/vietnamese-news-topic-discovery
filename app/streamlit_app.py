@@ -9,11 +9,13 @@ import requests
 import streamlit as st
 
 from app.data_service import (
+    discover_model_runs,
     get_model_overview,
     get_topic_table,
     load_dashboard_bundle,
 )
-
+from app.nmf_dashboard import render_nmf_details
+from app.hdbscan_dashboard import render_hdbscan_details
 
 API_BASE_URL = os.getenv(
     "API_BASE_URL",
@@ -69,7 +71,7 @@ def render_sidebar() -> None:
 
         st.caption(
             "Khám phá chủ đề tin tức tiếng Việt "
-            "bằng BERTopic."
+            "từ các mô hình đã được huấn luyện."
         )
 
         st.divider()
@@ -98,9 +100,9 @@ def render_sidebar() -> None:
         st.divider()
 
         st.info(
-            "Các điểm gần nhau trên bản đồ "
-            "embedding thể hiện các bài báo "
-            "có nội dung ngữ nghĩa tương đồng."
+            "Chọn mô hình để xem kết quả đã xuất. "
+            "Bản đồ hai chiều hỗ trợ khám phá; "
+            "cần đọc bài và từ khóa để diễn giải."
         )
 
 
@@ -116,7 +118,7 @@ def render_metric_cards(
             overview["topic_count"]
         ),
         help=(
-            "Số cụm chủ đề được BERTopic "
+            "Số cụm chủ đề được mô hình "
             "phát hiện, không tính topic -1."
         ),
     )
@@ -127,8 +129,7 @@ def render_metric_cards(
             overview["document_count"]
         ),
         help=(
-            "Tổng số bài trong train "
-            "và validation."
+            "Tổng số bài trong các split của artifact đang chọn."
         ),
     )
 
@@ -138,8 +139,7 @@ def render_metric_cards(
             overview["assigned_document_count"]
         ),
         help=(
-            "Số bài không bị HDBSCAN "
-            "xem là nhiễu."
+            "Số bài được gán topic khác -1."
         ),
     )
 
@@ -150,20 +150,20 @@ def render_metric_cards(
         ),
         help=(
             "Các bài thuộc topic -1, chưa được "
-            "HDBSCAN gán vào cụm ổn định."
+            "mô hình gán vào một topic."
         ),
     )
 
     second_row = st.columns(3)
 
     second_row[0].metric(
-        label="Tỷ lệ outlier validation",
+        label="Tỷ lệ outlier được báo cáo",
         value=format_percentage(
             overview["outlier_rate"]
         ),
         help=(
-            "Giá trị thấp hơn cho thấy mô hình "
-            "gán được nhiều bài validation hơn."
+            "Phạm vi theo metadata của từng mô hình; "
+            "không dùng riêng chỉ số này để xếp hạng chất lượng."
         ),
     )
 
@@ -187,7 +187,7 @@ def render_metric_cards(
             if runtime_seconds is not None
             else "N/A"
         ),
-        help="Tổng thời gian chạy thí nghiệm E1.",
+        help="Thời gian được đo trong run đang chọn; xem phạm vi đo trước khi so sánh.",
     )
 
 
@@ -313,21 +313,26 @@ def render_topic_table(
 
 
 def main() -> None:
-    """Hiển thị trang tổng quan BERTopic."""
+    """Hiển thị mô hình đã chọn và phần phân tích NMF."""
     render_sidebar()
+    runs = discover_model_runs()
+    if not runs:
+        st.error("Chưa có dữ liệu mô hình để hiển thị.")
+        st.stop()
+    labels = list(runs)
+    configured = os.getenv("TOPIC_ARTIFACT_DIR")
+    selected_index = next((i for i, label in enumerate(labels) if runs[label] == configured), 0)
+    selection = st.sidebar.selectbox("Mô hình / lượt chạy", labels, index=selected_index)
+    artifact_dir = runs[selection]
 
     st.title(
         "Khám phá chủ đề tin tức tiếng Việt"
     )
 
-    st.caption(
-        "Tổng quan kết quả BERTopic E1 — "
-        "Vietnamese SBERT → UMAP → "
-        "HDBSCAN → c-TF-IDF"
-    )
+    st.caption(selection)
 
     try:
-        bundle = load_dashboard_bundle()
+        bundle = load_dashboard_bundle(artifact_dir)
     except (FileNotFoundError, ValueError) as error:
         st.error(
             "Không thể đọc dữ liệu mô hình."
@@ -358,17 +363,14 @@ def main() -> None:
             f"""
 - **Mô hình:** {overview["model_name"]}
 - **Thuật toán:** {overview["algorithm"]}
-- **Embedding:** `{overview["representation"]}`
+- **Biểu diễn:** `{overview["representation"]}`
 - **Run ID:** `{bundle.model_summary.run_id}`
 - **Schema:** `{bundle.manifest.schema_version}`
 """
         )
 
-        st.info(
-            "Topic `-1` là các bài được HDBSCAN "
-            "xác định là outlier. Các bài này "
-            "không được tính vào bảng topic."
-        )
+        if overview["outlier_document_count"]:
+            st.info("Topic -1 là các bài chưa được gán topic và không được tính vào bảng topic.")
 
     st.divider()
 
@@ -379,7 +381,18 @@ def main() -> None:
     )
 
     render_topic_table(topic_table)
+    algorithm = overview["algorithm"].upper()
 
+    if algorithm == "NMF":
+        st.divider()
+        render_nmf_details(bundle, artifact_dir)
+
+    if algorithm == "HDBSCAN":
+        st.divider()
+        render_hdbscan_details(
+            bundle,
+            artifact_dir,
+        )
 
 if __name__ == "__main__":
     main()

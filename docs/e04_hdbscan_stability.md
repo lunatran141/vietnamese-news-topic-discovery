@@ -35,6 +35,8 @@ Script kiểm tra seed 42 tạo lại đúng nhãn train M11 và nhãn validatio
 - **Tỷ lệ đổi trạng thái nhiễu:** tỷ lệ bài chuyển giữa `-1` và một cụm trong một cặp seed.
 - **Jaccard tập nhiễu:** mức trùng nhau giữa hai tập `article_id` mang nhãn `-1`.
 - **ARI trên bài cùng được gán cụm:** ARI chỉ trên những bài không mang nhãn `-1` ở **cả hai seed**; luôn đọc cùng số bài còn lại sau khi lọc.
+- **Keyword Jaccard:** với mỗi cặp seed, các topic thường được ghép bằng Hungarian matching trên số `article_id` train chung. Sau đó tính Jaccard giữa hai tập top-10 từ khóa TF-IDF của từng cặp topic. Điểm của cặp seed là tổng Jaccard chia cho số topic lớn hơn giữa hai seed; topic không ghép được nhận đóng góp bằng 0.
+- **ARI/keyword Jaccard theo seed:** trung bình của seed đó với chín seed còn lại. Các giá trị này dùng để mô tả độ ổn định, không dùng để chọn seed có kết quả đẹp nhất.
 
 `cluster_id` được tạo riêng trong từng lần fit. Không kết luận hai cụm giống hoặc khác nhau chỉ vì số `cluster_id` bằng hoặc khác nhau; việc so sánh cụm phải dựa trên tập `article_id`. Pairwise ARI ở đây đo độ nhất quán **giữa các seed**, khác ARI so với `category_gold` trong đánh giá M11.
 
@@ -105,6 +107,7 @@ Riêng cặp seed 43–44, ARI trên những bài được gán cụm ở cả h
 | Độ bao phủ validation | 60,86 ± 3,02% | 56,65–65,20% |
 | Pairwise ARI train, 45 cặp | 0,5165 ± 0,0636 | 0,4223–0,6693 |
 | Pairwise ARI validation, 45 cặp | 0,4774 ± 0,0619 | 0,3796–0,6266 |
+| Keyword Jaccard train, 45 cặp | 0,6210 ± 0,0342 | 0,5536–0,6920 |
 
 Tỷ lệ nhiễu validation trung bình cao hơn train khoảng **11,84 điểm phần trăm**. Đây là so sánh mô tả giữa hai split; không tự nó xác định nguyên nhân khiến bài validation khó gán cụm hơn.
 
@@ -158,6 +161,7 @@ Các script:
 - `experiments/hdbscan/run_e04_train_stability.py`: fit trên train theo từng seed, xuất assignments và chỉ số train.
 - `experiments/hdbscan/run_e04_validation_stability.py`: fit trên train rồi dự đoán cùng validation theo từng seed.
 - `experiments/hdbscan/analyze_e04_seed_changes.py`: phân tích các assignments đã lưu; bước này không fit lại mô hình.
+- `experiments/hdbscan/summarize_e04_stability.py`: dùng assignments train đã lưu để tạo top-10 từ khóa, ghép topic giữa các seed và xuất stability summary chuẩn hóa; bước này không fit lại UMAP/HDBSCAN.
 
 Kết quả **ba seed ban đầu** nằm trực tiếp trong `results/hdbscan/stability/`. Kết quả **10 seed chính** nằm trong:
 
@@ -169,6 +173,8 @@ Mỗi thư mục gồm:
 - `validation_seed_metrics.csv`, `validation_pairwise_ari.csv`, `validation_assignments.csv`, `validation_summary.csv`.
 - `train_pairwise_state_analysis.csv`, `train_transition_cases.csv`.
 - `val_pairwise_state_analysis.csv`, `val_transition_cases.csv`.
+- `pairwise_keyword_jaccard.csv`: Jaccard từ khóa của 45 cặp seed sau khi ghép topic.
+- `stability_summary.csv`: một dòng cho mỗi seed với các cột `seed`, `topic_count`, `outlier_rate`, `coverage`, `ari_between_runs`, `keyword_jaccard`.
 
 Trong thư mục 10 seed, `train_assignments.csv` có **64.930 dòng** (6.493 × 10) và `validation_assignments.csv` có **13.910 dòng** (1.391 × 10). Mỗi file `*_pairwise_ari.csv` và `*_pairwise_state_analysis.csv` có **45 dòng**, ứng với 45 cặp seed.
 
@@ -180,6 +186,8 @@ Chạy từ thư mục gốc của dự án:
 python -B -m experiments.hdbscan.run_e04_train_stability
 python -B -m experiments.hdbscan.run_e04_validation_stability
 python -B -m experiments.hdbscan.analyze_e04_seed_changes
+python -B -m experiments.hdbscan.summarize_e04_stability
+python -B -m pytest -p no:cacheprovider tests/test_e04_hdbscan_stability.py -v
 ```
 
 Trước khi chạy, kiểm tra trong script train: `EMBEDDING_RUN="minilm_title_content"`, `EXPERIMENT="eom_15_5"` và `SEEDS=tuple(range(42, 52))`. Kiểm tra `RESULT_DIR` của script phân tích trỏ đến thư mục kết quả 10 seed nêu trên.

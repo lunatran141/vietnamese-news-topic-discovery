@@ -109,6 +109,20 @@ def _normalize_assignment_frame(
     else:
         result["primary_topic_share"] = share_values.max(axis=1)
 
+    order = np.argsort(-share_values, axis=1, kind="stable")
+    topic_ids = np.array([int(column.split("_")[1]) for column in shares])
+    if len(shares) < 2:
+        raise ValueError("NMF cần ít nhất hai topic để xuất top-2")
+    second_shares = share_values[np.arange(len(result)), order[:, 1]]
+    result["second_topic_id"] = topic_ids[order[:, 1]]
+    result["second_topic_share"] = second_shares
+    result["topic_share"] = share_values.max(axis=1)
+    result["top_two_share_gap"] = result["topic_share"] - second_shares
+    result["topic_entropy"] = -np.sum(
+        share_values * np.log(np.clip(share_values, np.finfo(float).tiny, 1.0)), axis=1,
+    )
+    result["normalized_topic_entropy"] = result["topic_entropy"] / np.log(len(shares))
+
     if "secondary_topic_id" in result:
         result["secondary_topic_id"] = result["secondary_topic_id"].map(
             normalize_nmf_topic_id
