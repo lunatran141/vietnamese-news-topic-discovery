@@ -11,7 +11,8 @@ from typing import Any
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.decomposition import PCA
+from scipy.sparse import vstack
+from sklearn.decomposition import PCA, TruncatedSVD
 import yaml
 
 from src.artifacts.loader import (
@@ -24,6 +25,7 @@ from src.artifacts.nmf_parquet import (
 )
 from src.data.dataset_loader import load_dataset
 from src.features.article_text import build_article_text
+from src.features.tfidf import load_tfidf_artifacts
 from src.models.lda_pipeline import transform_lda_pipeline
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -220,6 +222,292 @@ def _build_kmeans_topic_summary(
     ).reset_index(drop=True)
 
 
+def _build_kmeans_representative_docs(
+    source_dir: Path,
+    document_topics: pd.DataFrame,
+    top_n: int = 5,
+) -> pd.DataFrame:
+    """Tạo bảng representative_docs.csv sắp xếp theo khoảng cách tới tâm cụm."""
+    rep_columns = [
+        "topic_id",
+        "rank",
+        "article_id",
+        "distance_to_center",
+        "title",
+        "split",
+        "category_gold",
+        "source",
+        "published_at",
+    ]
+    split_lookup = (
+        document_topics[
+            [
+                col
+                for col in (
+                    "article_id",
+                    "split",
+                    "title",
+                    "distance_to_center",
+                    "category_gold",
+                    "source",
+                    "published_at",
+                )
+                if col in document_topics.columns
+            ]
+        ]
+        .drop_duplicates("article_id")
+        .set_index("article_id")
+        .to_dict("index")
+    )
+
+    rep_json_path = source_dir / "representative_docs.json"
+    rows: list[dict[str, Any]] = []
+
+    if rep_json_path.is_file():
+        raw_reps = _read_json(rep_json_path)
+        for cluster_key in sorted(
+            raw_reps.keys(),
+            key=lambda key: int(key),
+        ):
+            topic_id = int(cluster_key)
+            items = raw_reps[cluster_key]
+            sorted_items = sorted(
+                items,
+                key=lambda item: (
+                    float(item.get("distance_to_center", 0.0)),
+                    int(item.get("rank", 1)),
+                    str(item.get("article_id", "")),
+                ),
+            )[:top_n]
+            for rank, item in enumerate(sorted_items, start=1):
+                aid = str(item.get("article_id", ""))
+                doc_meta = split_lookup.get(aid, {})
+                rows.append(
+                    {
+                        "topic_id": topic_id,
+                        "rank": rank,
+                        "article_id": aid,
+                        "distance_to_center": round(
+                            float(
+                                item.get(
+                                    "distance_to_center",
+                                    doc_meta.get(
+                                        "distance_to_center",
+                                        0.0,
+                                    ),
+                                )
+                            ),
+                            4,
+                        ),
+                        "title": str(
+                            item.get(
+                                "title",
+                                doc_meta.get("title", ""),
+                            )
+                        ),
+                        "split": str(
+                            item.get(
+                                "split",
+                                doc_meta.get("split", "train"),
+                            )
+                        ),
+                        "category_gold": str(
+                            item.get(
+                                "category_gold",
+                                doc_meta.get("category_gold", ""),
+                            )
+                        ),
+                        "source": str(
+                            item.get(
+                                "source",
+                                doc_meta.get("source", ""),
+                            )
+                        ),
+                        "published_at": str(
+                            item.get(
+                                "published_at",
+                                doc_meta.get("published_at", ""),
+                            )
+                        ),
+                    }
+                )
+    else:
+        dev_docs = document_topics[
+            document_topics["split"].isin(
+                ["train", "val", "validation"]
+            )
+        ].copy()
+        if dev_docs.empty:
+            dev_docs = document_topics.copy()
+        for topic_id in sorted(
+            dev_docs["topic_id"].dropna().astype(int).unique()
+        ):
+            if topic_id == -1:
+                continue
+            group = dev_docs[dev_docs["topic_id"] == topic_id].copy()
+            if "distance_to_center" in group.columns:
+                group = group.sort_values(
+                    by=["distance_to_center", "article_id"],
+                    ascending=[True, True],
+                )
+            for rank, (_, doc_row) in enumerate(
+                group.head(top_n).iterrows(),
+                start=1,
+            ):
+                rows.append(
+                    {
+                        "topic_id": int(topic_id),
+                        "rank": rank,
+                        "article_id": str(doc_row["article_id"]),
+                        "distance_to_center": round(
+                            float(
+                                doc_row.get(
+                                    "distance_to_center",
+                                    0.0,
+                                )
+                            ),
+                            4,
+                        ),
+                        "title": str(doc_row.get("title", "")),
+                        "split": str(doc_row.get("split", "train")),
+                        "category_gold": str(
+                            doc_row.get("category_gold", "")
+                        ),
+                        "source": str(doc_row.get("source", "")),
+                        "published_at": str(
+                            doc_row.get("published_at", "")
+                        ),
+                    }
+                )
+
+    if not rows:
+        return pd.DataFrame(columns=rep_columns)
+
+    return pd.DataFrame(rows, columns=rep_columns)
+
+
+def _build_kmeans_projection_2d(
+    source_dir: Path,
+    document_topics: pd.DataFrame,
+    config: dict[str, Any],
+) -> pd.DataFrame:
+    """Tạo bảng projection_2d.csv cho K-Means bằng TruncatedSVD trên TF-IDF."""
+    precomputed_path = source_dir / "projection_2d.csv"
+    if precomputed_path.is_file():
+        precomputed_df = pd.read_csv(
+            precomputed_path,
+            encoding="utf-8-sig",
+        )
+        required_cols = {
+            "article_id",
+            "split",
+            "topic_id",
+            "x",
+            "y",
+        }
+        if required_cols.issubset(precomputed_df.columns) and len(
+            precomputed_df
+        ) == len(document_topics):
+            return precomputed_df[
+                ["article_id", "split", "topic_id", "x", "y"]
+            ].copy()
+
+    dataset_cfg = config.get("dataset", {})
+    tfidf_dir_str = dataset_cfg.get("tfidf_artifacts_dir")
+    if tfidf_dir_str:
+        tfidf_dir = Path(tfidf_dir_str)
+        if not tfidf_dir.is_Absolute() if hasattr(tfidf_dir, "is_Absolute") else not tfidf_dir.is_absolute():
+            project_root = Path(__file__).resolve().parents[2]
+            candidate_dir = project_root / tfidf_dir
+            if candidate_dir.is_dir():
+                tfidf_dir = candidate_dir
+
+        if (tfidf_dir / "tfidf_train.npz").is_file():
+            train_bundle = load_tfidf_artifacts(
+                tfidf_dir,
+                split="train",
+            )
+            svd = TruncatedSVD(
+                n_components=2,
+                random_state=int(
+                    config.get("clustering", {}).get(
+                        "random_state",
+                        42,
+                    )
+                ),
+            )
+            svd.fit(train_bundle["matrix"])
+
+            coord_lookup: dict[str, tuple[float, float]] = {}
+            for split_name in ("train", "val", "test"):
+                matrix_file = (
+                    tfidf_dir / f"tfidf_{split_name}.npz"
+                )
+                if not matrix_file.is_file():
+                    continue
+                split_bundle = load_tfidf_artifacts(
+                    tfidf_dir,
+                    split=split_name,
+                )
+                coords = svd.transform(split_bundle["matrix"])
+                for aid, xy in zip(
+                    split_bundle["article_ids"],
+                    coords,
+                ):
+                    coord_lookup[str(aid)] = (
+                        float(xy[0]),
+                        float(xy[1]),
+                    )
+
+            if set(
+                document_topics["article_id"].astype(str)
+            ).issubset(coord_lookup.keys()):
+                xs = [
+                    coord_lookup[str(aid)][0]
+                    for aid in document_topics["article_id"]
+                ]
+                ys = [
+                    coord_lookup[str(aid)][1]
+                    for aid in document_topics["article_id"]
+                ]
+                return pd.DataFrame(
+                    {
+                        "article_id": document_topics[
+                            "article_id"
+                        ].astype(str),
+                        "split": document_topics[
+                            "split"
+                        ].astype(str),
+                        "topic_id": document_topics[
+                            "topic_id"
+                        ].astype(int),
+                        "x": xs,
+                        "y": ys,
+                    }
+                )
+
+    angles = (
+        document_topics["topic_id"].astype(float)
+        * (2.0 * np.pi / max(len(document_topics["topic_id"].unique()), 2))
+    )
+    radii = (
+        document_topics["distance_to_center"].astype(float)
+        if "distance_to_center" in document_topics.columns
+        else np.ones(len(document_topics), dtype=float)
+    )
+    return pd.DataFrame(
+        {
+            "article_id": document_topics["article_id"].astype(
+                str
+            ),
+            "split": document_topics["split"].astype(str),
+            "topic_id": document_topics["topic_id"].astype(int),
+            "x": np.round(radii * np.cos(angles), 6),
+            "y": np.round(radii * np.sin(angles), 6),
+        }
+    )
+
+
 def export_kmeans_artifacts(
     source_dir: str | Path,
     output_dir: str | Path,
@@ -270,6 +558,9 @@ def export_kmeans_artifacts(
             "cluster_id hoặc topic_id"
         )
 
+    document_topics["article_id"] = document_topics[
+        "article_id"
+    ].astype(str)
     document_topics["topic_id"] = document_topics[
         "topic_id"
     ].astype(int)
@@ -334,6 +625,24 @@ def export_kmeans_artifacts(
         topic_keywords=topic_keywords,
     )
 
+    top_n_reps = int(
+        config.get("topics", {}).get(
+            "representative_docs_per_cluster",
+            5,
+        )
+    )
+    representative_docs = _build_kmeans_representative_docs(
+        source_dir=source_dir,
+        document_topics=document_topics,
+        top_n=top_n_reps,
+    )
+
+    projection_2d = _build_kmeans_projection_2d(
+        source_dir=source_dir,
+        document_topics=document_topics,
+        config=config,
+    )
+
     output_dir.mkdir(
         parents=True,
         exist_ok=True,
@@ -351,6 +660,16 @@ def export_kmeans_artifacts(
     )
     topic_keywords.to_csv(
         output_dir / "topic_keywords.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    representative_docs.to_csv(
+        output_dir / "representative_docs.csv",
+        index=False,
+        encoding="utf-8-sig",
+    )
+    projection_2d.to_csv(
+        output_dir / "projection_2d.csv",
         index=False,
         encoding="utf-8-sig",
     )
@@ -375,10 +694,19 @@ def export_kmeans_artifacts(
         )
     )
 
-    metrics_validation = run_metadata.get(
-        "metrics_validation",
-        {},
+    metrics_validation = dict(
+        run_metadata.get("metrics_validation", {})
     )
+    metrics_test = dict(
+        run_metadata.get("metrics_test", {})
+    )
+    runtime_breakdown = dict(
+        run_metadata.get("runtime_breakdown", {})
+    )
+    stability_info = dict(
+        run_metadata.get("stability", {})
+    )
+
     train_count = int(
         (document_topics["split"] == "train").sum()
     )
@@ -387,9 +715,156 @@ def export_kmeans_artifacts(
         .isin(["val", "validation"])
         .sum()
     )
+    test_count = int(
+        (document_topics["split"] == "test").sum()
+    )
     topic_diversity = _compute_topic_diversity(
         topic_keywords
     )
+
+    val_ari = metrics_validation.get(
+        "validation_ari",
+        metrics_validation.get("ari"),
+    )
+    val_nmi = metrics_validation.get(
+        "validation_nmi",
+        metrics_validation.get("nmi"),
+    )
+    val_purity = metrics_validation.get(
+        "validation_purity",
+        metrics_validation.get("purity"),
+    )
+    val_silhouette = metrics_validation.get(
+        "silhouette_score"
+    )
+    val_ch = metrics_validation.get(
+        "calinski_harabasz_score"
+    )
+    val_db = metrics_validation.get(
+        "davies_bouldin_score",
+        metrics_validation.get("davies_bouldin_index"),
+    )
+
+    test_ari = metrics_test.get(
+        "test_ari",
+        metrics_test.get("ari"),
+    )
+    test_nmi = metrics_test.get(
+        "test_nmi",
+        metrics_test.get("nmi"),
+    )
+    test_purity = metrics_test.get(
+        "test_purity",
+        metrics_test.get("purity"),
+    )
+    test_silhouette = metrics_test.get(
+        "silhouette_score"
+    )
+    test_ch = metrics_test.get(
+        "calinski_harabasz_score"
+    )
+    test_db = metrics_test.get(
+        "davies_bouldin_score",
+        metrics_test.get("davies_bouldin_index"),
+    )
+
+    representation_seconds = runtime_breakdown.get(
+        "representation_seconds"
+    )
+    fit_seconds = runtime_breakdown.get("fit_seconds")
+    validation_predict_seconds = runtime_breakdown.get(
+        "validation_predict_seconds"
+    )
+    test_predict_seconds = runtime_breakdown.get(
+        "test_predict_seconds"
+    )
+    evaluation_seconds = runtime_breakdown.get(
+        "evaluation_seconds"
+    )
+    runtime_seconds = runtime_breakdown.get(
+        "runtime_seconds",
+        run_metadata.get("execution_duration_seconds"),
+    )
+    runtime_scope = runtime_breakdown.get(
+        "runtime_scope",
+        run_metadata.get(
+            "runtime_scope",
+            (
+                "TF-IDF fit/transform (train/val/test) + "
+                "KMeans (K=9, seed=42) fit trên train + "
+                "predict trên val và test + tính metric đánh giá; "
+                "không gồm đọc/ghi ổ đĩa, quét lưới K-search và vẽ biểu đồ."
+            ),
+        ),
+    )
+
+    combined_metrics: dict[str, float | int | None] = {
+        "topic_diversity": topic_diversity,
+        "validation_topic_diversity": topic_diversity,
+        "test_topic_diversity": (
+            topic_diversity if test_count > 0 else None
+        ),
+        "validation_ari": val_ari,
+        "validation_nmi": val_nmi,
+        "validation_purity": val_purity,
+        "test_ari": test_ari,
+        "test_nmi": test_nmi,
+        "test_purity": test_purity,
+        "silhouette_score": val_silhouette,
+        "validation_silhouette_score": val_silhouette,
+        "test_silhouette_score": test_silhouette,
+        "calinski_harabasz_score": val_ch,
+        "validation_calinski_harabasz_score": val_ch,
+        "test_calinski_harabasz_score": test_ch,
+        "davies_bouldin_score": val_db,
+        "davies_bouldin_index": val_db,
+        "validation_davies_bouldin_score": val_db,
+        "test_davies_bouldin_score": test_db,
+        "stability_mean": stability_info.get(
+            "stability_mean",
+            run_metadata.get("stability_mean"),
+        ),
+        "stability_std": stability_info.get(
+            "stability_std",
+            run_metadata.get("stability_std"),
+        ),
+        "inertia": metrics_validation.get("inertia"),
+        "train_inertia": metrics_validation.get(
+            "train_inertia",
+            metrics_validation.get("inertia"),
+        ),
+        "validation_inertia": metrics_validation.get(
+            "validation_inertia"
+        ),
+        "test_inertia": metrics_test.get(
+            "test_inertia",
+            metrics_test.get("inertia"),
+        ),
+        "ari": val_ari,
+        "nmi": val_nmi,
+        "purity": val_purity,
+        "adjusted_rand_index": (
+            test_ari if test_ari is not None else val_ari
+        ),
+        "normalized_mutual_info": (
+            test_nmi if test_nmi is not None else val_nmi
+        ),
+        "representation_seconds": representation_seconds,
+        "fit_seconds": fit_seconds,
+        "validation_predict_seconds": validation_predict_seconds,
+        "test_predict_seconds": test_predict_seconds,
+        "evaluation_seconds": evaluation_seconds,
+        "runtime_seconds": runtime_seconds,
+        "k_search_pipeline_seconds": run_metadata.get(
+            "k_search_execution_duration_seconds",
+            run_metadata.get("execution_duration_seconds"),
+        ),
+        "document_count": len(document_topics),
+        "train_count": train_count,
+        "validation_count": validation_count,
+        "val_count": validation_count,
+        "test_count": test_count,
+    }
 
     model_summary: dict[str, Any] = {
         "model_name": f"KMeans {resolved_run_id}",
@@ -402,18 +877,40 @@ def export_kmeans_artifacts(
                 len(topic_summary),
             )
         ),
-        "outlier_rate": 0.0,
-        "runtime_seconds": run_metadata.get(
-            "execution_duration_seconds"
+        "outlier_rate": None,
+        "outlier_applicable": False,
+        "outlier_label": "Không áp dụng",
+        "outlier_note": (
+            "Không áp dụng (K-Means phân hoạch cứng toàn bộ bài báo, "
+            "không có cơ chế từ chối bài)"
         ),
-        "metrics": {
-            "topic_diversity": topic_diversity,
-            "train_outlier_rate": 0.0,
-            "validation_outlier_rate": 0.0,
-            "train_count": train_count,
-            "validation_count": validation_count,
-            **metrics_validation,
+        "runtime_seconds": runtime_seconds,
+        "representation_seconds": representation_seconds,
+        "fit_seconds": fit_seconds,
+        "validation_predict_seconds": validation_predict_seconds,
+        "test_predict_seconds": test_predict_seconds,
+        "evaluation_seconds": evaluation_seconds,
+        "runtime_scope": runtime_scope,
+        "evaluation_protocol": {
+            "validation": {
+                "fit_split": "train",
+                "evaluation_split": "val",
+                "model": "KMeans K9 seed42 (locked on validation)",
+            },
+            "test": {
+                "fit_split": "train",
+                "evaluation_split": "test",
+                "model": "KMeans K9 seed42 (frozen model inference only)",
+            },
+            "stability": {
+                "metric": "pairwise_ari_across_seeds",
+                "seeds": config.get("clustering", {}).get(
+                    "stability_seeds",
+                    [42, 43, 44, 45, 46],
+                ),
+            },
         },
+        "metrics": combined_metrics,
         "config": config,
     }
 

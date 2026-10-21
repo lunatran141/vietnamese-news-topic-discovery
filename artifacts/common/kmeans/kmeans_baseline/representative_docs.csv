@@ -1,0 +1,46 @@
+﻿topic_id,rank,article_id,distance_to_center,title,split,category_gold,source,published_at
+0,1,VNE_95cd82676193,0.9043,Mỹ Anh: Không đợi thành công trong nước rồi mới ra quốc tế,train,Giải trí,vnexpress,2026-09-21 00:00:00+07:00
+0,2,VNE_ec0869ae5d4d,0.921,Lê Vũ Long: 'Vợ đồng hành tôi suốt chặng đường làm nghề',train,Giải trí,vnexpress,2026-09-15 10:06:51+07:00
+0,3,VNE_00fed519c712,0.9244,"​Johnny Trí Nguyễn: 'Với Hộ linh tráng sĩ, êkíp vừa học vừa làm'",train,Giải trí,vnexpress,2026-09-13 00:00:00+07:00
+0,4,VNE_ab9541504635,0.9304,Khoai Lang Thang: Bữa cơm nghèo vét sạch gạo khiến tôi nhớ suốt đời,train,Giải trí,vnexpress,2026-09-16 00:00:00+07:00
+0,5,VNE_c10e13e447ef,0.9316,Xu hướng bình dân của điện ảnh Việt,train,Giải trí,vnexpress,2026-09-26 08:17:42+07:00
+1,1,TTR_f41aea345953,0.7945,Xác định 8 đội vào tứ kết bóng đá nữ Asiad 20,train,Thể thao,tuoitre,2026-09-21 20:46:00+07:00
+1,2,TTR_42e534c86c7e,0.7954,Đã xác định 6/8 đội vào tứ kết môn bóng đá nam Asiad 20,train,Thể thao,tuoitre,2026-09-22 15:46:00+07:00
+1,3,TTR_e2836bdb6a4a,0.8001,Bảng xếp hạng bóng đá nam Asiad 20: U23 Việt Nam nhì bảng C,train,Thể thao,tuoitre,2026-09-22 14:54:00+07:00
+1,4,TTR_d547c3438df8,0.8039,Lịch thi đấu bóng chuyền nữ Asiad 20: Việt Nam đấu Qatar,train,Thể thao,tuoitre,2026-09-15 17:20:00+07:00
+1,5,TTR_8b117715efce,0.8057,Lịch thi đấu bóng đá nữ Asiad 20: Việt Nam đấu Đài Bắc Trung Hoa,train,Thể thao,tuoitre,2026-09-14 06:00:00+07:00
+2,1,VNN_764e6baedca9,0.852,"Toàn cảnh thông tin hot nhất về iPhone 18 Pro, 18 Pro Max, iPhone Duo gập trước giờ ra mắt",train,Khoa học công nghệ,vietnamnet,2026-09-09 16:55:00+07:00
+2,2,TTR_7f1d531a367a,0.8561,Chạm giá 2.000 USD: iPhone Duo đắt gần gấp đôi nhưng nhiều cái còn thua iPhone 18 pro max?,train,Khoa học công nghệ,tuoitre,2026-09-13 10:43:00+07:00
+2,3,VNN_86b8c2d77aa0,0.8593,"3 iPhone cao cấp ra mắt tuần này: iPhone 18 Pro, 18 Pro Max, iPhone Ultra có gì?",train,Khoa học công nghệ,vietnamnet,2026-09-08 09:35:00+07:00
+2,4,VNN_34a8c20e1f5d,0.8642,Ai nên mua iPhone 18 Pro?,train,Khoa học công nghệ,vietnamnet,2026-09-18 07:46:00+07:00
+2,5,VNN_fc9ec356ef7e,0.8662,"Thời lượng pin iPhone 18 Pro vượt iPhone 17 Pro, iPhone Duo gây bất ngờ",train,Khoa học công nghệ,vietnamnet,2026-09-10 08:00:00+07:00
+3,1,VNE_37944c4688f3,0.8841,5 điều cần biết để giữ thận khỏe,train,Sức khỏe,vnexpress,2026-09-28 00:04:00+07:00
+3,2,VNE_7135767a6aee,0.8865,5 vấn đề sức khỏe dễ làm chệch kế hoạch nghỉ hưu,train,Sức khỏe,vnexpress,2026-09-23 15:00:00+07:00
+3,3,VNE_d1ae4d246855,0.8888,Lợi ích khám sức khỏe định kỳ sau tuổi trung niên,train,Sức khỏe,vnexpress,2026-09-26 09:00:00+07:00
+3,4,VNE_beafc7a32a09,0.8961,"Bác sĩ chỉ cách ăn uống, vận động tốt cho người viêm gan",train,Sức khỏe,vnexpress,2026-09-24 08:00:00+07:00
+3,5,VNN_c3e9c2d973f8,0.897,"Để tuổi 49-53 khỏe mạnh, 6 điều nên làm ngay",train,Sức khỏe,vietnamnet,2026-09-05 10:00:00+07:00
+4,1,TTR_7feae2cbbd47,0.8638,HLV tuyển Philippines: 'Chúng tôi không đáng thua',train,Thể thao,tuoitre,2026-09-26 21:30:00+07:00
+4,2,VNN_b404973833d6,0.8666,"Tuyển Việt Nam thua Thái Lan, hết cơ hội tranh vô địch FIFA ASEAN Cup",train,Thể thao,vietnamnet,2026-09-29 21:33:00+07:00
+4,3,TTR_7afd55251c58,0.8713,Nỗi lo tuyến giữa đội tuyển Việt Nam,train,Thể thao,tuoitre,2026-09-19 16:54:00+07:00
+4,4,VNE_626899e3cc3a,0.873,HLV Kim: 'Tôi xấu hổ vì Việt Nam không ghi bàn trước Thái Lan',train,Thể thao,vnexpress,2026-09-29 21:48:42+07:00
+4,5,VNE_ec495bc98300,0.8731,HLV Kim Sang-sik xin lỗi về chấn thương của Nguyễn Xuân Son,train,Thể thao,vnexpress,2026-09-28 17:54:30+07:00
+5,1,TTR_c3c0d75041fb,0.9021,Khởi tố nhóm thuê người vay ngân hàng mua ô tô rồi bán lại,train,Pháp luật,tuoitre,2026-09-07 19:47:00+07:00
+5,2,TTR_3f6f9dcd55fd,0.9041,Công an TP.HCM bắt nhóm bán đá cuội nhưng quảng cáo là ‘đá thiên thạch’,train,Pháp luật,tuoitre,2026-09-29 18:56:00+07:00
+5,3,TTR_a6e12c38d57a,0.9061,VKS đề nghị đến 20 năm tù với cựu viện trưởng và 30 năm tù cho 'bà trùm' vụ Viện Pháp y tâm thần,train,Pháp luật,tuoitre,2026-09-30 11:07:00+07:00
+5,4,TTR_da76d351d318,0.9061,Bắt tạm giam nghi phạm 'chạy' làm giấy tờ đất chiếm đoạt 17 tỉ,train,Pháp luật,tuoitre,2026-09-24 20:38:00+07:00
+5,5,TTR_a835a7d2dda6,0.9068,"Hai ‘ông trùm’ vụ sữa giả lĩnh 30 năm tù, cựu công an lừa ‘chạy án’ và cựu chi cục trưởng cùng lĩnh 12 năm",train,Pháp luật,tuoitre,2026-09-28 17:08:00+07:00
+6,1,VNN_c1be84a11d11,0.8915,Việt Nam đang tạo ra những Doanh nghiệp Quốc gia thay đổi cả nền kinh tế thế nào?,train,Kinh doanh,vietnamnet,2026-09-23 11:50:00+07:00
+6,2,TTR_bbad9c8d162b,0.8927,Từ thương mại đến hút dòng vốn chất lượng cao: Củng cố niềm tin dài hạn từ Mỹ,train,Kinh doanh,tuoitre,2026-09-21 13:49:00+07:00
+6,3,VNN_306c58fbed88,0.8954,"Dòng vốn 136,3 tỷ USD: Thị trường thiết bị năng lượng đón cơ hội lịch sử",train,Kinh doanh,vietnamnet,2026-09-26 11:40:00+07:00
+6,4,VNE_33d1847dbd0b,0.8962,VIB: 30 năm từ số hóa giao dịch đến cá nhân hóa trải nghiệm ngân hàng,train,Kinh doanh,vnexpress,2026-09-17 10:00:00+07:00
+6,5,TTR_8e27082f868f,0.8971,"Thu hút vốn Mỹ và Canada: Chìa khóa từ công nghệ chiến lược, năng lượng sạch",train,Kinh doanh,tuoitre,2026-09-25 09:30:00+07:00
+7,1,VNE_faeae66f26f2,0.8782,5 kỳ vọng lớn của ngành giáo dục năm học mới,train,Giáo dục,vnexpress,2026-09-04 21:28:31+07:00
+7,2,TTR_84de77fed7ad,0.8836,"Thứ trưởng Bộ GD&ĐT đề nghị Khánh Hòa cắt giảm các cuộc họp, cuộc thi không cần thiết",train,Giáo dục,tuoitre,2026-09-18 18:14:00+07:00
+7,3,TTR_aeafc4cbc413,0.885,"Tư vấn tuyển sinh - hướng nghiệp 2027: Tăng dữ liệu việc làm, tư vấn từ THCS",train,Giáo dục,tuoitre,2026-09-19 15:24:00+07:00
+7,4,VNN_72de9dccfc24,0.8866,Bước chuyển quan trọng của giáo dục dân tộc,train,Giáo dục,vietnamnet,2026-09-05 06:03:00+07:00
+7,5,TTR_f717e065a9b0,0.8868,"Bỏ điểm cộng học sinh giỏi, IELTS: Nếu từ 2027, có thiệt thòi cho học sinh đang lớp 12?",train,Giáo dục,tuoitre,2026-09-18 19:27:00+07:00
+8,1,VNN_df3e5b8dfc8b,0.8429,"VN-Index mất mốc 1.800 điểm, ông Phạm Nhật Vượng vẫn thăng hạng tỷ phú USD",train,Kinh doanh,vietnamnet,2026-09-12 05:30:00+07:00
+8,2,VNN_b33b5903223f,0.8478,"Giá vàng hôm nay 12/9/2026: Cuối tuần bật tăng, SJC và nhẫn lên cao",train,Kinh doanh,vietnamnet,2026-09-12 08:59:00+07:00
+8,3,VNN_583afb87bcff,0.8492,"Giá vàng hôm nay 27/9/2026 lao dốc, vàng SJC giảm 3,2 triệu đồng/lượng",train,Kinh doanh,vietnamnet,2026-09-27 06:00:00+07:00
+8,4,VNN_cebf3a9abc36,0.8504,"Giá vàng hôm nay 16/9/2026: SJC tăng 1,2 triệu đồng, thế giới vượt 4.330 USD",train,Kinh doanh,vietnamnet,2026-09-16 06:00:00+07:00
+8,5,VNN_3c6ab1529339,0.8512,Giá vàng hôm nay 4/9/2026: Bất ngờ rơi thẳng đứng gần 100 USD,train,Kinh doanh,vietnamnet,2026-09-04 19:40:00+07:00
