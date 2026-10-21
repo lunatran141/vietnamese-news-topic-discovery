@@ -1,6 +1,6 @@
 """Xuất HDBSCAN MiniLM + eom_15_5 theo schema chung P01.
 
-Các bảng dữ liệu xuất trên train + validation:
+Các bảng dữ liệu xuất trên train + validation + test:
 - document_topics.csv
 - topic_summary.csv
 - topic_keywords.csv
@@ -40,6 +40,14 @@ VAL_ASSIGNMENTS_PATH = (
     / "results/hdbscan/validation/"
     "minilm_title_content_eom_15_5_val_assignments.csv"
 )
+TEST_ASSIGNMENTS_PATH = (
+    ROOT / "results/hdbscan/test/"
+    "minilm_title_content_eom_15_5_test_assignments.csv"
+)
+TEST_METRICS_PATH = (
+    ROOT / "results/hdbscan/test/"
+    "minilm_title_content_eom_15_5_test_metrics.json"
+)
 M11_SUMMARY_PATH = ROOT / "results/hdbscan/m11_summary.csv"
 ARTICLES_PATH = ROOT / "data/processed/p0_minimal.csv"
 SPLIT_MANIFEST_PATH = ROOT / "data/splits/split_manifest.csv"
@@ -59,14 +67,17 @@ PROJECTION_2D_PATH = OUTPUT_DIR / "projection_2d.csv"
 CONFIG_USED_PATH = OUTPUT_DIR / "config_used.yaml"
 MODEL_SUMMARY_PATH = OUTPUT_DIR / "model_summary.json"
 RUN_METADATA_PATH = OUTPUT_DIR / "run_metadata.json"
+RUNTIME_SUMMARY_PATH = OUTPUT_DIR / "runtime_summary.json"
 MANIFEST_PATH = OUTPUT_DIR / "manifest.json"
+BENCHMARK_PATH = ROOT / "results/hdbscan/benchmark_p01_runtime.json"
 EMBEDDING_RUN = "minilm_title_content"
 EXPERIMENT = "eom_15_5"
 RUN_ID = f"{EMBEDDING_RUN}_{EXPERIMENT}"
 
 N_TRAIN = 6493
 N_VAL = 1391
-N_TOTAL = N_TRAIN + N_VAL
+N_TEST = 1390
+N_TOTAL = N_TRAIN + N_VAL + N_TEST
 N_TRAIN_OUTLIERS = 1608
 N_VAL_OUTLIERS = 484
 N_CLUSTERS = 101
@@ -83,22 +94,31 @@ def read_yaml(path: Path) -> dict:
 def read_split_manifest() -> pd.DataFrame:
     manifest = pd.read_csv(
         SPLIT_MANIFEST_PATH,
-        usecols=["article_id", "split"],
-        dtype={"article_id": str},
+        usecols=["article_id", "split", "category_gold"],
+        dtype={
+            "article_id": str,
+            "category_gold": str,
+        },
     )
+
     if manifest["article_id"].isna().any():
         raise ValueError("Split manifest có article_id thiếu")
     if manifest["article_id"].duplicated().any():
         raise ValueError("Split manifest có article_id trùng")
+    if manifest["category_gold"].isna().any():
+        raise ValueError("Split manifest có category_gold thiếu")
+    if manifest["category_gold"].str.strip().eq("").any():
+        raise ValueError("Split manifest có category_gold rỗng")
 
     counts = manifest["split"].value_counts().to_dict()
     if counts.get("train") != N_TRAIN:
         raise ValueError("Split train không có 6.493 bài")
     if counts.get("val") != N_VAL:
         raise ValueError("Split val không có 1.391 bài")
+    if counts.get("test") != N_TEST:
+        raise ValueError("Split test không có 1.390 bài")
 
     return manifest
-
 
 def read_articles() -> pd.DataFrame:
     articles = pd.read_csv(
@@ -290,28 +310,98 @@ def select_val_assignments(
     return val
 
 
+def select_test_assignments(
+    manifest: pd.DataFrame,
+    config_hash: str,
+    train_topic_ids: set[int],
+) -> tuple[pd.DataFrame, dict]:
+    """Read held-out predictions from the locked train-fitted model."""
+    test = pd.read_csv(
+        TEST_ASSIGNMENTS_PATH, encoding="utf-8-sig", dtype={"article_id": str}
+    )
+    metrics = json.loads(TEST_METRICS_PATH.read_text(encoding="utf-8"))
+    required = {
+        "article_id", "split", "cluster_id", "membership_strength",
+        "embedding_run", "experiment", "config_hash",
+    }
+    if not required.issubset(test.columns):
+        raise ValueError(f"Test assignments thiếu: {sorted(required - set(test.columns))}")
+    if len(test) != N_TEST or test["article_id"].duplicated().any():
+        raise ValueError("Test assignments không có đúng 1.390 ID duy nhất")
+    if not test["split"].eq("test").all():
+        raise ValueError("Test assignments có split khác test")
+    if not test["embedding_run"].eq(EMBEDDING_RUN).all():
+        raise ValueError("Test assignments thuộc embedding khác")
+    if not test["experiment"].eq(EXPERIMENT).all():
+        raise ValueError("Test assignments thuộc experiment khác")
+    if not test["config_hash"].eq(config_hash).all():
+        raise ValueError("Test assignments có config_hash khác train")
+    expected_ids = set(manifest.loc[manifest["split"].eq("test"), "article_id"])
+    if set(test["article_id"]) != expected_ids:
+        raise ValueError("Test assignments không khớp split manifest")
+    if test["cluster_id"].isna().any() or not set(test["cluster_id"]).issubset(train_topic_ids):
+        raise ValueError("Test có cụm không tồn tại trên train")
+    strengths = pd.to_numeric(test["membership_strength"], errors="coerce")
+    if strengths.isna().any() or not strengths.between(0, 1).all():
+        raise ValueError("Test có membership_strength không hợp lệ")
+    test["membership_strength"] = strengths
+    if (
+        metrics.get("run_id") != RUN_ID
+        or metrics.get("config_hash") != config_hash
+        or metrics.get("fit_split") != "train"
+        or metrics.get("split") != "test"
+        or metrics.get("test_count") != N_TEST
+        or metrics.get("test_outlier_count") != int(test["cluster_id"].eq(-1).sum())
+    ):
+        raise ValueError("Test metrics không khớp assignments hoặc run đã khóa")
+    return test, metrics
+
+
 def build_document_topics(
     assignments: pd.DataFrame,
 ) -> pd.DataFrame:
-    """Đổi train + val assignments sang schema chung."""
+    """Đổi train + val + test assignments sang schema chung."""
+    membership_strength = pd.to_numeric(
+        assignments["membership_strength"],
+        errors="coerce",
+    )
+
+    if membership_strength.isna().any():
+        raise ValueError(
+            "Có membership_strength không hợp lệ"
+        )
+    if not membership_strength.between(0, 1).all():
+        raise ValueError(
+            "Có membership_strength ngoài [0, 1]"
+        )
+
     result = pd.DataFrame(
         {
             "article_id": assignments["article_id"],
             "split": assignments["split"],
-            "topic_id": assignments["cluster_id"].astype(int),
-            # HDBSCAN membership strength, không phải
-            # xác suất đã hiệu chuẩn.
-            "topic_probability": assignments[
-                "membership_strength"
-            ].astype(float),
-            "is_outlier": assignments["cluster_id"].eq(-1),
+            "topic_id": assignments[
+                "cluster_id"
+            ].astype(int),
+
+            # Trường chuẩn của common artifact.
+            "topic_probability": membership_strength,
+
+            # Tên gốc, rõ nghĩa đối với HDBSCAN.
+            "membership_strength": membership_strength,
+
+            "is_outlier": assignments[
+                "cluster_id"
+            ].eq(-1),
             "title": assignments["title"],
+            "category_gold": assignments[
+                "category_gold"
+            ].astype(str),
         }
     )
 
     if len(result) != N_TOTAL:
         raise ValueError(
-            "document_topics không có 7.884 bài"
+            "document_topics không có 9.274 bài"
         )
     if result["article_id"].duplicated().any():
         raise ValueError(
@@ -320,6 +410,7 @@ def build_document_topics(
     if result["split"].value_counts().to_dict() != {
         "train": N_TRAIN,
         "val": N_VAL,
+        "test": N_TEST,
     }:
         raise ValueError(
             "document_topics sai số bài theo split"
@@ -328,14 +419,26 @@ def build_document_topics(
         raise ValueError(
             "Có bài không ghép được tiêu đề"
         )
+    if result["category_gold"].str.strip().eq("").any():
+        raise ValueError(
+            "Có bài thiếu category_gold"
+        )
+    if not np.allclose(
+        result["topic_probability"].to_numpy(dtype=float),
+        result["membership_strength"].to_numpy(dtype=float),
+        rtol=0,
+        atol=1e-12,
+    ):
+        raise ValueError(
+            "topic_probability không khớp membership_strength"
+        )
 
     return result
-
 
 def build_topic_keywords(
     assignments: pd.DataFrame,
 ) -> pd.DataFrame:
-    """Trích TF-IDF từ bài train + val đã được gán cụm."""
+    """Trích TF-IDF từ bài train + val + test đã được gán cụm."""
     clustered = assignments.loc[
         assignments["cluster_id"].ne(-1)
     ].copy()
@@ -414,7 +517,7 @@ def build_topic_summary(
     documents: pd.DataFrame,
     keywords: pd.DataFrame,
 ) -> pd.DataFrame:
-    """Thống kê cụm trên train + val."""
+    """Thống kê cụm trên train + val + test."""
     counts = documents.groupby("topic_id", sort=True).size()
     keyword_lookup = (
         keywords.sort_values(["topic_id", "rank"])
@@ -464,7 +567,7 @@ def build_topic_summary(
         raise ValueError("topic_summary có topic_id trùng")
     if int(result["document_count"].sum()) != N_TOTAL:
         raise ValueError(
-            "Tổng document_count không bằng 7.884"
+            "Tổng document_count không bằng 9.274"
         )
     if not result["percentage"].between(0, 1).all():
         raise ValueError(
@@ -477,7 +580,7 @@ def build_topic_summary(
 def build_representative_docs(
     documents: pd.DataFrame,
 ) -> pd.DataFrame:
-    """Chọn top 5 bài từ train + val cho mỗi cụm."""
+    """Chọn top 5 bài từ train + val + test cho mỗi cụm."""
     regular = documents.loc[
         documents["topic_id"].ne(-1)
     ].copy()
@@ -522,7 +625,7 @@ def build_representative_docs(
 
 
 def build_config_used() -> dict:
-    """Lưu cấu hình fit train và phạm vi artifact train + val."""
+    """Lưu cấu hình fit train và phạm vi artifact ba split."""
     m10 = read_yaml(EMBEDDING_CONFIG_PATH)
     m11 = read_yaml(HDBSCAN_CONFIG_PATH)
 
@@ -544,7 +647,7 @@ def build_config_used() -> dict:
     return {
         "dataset": m11["dataset"],
         "model_fit_split": "train",
-        "artifact_splits": ["train", "val"],
+        "artifact_splits": ["train", "val", "test"],
         "embedding": {
             "run_id": EMBEDDING_RUN,
             **m10["runs"][EMBEDDING_RUN],
@@ -560,7 +663,7 @@ def build_config_used() -> dict:
         },
         "keyword_extraction": {
             "method": "TF-IDF trên văn bản gom theo cụm",
-            "source_splits": ["train", "val"],
+            "source_splits": ["train", "val", "test"],
             "text": (
                 "processed_title + 60 từ đầu "
                 "processed_content"
@@ -573,7 +676,7 @@ def build_config_used() -> dict:
             "exclude_outlier_topic": True,
         },
         "representative_selection": {
-            "source_splits": ["train", "val"],
+            "source_splits": ["train", "val", "test"],
             "method": (
                 "Top 5 topic_probability mỗi cụm, "
                 "hòa điểm theo article_id"
@@ -583,7 +686,7 @@ def build_config_used() -> dict:
             "method": "UMAP",
             "n_components": 2,
             "fit_split": "train",
-            "transform_split": "val",
+            "transform_split": ["val", "test"],
             "purpose": "visualization_only",
         },
     }
@@ -593,12 +696,15 @@ def build_projection_2d(
     documents: pd.DataFrame,
     config_used: dict,
 ) -> pd.DataFrame:
-    """Fit UMAP 2D train, transform val; ghép nhãn theo ID."""
+    """Fit UMAP 2D train, transform val/test; ghép nhãn theo ID."""
     train_documents = documents.loc[
         documents["split"].eq("train")
     ]
     val_documents = documents.loc[
         documents["split"].eq("val")
+    ]
+    test_documents = documents.loc[
+        documents["split"].eq("test")
     ]
 
     embedding_path = (
@@ -706,6 +812,35 @@ def build_projection_2d(
             "Embedding validation chứa NaN/Infinity"
         )
 
+    test_data = load_split_dataset(
+        ROOT / m10["dataset"]["path"],
+        ROOT / m10["dataset"]["split_manifest_path"],
+        "test",
+    ).reset_index(drop=True)
+    test_ids = test_data["article_id"].astype(str).tolist()
+    if len(test_ids) != N_TEST or len(set(test_ids)) != N_TEST:
+        raise ValueError("Test không có 1.390 ID duy nhất")
+    if set(test_ids) != set(test_documents["article_id"]):
+        raise ValueError("Test không khớp document_topics")
+    if set(test_ids) & (set(train_ids) | set(val_ids)):
+        raise ValueError("Test có ID giao với train/validation")
+    print("Đang mã hóa test bằng MiniLM...")
+    test_embeddings = create_embeddings(
+        test_data,
+        encoder,
+        model_name=config_used["embedding"]["model_name"],
+        data_version=m10["dataset"]["data_version"],
+        content_words=config_used["embedding"]["content_words"],
+        title_col=m10["dataset"]["title_col"],
+        content_col=m10["dataset"]["content_col"],
+        batch_size=m10["encoding"]["batch_size"],
+    )
+    if test_embeddings["article_id"].astype(str).tolist() != test_ids:
+        raise ValueError("Thứ tự ID test đổi khi mã hóa")
+    test_vectors = np.stack(test_embeddings["embedding"].to_numpy())
+    if test_vectors.shape != (N_TEST, dimensions) or not np.isfinite(test_vectors).all():
+        raise ValueError("Embedding test sai kích thước hoặc chứa NaN/Infinity")
+
     umap_params = dict(config_used["umap"])
     umap_params["n_components"] = 2
     reducer = UMAP(**umap_params)
@@ -715,6 +850,8 @@ def build_projection_2d(
 
     print("Đang transform validation lên cùng bản đồ...")
     val_xy = reducer.transform(val_vectors)
+    print("Đang transform test lên cùng bản đồ...")
+    test_xy = reducer.transform(test_vectors)
 
     if train_xy.shape != (N_TRAIN, 2):
         raise ValueError(
@@ -724,6 +861,8 @@ def build_projection_2d(
         raise ValueError(
             "Tọa độ validation không có hai chiều"
         )
+    if test_xy.shape != (N_TEST, 2):
+        raise ValueError("Tọa độ test không có hai chiều")
     if not np.isfinite(train_xy).all():
         raise ValueError(
             "Tọa độ train chứa NaN/Infinity"
@@ -732,6 +871,8 @@ def build_projection_2d(
         raise ValueError(
             "Tọa độ validation chứa NaN/Infinity"
         )
+    if not np.isfinite(test_xy).all():
+        raise ValueError("Tọa độ test chứa NaN/Infinity")
 
     train_positions = pd.DataFrame(
         {
@@ -763,13 +904,20 @@ def build_projection_2d(
         validate="one_to_one",
     )
 
+    test_positions = pd.DataFrame(
+        {"article_id": test_ids, "x": test_xy[:, 0], "y": test_xy[:, 1]}
+    ).merge(
+        test_documents[["article_id", "split", "topic_id"]],
+        on="article_id", how="left", validate="one_to_one",
+    )
+
     result = pd.concat(
-        [train_positions, val_positions],
+        [train_positions, val_positions, test_positions],
         ignore_index=True,
     )
     if len(result) != N_TOTAL:
         raise ValueError(
-            "projection_2d không có 7.884 điểm"
+            "projection_2d không có 9.274 điểm"
         )
     if result["article_id"].duplicated().any():
         raise ValueError(
@@ -790,6 +938,8 @@ def write_metadata(
     config_used: dict,
     config_hash: str,
     n_outliers: int,
+    keywords: pd.DataFrame,
+    test_metrics: dict,
 ) -> None:
     """Ghi config, summary, run metadata và manifest."""
     with CONFIG_USED_PATH.open(
@@ -802,6 +952,80 @@ def write_metadata(
             sort_keys=False,
         )
 
+    runtime_seconds = None
+    runtime_scope = None
+    runtime_benchmark_path = None
+    train_runtime_seconds = None
+    val_runtime_seconds = None
+    benchmark = None
+
+    if BENCHMARK_PATH.is_file():
+        benchmark = json.loads(
+            BENCHMARK_PATH.read_text(encoding="utf-8")
+        )
+
+        if benchmark.get("run_id") != RUN_ID:
+            raise ValueError("Benchmark runtime thuộc run khác")
+        if benchmark.get("config_hash") != config_hash:
+            raise ValueError("Benchmark runtime có config_hash khác")
+        if benchmark.get("train_count") != N_TRAIN:
+            raise ValueError("Benchmark runtime có số bài train khác")
+        if benchmark.get("val_count") != N_VAL:
+            raise ValueError("Benchmark runtime có số bài val khác")
+
+        runtime_seconds = float(benchmark["runtime_seconds"])
+        if (
+            not np.isfinite(runtime_seconds)
+            or runtime_seconds <= 0
+        ):
+            raise ValueError("runtime_seconds không hợp lệ")
+
+        phases = benchmark["phases"]
+        train_runtime_seconds = sum(
+            float(phases[name])
+            for name in (
+                "train_representation_seconds",
+                "umap_fit_seconds",
+                "hdbscan_fit_seconds",
+            )
+        )
+        val_runtime_seconds = sum(
+            float(phases[name])
+            for name in (
+                "val_representation_seconds",
+                "val_predict_seconds",
+            )
+        )
+
+        if not np.isclose(
+            train_runtime_seconds + val_runtime_seconds,
+            runtime_seconds,
+        ):
+            raise ValueError("Runtime từng split không khớp tổng")
+
+        runtime_scope = benchmark.get("runtime_scope")
+        if not isinstance(runtime_scope, str) or not runtime_scope.strip():
+            raise ValueError("Benchmark thiếu runtime_scope")
+
+        runtime_benchmark_path = (
+            BENCHMARK_PATH.relative_to(ROOT).as_posix()
+        )
+    top_keywords = keywords.loc[
+        keywords["topic_id"].ne(-1)
+        & keywords["rank"].le(TOP_N_KEYWORDS),
+        "keyword",
+    ].astype(str).str.strip()
+
+    expected_count = N_CLUSTERS * TOP_N_KEYWORDS
+    if len(top_keywords) != expected_count:
+        raise ValueError("Không đủ top 10 từ khóa cho 101 cụm")
+    if top_keywords.eq("").any():
+        raise ValueError("Có từ khóa rỗng")
+
+    topic_diversity = round(
+        top_keywords.nunique() / len(top_keywords),
+        4,
+    )
     model_name = f"HDBSCAN {RUN_ID}"
     model_summary = {
         "model_name": model_name,
@@ -810,27 +1034,42 @@ def write_metadata(
         "representation": config_used["embedding"]["model_name"],
         "topic_count": N_CLUSTERS,
         "outlier_rate": n_outliers / N_TOTAL,
-        "runtime_seconds": None,
+        "runtime_seconds": runtime_seconds,
+        "runtime_scope": runtime_scope,
         "metrics": {
+            "train_runtime_seconds": train_runtime_seconds,
+            "val_runtime_seconds": val_runtime_seconds,
+            "test_runtime_seconds": test_metrics["runtime_seconds"],
+            "test_predict_seconds": test_metrics["test_predict_seconds"],
             "document_count": N_TOTAL,
             "train_count": N_TRAIN,
             "val_count": N_VAL,
+            "test_count": N_TEST,
             "outlier_count": n_outliers,
             "train_outlier_count": N_TRAIN_OUTLIERS,
             "val_outlier_count": N_VAL_OUTLIERS,
+            "test_outlier_count": test_metrics["test_outlier_count"],
             "train_assigned_count": (
                 N_TRAIN - N_TRAIN_OUTLIERS
             ),
             "val_assigned_count": (
                 N_VAL - N_VAL_OUTLIERS
             ),
+            "test_assigned_count": N_TEST - test_metrics["test_outlier_count"],
+            "test_ari": test_metrics["test_ari"],
+            "test_nmi": test_metrics["test_nmi"],
+            "test_outlier_rate": test_metrics["test_outlier_rate"],
+            "test_coverage": test_metrics["test_coverage"],
+            "topic_diversity": topic_diversity,
         },
         "config": config_used,
         "model_fit_split": "train",
-        "artifact_splits": ["train", "val"],
-        "topic_summary_scope": "train+val",
-        "keyword_source_splits": ["train", "val"],
-        "representative_source_splits": ["train", "val"],
+        "artifact_splits": ["train", "val", "test"],
+        "topic_summary_scope": "train+val+test",
+        "keyword_source_splits": ["train", "val", "test"],
+        "representative_source_splits": ["train", "val", "test"],
+        "test_metric_scope": test_metrics["metric_scope"],
+        "test_runtime_scope": test_metrics["runtime_scope"],
         "topic_probability_meaning": (
             "HDBSCAN membership_strength trong [0, 1]; "
             "không phải xác suất đã hiệu chuẩn"
@@ -841,7 +1080,7 @@ def write_metadata(
         ),
         "validation_note": (
             "Từ khóa và bài đại diện của bundle được tạo "
-            "sau khi chốt cấu hình, dùng cả train và val "
+            "sau khi chốt cấu hình, dùng train, val và test "
             "để hiển thị; không dùng để chọn lại model"
         ),
     }
@@ -855,69 +1094,243 @@ def write_metadata(
             ensure_ascii=False,
             indent=2,
         )
+    runtime_summary = {
+    "run_id": RUN_ID,
+    "config_hash": config_hash,
+    "measurement_note": (
+        "Train/validation và test được đo ở hai lần chạy riêng. "
+        "Không cộng các runtime này thành một phép đo toàn run."
+    ),
+    "train_validation": (
+        None
+        if benchmark is None
+        else {
+            "source_path": (
+                BENCHMARK_PATH.relative_to(ROOT).as_posix()
+            ),
+            "runtime_seconds": runtime_seconds,
+            "runtime_scope": runtime_scope,
+            "train_runtime_seconds": train_runtime_seconds,
+            "validation_runtime_seconds": val_runtime_seconds,
+            "model_load_seconds": benchmark[
+                "model_load_seconds"
+            ],
+            "representation_seconds": benchmark[
+                "representation_seconds"
+            ],
+            "train_representation_seconds": benchmark[
+                "phases"
+            ]["train_representation_seconds"],
+            "validation_representation_seconds": benchmark[
+                "phases"
+            ]["val_representation_seconds"],
+            "umap_fit_seconds": benchmark[
+                "phases"
+            ]["umap_fit_seconds"],
+            "hdbscan_fit_seconds": benchmark[
+                "phases"
+            ]["hdbscan_fit_seconds"],
+            "validation_predict_seconds": benchmark[
+                "validation_predict_seconds"
+            ],
+            "evaluation_seconds": benchmark[
+                "evaluation_seconds"
+            ],
+            "evaluation_scope": benchmark.get(
+                "evaluation_scope"
+            ),
+            "n_repeats": benchmark["n_repeats"],
+        }
+    ),
+    "test": {
+        "source_path": (
+            TEST_METRICS_PATH.relative_to(ROOT).as_posix()
+        ),
+        "runtime_seconds": test_metrics[
+            "runtime_seconds"
+        ],
+        "runtime_scope": test_metrics[
+            "runtime_scope"
+        ],
+        "model_load_seconds": test_metrics[
+            "model_load_seconds"
+        ],
+        "representation_seconds": test_metrics[
+            "test_representation_seconds"
+        ],
+        "test_predict_seconds": test_metrics[
+            "test_predict_seconds"
+        ],
+        "evaluation_seconds": test_metrics[
+            "evaluation_seconds"
+        ],
+        "metric_scope": test_metrics[
+            "metric_scope"
+        ],
+        "test_count": test_metrics[
+            "test_count"
+        ],
+        "test_outlier_count": test_metrics[
+            "test_outlier_count"
+        ],
+        "test_outlier_rate": test_metrics[
+            "test_outlier_rate"
+        ],
+        "test_coverage": test_metrics[
+            "test_coverage"
+        ],
+        "test_ari": test_metrics[
+            "test_ari"
+        ],
+        "test_nmi": test_metrics[
+            "test_nmi"
+        ],
+    },
+}
+
+    with RUNTIME_SUMMARY_PATH.open(
+    "w",
+    encoding="utf-8",
+    ) as file:
+        json.dump(
+        runtime_summary,
+        file,
+        ensure_ascii=False,
+        indent=2,
+    )
 
     run_metadata = {
-        "run_id": RUN_ID,
-        "embedding_run": EMBEDDING_RUN,
-        "experiment": EXPERIMENT,
-        "fit_split": "train",
-        "exported_splits": ["train", "val"],
-        "config_hash": config_hash,
-        "n_articles": N_TOTAL,
-        "n_clusters": N_CLUSTERS,
-        "n_outliers": n_outliers,
-        "n_assigned": N_TOTAL - n_outliers,
-        "outlier_rate": n_outliers / N_TOTAL,
-        "split_counts": {
-            "train": N_TRAIN,
-            "val": N_VAL,
-        },
-        "split_outlier_counts": {
-            "train": N_TRAIN_OUTLIERS,
-            "val": N_VAL_OUTLIERS,
-        },
-        "source_files": {
-            "train_assignments": (
-                TRAIN_ASSIGNMENTS_PATH
-                .relative_to(ROOT)
-                .as_posix()
-            ),
-            "val_assignments": (
-                VAL_ASSIGNMENTS_PATH
-                .relative_to(ROOT)
-                .as_posix()
-            ),
-            "m11_summary": (
-                M11_SUMMARY_PATH
-                .relative_to(ROOT)
-                .as_posix()
-            ),
-            "articles": (
-                ARTICLES_PATH
-                .relative_to(ROOT)
-                .as_posix()
-            ),
-            "split_manifest": (
-                SPLIT_MANIFEST_PATH
-                .relative_to(ROOT)
-                .as_posix()
-            ),
-            "embedding_artifact": config_used[
-                "embedding"
-            ]["artifact_path"],
-        },
-        "keyword_method": (
-            "TF-IDF trên processed_title và 60 từ đầu "
-            "processed_content của train + val; loại -1"
+    "run_id": RUN_ID,
+    "embedding_run": EMBEDDING_RUN,
+    "experiment": EXPERIMENT,
+    "fit_split": "train",
+    "exported_splits": [
+        "train",
+        "val",
+        "test",
+    ],
+    "config_hash": config_hash,
+    "n_articles": N_TOTAL,
+    "n_clusters": N_CLUSTERS,
+    "n_outliers": n_outliers,
+    "n_assigned": N_TOTAL - n_outliers,
+    "outlier_rate": n_outliers / N_TOTAL,
+
+    # runtime_seconds chỉ là benchmark train + validation.
+    "runtime_seconds": runtime_seconds,
+    "runtime_scope": runtime_scope,
+
+    # Liên kết đến ba nguồn runtime.
+    "runtime_benchmark_path": runtime_benchmark_path,
+    "test_metrics_path": (
+        TEST_METRICS_PATH.relative_to(ROOT).as_posix()
+    ),
+    "runtime_summary_path": (
+        RUNTIME_SUMMARY_PATH.relative_to(ROOT).as_posix()
+    ),
+
+    # Phạm vi test được lưu riêng.
+    "test_runtime_scope": test_metrics[
+        "runtime_scope"
+    ],
+    "test_metric_scope": test_metrics[
+        "metric_scope"
+    ],
+
+    "split_counts": {
+        "train": N_TRAIN,
+        "val": N_VAL,
+        "test": N_TEST,
+    },
+    "split_outlier_counts": {
+        "train": N_TRAIN_OUTLIERS,
+        "val": N_VAL_OUTLIERS,
+        "test": test_metrics[
+            "test_outlier_count"
+        ],
+    },
+    "source_files": {
+        "train_assignments": (
+            TRAIN_ASSIGNMENTS_PATH
+            .relative_to(ROOT)
+            .as_posix()
         ),
-        "projection_2d_method": (
-            "UMAP 2D fit train, transform val; "
-            "topic_id lấy từ HDBSCAN M11 5D"
+        "val_assignments": (
+            VAL_ASSIGNMENTS_PATH
+            .relative_to(ROOT)
+            .as_posix()
         ),
-    }
+        "test_assignments": (
+            TEST_ASSIGNMENTS_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
+        "m11_summary": (
+            M11_SUMMARY_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
+        "articles": (
+            ARTICLES_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
+        "split_manifest": (
+            SPLIT_MANIFEST_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
+        "embedding_artifact": config_used[
+            "embedding"
+        ]["artifact_path"],
+        "runtime_benchmark": (
+            None
+            if runtime_benchmark_path is None
+            else runtime_benchmark_path
+        ),
+        "test_metrics": (
+            TEST_METRICS_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
+        "runtime_summary": (
+            RUNTIME_SUMMARY_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
+    },
+    "document_topics_columns": [
+        "article_id",
+        "split",
+        "topic_id",
+        "topic_probability",
+        "membership_strength",
+        "is_outlier",
+        "title",
+        "category_gold",
+    ],
+    "membership_strength_meaning": (
+        "Độ mạnh thành viên HDBSCAN trong [0, 1]; "
+        "đồng nhất với topic_probability và không phải "
+        "xác suất đã hiệu chuẩn"
+    ),
+    "category_gold_usage": (
+        "Chỉ dùng cho đánh giá ARI/NMI sau khi dự đoán; "
+        "không dùng để fit UMAP hoặc HDBSCAN"
+    ),
+    "keyword_method": (
+        "TF-IDF trên processed_title và 60 từ đầu "
+        "processed_content của train + val + test; loại -1"
+    ),
+    "projection_2d_method": (
+        "UMAP 2D fit train, transform val và test; "
+        "topic_id lấy từ HDBSCAN M11 5D"
+    ),
+}
 
     with RUN_METADATA_PATH.open(
-        "w", encoding="utf-8"
+        "w",
+        encoding="utf-8",
     ) as file:
         json.dump(
             run_metadata,
@@ -925,7 +1338,6 @@ def write_metadata(
             ensure_ascii=False,
             indent=2,
         )
-
     # Loader chung chỉ nhận các trường manifest sau.
     manifest = {
         "schema_version": "1.0",
@@ -964,27 +1376,50 @@ def main() -> None:
         str(summary_row["config_hash"]),
         train_topic_ids,
     )
+    test, test_metrics = select_test_assignments(
+        split_manifest,
+        str(summary_row["config_hash"]),
+        train_topic_ids,
+    )
 
-    if set(train["article_id"]) & set(val["article_id"]):
-        raise ValueError(
-            "Train và validation có ID giao nhau"
-        )
+    if (
+        set(train["article_id"]) & set(val["article_id"])
+        or set(test["article_id"]) &
+        (set(train["article_id"]) | set(val["article_id"]))
+    ):
+        raise ValueError("Train, validation và test có ID giao nhau")
 
-    # Ghép nội dung gốc cho cả hai split trước khi trích
-    # từ khóa train + val.
+    # Ghép nội dung gốc cho cả ba split sau khi model đã được chốt.
     assignments = pd.concat(
-        [train, val],
+        [train, val, test],
         ignore_index=True,
     )
     if len(assignments) != N_TOTAL:
         raise ValueError(
-            "Không có đúng 7.884 assignments"
+            "Không có đúng 9.274 assignments"
         )
     if assignments["article_id"].duplicated().any():
         raise ValueError(
-            "Assignments train + val có ID trùng"
+            "Assignments train + val + test có ID trùng"
         )
 
+    # Ghép category_gold từ split manifest.
+    assignments = assignments.drop(
+        columns=["category_gold"],
+        errors="ignore",
+    ).merge(
+        split_manifest[
+            ["article_id", "category_gold"]
+        ],
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    if assignments["category_gold"].isna().any():
+        raise ValueError(
+            "Có assignment không ghép được category_gold"
+        )
     assignments = assignments.merge(
         articles,
         on="article_id",
@@ -1036,10 +1471,10 @@ def main() -> None:
 
     n_outliers = int(documents["topic_id"].eq(-1).sum())
     if n_outliers != (
-        N_TRAIN_OUTLIERS + N_VAL_OUTLIERS
+        N_TRAIN_OUTLIERS + N_VAL_OUTLIERS + test_metrics["test_outlier_count"]
     ):
         raise ValueError(
-            "Tổng số outlier không bằng 2.092"
+            "Tổng số outlier không khớp ba split"
         )
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -1074,18 +1509,20 @@ def main() -> None:
         config_used=config_used,
         config_hash=str(summary_row["config_hash"]),
         n_outliers=n_outliers,
+        keywords=keywords,
+        test_metrics=test_metrics,
     )
 
     bundle = load_artifact_bundle(OUTPUT_DIR)
     if len(bundle.document_topics) != N_TOTAL:
         raise ValueError(
-            "Loader không đọc đủ 7.884 bài"
+            "Loader không đọc đủ 9.274 bài"
         )
     if int(
         bundle.topic_summary["document_count"].sum()
     ) != N_TOTAL:
         raise ValueError(
-            "topic_summary không cộng đủ 7.884 bài"
+            "topic_summary không cộng đủ 9.274 bài"
         )
     if len(bundle.topic_keywords) != (
         N_CLUSTERS * TOP_N_KEYWORDS

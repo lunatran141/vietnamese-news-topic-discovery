@@ -1,0 +1,20 @@
+{
+  "run_id": "minilm_title_content_eom_15_5",
+  "config_hash": "1d34fba560e9253b1cd98f572f5fefd48b4072283118e41701580e3cc247ccf4",
+  "fit_split": "train",
+  "split": "test",
+  "test_count": 1390,
+  "test_outlier_count": 511,
+  "test_outlier_rate": 0.36762589928057554,
+  "test_coverage": 0.6323741007194245,
+  "test_ari": 0.12435800297066493,
+  "test_nmi": 0.4214446427822204,
+  "metric_scope": "All test articles, including outlier label -1; category_gold used only after prediction",
+  "model_load_seconds": 16.967969399998765,
+  "test_representation_seconds": 38.226828800001385,
+  "test_predict_seconds": 6.635673800001314,
+  "evaluation_seconds": 0.026905400000032387,
+  "runtime_seconds": 44.8625026000027,
+  "runtime_scope": "MiniLM encode test + UMAP transform + HDBSCAN approximate_predict test; excludes model load, evaluation and I/O",
+  "assignments_path": "results/hdbscan/test/minilm_title_content_eom_15_5_test_assignments.csv"
+}

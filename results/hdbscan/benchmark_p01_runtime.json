@@ -1,0 +1,45 @@
+{
+  "run_id": "minilm_title_content_eom_15_5",
+  "config_hash": "1d34fba560e9253b1cd98f572f5fefd48b4072283118e41701580e3cc247ccf4",
+  "train_count": 6493,
+  "val_count": 1391,
+  "n_repeats": 1,
+  "measurement_note": "Một lần đo (n_repeats=1). Chỉ so sánh runtime với run có cùng phạm vi đo và điều kiện máy.",
+  "runtime_scope": "MiniLM encode train và val + UMAP 5D fit train + HDBSCAN fit train + UMAP transform và approximate_predict val; không gồm tải model, đánh giá metric, đọc/ghi file và xuất dữ liệu UI",
+  "runtime_seconds": 279.5041256000004,
+  "phases": {
+    "train_representation_seconds": 202.5701597999996,
+    "umap_fit_seconds": 23.50581450000027,
+    "hdbscan_fit_seconds": 0.12275050000062038,
+    "val_representation_seconds": 40.144860999998855,
+    "val_predict_seconds": 13.160539800001061
+  },
+  "model_load_seconds": 9.151788600000145,
+  "representation_seconds": 242.71502079999846,
+  "validation_predict_seconds": 13.160539800001061,
+  "test_predict_seconds": null,
+  "evaluation_seconds": 0.014978600000176812,
+  "evaluation_scope": "ARI, NMI và coverage trên validation",
+  "validation_metrics": {
+    "ari": 0.1303056979282451,
+    "nmi": 0.4218424586299105,
+    "coverage": 0.6520488856937455
+  },
+  "environment": {
+    "platform": "Windows-10-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 3, GenuineIntel",
+    "logical_cpu_count": 12,
+    "ram_gb": 15.65,
+    "gpu": null,
+    "python_version": "3.11.9",
+    "library_versions": {
+      "numpy": "2.4.4",
+      "umap-learn": "0.5.11",
+      "hdbscan": "0.8.42",
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1"
+    },
+    "batch_size": 16,
+    "model_loaded_before_timing": true
+  }
+}
