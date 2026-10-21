@@ -15,7 +15,7 @@ from app.data_service import (
     load_dashboard_bundle,
 )
 from app.nmf_dashboard import render_nmf_details
-
+from app.hdbscan_dashboard import render_hdbscan_details
 
 API_BASE_URL = os.getenv(
     "API_BASE_URL",
@@ -381,10 +381,18 @@ def main() -> None:
     )
 
     render_topic_table(topic_table)
-    if overview["algorithm"].upper() == "NMF":
+    algorithm = overview["algorithm"].upper()
+
+    if algorithm == "NMF":
         st.divider()
         render_nmf_details(bundle, artifact_dir)
 
+    if algorithm == "HDBSCAN":
+        st.divider()
+        render_hdbscan_details(
+            bundle,
+            artifact_dir,
+        )
 
 if __name__ == "__main__":
     main()
