@@ -1,0 +1,492 @@
+[
+  {
+    "topic_id": "NMF_00",
+    "keywords": [
+      {
+        "term": "doanh_nghiệp",
+        "weight": 0.6894284420990675
+      },
+      {
+        "term": "phát_triển",
+        "weight": 0.6047347432937589
+      },
+      {
+        "term": "công_nghệ",
+        "weight": 0.5260281735924831
+      },
+      {
+        "term": "đầu_tư",
+        "weight": 0.42297462541964165
+      },
+      {
+        "term": "dự_án",
+        "weight": 0.38560456354992595
+      },
+      {
+        "term": "xây_dựng",
+        "weight": 0.3851416330630429
+      },
+      {
+        "term": "sản_phẩm",
+        "weight": 0.36941314055848584
+      },
+      {
+        "term": "mở_rộng",
+        "weight": 0.36828428132863383
+      },
+      {
+        "term": "việt_nam",
+        "weight": 0.3635623180515685
+      },
+      {
+        "term": "hệ_thống",
+        "weight": 0.3630992545878795
+      }
+    ],
+    "npmi_coherence": 0.23092840542558768,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_01",
+    "keywords": [
+      {
+        "term": "bóng",
+        "weight": 0.5380199910407772
+      },
+      {
+        "term": "bàn",
+        "weight": 0.4406745650371984
+      },
+      {
+        "term": "trận",
+        "weight": 0.44033273363717906
+      },
+      {
+        "term": "đội",
+        "weight": 0.43459904176724123
+      },
+      {
+        "term": "thắng",
+        "weight": 0.38539451033956634
+      },
+      {
+        "term": "sân",
+        "weight": 0.3458106643963949
+      },
+      {
+        "term": "league",
+        "weight": 0.34411895399314185
+      },
+      {
+        "term": "cầu_thủ",
+        "weight": 0.34209858782460584
+      },
+      {
+        "term": "trận_đấu",
+        "weight": 0.31050774638191286
+      },
+      {
+        "term": "bàn thắng",
+        "weight": 0.29191240483731923
+      }
+    ],
+    "npmi_coherence": 0.572138221267871,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_02",
+    "keywords": [
+      {
+        "term": "công_an",
+        "weight": 0.5188225343466852
+      },
+      {
+        "term": "điều_tra",
+        "weight": 0.4666317521994169
+      },
+      {
+        "term": "vụ",
+        "weight": 0.357265710148655
+      },
+      {
+        "term": "án",
+        "weight": 0.3571144268399789
+      },
+      {
+        "term": "cơ_quan",
+        "weight": 0.3324395234082044
+      },
+      {
+        "term": "cảnh_sát",
+        "weight": 0.3030099488000019
+      },
+      {
+        "term": "hành_vi",
+        "weight": 0.29775243972950494
+      },
+      {
+        "term": "vụ án",
+        "weight": 0.2958933567976458
+      },
+      {
+        "term": "tỉnh",
+        "weight": 0.29527722066990236
+      },
+      {
+        "term": "tiền",
+        "weight": 0.28719459684396387
+      }
+    ],
+    "npmi_coherence": 0.4631047530283993,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_03",
+    "keywords": [
+      {
+        "term": "bác_sĩ",
+        "weight": 0.4590558212710732
+      },
+      {
+        "term": "bệnh",
+        "weight": 0.38021812701726715
+      },
+      {
+        "term": "người_bệnh",
+        "weight": 0.34715672346238213
+      },
+      {
+        "term": "điều_trị",
+        "weight": 0.3415706338456958
+      },
+      {
+        "term": "bệnh_viện",
+        "weight": 0.3123374583241674
+      },
+      {
+        "term": "hoặc",
+        "weight": 0.2954962848980664
+      },
+      {
+        "term": "máu",
+        "weight": 0.26994421941561003
+      },
+      {
+        "term": "khám",
+        "weight": 0.263164628554588
+      },
+      {
+        "term": "nguy_cơ",
+        "weight": 0.2564808221393525
+      },
+      {
+        "term": "thuốc",
+        "weight": 0.25504234700842404
+      }
+    ],
+    "npmi_coherence": 0.46869259181927025,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_04",
+    "keywords": [
+      {
+        "term": "trường",
+        "weight": 0.6077014580904762
+      },
+      {
+        "term": "học_sinh",
+        "weight": 0.5324070872453734
+      },
+      {
+        "term": "giáo_dục",
+        "weight": 0.43662636038821645
+      },
+      {
+        "term": "học",
+        "weight": 0.3714190118672886
+      },
+      {
+        "term": "đào_tạo",
+        "weight": 0.3251479994387923
+      },
+      {
+        "term": "nhà_trường",
+        "weight": 0.289225024345119
+      },
+      {
+        "term": "giáo_viên",
+        "weight": 0.2819098071800875
+      },
+      {
+        "term": "năm_học",
+        "weight": 0.28109619388864754
+      },
+      {
+        "term": "đại_học",
+        "weight": 0.2758276319214717
+      },
+      {
+        "term": "lớp",
+        "weight": 0.2593816876451203
+      }
+    ],
+    "npmi_coherence": 0.4399064918285552,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_05",
+    "keywords": [
+      {
+        "term": "cô",
+        "weight": 0.4068410782886088
+      },
+      {
+        "term": "phim",
+        "weight": 0.394223974073644
+      },
+      {
+        "term": "anh",
+        "weight": 0.32589926831702887
+      },
+      {
+        "term": "tôi",
+        "weight": 0.31393176472763057
+      },
+      {
+        "term": "khán_giả",
+        "weight": 0.29530710802491367
+      },
+      {
+        "term": "diễn_viên",
+        "weight": 0.28293521916388115
+      },
+      {
+        "term": "nói",
+        "weight": 0.24007745310983475
+      },
+      {
+        "term": "nghệ_sĩ",
+        "weight": 0.23003386443559246
+      },
+      {
+        "term": "không",
+        "weight": 0.2246533156934403
+      },
+      {
+        "term": "nhân_vật",
+        "weight": 0.21574970255863088
+      }
+    ],
+    "npmi_coherence": 0.23306137330428137,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_06",
+    "keywords": [
+      {
+        "term": "asiad",
+        "weight": 0.6423497180283109
+      },
+      {
+        "term": "nữ",
+        "weight": 0.3752568359374658
+      },
+      {
+        "term": "asiad 20",
+        "weight": 0.3588875686965059
+      },
+      {
+        "term": "nam",
+        "weight": 0.3315953432777919
+      },
+      {
+        "term": "giành",
+        "weight": 0.3281325814625662
+      },
+      {
+        "term": "nhật bản",
+        "weight": 0.3177766159923381
+      },
+      {
+        "term": "asiad 2026",
+        "weight": 0.3138617123132495
+      },
+      {
+        "term": "u23",
+        "weight": 0.31313475253767364
+      },
+      {
+        "term": "nhật",
+        "weight": 0.3116913919394559
+      },
+      {
+        "term": "việt nam",
+        "weight": 0.302494147841447
+      }
+    ],
+    "npmi_coherence": 0.4356228291355469,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_07",
+    "keywords": [
+      {
+        "term": "asean cup",
+        "weight": 0.6602239541001585
+      },
+      {
+        "term": "asean",
+        "weight": 0.638160184259235
+      },
+      {
+        "term": "cup",
+        "weight": 0.6314945876841231
+      },
+      {
+        "term": "fifa",
+        "weight": 0.6190491772874397
+      },
+      {
+        "term": "cup 2026",
+        "weight": 0.5943847643494384
+      },
+      {
+        "term": "fifa asean",
+        "weight": 0.5869739673054273
+      },
+      {
+        "term": "thái lan",
+        "weight": 0.4342219570371029
+      },
+      {
+        "term": "thái",
+        "weight": 0.395007053739566
+      },
+      {
+        "term": "lan",
+        "weight": 0.38984337342533243
+      },
+      {
+        "term": "tuyển",
+        "weight": 0.3621504291641464
+      }
+    ],
+    "npmi_coherence": 0.6307854769656258,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_08",
+    "keywords": [
+      {
+        "term": "iphone",
+        "weight": 0.6965142958350883
+      },
+      {
+        "term": "pro",
+        "weight": 0.546681223105335
+      },
+      {
+        "term": "apple",
+        "weight": 0.5406070405183827
+      },
+      {
+        "term": "18 pro",
+        "weight": 0.4766520640075426
+      },
+      {
+        "term": "iphone 18",
+        "weight": 0.470080743535769
+      },
+      {
+        "term": "pro max",
+        "weight": 0.39308550738040376
+      },
+      {
+        "term": "max",
+        "weight": 0.3908038505030059
+      },
+      {
+        "term": "màn_hình",
+        "weight": 0.35125458786083963
+      },
+      {
+        "term": "máy",
+        "weight": 0.3052097910579904
+      },
+      {
+        "term": "18",
+        "weight": 0.29810666633696375
+      }
+    ],
+    "npmi_coherence": 0.6392656297594713,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  },
+  {
+    "topic_id": "NMF_09",
+    "keywords": [
+      {
+        "term": "giá",
+        "weight": 0.4615494847010811
+      },
+      {
+        "term": "tăng",
+        "weight": 0.44167240257090423
+      },
+      {
+        "term": "đồng",
+        "weight": 0.4323572170500503
+      },
+      {
+        "term": "usd",
+        "weight": 0.3578595993164711
+      },
+      {
+        "term": "thị_trường",
+        "weight": 0.34430748210933365
+      },
+      {
+        "term": "giảm",
+        "weight": 0.34206919121594337
+      },
+      {
+        "term": "lãi_suất",
+        "weight": 0.3416475170796201
+      },
+      {
+        "term": "bán",
+        "weight": 0.3150843555575678
+      },
+      {
+        "term": "phiên",
+        "weight": 0.3150611210230425
+      },
+      {
+        "term": "so",
+        "weight": 0.31208332802503547
+      }
+    ],
+    "npmi_coherence": 0.2932978123044136,
+    "manual_label": "",
+    "interpretability_rating_1_to_5": null,
+    "review_notes": ""
+  }
+]

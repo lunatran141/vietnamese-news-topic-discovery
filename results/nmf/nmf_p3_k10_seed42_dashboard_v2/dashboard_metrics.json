@@ -1,0 +1,21 @@
+{
+  "validation_ari": 0.5413847532679815,
+  "validation_nmi": 0.6689879241354867,
+  "validation_npmi": 0.44925738385583297,
+  "validation_reconstruction_error": 35.784748746389276,
+  "validation_normalized_reconstruction_error": 0.9594766436933756,
+  "validation_topic_diversity": 1.0,
+  "test_ari": 0.5390789913596382,
+  "test_nmi": 0.651372590995637,
+  "test_npmi": 0.44068035848390225,
+  "test_reconstruction_error": 35.7551457971039,
+  "test_normalized_reconstruction_error": 0.9590277041827523,
+  "test_topic_diversity": 1.0,
+  "representation_seconds": 18.453243400006613,
+  "fit_seconds": 5.398768699997163,
+  "validation_transform_seconds": 0.8346369999999297,
+  "test_transform_seconds": 0.7850371000022278,
+  "evaluation_seconds": 0.11409199999616249,
+  "runtime_seconds": 25.585778200002096,
+  "runtime_scope": "fixed_k_validation_train_fit_and_final_train_val_fit; representation=two_fit_transform; transform=vectorizer_plus_nmf; evaluation=metrics_only; excludes_dataset_io_artifact_export_and_ui"
+}
