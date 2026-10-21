@@ -71,10 +71,62 @@ artifacts/common/hdbscan/minilm_title_content_eom_15_5/
 Các cột:
 
 ```text
-article_id,split,topic_id,topic_probability,membership_strength,is_outlier,title,category_gold
+article_id,split,topic_id,topic_probability,membership_strength,soft_primary_topic_id,soft_primary_membership_strength,second_topic_id,second_membership_strength,top_two_share_gap,is_multi_topic,is_outlier,title,category_gold
 ```
 
-File chứa train, validation và test. `topic_id` là ID cụm HDBSCAN; `is_outlier` đúng khi `topic_id=-1`. `membership_strength` là độ mạnh thành viên HDBSCAN trong khoảng `[0, 1]` và có cùng giá trị với `topic_probability`; đây không phải xác suất đã hiệu chuẩn. `category_gold` chỉ dùng để đánh giá ARI/NMI sau khi dự đoán, không dùng để fit UMAP hoặc HDBSCAN. Mỗi `article_id` chỉ xuất hiện một lần.
+File chứa 9.274 bài thuộc ba split: 6.493 train, 1.391 validation và 1.390 test. Mỗi `article_id` chỉ xuất hiện một lần.
+
+Các trường assignment chính:
+
+- `topic_id`: nhãn cứng do HDBSCAN gán; giá trị `-1` biểu thị outlier.
+- `topic_probability`: trường tương thích với common artifact schema.
+- `membership_strength`: độ mạnh thành viên HDBSCAN trong khoảng `[0, 1]`, có cùng giá trị với `topic_probability`.
+- `is_outlier`: bằng `True` khi `topic_id=-1`.
+- `category_gold`: nhãn danh mục tham chiếu, chỉ dùng để đánh giá ARI/NMI sau khi dự đoán; không dùng để fit UMAP hoặc HDBSCAN.
+
+`membership_strength` không phải xác suất đã hiệu chuẩn.
+
+#### Full membership vector và bài chồng lấn
+
+HDBSCAN xuất full soft membership vector trên 101 cụm cho toàn bộ 9.274 bài. Các vector đầy đủ được lưu tại:
+
+```text
+results/hdbscan/membership/minilm_title_content_eom_15_5/membership_vectors.npz
+```
+
+File NPZ chứa:
+
+- `article_ids`: thứ tự mã bài tương ứng với các hàng của ma trận.
+- `splits`: split của từng bài.
+- `topic_ids`: topic tương ứng với từng cột của ma trận.
+- `membership_vectors`: ma trận kích thước `9274 × 101`.
+
+Bảng tóm tắt được lưu tại:
+
+```text
+results/hdbscan/membership/minilm_title_content_eom_15_5/membership_summary.csv
+```
+
+Từ full membership vector, exporter bổ sung vào `document_topics.csv`:
+
+- `soft_primary_topic_id`: topic có soft membership strength lớn nhất.
+- `soft_primary_membership_strength`: soft membership strength lớn nhất.
+- `second_topic_id`: topic có soft membership strength lớn thứ hai.
+- `second_membership_strength`: soft membership strength lớn thứ hai.
+- `top_two_share_gap`: chênh lệch giữa hai soft membership strength đứng đầu.
+- `is_multi_topic`: cờ heuristic nhận diện bài gần ranh giới hoặc có khả năng chồng lấn chủ đề.
+
+Quy tắc hiện tại:
+
+```text
+is_multi_topic = top_two_share_gap <= 0.10
+```
+
+Theo quy tắc này, artifact hiện có 3.732 bài được đánh dấu `is_multi_topic=True`.
+
+`topic_id` và `soft_primary_topic_id` có ý nghĩa khác nhau. `topic_id` là nhãn cứng của HDBSCAN, còn `soft_primary_topic_id` được lấy từ thứ tự các giá trị trong full membership vector. Hai trường có thể khác nhau ở một số bài và exporter không ép chúng giống nhau.
+
+`top_two_share_gap` và `is_multi_topic` phục vụ phân tích bài biên, bài có confidence thấp và topic chồng lấn. Ngưỡng `0.10` là quy tắc heuristic đã công bố, không phải ngưỡng xác suất được HDBSCAN hiệu chuẩn.
 
 ### `topic_summary.csv`
 
