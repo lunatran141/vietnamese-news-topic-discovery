@@ -729,8 +729,38 @@ def export_lda_artifacts(
     if probabilities.shape != (len(dataset), k):
         raise ValueError("Invalid LDA distribution shape")
 
-    topic_ids = probabilities.argmax(axis=1)
-    topic_probs = probabilities.max(axis=1)
+
+    # Main and second topic probabilities from frozen LDA K15.
+    sorted_topic_indices = np.argsort(
+        probabilities, axis=1
+    )[:, ::-1]
+
+    topic_ids = sorted_topic_indices[:, 0]
+    second_topic_ids = sorted_topic_indices[:, 1]
+
+    row_indices = np.arange(len(dataset))
+
+    topic_probs = probabilities[row_indices, topic_ids]
+    second_topic_probs = probabilities[
+        row_indices, second_topic_ids
+    ]
+
+    # Difference between first and second topic probabilities.
+    top_two_share_gap = topic_probs - second_topic_probs
+
+    # Shannon entropy, using natural logarithm.
+    # Clip only for numerical stability in log().
+    safe_probs = np.clip(probabilities, 1e-12, 1.0)
+    topic_entropy = -np.sum(
+        probabilities * np.log(safe_probs), axis=1
+    )
+
+    if not np.isfinite(topic_entropy).all():
+        raise ValueError("Invalid LDA topic entropy")
+
+    if (top_two_share_gap < -1e-10).any():
+        raise ValueError("Invalid top-two topic probability gap")
+
 
 
     # PCA projection for visualization only.
@@ -768,12 +798,47 @@ def export_lda_artifacts(
     if ((topic_probs < 0) | (topic_probs > 1)).any():
         raise ValueError("Topic probabilities outside [0,1]")
 
+
+    # Additional LDA probability fields required by the leader.
     document_topics = dataset[
-        ["article_id", "split", "title", "source", "published_at"]
+        [
+            "article_id",
+            "split",
+            "title",
+            "source",
+            "published_at",
+            "category_gold",
+        ]
     ].copy()
 
     document_topics["topic_id"] = topic_ids.astype(int)
     document_topics["topic_probability"] = topic_probs
+
+    document_topics["second_topic_id"] = (
+        second_topic_ids.astype(int)
+    )
+
+    document_topics["second_topic_probability"] = (
+        second_topic_probs
+    )
+
+    document_topics["top_two_share_gap"] = (
+        top_two_share_gap
+    )
+
+    document_topics["topic_entropy"] = topic_entropy
+
+    # Leader-approved multi-topic threshold.
+    # A document is multi-topic if its second topic
+    # has a probability of at least 0.20.
+    MULTI_TOPIC_THRESHOLD = 0.20
+
+    document_topics["is_multi_topic"] = (
+        document_topics["second_topic_probability"]
+        >= MULTI_TOPIC_THRESHOLD
+    )
+
+    # LDA has no explicit outlier label.
     document_topics["is_outlier"] = False
 
     document_topics = document_topics[
@@ -782,12 +847,19 @@ def export_lda_artifacts(
             "split",
             "topic_id",
             "topic_probability",
-            "is_outlier",
+            "second_topic_id",
+            "second_topic_probability",
+            "top_two_share_gap",
+            "topic_entropy",
+            "is_multi_topic",
             "title",
+            "category_gold",
+            "is_outlier",
             "source",
             "published_at",
         ]
     ]
+
 
     feature_names = vectorizer.get_feature_names_out()
     keyword_rows = []
@@ -879,6 +951,175 @@ def export_lda_artifacts(
         if not np.isfinite(runtime_seconds) or runtime_seconds <= 0:
             raise ValueError("Invalid LDA Final runtime")
 
+    # Runtime breakdown from reproducible LDA benchmarks.
+    runtime_details = {
+        "representation_seconds": None,
+        "fit_seconds": None,
+        "validation_inference_seconds": None,
+        "test_inference_seconds": None,
+        "evaluation_seconds": None,
+        "runtime_scope": (
+            "Final Train+Val -> Test: BoW representation, "
+            "LDA fit, Test inference and evaluation; "
+            "excludes data loading and artifact export. "
+            "Validation inference is reported separately "
+            "from the Development Train -> Validation benchmark."
+        ),
+        "runtime_mean": None,
+        "runtime_std": None,
+    }
+
+    if runtime_path.is_file():
+        def get_runtime(run_name, stage, field):
+            matches = runtime_df.loc[
+                (runtime_df["run"] == run_name)
+                & (runtime_df["stage"] == stage)
+                & (runtime_df["repeats"] == 5)
+            ]
+
+            if len(matches) != 1:
+                raise ValueError(
+                    f"Expected one benchmark row: {run_name}, {stage}"
+                )
+
+            value = float(matches.iloc[0][field])
+
+            if not np.isfinite(value) or value < 0:
+                raise ValueError(
+                    f"Invalid benchmark value: {run_name}, {stage}"
+                )
+
+            return value
+
+        development_run = "lda_k15_seed42_development_benchmark"
+        final_run = "lda_k15_seed42_final_benchmark"
+
+        runtime_details.update({
+            "representation_seconds": get_runtime(
+                final_run, "representation_seconds", "mean_seconds"
+            ),
+            "fit_seconds": get_runtime(
+                final_run, "fit_seconds", "mean_seconds"
+            ),
+            "validation_inference_seconds": get_runtime(
+                development_run, "predict_seconds", "mean_seconds"
+            ),
+            "test_inference_seconds": get_runtime(
+                final_run, "predict_seconds", "mean_seconds"
+            ),
+            "evaluation_seconds": get_runtime(
+                final_run, "evaluation_seconds", "mean_seconds"
+            ),
+            "runtime_mean": get_runtime(
+                final_run, "runtime_seconds", "mean_seconds"
+            ),
+            "runtime_std": get_runtime(
+                final_run, "runtime_seconds", "std_seconds"
+            ),
+        })
+
+
+    # Read supplementary Development Validation metrics.
+    validation_metrics_path = (
+        project_root
+        / "results"
+        / "lda"
+        / "validation_supplement"
+        / "validation_metrics.json"
+    )
+
+    validation_metrics = _read_json(validation_metrics_path)
+
+    if (
+        validation_metrics["fit_split"] != "train"
+        or validation_metrics["evaluation_split"] != "val"
+        or int(validation_metrics["n_topics"]) != 15
+        or int(validation_metrics["random_state"]) != 42
+        or validation_metrics["npmi_definition"]
+        != "document_binary_common"
+    ):
+        raise ValueError("Invalid LDA Validation evaluation protocol")
+
+    # Read M09 stability using reference seed 42.
+    stability_path = (
+        project_root
+        / "results"
+        / "lda"
+        / "m09"
+        / "stability_metrics.csv"
+    )
+
+    stability_df = pd.read_csv(stability_path)
+
+    required_stability_columns = {
+        "reference_seed",
+        "candidate_seed",
+        "k",
+        "mean_matched_jaccard",
+        "mean_document_cosine",
+    }
+
+    missing = required_stability_columns - set(stability_df.columns)
+    if missing:
+        raise ValueError(
+            f"Missing LDA stability columns: {sorted(missing)}"
+        )
+
+    stability_rows = stability_df.loc[
+        (stability_df["reference_seed"] == 42)
+        & (stability_df["candidate_seed"] != 42)
+        & (stability_df["k"] == 15)
+    ].copy()
+
+    if (
+        len(stability_rows) != 4
+        or stability_rows["candidate_seed"].nunique() != 4
+    ):
+        raise ValueError("Expected 4 M09 candidate seeds")
+
+    stability_mean = float(
+        stability_rows["mean_matched_jaccard"].mean()
+    )
+    stability_std = float(
+        stability_rows["mean_matched_jaccard"].std(ddof=1)
+    )
+
+    document_cosine_mean = float(
+        stability_rows["mean_document_cosine"].mean()
+    )
+    document_cosine_std = float(
+        stability_rows["mean_document_cosine"].std(ddof=1)
+    )
+
+    metric_details = {
+        "validation_ari": float(
+            validation_metrics["validation_ari"]
+        ),
+        "validation_nmi": float(
+            validation_metrics["validation_nmi"]
+        ),
+        "validation_npmi": float(
+            validation_metrics["validation_npmi"]
+        ),
+        "test_ari": float(final_metrics["adjusted_rand_index"]),
+        "test_nmi": float(final_metrics["normalized_mutual_info"]),
+        "test_npmi": float(final_metrics["npmi_coherence"]),
+        "perplexity": float(
+            validation_metrics["validation_perplexity"]
+        ),
+        "topic_diversity": float(
+            final_metrics["topic_diversity"]
+        ),
+        "stability_mean": stability_mean,
+        "stability_std": stability_std,
+        "document_cosine_mean": document_cosine_mean,
+        "document_cosine_std": document_cosine_std,
+    }
+
+    for key, value in metric_details.items():
+        if isinstance(value, float) and not np.isfinite(value):
+            raise ValueError(f"Invalid LDA metric: {key}")
+
     run_id = "lda_k15_seed42"
     model_name = "LDA K15"
 
@@ -888,11 +1129,45 @@ def export_lda_artifacts(
         "algorithm": "LDA",
         "representation": "Bag-of-Words",
         "topic_count": k,
+        "evaluation_protocol": {
+            "validation": {
+                "fit_split": "train",
+                "evaluation_split": "val",
+                "model": "LDA Development K15 seed42",
+                "npmi_definition": "document_binary_common",
+                "perplexity_scope": "Development Train -> Validation",
+            },
+            "test": {
+                "fit_split": "train+val",
+                "evaluation_split": "test",
+                "model": "LDA Final K15 seed42",
+                "npmi_definition": "document_binary_common",
+            },
+            "stability": {
+                "metric": "matched_jaccard",
+                "reference_seed": 42,
+                "candidate_seeds": [52, 62, 72, 82],
+                "std_definition": "sample_std_ddof_1",
+            },
+        },
         "outlier_rate": 0.0,
         "runtime_seconds": runtime_seconds,
+        **runtime_details,
+        "multi_topic": {
+            "definition": "second_topic_probability >= threshold",
+            "threshold": 0.20,
+            "total_documents": len(document_topics),
+            "multi_topic_count": int(
+                document_topics["is_multi_topic"].sum()
+            ),
+            "multi_topic_rate": float(
+                document_topics["is_multi_topic"].mean()
+            ),
+        },
         "metrics": {
-            "topic_diversity": float(
-                final_metrics["topic_diversity"]
+            **metric_details,
+            "npmi_coherence": float(
+                final_metrics["npmi_coherence"]
             ),
             "npmi_coherence": float(
                 final_metrics["npmi_coherence"]
