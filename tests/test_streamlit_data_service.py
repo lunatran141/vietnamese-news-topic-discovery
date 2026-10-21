@@ -158,3 +158,17 @@ def test_hdbscan_validation_artifacts_integrate_with_ui() -> None:
     assert not representatives.empty
     assert representatives["topic_id"].eq(1).all()
     assert representatives["split"].eq("val").all()
+
+
+def test_timing_metrics_extracted_for_all_models() -> None:
+    """Các model đã chạy có đầy đủ thông tin fit_seconds và representation_seconds."""
+    runs = {run.method: run for run in discover_artifact_runs()}
+    for method in ("bertopic", "hdbscan", "kmeans", "lda", "nmf"):
+        run = runs[method]
+        bundle = load_dashboard_bundle(str(run.path))
+        overview = get_model_overview(bundle, "val", artifact_dir=run.path)
+        assert overview["fit_seconds"] is not None and overview["fit_seconds"] > 0
+        assert (
+            overview["representation_seconds"] is not None
+            and overview["representation_seconds"] > 0
+        )

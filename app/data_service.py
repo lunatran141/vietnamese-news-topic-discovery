@@ -92,9 +92,26 @@ def get_document_table(
     return documents.copy()
 
 
+def _resolve_artifact_dir(
+    bundle: ArtifactBundle,
+    artifact_dir: str | Path | None = None,
+) -> Path | None:
+    if artifact_dir is not None:
+        path = Path(artifact_dir)
+        if path.is_dir():
+            return path
+    run_id = getattr(bundle.model_summary, "run_id", None)
+    if run_id:
+        for cand in ARTIFACT_ROOT.glob("*/*"):
+            if cand.is_dir() and cand.name == run_id:
+                return cand
+    return None
+
+
 def get_model_overview(
     bundle: ArtifactBundle,
     split: str | None = None,
+    artifact_dir: str | Path | None = None,
 ) -> dict[str, int | float | str | None]:
     """Tính số lượng trên đúng split đang xem; metric run giữ nguyên."""
     summary = bundle.model_summary
@@ -126,6 +143,59 @@ def get_model_overview(
             summary.metrics.get("npmi_coherence"),
         )
 
+    fit_seconds = summary.metrics.get("fit_seconds")
+    if fit_seconds is None:
+        fit_seconds = getattr(summary, "fit_seconds", None)
+    if fit_seconds is None and hasattr(summary, "model_extra") and summary.model_extra:
+        fit_seconds = summary.model_extra.get("fit_seconds")
+
+    representation_seconds = summary.metrics.get("representation_seconds")
+    if representation_seconds is None:
+        representation_seconds = getattr(summary, "representation_seconds", None)
+    if representation_seconds is None and hasattr(summary, "model_extra") and summary.model_extra:
+        representation_seconds = summary.model_extra.get("representation_seconds")
+
+    val_predict = summary.metrics.get("validation_predict_seconds")
+    if val_predict is None:
+        val_predict = getattr(summary, "validation_inference_seconds", None)
+    if val_predict is None and hasattr(summary, "model_extra") and summary.model_extra:
+        val_predict = summary.model_extra.get("validation_inference_seconds")
+
+    test_predict = summary.metrics.get("test_predict_seconds")
+    if test_predict is None:
+        test_predict = getattr(summary, "test_inference_seconds", None)
+    if test_predict is None and hasattr(summary, "model_extra") and summary.model_extra:
+        test_predict = summary.model_extra.get("test_inference_seconds")
+
+    resolved_dir = _resolve_artifact_dir(bundle, artifact_dir)
+    if resolved_dir:
+        rt_file = resolved_dir / "runtime_summary.json"
+        if rt_file.is_file():
+            try:
+                with rt_file.open("r", encoding="utf-8") as file:
+                    rt_data = json.load(file)
+                tv = rt_data.get("train_validation") if isinstance(rt_data, dict) else None
+                test_rt = rt_data.get("test") if isinstance(rt_data, dict) else None
+                if isinstance(tv, dict):
+                    if fit_seconds is None:
+                        u = tv.get("umap_fit_seconds")
+                        h = tv.get("hdbscan_fit_seconds")
+                        if u is not None or h is not None:
+                            fit_seconds = (u or 0.0) + (h or 0.0)
+                        else:
+                            fit_seconds = tv.get("fit_seconds")
+                    if val_predict is None:
+                        val_predict = tv.get("validation_predict_seconds")
+                if split == "test" and isinstance(test_rt, dict):
+                    if representation_seconds is None and test_rt.get("representation_seconds") is not None:
+                        representation_seconds = test_rt.get("representation_seconds")
+                    if test_predict is None and test_rt.get("test_predict_seconds") is not None:
+                        test_predict = test_rt.get("test_predict_seconds")
+                if representation_seconds is None and isinstance(tv, dict):
+                    representation_seconds = tv.get("representation_seconds") or tv.get("train_representation_seconds")
+            except Exception:
+                pass
+
     return {
         "model_name": summary.model_name,
         "algorithm": summary.algorithm,
@@ -142,16 +212,10 @@ def get_model_overview(
         "supports_outlier": supports_outlier,
         "runtime_seconds": summary.runtime_seconds,
         "runtime_scope": getattr(summary, "runtime_scope", None),
-        "fit_seconds": summary.metrics.get("fit_seconds"),
-        "representation_seconds": summary.metrics.get(
-            "representation_seconds"
-        ),
-        "validation_predict_seconds": summary.metrics.get(
-            "validation_predict_seconds"
-        ),
-        "test_predict_seconds": summary.metrics.get(
-            "test_predict_seconds"
-        ),
+        "fit_seconds": fit_seconds,
+        "representation_seconds": representation_seconds,
+        "validation_predict_seconds": val_predict,
+        "test_predict_seconds": test_predict,
         "adjusted_rand_index": adjusted_rand_index,
         "normalized_mutual_info": normalized_mutual_info,
         "coherence": coherence,
