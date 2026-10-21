@@ -4,12 +4,14 @@ from pathlib import Path
 from typing import Callable
 from matplotlib.lines import Line2D
 from matplotlib.patches import FancyBboxPatch, Patch
+from matplotlib.ticker import FormatStrFormatter, MaxNLocator
 import matplotlib
 
 # Dùng backend không cần mở cửa sổ giao diện.
 matplotlib.use("Agg")
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
 
@@ -22,6 +24,7 @@ RUN_COLORS = {
     "e1": "#8EDBE5",  # Xanh cyan
     "e2": "#F5B5D2",  # Hồng
     "e3": "#C5B3ED",  # Tím lavender
+    "e4": "#FFD3A5",  # Cam đào
 }
 
 TOPIC_COLORS = [
@@ -73,7 +76,7 @@ def validate_columns(
 def get_run_labels(
     summary: pd.DataFrame,
 ) -> list[str]:
-    """Rút gọn run_id thành E0, E1, E2 và E3."""
+    """Rút gọn run_id thành E0–E4."""
     return [
         str(run_id).split("_", maxsplit=1)[0].upper()
         for run_id in summary["run_id"]
@@ -83,7 +86,7 @@ def get_run_labels(
 def get_run_colors(
     summary: pd.DataFrame,
 ) -> list[str]:
-    """Gán một màu nhất quán cho từng cấu hình E0–E3."""
+    """Gán một màu nhất quán cho từng cấu hình E0–E4."""
     colors = []
 
     for run_id in summary["run_id"]:
@@ -119,13 +122,17 @@ def add_experiment_legend(
             facecolor=RUN_COLORS["e3"],
             label="E3: E1 + HDBSCAN min_cluster_size=30",
         ),
+        Patch(
+            facecolor=RUN_COLORS["e4"],
+            label="E4: E1 + chỉ dùng tiêu đề",
+        ),
     ]
 
     figure.legend(
         handles=legend_items,
         loc="upper center",
         bbox_to_anchor=(0.5, 0.92),
-        ncol=2,
+        ncol=3,
         frameon=True,
         fontsize=9,
     )
@@ -156,7 +163,7 @@ def plot_experiment_dashboard(
     summary: pd.DataFrame,
     output_path: str | Path,
 ) -> None:
-    """So sánh bốn cấu hình theo các chỉ số chính."""
+    """So sánh năm cấu hình theo các chỉ số chính."""
     required_columns = {
         "run_id",
         "topic_count",
@@ -258,7 +265,8 @@ def plot_experiment_dashboard(
     figure.suptitle(
         "So sánh các cấu hình BERTopic\n"
         "E0: baseline | E1: Vietnamese SBERT | "
-        "E2: thay đổi UMAP | E3: thay đổi HDBSCAN",
+        "E2: thay đổi UMAP | E3: thay đổi HDBSCAN | "
+        "E4: chỉ tiêu đề",
         fontsize=15,
         fontweight="bold",
     )
@@ -451,6 +459,126 @@ def plot_topic_diversity(
         dpi=200,
         bbox_inches="tight",
     )
+    plt.close(figure)
+
+
+def plot_title_content_ablation(
+    summary: pd.DataFrame,
+    output_path: str | Path,
+) -> None:
+    """So sánh BERTopic chỉ tiêu đề với tiêu đề + nội dung trên validation."""
+    required = {
+        "run_id",
+        "input_text_label",
+        "topic_count",
+        "validation_outlier_rate",
+        "topic_diversity",
+        "validation_adjusted_rand_index",
+        "validation_normalized_mutual_info",
+        "validation_npmi_coherence",
+    }
+    validate_columns(summary, required)
+
+    selected = summary.loc[
+        summary["input_text_label"].isin(
+            ["title_only", "title_content"]
+        )
+    ].copy()
+    selected = selected.drop_duplicates(
+        subset=["input_text_label"], keep="last"
+    ).set_index("input_text_label")
+
+    missing = {"title_only", "title_content"}.difference(selected.index)
+    if missing:
+        raise ValueError(
+            "Chưa đủ kết quả ablation BERTopic: "
+            + ", ".join(sorted(missing))
+        )
+
+    selected = selected.loc[["title_only", "title_content"]]
+    numeric_columns = list(required.difference({"run_id", "input_text_label"}))
+    selected[numeric_columns] = selected[numeric_columns].apply(
+        pd.to_numeric, errors="raise"
+    )
+
+    labels = ["Chỉ tiêu đề", "Tiêu đề + nội dung"]
+    # Pastel tươi, đủ tương phản khi chiếu và khi in trên nền trắng.
+    colors = ["#FFB7C5", "#74D7C4"]
+    metric_columns = [
+        "validation_adjusted_rand_index",
+        "validation_normalized_mutual_info",
+        "validation_npmi_coherence",
+        "topic_diversity",
+    ]
+    metric_labels = ["ARI", "NMI", "NPMI", "Diversity"]
+    positions = np.arange(len(metric_columns))
+    width = 0.34
+
+    figure, axes = plt.subplots(1, 2, figsize=(14, 6))
+    for index, (variant, label, color) in enumerate(
+        zip(selected.index, labels, colors)
+    ):
+        values = 100 * selected.loc[variant, metric_columns].to_numpy(dtype=float)
+        bars = axes[0].bar(
+            positions + (index - 0.5) * width,
+            values,
+            width,
+            label=label,
+            color=color,
+        )
+        for bar, value in zip(bars, values):
+            axes[0].annotate(
+                f"{value:.1f}",
+                (bar.get_x() + bar.get_width() / 2, value),
+                xytext=(0, 4 if value >= 0 else -13),
+                textcoords="offset points",
+                ha="center",
+                fontsize=9,
+            )
+
+    axes[0].axhline(0, color="#616875", linewidth=0.8)
+    axes[0].set_xticks(positions, metric_labels)
+    axes[0].set_ylabel("Điểm số (×100)")
+    axes[0].set_title("Chất lượng chủ đề trên validation", fontweight="bold")
+    axes[0].grid(axis="y", linestyle="--", alpha=0.25)
+    axes[0].legend()
+
+    outlier_values = 100 * selected["validation_outlier_rate"].to_numpy(dtype=float)
+    bars = axes[1].bar(labels, outlier_values, color=colors, width=0.58)
+    axes[1].set_ylabel("Outlier validation (%)")
+    axes[1].set_title("Độ bao phủ và số topic", fontweight="bold")
+    axes[1].grid(axis="y", linestyle="--", alpha=0.25)
+    for bar, outlier, topic_count in zip(
+        bars,
+        outlier_values,
+        selected["topic_count"].to_numpy(dtype=int),
+    ):
+        axes[1].annotate(
+            f"{outlier:.1f}% outlier\n{topic_count} topic",
+            (bar.get_x() + bar.get_width() / 2, outlier),
+            xytext=(0, 6),
+            textcoords="offset points",
+            ha="center",
+            fontsize=10,
+        )
+
+    figure.suptitle(
+        "Ablation đầu vào BERTopic: Title only và Title + Content",
+        fontsize=16,
+        fontweight="bold",
+    )
+    figure.text(
+        0.5,
+        0.01,
+        "Hai run dùng cùng Vietnamese SBERT, UMAP và HDBSCAN; chỉ thay trường văn bản đầu vào.",
+        ha="center",
+        fontsize=10,
+    )
+    figure.tight_layout(rect=(0, 0.05, 1, 0.93))
+
+    path = Path(output_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    figure.savefig(path, dpi=200, bbox_inches="tight", facecolor="white")
     plt.close(figure)
 
 
@@ -911,7 +1039,7 @@ def plot_ctfidf_keywords(
     figure, axes = plt.subplots(
         number_of_rows,
         number_of_columns,
-        figsize=(15, 4 * number_of_rows),
+        figsize=(17, 4.6 * number_of_rows),
         squeeze=False,
     )
 
@@ -984,6 +1112,15 @@ def plot_ctfidf_keywords(
                 0,
                 float(maximum_score) * 1.22,
             )
+            axis.xaxis.set_major_locator(
+                MaxNLocator(nbins=5, min_n_ticks=4)
+            )
+            axis.xaxis.set_major_formatter(
+                FormatStrFormatter(
+                    "%.3f" if float(maximum_score) < 0.1 else "%.2f"
+                )
+            )
+            axis.tick_params(axis="x", labelsize=8)
 
     # Ẩn các ô thừa nếu số topic không chia hết cho 3.
     for index in range(
@@ -1008,7 +1145,9 @@ def plot_ctfidf_keywords(
     )
 
     figure.tight_layout(
-        rect=(0, 0.04, 1, 0.94)
+        rect=(0, 0.04, 1, 0.94),
+        h_pad=2.2,
+        w_pad=2.5,
     )
 
     path = Path(output_path)

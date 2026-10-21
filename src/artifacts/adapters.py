@@ -1074,6 +1074,7 @@ def export_bertopic_artifacts(
         "runtime_seconds": metrics.get(
             "runtime_seconds"
         ),
+        "runtime_scope": metrics.get("runtime_scope"),
         "metrics": {
             "topic_diversity": metrics.get(
                 "topic_diversity"
@@ -1089,6 +1090,58 @@ def export_bertopic_artifacts(
             ),
             "validation_count": metrics.get(
                 "validation_count"
+            ),
+            "test_count": metrics.get("test_count"),
+            "test_outlier_rate": metrics.get(
+                "test_outlier_rate"
+            ),
+            "test_coverage": metrics.get("test_coverage"),
+            "validation_adjusted_rand_index": metrics.get(
+                "validation_adjusted_rand_index"
+            ),
+            "validation_normalized_mutual_info": metrics.get(
+                "validation_normalized_mutual_info"
+            ),
+            "validation_npmi_coherence": metrics.get(
+                "validation_npmi_coherence"
+            ),
+            "test_adjusted_rand_index": metrics.get(
+                "test_adjusted_rand_index"
+            ),
+            "test_normalized_mutual_info": metrics.get(
+                "test_normalized_mutual_info"
+            ),
+            "test_npmi_coherence": metrics.get(
+                "test_npmi_coherence"
+            ),
+            "npmi_coherence": metrics.get(
+                "test_npmi_coherence",
+                metrics.get("validation_npmi_coherence"),
+            ),
+            "model_load_seconds": metrics.get(
+                "model_load_seconds"
+            ),
+            "representation_seconds": metrics.get(
+                "representation_seconds"
+            ),
+            "model_init_seconds": metrics.get(
+                "model_init_seconds"
+            ),
+            "fit_seconds": metrics.get("fit_seconds"),
+            "validation_predict_seconds": metrics.get(
+                "validation_predict_seconds"
+            ),
+            "test_predict_seconds": metrics.get(
+                "test_predict_seconds"
+            ),
+            "final_fit_seconds": metrics.get(
+                "final_fit_seconds"
+            ),
+            "final_runtime_seconds": metrics.get(
+                "final_runtime_seconds"
+            ),
+            "evaluation_seconds": metrics.get(
+                "evaluation_seconds"
             ),
         },
         "config": config,

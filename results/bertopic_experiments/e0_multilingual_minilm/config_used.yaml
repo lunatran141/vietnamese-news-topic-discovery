@@ -32,9 +32,13 @@ vectorizer:
   - 2
   min_df: 2
   max_df: 0.95
+ctfidf:
+  bm25_weighting: false
+  reduce_frequent_words: false
 topic_representation:
   top_n_words: 10
   representative_docs_per_topic: 5
+  calculate_probabilities: true
 experiment:
   seed: 42
   run_id: e0_multilingual_minilm

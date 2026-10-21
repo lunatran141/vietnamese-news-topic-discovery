@@ -1,6 +1,7 @@
 """Tạo các biểu đồ từ kết quả thí nghiệm BERTopic."""
 
 from pathlib import Path
+import sys
 
 import pandas as pd
 
@@ -13,6 +14,7 @@ from src.visualization.bertopic_plots import (
     plot_ctfidf_keywords,
     plot_bertopic_pipeline,
     plot_cluster_evaluation,
+    plot_title_content_ablation,
 )
 
 
@@ -79,6 +81,8 @@ def validate_input_files() -> None:
 
 def main() -> None:
     """Đọc kết quả và tạo các hình trực quan chính."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     validate_input_files()
 
     summary = pd.read_csv(
@@ -164,6 +168,21 @@ def main() -> None:
         topic_summary,
         OUTPUT_DIR / "08_e1_cluster_evaluation.png",
     )
+
+    # Chỉ tạo khi E4 title-only đã chạy; không thay số liệu thiếu bằng 0.
+    if {
+        "input_text_label",
+        "validation_adjusted_rand_index",
+        "validation_normalized_mutual_info",
+        "validation_npmi_coherence",
+    }.issubset(summary.columns) and {
+        "title_only",
+        "title_content",
+    }.issubset(set(summary["input_text_label"].dropna())):
+        plot_title_content_ablation(
+            summary,
+            OUTPUT_DIR / "09_bertopic_title_content_ablation.png",
+        )
 
     print(
         "Đã tạo các biểu đồ:"

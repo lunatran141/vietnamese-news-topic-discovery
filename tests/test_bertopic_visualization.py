@@ -14,6 +14,7 @@ from src.visualization.bertopic_plots import (
     plot_experiment_dashboard,
     plot_topic_diversity,
     plot_topic_sizes,
+    plot_title_content_ablation,
     plot_validation_outlier,
     validate_columns,
 )
@@ -363,3 +364,47 @@ def test_cluster_evaluation_creates_file(
 
     assert output_path.is_file()
     assert output_path.stat().st_size > 0
+
+
+def test_title_content_ablation_creates_file(tmp_path: Path) -> None:
+    """Biểu đồ chỉ được tạo khi có đủ hai biến thể đầu vào."""
+    data = pd.DataFrame(
+        {
+            "run_id": [
+                "e1_vietnamese_sbert",
+                "e4_vietnamese_sbert_title_only",
+            ],
+            "input_text_label": ["title_content", "title_only"],
+            "topic_count": [96, 42],
+            "validation_outlier_rate": [0.36, 0.51],
+            "topic_diversity": [0.68, 0.61],
+            "validation_adjusted_rand_index": [0.07, 0.03],
+            "validation_normalized_mutual_info": [0.42, 0.31],
+            "validation_npmi_coherence": [-0.06, -0.10],
+        }
+    )
+    output_path = tmp_path / "title_content.png"
+
+    plot_title_content_ablation(data, output_path)
+
+    assert output_path.is_file()
+    assert output_path.stat().st_size > 0
+
+
+def test_title_content_ablation_requires_both_variants(tmp_path: Path) -> None:
+    """Không được biến dữ liệu thiếu thành số 0 gây hiểu sai."""
+    data = pd.DataFrame(
+        {
+            "run_id": ["e1_vietnamese_sbert"],
+            "input_text_label": ["title_content"],
+            "topic_count": [96],
+            "validation_outlier_rate": [0.36],
+            "topic_diversity": [0.68],
+            "validation_adjusted_rand_index": [0.07],
+            "validation_normalized_mutual_info": [0.42],
+            "validation_npmi_coherence": [-0.06],
+        }
+    )
+
+    with pytest.raises(ValueError, match="title_only"):
+        plot_title_content_ablation(data, tmp_path / "missing.png")

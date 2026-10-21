@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 from src.evaluation.bertopic_metrics import (
+    calculate_external_metrics,
     calculate_outlier_rate,
     calculate_topic_diversity,
 )
@@ -59,3 +60,25 @@ def test_outlier_rate_accepts_numpy_array() -> None:
     outlier_rate = calculate_outlier_rate(topics)
 
     assert outlier_rate == pytest.approx(0.5)
+
+
+def test_calculate_external_metrics_for_perfect_assignment() -> None:
+    """ARI/NMI bằng một khi phân cụm khớp hoàn toàn nhãn tham chiếu."""
+    metrics = calculate_external_metrics(
+        ["kinh-te", "kinh-te", "the-thao", "the-thao"],
+        [3, 3, 8, 8],
+    )
+
+    assert metrics["adjusted_rand_index"] == pytest.approx(1.0)
+    assert metrics["normalized_mutual_info"] == pytest.approx(1.0)
+
+
+def test_external_metrics_can_ignore_outliers() -> None:
+    """Có thể loại bài -1 khi cần báo cáo metric trên phần được bao phủ."""
+    metrics = calculate_external_metrics(
+        ["a", "a", "b"],
+        [0, -1, 1],
+        ignore_outliers=True,
+    )
+
+    assert metrics["adjusted_rand_index"] == pytest.approx(1.0)

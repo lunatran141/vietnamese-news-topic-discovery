@@ -237,7 +237,12 @@ def test_official_kmeans_artifacts_exist_and_conform_to_handbook() -> None:
     required_cols = {"article_id", "title", "cluster_id", "distance_to_center", "split", "category_gold"}
     assert required_cols.issubset(doc_topics.columns)
 
-    assert len(doc_topics) == 7884
+    assert len(doc_topics) == 9274
+    assert doc_topics["split"].value_counts().to_dict() == {
+        "train": 6493,
+        "val": 1391,
+        "test": 1390,
+    }
 
     assert (doc_topics["distance_to_center"] >= 0.0).all()
     assert np.isfinite(doc_topics["distance_to_center"]).all()

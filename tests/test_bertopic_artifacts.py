@@ -7,6 +7,7 @@ from src.evaluation.bertopic_artifacts import (
     build_embedding_projection,
     build_topic_keywords,
     build_topic_summary,
+    prepare_topic_diagnostics,
     prepare_topic_probabilities,
 )
 
@@ -65,6 +66,18 @@ def test_prepare_topic_probabilities_from_matrix() -> None:
     )
 
     assert result.tolist() == [0.8, 0.7]
+
+
+def test_prepare_topic_diagnostics_from_membership_matrix() -> None:
+    """Ma trận membership phải xuất gap, entropy và cờ đa chủ đề."""
+    result = prepare_topic_diagnostics(
+        np.array([[0.51, 0.49], [0.90, 0.10]]),
+        expected_length=2,
+    )
+
+    assert result["second_topic_probability"].tolist() == [0.49, 0.10]
+    assert result["top_two_share_gap"].tolist() == pytest.approx([0.02, 0.80])
+    assert result["is_multi_topic"].tolist() == [True, False]
 
 
 def test_build_document_topics() -> None:

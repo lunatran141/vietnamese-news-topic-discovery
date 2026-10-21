@@ -30,6 +30,50 @@ def prepare_topic_probabilities(
     return probability_array.astype(float)
 
 
+def prepare_topic_diagnostics(
+    probabilities: Any | None,
+    expected_length: int,
+    *,
+    multi_topic_gap_threshold: float = 0.10,
+) -> dict[str, np.ndarray]:
+    """Trích top-1/top-2 và entropy khi BERTopic trả ma trận membership.
+
+    BERTopic có thể chỉ trả một confidence cho mỗi bài. Trong trường hợp
+    đó các trường chẩn đoán đa chủ đề được để thiếu thay vì suy diễn.
+    """
+    missing = np.full(expected_length, np.nan)
+    result = {
+        "second_topic_probability": missing.copy(),
+        "top_two_share_gap": missing.copy(),
+        "topic_entropy": missing.copy(),
+        "is_multi_topic": np.full(expected_length, False, dtype=bool),
+    }
+    if probabilities is None:
+        return result
+
+    values = np.asarray(probabilities, dtype=float)
+    if values.ndim != 2:
+        return result
+    if len(values) != expected_length:
+        raise ValueError("Số xác suất phải bằng số bài trong dataset.")
+    if values.shape[1] < 2:
+        return result
+
+    sorted_values = np.sort(values, axis=1)
+    top_one = sorted_values[:, -1]
+    top_two = sorted_values[:, -2]
+    gap = top_one - top_two
+    safe_values = np.clip(values, 1e-12, 1.0)
+
+    result["second_topic_probability"] = top_two
+    result["top_two_share_gap"] = gap
+    result["topic_entropy"] = -np.sum(
+        safe_values * np.log(safe_values), axis=1
+    )
+    result["is_multi_topic"] = gap <= multi_topic_gap_threshold
+    return result
+
+
 def build_document_topics(
     dataset: pd.DataFrame,
     topics: Sequence[int],
@@ -52,6 +96,10 @@ def build_document_topics(
         probabilities,
         len(dataset),
     )
+    diagnostics = prepare_topic_diagnostics(
+        probabilities,
+        len(dataset),
+    )
 
     result = pd.DataFrame(
         {
@@ -61,6 +109,7 @@ def build_document_topics(
             "split": split,
             "topic": topic_values,
             "topic_probability": probability_values,
+            **diagnostics,
             "is_outlier": topic_values == -1,
         }
     )
