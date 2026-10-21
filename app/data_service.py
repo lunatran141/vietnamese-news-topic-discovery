@@ -98,9 +98,32 @@ def get_model_overview(
     """Tính số lượng trên đúng split đang xem; metric run giữ nguyên."""
     summary = bundle.model_summary
     documents = get_document_table(bundle, split)
+    supports_outlier = summary.algorithm.strip().lower() in {
+        "bertopic",
+        "hdbscan",
+    }
     outlier = documents["is_outlier"].fillna(False).astype(bool)
-    outlier_count = int(outlier.sum())
+    raw_outlier_count = int(outlier.sum())
+    outlier_count = raw_outlier_count if supports_outlier else None
     topic_count = int(documents.loc[~outlier, "topic_id"].nunique())
+
+    metric_split = "test" if split == "test" else "validation"
+    adjusted_rand_index = summary.metrics.get(
+        f"{metric_split}_adjusted_rand_index"
+    )
+    normalized_mutual_info = summary.metrics.get(
+        f"{metric_split}_normalized_mutual_info"
+    )
+    if metric_split == "test":
+        coherence = summary.metrics.get(
+            "test_npmi_coherence",
+            summary.metrics.get("npmi_coherence"),
+        )
+    else:
+        coherence = summary.metrics.get(
+            "validation_npmi_coherence",
+            summary.metrics.get("npmi_coherence"),
+        )
 
     return {
         "model_name": summary.model_name,
@@ -108,9 +131,14 @@ def get_model_overview(
         "representation": summary.representation,
         "topic_count": topic_count,
         "document_count": len(documents),
-        "assigned_document_count": len(documents) - outlier_count,
+        "assigned_document_count": len(documents) - raw_outlier_count,
         "outlier_document_count": outlier_count,
-        "outlier_rate": outlier_count / len(documents) if len(documents) else None,
+        "outlier_rate": (
+            raw_outlier_count / len(documents)
+            if supports_outlier and len(documents)
+            else None
+        ),
+        "supports_outlier": supports_outlier,
         "runtime_seconds": summary.runtime_seconds,
         "runtime_scope": getattr(summary, "runtime_scope", None),
         "fit_seconds": summary.metrics.get("fit_seconds"),
@@ -123,18 +151,9 @@ def get_model_overview(
         "test_predict_seconds": summary.metrics.get(
             "test_predict_seconds"
         ),
-        "adjusted_rand_index": summary.metrics.get(
-            "test_adjusted_rand_index",
-            summary.metrics.get("validation_adjusted_rand_index"),
-        ),
-        "normalized_mutual_info": summary.metrics.get(
-            "test_normalized_mutual_info",
-            summary.metrics.get("validation_normalized_mutual_info"),
-        ),
-        "coherence": summary.metrics.get(
-            "npmi_coherence",
-            summary.metrics.get("coherence"),
-        ),
+        "adjusted_rand_index": adjusted_rand_index,
+        "normalized_mutual_info": normalized_mutual_info,
+        "coherence": coherence,
         "topic_diversity": summary.metrics.get("topic_diversity"),
     }
 

@@ -188,6 +188,11 @@ def render_overview(run: ArtifactRun, bundle, split: str) -> None:
         if overview["runtime_scope"]:
             st.caption(f"Phạm vi runtime: {overview['runtime_scope']}")
         st.write(f"**Topic diversity được báo cáo:** {fmt_number(overview['topic_diversity'])}")
+        if not overview["supports_outlier"]:
+            st.caption(
+                "Mô hình này buộc mọi bài vào một topic nên chỉ số outlier "
+                "không áp dụng; N/A không có nghĩa là 0%."
+            )
         st.caption("Metric run có thể được đo trên tập khác với bộ lọc đang xem. Số bài, topic và outlier phía trên được tính trên split đã chọn.")
     st.subheader("Danh sách topic")
     columns = ["topic_id", "topic_name", "document_count", "percentage", "top_keywords"]
@@ -364,7 +369,12 @@ def comparison_table(runs: list[ArtifactRun], split: str) -> pd.DataFrame:
             "Split": split if split != "all" else ", ".join(available),
             "Số bài": overview["document_count"],
             "Số topic": overview["topic_count"],
-            "Outlier (%)": round(100 * (overview["outlier_rate"] or 0), 2),
+            "Outlier áp dụng": "Có" if overview["supports_outlier"] else "Không",
+            "Outlier (%)": (
+                round(100 * overview["outlier_rate"], 2)
+                if overview["outlier_rate"] is not None
+                else None
+            ),
             "Topic diversity (run)": overview["topic_diversity"],
             "ARI (run)": overview["adjusted_rand_index"],
             "NMI (run)": overview["normalized_mutual_info"],
@@ -409,6 +419,13 @@ def render_errors(run: ArtifactRun, bundle, split: str) -> None:
     types = ["Outlier", "Topic quá rộng", "Bài đa chủ đề", "Topic chồng lấn"]
     selected = st.radio("Loại trường hợp", types, horizontal=True)
     if selected == "Outlier":
+        overview = get_model_overview(bundle, split)
+        if not overview["supports_outlier"]:
+            st.info(
+                "Outlier không áp dụng cho run này vì thuật toán buộc mọi "
+                "bài vào một topic. Chỉ BERTopic/HDBSCAN hiện xuất nhãn -1."
+            )
+            return
         cases = documents.loc[documents["is_outlier"].fillna(False).astype(bool)]
         st.caption("Các bài có topic -1 theo artifact; cần đánh giá thủ công trước khi gọi là lỗi.")
     elif selected == "Bài đa chủ đề":
@@ -485,6 +502,8 @@ def render_experiments(run: ArtifactRun) -> None:
                     "validation_adjusted_rand_index",
                     "validation_normalized_mutual_info",
                     "validation_npmi_coherence",
+                    "test_outlier_rate", "test_adjusted_rand_index",
+                    "test_normalized_mutual_info", "test_npmi_coherence",
                 ]
                 labels = {
                     "run_id": "Run",
@@ -496,6 +515,10 @@ def render_experiments(run: ArtifactRun) -> None:
                     "validation_adjusted_rand_index": "ARI validation",
                     "validation_normalized_mutual_info": "NMI validation",
                     "validation_npmi_coherence": "NPMI validation",
+                    "test_outlier_rate": "Outlier test",
+                    "test_adjusted_rand_index": "ARI test",
+                    "test_normalized_mutual_info": "NMI test",
+                    "test_npmi_coherence": "NPMI test",
                 }
                 compact = frame[
                     [column for column in display_columns if column in frame]
@@ -503,6 +526,7 @@ def render_experiments(run: ArtifactRun) -> None:
                 for percentage_column in (
                     "Outlier train",
                     "Outlier validation",
+                    "Outlier test",
                 ):
                     if percentage_column in compact:
                         compact[percentage_column] = (
@@ -520,12 +544,17 @@ def render_experiments(run: ArtifactRun) -> None:
                         "ARI validation": st.column_config.NumberColumn(format="%.3f"),
                         "NMI validation": st.column_config.NumberColumn(format="%.3f"),
                         "NPMI validation": st.column_config.NumberColumn(format="%.3f"),
+                        "Outlier test": st.column_config.NumberColumn(format="%.1f%%"),
+                        "ARI test": st.column_config.NumberColumn(format="%.3f"),
+                        "NMI test": st.column_config.NumberColumn(format="%.3f"),
+                        "NPMI test": st.column_config.NumberColumn(format="%.3f"),
                     },
                 )
                 timing_columns = [
                     "run_id", "model_load_seconds",
                     "representation_seconds", "model_init_seconds",
                     "fit_seconds", "validation_predict_seconds",
+                    "test_predict_seconds",
                     "evaluation_seconds", "runtime_seconds",
                 ]
                 timing_labels = {
@@ -535,6 +564,7 @@ def render_experiments(run: ArtifactRun) -> None:
                     "model_init_seconds": "Khởi tạo",
                     "fit_seconds": "Fit",
                     "validation_predict_seconds": "Predict validation",
+                    "test_predict_seconds": "Predict test",
                     "evaluation_seconds": "Evaluation",
                     "runtime_seconds": "Runtime pipeline",
                 }
@@ -575,7 +605,8 @@ def render_experiments(run: ArtifactRun) -> None:
         st.dataframe(pd.DataFrame(config_rows), width="stretch", hide_index=True)
         st.caption(
             "E2 chỉ đổi UMAP n_neighbors; E3 chỉ đổi HDBSCAN "
-            "min_cluster_size. E1 được chọn theo outlier validation thấp nhất."
+            "min_cluster_size; E4 chỉ đổi đầu vào sang title-only. "
+            "E1 được chọn bằng validation trước khi mở test."
         )
 
         bundle = load_dashboard_bundle(str(run.path))

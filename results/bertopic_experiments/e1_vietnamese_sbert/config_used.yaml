@@ -44,3 +44,4 @@ experiment:
   run_id: e1_vietnamese_sbert
   output_dir: artifacts/bertopic/bertopic_baseline
   save_model: true
+  input_text_label: title_content

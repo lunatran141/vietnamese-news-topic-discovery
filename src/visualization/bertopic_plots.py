@@ -76,7 +76,7 @@ def validate_columns(
 def get_run_labels(
     summary: pd.DataFrame,
 ) -> list[str]:
-    """Rút gọn run_id thành E0, E1, E2 và E3."""
+    """Rút gọn run_id thành E0–E4."""
     return [
         str(run_id).split("_", maxsplit=1)[0].upper()
         for run_id in summary["run_id"]
@@ -86,7 +86,7 @@ def get_run_labels(
 def get_run_colors(
     summary: pd.DataFrame,
 ) -> list[str]:
-    """Gán một màu nhất quán cho từng cấu hình E0–E3."""
+    """Gán một màu nhất quán cho từng cấu hình E0–E4."""
     colors = []
 
     for run_id in summary["run_id"]:
@@ -122,13 +122,17 @@ def add_experiment_legend(
             facecolor=RUN_COLORS["e3"],
             label="E3: E1 + HDBSCAN min_cluster_size=30",
         ),
+        Patch(
+            facecolor=RUN_COLORS["e4"],
+            label="E4: E1 + chỉ dùng tiêu đề",
+        ),
     ]
 
     figure.legend(
         handles=legend_items,
         loc="upper center",
         bbox_to_anchor=(0.5, 0.92),
-        ncol=2,
+        ncol=3,
         frameon=True,
         fontsize=9,
     )
@@ -159,7 +163,7 @@ def plot_experiment_dashboard(
     summary: pd.DataFrame,
     output_path: str | Path,
 ) -> None:
-    """So sánh bốn cấu hình theo các chỉ số chính."""
+    """So sánh năm cấu hình theo các chỉ số chính."""
     required_columns = {
         "run_id",
         "topic_count",
@@ -261,7 +265,8 @@ def plot_experiment_dashboard(
     figure.suptitle(
         "So sánh các cấu hình BERTopic\n"
         "E0: baseline | E1: Vietnamese SBERT | "
-        "E2: thay đổi UMAP | E3: thay đổi HDBSCAN",
+        "E2: thay đổi UMAP | E3: thay đổi HDBSCAN | "
+        "E4: chỉ tiêu đề",
         fontsize=15,
         fontweight="bold",
     )

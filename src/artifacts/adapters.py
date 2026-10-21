@@ -1102,11 +1102,17 @@ def export_bertopic_artifacts(
             "validation_normalized_mutual_info": metrics.get(
                 "validation_normalized_mutual_info"
             ),
+            "validation_npmi_coherence": metrics.get(
+                "validation_npmi_coherence"
+            ),
             "test_adjusted_rand_index": metrics.get(
                 "test_adjusted_rand_index"
             ),
             "test_normalized_mutual_info": metrics.get(
                 "test_normalized_mutual_info"
+            ),
+            "test_npmi_coherence": metrics.get(
+                "test_npmi_coherence"
             ),
             "npmi_coherence": metrics.get(
                 "test_npmi_coherence",

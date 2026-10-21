@@ -28,7 +28,7 @@ def test_load_dashboard_bundle() -> None:
     assert bundle.model_summary.run_id == (
         "e1_vietnamese_sbert"
     )
-    assert len(bundle.document_topics) == 7884
+    assert len(bundle.document_topics) == 9274
     assert len(bundle.topic_keywords) == 960
 
 
@@ -40,7 +40,7 @@ def test_get_model_overview() -> None:
 
     assert overview["algorithm"] == "BERTopic"
     assert overview["topic_count"] == 96
-    assert overview["document_count"] == 7884
+    assert overview["document_count"] == 9274
     assert (
         overview["assigned_document_count"]
         + overview["outlier_document_count"]
@@ -97,7 +97,7 @@ def test_five_models_are_discoverable_and_loadable() -> None:
 def test_split_counts_are_derived_from_assignments() -> None:
     """Số bài trên UI phải khớp split, kể cả khi summary khác scope."""
     bundle = load_dashboard_bundle(ARTIFACT_DIR)
-    assert get_available_splits(bundle) == ["train", "val"]
+    assert get_available_splits(bundle) == ["train", "val", "test"]
 
     overview = get_model_overview(bundle, "val")
     topics = get_topic_table(bundle, split="val")
@@ -106,6 +106,24 @@ def test_split_counts_are_derived_from_assignments() -> None:
     assert overview["document_count"] == 1391
     assert topics["document_count"].sum() == overview["assigned_document_count"]
     assert len(documents) == 1391
+
+    test_overview = get_model_overview(bundle, "test")
+    assert test_overview["document_count"] == 1390
+    assert test_overview["outlier_rate"] == 515 / 1390
+    assert test_overview["adjusted_rand_index"] == (
+        bundle.model_summary.metrics["test_adjusted_rand_index"]
+    )
+
+
+def test_outlier_is_na_for_forced_assignment_models() -> None:
+    """KMeans/LDA/NMF không được trình bày 0% như detector outlier."""
+    runs = {run.method: run for run in discover_artifact_runs()}
+    for method in ("kmeans", "lda", "nmf"):
+        bundle = load_dashboard_bundle(str(runs[method].path))
+        overview = get_model_overview(bundle, "train")
+        assert overview["supports_outlier"] is False
+        assert overview["outlier_rate"] is None
+        assert overview["outlier_document_count"] is None
 
 
 def test_optional_map_and_metadata() -> None:
