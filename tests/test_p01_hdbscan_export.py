@@ -183,6 +183,12 @@ def test_document_topics_chua_ca_ba_split(bundle):
         "is_outlier",
         "title",
         "category_gold",
+        "soft_primary_topic_id",
+        "soft_primary_membership_strength",
+        "second_topic_id",
+        "second_membership_strength",
+        "top_two_share_gap",
+        "is_multi_topic",
     }
     assert required_columns.issubset(documents.columns)
     assert len(documents) == EXPECTED_TOTAL
@@ -199,6 +205,68 @@ def test_document_topics_chua_ca_ba_split(bundle):
     # Kiểm tra trường gốc của HDBSCAN.
     assert documents["membership_strength"].notna().all()
     assert documents["membership_strength"].between(0, 1).all()
+
+    assert documents[
+        "soft_primary_topic_id"
+    ].notna().all()
+    assert documents[
+        "second_topic_id"
+    ].notna().all()
+
+    assert documents[
+        "soft_primary_topic_id"
+    ].between(0, 100).all()
+    assert documents[
+        "second_topic_id"
+    ].between(0, 100).all()
+
+    assert (
+        documents["soft_primary_topic_id"]
+        != documents["second_topic_id"]
+    ).all()
+
+    assert documents[
+        "soft_primary_membership_strength"
+    ].notna().all()
+    assert documents[
+        "soft_primary_membership_strength"
+    ].between(0, 1).all()
+
+    assert documents[
+        "second_membership_strength"
+    ].notna().all()
+    assert documents[
+        "second_membership_strength"
+    ].between(0, 1).all()
+
+    assert (
+        documents["soft_primary_membership_strength"]
+        >= documents["second_membership_strength"]
+    ).all()
+
+    expected_gap = (
+        documents["soft_primary_membership_strength"]
+        - documents["second_membership_strength"]
+    )
+
+    assert np.allclose(
+        documents["top_two_share_gap"],
+        expected_gap,
+        rtol=0,
+        atol=1e-12,
+    )
+
+    multi_topic_flags = (
+        documents["is_multi_topic"]
+        .astype(str)
+        .str.lower()
+        .map({"true": True, "false": False})
+    )
+
+    assert multi_topic_flags.notna().all()
+    assert multi_topic_flags.eq(
+        documents["top_two_share_gap"] <= 0.10
+    ).all()
 
     # Hai cột phải chứa cùng một giá trị.
     assert np.allclose(
@@ -412,15 +480,52 @@ def test_run_metadata_va_model_summary_khop_bundle(bundle):
         metadata["split_outlier_counts"]
         == expected_outliers()
     )
-    assert metadata["document_topics_columns"] == [
+    expected_document_columns = [
         "article_id",
         "split",
         "topic_id",
         "topic_probability",
         "membership_strength",
+        "soft_primary_topic_id",
+        "soft_primary_membership_strength",
+        "second_topic_id",
+        "second_membership_strength",
+        "top_two_share_gap",
+        "is_multi_topic",
         "is_outlier",
         "title",
         "category_gold",
+    ]
+
+    assert (
+        metadata["document_topics_columns"]
+        == expected_document_columns
+    )
+    assert (
+        list(bundle.document_topics.columns)
+        == expected_document_columns
+    )
+    assert metadata["source_files"][
+        "membership_summary"
+    ] == (
+        "results/hdbscan/membership/"
+        "minilm_title_content_eom_15_5/"
+        "membership_summary.csv"
+    )
+
+    assert metadata["source_files"][
+        "membership_vectors"
+    ] == (
+        "results/hdbscan/membership/"
+        "minilm_title_content_eom_15_5/"
+        "membership_vectors.npz"
+    )
+
+    assert "101 cụm" in metadata[
+        "full_membership_meaning"
+    ]
+    assert "top_two_share_gap <= 0.10" in metadata[
+        "multi_topic_rule"
     ]
     assert "HDBSCAN" in metadata["membership_strength_meaning"]
     assert "không dùng để fit" in metadata["category_gold_usage"]

@@ -79,7 +79,19 @@ STABILITY_SUMMARY_PATH = (
 EMBEDDING_RUN = "minilm_title_content"
 EXPERIMENT = "eom_15_5"
 RUN_ID = f"{EMBEDDING_RUN}_{EXPERIMENT}"
+MULTI_TOPIC_GAP_MAX = 0.10
 
+MEMBERSHIP_DIR = (
+    ROOT
+    / "results/hdbscan/membership"
+    / RUN_ID
+)
+MEMBERSHIP_SUMMARY_PATH = (
+    MEMBERSHIP_DIR / "membership_summary.csv"
+)
+MEMBERSHIP_VECTORS_PATH = (
+    MEMBERSHIP_DIR / "membership_vectors.npz"
+)
 N_TRAIN = 6493
 N_VAL = 1391
 N_TEST = 1390
@@ -416,6 +428,157 @@ def select_test_assignments(
         raise ValueError("Test metrics không khớp assignments hoặc run đã khóa")
     return test, metrics
 
+def read_membership_summary() -> pd.DataFrame:
+    if not MEMBERSHIP_SUMMARY_PATH.is_file():
+        raise FileNotFoundError(
+            f"Thiếu membership summary: "
+            f"{MEMBERSHIP_SUMMARY_PATH}"
+        )
+    if not MEMBERSHIP_VECTORS_PATH.is_file():
+        raise FileNotFoundError(
+            f"Thiếu full membership vectors: "
+            f"{MEMBERSHIP_VECTORS_PATH}"
+        )
+
+    summary = pd.read_csv(
+        MEMBERSHIP_SUMMARY_PATH,
+        encoding="utf-8-sig",
+        dtype={"article_id": str},
+    )
+
+    required = {
+        "article_id",
+        "split",
+        "soft_primary_topic_id",
+        "soft_primary_membership_strength",
+        "second_topic_id",
+        "second_membership_strength",
+        "top_two_share_gap",
+        "is_multi_topic",
+    }
+
+    missing = required - set(summary.columns)
+    if missing:
+        raise ValueError(
+            "Membership summary thiếu cột: "
+            f"{sorted(missing)}"
+        )
+
+    if len(summary) != N_TOTAL:
+        raise ValueError(
+            "Membership summary không có 9.274 bài"
+        )
+    if summary["article_id"].isna().any():
+        raise ValueError(
+            "Membership summary có article_id thiếu"
+        )
+    if summary["article_id"].duplicated().any():
+        raise ValueError(
+            "Membership summary có article_id trùng"
+        )
+    if summary["split"].value_counts().to_dict() != {
+        "train": N_TRAIN,
+        "val": N_VAL,
+        "test": N_TEST,
+    }:
+        raise ValueError(
+            "Membership summary sai số bài theo split"
+        )
+
+    numeric_columns = [
+        "soft_primary_membership_strength",
+        "second_membership_strength",
+        "top_two_share_gap",
+    ]
+    for column in numeric_columns:
+        summary[column] = pd.to_numeric(
+            summary[column],
+            errors="coerce",
+        )
+
+    if summary[numeric_columns].isna().any().any():
+        raise ValueError(
+            "Membership summary có giá trị số không hợp lệ"
+        )
+    if not summary[numeric_columns].apply(
+        lambda column: column.between(0, 1)
+    ).all().all():
+        raise ValueError(
+            "Membership summary có giá trị ngoài [0, 1]"
+        )
+
+    expected_gap = (
+        summary["soft_primary_membership_strength"]
+        - summary["second_membership_strength"]
+    )
+    if not np.allclose(
+        summary["top_two_share_gap"],
+        expected_gap,
+        rtol=0,
+        atol=1e-12,
+    ):
+        raise ValueError(
+            "top_two_share_gap không khớp top-2"
+        )
+
+    flags = (
+        summary["is_multi_topic"]
+        .astype(str)
+        .str.lower()
+        .map({"true": True, "false": False})
+    )
+    if flags.isna().any():
+        raise ValueError(
+            "is_multi_topic không phải boolean"
+        )
+    summary["is_multi_topic"] = flags
+
+    expected_flags = (
+        summary["top_two_share_gap"]
+        <= MULTI_TOPIC_GAP_MAX
+    )
+    if not summary["is_multi_topic"].eq(
+        expected_flags
+    ).all():
+        raise ValueError(
+            "is_multi_topic không khớp ngưỡng gap"
+        )
+
+    with np.load(
+        MEMBERSHIP_VECTORS_PATH,
+        allow_pickle=False,
+    ) as vectors:
+        matrix = vectors["membership_vectors"]
+        topic_ids = vectors["topic_ids"]
+        article_ids = vectors["article_ids"]
+        splits = vectors["splits"]
+
+    if matrix.shape != (N_TOTAL, N_CLUSTERS):
+        raise ValueError(
+            "Full membership vector sai kích thước"
+        )
+    if len(topic_ids) != N_CLUSTERS:
+        raise ValueError(
+            "Full membership vector sai số topic"
+        )
+    if not np.isfinite(matrix).all():
+        raise ValueError(
+            "Full membership vector chứa NaN/Infinity"
+        )
+    if article_ids.astype(str).tolist() != (
+        summary["article_id"].tolist()
+    ):
+        raise ValueError(
+            "Thứ tự article_id trong NPZ và CSV không khớp"
+        )
+    if splits.astype(str).tolist() != (
+        summary["split"].tolist()
+    ):
+        raise ValueError(
+            "Thứ tự split trong NPZ và CSV không khớp"
+        )
+
+    return summary
 
 def build_document_topics(
     assignments: pd.DataFrame,
@@ -448,7 +611,24 @@ def build_document_topics(
 
             # Tên gốc, rõ nghĩa đối với HDBSCAN.
             "membership_strength": membership_strength,
-
+            "soft_primary_topic_id": assignments[
+                "soft_primary_topic_id"
+            ].astype(int),
+            "soft_primary_membership_strength": assignments[
+                "soft_primary_membership_strength"
+            ].astype(float),
+            "second_topic_id": assignments[
+                "second_topic_id"
+            ].astype(int),
+            "second_membership_strength": assignments[
+                "second_membership_strength"
+            ].astype(float),
+            "top_two_share_gap": assignments[
+                "top_two_share_gap"
+            ].astype(float),
+            "is_multi_topic": assignments[
+                "is_multi_topic"
+            ].astype(bool),
             "is_outlier": assignments[
                 "cluster_id"
             ].eq(-1),
@@ -1367,6 +1547,16 @@ def write_metadata(
             .as_posix()
         ),
         "stability_summary": stability_summary_path,
+        "membership_summary": (
+            MEMBERSHIP_SUMMARY_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
+        "membership_vectors": (
+            MEMBERSHIP_VECTORS_PATH
+            .relative_to(ROOT)
+            .as_posix()
+        ),
     },
     "document_topics_columns": [
         "article_id",
@@ -1374,6 +1564,12 @@ def write_metadata(
         "topic_id",
         "topic_probability",
         "membership_strength",
+        "soft_primary_topic_id",
+        "soft_primary_membership_strength",
+        "second_topic_id",
+        "second_membership_strength",
+        "top_two_share_gap",
+        "is_multi_topic",
         "is_outlier",
         "title",
         "category_gold",
@@ -1382,6 +1578,16 @@ def write_metadata(
         "Độ mạnh thành viên HDBSCAN trong [0, 1]; "
         "đồng nhất với topic_probability và không phải "
         "xác suất đã hiệu chuẩn"
+    ),
+    "full_membership_meaning": (
+        "Full HDBSCAN soft membership trên 101 cụm. "
+        "soft_primary và second_topic được xếp theo "
+        "membership vector; top_two_share_gap là chênh lệch "
+        "giữa hai giá trị đứng đầu."
+    ),
+    "multi_topic_rule": (
+        "is_multi_topic=True khi top_two_share_gap <= 0.10; "
+        "đây là heuristic phân tích bài biên/chồng lấn."
     ),
     "category_gold_usage": (
         "Chỉ dùng cho đánh giá ARI/NMI sau khi dự đoán; "
@@ -1499,7 +1705,30 @@ def main() -> None:
         raise ValueError(
             "Có bài không ghép được tiêu đề"
         )
+    membership_summary = read_membership_summary()
 
+    assignments = assignments.merge(
+        membership_summary,
+        on=["article_id", "split"],
+        how="left",
+        validate="one_to_one",
+    )
+
+    membership_columns = [
+        "soft_primary_topic_id",
+        "soft_primary_membership_strength",
+        "second_topic_id",
+        "second_membership_strength",
+        "top_two_share_gap",
+        "is_multi_topic",
+    ]
+
+    if assignments[
+        membership_columns
+    ].isna().any().any():
+        raise ValueError(
+            "Có assignment thiếu dữ liệu membership"
+        )
     documents = build_document_topics(assignments)
     keywords = build_topic_keywords(assignments)
     topic_summary = build_topic_summary(
