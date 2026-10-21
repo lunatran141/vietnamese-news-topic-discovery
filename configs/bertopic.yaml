@@ -63,6 +63,10 @@ topic_representation:
   top_n_words: 10
   representative_docs_per_topic: 5
 
+  # Cần ma trận membership đầy đủ để phân tích bài đa chủ đề và
+  # khoảng cách giữa hai topic mạnh nhất. Không dùng như xác suất đã hiệu chỉnh.
+  calculate_probabilities: true
+
 experiment:
   # Seed và run_id được lưu để có thể chạy lại thí nghiệm.
   seed: 42

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import copy
 import json
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -22,8 +23,13 @@ from src.evaluation.bertopic_artifacts import (
     build_topic_summary,
 )
 from src.evaluation.bertopic_metrics import (
+    calculate_external_metrics,
     calculate_outlier_rate,
     calculate_topic_diversity,
+)
+from src.evaluation.lda_metrics import (
+    calculate_coherence,
+    prepare_coherence_corpus,
 )
 from src.models.bertopic_pipeline import (
     build_bertopic_model,
@@ -107,6 +113,14 @@ def build_run_config(
         run_config["hdbscan"]
     )
     config["experiment"]["run_id"] = run_config["run_id"]
+    config["dataset"]["text_variant"] = run_config.get(
+        "input_text_column",
+        config["dataset"]["text_variant"],
+    )
+    config["experiment"]["input_text_label"] = run_config.get(
+        "input_text_label",
+        "title_content",
+    )
 
     return config
 
@@ -162,6 +176,8 @@ def update_summary(
 
 def main() -> None:
     """Fit trên train và đánh giá run trên validation."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     arguments = parse_arguments()
 
     experiment_config = load_yaml(arguments.config)
@@ -189,7 +205,7 @@ def main() -> None:
         selected_run,
     )
 
-    dataset_config = base_config["dataset"]
+    dataset_config = run_config["dataset"]
 
     train_dataset = load_split_dataset(
         dataset_config["path"],
@@ -233,14 +249,21 @@ def main() -> None:
     print(f"Train: {len(train_documents)} bài")
     print(f"Validation: {len(validation_documents)} bài")
     print(f"Embedding: {embedding_config['model_name']}")
+    print(
+        "Đầu vào: "
+        f"{selected_run.get('input_text_label', 'title_content')} "
+        f"({text_column})"
+    )
 
-    start_time = time.perf_counter()
-
+    pipeline_start = time.perf_counter()
+    model_load_start = time.perf_counter()
     embedding_model = SentenceTransformer(
         embedding_config["model_name"],
         **model_arguments,
     )
+    model_load_seconds = time.perf_counter() - model_load_start
 
+    representation_start = time.perf_counter()
     train_embeddings = encode_documents(
         embedding_model,
         train_documents,
@@ -251,27 +274,39 @@ def main() -> None:
         validation_documents,
         run_config,
     )
+    representation_seconds = (
+        time.perf_counter() - representation_start
+    )
 
+    model_init_start = time.perf_counter()
     topic_model = build_bertopic_model(
         run_config,
         embedding_model=embedding_model,
     )
+    model_init_seconds = time.perf_counter() - model_init_start
 
+    fit_start = time.perf_counter()
     train_topics, train_probabilities = fit_bertopic_model(
         topic_model,
         train_documents,
         train_embeddings,
     )
+    fit_seconds = time.perf_counter() - fit_start
 
+    validation_predict_start = time.perf_counter()
     validation_topics, validation_probabilities = (
         topic_model.transform(
             validation_documents,
             embeddings=validation_embeddings,
         )
     )
+    validation_predict_seconds = (
+        time.perf_counter() - validation_predict_start
+    )
 
-    runtime_seconds = time.perf_counter() - start_time
+    runtime_seconds = time.perf_counter() - pipeline_start
 
+    evaluation_start = time.perf_counter()
     topic_words = topic_model.get_topics()
     topic_count = len(
         {
@@ -281,10 +316,39 @@ def main() -> None:
         }
     )
 
-    result = {
+    validation_external_metrics: dict[str, float] = {}
+    if "category_gold" in validation_dataset.columns:
+        validation_external_metrics = calculate_external_metrics(
+            validation_dataset["category_gold"].fillna("unknown"),
+            validation_topics,
+        )
+
+    topic_word_lists = [
+        [word for word, _ in words[: base_config["topic_representation"]["top_n_words"]]]
+        for topic_id, words in topic_words.items()
+        if int(topic_id) != -1
+    ]
+    coherence_texts, coherence_dictionary = prepare_coherence_corpus(
+        validation_documents,
+        topic_model.vectorizer_model,
+    )
+    validation_npmi_coherence = calculate_coherence(
+        topic_word_lists,
+        coherence_texts,
+        coherence_dictionary,
+        metric="c_npmi",
+        processes=1,
+    )
+
+    result: dict[str, Any] = {
         "run_id": selected_run["run_id"],
         "description": selected_run["description"],
         "embedding_model": embedding_config["model_name"],
+        "input_text_column": text_column,
+        "input_text_label": selected_run.get(
+            "input_text_label",
+            "title_content",
+        ),
         "train_count": len(train_documents),
         "validation_count": len(validation_documents),
         "topic_count": topic_count,
@@ -300,8 +364,32 @@ def main() -> None:
                 "top_n_words"
             ],
         ),
+        "validation_adjusted_rand_index": (
+            validation_external_metrics.get("adjusted_rand_index")
+        ),
+        "validation_normalized_mutual_info": (
+            validation_external_metrics.get("normalized_mutual_info")
+        ),
+        "validation_npmi_coherence": validation_npmi_coherence,
+        "model_load_seconds": round(model_load_seconds, 2),
+        "representation_seconds": round(
+            representation_seconds, 2
+        ),
+        "model_init_seconds": round(model_init_seconds, 2),
+        "fit_seconds": round(fit_seconds, 2),
+        "validation_predict_seconds": round(
+            validation_predict_seconds, 2
+        ),
         "runtime_seconds": round(runtime_seconds, 2),
+        "runtime_scope": (
+            "model_load + representation + model_init + fit + "
+            "validation_prediction"
+        ),
     }
+    result["evaluation_seconds"] = round(
+        time.perf_counter() - evaluation_start,
+        2,
+    )
 
     output_root = Path(protocol["output_dir"])
 

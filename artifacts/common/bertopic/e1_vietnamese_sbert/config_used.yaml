@@ -38,6 +38,7 @@ ctfidf:
 topic_representation:
   top_n_words: 10
   representative_docs_per_topic: 5
+  calculate_probabilities: true
 experiment:
   seed: 42
   run_id: e1_vietnamese_sbert

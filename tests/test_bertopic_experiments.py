@@ -55,6 +55,11 @@ def test_required_metrics_are_declared() -> None:
         "train_outlier_rate",
         "validation_outlier_rate",
         "topic_diversity",
+        "validation_adjusted_rand_index",
+        "validation_normalized_mutual_info",
+        "validation_npmi_coherence",
+        "fit_seconds",
+        "validation_predict_seconds",
         "runtime_seconds",
     }
 
@@ -109,3 +114,21 @@ def test_e3_changes_only_hdbscan_cluster_size() -> None:
     assert experiment["umap"] == selected["umap"]
     assert changed_hdbscan_fields == {"min_cluster_size"}
     assert experiment["hdbscan"]["min_cluster_size"] == 30
+
+
+def test_title_ablation_changes_only_input_text() -> None:
+    """E4 phải giữ nguyên mô hình E1 và chỉ đổi đầu vào sang tiêu đề."""
+    runs = {
+        run["run_id"]: run
+        for run in load_experiment_config()["runs"]
+    }
+    title_content = runs["e1_vietnamese_sbert"]
+    title_only = runs["e4_vietnamese_sbert_title_only"]
+
+    assert title_content["input_text_column"] == "text"
+    assert title_content["input_text_label"] == "title_content"
+    assert title_only["input_text_column"] == "processed_title"
+    assert title_only["input_text_label"] == "title_only"
+    assert title_only["embedding"] == title_content["embedding"]
+    assert title_only["umap"] == title_content["umap"]
+    assert title_only["hdbscan"] == title_content["hdbscan"]

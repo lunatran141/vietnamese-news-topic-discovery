@@ -5,13 +5,31 @@
   "representation": "keepitreal/vietnamese-sbert",
   "topic_count": 96,
   "outlier_rate": 0.35873472322070454,
-  "runtime_seconds": 1159.69,
+  "runtime_seconds": 1086.07,
+  "runtime_scope": "model_load + representation + model_init + fit + validation_prediction",
   "metrics": {
     "topic_diversity": 0.68125,
     "train_outlier_rate": 0.24611119667334053,
     "validation_outlier_rate": 0.35873472322070454,
     "train_count": 6493,
-    "validation_count": 1391
+    "validation_count": 1391,
+    "test_count": null,
+    "test_outlier_rate": null,
+    "test_coverage": null,
+    "validation_adjusted_rand_index": 0.07201858892122891,
+    "validation_normalized_mutual_info": 0.4213341483904848,
+    "test_adjusted_rand_index": null,
+    "test_normalized_mutual_info": null,
+    "npmi_coherence": -0.06682746580752232,
+    "model_load_seconds": 4.96,
+    "representation_seconds": 1011.69,
+    "model_init_seconds": 0.0,
+    "fit_seconds": 50.06,
+    "validation_predict_seconds": 19.35,
+    "test_predict_seconds": null,
+    "final_fit_seconds": null,
+    "final_runtime_seconds": null,
+    "evaluation_seconds": 8.78
   },
   "config": {
     "dataset": {
@@ -60,7 +78,8 @@
     },
     "topic_representation": {
       "top_n_words": 10,
-      "representative_docs_per_topic": 5
+      "representative_docs_per_topic": 5,
+      "calculate_probabilities": true
     },
     "experiment": {
       "seed": 42,

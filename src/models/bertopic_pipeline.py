@@ -130,6 +130,10 @@ def build_bertopic_model(
         vectorizer_model=vectorizer_model,
         ctfidf_model=ctfidf_model,
         top_n_words=topic_config["top_n_words"],
+        calculate_probabilities=topic_config.get(
+            "calculate_probabilities",
+            False,
+        ),
         verbose=False,
     )
 

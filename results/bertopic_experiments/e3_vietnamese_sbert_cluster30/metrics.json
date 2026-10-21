@@ -8,5 +8,15 @@
   "train_outlier_rate": 0.29585707685199447,
   "validation_outlier_rate": 0.39108554996405465,
   "topic_diversity": 0.7456140350877193,
-  "runtime_seconds": 997.85
+  "validation_adjusted_rand_index": 0.07324255009511438,
+  "validation_normalized_mutual_info": 0.4265548816685457,
+  "validation_npmi_coherence": -0.04940396390143827,
+  "model_load_seconds": 3.45,
+  "representation_seconds": 1653.9,
+  "model_init_seconds": 0.0,
+  "fit_seconds": 65.07,
+  "validation_predict_seconds": 25.49,
+  "runtime_seconds": 1747.92,
+  "runtime_scope": "model_load + representation + model_init + fit + validation_prediction",
+  "evaluation_seconds": 15.34
 }

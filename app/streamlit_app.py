@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import requests
 import streamlit as st
+import yaml
 
 from app.data_service import (
     ArtifactRun,
@@ -65,6 +66,7 @@ FIGURES = {
     ],
     "bertopic": [
         ("So sánh cấu hình", "results/bertopic_visualization/01_experiment_dashboard.png"),
+        ("Title only và Title + Content", "results/bertopic_visualization/09_bertopic_title_content_ablation.png"),
         ("Từ khóa c-TF-IDF", "results/bertopic_visualization/06_e1_ctfidf_keywords.png"),
         ("Đánh giá cụm", "results/bertopic_visualization/08_e1_cluster_evaluation.png"),
     ],
@@ -179,7 +181,11 @@ def render_overview(run: ArtifactRun, bundle, split: str) -> None:
         st.write(f"**Thuật toán:** {overview['algorithm']}")
         st.write(f"**Biểu diễn:** {overview['representation']}")
         st.write(f"**Run ID:** `{bundle.model_summary.run_id}`")
-        st.write(f"**Thời gian chạy được báo cáo:** {fmt_number(overview['runtime_seconds'])} giây")
+        st.write(f"**Tổng runtime đã ghi nhận:** {fmt_number(overview['runtime_seconds'])} giây")
+        st.write(f"**Fit time:** {fmt_number(overview['fit_seconds'])} giây")
+        st.write(f"**Representation time:** {fmt_number(overview['representation_seconds'])} giây")
+        if overview["runtime_scope"]:
+            st.caption(f"Phạm vi runtime: {overview['runtime_scope']}")
         st.write(f"**Topic diversity được báo cáo:** {fmt_number(overview['topic_diversity'])}")
         st.caption("Metric run có thể được đo trên tập khác với bộ lọc đang xem. Số bài, topic và outlier phía trên được tính trên split đã chọn.")
     st.subheader("Danh sách topic")
@@ -355,7 +361,11 @@ def comparison_table(runs: list[ArtifactRun], split: str) -> pd.DataFrame:
             "Số topic": overview["topic_count"],
             "Outlier (%)": round(100 * (overview["outlier_rate"] or 0), 2),
             "Topic diversity (run)": overview["topic_diversity"],
-            "Runtime (giây, run)": overview["runtime_seconds"],
+            "ARI (run)": overview["adjusted_rand_index"],
+            "NMI (run)": overview["normalized_mutual_info"],
+            "Coherence (run)": overview["coherence"],
+            "Fit (giây, run)": overview["fit_seconds"],
+            "Runtime pipeline (giây, run)": overview["runtime_seconds"],
             "Biểu diễn": overview["representation"],
         })
     return pd.DataFrame(rows)
@@ -372,7 +382,7 @@ def render_comparison(runs: list[ArtifactRun], current: ArtifactRun) -> None:
     table_download(table, f"model_comparison_{split}.csv", "Tải bảng so sánh CSV")
     if split == "all":
         st.warning("Mỗi mô hình có phạm vi split khác nhau; hàng 'all' dùng để khám phá, không dùng làm kết luận so sánh định lượng.")
-    st.info("Topic diversity, runtime và outlier có định nghĩa/phạm vi khác nhau giữa các phương pháp. Xem config và evaluation protocol trước khi kết luận mô hình nào tốt hơn.")
+    st.info("ARI/NMI dùng category_gold rộng; coherence, topic diversity, runtime và outlier có định nghĩa/phạm vi khác nhau giữa các phương pháp. Ô N/A nghĩa là run chưa xuất metric, không phải giá trị bằng 0.")
     st.subheader("Xem hai run cạnh nhau")
     options = [run for run in runs if split == "all" or split in get_available_splits(load_dashboard_bundle(str(run.path)))]
     if len(options) < 2:
@@ -444,9 +454,152 @@ def render_experiments(run: ArtifactRun) -> None:
             continue
         with st.expander(path.stem.replace("_", " ").title()):
             frame = pd.read_csv(path, encoding="utf-8-sig")
-            st.dataframe(frame.head(100), width="stretch", hide_index=True)
+            if run.method == "bertopic" and path.name == "summary.csv":
+                display_columns = [
+                    "run_id", "input_text_label", "topic_count", "train_outlier_rate",
+                    "validation_outlier_rate", "topic_diversity",
+                    "validation_adjusted_rand_index",
+                    "validation_normalized_mutual_info",
+                    "validation_npmi_coherence",
+                ]
+                labels = {
+                    "run_id": "Run",
+                    "input_text_label": "Đầu vào",
+                    "topic_count": "Số topic",
+                    "train_outlier_rate": "Outlier train",
+                    "validation_outlier_rate": "Outlier validation",
+                    "topic_diversity": "Diversity",
+                    "validation_adjusted_rand_index": "ARI validation",
+                    "validation_normalized_mutual_info": "NMI validation",
+                    "validation_npmi_coherence": "NPMI validation",
+                }
+                compact = frame[
+                    [column for column in display_columns if column in frame]
+                ].rename(columns=labels)
+                for percentage_column in (
+                    "Outlier train",
+                    "Outlier validation",
+                ):
+                    if percentage_column in compact:
+                        compact[percentage_column] = (
+                            100 * compact[percentage_column]
+                        )
+                st.markdown("**Chất lượng và khả năng bao phủ**")
+                st.dataframe(
+                    compact,
+                    width="stretch",
+                    hide_index=True,
+                    column_config={
+                        "Outlier train": st.column_config.NumberColumn(format="%.1f%%"),
+                        "Outlier validation": st.column_config.NumberColumn(format="%.1f%%"),
+                        "Diversity": st.column_config.NumberColumn(format="%.3f"),
+                        "ARI validation": st.column_config.NumberColumn(format="%.3f"),
+                        "NMI validation": st.column_config.NumberColumn(format="%.3f"),
+                        "NPMI validation": st.column_config.NumberColumn(format="%.3f"),
+                    },
+                )
+                timing_columns = [
+                    "run_id", "model_load_seconds",
+                    "representation_seconds", "model_init_seconds",
+                    "fit_seconds", "validation_predict_seconds",
+                    "evaluation_seconds", "runtime_seconds",
+                ]
+                timing_labels = {
+                    "run_id": "Run",
+                    "model_load_seconds": "Load model",
+                    "representation_seconds": "Embedding",
+                    "model_init_seconds": "Khởi tạo",
+                    "fit_seconds": "Fit",
+                    "validation_predict_seconds": "Predict validation",
+                    "evaluation_seconds": "Evaluation",
+                    "runtime_seconds": "Runtime pipeline",
+                }
+                timings = frame[
+                    [column for column in timing_columns if column in frame]
+                ].rename(columns=timing_labels)
+                st.markdown("**Thời gian theo giai đoạn (giây)**")
+                st.dataframe(timings, width="stretch", hide_index=True)
+                st.caption(
+                    "N/A nghĩa là run cũ chưa được đo lại theo protocol mới. "
+                    "Không được diễn giải N/A là 0 giây."
+                )
+            else:
+                st.dataframe(frame.head(100), width="stretch", hide_index=True)
             st.caption(f"Hiển thị tối đa 100/{len(frame):,} hàng.")
             table_download(frame, path.name, "Tải bảng CSV")
+    if run.method == "bertopic":
+        config_path = Path(__file__).resolve().parents[1] / "configs/bertopic_experiments.yaml"
+        with config_path.open("r", encoding="utf-8") as file:
+            experiment_config = yaml.safe_load(file)
+        config_rows = []
+        for item in experiment_config["runs"]:
+            config_rows.append(
+                {
+                    "Run": item["run_id"],
+                    "Đầu vào": item.get("input_text_label", "title_content"),
+                    "Embedding": item["embedding"]["model_name"],
+                    "UMAP neighbors": item["umap"]["n_neighbors"],
+                    "UMAP components": item["umap"]["n_components"],
+                    "UMAP min_dist": item["umap"]["min_dist"],
+                    "UMAP metric": item["umap"]["metric"],
+                    "HDBSCAN min cluster": item["hdbscan"]["min_cluster_size"],
+                    "HDBSCAN min samples": item["hdbscan"]["min_samples"],
+                    "Selection": item["hdbscan"]["cluster_selection_method"],
+                }
+            )
+        st.subheader("Cấu hình UMAP và HDBSCAN")
+        st.dataframe(pd.DataFrame(config_rows), width="stretch", hide_index=True)
+        st.caption(
+            "E2 chỉ đổi UMAP n_neighbors; E3 chỉ đổi HDBSCAN "
+            "min_cluster_size. E1 được chọn theo outlier validation thấp nhất."
+        )
+
+        bundle = load_dashboard_bundle(str(run.path))
+        topics = get_topic_table(bundle).head(15)
+        if not topics.empty:
+            names = topic_names(bundle)
+            topic_id = st.selectbox(
+                "Xem từ khóa c-TF-IDF của topic",
+                topics["topic_id"].astype(int).tolist(),
+                format_func=lambda value: topic_label(value, names),
+                key="experiment_ctfidf_topic",
+            )
+            keywords = get_keywords_for_topic(bundle, topic_id).head(15)
+            if not keywords.empty:
+                score_column = (
+                    "weight" if "weight" in keywords.columns else "score"
+                )
+                keywords[score_column] = pd.to_numeric(
+                    keywords[score_column],
+                    errors="coerce",
+                )
+                keyword_chart = (
+                    alt.Chart(keywords)
+                    .mark_bar(color="#CDB4DB")
+                    .encode(
+                        x=alt.X(
+                            f"{score_column}:Q",
+                            title="Điểm c-TF-IDF",
+                            scale=alt.Scale(zero=True),
+                        ),
+                        y=alt.Y("keyword:N", sort="-x", title="Từ khóa"),
+                        tooltip=[
+                            "keyword:N",
+                            alt.Tooltip(
+                                f"{score_column}:Q",
+                                title="Điểm c-TF-IDF",
+                                format=".4f",
+                            ),
+                        ],
+                    )
+                    .properties(height=380)
+                )
+                st.altair_chart(keyword_chart, width="stretch")
+                st.dataframe(keywords, width="stretch", hide_index=True)
+                st.caption(
+                    "c-TF-IDF cao nghĩa là từ đặc trưng cho topic so với các "
+                    "topic khác; không phải xác suất xuất hiện của từ."
+                )
     if not FIGURES.get(run.method) and not tables.get(run.method):
         st.info("Chưa có hình hoặc bảng thí nghiệm được liên kết cho run này.")
 

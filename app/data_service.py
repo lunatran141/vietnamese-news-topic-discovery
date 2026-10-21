@@ -96,6 +96,29 @@ def get_model_overview(
         "outlier_document_count": outlier_count,
         "outlier_rate": outlier_count / len(documents) if len(documents) else None,
         "runtime_seconds": summary.runtime_seconds,
+        "runtime_scope": getattr(summary, "runtime_scope", None),
+        "fit_seconds": summary.metrics.get("fit_seconds"),
+        "representation_seconds": summary.metrics.get(
+            "representation_seconds"
+        ),
+        "validation_predict_seconds": summary.metrics.get(
+            "validation_predict_seconds"
+        ),
+        "test_predict_seconds": summary.metrics.get(
+            "test_predict_seconds"
+        ),
+        "adjusted_rand_index": summary.metrics.get(
+            "test_adjusted_rand_index",
+            summary.metrics.get("validation_adjusted_rand_index"),
+        ),
+        "normalized_mutual_info": summary.metrics.get(
+            "test_normalized_mutual_info",
+            summary.metrics.get("validation_normalized_mutual_info"),
+        ),
+        "coherence": summary.metrics.get(
+            "npmi_coherence",
+            summary.metrics.get("coherence"),
+        ),
         "topic_diversity": summary.metrics.get("topic_diversity"),
     }
 
