@@ -424,6 +424,13 @@ def test_run_metadata_va_model_summary_khop_bundle(bundle):
     ]
     assert "HDBSCAN" in metadata["membership_strength_meaning"]
     assert "không dùng để fit" in metadata["category_gold_usage"]
+    assert metadata["stability_summary_path"] == (
+        "results/hdbscan/stability/"
+        "minilm_title_content_eom_15_5_seeds42_51/"
+        "stability_summary.csv"
+    )
+    assert "10 UMAP seeds 42-51" in metadata["stability_scope"]
+    assert "keyword Jaccard" in metadata["stability_scope"]
 
     metrics = summary.metrics
     assert metrics["document_count"] == EXPECTED_TOTAL
