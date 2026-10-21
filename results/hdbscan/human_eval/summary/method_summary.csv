@@ -1,0 +1,7 @@
+﻿criterion,n_topics,mean_score
+consistency_1_5,5,3.0
+specificity_1_5,5,3.3
+naming_1_5,5,3.2
+usefulness_1_5,5,3.4
+boundary_1_5,5,2.5
+document_relevance_1_5,5,3.9
