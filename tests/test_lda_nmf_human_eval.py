@@ -5,6 +5,7 @@ import pandas as pd
 import pytest
 
 from experiments.human_eval import build_lda_nmf_samples as he
+from experiments.human_eval.summarize_lda_nmf import summarize, TOPIC_SCORES, FLAGS, DOC_SCORE
 
 
 @pytest.fixture(scope="module")
@@ -70,3 +71,41 @@ def test_export_refuses_overwrite(evaluation_data, tmp_path, monkeypatch):
         he.export_evaluation_files(reviewer_data, mapping)
 
     assert marker.read_text(encoding="utf-8") == "DO NOT OVERWRITE"
+
+
+def test_pending_review_does_not_publish_scores(evaluation_data, tmp_path, monkeypatch):
+    _, _, data, mapping = evaluation_data
+    monkeypatch.setattr(he, "OUTPUT_DIR", tmp_path)
+    he.export_evaluation_files(data, mapping)
+    result = summarize(tmp_path)
+    assert result["status"] == "pending"
+    assert result["missing_ratings"] == 500
+    assert result["by_model"] == []
+
+
+def test_complete_reviews_and_invalid_ratings(evaluation_data, tmp_path, monkeypatch):
+    _, _, data, mapping = evaluation_data
+    monkeypatch.setattr(he, "OUTPUT_DIR", tmp_path)
+    he.export_evaluation_files(data, mapping)
+    # Điểm giả chỉ trong fixture tạm để kiểm tra tổng hợp, không phải đánh giá thật.
+    for reviewer in ("R1", "R2"):
+        for kind in ("topics", "documents"):
+            path = tmp_path / f"reviewer_{reviewer}_{kind}.csv"
+            frame = pd.read_csv(path)
+            for column in TOPIC_SCORES if kind == "topics" else [DOC_SCORE]:
+                frame[column] = 4
+            if kind == "topics":
+                for column in FLAGS:
+                    frame[column] = "no"
+            frame.to_csv(path, index=False)
+    result = summarize(tmp_path)
+    assert result["status"] == "complete"
+    assert len(result["by_model"]) == 2
+    assert all(row[DOC_SCORE] == 4 for row in result["by_model"])
+    assert all(row["kappa"] is None for row in result["agreement"])
+    path = tmp_path / "reviewer_R1_topics.csv"
+    frame = pd.read_csv(path)
+    frame.loc[0, "keyword_coherence_1_5"] = 6
+    frame.to_csv(path, index=False)
+    with pytest.raises(ValueError, match="1-5"):
+        summarize(tmp_path)
