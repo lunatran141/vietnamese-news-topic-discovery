@@ -94,13 +94,21 @@ def read_yaml(path: Path) -> dict:
 def read_split_manifest() -> pd.DataFrame:
     manifest = pd.read_csv(
         SPLIT_MANIFEST_PATH,
-        usecols=["article_id", "split"],
-        dtype={"article_id": str},
+        usecols=["article_id", "split", "category_gold"],
+        dtype={
+            "article_id": str,
+            "category_gold": str,
+        },
     )
+
     if manifest["article_id"].isna().any():
         raise ValueError("Split manifest có article_id thiếu")
     if manifest["article_id"].duplicated().any():
         raise ValueError("Split manifest có article_id trùng")
+    if manifest["category_gold"].isna().any():
+        raise ValueError("Split manifest có category_gold thiếu")
+    if manifest["category_gold"].str.strip().eq("").any():
+        raise ValueError("Split manifest có category_gold rỗng")
 
     counts = manifest["split"].value_counts().to_dict()
     if counts.get("train") != N_TRAIN:
@@ -111,7 +119,6 @@ def read_split_manifest() -> pd.DataFrame:
         raise ValueError("Split test không có 1.390 bài")
 
     return manifest
-
 
 def read_articles() -> pd.DataFrame:
     articles = pd.read_csv(
@@ -354,18 +361,41 @@ def build_document_topics(
     assignments: pd.DataFrame,
 ) -> pd.DataFrame:
     """Đổi train + val + test assignments sang schema chung."""
+    membership_strength = pd.to_numeric(
+        assignments["membership_strength"],
+        errors="coerce",
+    )
+
+    if membership_strength.isna().any():
+        raise ValueError(
+            "Có membership_strength không hợp lệ"
+        )
+    if not membership_strength.between(0, 1).all():
+        raise ValueError(
+            "Có membership_strength ngoài [0, 1]"
+        )
+
     result = pd.DataFrame(
         {
             "article_id": assignments["article_id"],
             "split": assignments["split"],
-            "topic_id": assignments["cluster_id"].astype(int),
-            # HDBSCAN membership strength, không phải
-            # xác suất đã hiệu chuẩn.
-            "topic_probability": assignments[
-                "membership_strength"
-            ].astype(float),
-            "is_outlier": assignments["cluster_id"].eq(-1),
+            "topic_id": assignments[
+                "cluster_id"
+            ].astype(int),
+
+            # Trường chuẩn của common artifact.
+            "topic_probability": membership_strength,
+
+            # Tên gốc, rõ nghĩa đối với HDBSCAN.
+            "membership_strength": membership_strength,
+
+            "is_outlier": assignments[
+                "cluster_id"
+            ].eq(-1),
             "title": assignments["title"],
+            "category_gold": assignments[
+                "category_gold"
+            ].astype(str),
         }
     )
 
@@ -389,9 +419,21 @@ def build_document_topics(
         raise ValueError(
             "Có bài không ghép được tiêu đề"
         )
+    if result["category_gold"].str.strip().eq("").any():
+        raise ValueError(
+            "Có bài thiếu category_gold"
+        )
+    if not np.allclose(
+        result["topic_probability"].to_numpy(dtype=float),
+        result["membership_strength"].to_numpy(dtype=float),
+        rtol=0,
+        atol=1e-12,
+    ):
+        raise ValueError(
+            "topic_probability không khớp membership_strength"
+        )
 
     return result
-
 
 def build_topic_keywords(
     assignments: pd.DataFrame,
@@ -1257,6 +1299,25 @@ def write_metadata(
             .as_posix()
         ),
     },
+    "document_topics_columns": [
+        "article_id",
+        "split",
+        "topic_id",
+        "topic_probability",
+        "membership_strength",
+        "is_outlier",
+        "title",
+        "category_gold",
+    ],
+    "membership_strength_meaning": (
+        "Độ mạnh thành viên HDBSCAN trong [0, 1]; "
+        "đồng nhất với topic_probability và không phải "
+        "xác suất đã hiệu chuẩn"
+    ),
+    "category_gold_usage": (
+        "Chỉ dùng cho đánh giá ARI/NMI sau khi dự đoán; "
+        "không dùng để fit UMAP hoặc HDBSCAN"
+    ),
     "keyword_method": (
         "TF-IDF trên processed_title và 60 từ đầu "
         "processed_content của train + val + test; loại -1"
@@ -1342,6 +1403,23 @@ def main() -> None:
             "Assignments train + val + test có ID trùng"
         )
 
+    # Ghép category_gold từ split manifest.
+    assignments = assignments.drop(
+        columns=["category_gold"],
+        errors="ignore",
+    ).merge(
+        split_manifest[
+            ["article_id", "category_gold"]
+        ],
+        on="article_id",
+        how="left",
+        validate="one_to_one",
+    )
+
+    if assignments["category_gold"].isna().any():
+        raise ValueError(
+            "Có assignment không ghép được category_gold"
+        )
     assignments = assignments.merge(
         articles,
         on="article_id",

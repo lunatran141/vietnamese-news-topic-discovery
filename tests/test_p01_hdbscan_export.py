@@ -86,11 +86,20 @@ def _check_source_assignments(
         source["embedding_run"].eq("minilm_title_content")
         & source["experiment"].eq("eom_15_5"),
         ["article_id", "cluster_id", "membership_strength"],
-    ]
+    ].rename(
+        columns={
+            "membership_strength": "source_membership_strength",
+        }
+    )
 
     selected_documents = documents.loc[
         documents["split"].eq(split),
-        ["article_id", "topic_id", "topic_probability"],
+        [
+            "article_id",
+            "topic_id",
+            "topic_probability",
+            "membership_strength",
+        ],
     ]
 
     comparison = selected_documents.merge(
@@ -107,7 +116,13 @@ def _check_source_assignments(
     ).all()
     assert np.allclose(
         comparison["topic_probability"].to_numpy(dtype=float),
+        comparison["source_membership_strength"].to_numpy(dtype=float),
+        rtol=0,
+        atol=1e-12,
+    )
+    assert np.allclose(
         comparison["membership_strength"].to_numpy(dtype=float),
+        comparison["source_membership_strength"].to_numpy(dtype=float),
         rtol=0,
         atol=1e-12,
     )
@@ -164,8 +179,10 @@ def test_document_topics_chua_ca_ba_split(bundle):
         "split",
         "topic_id",
         "topic_probability",
+        "membership_strength",
         "is_outlier",
         "title",
+        "category_gold",
     }
     assert required_columns.issubset(documents.columns)
     assert len(documents) == EXPECTED_TOTAL
@@ -175,8 +192,31 @@ def test_document_topics_chua_ca_ba_split(bundle):
         documents["split"].value_counts().to_dict()
         == EXPECTED_SPLIT_COUNTS
     )
+
     assert documents["topic_probability"].notna().all()
     assert documents["topic_probability"].between(0, 1).all()
+
+    # Kiểm tra trường gốc của HDBSCAN.
+    assert documents["membership_strength"].notna().all()
+    assert documents["membership_strength"].between(0, 1).all()
+
+    # Hai cột phải chứa cùng một giá trị.
+    assert np.allclose(
+        documents["topic_probability"].to_numpy(dtype=float),
+        documents["membership_strength"].to_numpy(dtype=float),
+        rtol=0,
+        atol=1e-12,
+    )
+
+    # Nhãn vàng phải tồn tại cho tất cả bài.
+    assert documents["category_gold"].notna().all()
+    assert (
+        documents["category_gold"]
+        .astype(str)
+        .str.strip()
+        .ne("")
+        .all()
+    )
 
     flags = (
         documents["is_outlier"]
@@ -188,11 +228,46 @@ def test_document_topics_chua_ca_ba_split(bundle):
     assert flags.eq(documents["topic_id"].eq(-1)).all()
 
     outliers_by_split = (
-        documents.loc[documents["topic_id"].eq(-1), "split"]
+        documents.loc[
+            documents["topic_id"].eq(-1),
+            "split",
+        ]
         .value_counts()
         .to_dict()
     )
     assert outliers_by_split == expected_outliers()
+
+
+def test_category_gold_khop_split_manifest(bundle):
+    expected = pd.read_csv(
+        ROOT / "data/splits/split_manifest.csv",
+        usecols=["article_id", "split", "category_gold"],
+        dtype={
+            "article_id": str,
+            "category_gold": str,
+        },
+    )
+    actual = bundle.document_topics[
+        ["article_id", "split", "category_gold"]
+    ].copy()
+    actual["article_id"] = actual["article_id"].astype(str)
+
+    comparison = actual.merge(
+        expected,
+        on="article_id",
+        how="outer",
+        suffixes=("_artifact", "_manifest"),
+        validate="one_to_one",
+        indicator=True,
+    )
+
+    assert comparison["_merge"].eq("both").all()
+    assert comparison["split_artifact"].eq(
+        comparison["split_manifest"]
+    ).all()
+    assert comparison["category_gold_artifact"].eq(
+        comparison["category_gold_manifest"]
+    ).all()
 
 
 def test_train_khop_assignments_m11(bundle):
@@ -214,30 +289,54 @@ def test_validation_khop_assignments_da_predict(bundle):
 def test_test_khop_assignments_da_predict(bundle):
     _check_source_assignments(bundle.document_topics, TEST_ASSIGNMENTS, "test")
     test_metrics = json.loads(TEST_METRICS.read_text(encoding="utf-8"))
-    test_rows = bundle.document_topics.loc[bundle.document_topics["split"].eq("test")]
+    test_rows = bundle.document_topics.loc[
+        bundle.document_topics["split"].eq("test")
+    ].copy()
     assert len(test_rows) == test_metrics["test_count"] == 1390
-    assert int(test_rows["topic_id"].eq(-1).sum()) == test_metrics["test_outlier_count"]
+    assert int(test_rows["topic_id"].eq(-1).sum()) == (
+        test_metrics["test_outlier_count"]
+    )
     assert test_metrics["test_coverage"] == pytest.approx(
         1 - test_metrics["test_outlier_count"] / 1390
     )
+
     with (ROOT / "configs/hdbscan.yaml").open(encoding="utf-8") as file:
         config = yaml.safe_load(file)
+
     dataset = config["dataset"]
     gold = load_split_dataset(
         ROOT / dataset["path"],
         ROOT / dataset["split_manifest_path"],
         "test",
     )[["article_id", "category_gold"]].copy()
+
     gold["article_id"] = gold["article_id"].astype(str)
-    joined = test_rows.assign(
-        article_id=test_rows["article_id"].astype(str)
-    ).merge(gold, on="article_id", validate="one_to_one")
+    test_rows["article_id"] = test_rows["article_id"].astype(str)
+
+    joined = test_rows.merge(
+        gold,
+        on="article_id",
+        how="inner",
+        suffixes=("_artifact", "_dataset"),
+        validate="one_to_one",
+    )
+
     assert len(joined) == len(test_rows)
+    assert joined["category_gold_artifact"].eq(
+        joined["category_gold_dataset"]
+    ).all()
+
     assert test_metrics["test_ari"] == pytest.approx(
-        adjusted_rand_score(joined["category_gold"], joined["topic_id"])
+        adjusted_rand_score(
+            joined["category_gold_artifact"],
+            joined["topic_id"],
+        )
     )
     assert test_metrics["test_nmi"] == pytest.approx(
-        normalized_mutual_info_score(joined["category_gold"], joined["topic_id"])
+        normalized_mutual_info_score(
+            joined["category_gold_artifact"],
+            joined["topic_id"],
+        )
     )
 
 
@@ -313,6 +412,18 @@ def test_run_metadata_va_model_summary_khop_bundle(bundle):
         metadata["split_outlier_counts"]
         == expected_outliers()
     )
+    assert metadata["document_topics_columns"] == [
+        "article_id",
+        "split",
+        "topic_id",
+        "topic_probability",
+        "membership_strength",
+        "is_outlier",
+        "title",
+        "category_gold",
+    ]
+    assert "HDBSCAN" in metadata["membership_strength_meaning"]
+    assert "không dùng để fit" in metadata["category_gold_usage"]
 
     metrics = summary.metrics
     assert metrics["document_count"] == EXPECTED_TOTAL

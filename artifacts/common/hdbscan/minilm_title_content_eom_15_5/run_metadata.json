@@ -38,8 +38,23 @@
     "m11_summary": "results/hdbscan/m11_summary.csv",
     "articles": "data/processed/p0_minimal.csv",
     "split_manifest": "data/splits/split_manifest.csv",
-    "embedding_artifact": "artifacts/embeddings/m10_v1_train_minilm.npz"
+    "embedding_artifact": "artifacts/embeddings/m10_v1_train_minilm.npz",
+    "runtime_benchmark": "results/hdbscan/benchmark_p01_runtime.json",
+    "test_metrics": "results/hdbscan/test/minilm_title_content_eom_15_5_test_metrics.json",
+    "runtime_summary": "artifacts/common/hdbscan/minilm_title_content_eom_15_5/runtime_summary.json"
   },
+  "document_topics_columns": [
+    "article_id",
+    "split",
+    "topic_id",
+    "topic_probability",
+    "membership_strength",
+    "is_outlier",
+    "title",
+    "category_gold"
+  ],
+  "membership_strength_meaning": "Độ mạnh thành viên HDBSCAN trong [0, 1]; đồng nhất với topic_probability và không phải xác suất đã hiệu chuẩn",
+  "category_gold_usage": "Chỉ dùng cho đánh giá ARI/NMI sau khi dự đoán; không dùng để fit UMAP hoặc HDBSCAN",
   "keyword_method": "TF-IDF trên processed_title và 60 từ đầu processed_content của train + val + test; loại -1",
   "projection_2d_method": "UMAP 2D fit train, transform val và test; topic_id lấy từ HDBSCAN M11 5D"
 }

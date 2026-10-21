@@ -69,10 +69,10 @@ artifacts/common/hdbscan/minilm_title_content_eom_15_5/
 Các cột:
 
 ```text
-article_id,split,topic_id,topic_probability,is_outlier,title
+article_id,split,topic_id,topic_probability,membership_strength,is_outlier,title,category_gold
 ```
 
-File chứa train, validation và test. `topic_id` là ID cụm HDBSCAN; `is_outlier` đúng khi `topic_id=-1`. Mỗi `article_id` chỉ xuất hiện một lần.
+File chứa train, validation và test. `topic_id` là ID cụm HDBSCAN; `is_outlier` đúng khi `topic_id=-1`. `membership_strength` là độ mạnh thành viên HDBSCAN trong khoảng `[0, 1]` và có cùng giá trị với `topic_probability`; đây không phải xác suất đã hiệu chuẩn. `category_gold` chỉ dùng để đánh giá ARI/NMI sau khi dự đoán, không dùng để fit UMAP hoặc HDBSCAN. Mỗi `article_id` chỉ xuất hiện một lần.
 
 ### `topic_summary.csv`
 
@@ -197,7 +197,7 @@ Chạy test P01:
 python -B -m pytest -p no:cacheprovider tests/test_p01_hdbscan_export.py -v
 ```
 
-Kết quả đã ghi nhận: **11 test P01 passed; 21 test P01 + loader + schema passed**. Các test kiểm tra common bundle, ID ba split, assignments train/validation/test, topic summary và keywords, metadata, representative docs, projection 2D, runtime benchmark và file tổng hợp runtime.
+Kết quả đã ghi nhận: **12 test P01 passed; 22 test P01 + loader + schema passed**. Các test kiểm tra common bundle, ID ba split, assignments train/validation/test, `membership_strength`, `category_gold`, topic summary và keywords, metadata, representative docs, projection 2D, runtime benchmark và file tổng hợp runtime.
 
 Có thể kiểm tra các giá trị qua loader:
 
