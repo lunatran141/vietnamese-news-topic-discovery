@@ -19,6 +19,8 @@
   "runtime_benchmark_path": "results/hdbscan/benchmark_p01_runtime.json",
   "test_metrics_path": "results/hdbscan/test/minilm_title_content_eom_15_5_test_metrics.json",
   "runtime_summary_path": "artifacts/common/hdbscan/minilm_title_content_eom_15_5/runtime_summary.json",
+  "stability_summary_path": "results/hdbscan/stability/minilm_title_content_eom_15_5_seeds42_51/stability_summary.csv",
+  "stability_scope": "10 UMAP seeds 42-51; UMAP và HDBSCAN fit trên train; ARI gồm nhãn -1; keyword Jaccard dùng top-10 TF-IDF sau khi ghép topic theo article overlap",
   "test_runtime_scope": "MiniLM encode test + UMAP transform + HDBSCAN approximate_predict test; excludes model load, evaluation and I/O",
   "test_metric_scope": "All test articles, including outlier label -1; category_gold used only after prediction",
   "split_counts": {
@@ -41,7 +43,8 @@
     "embedding_artifact": "artifacts/embeddings/m10_v1_train_minilm.npz",
     "runtime_benchmark": "results/hdbscan/benchmark_p01_runtime.json",
     "test_metrics": "results/hdbscan/test/minilm_title_content_eom_15_5_test_metrics.json",
-    "runtime_summary": "artifacts/common/hdbscan/minilm_title_content_eom_15_5/runtime_summary.json"
+    "runtime_summary": "artifacts/common/hdbscan/minilm_title_content_eom_15_5/runtime_summary.json",
+    "stability_summary": "results/hdbscan/stability/minilm_title_content_eom_15_5_seeds42_51/stability_summary.csv"
   },
   "document_topics_columns": [
     "article_id",

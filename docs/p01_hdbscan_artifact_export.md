@@ -62,6 +62,8 @@ artifacts/common/hdbscan/minilm_title_content_eom_15_5/
 
 `manifest.json` khai báo các file bắt buộc theo common artifact schema. `run_metadata.json`, `runtime_summary.json`, `representative_docs.csv` và `projection_2d.csv` là dữ liệu bổ sung cho run và giao diện. `runtime_summary.json` liên kết benchmark train/validation với kết quả test, đồng thời giữ phạm vi của hai lần đo riêng. File benchmark gốc vẫn được lưu trong `results/hdbscan/`.
 
+`run_metadata.json` cũng liên kết `stability_summary.csv` của E04. Bảng này mô tả 10 seed UMAP từ 42 đến 51 bằng số topic, outlier rate, coverage, ARI giữa các run và keyword Jaccard. UMAP và HDBSCAN được fit trên train; stability không dùng để chọn lại seed đại diện.
+
 ## 4. Nội dung các artifact
 
 ### `document_topics.csv`

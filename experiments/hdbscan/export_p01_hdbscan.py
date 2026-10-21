@@ -70,6 +70,12 @@ RUN_METADATA_PATH = OUTPUT_DIR / "run_metadata.json"
 RUNTIME_SUMMARY_PATH = OUTPUT_DIR / "runtime_summary.json"
 MANIFEST_PATH = OUTPUT_DIR / "manifest.json"
 BENCHMARK_PATH = ROOT / "results/hdbscan/benchmark_p01_runtime.json"
+STABILITY_SUMMARY_PATH = (
+    ROOT
+    / "results/hdbscan/stability/"
+    "minilm_title_content_eom_15_5_seeds42_51/"
+    "stability_summary.csv"
+)
 EMBEDDING_RUN = "minilm_title_content"
 EXPERIMENT = "eom_15_5"
 RUN_ID = f"{EMBEDDING_RUN}_{EXPERIMENT}"
@@ -84,11 +90,65 @@ N_CLUSTERS = 101
 
 TOP_N_KEYWORDS = 10
 TOP_N_REPRESENTATIVES = 5
+STABILITY_COLUMNS = [
+    "seed",
+    "topic_count",
+    "outlier_rate",
+    "coverage",
+    "ari_between_runs",
+    "keyword_jaccard",
+]
+STABILITY_SEEDS = tuple(range(42, 52))
 
 
 def read_yaml(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as file:
         return yaml.safe_load(file)
+
+
+def validate_stability_summary() -> str:
+    """Kiểm tra stability summary trước khi liên kết vào metadata."""
+    if not STABILITY_SUMMARY_PATH.is_file():
+        raise FileNotFoundError(
+            f"Thiếu stability summary: {STABILITY_SUMMARY_PATH}"
+        )
+
+    stability = pd.read_csv(STABILITY_SUMMARY_PATH)
+    if list(stability.columns) != STABILITY_COLUMNS:
+        raise ValueError(
+            "Stability summary không đúng schema: "
+            f"cần {STABILITY_COLUMNS}"
+        )
+    if stability["seed"].tolist() != list(STABILITY_SEEDS):
+        raise ValueError("Stability summary không đủ seed 42-51")
+    if stability.isna().any().any():
+        raise ValueError("Stability summary có giá trị thiếu")
+    if not stability["topic_count"].gt(0).all():
+        raise ValueError("Stability summary có topic_count không hợp lệ")
+
+    metric_columns = [
+        "outlier_rate",
+        "coverage",
+        "ari_between_runs",
+        "keyword_jaccard",
+    ]
+    if not np.isfinite(
+        stability[metric_columns].to_numpy(dtype=float)
+    ).all():
+        raise ValueError("Stability summary có metric không hữu hạn")
+    if not stability[metric_columns].apply(
+        lambda column: column.between(0, 1)
+    ).all().all():
+        raise ValueError("Stability summary có metric ngoài [0, 1]")
+    if not np.allclose(
+        stability["coverage"].to_numpy(dtype=float),
+        1.0 - stability["outlier_rate"].to_numpy(dtype=float),
+        rtol=0,
+        atol=1e-12,
+    ):
+        raise ValueError("Stability coverage không bằng 1 - outlier_rate")
+
+    return STABILITY_SUMMARY_PATH.relative_to(ROOT).as_posix()
 
 
 def read_split_manifest() -> pd.DataFrame:
@@ -942,6 +1002,8 @@ def write_metadata(
     test_metrics: dict,
 ) -> None:
     """Ghi config, summary, run metadata và manifest."""
+    stability_summary_path = validate_stability_summary()
+
     with CONFIG_USED_PATH.open(
         "w", encoding="utf-8"
     ) as file:
@@ -1228,6 +1290,12 @@ def write_metadata(
     "runtime_summary_path": (
         RUNTIME_SUMMARY_PATH.relative_to(ROOT).as_posix()
     ),
+    "stability_summary_path": stability_summary_path,
+    "stability_scope": (
+        "10 UMAP seeds 42-51; UMAP và HDBSCAN fit trên train; "
+        "ARI gồm nhãn -1; keyword Jaccard dùng top-10 TF-IDF "
+        "sau khi ghép topic theo article overlap"
+    ),
 
     # Phạm vi test được lưu riêng.
     "test_runtime_scope": test_metrics[
@@ -1298,6 +1366,7 @@ def write_metadata(
             .relative_to(ROOT)
             .as_posix()
         ),
+        "stability_summary": stability_summary_path,
     },
     "document_topics_columns": [
         "article_id",
