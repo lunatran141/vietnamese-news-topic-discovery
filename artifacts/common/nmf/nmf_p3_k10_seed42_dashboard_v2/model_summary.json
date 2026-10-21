@@ -1,0 +1,102 @@
+{
+  "model_name": "NMF nmf_p3_k10_seed42_dashboard_v2",
+  "run_id": "nmf_p3_k10_seed42_dashboard_v2",
+  "algorithm": "NMF",
+  "representation": "TF-IDF",
+  "topic_count": 10,
+  "outlier_rate": 0.0,
+  "runtime_seconds": 25.585778200002096,
+  "runtime_scope": "fixed_k_validation_train_fit_and_final_train_val_fit; representation=two_fit_transform; transform=vectorizer_plus_nmf; evaluation=metrics_only; excludes_dataset_io_artifact_export_and_ui",
+  "evaluation_split": "test",
+  "representative_split": "train+val",
+  "metrics": {
+    "n_topics": 10,
+    "npmi_coherence": 0.44068035848390225,
+    "topic_diversity": 1.0,
+    "normalized_reconstruction_error": 0.9590277041827523,
+    "mean_primary_topic_share": 0.6687956294161916,
+    "n_iter": 44,
+    "reconstruction_error": 35.7551457971039,
+    "adjusted_rand_index": 0.5390789913596382,
+    "normalized_mutual_info": 0.651372590995637,
+    "train_count": 6493,
+    "validation_count": 1391,
+    "test_count": 1390,
+    "validation_ari": 0.5413847532679815,
+    "validation_nmi": 0.6689879241354867,
+    "validation_npmi": 0.44925738385583297,
+    "validation_reconstruction_error": 35.784748746389276,
+    "validation_normalized_reconstruction_error": 0.9594766436933756,
+    "validation_topic_diversity": 1.0,
+    "test_ari": 0.5390789913596382,
+    "test_nmi": 0.651372590995637,
+    "test_npmi": 0.44068035848390225,
+    "test_reconstruction_error": 35.7551457971039,
+    "test_normalized_reconstruction_error": 0.9590277041827523,
+    "test_topic_diversity": 1.0,
+    "representation_seconds": 18.453243400006613,
+    "fit_seconds": 5.398768699997163,
+    "validation_transform_seconds": 0.8346369999999297,
+    "test_transform_seconds": 0.7850371000022278,
+    "evaluation_seconds": 0.11409199999616249,
+    "runtime_seconds": 25.585778200002096
+  },
+  "config": {
+    "data": {
+      "dataset_path": "data/processed/p3_no_stopwords.csv",
+      "dataset_manifest_path": "data/processed/dataset_manifest.json",
+      "split_manifest_path": "data/splits/split_manifest.csv",
+      "dataset_version": "v1.0",
+      "preprocessing_variant": "p3_no_stopwords",
+      "id_column": "article_id",
+      "text_column": "text",
+      "gold_column": "category_gold",
+      "encoding": "utf-8-sig"
+    },
+    "representation": {
+      "ngram_range": [
+        1,
+        2
+      ],
+      "min_df": 3,
+      "max_df": 0.95,
+      "max_features": 50000,
+      "sublinear_tf": true,
+      "token_pattern": "(?u)\\b\\w\\w+\\b"
+    },
+    "topic_selection": {
+      "candidates": [
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "coherence_top_n": 10,
+      "selected_n_topics": 10,
+      "selection_run_id": "nmf_p3_select_review_seed42_v1",
+      "primary_metric": "npmi_coherence"
+    },
+    "model": {
+      "init": "nndsvda",
+      "solver": "cd",
+      "beta_loss": "frobenius",
+      "max_iter": 500,
+      "tolerance": 0.0001,
+      "random_seed": 42
+    },
+    "analysis": {
+      "top_words": 10,
+      "representative_documents_per_topic": 5,
+      "secondary_topic_min_share": 0.2,
+      "top_two_gap_filter": 0.1,
+      "max_topics_per_document": 3,
+      "multi_topic_cases_limit": 50,
+      "preview_characters": 500
+    },
+    "outputs": {
+      "artifact_root": "artifacts/nmf",
+      "result_root": "results/nmf"
+    }
+  }
+}

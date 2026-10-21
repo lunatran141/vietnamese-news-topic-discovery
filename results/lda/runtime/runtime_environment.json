@@ -1,0 +1,46 @@
+{
+  "created_at_utc": "2026-10-21T02:50:51.986416+00:00",
+  "benchmark_type": "separate_runtime_benchmark",
+  "dataset_version": "v1.0",
+  "preprocessing_variant": "p2_segmented",
+  "n_topics": 15,
+  "seed": 42,
+  "repeats": 5,
+  "python_version": "3.11.9",
+  "os": "Windows-10-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 141 Stepping 1, GenuineIntel",
+  "logical_cpu_count": 12,
+  "sklearn_version": "1.8.0",
+  "pandas_version": "2.3.2",
+  "numpy_version": "2.3.2",
+  "joblib_version": "1.5.3",
+  "runtime_scope": {
+    "runtime_seconds": "Wall-clock time from BoW vectorization through LDA fitting, prediction and evaluation",
+    "representation_seconds": [
+      "bow_fit",
+      "bow_transform"
+    ],
+    "fit_seconds": "lda_training",
+    "predict_seconds": "lda_inference",
+    "evaluation_seconds": [
+      "topic_keyword_extraction",
+      "document_binary_npmi",
+      "topic_diversity",
+      "adjusted_rand_index",
+      "normalized_mutual_info"
+    ],
+    "excluded": [
+      "CSV loading",
+      "text extraction",
+      "artifact serialization",
+      "auxiliary inference"
+    ],
+    "notes": [
+      "Each training repetition is a fresh fit.",
+      "Development evaluates Validation.",
+      "Final evaluates Test using the fixed approved configuration.",
+      "The benchmark does not overwrite Final artifacts.",
+      "Benchmark times are not historical Final run times."
+    ]
+  }
+}

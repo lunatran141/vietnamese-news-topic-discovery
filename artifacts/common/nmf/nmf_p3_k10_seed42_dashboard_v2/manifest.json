@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0",
+  "model_name": "NMF nmf_p3_k10_seed42_dashboard_v2",
+  "run_id": "nmf_p3_k10_seed42_dashboard_v2",
+  "model_summary_path": "model_summary.json",
+  "topic_summary_path": "topic_summary.csv",
+  "document_topics_path": "document_topics.csv",
+  "topic_keywords_path": "topic_keywords.csv",
+  "config_path": "config_used.yaml"
+}

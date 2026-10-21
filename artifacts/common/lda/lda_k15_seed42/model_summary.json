@@ -4,10 +4,62 @@
   "algorithm": "LDA",
   "representation": "Bag-of-Words",
   "topic_count": 15,
+  "evaluation_protocol": {
+    "validation": {
+      "fit_split": "train",
+      "evaluation_split": "val",
+      "model": "LDA Development K15 seed42",
+      "npmi_definition": "document_binary_common",
+      "perplexity_scope": "Development Train -> Validation"
+    },
+    "test": {
+      "fit_split": "train+val",
+      "evaluation_split": "test",
+      "model": "LDA Final K15 seed42",
+      "npmi_definition": "document_binary_common"
+    },
+    "stability": {
+      "metric": "matched_jaccard",
+      "reference_seed": 42,
+      "candidate_seeds": [
+        52,
+        62,
+        72,
+        82
+      ],
+      "std_definition": "sample_std_ddof_1"
+    }
+  },
   "outlier_rate": 0.0,
-  "runtime_seconds": null,
+  "runtime_seconds": 22.3437,
+  "representation_seconds": 2.3262,
+  "fit_seconds": 19.7644,
+  "validation_inference_seconds": 0.2198,
+  "test_inference_seconds": 0.2286,
+  "evaluation_seconds": 0.0127,
+  "runtime_scope": "Final Train+Val -> Test: BoW representation, LDA fit, Test inference and evaluation; excludes data loading and artifact export. Validation inference is reported separately from the Development Train -> Validation benchmark.",
+  "runtime_mean": 22.3437,
+  "runtime_std": 0.3521,
+  "multi_topic": {
+    "definition": "second_topic_probability >= threshold",
+    "threshold": 0.2,
+    "total_documents": 9274,
+    "multi_topic_count": 4574,
+    "multi_topic_rate": 0.49320681475091654
+  },
   "metrics": {
+    "validation_ari": 0.41522628538438183,
+    "validation_nmi": 0.5594385556458895,
+    "validation_npmi": 0.1343512695067231,
+    "test_ari": 0.40646609063623057,
+    "test_nmi": 0.5727127152837649,
+    "test_npmi": 0.14709446410016874,
+    "perplexity": 1783.2125727666962,
     "topic_diversity": 0.6533333333333333,
+    "stability_mean": 0.4433506838305599,
+    "stability_std": 0.03405692541534584,
+    "document_cosine_mean": 0.6784441960980856,
+    "document_cosine_std": 0.04590383622416562,
     "npmi_coherence": 0.14709446410016874,
     "adjusted_rand_index": 0.40646609063623057,
     "normalized_mutual_info": 0.5727127152837649,

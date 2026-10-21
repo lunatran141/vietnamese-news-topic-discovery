@@ -1,0 +1,14 @@
+{
+  "n_topics": 10,
+  "npmi_coherence": 0.44068035848390225,
+  "topic_diversity": 1.0,
+  "normalized_reconstruction_error": 0.9590277041827523,
+  "mean_primary_topic_share": 0.6687956294161916,
+  "n_iter": 44,
+  "converged": true,
+  "reconstruction_error": 35.7551457971039,
+  "adjusted_rand_index": 0.5390789913596382,
+  "normalized_mutual_info": 0.651372590995637,
+  "fit_split": "train+val",
+  "evaluation_split": "test"
+}

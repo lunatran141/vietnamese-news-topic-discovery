@@ -7,6 +7,7 @@ model_fit_split: train
 artifact_splits:
 - train
 - val
+- test
 embedding:
   run_id: minilm_title_content
   model_name: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
@@ -31,6 +32,7 @@ keyword_extraction:
   source_splits:
   - train
   - val
+  - test
   text: processed_title + 60 từ đầu processed_content
   ngram_range:
   - 1
@@ -44,10 +46,13 @@ representative_selection:
   source_splits:
   - train
   - val
+  - test
   method: Top 5 topic_probability mỗi cụm, hòa điểm theo article_id
 projection_2d:
   method: UMAP
   n_components: 2
   fit_split: train
-  transform_split: val
+  transform_split:
+  - val
+  - test
   purpose: visualization_only

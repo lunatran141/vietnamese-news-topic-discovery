@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -44,13 +45,28 @@ class ArtifactRun:
 
 def discover_artifact_runs(root: Path = ARTIFACT_ROOT) -> list[ArtifactRun]:
     """Tìm các run đã xuất manifest, không phụ thuộc tên thư mục cố định."""
+    runs = [
+        ArtifactRun(path.parent.parent.name, path.parent.name, path.parent)
+        for path in root.glob("*/*/manifest.json")
+    ]
+    current_nmf = "nmf_p3_k10_seed42_dashboard_v2"
+    if any(run.method == "nmf" and run.run_id == current_nmf for run in runs):
+        runs = [
+            run for run in runs
+            if run.method != "nmf" or run.run_id == current_nmf
+        ]
     return sorted(
-        (
-            ArtifactRun(path.parent.parent.name, path.parent.name, path.parent)
-            for path in root.glob("*/*/manifest.json")
-        ),
+        runs,
         key=lambda run: (run.method, run.run_id),
     )
+
+
+def discover_model_runs(root: str | Path = ARTIFACT_ROOT) -> dict[str, str]:
+    """Dạng mapping dùng bởi màn hình phân tích chi tiết NMF."""
+    return {
+        run.label: str(run.path)
+        for run in discover_artifact_runs(Path(root))
+    }
 
 
 @st.cache_resource(show_spinner=False)
@@ -244,3 +260,109 @@ def get_topic_trend(
         return pd.DataFrame(columns=["period", "count"])
     counts = selected.groupby(selected["date"].dt.to_period(frequency)).size()
     return pd.DataFrame({"period": counts.index.astype(str), "count": counts.values})
+
+
+def filter_documents(
+    bundle: ArtifactBundle,
+    split: str | None = None,
+    multi_topic_only: bool = False,
+    gap_max: float | None = None,
+    query: str = "",
+) -> pd.DataFrame:
+    """Lọc bài cho phân tích NMF/HDBSCAN mà không đổi artifact gốc."""
+    frame = bundle.document_topics.copy()
+    if split and split != "all":
+        frame = frame.loc[frame["split"].eq(split)]
+    if multi_topic_only:
+        if "is_multi_topic" not in frame:
+            return frame.iloc[:0]
+        flags = frame["is_multi_topic"].astype(str).str.lower().eq("true")
+        frame = frame.loc[flags]
+    if gap_max is not None:
+        if "top_two_share_gap" not in frame:
+            return frame.iloc[:0]
+        gap = pd.to_numeric(frame["top_two_share_gap"], errors="coerce")
+        frame = frame.loc[gap.le(gap_max)]
+    if query:
+        matches = frame["article_id"].astype(str).str.contains(
+            query, case=False, regex=False
+        )
+        if "title" in frame:
+            matches |= frame["title"].fillna("").astype(str).str.contains(
+                query, case=False, regex=False
+            )
+        frame = frame.loc[matches]
+    return frame.reset_index(drop=True)
+
+
+def get_article_distribution(
+    bundle: ArtifactBundle,
+    article_id: str,
+) -> pd.DataFrame:
+    """Lấy toàn bộ topic share của một bài NMF."""
+    rows = bundle.document_topics.loc[
+        bundle.document_topics["article_id"].eq(article_id)
+    ]
+    if rows.empty:
+        return pd.DataFrame(columns=["topic_id", "topic_share"])
+    values = [
+        {
+            "topic_id": int(column.split("_")[1]),
+            "topic_share": float(rows.iloc[0][column]),
+        }
+        for column in rows.columns
+        if re.fullmatch(r"topic_\d+_share", column)
+    ]
+    return pd.DataFrame(values, columns=["topic_id", "topic_share"]).sort_values(
+        ["topic_share", "topic_id"],
+        ascending=[False, True],
+        kind="stable",
+    ).reset_index(drop=True)
+
+
+def get_split_metrics(bundle: ArtifactBundle) -> pd.DataFrame:
+    """Trả metric validation/test đúng phạm vi đã công bố."""
+    metrics = bundle.model_summary.metrics
+    rows = []
+    for split in ("validation", "test"):
+        row = {
+            "split": split,
+            "fit_split": "train" if split == "validation" else "train+val",
+        }
+        for label, legacy in (
+            ("ari", "adjusted_rand_index"),
+            ("nmi", "normalized_mutual_info"),
+            ("npmi", "npmi_coherence"),
+            ("topic_diversity", "topic_diversity"),
+            ("reconstruction_error", "reconstruction_error"),
+            ("normalized_reconstruction_error", "normalized_reconstruction_error"),
+        ):
+            row[label] = metrics.get(f"{split}_{label}")
+            if (
+                row[label] is None
+                and split == "test"
+                and bundle.model_summary.algorithm.upper() in {"NMF", "LDA"}
+            ):
+                row[label] = metrics.get(legacy)
+        if any(
+            value is not None
+            for key, value in row.items()
+            if key not in {"split", "fit_split"}
+        ):
+            rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def load_optional_table(
+    artifact_dir: str | Path,
+    filename: str,
+) -> pd.DataFrame:
+    """Đọc bảng phụ cho giao diện, giới hạn ở tên file đã biết."""
+    if filename not in {"representative_docs.csv", "projection_2d.csv"}:
+        raise ValueError("Bảng phụ không được hỗ trợ")
+    path = Path(artifact_dir) / filename
+    return (
+        pd.read_csv(path, encoding="utf-8-sig")
+        if path.is_file()
+        else pd.DataFrame()
+    )

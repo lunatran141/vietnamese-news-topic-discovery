@@ -29,6 +29,7 @@ from app.data_service import (
     load_projection,
     load_representatives,
 )
+from app.nmf_dashboard import render_nmf_details
 
 
 API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000").rstrip("/")
@@ -194,6 +195,10 @@ def render_overview(run: ArtifactRun, bundle, split: str) -> None:
     display["percentage"] = (display["percentage"] * 100).round(2)
     st.dataframe(display, width="stretch", hide_index=True)
     table_download(display, f"{run.run_id}_{split}_topics.csv", "Tải bảng topic CSV")
+    if run.method == "nmf":
+        st.divider()
+        st.subheader("Phân tích chi tiết NMF")
+        render_nmf_details(bundle, str(run.path))
 
 
 def render_topic_detail(run: ArtifactRun, bundle, split: str) -> None:
@@ -411,7 +416,7 @@ def render_errors(run: ArtifactRun, bundle, split: str) -> None:
             st.info("Run này chưa xuất dấu hiệu bài đa chủ đề.")
             return
         cases = documents.loc[documents["is_multi_topic"].fillna(False).astype(bool)]
-        st.caption("NMF đánh dấu bài có nhiều topic đủ trọng số; đây là trường hợp cần xem xét, không tự động là lỗi.")
+        st.caption("Artifact của mô hình đánh dấu bài có nhiều topic đủ trọng số; đây là trường hợp cần xem xét, không tự động là lỗi.")
     elif selected == "Topic chồng lấn":
         if "top_two_share_gap" not in documents:
             st.info("Run này chưa xuất khoảng cách giữa hai topic mạnh nhất.")
@@ -429,7 +434,14 @@ def render_errors(run: ArtifactRun, bundle, split: str) -> None:
         cases = documents.loc[documents["topic_id"].isin(broad)]
         st.caption("Các topic thuộc nhóm 10% lớn nhất theo số bài. Kích thước lớn là tín hiệu để kiểm tra, chưa chứng minh topic sai.")
     st.metric("Số bài trong nhóm đang xem", len(cases))
-    columns = [c for c in ("article_id", "title", "topic_id", "split", "source", "published_at", "topic_probability", "secondary_topic_id", "secondary_topic_share") if c in cases]
+    columns = [c for c in (
+        "article_id", "title", "topic_id", "split", "source",
+        "published_at", "topic_probability", "topic_share",
+        "soft_primary_topic_id", "soft_primary_membership_strength",
+        "secondary_topic_id", "secondary_topic_share", "second_topic_id",
+        "second_topic_share", "second_membership_strength",
+        "top_two_share_gap", "is_multi_topic",
+    ) if c in cases]
     st.dataframe(cases[columns].head(300), width="stretch", hide_index=True)
     table_download(cases[columns], f"{run.run_id}_{split}_error_cases.csv", "Tải danh sách CSV")
 
@@ -443,9 +455,21 @@ def render_experiments(run: ArtifactRun) -> None:
             st.image(str(path), width="stretch")
     tables = {
         "kmeans": ["results/kmeans/kmeans_k_search_metrics.csv", "results/kmeans/m03_preprocessing_ablation_metrics.csv", "results/kmeans/m03a_title_vs_content_metrics.csv"],
-        "nmf": ["results/nmf/nmf_p3_select_review_seed42_v1/topic_count_metrics.csv", "results/nmf/nmf_p3_k10_seed42_v1/multi_topic_cases.csv"],
+        "nmf": [
+            "results/nmf/nmf_p3_select_review_seed42_v1/topic_count_metrics.csv",
+            "results/nmf/nmf_p3_k10_seed42_dashboard_v2/split_metrics.csv",
+            "results/nmf/nmf_p3_k10_seed42_dashboard_v2/runtime_by_stage.csv",
+            "results/nmf/nmf_p3_k10_seed42_dashboard_v2/multi_topic_cases.csv",
+        ],
         "lda": ["results/lda/m08/topic_number_results.csv", "results/lda/m09/stability_metrics.csv", "results/lda/m09/runtime_by_seed.csv"],
-        "hdbscan": ["results/hdbscan/m11_summary.csv", "results/hdbscan/validation/m11_validation_metrics.csv", "results/hdbscan/outlier_analysis/m12_outlier_rates.csv"],
+        "hdbscan": [
+            "results/hdbscan/m11_summary.csv",
+            "results/hdbscan/validation/m11_validation_metrics.csv",
+            "results/hdbscan/outlier_analysis/m12_outlier_rates.csv",
+            "results/hdbscan/stability/minilm_title_content_eom_15_5_seeds42_51/stability_summary.csv",
+            "results/hdbscan/stability/minilm_title_content_eom_15_5_seeds42_51/pairwise_keyword_jaccard.csv",
+            "results/hdbscan/membership/minilm_title_content_eom_15_5/membership_summary.csv",
+        ],
         "bertopic": ["results/bertopic_experiments/summary.csv"],
     }
     for relative_path in tables.get(run.method, []):

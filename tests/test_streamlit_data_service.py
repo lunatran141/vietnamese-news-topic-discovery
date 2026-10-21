@@ -109,10 +109,10 @@ def test_split_counts_are_derived_from_assignments() -> None:
 
 
 def test_optional_map_and_metadata() -> None:
-    """Projection có thể thiếu, nhưng metadata tìm kiếm vẫn tải được."""
+    """Các run đã bàn giao projection và metadata tìm kiếm tải được."""
     runs = {run.method: run for run in discover_artifact_runs()}
     assert not load_projection(str(runs["lda"].path)).empty
-    assert load_projection(str(runs["kmeans"].path)).empty
+    assert not load_projection(str(runs["kmeans"].path)).empty
 
     bundle = load_dashboard_bundle(str(runs["kmeans"].path))
     documents = enrich_documents(get_document_table(bundle, "train"))
@@ -126,13 +126,14 @@ def test_hdbscan_validation_artifacts_integrate_with_ui() -> None:
     run = runs["hdbscan"]
     bundle = load_dashboard_bundle(str(run.path))
 
-    assert get_available_splits(bundle) == ["train", "val"]
+    assert get_available_splits(bundle) == ["train", "val", "test"]
     assert len(get_document_table(bundle, "train")) == 6493
     assert len(get_document_table(bundle, "val")) == 1391
+    assert len(get_document_table(bundle, "test")) == 1390
 
     projection = load_projection(str(run.path))
-    assert len(projection) == 7884
-    assert set(projection["split"]) == {"train", "val"}
+    assert len(projection) == 9274
+    assert set(projection["split"]) == {"train", "val", "test"}
     assert projection["article_id"].is_unique
 
     representatives = get_representatives_for_topic(str(run.path), 1, "val")

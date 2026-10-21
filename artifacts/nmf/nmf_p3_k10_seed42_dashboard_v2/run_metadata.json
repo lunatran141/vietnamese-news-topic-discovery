@@ -1,0 +1,51 @@
+{
+  "run_id": "nmf_p3_k10_seed42_dashboard_v2",
+  "method": "NMF",
+  "tasks": [
+    "M04",
+    "M05",
+    "M06"
+  ],
+  "stage": "dashboard",
+  "created_at_utc": "2026-10-21T04:29:26.218083+00:00",
+  "dataset_version": "v1.0",
+  "preprocessing_variant": "p3_no_stopwords",
+  "dataset_sha256": "663a34f309ef1f6d8d2dc61a68fd041d5f7aac71aa930dccb74841847a7d6710",
+  "split_counts": {
+    "train": 6493,
+    "val": 1391,
+    "test": 1390
+  },
+  "random_seed": 42,
+  "versions": {
+    "python": "3.14.0",
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0"
+  },
+  "selected_n_topics": 10,
+  "selection_run_id": "nmf_p3_select_review_seed42_v1",
+  "fit_split": "train+val",
+  "evaluation_split": "test",
+  "test_accessed": true,
+  "fixed_k_remeasurement": true,
+  "representative_split": "train+val",
+  "model_file": "model/nmf_pipeline.joblib",
+  "representation_seconds": 18.453243400006613,
+  "fit_seconds": 5.398768699997163,
+  "validation_transform_seconds": 0.8346369999999297,
+  "test_transform_seconds": 0.7850371000022278,
+  "evaluation_seconds": 0.11409199999616249,
+  "runtime_seconds": 25.585778200002096,
+  "runtime_scope": "fixed_k_validation_train_fit_and_final_train_val_fit; representation=two_fit_transform; transform=vectorizer_plus_nmf; evaluation=metrics_only; excludes_dataset_io_artifact_export_and_ui",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "processor": "Intel64 Family 6 Model 141 Stepping 1, GenuineIntel",
+    "logical_cpu_count": 16,
+    "thread_limits": {
+      "OPENBLAS_NUM_THREADS": "2",
+      "OMP_NUM_THREADS": "2",
+      "MKL_NUM_THREADS": "2"
+    }
+  }
+}
