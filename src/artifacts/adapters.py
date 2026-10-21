@@ -828,6 +828,57 @@ def export_lda_artifacts(
 
     topic_summary = pd.DataFrame(summary_rows)
 
+    # Load the LDA Final runtime benchmark when available.
+    # Resolve relative to the repository, not the current directory.
+    project_root = Path(__file__).resolve().parents[2]
+    runtime_path = (
+        project_root
+        / "results"
+        / "lda"
+        / "runtime"
+        / "runtime_summary.csv"
+    )
+
+    runtime_seconds = None
+
+    if runtime_path.is_file():
+        runtime_df = pd.read_csv(runtime_path)
+
+        required_columns = {
+            "run",
+            "fit_split",
+            "inference_split",
+            "stage",
+            "repeats",
+            "mean_seconds",
+        }
+
+        missing_columns = required_columns - set(runtime_df.columns)
+        if missing_columns:
+            raise ValueError(
+                f"Missing LDA runtime columns: {sorted(missing_columns)}"
+            )
+
+        runtime_rows = runtime_df.loc[
+            (runtime_df["run"] == "lda_k15_seed42_final_benchmark")
+            & (runtime_df["fit_split"] == "train+val")
+            & (runtime_df["inference_split"] == "test")
+            & (runtime_df["stage"] == "runtime_seconds")
+            & (runtime_df["repeats"] == 5)
+        ]
+
+        if len(runtime_rows) != 1:
+            raise ValueError(
+                "Expected exactly one LDA Final runtime benchmark row"
+            )
+
+        runtime_seconds = float(
+            runtime_rows.iloc[0]["mean_seconds"]
+        )
+
+        if not np.isfinite(runtime_seconds) or runtime_seconds <= 0:
+            raise ValueError("Invalid LDA Final runtime")
+
     run_id = "lda_k15_seed42"
     model_name = "LDA K15"
 
@@ -838,7 +889,7 @@ def export_lda_artifacts(
         "representation": "Bag-of-Words",
         "topic_count": k,
         "outlier_rate": 0.0,
-        "runtime_seconds": None,
+        "runtime_seconds": runtime_seconds,
         "metrics": {
             "topic_diversity": float(
                 final_metrics["topic_diversity"]

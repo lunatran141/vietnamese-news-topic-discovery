@@ -5,7 +5,7 @@
   "representation": "Bag-of-Words",
   "topic_count": 15,
   "outlier_rate": 0.0,
-  "runtime_seconds": null,
+  "runtime_seconds": 22.3437,
   "metrics": {
     "topic_diversity": 0.6533333333333333,
     "npmi_coherence": 0.14709446410016874,
