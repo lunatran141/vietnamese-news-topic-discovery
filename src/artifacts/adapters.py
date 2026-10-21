@@ -1041,6 +1041,10 @@ def export_nmf_artifacts(
     metadata = _read_json(source_dir / "run_metadata.json")
     metrics = _read_json(result_dir / "test_metrics.json")
     assignments = read_nmf_parquet_assignments(source_dir)
+    threshold = float(config.get("analysis", {}).get("secondary_topic_min_share", 0.20))
+    gap_threshold = float(config.get("analysis", {}).get("top_two_gap_filter", 0.10))
+    assignments["is_multi_topic"] = assignments["second_topic_share"].ge(threshold)
+    assignments["is_close_top_two"] = assignments["top_two_share_gap"].le(gap_threshold)
     topic_count = int(metadata.get("selected_n_topics", 0))
     run_id = str(metadata.get("run_id", source_dir.name))
     if topic_count < 2 or run_id != source_dir.name:
@@ -1243,6 +1247,13 @@ def export_nmf_artifacts(
         (assignments["split"] == "val").sum()
     )
     numeric_metrics["test_count"] = int((assignments["split"] == "test").sum())
+    dashboard_metrics_path = result_dir / "dashboard_metrics.json"
+    if dashboard_metrics_path.is_file():
+        numeric_metrics.update({
+            key: value for key, value in _read_json(dashboard_metrics_path).items()
+            if isinstance(value, (int, float)) and not isinstance(value, bool)
+            and np.isfinite(value)
+        })
     model_summary = {
         "model_name": model_name,
         "run_id": run_id,
@@ -1251,6 +1262,9 @@ def export_nmf_artifacts(
         "topic_count": topic_count,
         "outlier_rate": float(assignments["is_outlier"].mean()),
         "runtime_seconds": metadata.get("runtime_seconds"),
+        "runtime_scope": metadata.get("runtime_scope"),
+        "evaluation_split": "test",
+        "representative_split": metadata.get("representative_split", "source_artifact"),
         "metrics": numeric_metrics,
         "config": config,
     }

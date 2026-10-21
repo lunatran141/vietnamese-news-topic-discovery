@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import argparse
 from pathlib import Path
 
 import numpy as np
@@ -406,6 +407,8 @@ def export_evaluation_files(reviewer_data, topic_mapping):
     topics_form["topic_interpretability_1_5"] = ""
     topics_form["proposed_topic_label"] = ""
     topics_form["mixed_topic_yes_no"] = ""
+    topics_form["too_broad_yes_no"] = ""
+    topics_form["hard_to_name_yes_no"] = ""
     topics_form["topic_notes"] = ""
 
     documents_form = samples[
@@ -463,8 +466,19 @@ def export_evaluation_files(reviewer_data, topic_mapping):
     print("Reviewer forms: 4 (2 topic forms + 2 document forms)")
     print("Output:", OUTPUT_DIR)
     print("Export validation: PASS")
+    (OUTPUT_DIR / "metadata.json").write_text(json.dumps({
+        "seed": SEED, "lda_run_id": LDA_DIR.name, "nmf_run_id": NMF_DIR.name,
+        "sampling_split": "train+val", "reviewers": ["R1", "R2"],
+        "topic_count": 25, "document_topic_pairs": 125,
+        "status": "pending", "scores_generated_by_ai": False,
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--nmf-dir", type=Path, default=NMF_DIR)
+    parser.add_argument("--output-dir", type=Path, default=OUTPUT_DIR)
+    args = parser.parse_args()
+    NMF_DIR, OUTPUT_DIR = args.nmf_dir, args.output_dir
     inputs = load_inputs()
     samples = select_samples(inputs)
 
