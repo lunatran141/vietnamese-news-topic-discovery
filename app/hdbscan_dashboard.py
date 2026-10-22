@@ -3,11 +3,17 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
+
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 
 import altair as alt
 import pandas as pd
 import streamlit as st
 
+from app.ui.theme import OUTLIER_COLOR
 from app.data_service import (
     filter_documents,
     get_hdbscan_split_summary,
@@ -631,7 +637,7 @@ def _render_projection(
             .mark_circle(
                 size=45,
                 opacity=0.55,
-                color="#9E9E9E",
+                color=OUTLIER_COLOR,
             )
             .encode(
                 x=alt.X(
