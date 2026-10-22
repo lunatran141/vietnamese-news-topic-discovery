@@ -1,7 +1,7 @@
 """Trang 4: Đánh giá và so sánh (so sánh mô hình, kết quả thí nghiệm, chuyên sâu)."""
 
 from __future__ import annotations
-
+import altair as alt
 from pathlib import Path
 
 import pandas as pd
@@ -20,6 +20,8 @@ from app.ui.components import (
     build_topic_labels, data_table, label_of, note, page_header, table_download,
 )
 from app.ui.context import AnalysisContext
+import json
+from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -146,6 +148,43 @@ def comparison_table(runs: list[ArtifactRun], split: str) -> pd.DataFrame:
         if split != "all" and split not in available:
             continue
         overview = get_model_overview(bundle, split, artifact_dir=run.path)
+        ari = overview["adjusted_rand_index"]
+        nmi = overview["normalized_mutual_info"]
+        coherence = overview["coherence"]
+
+        if bundle.model_summary.algorithm.strip().lower() == "hdbscan":
+            metric_docs = bundle.document_topics
+            if split != "all":
+                metric_docs = metric_docs.loc[
+                    metric_docs["split"].eq(split)
+                ]
+
+            if (
+                not metric_docs.empty
+                and metric_docs["category_gold"].notna().all()
+                and metric_docs["topic_id"].notna().all()
+            ):
+                ari = round(float(adjusted_rand_score(
+                    metric_docs["category_gold"],
+                    metric_docs["topic_id"],
+                )), 4)
+                nmi = round(float(normalized_mutual_info_score(
+                    metric_docs["category_gold"],
+                    metric_docs["topic_id"],
+                )), 4)
+
+            coherence_path = run.path / "coherence_summary.json"
+            if coherence_path.is_file():
+                coherence_data = json.loads(
+                    coherence_path.read_text(encoding="utf-8-sig")
+                )
+                if coherence_data.get("run_id") != bundle.model_summary.run_id:
+                    raise ValueError("Coherence artifact không đúng run_id")
+
+                split_result = coherence_data.get(
+                    "scores_by_split", {}
+                ).get(split, {})
+                coherence = split_result.get("npmi_coherence")
         rows.append({
             "Mô hình": bundle.model_summary.algorithm,
             "Run": bundle.model_summary.run_id,
@@ -157,9 +196,9 @@ def comparison_table(runs: list[ArtifactRun], split: str) -> pd.DataFrame:
                 round(100 * overview["outlier_rate"], 2) if overview["outlier_rate"] is not None else None
             ),
             "Topic diversity (run)": overview["topic_diversity"],
-            "ARI (run)": overview["adjusted_rand_index"],
-            "NMI (run)": overview["normalized_mutual_info"],
-            "Coherence (run)": overview["coherence"],
+            "ARI (run)": ari,
+            "NMI (run)": nmi,
+            "Coherence (run)": coherence,
             "Fit (giây, run)": overview["fit_seconds"],
             "Runtime pipeline (giây, run)": overview["runtime_seconds"],
             "Biểu diễn": overview["representation"],
@@ -212,6 +251,224 @@ def _render_comparison(runs: list[ArtifactRun], current: ArtifactRun) -> None:
             with st.expander("Cấu hình run"):
                 st.json(bundle.model_summary.config)
 
+def _render_hdbscan_stability_charts(frame: pd.DataFrame) -> None:
+    required = {
+        "seed", "topic_count", "outlier_rate",
+        "coverage", "ari_between_runs", "keyword_jaccard",
+    }
+    if not required.issubset(frame.columns):
+        st.warning("Stability Summary thiếu cột để vẽ biểu đồ.")
+        return
+
+    data = frame[list(required)].copy()
+    for column in required:
+        data[column] = pd.to_numeric(data[column], errors="coerce")
+    data = data.dropna(subset=["seed"]).sort_values("seed")
+    data["seed"] = data["seed"].astype(int)
+
+    st.markdown("**Số cụm theo seed UMAP**")
+    count_chart = (
+        alt.Chart(data)
+        .mark_bar()
+        .encode(
+            x=alt.X("seed:O", title="Seed UMAP"),
+            y=alt.Y("topic_count:Q", title="Số cụm"),
+            tooltip=["seed:O", "topic_count:Q"],
+        )
+        .properties(height=260)
+    )
+    st.altair_chart(count_chart, use_container_width=True)
+
+    rates = data[
+        ["seed", "outlier_rate", "coverage"]
+    ].melt(
+        id_vars="seed",
+        var_name="metric",
+        value_name="value",
+    )
+    rates["metric"] = rates["metric"].map({
+        "outlier_rate": "Tỷ lệ nhiễu",
+        "coverage": "Độ bao phủ",
+    })
+
+    st.markdown("**Tỷ lệ nhiễu và độ bao phủ**")
+    rate_chart = (
+        alt.Chart(rates)
+        .mark_line(point=True)
+        .encode(
+            x=alt.X("seed:O", title="Seed UMAP"),
+            y=alt.Y(
+                "value:Q",
+                title="Tỷ lệ",
+                axis=alt.Axis(format=".0%"),
+                scale=alt.Scale(domain=[0, 1]),
+            ),
+            color=alt.Color("metric:N", title="Chỉ số"),
+            tooltip=[
+                "seed:O",
+                "metric:N",
+                alt.Tooltip("value:Q", format=".2%"),
+            ],
+        )
+        .properties(height=260)
+    )
+    st.altair_chart(rate_chart, use_container_width=True)
+
+    scores = data[
+        ["seed", "ari_between_runs", "keyword_jaccard"]
+    ].melt(
+        id_vars="seed",
+        var_name="metric",
+        value_name="value",
+    )
+    scores["metric"] = scores["metric"].map({
+        "ari_between_runs": "ARI giữa các run",
+        "keyword_jaccard": "Keyword Jaccard",
+    })
+
+    st.markdown("**Độ nhất quán giữa các seed**")
+    score_chart = (
+        alt.Chart(scores)
+        .mark_line(point=True)
+        .encode(
+            x=alt.X("seed:O", title="Seed UMAP"),
+            y=alt.Y(
+                "value:Q",
+                title="Điểm",
+                scale=alt.Scale(domain=[0, 1]),
+            ),
+            color=alt.Color("metric:N", title="Chỉ số"),
+            tooltip=[
+                "seed:O",
+                "metric:N",
+                alt.Tooltip("value:Q", format=".3f"),
+            ],
+        )
+        .properties(height=260)
+    )
+    st.altair_chart(score_chart, use_container_width=True)
+
+    st.caption(
+        "ARI và Keyword Jaccard tại mỗi seed là giá trị trung bình "
+        "của các cặp chứa seed đó; các cặp không phải thí nghiệm độc lập."
+    )
+
+def _render_hdbscan_m12_charts(frame: pd.DataFrame) -> None:
+    required = {
+        "embedding_run", "experiment", "group_type", "group_value",
+        "n_articles", "n_outliers", "outlier_percent",
+    }
+    if not required.issubset(frame.columns):
+        st.warning("M12 Outlier Rates thiếu cột để vẽ biểu đồ.")
+        return
+
+    data = frame.copy()
+    for column in ("n_articles", "n_outliers", "outlier_percent"):
+        data[column] = pd.to_numeric(data[column], errors="coerce")
+
+    embeddings = sorted(data["embedding_run"].dropna().unique())
+    default_embedding = "minilm_title_content"
+    embedding = st.selectbox(
+        "Embedding",
+        embeddings,
+        index=(
+            embeddings.index(default_embedding)
+            if default_embedding in embeddings else 0
+        ),
+        key="m12_chart_embedding",
+    )
+
+    available = data.loc[data["embedding_run"].eq(embedding)]
+    experiments = sorted(available["experiment"].dropna().unique())
+    default_experiment = "eom_15_5"
+    experiment = st.selectbox(
+        "Cấu hình HDBSCAN",
+        experiments,
+        index=(
+            experiments.index(default_experiment)
+            if default_experiment in experiments else 0
+        ),
+        key="m12_chart_experiment",
+    )
+
+    selected = available.loc[
+        available["experiment"].eq(experiment)
+    ].copy()
+
+    overall = selected.loc[selected["group_type"].eq("overall")]
+    if not overall.empty:
+        row = overall.iloc[0]
+        st.metric(
+            "Tỷ lệ outlier chung",
+            f"{row['outlier_percent']:.2f}%",
+            help=(
+                f"{int(row['n_outliers']):,} bài outlier trên "
+                f"{int(row['n_articles']):,} bài train"
+            ),
+        )
+
+    for group_type, title, order in (
+        (
+            "content_length",
+            "Theo độ dài nội dung",
+            ["0-99", "100-299", "300-599", "600+"],
+        ),
+        (
+            "source",
+            "Theo nguồn báo",
+            ["tuoitre", "vietnamnet", "vnexpress"],
+        ),
+    ):
+        subset = selected.loc[
+            selected["group_type"].eq(group_type)
+        ].dropna(subset=["outlier_percent"])
+
+        if subset.empty:
+            continue
+
+        st.markdown(f"**{title}**")
+        chart = (
+            alt.Chart(subset)
+            .mark_bar()
+            .encode(
+                y=alt.Y(
+                    "group_value:N",
+                    title="Nhóm",
+                    sort=order,
+                ),
+                x=alt.X(
+                    "outlier_percent:Q",
+                    title="Tỷ lệ outlier (%)",
+                    scale=alt.Scale(domain=[0, 100]),
+                ),
+                tooltip=[
+                    alt.Tooltip("group_value:N", title="Nhóm"),
+                    alt.Tooltip(
+                        "n_articles:Q",
+                        title="Số bài",
+                        format=",.0f",
+                    ),
+                    alt.Tooltip(
+                        "n_outliers:Q",
+                        title="Số outlier",
+                        format=",.0f",
+                    ),
+                    alt.Tooltip(
+                        "outlier_percent:Q",
+                        title="Outlier (%)",
+                        format=".2f",
+                    ),
+                ],
+            )
+            .properties(height=max(180, len(subset) * 45))
+        )
+        st.altair_chart(chart, use_container_width=True)
+
+    st.caption(
+        "Tỷ lệ được tính trên tập train cho cấu hình đã chọn. "
+        "Các nhóm có số bài khác nhau; xem số bài trong tooltip. "
+        "Cột outlier_percent của CSV đã ở đơn vị phần trăm."
+    )
 
 def _render_experiments(run: ArtifactRun) -> None:
     note("Hình và bảng kết quả đã được nhóm xuất trong repo. Các phép đo có protocol riêng cho từng phương pháp.")
@@ -228,9 +485,31 @@ def _render_experiments(run: ArtifactRun) -> None:
             frame = pd.read_csv(path, encoding="utf-8-sig")
             if run.method == "bertopic" and path.name == "summary.csv":
                 _render_bertopic_summary(frame)
+            elif (
+                run.method == "hdbscan"
+                and path.name == "stability_summary.csv"
+            ):
+                _render_hdbscan_stability_charts(frame)
+                if st.checkbox(
+                    "Hiện bảng số liệu gốc",
+                    value=False,
+                    key="hdbscan_stability_raw_table",
+                ):
+                    data_table(frame.head(100))
+            elif (
+                run.method == "hdbscan"
+                and path.name == "m12_outlier_rates.csv"
+            ):
+                _render_hdbscan_m12_charts(frame)
+                if st.checkbox(
+                    "Hiện bảng M12 gốc",
+                    value=False,
+                    key="hdbscan_m12_raw_table",
+                ):
+                    data_table(frame.head(100))
+                    st.caption(f"Hiển thị tối đa 100/{len(frame):,} hàng.")
             else:
                 data_table(frame.head(100))
-            st.caption(f"Hiển thị tối đa 100/{len(frame):,} hàng.")
             table_download(frame, path.name, "Tải bảng CSV")
     if run.method == "bertopic":
         _render_bertopic_config(run)

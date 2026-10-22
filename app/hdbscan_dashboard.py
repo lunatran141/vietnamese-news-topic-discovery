@@ -1,7 +1,7 @@
 """Các màn hình phân tích HDBSCAN từ common artifact."""
 
 from __future__ import annotations
-
+import json
 from pathlib import Path
 import sys
 
@@ -61,6 +61,15 @@ def _render_quality_and_runtime(
     """Hiển thị metric và runtime của run đại diện."""
 
     metrics = bundle.model_summary.metrics
+    coherence_path = Path(artifact_dir) / "coherence_summary.json"
+    coherence = None
+    if coherence_path.is_file():
+        coherence_data = json.loads(
+            coherence_path.read_text(encoding="utf-8-sig")
+        )
+        if coherence_data.get("run_id") != bundle.model_summary.run_id:
+            raise ValueError("Coherence artifact không đúng run_id")
+        coherence = coherence_data.get("npmi_coherence")
     runtime = load_hdbscan_runtime(artifact_dir)
 
     train_validation = runtime.get(
@@ -128,11 +137,12 @@ def _render_quality_and_runtime(
         _format_number(test_nmi, digits=4),
     )
     second_row[2].metric(
-        "Coherence",
-        "N/A",
+        "Coherence (NPMI)",
+        _format_number(coherence, digits=4),
         help=(
-            "Run HDBSCAN này chưa đo coherence. "
-            "Không thay giá trị thiếu bằng 0."
+            "NPMI đồng xuất hiện của 10 từ khóa mỗi cụm trên 9.274 bài "
+            "train + val + test. Loại topic -1. Đây là điểm mô tả "
+            "sau huấn luyện, không phải test coherence độc lập."
         ),
     )
     second_row[3].metric(
@@ -1218,6 +1228,142 @@ def _render_hard_cases(
                 "assignment nhạy với seed."
             )
 
+def _render_topic_naming(bundle) -> None:
+    """Xem tên đã duyệt, từ khóa và bài ví dụ của 101 cụm."""
+    st.subheader("Diễn giải 101 chủ đề HDBSCAN")
+
+    run_id = bundle.model_summary.run_id
+    expected_run = "minilm_title_content_eom_15_5"
+
+    if run_id != expected_run:
+        st.info(
+            "Bộ tên này chỉ dành cho run "
+            "minilm_title_content_eom_15_5."
+        )
+        return
+
+    naming_dir = (
+        _PROJECT_ROOT / "results/hdbscan/topic_naming"
+    )
+    review_path = naming_dir / "topic_name_review.csv"
+    examples_path = naming_dir / "topic_name_examples.csv"
+    mapping_path = (
+        _PROJECT_ROOT
+        / "artifacts/common/hdbscan"
+        / expected_run
+        / "topic_display_mapping.json"
+    )
+
+    if not all(
+        path.is_file()
+        for path in (review_path, examples_path, mapping_path)
+    ):
+        st.warning("Chưa đủ CSV và JSON đặt tên HDBSCAN.")
+        return
+
+    import json
+
+    review = pd.read_csv(
+        review_path,
+        encoding="utf-8-sig",
+        keep_default_na=False,
+    )
+    examples = pd.read_csv(
+        examples_path,
+        encoding="utf-8-sig",
+    )
+    payload = json.loads(
+        mapping_path.read_text(encoding="utf-8")
+    )
+    mapping = payload["mapping"]
+
+    if (
+        payload.get("run_id") != expected_run
+        or len(review) != 101
+        or len(mapping) != 101
+        or "-1" in mapping
+        or set(review["topic_id"].astype(str)) != set(mapping)
+    ):
+        st.error("Phiếu và mapping không khớp 101 cụm.")
+        return
+
+    st.metric("Cụm có tên", "101 / 101")
+    st.caption(
+        "Tên được lưu theo từng topic_id của run đã chọn. "
+        "Nhãn -1 là outlier, không phải một chủ đề."
+    )
+
+    columns = [
+        "topic_id",
+        "document_count",
+        "suggest_label",
+        "display_name",
+        "top_keywords",
+        "scope_notes",
+        "review_status",
+    ]
+    st.dataframe(
+        review[columns],
+        hide_index=True,
+        width="stretch",
+    )
+
+    topic_ids = review["topic_id"].astype(int).tolist()
+    selected_id = st.selectbox(
+        "Chọn cụm để đọc kỹ",
+        topic_ids,
+        format_func=lambda topic_id: (
+            f"T{topic_id} · "
+            f"{mapping[str(topic_id)]['display_name']}"
+        ),
+        key="hdbscan_topic_naming_id",
+    )
+
+    selected = review.loc[
+        review["topic_id"].eq(selected_id)
+    ].iloc[0]
+
+    st.markdown(
+        f"### T{selected_id} · {selected['display_name']}"
+    )
+    st.write(f"**Số bài:** {int(selected['document_count']):,}")
+    st.write(f"**Tên gợi ý:** {selected['suggest_label']}")
+    st.write(f"**Từ khóa:** {selected['top_keywords']}")
+    st.write(f"**Phạm vi:** {selected['scope_notes']}")
+
+    topic_examples = examples.loc[
+        examples["topic_id"].eq(selected_id)
+    ]
+
+    for sample_type, heading in (
+        ("representative", "Bài đại diện"),
+        ("random_train", "Bài train lấy ngẫu nhiên"),
+    ):
+        st.markdown(f"#### {heading}")
+        rows = topic_examples.loc[
+            topic_examples["sample_type"].eq(sample_type)
+        ]
+        st.dataframe(
+            rows[
+                [
+                    "article_id",
+                    "split",
+                    "title",
+                    "content_excerpt",
+                    "url",
+                ]
+            ],
+            hide_index=True,
+            width="stretch",
+        )
+
+    st.download_button(
+        "Tải mapping 101 chủ đề",
+        data=mapping_path.read_bytes(),
+        file_name=mapping_path.name,
+        mime="application/json",
+    )
+
 def render_hdbscan_details(
     bundle,
     artifact_dir: str,
@@ -1235,6 +1381,7 @@ def render_hdbscan_details(
             "Hard cases",
             "Bài đại diện",
             "Human evaluation",
+            "Tên 101 chủ đề",
         ]
     )
 
@@ -1279,3 +1426,5 @@ def render_hdbscan_details(
         _render_human_evaluation(
             artifact_dir
         )
+    with tabs[9]:
+        _render_topic_naming(bundle)

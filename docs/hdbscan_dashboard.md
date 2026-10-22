@@ -102,11 +102,11 @@ Dashboard hiển thị nguyên văn `runtime_scope` để người dùng biết 
 
 ### 4.3. Coherence
 
-Run HDBSCAN hiện chưa đo coherence. Dashboard hiển thị:
-
-```text
-N/A
-```
+Dashboard đọc `coherence_summary.json` của run HDBSCAN. NPMI được tính
+riêng trên train, val, test và all, dùng 10 từ khóa cho mỗi trong 101 cụm.
+Từ khóa được rút từ toàn bộ train + val + test, nên đây là phép đo mô tả
+theo split, không phải đánh giá test độc lập. Từ khóa vắng mặt và điểm
+của từng cụm được ghi trong artifact coherence.
 
 Giá trị thiếu không được đổi thành `0`.
 
