@@ -14,6 +14,7 @@ from app.data_service import (
     load_projection,
 )
 from app.hdbscan_dashboard import render_hdbscan_details
+from app.lda_dashboard import render_lda_details
 from app.nmf_dashboard import render_nmf_details
 from app.ui import charts
 from app.ui.components import (
@@ -32,7 +33,36 @@ FIGURES = {
     "nmf": [
         ("Chọn số topic", "results/nmf/nmf_p3_select_review_seed42_v1/topic_count_selection.png"),
     ],
-    "lda": [],
+    "lda": [
+        (
+            "M08 — So sánh Coherence và Topic Diversity",
+            "results/lda/figures/f01_m08_metrics_comparison.png",
+        ),
+        (
+            "M08 — Thời gian chạy theo số topic K",
+            "results/lda/figures/f02_m08_runtime_vs_k.png",
+        ),
+        (
+            "M09 — Độ ổn định LDA giữa các cặp seed",
+            "results/lda/figures/f03_m09_stability_pairs.png",
+        ),
+        (
+            "M09 — Thời gian chạy theo random seed",
+            "results/lda/figures/f04_m09_runtime_by_seed.png",
+        ),
+        (
+            "LDA Final — Phân bố số lượng bài theo topic",
+            "results/lda/figures/f05_final_topic_distribution.png",
+        ),
+        (
+            "LDA Final — Topic Coherence NPMI",
+            "results/lda/figures/f06_final_topic_npmi.png",
+        ),
+        (
+            "LDA Final — Bản đồ PCA 2D",
+            "results/lda/figures/f07_final_projection_2d.png",
+        ),
+    ],
     "hdbscan": [
         ("Số cụm", "results/hdbscan/figures/m11_cluster_count.png"),
         ("Outlier trên validation", "results/hdbscan/figures/m11_validation_noise_coverage.png"),
@@ -290,12 +320,17 @@ def _render_deep_dive(ctx: AnalysisContext) -> None:
     elif run.method == "nmf":
         st.subheader("Phân tích chi tiết NMF")
         render_nmf_details(ctx.bundle, str(run.path))
+
     elif run.method == "hdbscan":
         st.subheader("Phân tích chi tiết HDBSCAN")
         render_hdbscan_details(ctx.bundle, str(run.path))
+
+    elif run.method == "lda":
+        render_lda_details(ctx.bundle, str(run.path))
+
     else:
         st.info(
-            "Phân tích chuyên sâu hiện có cho BERTopic, NMF và HDBSCAN. "
+            "Phân tích chuyên sâu hiện có cho BERTopic, NMF, HDBSCAN và LDA. "
             "Chọn một run tương ứng ở sidebar để xem."
         )
 
@@ -450,4 +485,3 @@ def _render_bertopic_deep_dive(ctx: AnalysisContext) -> None:
         "c-TF-IDF mô tả từ đặc trưng của cả topic, còn bài đại diện giúp người đánh giá "
         "kiểm tra tên topic có đúng với nội dung thực tế hay không."
     )
-
