@@ -10,7 +10,8 @@ import yaml
 
 from app.data_service import (
     ArtifactRun, get_available_splits, get_keywords_for_topic, get_model_overview,
-    get_topic_table, load_dashboard_bundle,
+    get_representatives_for_topic, get_topic_table, load_dashboard_bundle,
+    load_projection,
 )
 from app.hdbscan_dashboard import render_hdbscan_details
 from app.nmf_dashboard import render_nmf_details
@@ -227,7 +228,11 @@ def _render_bertopic_summary(frame: pd.DataFrame) -> None:
     st.caption("N/A nghĩa là run cũ chưa được đo lại theo protocol mới. Không được diễn giải N/A là 0 giây.")
 
 
-def _render_bertopic_config(run: ArtifactRun) -> None:
+def _render_bertopic_config(
+    run: ArtifactRun,
+    *,
+    show_topic_keywords: bool = True,
+) -> None:
     config_path = REPO_ROOT / "configs/bertopic_experiments.yaml"
     if not config_path.is_file():
         return
@@ -254,6 +259,8 @@ def _render_bertopic_config(run: ArtifactRun) -> None:
         "E2 chỉ đổi UMAP n_neighbors; E3 chỉ đổi HDBSCAN min_cluster_size; E4 chỉ đổi đầu vào "
         "sang title-only. E1 được chọn bằng validation trước khi mở test."
     )
+    if not show_topic_keywords:
+        return
     bundle = load_dashboard_bundle(str(run.path))
     topics = get_topic_table(bundle).head(15)
     if topics.empty:
@@ -278,7 +285,9 @@ def _render_bertopic_config(run: ArtifactRun) -> None:
 
 def _render_deep_dive(ctx: AnalysisContext) -> None:
     run = ctx.run
-    if run.method == "nmf":
+    if run.method == "bertopic":
+        _render_bertopic_deep_dive(ctx)
+    elif run.method == "nmf":
         st.subheader("Phân tích chi tiết NMF")
         render_nmf_details(ctx.bundle, str(run.path))
     elif run.method == "hdbscan":
@@ -286,7 +295,159 @@ def _render_deep_dive(ctx: AnalysisContext) -> None:
         render_hdbscan_details(ctx.bundle, str(run.path))
     else:
         st.info(
-            "Phân tích chuyên sâu hiện có cho NMF và HDBSCAN. "
-            "Chọn một run NMF hoặc HDBSCAN ở sidebar để xem."
+            "Phân tích chuyên sâu hiện có cho BERTopic, NMF và HDBSCAN. "
+            "Chọn một run tương ứng ở sidebar để xem."
         )
+
+
+def _render_bertopic_deep_dive(ctx: AnalysisContext) -> None:
+    """Phân tích tương tác BERTopic từ artifact, không phụ thuộc ảnh tĩnh."""
+    run, bundle, split = ctx.run, ctx.bundle, ctx.split
+    st.subheader("Phân tích chi tiết BERTopic")
+    note(
+        "BERTopic là pipeline gồm biểu diễn ngữ nghĩa, UMAP, HDBSCAN và c-TF-IDF. "
+        "Các biểu đồ dưới đây tách riêng chất lượng, chi phí chạy và nội dung topic."
+    )
+
+    summary_path = REPO_ROOT / "results/bertopic_experiments/summary.csv"
+    if summary_path.is_file():
+        summary = pd.read_csv(summary_path, encoding="utf-8-sig")
+        summary = summary.loc[summary["run_id"].ne("smoke_200")].copy()
+        order = {
+            "e0_multilingual_minilm": 0,
+            "e1_vietnamese_sbert": 1,
+            "e2_vietnamese_sbert_neighbors30": 2,
+            "e3_vietnamese_sbert_cluster30": 3,
+            "e4_vietnamese_sbert_title_only": 4,
+        }
+        summary["_order"] = summary["run_id"].map(order).fillna(99)
+        summary = summary.sort_values("_order").drop(columns="_order")
+
+        st.markdown("#### So sánh E0–E4")
+        quality = pd.DataFrame({
+            "Mô hình": "BERTopic",
+            "Run": summary["run_id"],
+            "Outlier validation (%)": 100 * summary["validation_outlier_rate"],
+            "Topic diversity (%)": 100 * summary["topic_diversity"],
+            "NMI validation (%)": 100 * summary["validation_normalized_mutual_info"],
+            "ARI validation (%)": 100 * summary["validation_adjusted_rand_index"],
+        })
+        st.plotly_chart(
+            charts.model_compare_bar(
+                quality,
+                [
+                    "Outlier validation (%)", "Topic diversity (%)",
+                    "NMI validation (%)", "ARI validation (%)",
+                ],
+            ),
+            width="stretch",
+            config=charts.PLOT_CONFIG,
+        )
+        note(
+            "Outlier thấp là tốt, trong khi diversity, NMI và ARI cao là tốt. "
+            "Không chọn cấu hình chỉ dựa trên một cột duy nhất.",
+            "warn",
+        )
+
+        timing = pd.DataFrame({
+            "Mô hình": "BERTopic",
+            "Run": summary["run_id"],
+            "Load model": summary.get("model_load_seconds"),
+            "Embedding": summary.get("representation_seconds"),
+            "Fit": summary.get("fit_seconds"),
+            "Predict validation": summary.get("validation_predict_seconds"),
+            "Predict test": summary.get("test_predict_seconds"),
+        })
+        st.markdown("#### Runtime theo giai đoạn")
+        st.plotly_chart(
+            charts.model_compare_bar(
+                timing,
+                ["Load model", "Embedding", "Fit", "Predict validation", "Predict test"],
+            ),
+            width="stretch",
+            config=charts.PLOT_CONFIG,
+        )
+        st.caption(
+            "Đơn vị là giây. N/A nghĩa là run chưa được đo ở giai đoạn đó; "
+            "không được xem là 0 giây."
+        )
+
+    _render_bertopic_config(run, show_topic_keywords=False)
+
+    topics = get_topic_table(bundle, split=split).head(30)
+    if topics.empty:
+        st.info("Không có topic BERTopic trong split đang chọn.")
+        return
+    labels = build_topic_labels(bundle, run.run_id)
+    topic_ids = topics["topic_id"].astype(int).tolist()
+    topic_id = st.selectbox(
+        "Topic cần phân tích",
+        topic_ids,
+        format_func=lambda value: label_of(value, labels),
+        key="bertopic_deep_topic",
+    )
+
+    projection = load_projection(str(run.path))
+    if not projection.empty:
+        if split != "all" and "split" in projection:
+            projection = projection.loc[projection["split"].eq(split)]
+        visible_topics = topic_ids[:8]
+        if topic_id not in visible_topics:
+            visible_topics.append(topic_id)
+        show_outliers = st.checkbox(
+            "Hiển thị outlier trên bản đồ",
+            value=False,
+            key="bertopic_deep_outliers",
+        )
+        st.markdown("#### Bản đồ biểu diễn 2D")
+        st.plotly_chart(
+            charts.projection_scatter(
+                projection,
+                labels,
+                visible_topics,
+                selected=topic_id,
+                show_outliers=show_outliers,
+            ),
+            width="stretch",
+            config=charts.PLOT_CONFIG,
+        )
+        st.caption(
+            "UMAP 2D chỉ hỗ trợ quan sát cấu trúc tương đối; không dùng riêng biểu đồ này "
+            "để kết luận mô hình tốt hay xấu."
+        )
+
+    left, right = st.columns([1, 1])
+    with left:
+        st.markdown("#### Từ khóa c-TF-IDF")
+        keywords = get_keywords_for_topic(bundle, topic_id).head(15)
+        if keywords.empty:
+            st.info("Topic này chưa xuất từ khóa.")
+        else:
+            score_column = "weight" if "weight" in keywords.columns else "score"
+            keywords[score_column] = pd.to_numeric(keywords[score_column], errors="coerce")
+            st.plotly_chart(
+                charts.keyword_bar(keywords, score_column, "Điểm c-TF-IDF"),
+                width="stretch",
+                config=charts.PLOT_CONFIG,
+            )
+            data_table(keywords)
+    with right:
+        st.markdown("#### Bài báo đại diện")
+        representatives = get_representatives_for_topic(
+            str(run.path), topic_id, split=split,
+        )
+        if representatives.empty:
+            st.info("Topic này chưa xuất bài báo đại diện cho split đang chọn.")
+        else:
+            columns = [
+                column for column in (
+                    "rank", "title", "split", "topic_probability", "category_gold"
+                )
+                if column in representatives
+            ]
+            data_table(representatives[columns].head(10))
+    note(
+        "c-TF-IDF mô tả từ đặc trưng của cả topic, còn bài đại diện giúp người đánh giá "
+        "kiểm tra tên topic có đúng với nội dung thực tế hay không."
+    )
 
