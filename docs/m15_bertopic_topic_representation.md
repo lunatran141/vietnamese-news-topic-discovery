@@ -110,8 +110,8 @@ Hiện bảng có đủ 96 nhãn dự thảo. Các trường review gồm:
 - topic trùng;
 - ghi chú và trạng thái review.
 
-Để hoàn thành E05, cần ít nhất hai người đánh giá độc lập. Không ghi nhận
-Codex như một human rater.
+Để hoàn thành E05, cần ít nhất hai người đánh giá độc lập. Công cụ hỗ trợ
+tự động không được ghi nhận như một human rater.
 
 Không merge topic trực tiếp trong M15. Các đề xuất rename hoặc merge được
 lưu riêng để sử dụng ở task P07.

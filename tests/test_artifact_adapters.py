@@ -129,7 +129,7 @@ def test_export_bertopic_artifacts(
 def test_export_bertopic_applies_m15_labels_and_representatives(
     tmp_path: Path,
 ) -> None:
-    """Common artifact dùng nhãn và bài đại diện đã review của M15."""
+    """Common artifact dùng nhãn dự thảo và bài đại diện của M15."""
     source_dir = tmp_path / "source"
     output_dir = tmp_path / "output"
     representation_dir = tmp_path / "m15"
@@ -145,7 +145,7 @@ def test_export_bertopic_applies_m15_labels_and_representatives(
             {
                 "0": {
                     "display_label": "Kinh tế và đầu tư",
-                    "status": "assistant_reviewed",
+                    "status": "pending_human_review",
                 }
             },
             ensure_ascii=False,

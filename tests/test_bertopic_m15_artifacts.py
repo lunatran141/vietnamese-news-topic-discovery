@@ -171,8 +171,8 @@ def test_display_mapping_applies_reviewed_label() -> None:
             0: "Ngân hàng và tín dụng",
             1: "Bóng đá",
         },
-        "review_status": "assistant_reviewed",
-        "reviewed_by": ["Codex-assisted"],
+        "review_status": "pending_human_review",
+        "reviewed_by": [],
         "review_note": "Cần người phụ trách xác nhận.",
     }
 
@@ -180,6 +180,6 @@ def test_display_mapping_applies_reviewed_label() -> None:
 
     assert result["0"]["display_label"] == "Ngân hàng và tín dụng"
     assert result["0"]["suggested_label"] == "ngân hàng – lãi suất – tín dụng"
-    assert result["0"]["status"] == "assistant_reviewed"
-    assert result["0"]["reviewed_by"] == ["Codex-assisted"]
+    assert result["0"]["status"] == "pending_human_review"
+    assert result["0"]["reviewed_by"] == []
     assert result["0"]["review_note"] == "Cần người phụ trách xác nhận."
