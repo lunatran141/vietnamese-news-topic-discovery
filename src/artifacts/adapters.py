@@ -1440,12 +1440,13 @@ def export_lda_artifacts(
 
         summary_rows.append({
             "topic_id": topic_id,
-            "topic_name": f"Topic {topic_id}",
+            "topic_name": " ".join(
+                str(word).replace("_", " ")
+                for word in keywords[:3]
+            ),
             "document_count": count,
             "percentage": count / len(document_topics),
-            "top_keywords": json.dumps(
-                keywords, ensure_ascii=False
-            ),
+            "top_keywords": ", ".join(keywords),
         })
 
     topic_summary = pd.DataFrame(summary_rows)
