@@ -1,0 +1,42 @@
+{
+  "run_id": "minilm_title_content_eom_15_5",
+  "metric": "document_npmi",
+  "top_n_keywords": 10,
+  "topic_count": 101,
+  "reference_text": "processed_title + 60 từ đầu processed_content",
+  "keyword_source": "topic_keywords.csv; train + val + test",
+  "missing_pair_policy": "Cặp từ không đồng xuất hiện nhận điểm -1 theo experiments.nmf.metrics.npmi_coherence",
+  "outlier_topic_excluded": true,
+  "interpretation": "Điểm theo từng tập văn bản, dùng chung bộ từ khóa được rút từ train + val + test; không phải phép đánh giá test độc lập.",
+  "scores_by_split": {
+    "train": {
+      "npmi_coherence": 0.17482951980564898,
+      "reference_document_count": 6493,
+      "missing_keyword_count": 3,
+      "topics_with_all_keywords_present": 98,
+      "topic_count": 101
+    },
+    "val": {
+      "npmi_coherence": -0.2660252971075478,
+      "reference_document_count": 1391,
+      "missing_keyword_count": 225,
+      "topics_with_all_keywords_present": 38,
+      "topic_count": 101
+    },
+    "test": {
+      "npmi_coherence": -0.2771799242895512,
+      "reference_document_count": 1390,
+      "missing_keyword_count": 225,
+      "topics_with_all_keywords_present": 27,
+      "topic_count": 101
+    },
+    "all": {
+      "npmi_coherence": 0.2063238072023034,
+      "reference_document_count": 9274,
+      "missing_keyword_count": 0,
+      "topics_with_all_keywords_present": 101,
+      "topic_count": 101
+    }
+  },
+  "npmi_coherence": 0.2063238072023034
+}

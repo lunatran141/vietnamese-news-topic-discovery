@@ -9,6 +9,7 @@ Phần này tổng hợp các ca khó và giới hạn của HDBSCAN sau các b�
 
 Bảng ca được lưu ở `results/hdbscan/error_analysis/hdbscan_error_cases.csv`, gồm:
 
+-**1 bài train** của cấu hình MiniLM + EOM, phát hiện khi rà bài ngẫu nhiên để đặt tên cụm.
 - **6 bài validation** từ đánh giá định tính cấu hình `minilm_title_content + eom_15_5`. Các bài này thuộc các cụm T01, T03, T04 và T05 trong `results/hdbscan/human_eval/`.
 - **4 bài train** từ phân tích outlier M12 của cấu hình `mpnet_title_content + eom_15_5`.
 
@@ -24,7 +25,7 @@ Nguồn đối chiếu chính:
 
 Trong `hdbscan_error_cases.csv`, cột `source_file` của các ca HS lấy từ bộ bài mẫu `evaluation_samples.csv`. Nội dung cột `evidence` được lấy từ `reviewer_R1_documents.csv` và `reviewer_R2_documents.csv`, cột `interpretation` được rà và điền sau khi tạo bảng ca.
 
-## 2. Các nhóm trường hợp trên validation
+## 2. Các nhóm trường hợp của cấu hình MiniLM
 
 ### 2.1. Tin trùng sự kiện trong một cụm có ranh giới rộng
 
@@ -52,6 +53,12 @@ Nội dung HS024 có dấu hiệu xuất hiện thêm một mẩu tin khác ở 
 **HS016 — `VNE_29086a9d7dfc`** bàn về cả giá vàng và chứng khoán Mỹ sau quyết định lãi suất của Fed. Bài được đưa vào T04 về biến động giá vàng. R1 chấm **5/5**, R2 chấm **4/5** về mức phù hợp.
 
 Đây là một ca `multi_topic` cần đọc kỹ, **chưa phải bằng chứng rằng HDBSCAN gán sai cụm**: giá vàng vẫn là nội dung đáng kể của bài. Trường hợp này cho thấy ranh giới chủ đề có thể không rạch ròi đối với tin kinh tế đề cập nhiều thị trường.
+
+### 2.4. Bài công nghệ lạc vào cụm y tế trên train
+
+**TN001 — `VNN_707b880b93fd`** thuộc cụm gốc `1` (T05 trong phiếu đánh giá). Tiêu đề và nội dung bài nói về laptop mỏng nhẹ và trải nghiệm mang máy khi di chuyển, không có trọng tâm y tế. Đây là một ca ngoài chủ đề trong cụm “Y tế và chăm sóc sức khỏe”.
+
+Ca này được phát hiện khi rà bài train ngẫu nhiên trong `topic_name_examples.csv`; nó không thuộc bộ mẫu validation được R1/R2 chấm. Vì vậy, không gán điểm phù hợp của R1/R2 cho ca này.
 
 ## 3. Các dạng outlier trên train
 
@@ -93,7 +100,7 @@ E04 còn ghi nhận độ nhạy với seed UMAP của cấu hình MiniLM + EOM:
 
 ## 5. Những dạng lỗi chưa được xác nhận
 
-Danh sách yêu cầu E06 của nhóm còn có trường hợp **`narrow` — một chủ đề bị chia thành nhiều cụm quá hẹp**. Mười ca trong bảng hiện tại chưa chứng minh được điều đó. Để báo cáo dạng lỗi này, cần tìm ít nhất hai cụm cụ thể, đối chiếu các `article_id` và nội dung bài, rồi chỉ ra chúng thực sự thuộc cùng một chủ đề ở mức chi tiết đã thống nhất.
+Danh sách yêu cầu E06 của nhóm còn có trường hợp **`narrow` — một chủ đề bị chia thành nhiều cụm quá hẹp**. Mười một ca trong bảng hiện tại chưa chứng minh được điều đó. Để báo cáo dạng lỗi này, cần tìm ít nhất hai cụm cụ thể, đối chiếu các `article_id` và nội dung bài, rồi chỉ ra chúng thực sự thuộc cùng một chủ đề ở mức chi tiết đã thống nhất.
 
 Không nên ghi `narrow` là lỗi HDBSCAN đã quan sát được chỉ để điền đủ danh mục lỗi chung. Tương tự, `duplicate` là thuộc tính của cặp HS001/HS004; lỗi ranh giới T01 cần được giải thích riêng.
 
@@ -105,6 +112,6 @@ Các ca đã đọc cho thấy ba vấn đề đáng chú ý đối với HDBSCA
 2. **Bài có nhiều trọng tâm cần được đánh giá theo ngữ cảnh:** HS016 là ca khó nhưng không đủ bằng chứng để gọi là gán sai.
 3. **Nhãn `-1` có nhiều nguyên nhân:** bài hợp lệ chưa được gán cụm, tiểu chủ đề có thể hiếm, đầu vào thiếu ngữ cảnh hoặc bản ghi chứa nhiều tin độc lập.
 
-Phạm vi của kết luận này là **10 ca được chọn để phân tích**, không phải tỷ lệ xuất hiện các lỗi trong toàn bộ dữ liệu. Sáu ca validation và bốn ca train dùng hai embedding khác nhau. Ngoài ra, độ nhạy với seed ở E04 được đo trên cùng dữ liệu, chưa thay thế đánh giá trên dữ liệu khác thời gian hoặc nguồn.
+Phạm vi của kết luận này là **11 ca được chọn để phân tích**: 6 ca validation MiniLM, 1 ca train MiniLM và 4 ca train MPNet. Đây không phải tỷ lệ lỗi trong toàn bộ dữ liệu. Ngoài ra, độ nhạy với seed ở E04 được đo trên cùng dữ liệu, chưa thay thế đánh giá trên dữ liệu khác thời gian hoặc nguồn.
 
 Phần HDBSCAN này là đầu vào cho E06 chung của nhóm. Khi so sánh với KMeans, NMF, LDA và BERTopic, nhóm cần giữ cùng định nghĩa từng nhóm lỗi và dẫn chứng bài cụ thể; không cộng số ca của các mẫu được chọn theo cách khác nhau thành một tỷ lệ lỗi chung.

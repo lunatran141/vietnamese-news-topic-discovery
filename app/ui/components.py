@@ -7,6 +7,8 @@ import re
 
 import pandas as pd
 import streamlit as st
+import json
+from pathlib import Path
 
 _GENERIC_NAME = re.compile(r"^(topic|chủ đề)\s*\d+$", re.IGNORECASE)
 _NUMERIC_PREFIX = re.compile(r"^\d+_")
@@ -41,14 +43,47 @@ def clean_topic_name(raw: str | None, keywords: str | None = None) -> str:
 
 
 def build_topic_labels(bundle, run_id: str) -> dict[int, str]:
-    """Nhãn `T<id> · tên` cho mọi topic, ưu tiên tên người dùng đã đổi trong phiên."""
-    mapping = st.session_state.get(f"mapping_{run_id}", {})
+    """Ưu tiên tên trong phiên, rồi tên HDBSCAN đã duyệt."""
+    saved_mapping: dict[str, dict] = {}
+
+    if run_id == "minilm_title_content_eom_15_5":
+        root = Path(__file__).resolve().parents[2]
+        path = (
+            root
+            / "artifacts/common/hdbscan"
+            / run_id
+            / "topic_display_mapping.json"
+        )
+        if path.is_file():
+            payload = json.loads(
+                path.read_text(encoding="utf-8")
+            )
+            if payload.get("run_id") != run_id:
+                raise ValueError("Mapping HDBSCAN sai run_id")
+            saved_mapping = payload["mapping"]
+
+    mapping = {
+        **saved_mapping,
+        **st.session_state.get(f"mapping_{run_id}", {}),
+    }
+
     labels: dict[int, str] = {}
     for row in bundle.topic_summary.to_dict("records"):
         topic_id = int(row["topic_id"])
-        custom = mapping.get(str(topic_id), {}).get("display_name")
-        name = custom or clean_topic_name(row.get("topic_name"), row.get("top_keywords"))
-        labels[topic_id] = "Outlier" if topic_id == -1 else f"T{topic_id} · {name}"
+
+        if topic_id == -1:
+            labels[topic_id] = "Outlier"
+            continue
+
+        custom = mapping.get(str(topic_id), {}).get(
+            "display_name"
+        )
+        name = custom or clean_topic_name(
+            row.get("topic_name"),
+            row.get("top_keywords"),
+        )
+        labels[topic_id] = f"T{topic_id} · {name}"
+
     return labels
 
 

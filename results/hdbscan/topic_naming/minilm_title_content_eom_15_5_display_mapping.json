@@ -1,0 +1,511 @@
+{
+  "run_id": "minilm_title_content_eom_15_5",
+  "schema_version": "1.0",
+  "mapping": {
+    "1": {
+      "suggest_label": "Y tế và chăm sóc sức khỏe",
+      "display_name": "Y tế và chăm sóc sức khỏe",
+      "display_group_id": null
+    },
+    "21": {
+      "suggest_label": "Trí tuệ nhân tạo và các công ty công nghệ",
+      "display_name": "Trí tuệ nhân tạo và các công ty công nghệ",
+      "display_group_id": null
+    },
+    "9": {
+      "suggest_label": "Bóng đá câu lạc bộ Việt Nam",
+      "display_name": "Bóng đá câu lạc bộ Việt Nam",
+      "display_group_id": "Bóng đá câu lạc bộ"
+    },
+    "35": {
+      "suggest_label": "Các cuộc thi sắc đẹp quốc tế",
+      "display_name": "Các cuộc thi sắc đẹp quốc tế",
+      "display_group_id": null
+    },
+    "87": {
+      "suggest_label": "Các vụ án mạng và bạo lực gây chết người",
+      "display_name": "Các vụ án mạng và bạo lực gây chết người",
+      "display_group_id": null
+    },
+    "94": {
+      "suggest_label": "Thị trường chứng khoán và VN-Index",
+      "display_name": "Thị trường chứng khoán và VN-Index",
+      "display_group_id": "Thị trường chứng khoán Việt Nam"
+    },
+    "16": {
+      "suggest_label": "Bóng đá Anh: Manchester City và Manchester United",
+      "display_name": "Bóng đá Anh: Manchester City và Manchester United",
+      "display_group_id": "Bóng đá câu lạc bộ"
+    },
+    "76": {
+      "suggest_label": "Chính sách giáo dục và tuyển sinh",
+      "display_name": "Chính sách giáo dục và tuyển sinh",
+      "display_group_id": null
+    },
+    "63": {
+      "suggest_label": "Ca sĩ và đời sống âm nhạc",
+      "display_name": "Ca sĩ và đời sống âm nhạc",
+      "display_group_id": "Ca sĩ và âm nhạc"
+    },
+    "3": {
+      "suggest_label": "Giá vàng và thị trường vàng",
+      "display_name": "Giá vàng và thị trường vàng",
+      "display_group_id": null
+    },
+    "36": {
+      "suggest_label": "Thể thao Việt Nam tại Asiad",
+      "display_name": "Thể thao Việt Nam tại Asiad",
+      "display_group_id": "Asiad 2026"
+    },
+    "2": {
+      "suggest_label": "Giải chạy bộ và marathon",
+      "display_name": "Giải chạy bộ và marathon",
+      "display_group_id": null
+    },
+    "26": {
+      "suggest_label": "Công nghệ quốc phòng và hàng không vũ trụ",
+      "display_name": "Công nghệ quốc phòng và hàng không vũ trụ",
+      "display_group_id": null
+    },
+    "90": {
+      "suggest_label": "Bắt giữ và khởi tố vụ án",
+      "display_name": "Bắt giữ và khởi tố vụ án",
+      "display_group_id": null
+    },
+    "100": {
+      "suggest_label": "Tài chính và kết quả kinh doanh doanh nghiệp",
+      "display_name": "Tài chính và kết quả kinh doanh doanh nghiệp",
+      "display_group_id": null
+    },
+    "60": {
+      "suggest_label": "Pháp lý nhà ở và đất đai",
+      "display_name": "Pháp lý nhà ở và đất đai",
+      "display_group_id": null
+    },
+    "38": {
+      "suggest_label": "Bổ nhiệm và nhân sự lãnh đạo",
+      "display_name": "Bổ nhiệm và nhân sự lãnh đạo",
+      "display_group_id": null
+    },
+    "98": {
+      "suggest_label": "Giá nông sản và thủy sản",
+      "display_name": "Giá nông sản và thủy sản",
+      "display_group_id": null
+    },
+    "39": {
+      "suggest_label": "Bữa ăn bán trú và an toàn thực phẩm trường học",
+      "display_name": "Bữa ăn bán trú và an toàn thực phẩm trường học",
+      "display_group_id": null
+    },
+    "18": {
+      "suggest_label": "Real Madrid và HLV Mourinho",
+      "display_name": "Real Madrid và HLV Mourinho",
+      "display_group_id": null
+    },
+    "43": {
+      "suggest_label": "Thời trang và nhà thiết kế",
+      "display_name": "Thời trang và nhà thiết kế",
+      "display_group_id": null
+    },
+    "66": {
+      "suggest_label": "Tai nạn giao thông và tài xế",
+      "display_name": "Tai nạn giao thông và tài xế",
+      "display_group_id": null
+    },
+    "4": {
+      "suggest_label": "Giá xăng dầu và thị trường năng lượng",
+      "display_name": "Giá xăng dầu và thị trường năng lượng",
+      "display_group_id": null
+    },
+    "41": {
+      "suggest_label": "Đội tuyển bóng đá nữ Việt Nam",
+      "display_name": "Đội tuyển bóng đá nữ Việt Nam",
+      "display_group_id": null
+    },
+    "79": {
+      "suggest_label": "Đời sống trường học và phụ huynh",
+      "display_name": "Đời sống trường học và phụ huynh",
+      "display_group_id": null
+    },
+    "44": {
+      "suggest_label": "Đội tuyển Việt Nam tại FIFA ASEAN Cup",
+      "display_name": "Đội tuyển Việt Nam tại FIFA ASEAN Cup",
+      "display_group_id": "FIFA ASEAN Cup 2026"
+    },
+    "64": {
+      "suggest_label": "Đám cưới và đời sống nghệ sĩ",
+      "display_name": "Đám cưới và đời sống nghệ sĩ",
+      "display_group_id": null
+    },
+    "81": {
+      "suggest_label": "Hoạt động và truyền thông doanh nghiệp",
+      "display_name": "Hoạt động và truyền thông doanh nghiệp",
+      "display_group_id": null
+    },
+    "12": {
+      "suggest_label": "Thông tin trước ra mắt iPhone 18 Pro",
+      "display_name": "Thông tin trước ra mắt iPhone 18 Pro",
+      "display_group_id": "iPhone 18"
+    },
+    "96": {
+      "suggest_label": "Hợp tác và đầu tư kinh doanh",
+      "display_name": "Hợp tác và đầu tư kinh doanh",
+      "display_group_id": null
+    },
+    "92": {
+      "suggest_label": "Quy hoạch đô thị và hạ tầng giao thông",
+      "display_name": "Quy hoạch đô thị và hạ tầng giao thông",
+      "display_group_id": null
+    },
+    "77": {
+      "suggest_label": "Trường lớp và hoạt động đầu năm học",
+      "display_name": "Trường lớp và hoạt động đầu năm học",
+      "display_group_id": null
+    },
+    "31": {
+      "suggest_label": "U23 Việt Nam tại Asiad 2026",
+      "display_name": "U23 Việt Nam tại Asiad 2026",
+      "display_group_id": "U23 Việt Nam tại Asiad"
+    },
+    "15": {
+      "suggest_label": "Arsenal tại Ngoại hạng Anh",
+      "display_name": "Arsenal tại Ngoại hạng Anh",
+      "display_group_id": null
+    },
+    "52": {
+      "suggest_label": "Chính sách thuế và thủ tục thuế",
+      "display_name": "Chính sách thuế và thủ tục thuế",
+      "display_group_id": null
+    },
+    "51": {
+      "suggest_label": "Phim hoạt hình anime và nhân vật",
+      "display_name": "Phim hoạt hình anime và nhân vật",
+      "display_group_id": null
+    },
+    "19": {
+      "suggest_label": "Barcelona và các cầu thủ chủ chốt",
+      "display_name": "Barcelona và các cầu thủ chủ chốt",
+      "display_group_id": null
+    },
+    "53": {
+      "suggest_label": "Hàng không Việt Nam và các hãng bay",
+      "display_name": "Hàng không Việt Nam và các hãng bay",
+      "display_group_id": null
+    },
+    "5": {
+      "suggest_label": "Thị trường iPhone 18",
+      "display_name": "Thị trường iPhone 18",
+      "display_group_id": "iPhone 18"
+    },
+    "37": {
+      "suggest_label": "Lịch thi đấu và huy chương Asiad 2026",
+      "display_name": "Lịch thi đấu và huy chương Asiad 2026",
+      "display_group_id": "Asiad 2026"
+    },
+    "73": {
+      "suggest_label": "Lãi suất ngân hàng và tiền gửi",
+      "display_name": "Lãi suất ngân hàng và tiền gửi",
+      "display_group_id": null
+    },
+    "10": {
+      "suggest_label": "Câu chuyện thương hiệu và sản phẩm",
+      "display_name": "Câu chuyện thương hiệu và sản phẩm",
+      "display_group_id": null
+    },
+    "58": {
+      "suggest_label": "Điện mặt trời và ngành điện",
+      "display_name": "Điện mặt trời và ngành điện",
+      "display_group_id": null
+    },
+    "54": {
+      "suggest_label": "Thủ khoa và thành tích học tập",
+      "display_name": "Thủ khoa và thành tích học tập",
+      "display_group_id": null
+    },
+    "85": {
+      "suggest_label": "Tội chiếm đoạt tài sản và bản án",
+      "display_name": "Tội chiếm đoạt tài sản và bản án",
+      "display_group_id": null
+    },
+    "0": {
+      "suggest_label": "Điện thoại thông minh và công nghệ di động",
+      "display_name": "Điện thoại thông minh và công nghệ di động",
+      "display_group_id": null
+    },
+    "80": {
+      "suggest_label": "Lừa đảo và cảnh báo chiêu trò",
+      "display_name": "Lừa đảo và cảnh báo chiêu trò",
+      "display_group_id": null
+    },
+    "27": {
+      "suggest_label": "U20 Việt Nam tại vòng loại châu Á",
+      "display_name": "U20 Việt Nam tại vòng loại châu Á",
+      "display_group_id": null
+    },
+    "7": {
+      "suggest_label": "Lionel Messi và Inter Miami",
+      "display_name": "Lionel Messi và Inter Miami",
+      "display_group_id": null
+    },
+    "50": {
+      "suggest_label": "Các trận đấu FIFA ASEAN Cup",
+      "display_name": "Các trận đấu FIFA ASEAN Cup",
+      "display_group_id": "FIFA ASEAN Cup 2026"
+    },
+    "24": {
+      "suggest_label": "Các giải quần vợt và cầu lông",
+      "display_name": "Các giải quần vợt và cầu lông",
+      "display_group_id": null
+    },
+    "83": {
+      "suggest_label": "Vụ án cựu hiệu trưởng THCS Ba Đình",
+      "display_name": "Vụ án cựu hiệu trưởng THCS Ba Đình",
+      "display_group_id": null
+    },
+    "22": {
+      "suggest_label": "Phim ngắn và ứng dụng AI trong điện ảnh",
+      "display_name": "Phim ngắn và ứng dụng AI trong điện ảnh",
+      "display_group_id": null
+    },
+    "40": {
+      "suggest_label": "Bóng chuyền tại Asiad",
+      "display_name": "Bóng chuyền tại Asiad",
+      "display_group_id": null
+    },
+    "78": {
+      "suggest_label": "Mưa ngập ảnh hưởng trường học",
+      "display_name": "Mưa ngập ảnh hưởng trường học",
+      "display_group_id": null
+    },
+    "46": {
+      "suggest_label": "Tin về hoàng gia và công nương",
+      "display_name": "Tin về hoàng gia và công nương",
+      "display_group_id": null
+    },
+    "88": {
+      "suggest_label": "Trung tâm thương mại và cửa hàng bán lẻ",
+      "display_name": "Trung tâm thương mại và cửa hàng bán lẻ",
+      "display_group_id": null
+    },
+    "84": {
+      "suggest_label": "Xét xử và bản án hình sự",
+      "display_name": "Xét xử và bản án hình sự",
+      "display_group_id": null
+    },
+    "97": {
+      "suggest_label": "Tin và hoạt động tập đoàn doanh nghiệp",
+      "display_name": "Tin và hoạt động tập đoàn doanh nghiệp",
+      "display_group_id": null
+    },
+    "82": {
+      "suggest_label": "Tranh chấp tài sản và kiện tụng dân sự",
+      "display_name": "Tranh chấp tài sản và kiện tụng dân sự",
+      "display_group_id": null
+    },
+    "61": {
+      "suggest_label": "Điện ảnh Hollywood và phim siêu anh hùng",
+      "display_name": "Điện ảnh Hollywood và phim siêu anh hùng",
+      "display_group_id": null
+    },
+    "33": {
+      "suggest_label": "Đội tuyển Indonesia tại FIFA ASEAN Cup",
+      "display_name": "Đội tuyển Indonesia tại FIFA ASEAN Cup",
+      "display_group_id": "FIFA ASEAN Cup 2026"
+    },
+    "30": {
+      "suggest_label": "Bóng đá U23 châu Á tại Asiad",
+      "display_name": "Bóng đá U23 châu Á tại Asiad",
+      "display_group_id": null
+    },
+    "11": {
+      "suggest_label": "iPhone Duo và sản phẩm Apple",
+      "display_name": "iPhone Duo và sản phẩm Apple",
+      "display_group_id": null
+    },
+    "75": {
+      "suggest_label": "Trường học và tuyển sinh",
+      "display_name": "Trường học và tuyển sinh",
+      "display_group_id": null
+    },
+    "47": {
+      "suggest_label": "Vụ án Viện Pháp y tâm thần",
+      "display_name": "Vụ án Viện Pháp y tâm thần",
+      "display_group_id": null
+    },
+    "86": {
+      "suggest_label": "Chợ truyền thống và tiểu thương",
+      "display_name": "Chợ truyền thống và tiểu thương",
+      "display_group_id": null
+    },
+    "13": {
+      "suggest_label": "IELTS trong xét tuyển đại học",
+      "display_name": "IELTS trong xét tuyển đại học",
+      "display_group_id": null
+    },
+    "29": {
+      "suggest_label": "Thể thao Trung Quốc tại Asiad",
+      "display_name": "Thể thao Trung Quốc tại Asiad",
+      "display_group_id": null
+    },
+    "71": {
+      "suggest_label": "Thiếu sách giáo khoa",
+      "display_name": "Thiếu sách giáo khoa",
+      "display_group_id": null
+    },
+    "62": {
+      "suggest_label": "Ca sĩ và âm nhạc đương đại",
+      "display_name": "Ca sĩ và âm nhạc đương đại",
+      "display_group_id": "Ca sĩ và âm nhạc"
+    },
+    "65": {
+      "suggest_label": "Tin buồn và biến cố của nghệ sĩ",
+      "display_name": "Tin buồn và biến cố của nghệ sĩ",
+      "display_group_id": null
+    },
+    "74": {
+      "suggest_label": "Chính sách lãi suất của Fed",
+      "display_name": "Chính sách lãi suất của Fed",
+      "display_group_id": null
+    },
+    "99": {
+      "suggest_label": "Nâng hạng và phát triển thị trường chứng khoán",
+      "display_name": "Nâng hạng và phát triển thị trường chứng khoán",
+      "display_group_id": "Thị trường chứng khoán Việt Nam"
+    },
+    "34": {
+      "suggest_label": "Cờ vua Việt Nam và Olympiad",
+      "display_name": "Cờ vua Việt Nam và Olympiad",
+      "display_group_id": null
+    },
+    "6": {
+      "suggest_label": "Cristiano Ronaldo và Al Nassr",
+      "display_name": "Cristiano Ronaldo và Al Nassr",
+      "display_group_id": null
+    },
+    "17": {
+      "suggest_label": "Robot và ứng dụng công nghệ robot",
+      "display_name": "Robot và ứng dụng công nghệ robot",
+      "display_group_id": null
+    },
+    "23": {
+      "suggest_label": "Quần vợt tại US Open",
+      "display_name": "Quần vợt tại US Open",
+      "display_group_id": null
+    },
+    "67": {
+      "suggest_label": "Văn học võ hiệp Kim Dung và phim truyền hình",
+      "display_name": "Văn học võ hiệp Kim Dung và phim truyền hình",
+      "display_group_id": null
+    },
+    "48": {
+      "suggest_label": "Phim Đầu xuân tươi sáng và diễn viên",
+      "display_name": "Phim Đầu xuân tươi sáng và diễn viên",
+      "display_group_id": null
+    },
+    "45": {
+      "suggest_label": "Xử phạt vi phạm trên môi trường mạng",
+      "display_name": "Xử phạt vi phạm trên môi trường mạng",
+      "display_group_id": null
+    },
+    "25": {
+      "suggest_label": "Di sản văn hóa và khảo cổ",
+      "display_name": "Di sản văn hóa và khảo cổ",
+      "display_group_id": null
+    },
+    "55": {
+      "suggest_label": "Nghiên cứu công nghệ và linh kiện điện tử",
+      "display_name": "Nghiên cứu công nghệ và linh kiện điện tử",
+      "display_group_id": null
+    },
+    "20": {
+      "suggest_label": "U23 Việt Nam tại Asiad",
+      "display_name": "U23 Việt Nam tại Asiad",
+      "display_group_id": "U23 Việt Nam tại Asiad"
+    },
+    "28": {
+      "suggest_label": "Cầu thủ tuyển Việt Nam và chấn thương",
+      "display_name": "Cầu thủ tuyển Việt Nam và chấn thương",
+      "display_group_id": null
+    },
+    "8": {
+      "suggest_label": "Bóng đá Đức và Harry Kane",
+      "display_name": "Bóng đá Đức và Harry Kane",
+      "display_group_id": null
+    },
+    "14": {
+      "suggest_label": "Tài xế và dịch vụ gọi xe",
+      "display_name": "Tài xế và dịch vụ gọi xe",
+      "display_group_id": null
+    },
+    "69": {
+      "suggest_label": "Diễn viên và phim tại liên hoan phim",
+      "display_name": "Diễn viên và phim tại liên hoan phim",
+      "display_group_id": null
+    },
+    "49": {
+      "suggest_label": "Tuyển Việt Nam tại FIFA ASEAN Cup 2026",
+      "display_name": "Tuyển Việt Nam tại FIFA ASEAN Cup 2026",
+      "display_group_id": "FIFA ASEAN Cup 2026"
+    },
+    "57": {
+      "suggest_label": "Bạo lực học đường và an toàn học sinh",
+      "display_name": "Bạo lực học đường và an toàn học sinh",
+      "display_group_id": null
+    },
+    "70": {
+      "suggest_label": "Phim Việt và hoạt động điện ảnh",
+      "display_name": "Phim Việt và hoạt động điện ảnh",
+      "display_group_id": null
+    },
+    "56": {
+      "suggest_label": "Cà phê, Robusta và văn hóa uống cà phê",
+      "display_name": "Cà phê, Robusta và văn hóa uống cà phê",
+      "display_group_id": null
+    },
+    "68": {
+      "suggest_label": "Quản lý trường công và các khoản thu",
+      "display_name": "Quản lý trường công và các khoản thu",
+      "display_group_id": null
+    },
+    "32": {
+      "suggest_label": "Ngộ độc thực phẩm và an toàn ăn uống",
+      "display_name": "Ngộ độc thực phẩm và an toàn ăn uống",
+      "display_group_id": null
+    },
+    "42": {
+      "suggest_label": "Thu hồi và kiểm soát chất lượng sản phẩm",
+      "display_name": "Thu hồi và kiểm soát chất lượng sản phẩm",
+      "display_group_id": null
+    },
+    "59": {
+      "suggest_label": "Xuất nhập cảnh và công dân từ Campuchia",
+      "display_name": "Xuất nhập cảnh và công dân từ Campuchia",
+      "display_group_id": null
+    },
+    "91": {
+      "suggest_label": "Kinh tế và quan hệ thương mại quốc tế",
+      "display_name": "Kinh tế và quan hệ thương mại quốc tế",
+      "display_group_id": null
+    },
+    "95": {
+      "suggest_label": "Mua sắm trực tuyến và hàng tiêu dùng",
+      "display_name": "Mua sắm trực tuyến và hàng tiêu dùng",
+      "display_group_id": null
+    },
+    "89": {
+      "suggest_label": "Khởi tố vi phạm trong hoạt động kinh doanh",
+      "display_name": "Khởi tố vi phạm trong hoạt động kinh doanh",
+      "display_group_id": null
+    },
+    "93": {
+      "suggest_label": "Đầu tư công nghệ và logistics",
+      "display_name": "Đầu tư công nghệ và logistics",
+      "display_group_id": null
+    },
+    "72": {
+      "suggest_label": "Tội phạm mại dâm và xâm hại tình dục",
+      "display_name": "Tội phạm mại dâm và xâm hại tình dục",
+      "display_group_id": null
+    }
+  }
+}

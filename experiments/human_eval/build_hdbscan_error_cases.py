@@ -103,6 +103,38 @@ def main() -> None:
             "interpretation": item["review_reason"],
             "source_file": "outlier_analysis/m12_labeled_cases.csv",
         })
+    examples = read_csv(BASE / "topic_naming/topic_name_examples.csv")
+    match = examples.loc[
+        (examples["article_id"] == "VNN_707b880b93fd")
+        & (examples["topic_id"].astype(str) == "1")
+        & (examples["split"] == "train")
+    ]
+    if len(match) != 1:
+        raise ValueError(
+            "Cần đúng một bài VNN_707b880b93fd thuộc cụm 1 trên train"
+        )
+
+    item = match.iloc[0]
+    rows.append({
+        "case_id": "TN001",
+        "split": "train",
+        "embedding_run": "minilm_title_content",
+        "experiment": "eom_15_5",
+        "article_id": item["article_id"],
+        "cluster_id": 1,
+        "error_group": "broad",
+        "review_label": "",
+        "title": item["title"],
+        "evidence": (
+            "Tiêu đề và nội dung nói về trọng lượng laptop "
+            "và trải nghiệm mang máy khi di chuyển."
+        ),
+        "interpretation": (
+            "Bài công nghệ bị gán vào cụm y tế T05; "
+            "đây là ca ngoài chủ đề được phát hiện khi rà bài train."
+        ),
+        "source_file": "topic_naming/topic_name_examples.csv",
+    })
 
     result = pd.DataFrame(rows)
 
