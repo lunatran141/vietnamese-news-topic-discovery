@@ -1,29 +1,8 @@
 {
   "0": [
     {
-      "article_id": "TTR_097e0d9b9680",
-      "title": "TP.HCM muốn cùng Đông Nam Bộ, ĐBSCL lập 'bản đồ cơ hội đầu tư' toàn vùng",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Kinh doanh"
-    },
-    {
       "article_id": "TTR_0a28c0c1b215",
       "title": "Vốn ngoại đổ vào kỷ lục, bất động sản công nghiệp 'cháy hàng' nhà xưởng xây sẵn",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Kinh doanh"
-    },
-    {
-      "article_id": "TTR_0bf715556d39",
-      "title": "Vietjet và CFM hợp tác phát triển bảo dưỡng động cơ tại Việt Nam",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Kinh doanh"
-    },
-    {
-      "article_id": "TTR_0e9758ccde90",
-      "title": "Thủ tướng: Cầu thị, lắng nghe ý kiến người dân về thời hạn sử dụng nhà chung cư",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Kinh doanh"
@@ -34,16 +13,30 @@
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_1dbf2ffa4082",
+      "title": "Xổ số ở những nơi đoàn Cần Thơ, Sóc Trăng đến học tập hoạt động ra sao?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_2d859dfd74c0",
+      "title": "Từ những công trình biểu tượng Việt - Nga đến kích hoạt dự án hợp tác đầu tư mới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_31e875fc01f7",
+      "title": "Cà Mau đề xuất dự án tổ hợp lọc hóa dầu 7 triệu tấn/năm",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
     }
   ],
   "1": [
-    {
-      "article_id": "TTR_014cf7ac9165",
-      "title": "140.000 USD hay hai hộp xì gà trong chiếc túi ‘chạy án’ vụ sữa giả?",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Pháp luật"
-    },
     {
       "article_id": "TTR_06d434163f42",
       "title": "Bắt tạm giam Phó chủ tịch UBND tỉnh Phú Thọ Nguyễn Huy Ngọc",
@@ -66,35 +59,21 @@
       "category_gold": "Pháp luật"
     },
     {
-      "article_id": "TTR_187e91ef13c5",
-      "title": "Cựu Trưởng Công an TP Phú Quốc Lê Văn Mót bị phạt 18 năm tù về tội lừa đảo chiếm đoạt tài sản",
+      "article_id": "TTR_1c4166d21ee1",
+      "title": "Bắt tạm giam Thứ trưởng Bộ Y tế Trần Văn Thuấn",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_2350437f332e",
+      "title": "Từ 8 đơn trình báo mất 160 triệu đồng, công an bóc gỡ đường dây lừa đảo hơn 1.000 tỉ",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Pháp luật"
     }
   ],
   "2": [
-    {
-      "article_id": "TTR_182f33ff8c12",
-      "title": "Có nhân tuyến giáp là phải kiêng iod, đậu phụ, đậu nành, cải bắp, súp lơ?",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Sức khỏe"
-    },
-    {
-      "article_id": "TTR_1b133b09aedd",
-      "title": "Vitamin D cần thiết, nhưng làm sao để tăng cường khả năng hấp thụ?",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Sức khỏe"
-    },
-    {
-      "article_id": "TTR_1b197b9b775f",
-      "title": "Các loại thịt cá thường dùng mang lại dinh dưỡng như thế nào?",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Sức khỏe"
-    },
     {
       "article_id": "TTR_22f4b859d300",
       "title": "Cẩn trọng khi ăn bông bí, dưa chuột có vị đắng",
@@ -108,30 +87,30 @@
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_46194f6ecb6f",
+      "title": "Thực phẩm nào chứa nhiều muối nhưng lại không có vị mặn?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_7f7edfc4b83c",
+      "title": "Vì sao ở Việt Nam nhiều nắng vẫn có người thiếu vitamin D?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_91311ea2fb29",
+      "title": "Có nên chi nhiều tiền để bổ sung collagen?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
     }
   ],
   "3": [
-    {
-      "article_id": "TTR_207368b3e867",
-      "title": "Những thông tin rò rỉ về iPhone 18 màn hình gập",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Kinh doanh"
-    },
-    {
-      "article_id": "TTR_273e1d301406",
-      "title": "Trung Quốc chế tạo máy CT 'cỡ lòng bàn tay', nặng chỉ 6kg",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Khoa học công nghệ"
-    },
-    {
-      "article_id": "TTR_2e70edee952f",
-      "title": "iPhone 18 chưa lên kệ, phụ kiện đã ‘đua’ ra mắt rầm rộ",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Kinh doanh"
-    },
     {
       "article_id": "TTR_3a35e7cc91a1",
       "title": "Hàng chục ngàn iPhone 18 đã đến tay khách Việt chỉ sau 3 ngày, màu máy nào áp đảo?",
@@ -140,21 +119,35 @@
       "category_gold": "Kinh doanh"
     },
     {
-      "article_id": "TTR_6320fa94d3e2",
-      "title": "Giá bán iPhone 18 Pro, Pro Max và iPhone Duo tại Việt Nam: Bản cao nhất vượt mốc 100 triệu đồng",
+      "article_id": "TTR_7f1d531a367a",
+      "title": "Chạm giá 2.000 USD: iPhone Duo đắt gần gấp đôi nhưng nhiều cái còn thua iPhone 18 pro max?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_d4e198f40377",
+      "title": "iPhone 18 Pro hơn 300 triệu đồng xuất hiện tại TP.HCM",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_ea1b5d054c1f",
+      "title": "Công bố iPhone Duo: Điện thoại gập đầu tiên của Apple, giá chạm 2.000 USD",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Khoa học công nghệ"
+    },
+    {
+      "article_id": "TTR_f5fc3b5b6079",
+      "title": "Hơn 220.000 iPhone 18 đã được người dùng Việt đặt mua, 90% chọn Pro Max",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Kinh doanh"
     }
   ],
   "4": [
-    {
-      "article_id": "TTR_073a012f24ac",
-      "title": "TP.HCM: Phát triển cơ sở 2 của nhiều bệnh viện tuyến cuối tại khu vực xa trung tâm",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Sức khỏe"
-    },
     {
       "article_id": "TTR_0f0e48f324ec",
       "title": "Bệnh viện Phụ sản TP Cần Thơ là bệnh viện hạt nhân lĩnh vực Sản khoa",
@@ -170,35 +163,28 @@
       "category_gold": "Sức khỏe"
     },
     {
-      "article_id": "TTR_20daf5d8cd01",
-      "title": "Sáp nhập BV Giao thông vận tải TP.HCM vào BV Phục hồi chức năng - Điều trị bệnh nghề nghiệp",
+      "article_id": "TTR_232cde070948",
+      "title": "Một ngày ở 'khu phố' bệnh viện điều trị ung thư",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Sức khỏe"
     },
     {
-      "article_id": "TTR_232cde070948",
-      "title": "Một ngày ở 'khu phố' bệnh viện điều trị ung thư",
+      "article_id": "TTR_29fbbb96200a",
+      "title": "Không phải cứ lớn tuổi là suy yếu, 80 tuổi vẫn có thể khỏe mạnh",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "TTR_38c168a2f64a",
+      "title": "Đề xuất thêm nguồn hỗ trợ chi phí cho người mắc bệnh hiểm nghèo, ung thư, suy thận",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Sức khỏe"
     }
   ],
   "5": [
-    {
-      "article_id": "TTR_011d257b58b1",
-      "title": "Lời khen cho Nhật Bản: Không tìm cách 'lạm phát' huy chương ở Asiad",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Thể thao"
-    },
-    {
-      "article_id": "TTR_04877a022700",
-      "title": "Châu Tuyết Vân giành HCB taekwondo thế giới",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Thể thao"
-    },
     {
       "article_id": "TTR_0f748109e22a",
       "title": "Nhân tố mới sẽ giúp taekwondo Việt Nam giành huy chương ở Asiad 2026?",
@@ -214,8 +200,22 @@
       "category_gold": "Thể thao"
     },
     {
-      "article_id": "TTR_196856ca31dc",
-      "title": "Lịch thi đấu Asiad ngày 21-9 của đoàn Việt Nam: Sôi động đường đua xanh",
+      "article_id": "TTR_2e4fbe61a4d1",
+      "title": "Châu Tuyết Vân cùng đồng đội bảo vệ thành công HCV taekwondo thế giới",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_30dda3f9dbed",
+      "title": "Các cô gái karate về nước trong vòng tay yêu thương sau khi giành HCV Asiad",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Thể thao"
+    },
+    {
+      "article_id": "TTR_41c07bfc9fd7",
+      "title": "Việt Nam giành thêm 1 huy chương trong ngày thi đấu 21-9 ở Asiad 20",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Thể thao"
@@ -267,20 +267,6 @@
       "category_gold": "Pháp luật"
     },
     {
-      "article_id": "TTR_1e11275bd8ff",
-      "title": "Vụ đánh phụ nữ 32 tuổi chết: Vì sao khởi tố tội cố ý gây thương tích?",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Pháp luật"
-    },
-    {
-      "article_id": "TTR_2f3a4b2052e2",
-      "title": "Ngày 6-10 xét xử công khai vụ sát hại 3 mẹ con ở Đồng Nai",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Pháp luật"
-    },
-    {
       "article_id": "TTR_3097ef57e806",
       "title": "Tử hình người dùng dao đâm chiến sĩ công an tử vong, chị dâu bị thương",
       "split": "train",
@@ -290,6 +276,20 @@
     {
       "article_id": "TTR_3419d89a6d3f",
       "title": "Bắt nam thanh niên sát hại vợ và chị vợ ở xã Củ Chi",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_359ed250bc2c",
+      "title": "Vụ án mạng ở Phước Hải: Nguyên nhân ban đầu nghi do ghen tuông",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_40d43a1a24ab",
+      "title": "Ly hôn một năm, người đàn ông mang xăng tạt vào vợ cũ rồi châm lửa đốt",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Pháp luật"
@@ -408,27 +408,6 @@
   ],
   "11": [
     {
-      "article_id": "TTR_0d37545e4b0b",
-      "title": "Sau vụ suất ăn bán trú lèo tèo, Hà Nội giao 3 phó giám đốc sở làm trưởng đoàn đi kiểm tra",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Giáo dục"
-    },
-    {
-      "article_id": "TTR_11cbbff719da",
-      "title": "Thủ tướng: Chủ tịch tỉnh chịu trách nhiệm bữa ăn bán trú, không chọn nhà cung cấp vì giá rẻ",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Giáo dục"
-    },
-    {
-      "article_id": "TTR_1230083af969",
-      "title": "Tin tức sáng 18-9: TP.HCM sẽ kiểm tra đột xuất an toàn thực phẩm khi có phản ánh của người dân",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Sức khỏe"
-    },
-    {
       "article_id": "TTR_1251b30b16c7",
       "title": "Sau phản ánh bữa ăn kém chất lượng, trường ở TP.HCM đổi nhà cung cấp, phụ huynh cùng giám sát",
       "split": "train",
@@ -438,6 +417,27 @@
     {
       "article_id": "TTR_1ffaf02ea056",
       "title": "Phụ huynh kiểm tra đột xuất thấy cơm bán trú 'toàn tóp mỡ', nhà trường nói gì?",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_24df30075ab7",
+      "title": "Phụ huynh kiểm tra bếp ăn bán trú đột xuất, phát hiện 'tôm ươn, thịt gà có mùi lạ'",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_372dd149ffc9",
+      "title": "Thành ủy Hà Nội vào cuộc vụ suất ăn bán trú 40.000 đồng 'lèo tèo' giá đỗ và thịt",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Giáo dục"
+    },
+    {
+      "article_id": "TTR_3872b8fd4890",
+      "title": "Nhà trường nói gì việc học sinh ăn sáng bên ngoài, cạnh thùng rác?",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Giáo dục"
@@ -489,20 +489,6 @@
       "category_gold": "Pháp luật"
     },
     {
-      "article_id": "TTR_1212f1176a30",
-      "title": "Tin tức sáng 30-9: Luật Đất đai sửa đổi đề xuất về sổ đỏ hộ gia đình thế nào?",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Kinh doanh"
-    },
-    {
-      "article_id": "TTR_1257e1f6132e",
-      "title": "VKSND khu vực 5 TP.HCM thắng kiện vụ đòi lại nhà xe cho thuê ở cư xá Thanh Đa",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Pháp luật"
-    },
-    {
       "article_id": "TTR_148553f716cc",
       "title": "2 công ty Hoàn Cầu ‘con’ ở Sông Lô Nha Trang kiện nhau để đòi nợ hơn 56,83 triệu đồng",
       "split": "train",
@@ -515,6 +501,20 @@
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Kinh doanh"
+    },
+    {
+      "article_id": "TTR_2319aa2d85bd",
+      "title": "Tòa buộc Công ty Nha khoa Kim thanh toán hơn 1,7 tỉ đồng tiền thuê nhà, mất cọc hơn 544 triệu đồng",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
+    },
+    {
+      "article_id": "TTR_29fbb48c8c7e",
+      "title": "Vụ án dân sự công ích thứ 2 tại TP.HCM: Tòa tuyên viện kiểm sát thắng kiện",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Pháp luật"
     }
   ],
   "14": [
@@ -741,20 +741,6 @@
   ],
   "20": [
     {
-      "article_id": "TTR_0f1145dd4252",
-      "title": "Nam giới cũng bị ung thư vú: Ai có nguy cơ cao?",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Sức khỏe"
-    },
-    {
-      "article_id": "TTR_4ebd91283671",
-      "title": "Nam sinh lớp 9 nhập viện vì 'nghịch dại', đưa quả dưa chuột dài 20cm vào hậu môn",
-      "split": "train",
-      "topic_probability": 1.0,
-      "category_gold": "Sức khỏe"
-    },
-    {
       "article_id": "TTR_69caba96f3c4",
       "title": "Chăm sóc da kỹ, tốn tiền triệu nhưng da càng xấu, nổi mụn: Có gì sai sai?",
       "split": "train",
@@ -771,6 +757,20 @@
     {
       "article_id": "TTR_aee165077653",
       "title": "Tiểu ra máu, coi chừng phải cắt bỏ bàng quang",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_1034a987048e",
+      "title": "Tăng tế bào bạch cầu gây viêm đường tiêu hóa",
+      "split": "train",
+      "topic_probability": 1.0,
+      "category_gold": "Sức khỏe"
+    },
+    {
+      "article_id": "VNE_14967bf91ccb",
+      "title": "Sau điều trị ung thư vú bao lâu có thể tái tạo ngực?",
       "split": "train",
       "topic_probability": 1.0,
       "category_gold": "Sức khỏe"

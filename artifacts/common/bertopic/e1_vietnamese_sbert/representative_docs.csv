@@ -1,0 +1,481 @@
+﻿topic_id,rank,display_label,article_id,title,split,topic_probability,category_gold
+0,1,"Kinh tế, đầu tư và phát triển vùng",TTR_0a28c0c1b215,"Vốn ngoại đổ vào kỷ lục, bất động sản công nghiệp 'cháy hàng' nhà xưởng xây sẵn",train,1.0,Kinh doanh
+0,2,"Kinh tế, đầu tư và phát triển vùng",TTR_0ecc010f647e,Khu công nghệ cao hơn 5.000 tỉ đồng ở Cần Thơ đặt ở phường nào?,train,1.0,Kinh doanh
+0,3,"Kinh tế, đầu tư và phát triển vùng",TTR_1dbf2ffa4082,"Xổ số ở những nơi đoàn Cần Thơ, Sóc Trăng đến học tập hoạt động ra sao?",train,1.0,Kinh doanh
+0,4,"Kinh tế, đầu tư và phát triển vùng",TTR_2d859dfd74c0,Từ những công trình biểu tượng Việt - Nga đến kích hoạt dự án hợp tác đầu tư mới,train,1.0,Kinh doanh
+0,5,"Kinh tế, đầu tư và phát triển vùng",TTR_31e875fc01f7,Cà Mau đề xuất dự án tổ hợp lọc hóa dầu 7 triệu tấn/năm,train,1.0,Kinh doanh
+1,1,Điều tra và xét xử hình sự,TTR_06d434163f42,Bắt tạm giam Phó chủ tịch UBND tỉnh Phú Thọ Nguyễn Huy Ngọc,train,1.0,Pháp luật
+1,2,Điều tra và xét xử hình sự,TTR_0edd6e428b09,Xem xét trách nhiệm hàng loạt cán bộ Yên Bái cũ trong vụ án Đinh Tiến Hùng,train,1.0,Pháp luật
+1,3,Điều tra và xét xử hình sự,TTR_14d24a5c85c3,"Làm giả 37 hồ sơ thiết kế xe cơ giới, một cán bộ kỹ thuật bị bắt",train,1.0,Pháp luật
+1,4,Điều tra và xét xử hình sự,TTR_1c4166d21ee1,Bắt tạm giam Thứ trưởng Bộ Y tế Trần Văn Thuấn,train,1.0,Sức khỏe
+1,5,Điều tra và xét xử hình sự,TTR_2350437f332e,"Từ 8 đơn trình báo mất 160 triệu đồng, công an bóc gỡ đường dây lừa đảo hơn 1.000 tỉ",train,1.0,Pháp luật
+2,1,Dinh dưỡng và sức khỏe,TTR_22f4b859d300,"Cẩn trọng khi ăn bông bí, dưa chuột có vị đắng",train,1.0,Sức khỏe
+2,2,Dinh dưỡng và sức khỏe,TTR_33c8f244cbb8,Những thói quen âm thầm có thể ảnh hưởng đến sức khỏe tim mạch của bạn,train,1.0,Sức khỏe
+2,3,Dinh dưỡng và sức khỏe,TTR_46194f6ecb6f,Thực phẩm nào chứa nhiều muối nhưng lại không có vị mặn?,train,1.0,Sức khỏe
+2,4,Dinh dưỡng và sức khỏe,TTR_7f7edfc4b83c,Vì sao ở Việt Nam nhiều nắng vẫn có người thiếu vitamin D?,train,1.0,Sức khỏe
+2,5,Dinh dưỡng và sức khỏe,TTR_91311ea2fb29,Có nên chi nhiều tiền để bổ sung collagen?,train,1.0,Sức khỏe
+3,1,iPhone và sản phẩm Apple,TTR_3a35e7cc91a1,"Hàng chục ngàn iPhone 18 đã đến tay khách Việt chỉ sau 3 ngày, màu máy nào áp đảo?",train,1.0,Kinh doanh
+3,2,iPhone và sản phẩm Apple,TTR_7f1d531a367a,Chạm giá 2.000 USD: iPhone Duo đắt gần gấp đôi nhưng nhiều cái còn thua iPhone 18 pro max?,train,1.0,Khoa học công nghệ
+3,3,iPhone và sản phẩm Apple,TTR_d4e198f40377,iPhone 18 Pro hơn 300 triệu đồng xuất hiện tại TP.HCM,train,1.0,Kinh doanh
+3,4,iPhone và sản phẩm Apple,TTR_ea1b5d054c1f,"Công bố iPhone Duo: Điện thoại gập đầu tiên của Apple, giá chạm 2.000 USD",train,1.0,Khoa học công nghệ
+3,5,iPhone và sản phẩm Apple,TTR_f5fc3b5b6079,"Hơn 220.000 iPhone 18 đã được người dùng Việt đặt mua, 90% chọn Pro Max",train,1.0,Kinh doanh
+4,1,Hệ thống bệnh viện và khám chữa bệnh,TTR_0f0e48f324ec,Bệnh viện Phụ sản TP Cần Thơ là bệnh viện hạt nhân lĩnh vực Sản khoa,train,1.0,Sức khỏe
+4,2,Hệ thống bệnh viện và khám chữa bệnh,TTR_1d61eb8e014a,Vụ nghi ngộ độc thực phẩm ở khu công nghiệp tại Huế: Đã có hơn 95 người nhập viện,train,1.0,Sức khỏe
+4,3,Hệ thống bệnh viện và khám chữa bệnh,TTR_232cde070948,Một ngày ở 'khu phố' bệnh viện điều trị ung thư,train,1.0,Sức khỏe
+4,4,Hệ thống bệnh viện và khám chữa bệnh,TTR_29fbbb96200a,"Không phải cứ lớn tuổi là suy yếu, 80 tuổi vẫn có thể khỏe mạnh",train,1.0,Sức khỏe
+4,5,Hệ thống bệnh viện và khám chữa bệnh,TTR_38c168a2f64a,"Đề xuất thêm nguồn hỗ trợ chi phí cho người mắc bệnh hiểm nghèo, ung thư, suy thận",train,1.0,Sức khỏe
+5,1,Thành tích thể thao tại ASIAD,TTR_0f748109e22a,Nhân tố mới sẽ giúp taekwondo Việt Nam giành huy chương ở Asiad 2026?,train,1.0,Thể thao
+5,2,Thành tích thể thao tại ASIAD,TTR_1787a0fbb340,Lịch thi đấu Asiad ngày 22-9 của đoàn Việt Nam: Chờ HCV đầu tiên,train,1.0,Thể thao
+5,3,Thành tích thể thao tại ASIAD,TTR_2e4fbe61a4d1,Châu Tuyết Vân cùng đồng đội bảo vệ thành công HCV taekwondo thế giới,train,1.0,Thể thao
+5,4,Thành tích thể thao tại ASIAD,TTR_30dda3f9dbed,Các cô gái karate về nước trong vòng tay yêu thương sau khi giành HCV Asiad,train,1.0,Thể thao
+5,5,Thành tích thể thao tại ASIAD,TTR_41c07bfc9fd7,Việt Nam giành thêm 1 huy chương trong ngày thi đấu 21-9 ở Asiad 20,train,1.0,Thể thao
+6,1,Âm nhạc và nghệ sĩ Việt,TTR_40eef11ae0ac,"Saigon Soul Revival đưa t'rưng, sáo trúc hòa cùng soul, rock trong 'Chốn ta về'",train,1.0,Giải trí
+6,2,Âm nhạc và nghệ sĩ Việt,TTR_461e30aa6d5f,OSAD từ ‘thánh thả thính’ Người âm phủ đến bất ngờ ở Anh trai vượt ngàn chông gai,train,1.0,Giải trí
+6,3,Âm nhạc và nghệ sĩ Việt,TTR_52981a5ac7d8,"Anh em Touliver, Soobin, Rhymastic ‘về nhà’",train,1.0,Giải trí
+6,4,Âm nhạc và nghệ sĩ Việt,TTR_830cc8e03a8f,Soobin bắt tay với nhà sản xuất âm nhạc đoạt giải Grammy làm album mới,train,1.0,Giải trí
+6,5,Âm nhạc và nghệ sĩ Việt,TTR_aec587837be1,Tùng Dương sắp tổ chức concert thứ 15 ở sân vận động,train,1.0,Giải trí
+7,1,Án mạng và hành vi bạo lực,TTR_17ef1dcf7f0a,Bắt người dùng dao rọc giấy đâm 'tình địch' bị thương tích,train,1.0,Pháp luật
+7,2,Án mạng và hành vi bạo lực,TTR_3097ef57e806,"Tử hình người dùng dao đâm chiến sĩ công an tử vong, chị dâu bị thương",train,1.0,Pháp luật
+7,3,Án mạng và hành vi bạo lực,TTR_3419d89a6d3f,Bắt nam thanh niên sát hại vợ và chị vợ ở xã Củ Chi,train,1.0,Pháp luật
+7,4,Án mạng và hành vi bạo lực,TTR_359ed250bc2c,Vụ án mạng ở Phước Hải: Nguyên nhân ban đầu nghi do ghen tuông,train,1.0,Pháp luật
+7,5,Án mạng và hành vi bạo lực,TTR_40d43a1a24ab,"Ly hôn một năm, người đàn ông mang xăng tạt vào vợ cũ rồi châm lửa đốt",train,1.0,Pháp luật
+8,1,Trường học và học sinh,TTR_0edbaddb9a6d,"Xuyên đêm hoàn thiện trường nội trú ở rẻo cao Huế, kịp đón học sinh ngày khai giảng",train,1.0,Giáo dục
+8,2,Trường học và học sinh,TTR_3b596d702bc2,Những ngôi trường mang tên 2-9,train,1.0,Giáo dục
+8,3,Trường học và học sinh,TTR_52596f045c21,Trường học TP.HCM tất bật 'thay áo mới' trước ngày khai giảng,train,1.0,Giáo dục
+8,4,Trường học và học sinh,TTR_d841763a0130,Học sinh vùng biên đón năm học mới ở ngôi trường gần 400 tỉ,train,1.0,Giáo dục
+8,5,Trường học và học sinh,TTR_f2fa47f58acb,Quỹ Thiện Tâm Tập đoàn Vingroup trao 300 suất học bổng cho học sinh khuyết tật,train,1.0,Giáo dục
+9,1,Rủi ro và quản trị trí tuệ nhân tạo,TTR_29cdefb53f61,"Ông Obama ra cảnh báo về AI, kêu gọi Đảng Dân chủ hành động",train,1.0,Khoa học công nghệ
+9,2,Rủi ro và quản trị trí tuệ nhân tạo,TTR_a41b0bd5ef9d,Chuyên gia cảnh báo: Trí tuệ nhân tạo có hơn 10% khả năng 'hủy diệt toàn bộ nhân loại',train,1.0,Khoa học công nghệ
+9,3,Rủi ro và quản trị trí tuệ nhân tạo,TTR_c80a18195155,CEO Nvidia: Xác suất AI khiến thế giới diệt vong vào năm 2030 là 0%,train,1.0,Khoa học công nghệ
+9,4,Rủi ro và quản trị trí tuệ nhân tạo,TTR_e4fd05fe4787,Thượng nghị sĩ Mỹ: Phải cấm siêu AI trước khi quá muộn!,train,1.0,Khoa học công nghệ
+9,5,Rủi ro và quản trị trí tuệ nhân tạo,VNE_72f550c20531,'Cảnh báo đỏ' khi AI vượt vòng kiểm soát,train,1.0,Khoa học công nghệ
+10,1,Đội tuyển bóng đá nữ Việt Nam,TTR_1d0f1933342d,Đội tuyển nữ Việt Nam gặp khó trước trận gặp Nhật Bản,train,1.0,Thể thao
+10,2,Đội tuyển bóng đá nữ Việt Nam,TTR_1f27fc627077,"Tạm biệt sân cỏ buôn làng, đội bóng nữ xã Đak Đoa 'tiến về' CLB Hoàng Anh Gia Lai",train,1.0,Thể thao
+10,3,Đội tuyển bóng đá nữ Việt Nam,TTR_3f6f46cb18db,Tuyển nữ Việt Nam thua Đài Bắc Trung Hoa ở trận ra quân Asiad 20,train,1.0,Thể thao
+10,4,Đội tuyển bóng đá nữ Việt Nam,TTR_3fcc2c9d4bb3,HLV Hoàng Văn Phúc nói gì về màn trình diễn của đội tuyển nữ Việt Nam trước Trung Quốc?,train,1.0,Thể thao
+10,5,Đội tuyển bóng đá nữ Việt Nam,TTR_430848e390af,"Tuyển nữ Việt Nam đổi lên giờ tập sớm hơn, chịu nóng để chuẩn bị đấu tuyển Trung Quốc",train,1.0,Thể thao
+11,1,An toàn và chất lượng bữa ăn bán trú,TTR_1251b30b16c7,"Sau phản ánh bữa ăn kém chất lượng, trường ở TP.HCM đổi nhà cung cấp, phụ huynh cùng giám sát",train,1.0,Giáo dục
+11,2,An toàn và chất lượng bữa ăn bán trú,TTR_1ffaf02ea056,"Phụ huynh kiểm tra đột xuất thấy cơm bán trú 'toàn tóp mỡ', nhà trường nói gì?",train,1.0,Giáo dục
+11,3,An toàn và chất lượng bữa ăn bán trú,TTR_24df30075ab7,"Phụ huynh kiểm tra bếp ăn bán trú đột xuất, phát hiện 'tôm ươn, thịt gà có mùi lạ'",train,1.0,Giáo dục
+11,4,An toàn và chất lượng bữa ăn bán trú,TTR_372dd149ffc9,Thành ủy Hà Nội vào cuộc vụ suất ăn bán trú 40.000 đồng 'lèo tèo' giá đỗ và thịt,train,1.0,Giáo dục
+11,5,An toàn và chất lượng bữa ăn bán trú,TTR_3872b8fd4890,"Nhà trường nói gì việc học sinh ăn sáng bên ngoài, cạnh thùng rác?",train,1.0,Giáo dục
+12,1,Cấp cứu tim mạch và ghép tạng,TTR_614b7ffacbd0,Lần đầu cấy ghép ‘trái tim cơ học’ phù hợp với lồng ngực người Việt,train,1.0,Sức khỏe
+12,2,Cấp cứu tim mạch và ghép tạng,TTR_87f239f3e51e,Cấp cứu bệnh nhân đột quỵ trong 30 phút 'giờ vàng' tại Vĩnh Long,train,1.0,Sức khỏe
+12,3,Cấp cứu tim mạch và ghép tạng,TTR_9019953fec9f,Bệnh viện Nhân dân Gia Định cứu sống người đàn ông ngừng tim hơn 60 phút,train,1.0,Sức khỏe
+12,4,Cấp cứu tim mạch và ghép tạng,TTR_e49154372ff5,"Cứu sống nữ bệnh nhân vỡ tim nguy kịch, gia đình đã chuẩn bị hậu sự",train,1.0,Sức khỏe
+12,5,Cấp cứu tim mạch và ghép tạng,VNE_2842f5a6d7b8,Nữ nhân viên y tế chết não hiến tạng cứu 3 người,train,1.0,Sức khỏe
+13,1,"Pháp luật nhà ở, đất đai và tranh chấp",TTR_087c5872db76,"Phạt đến 30 triệu nếu sử dụng nhà ở sai mục đích, hiểu sao cho đúng và khi nào bị phạt?",train,1.0,Pháp luật
+13,2,"Pháp luật nhà ở, đất đai và tranh chấp",TTR_148553f716cc,"2 công ty Hoàn Cầu ‘con’ ở Sông Lô Nha Trang kiện nhau để đòi nợ hơn 56,83 triệu đồng",train,1.0,Pháp luật
+13,3,"Pháp luật nhà ở, đất đai và tranh chấp",TTR_1906749f69f2,Cần lưu ý gì khi mua chung cư 'có thời hạn'?,train,1.0,Kinh doanh
+13,4,"Pháp luật nhà ở, đất đai và tranh chấp",TTR_2319aa2d85bd,"Tòa buộc Công ty Nha khoa Kim thanh toán hơn 1,7 tỉ đồng tiền thuê nhà, mất cọc hơn 544 triệu đồng",train,1.0,Pháp luật
+13,5,"Pháp luật nhà ở, đất đai và tranh chấp",TTR_29fbb48c8c7e,Vụ án dân sự công ích thứ 2 tại TP.HCM: Tòa tuyên viện kiểm sát thắng kiện,train,1.0,Pháp luật
+14,1,Tai nạn và vi phạm giao thông đường bộ,TTR_124dc949b46f,"Vụ lật xe khách chết 4 người: Xe chạy vào đoạn đường chưa khai thác, trách nhiệm thuộc về ai?",train,1.0,Pháp luật
+14,2,Tai nạn và vi phạm giao thông đường bộ,TTR_353e2f9efea2,"Tài xế say xỉn chạy ô tô tông vào dải phân cách ở Đắk Lắk, vẫn đòi tiếp tục lái xe",train,1.0,Pháp luật
+14,3,Tai nạn và vi phạm giao thông đường bộ,TTR_3a8f42a71017,"Xe khách và taxi chèn ép, đuổi nhau sau va chạm giao thông ở Hà Nội",train,1.0,Pháp luật
+14,4,Tai nạn và vi phạm giao thông đường bộ,TTR_3b2d5aea0a1b,"Kéo giường lưu động chở bệnh nhân 'đi bão', người đàn ông bị công an xử phạt",train,1.0,Pháp luật
+14,5,Tai nạn và vi phạm giao thông đường bộ,TTR_503ebf5facf0,"Xe đầu kéo 'văng' thùng sang làn đối diện, 2 người trên xe khách tử vong",train,1.0,Pháp luật
+15,1,Bóng đá Việt Nam - Thái Lan,TTR_1135788f5cc4,Tuyển Việt Nam thua Thái Lan lần đầu sau hơn 2 năm,train,1.0,Thể thao
+15,2,Bóng đá Việt Nam - Thái Lan,TTR_20f46424e5f1,Trùng hợp khó tin ở 2 trận thua của tuyển Việt Nam trước Thái Lan,train,1.0,Thể thao
+15,3,Bóng đá Việt Nam - Thái Lan,TTR_644a61d435a8,Dự đoán tỉ số FIFA ASEAN Cup: Việt Nam và Thái Lan tạo nên trận cầu kịch tính,train,1.0,Thể thao
+15,4,Bóng đá Việt Nam - Thái Lan,TTR_9018959f8d6c,"Dọn rác sau trận tuyển Việt Nam đấu Thái Lan, CĐV Việt Nam để lại hình ảnh đẹp",train,1.0,Thể thao
+15,5,Bóng đá Việt Nam - Thái Lan,TTR_faa86c2769c6,Việt Nam - Thái Lan: Chờ tài HLV Kim Sang Sik,train,1.0,Thể thao
+16,1,Chính sách tuyển sinh đại học,TTR_0ab3d0416f80,Bỏ điểm cộng IELTS: Công bằng hay mất động lực học ngoại ngữ?,train,1.0,Giáo dục
+16,2,Chính sách tuyển sinh đại học,TTR_3256e108821a,"Bỏ cộng điểm IELTS, thí sinh vẫn còn nhiều lợi thế",train,1.0,Giáo dục
+16,3,Chính sách tuyển sinh đại học,TTR_9d2bace02879,Nhiều đại học đồng tình bỏ cộng điểm IELTS khi xét tuyển,train,1.0,Giáo dục
+16,4,Chính sách tuyển sinh đại học,TTR_bf8bd180aff4,"Bỏ điểm cộng học sinh giỏi, IELTS trong xét tuyển đại học: Có gây 'sốc' cho thí sinh?",train,1.0,Giáo dục
+16,5,Chính sách tuyển sinh đại học,TTR_f717e065a9b0,"Bỏ điểm cộng học sinh giỏi, IELTS: Nếu từ 2027, có thiệt thòi cho học sinh đang lớp 12?",train,1.0,Giáo dục
+17,1,Sách giáo khoa và cung ứng học liệu,TTR_0778eeb6fbe8,Nhà xuất bản Giáo Dục đề nghị các trường rà soát từng học sinh còn thiếu sách giáo khoa,train,1.0,Giáo dục
+17,2,Sách giáo khoa và cung ứng học liệu,TTR_38ec0e1f596b,Thiếu sách giáo khoa: Cần thay đổi cách đặt hàng và phân phối sách,train,1.0,Giáo dục
+17,3,Sách giáo khoa và cung ứng học liệu,TTR_7c33c2b49c94,"Thiếu sách giáo khoa, trách nhiệm phải rõ",train,1.0,Giáo dục
+17,4,Sách giáo khoa và cung ứng học liệu,TTR_891381fd14af,"Học sinh Khánh Hòa thiếu sách giáo khoa: Có thể dùng sách cũ, sách điện tử",train,1.0,Giáo dục
+17,5,Sách giáo khoa và cung ứng học liệu,TTR_a79b377aeae5,"Thiếu sách giáo khoa, TP.HCM huy động sách thư viện, sách cũ cho học sinh mượn",train,1.0,Giáo dục
+18,1,Đội tuyển bóng đá nam Việt Nam,TTR_0b4e14ee54b2,Tuyển Việt Nam có 8 cầu thủ nhập tịch lẫn Việt kiều: Ai có cơ hội đá chính?,train,1.0,Thể thao
+18,2,Đội tuyển bóng đá nam Việt Nam,TTR_11ba80c5d633,Hoàng Đức là đội trưởng tuyển Việt Nam nhưng chưa ráp quân được vì chấn thương,train,1.0,Thể thao
+18,3,Đội tuyển bóng đá nam Việt Nam,TTR_41df90963b5d,"Lo Hoàng Đức và mừng Tiến Linh, HLV Kim Sang Sik làm gì đây?",train,1.0,Thể thao
+18,4,Đội tuyển bóng đá nam Việt Nam,TTR_619db1b03a5e,"HLV Kim Sang Sik về Hàn Quốc chịu tang cha, VFF và người hâm mộ Việt Nam chia buồn",train,1.0,Thể thao
+18,5,Đội tuyển bóng đá nam Việt Nam,TTR_7afd55251c58,Nỗi lo tuyến giữa đội tuyển Việt Nam,train,1.0,Thể thao
+19,1,Giải chạy marathon,TTR_b5dc798c35f5,5.300 VĐV chinh phục Giải chạy địa hình khốc liệt nhất Việt Nam tại Sa Pa,train,1.0,Thể thao
+19,2,Giải chạy marathon,TTR_fbdcbc71facc,7.000 người tham dự Giải chạy marathon Cà Mau 2026,train,1.0,Thể thao
+19,3,Giải chạy marathon,VNE_036eb0779d7f,8.000 runner phủ kín những cung đường ven biển Quy Nhơn,train,1.0,Thể thao
+19,4,Giải chạy marathon,VNE_0bd09fe6f928,Ngày cuối mua vé ưu đãi giải VM Hanoi Midnight,train,1.0,Thể thao
+19,5,Giải chạy marathon,VNE_18d8eb263e47,VnExpress Marathon Hải Phòng trở lại cuối tháng 12,train,1.0,Thể thao
+20,1,Bệnh lý và chăm sóc sức khỏe,TTR_69caba96f3c4,"Chăm sóc da kỹ, tốn tiền triệu nhưng da càng xấu, nổi mụn: Có gì sai sai?",train,1.0,Sức khỏe
+20,2,Bệnh lý và chăm sóc sức khỏe,TTR_a674800a04af,Nữ sinh mặt sưng 'như ong đốt’ vì làm đẹp cấp tốc để tựu trường,train,1.0,Sức khỏe
+20,3,Bệnh lý và chăm sóc sức khỏe,TTR_aee165077653,"Tiểu ra máu, coi chừng phải cắt bỏ bàng quang",train,1.0,Sức khỏe
+20,4,Bệnh lý và chăm sóc sức khỏe,VNE_1034a987048e,Tăng tế bào bạch cầu gây viêm đường tiêu hóa,train,1.0,Sức khỏe
+20,5,Bệnh lý và chăm sóc sức khỏe,VNE_14967bf91ccb,Sau điều trị ung thư vú bao lâu có thể tái tạo ngực?,train,1.0,Sức khỏe
+21,1,Thời trang hoàng gia và người nổi tiếng,TTR_539e453750e5,Công chúa ngầu nhất châu Âu,train,1.0,Giải trí
+21,2,Thời trang hoàng gia và người nổi tiếng,TTR_6fa8a5df8170,'Váy trả thù' của Công nương Diana trở lại sàn đấu giá,train,1.0,Giải trí
+21,3,Thời trang hoàng gia và người nổi tiếng,TTR_7c27f949165d,Céline Dion diện hơn 500 carat đá quý cho màn tái xuất sau 6 năm mắc bệnh lạ,train,1.0,Giải trí
+21,4,Thời trang hoàng gia và người nổi tiếng,TTR_85e97b95ca27,5 chiếc vương miện gắn bó với Hoàng hậu Rania xứ Jordan,train,1.0,Giải trí
+21,5,Thời trang hoàng gia và người nổi tiếng,TTR_be768b3adc13,Ivanka Trump diện váy nhà mốt Trung Quốc đón tiếp ông Tập Cận Bình,train,1.0,Giải trí
+22,1,Hôn nhân và đời sống nghệ sĩ,TTR_9c66fa2a9d51,Hẹn hò thời 4.0: Từ quẹt app đến thuê người mai mối nhưng vẫn kết hôn muộn,train,1.0,Sức khỏe
+22,2,Hôn nhân và đời sống nghệ sĩ,TTR_bea4a49add27,Nam thần màn ảnh Nhan Phúc Vinh cầu hôn Khả Ngân làm cõi mạng dậy sóng cả đêm,train,1.0,Giải trí
+22,3,Hôn nhân và đời sống nghệ sĩ,VNE_1df0664a21ca,Vợ chồng nghệ sĩ Công Lý cùng dàn sao dự đám cưới Ngọc Quỳnh,train,1.0,Giải trí
+22,4,Hôn nhân và đời sống nghệ sĩ,VNE_22d402d2097c,Hoài Lâm sắp cưới,train,1.0,Giải trí
+22,5,Hôn nhân và đời sống nghệ sĩ,VNE_2a1b5ca67615,Ngọc Quỳnh - Thùy Anh: Hạnh phúc sau đổ vỡ,train,1.0,Giải trí
+23,1,Giá nông sản và thực phẩm,TTR_1ce9f2fb2d61,"Giá cả đầu ngày: Rau Trung Quốc giá rẻ đổ về, nông dân miền Tây lo rau màu rớt giá",train,1.0,Kinh doanh
+23,2,Giá nông sản và thực phẩm,TTR_2fd500fcbd95,"Giá cả đầu ngày: Khoai mì, cam sành đồng loạt tăng giá, người trồng phấn khởi; rau xanh vẫn đắt lên",train,1.0,Kinh doanh
+23,3,Giá nông sản và thực phẩm,TTR_36422daedfc6,"Dừa tươi miền Tây bán tại vườn chỉ 6.500 đồng/trái, sao ra chợ lại 15.000 đồng?",train,1.0,Kinh doanh
+23,4,Giá nông sản và thực phẩm,TTR_3aa2fb7a93db,Tin tức sáng 7-9: Khó mua bông cải Đà Lạt,train,1.0,Kinh doanh
+23,5,Giá nông sản và thực phẩm,TTR_555b65da4136,"Giá cả đầu ngày: Cá đồng, chuột đồng miền Tây giá cao giữa mùa nước nổi",train,1.0,Kinh doanh
+24,1,Các cuộc thi sắc đẹp quốc tế,TTR_54aa76387dc0,Từ cú hụt chân bắt vương miện đến top 15 tài năng của Emoura Phạm,train,1.0,Giải trí
+24,2,Các cuộc thi sắc đẹp quốc tế,TTR_69e5fbbff818,"Miss Earth Water từng bị tước danh hiệu vì thi hoa hậu khác, Trịnh Mỹ Anh thì sao?",train,1.0,Giải trí
+24,3,Các cuộc thi sắc đẹp quốc tế,TTR_762e66944570,Chung kết Miss World 2026: Bảo Ngọc vào top 20,train,1.0,Giải trí
+24,4,Các cuộc thi sắc đẹp quốc tế,TTR_7e0cd444620a,Miss Universe Vietnam 2026: Ba cái tên quen cùng trở lại,train,1.0,Giải trí
+24,5,Các cuộc thi sắc đẹp quốc tế,TTR_d4062c7fea58,Cô gái gốc Cameroon từng thi Hoa hậu Hoàn vũ Việt Nam bất ngờ thi sắc đẹp quốc tế,train,1.0,Giải trí
+25,1,Giáo dục đại học và sinh viên,TTR_2d8f19dd49f3,TP.HCM khen thưởng hơn 700 học sinh và giáo viên giỏi,train,1.0,Giáo dục
+25,2,Giáo dục đại học và sinh viên,TTR_2fbe991ea724,Kết nối doanh nghiệp ngay trong Ngày hội tân sinh viên Đại học Cần Thơ,train,1.0,Giáo dục
+25,3,Giáo dục đại học và sinh viên,TTR_352e7c5e1549,Đỗ Cẩm Ly mang dự án giáo dục ‘Caravan cho em’ đến Miss Cosmo 2026,train,1.0,Giải trí
+25,4,Giáo dục đại học và sinh viên,TTR_7010e268a0f2,Hiệu trưởng Trường ĐH Tài nguyên và Môi trường: Sinh viên hãy chủ động nuôi dưỡng lối sống xanh,train,1.0,Giáo dục
+25,5,Giáo dục đại học và sinh viên,TTR_85adcd38dfa3,Học viện Hàng không Việt Nam học làm truyền thông tuyển sinh từ người làm báo,train,1.0,Giáo dục
+26,1,Thị trường xăng dầu,TTR_128c26627731,"Đọc nhanh: Vàng, chứng khoán 'đỏ rực' khi chờ tin từ Fed; Lãi suất qua đêm vọt lên 5,2%",train,1.0,Kinh doanh
+26,2,Thị trường xăng dầu,TTR_14fd0be8bb8c,Vì sao cú sốc dầu mỏ Trung Đông không còn làm khó được Trung Quốc?,train,1.0,Kinh doanh
+26,3,Thị trường xăng dầu,TTR_3ef03127e259,Khả năng ông Trump dùng luật thời chiến để tăng sản xuất xăng dầu,train,1.0,Kinh doanh
+26,4,Thị trường xăng dầu,TTR_43839fb4a2a3,"Đọc nhanh 7-9: Giá dầu tăng vọt gần 10% chỉ trong một tuần, vàng vẫn trên 4.400 USD",train,1.0,Kinh doanh
+26,5,Thị trường xăng dầu,TTR_4f2736df0c81,Vì sao giá xăng dầu trong nước tăng liên tiếp dù giá thế giới tuần qua giảm?,train,1.0,Kinh doanh
+27,1,Quản trị và sắp xếp trường học,TTR_0ab1d397fcf7,"Hiệu trưởng trường hơn 10.500 học sinh, 287 lớp: Hạn chế hội họp, quản trị bằng chuyển đổi số",train,1.0,Giáo dục
+27,2,Quản trị và sắp xếp trường học,TTR_1cb95db5bcd5,"Dự kiến chuyển 19 cơ sở giáo dục nghề nghiệp từ bộ, ngành về địa phương",train,1.0,Giáo dục
+27,3,Quản trị và sắp xếp trường học,TTR_2b8520abe860,"Nha Trang nói gì về việc nhập 13 trường tiểu học thành trường 287 lớp, 10.565 học sinh?",train,1.0,Giáo dục
+27,4,Quản trị và sắp xếp trường học,TTR_2b989b1f254c,388 cán bộ quản lý giáo dục ở Tây Ninh chuyển làm giáo viên,train,1.0,Giáo dục
+27,5,Quản trị và sắp xếp trường học,TTR_444f5d77b957,"Gộp xong trường học, vẫn thiếu thầy và phòng học",train,1.0,Giáo dục
+28,1,U20 Việt Nam tại vòng loại châu Á,TTR_53502db35bb1,Lịch trực tiếp vòng loại U20 châu Á 2026: U20 Việt Nam quyết đấu U20 Iran,train,1.0,Thể thao
+28,2,U20 Việt Nam tại vòng loại châu Á,TTR_7f665785b072,U20 Việt Nam phải thắng dàn cầu thủ châu Âu của U20 Palestine,train,1.0,Thể thao
+28,3,U20 Việt Nam tại vòng loại châu Á,TTR_89087aef868a,Lịch trực tiếp vòng loại U20 châu Á 2027: Việt Nam đối đầu Palestine,train,1.0,Thể thao
+28,4,U20 Việt Nam tại vòng loại châu Á,TTR_a07afe3f21b6,"Thua hai trận liên tiếp, U20 Việt Nam đi tiếp trong trường hợp nào?",train,1.0,Thể thao
+28,5,U20 Việt Nam tại vòng loại châu Á,TTR_a72542a4e861,U20 Triều Tiên báo tin cực vui cho U20 Việt Nam,train,1.0,Thể thao
+29,1,Dự đoán và kết quả bóng đá châu Âu,TTR_78deb1915666,"Dự đoán tỉ số Ngoại hạng Anh: Liverpool chật vật, Chelsea thắng tưng bừng tân binh",train,1.0,Thể thao
+29,2,Dự đoán và kết quả bóng đá châu Âu,TTR_7d5d52b0236a,Dự đoán tỉ số Ngoại hạng Anh: Haaland 'nhấn chìm' Man United tại Old Trafford,train,1.0,Thể thao
+29,3,Dự đoán và kết quả bóng đá châu Âu,TTR_b62bebf12bd9,Dự đoán tỉ số Champions League: Liverpool bất lực trước Atletico Madrid,train,1.0,Thể thao
+29,4,Dự đoán và kết quả bóng đá châu Âu,TTR_c3ad4a1d872b,Man United thắng đậm trong ngày trở lại Champions League,train,1.0,Thể thao
+29,5,Dự đoán và kết quả bóng đá châu Âu,TTR_f5624e8ce8c7,Dự đoán tỉ số Ngoại hạng Anh: Man United 'ôm hận' trước Everton,train,1.0,Thể thao
+30,1,Điện ảnh Việt Nam và doanh thu phòng vé,TTR_0d9ba5eb253d,"Đoàn phim Trại buôn người 'chơi lớn', tài trợ luôn một lễ hội đua bò để quay phim",train,1.0,Giải trí
+30,2,Điện ảnh Việt Nam và doanh thu phòng vé,TTR_62a1010d28b9,"Nữ giám đốc đứng sau ‘Trại buôn người’: Lập công ty vốn 1 tỉ, phim đầu tay thu trăm tỉ",train,1.0,Kinh doanh
+30,3,Điện ảnh Việt Nam và doanh thu phòng vé,TTR_7d2bbd64be63,Phim Việt đang 'hốt bạc' nhờ suất chiếu sớm?,train,1.0,Giải trí
+30,4,Điện ảnh Việt Nam và doanh thu phòng vé,TTR_a0182c3d43a5,Hậu Tây Du Ký: Mở ra hành trình 'thỉnh kinh' AI,train,1.0,Giải trí
+30,5,Điện ảnh Việt Nam và doanh thu phòng vé,TTR_d5ec26baf41b,Hộ linh tráng sĩ nợ một phim cổ trang xứng tầm hay khán giả nợ ê kíp một tâm thế khác?,train,1.0,Giải trí
+31,1,Anime và nhân vật truyện,TTR_2bd579e88f4c,"Vì sao 'Lúc đó, tôi đã chuyển sinh thành slime' được fan anime yêu đến vậy?",train,1.0,Giải trí
+31,2,Anime và nhân vật truyện,TTR_2fc22d4f7abd,Dragon Ball GT vẫn là anime đáng nhớ về Goku sau 30 năm,train,1.0,Giải trí
+31,3,Anime và nhân vật truyện,TTR_33d479855167,Dabura trở lại sau cái kết Jujutsu Kaisen Modulo,train,1.0,Giải trí
+31,4,Anime và nhân vật truyện,TTR_3c69151e5adb,Vì sao Jujutsu Kaisen không đi theo công thức thành công của Thanh gươm diệt quỷ?,train,1.0,Giải trí
+31,5,Anime và nhân vật truyện,TTR_6b12a135562a,5 anime ngắn dành cho người mới bắt đầu,train,1.0,Giải trí
+32,1,U23 Việt Nam tại ASIAD,TTR_05730e084214,U23 Kuwait có gì đáng ngại?,train,1.0,Thể thao
+32,2,U23 Việt Nam tại ASIAD,TTR_411476851a50,Hàn Quốc cẩn trọng trước U23 Việt Nam,train,1.0,Thể thao
+32,3,U23 Việt Nam tại ASIAD,TTR_5bf2f1c3aaaa,"HLV Đinh Hồng Vinh: Gặp ai ở tứ kết Asiad 2026, U23 Việt Nam cũng sẵn sàng",train,1.0,Thể thao
+32,4,U23 Việt Nam tại ASIAD,TTR_841b68c84aaf,Lịch thi đấu của U23 Việt Nam ở môn bóng đá nam Asiad 20,train,1.0,Thể thao
+32,5,U23 Việt Nam tại ASIAD,TTR_b0913cf2684e,Asiad 2026: Chờ tin chiến thắng của U23 Việt Nam trước U23 Kuwait,train,1.0,Thể thao
+33,1,Biến động giá vàng,TTR_63ea4457bf26,"Giá vàng 'quay xe', sẽ tăng tiếp nếu Fed nâng lãi suất vào tuần tới?",train,1.0,Kinh doanh
+33,2,Biến động giá vàng,VNE_1aa6221a2a36,Giá vàng miếng xuống thấp nhất một tháng,train,1.0,Kinh doanh
+33,3,Biến động giá vàng,VNE_46c9b0a0a37b,Giá vàng miếng về dưới 145 triệu đồng,train,1.0,Kinh doanh
+33,4,Biến động giá vàng,VNE_d6e0201cbca0,Mỗi lượng vàng tăng gần hai triệu đồng,train,1.0,Kinh doanh
+33,5,Biến động giá vàng,VNE_d9f8c33582f2,Giá vàng miếng xuống thấp nhất hai tháng,train,1.0,Kinh doanh
+34,1,Sản khoa và sức khỏe sinh sản,TTR_44a1d4f73c30,"Song thai hai lần liên tiếp: Bác sĩ nói không phải 'hời', là thất bại khi hỗ trợ sinh sản",train,1.0,Sức khỏe
+34,2,Sản khoa và sức khỏe sinh sản,TTR_a1d1c6887fea,"Bác sĩ Chợ Rẫy kể khoảnh khắc nghẹt thở đỡ sinh em bé trên máy bay, hạ cánh ở Myanmar",train,1.0,Sức khỏe
+34,3,Sản khoa và sức khỏe sinh sản,TTR_b879f18bb16d,Phản ứng nhanh cứu sản phụ và em bé bị sa dây rốn nguy kịch,train,1.0,Sức khỏe
+34,4,Sản khoa và sức khỏe sinh sản,TTR_d91ed27d376a,Khởi tố người phụ nữ tổ chức mang thai hộ vì mục đích thương mại hơn 1 tỉ đồng,train,1.0,Pháp luật
+34,5,Sản khoa và sức khỏe sinh sản,VNE_088888f6fe17,Giải pháp ngừa thai 'vô hình' từ màng phim VCF,train,1.0,Sức khỏe
+35,1,Trộm cướp và tài sản,TTR_39ad76f5119d,"Bắt 4 người trộm tài sản tại trụ sở HĐND, Sở Nội vụ và báo Hậu Giang cũ",train,1.0,Pháp luật
+35,2,Trộm cướp và tài sản,TTR_52c76c5d8357,Nguồn gốc chiếc xe hơi chở 4 người nước ngoài trộm tiệm vàng ở Đắk Lắk,train,1.0,Pháp luật
+35,3,Trộm cướp và tài sản,TTR_658bb7d87d8e,"Hai phụ nữ đang đi trên đường bị hai người mặc áo dài áp sát, cướp dây chuyền",train,1.0,Pháp luật
+35,4,Trộm cướp và tài sản,TTR_75aa764713cb,Nam thanh niên cầm dao dọa giết nhân viên siêu thị để cướp tài sản,train,1.0,Pháp luật
+35,5,Trộm cướp và tài sản,TTR_ad880d45536d,"Mang xe đi cầm rồi báo bị 'cướp xe và 42 triệu đồng', người phụ nữ bị công an phạt 3,5 triệu đồng",train,1.0,Pháp luật
+36,1,"Giấc ngủ, vận động và sức khỏe lối sống",TTR_6537346c85d0,Loạt công nghệ 'đối phó' với tiếng ngáy,train,1.0,Khoa học công nghệ
+36,2,"Giấc ngủ, vận động và sức khỏe lối sống",TTR_71d22824ec13,Động tác tập đơn giản giúp nam giới U50 tăng cường khả năng tình dục,train,1.0,Thể thao
+36,3,"Giấc ngủ, vận động và sức khỏe lối sống",TTR_903f2cd18471,"Tại sao có người nói mớ khi ngủ, có người không?",train,1.0,Sức khỏe
+36,4,"Giấc ngủ, vận động và sức khỏe lối sống",VNE_023b59ede468,Đi bộ đúng cách tốt cho sức khỏe thế nào,train,1.0,Sức khỏe
+36,5,"Giấc ngủ, vận động và sức khỏe lối sống",VNE_097eb430b510,Ba thói quen thường ngày có thể khiến bạn già nhanh,train,1.0,Sức khỏe
+37,1,Real Madrid tại Champions League,TTR_5916376e5dc4,Lịch trực tiếp Champions League: Real Madrid đấu Inter Milan,train,1.0,Thể thao
+37,2,Real Madrid tại Champions League,TTR_79d27786ff65,Dự đoán tỉ số: Atletico bất lực trước 'Người đặc biệt' Mourinho,train,1.0,Thể thao
+37,3,Real Madrid tại Champions League,TTR_7abcc7714699,Real Madrid thắng may Inter Milan ở ngày mở màn Champions League,train,1.0,Thể thao
+37,4,Real Madrid tại Champions League,TTR_9a6d23ea6541,Tranh cãi nảy lửa khi Mbappe không được đá lại quả 11m trong trận Real Madrid gặp Real Betis,train,1.0,Thể thao
+37,5,Real Madrid tại Champions League,TTR_9c85253ed106,'Siêu dự bị' của HLV Mourinho giải cứu Real Madrid,train,1.0,Thể thao
+38,1,Bóng đá câu lạc bộ Việt Nam,TTR_135f4b1838c2,"Có tuyển thủ Việt Nam trong đội, Becamex TP.HCM gây thất vọng ngày ra quân Giải hạng nhất 2026 - 2027",train,1.0,Thể thao
+38,2,Bóng đá câu lạc bộ Việt Nam,TTR_2712a9de4332,Derby nóng bỏng trên sân Hàng Đẫy,train,1.0,Thể thao
+38,3,Bóng đá câu lạc bộ Việt Nam,TTR_299630bf99d7,"Hoàng Hên, Hai Long dễ 'gieo sầu' cho CLB Công An TP.HCM",train,1.0,Thể thao
+38,4,Bóng đá câu lạc bộ Việt Nam,TTR_31da5d904adb,Thể Công - Viettel đấu Melbourne Victory: Ngày trở lại sân chơi châu Á của HLV Popov,train,1.0,Thể thao
+38,5,Bóng đá câu lạc bộ Việt Nam,TTR_61f711796287,"Lịch trực tiếp vòng 1 Giải hạng nhất: Công An Nhân Dân, Becamex TP.HCM ra sân",train,1.0,Thể thao
+39,1,Kết quả Giải hạng Nhất và V-League,TTR_14f2fa3257cf,"Dùng ‘chiêu’ thay thủ môn, Quy Nhơn United vẫn thua trên chấm luân lưu",train,1.0,Thể thao
+39,2,Kết quả Giải hạng Nhất và V-League,TTR_3da204111c45,Câu lạc bộ Hưng Yên khởi đầu như mơ ở Giải hạng nhất,train,1.0,Thể thao
+39,3,Kết quả Giải hạng Nhất và V-League,TTR_54c9cb4209b8,Tân binh Bắc Ninh gây sốc ở V-League 2026-2027,train,1.0,Thể thao
+39,4,Kết quả Giải hạng Nhất và V-League,TTR_5e1c09ac4b1e,Đại diện TP.HCM khởi đầu thuận lợi ở Giải hạng nhất,train,1.0,Thể thao
+39,5,Kết quả Giải hạng Nhất và V-League,TTR_7134f1b1d47b,Video: Tiền vệ Sông Lam Nghệ An lập cú đúp trong 4 phút,train,1.0,Thể thao
+40,1,Doanh thu và kế hoạch kinh doanh doanh nghiệp,TTR_741d7fb2a216,"Coteccons đặt mục tiêu lãi 1.050 tỉ đồng năm tài chính 2027, không chia cổ tức dù lãi tăng gần 73%",train,1.0,Kinh doanh
+40,2,Doanh thu và kế hoạch kinh doanh doanh nghiệp,TTR_76998a34ae5d,"Doanh thu MCH tăng 15%, động lực tăng trưởng mở rộng",train,1.0,Kinh doanh
+40,3,Doanh thu và kế hoạch kinh doanh doanh nghiệp,TTR_9aa2d8ac9d2c,TP.HCM giao chỉ tiêu xổ số Bình Dương doanh thu hơn 32.000 tỉ đồng trong 5 năm,train,1.0,Kinh doanh
+40,4,Doanh thu và kế hoạch kinh doanh doanh nghiệp,TTR_a2e57ed2bcb3,"Cùng làm bất động sản công nghiệp nhưng nơi lãi đậm, nơi giảm sâu?",train,1.0,Kinh doanh
+40,5,Doanh thu và kế hoạch kinh doanh doanh nghiệp,TTR_baf7edb6bb32,Tỉnh Đồng Tháp giao nhiệm vụ cho 2 công ty xổ số của tỉnh đạt doanh thu hơn 18.000 tỉ,train,1.0,Kinh doanh
+41,1,Thuế và pháp lý doanh nghiệp,TTR_43706f3f1f7d,"Trường không xuất hóa đơn học phí: Quýt làm, cam chịu?",train,1.0,Kinh doanh
+41,2,Thuế và pháp lý doanh nghiệp,TTR_556c0132516d,"Thời gian hoàn thuế kéo dài, doanh nghiệp mong sớm được tháo gỡ",train,1.0,Kinh doanh
+41,3,Thuế và pháp lý doanh nghiệp,TTR_6e39bf965e3d,"Bán nhà 30 tỉ nhưng 'lỡ' khai chỉ 10 tỉ, chủ động nộp thuế bổ sung thì có thoát án hình sự?",train,1.0,Pháp luật
+41,4,Thuế và pháp lý doanh nghiệp,TTR_893a7848832e,"Đối diện khoản phạt khi đóng mã số thuế, nhiều doanh nghiệp đành bỏ cuộc",train,1.0,Kinh doanh
+41,5,Thuế và pháp lý doanh nghiệp,TTR_ded7e2ae9f06,"Bị mạo danh lập doanh nghiệp, làm sao để người dân không 'bị phạt' oan?",train,1.0,Kinh doanh
+42,1,Lợi nhuận và thua lỗ doanh nghiệp,TTR_513133e5e3d5,Vinasun lần đầu tiên báo lỗ kể từ sau COVID-19,train,1.0,Kinh doanh
+42,2,Lợi nhuận và thua lỗ doanh nghiệp,TTR_580023910107,"PNJ điều chỉnh kế hoạch năm 2026, dự kiến lỗ 6.271 tỉ đồng",train,1.0,Kinh doanh
+42,3,Lợi nhuận và thua lỗ doanh nghiệp,TTR_87ca99539f6b,Công ty sở hữu khu nghỉ dưỡng có giá phòng 181 triệu đồng/đêm lãi lớn nhất từ khi niêm yết,train,1.0,Kinh doanh
+42,4,Lợi nhuận và thua lỗ doanh nghiệp,VNE_294766acb5b0,VETC vẫn lỗ lũy kế hơn 400 tỷ đồng,train,1.0,Kinh doanh
+42,5,Lợi nhuận và thua lỗ doanh nghiệp,VNE_3f8f55b8cc49,Chủ đầu tư Aqua City lỗ hơn 120 tỷ đồng,train,1.0,Kinh doanh
+43,1,Tranh chấp dân sự và tài sản,TTR_3187c582006f,"Người đàn ông 63 tuổi kiện bạn gái 48 tuổi, đòi hơn 5 tỉ đồng sau chia tay",train,1.0,Pháp luật
+43,2,Tranh chấp dân sự và tài sản,TTR_3a95b47388a6,"Ngôi nhà bán giá 1 triệu đồng, kết quả thẩm định hơn 1 triệu đô la Mỹ: Bị đơn kháng cáo",train,1.0,Pháp luật
+43,3,Tranh chấp dân sự và tài sản,TTR_84e923f271ff,"Vì sao hậu chia tay, vợ cũ khởi kiện bác sĩ Chiêm Quốc Thái?",train,1.0,Pháp luật
+43,4,Tranh chấp dân sự và tài sản,TTR_a257238a7d72,Sui gia kiện nhau từ chuyện cho ở nhờ trên đất,train,1.0,Pháp luật
+43,5,Tranh chấp dân sự và tài sản,TTR_a2aec7c38642,"Tòa tuyên 'vợ cũ' phải trả cho ông Chiêm Quốc Thái 301.000 USD, được nhận lại 743 triệu đồng",train,1.0,Pháp luật
+44,1,Xét xử các vụ án cán bộ và giáo dục,TTR_077c75fbcdf8,Cựu Bộ trưởng Y tế Nguyễn Thị Kim Tiến đã khắc phục xong 108 tỉ đồng,train,1.0,Pháp luật
+44,2,Xét xử các vụ án cán bộ và giáo dục,TTR_231996c67f82,"Cựu hiệu trưởng bị tuyên 3 năm tù nói ‘không tư lợi cá nhân, không tham ô’",train,1.0,Giáo dục
+44,3,Xét xử các vụ án cán bộ và giáo dục,TTR_324268bb35ea,"Bà Nguyễn Thị Kim Tiến điều trị bệnh, không thể di chuyển, xin xét xử vắng mặt",train,1.0,Pháp luật
+44,4,Xét xử các vụ án cán bộ và giáo dục,TTR_525f010bfb29,Cựu Bộ trưởng Y tế Nguyễn Thị Kim Tiến được đề nghị giảm 6 tháng đến 1 năm tù,train,1.0,Pháp luật
+44,5,Xét xử các vụ án cán bộ và giáo dục,TTR_5c1e6ba0331c,Vụ cựu Hiệu trưởng Trường THCS Ba Đình: Từ 15.000 đồng/tiết dạy thêm 13 năm trước đến bản án 3 năm tù,train,1.0,Giáo dục
+45,1,Quần vợt quốc tế và US Open,TTR_51dbb638336d,Zverev phản ứng lạ khi nhận ra mình vừa vô địch Mỹ mở rộng,train,1.0,Thể thao
+45,2,Quần vợt quốc tế và US Open,TTR_dc717f6cb668,Lịch trực tiếp chung kết US Open 2026: Shelton quyết đấu Zverev,train,1.0,Thể thao
+45,3,Quần vợt quốc tế và US Open,VNE_0200b671ea66,Zverev chỉ ra sai lầm của Alcaraz khi đấu Shelton,train,1.0,Thể thao
+45,4,Quần vợt quốc tế và US Open,VNE_193689754e59,Alcaraz bị loại trong trận đấu muộn nhất lịch sử Mỹ Mở rộng,train,1.0,Thể thao
+45,5,Quần vợt quốc tế và US Open,VNE_650a549b1632,Toni Nadal: 'Zverev đã xích lại gần hơn với Alcaraz và Sinner',train,1.0,Thể thao
+46,1,Thủ khoa và thành tích đại học,TTR_27b0d3065a78,Cặp song sinh giành 'vàng' Olympic toán quốc tế Hiền - Hậu được tuyển thẳng ngành toán,train,1.0,Giáo dục
+46,2,Thủ khoa và thành tích đại học,TTR_79f4b081c9ad,Lần đầu Đại học Bách khoa Hà Nội có 3 thủ khoa tốt nghiệp đạt GPA 4.0,train,1.0,Giáo dục
+46,3,Thủ khoa và thành tích đại học,TTR_8dc8a576c6fc,"Thủ khoa 108,33 điểm của Trường đại học Công nghệ thông tin bắt đầu học lập trình từ lớp 8",train,1.0,Giáo dục
+46,4,Thủ khoa và thành tích đại học,TTR_efe2d92508fe,Bốn thủ khoa vào Trường đại học Bách khoa TP.HCM cùng đạt điểm 10 môn toán,train,1.0,Giáo dục
+46,5,Thủ khoa và thành tích đại học,TTR_f4c6504dc638,Thủ khoa tốt nghiệp ĐH Kinh tế quốc dân sở hữu 11 công bố quốc tế về trí tuệ nhân tạo,train,1.0,Giáo dục
+47,1,Bệnh truyền nhiễm và cấp cứu nhi khoa,TTR_0a84125614b8,Đắk Lắk đã có 3 người chết vì sốt xuất huyết,train,1.0,Sức khỏe
+47,2,Bệnh truyền nhiễm và cấp cứu nhi khoa,TTR_2a909acaaa98,"Cô gái 16 tuổi nguy kịch vì mắc sốt xuất huyết, chi phí điều trị gần 1 tỉ đồng",train,1.0,Sức khỏe
+47,3,Bệnh truyền nhiễm và cấp cứu nhi khoa,TTR_6528d6e002d2,"Viêm phổi tái phát, bác sĩ bất ngờ lấy ra... răng sâu trong phế quản",train,1.0,Sức khỏe
+47,4,Bệnh truyền nhiễm và cấp cứu nhi khoa,TTR_c43b6db6a0c3,Nguy cơ sặc sữa ở trẻ và những điều ba mẹ cần biết,train,1.0,Sức khỏe
+47,5,Bệnh truyền nhiễm và cấp cứu nhi khoa,TTR_eb589e866051,"Bé trai 1 tháng tuổi bị cho uống nhầm 5 giọt axit, bác sĩ khuyến cáo gì?",train,1.0,Sức khỏe
+48,1,Barcelona và cầu thủ nổi bật,TTR_13b6b0ad0237,Raphinha lập hat-trick giúp Barca khởi đầu hoàn hảo ở La Liga,train,1.0,Thể thao
+48,2,Barcelona và cầu thủ nổi bật,TTR_24e2f5f97182,Các đại gia ra quân thuận lợi ở Champions League,train,1.0,Thể thao
+48,3,Barcelona và cầu thủ nổi bật,TTR_2b39591bccdd,Barca lại khiến Real Madrid và Mourinho 'mất vui',train,1.0,Thể thao
+48,4,Barcelona và cầu thủ nổi bật,TTR_5e00ab9399d7,Yamal lại rực sáng trước khi công bố Quả bóng vàng 2026,train,1.0,Thể thao
+48,5,Barcelona và cầu thủ nổi bật,VNE_3126bfa0b63e,Raphinha lập cột mốc hiếm trong lịch sử Barca,train,1.0,Thể thao
+49,1,Đào tạo bác sĩ nội trú,TTR_3a34455b9737,"Bác sĩ nội trú nói về lương, 41 tuổi mới có khoản tiền tiết kiệm đầu tiên",train,1.0,Sức khỏe
+49,2,Đào tạo bác sĩ nội trú,TTR_3d4daed4f6b7,"Vượt kỳ thi khắc nghiệt và màn hô chọn chuyên ngành, bác sĩ nội trú tiếp tục thử thách gì?",train,1.0,Sức khỏe
+49,3,Đào tạo bác sĩ nội trú,TTR_509e0124e2a8,"Vì sao Y Hà Nội giữ 'đặc sản' hô tên, chọn chuyên ngành bác sĩ nội trú suốt 11 năm?",train,1.0,Giáo dục
+49,4,Đào tạo bác sĩ nội trú,TTR_7bd6309efd3b,"PGS.TS Nguyễn Lân Hiếu: Hô tên, chọn chuyên ngành cho BS nội trú tạo ra cuộc chạy đua điểm số",train,1.0,Giáo dục
+49,5,Đào tạo bác sĩ nội trú,TTR_c21396c3c931,"Nếu không thay đổi mô hình đào tạo, thế giới sẽ không công nhận bằng bác sĩ Việt Nam",train,1.0,Sức khỏe
+50,1,Diễn biến chỉ số VN-Index,TTR_2672f2c25ca4,"Tăng bốc hơn 17 điểm rồi quay đầu, VN-Index kết phiên trong sắc đỏ",train,1.0,Kinh doanh
+50,2,Diễn biến chỉ số VN-Index,TTR_365d4150b6e7,"Chứng khoán 23-9: Hồi phục nhờ nhóm Vingroup, VN-Index dự báo có thể rung lắc",train,1.0,Kinh doanh
+50,3,Diễn biến chỉ số VN-Index,TTR_8a483d1c2da9,"Chứng khoán 22-9: Câu chuyện nâng hạng hạ nhiệt, dòng tiền tìm kiếm động lực mới",train,1.0,Kinh doanh
+50,4,Diễn biến chỉ số VN-Index,TTR_8bf5cbc3953e,VN-Index gần như ‘bất động’ trước giờ G nâng hạng,train,1.0,Kinh doanh
+50,5,Diễn biến chỉ số VN-Index,TTR_927a11e90432,"2 cổ phiếu trụ kéo VN-Index mất 18 điểm, một cổ phiếu sữa ngược dòng tăng kịch trần",train,1.0,Kinh doanh
+51,1,Phim quốc tế và giải thưởng điện ảnh,TTR_3f540d92d906,"Phim có Jo In Sung 'tuyệt đối điện ảnh', gây chấn động Venice",train,1.0,Giải trí
+51,2,Phim quốc tế và giải thưởng điện ảnh,TTR_62ca3a6db3b5,Phim của Jo In Sung giành chiến thắng đầu tiên tại Liên hoan phim Venice,train,1.0,Giải trí
+51,3,Phim quốc tế và giải thưởng điện ảnh,TTR_9cf0b3d8b394,Lý Hiện bị cuốn vào phi vụ báo thù trong phim mới,train,1.0,Giải trí
+51,4,Phim quốc tế và giải thưởng điện ảnh,TTR_ad93c1bff311,Robert Pattinson rộng cửa đến Oscar,train,1.0,Giải trí
+51,5,Phim quốc tế và giải thưởng điện ảnh,TTR_b852730c5455,Elon Musk nổi giận vì bị 'soi' suốt 4 giờ trên màn ảnh,train,1.0,Giải trí
+52,1,Hợp tác và công nghệ điều trị y khoa,TTR_34d1ebcc4a6d,"Nghiên cứu, ứng dụng tế bào gốc để người cao tuổi không cần ra nước ngoài điều trị",train,1.0,Sức khỏe
+52,2,Hợp tác và công nghệ điều trị y khoa,TTR_6d1b6b5ad14d,"1.000 chuyên gia quốc tế, trong nước bàn y học thế giới tại Bệnh viện Tâm Anh",train,1.0,Sức khỏe
+52,3,Hợp tác và công nghệ điều trị y khoa,VNE_687c50520738,Bác sĩ Việt - Trung hợp tác hội chẩn điều trị ung thư từ xa,train,1.0,Sức khỏe
+52,4,Hợp tác và công nghệ điều trị y khoa,VNE_70345aad1ecb,Liệu pháp nội tiết mới trong quản lý cường kinh và tránh thai,train,1.0,Sức khỏe
+52,5,Hợp tác và công nghệ điều trị y khoa,VNE_7240006ed3ab,Hơn 1.000 chuyên gia y tế Việt Nam và thế giới chia sẻ kinh nghiệm y khoa,train,1.0,Sức khỏe
+53,1,"UAV, tên lửa và tác chiến hiện đại",VNN_022465b932f7,"UAV đánh chặn Sokol-I, ‘chim ưng’ xốp giá rẻ thay đổi tác chiến drone trên bầu trời Ukraine",train,1.0,Khoa học công nghệ
+53,2,"UAV, tên lửa và tác chiến hiện đại",VNN_22aede91b627,"Tên lửa Squall lộ diện, ‘ác mộng’ mới của mọi hệ thống phòng không",train,1.0,Khoa học công nghệ
+53,3,"UAV, tên lửa và tác chiến hiện đại",VNN_37c4fead7481,Ukraine thay ‘mắt thần’ kép cho tên lửa FP-7.x ‘chọi’ Iskander Nga,train,1.0,Khoa học công nghệ
+53,4,"UAV, tên lửa và tác chiến hiện đại",VNN_649912263210,"Tác chiến điện tử Ukraine ‘bịt mắt’ 20.000 UAV Nga, tung đòn kết liễu bằng sát thủ giấu mặt RAM-2X",train,1.0,Khoa học công nghệ
+53,5,"UAV, tên lửa và tác chiến hiện đại",VNN_672a41719349,"‘Sát thủ tàng hình điện’ SkyStriker, bước ngoặt đạn tuần kích tầm xa mới của châu Âu",train,1.0,Khoa học công nghệ
+54,1,Các vụ tử vong và án hình sự quốc tế,VNE_1c58b54089a3,Bê bối tình ái quanh cái chết bí ẩn của nữ thực tập sinh,train,1.0,Pháp luật
+54,2,Các vụ tử vong và án hình sự quốc tế,VNE_45a1bc196f79,"Tài xế Uber bỏ mặc khách nữ say rượu bên đường cao tốc, gây tử vong",train,1.0,Pháp luật
+54,3,Các vụ tử vong và án hình sự quốc tế,VNE_8a5971e2bdff,Nỗ lực thoát hiểm của cô gái bị kẻ sát nhân nhốt trong cốp xe,train,1.0,Pháp luật
+54,4,Các vụ tử vong và án hình sự quốc tế,VNE_a2e4e87b80a9,Con trai Cindy Crawford tử vong ở tuổi 27,train,1.0,Giải trí
+54,5,Các vụ tử vong và án hình sự quốc tế,VNE_f6994212e684,Bí ẩn cái chết của triệu phú Anh sau tin nhắn 'Đừng tin ai',train,1.0,Pháp luật
+55,1,Khoa học và công nghệ không gian,TTR_23358035a348,Lần đầu máy tính lượng tử hoạt động ngoài không gian,train,1.0,Khoa học công nghệ
+55,2,Khoa học và công nghệ không gian,TTR_28ce216c58db,Google sắp giải được bài toán đưa trung tâm dữ liệu AI lên không gian,train,1.0,Khoa học công nghệ
+55,3,Khoa học và công nghệ không gian,TTR_5698489a6978,Trung Quốc phóng 4 vệ tinh có thể 'lọc' dữ liệu ngay trên quỹ đạo,train,1.0,Khoa học công nghệ
+55,4,Khoa học và công nghệ không gian,VNE_1bcdce22a58b,Lần đầu phát hiện tín hiệu vô tuyến từ ngoại hành tinh,train,1.0,Khoa học công nghệ
+55,5,Khoa học và công nghệ không gian,VNE_5d7bcde1ab58,Thử hạt nhân Triều Tiên có thể kích hoạt đứt gãy địa chấn,train,1.0,Khoa học công nghệ
+56,1,Chính sách lãi suất của ngân hàng trung ương,TTR_0e2fccad82ea,"Fed tăng lãi suất, thị trường chứng khoán Việt Nam thường diễn biến ra sao?",train,1.0,Kinh doanh
+56,2,Chính sách lãi suất của ngân hàng trung ương,TTR_8bbcf9a81f1d,"Fed tăng lãi suất lần đầu tiên sau 3 năm, chuyện gì tiếp theo?",train,1.0,Kinh doanh
+56,3,Chính sách lãi suất của ngân hàng trung ương,TTR_a937c4e92216,Úc xem xét kéo dài thuế chống bán phá giá với thép mạ Việt Nam,train,1.0,Kinh doanh
+56,4,Chính sách lãi suất của ngân hàng trung ương,TTR_f9b02e6e8176,Nhật Bản nâng lãi suất lên mức cao nhất trong 31 năm,train,1.0,Kinh doanh
+56,5,Chính sách lãi suất của ngân hàng trung ương,VNE_01c1881dda9a,"Goldman ‌Sachs, JP Morgan dự báo Fed nâng lãi tuần này",train,1.0,Kinh doanh
+57,1,Diễn viên và phim truyền hình châu Á,TTR_609f1ffb7f61,Cù Thị Trà thoát mác 'mỹ nhân' giật chồng,train,1.0,Giải trí
+57,2,Diễn viên và phim truyền hình châu Á,TTR_794128574fb8,"Trên phim làm 'trùm', đời thường khép kín",train,1.0,Giải trí
+57,3,Diễn viên và phim truyền hình châu Á,TTR_ae897e9933b6,Triệu Lộ Tư nay đã khác,train,1.0,Giải trí
+57,4,Diễn viên và phim truyền hình châu Á,TTR_c07839b24258,"Từ con ông trùm đến nữ cầu thủ bóng đá, cô ấy là ai?",train,1.0,Giải trí
+57,5,Diễn viên và phim truyền hình châu Á,TTR_c498a2946e2e,Chi Pu tái xuất Chị chị em em sau 7 năm,train,1.0,Giải trí
+58,1,U23 Việt Nam chuẩn bị ASIAD,TTR_41f06ba20cab,Bóng đá trẻ Việt Nam học được gì ở Asiad 2026?,train,1.0,Thể thao
+58,2,U23 Việt Nam chuẩn bị ASIAD,TTR_8a10836dd30c,Cậu bé 13 tuổi cao 2m10 gây sốt ở Giải bóng chuyền nam châu Á,train,1.0,Thể thao
+58,3,U23 Việt Nam chuẩn bị ASIAD,TTR_b8935b7dbb94,"Tuyển U23 Việt Nam công bố danh sách 23 cầu thủ dự Asiad 2026, Đình Bắc có tên không?",train,1.0,Thể thao
+58,4,U23 Việt Nam chuẩn bị ASIAD,TTR_d7b39044744e,Vì sao toàn bộ cầu thủ Việt kiều vắng mặt ở tuyển U23 Việt Nam dự Asiad 2026?,train,1.0,Thể thao
+58,5,U23 Việt Nam chuẩn bị ASIAD,TTR_dd8093dea50c,U23 Việt Nam chia tay cầu thủ đẳng cấp trước thềm Asiad 2026,train,1.0,Thể thao
+59,1,Xuất nhập khẩu và kim ngạch thương mại,TTR_12d53ec7c2e2,"Việt Nam chi gần 1,6 tỉ USD nhập ô tô Trung Quốc trong 8 tháng",train,1.0,Kinh doanh
+59,2,Xuất nhập khẩu và kim ngạch thương mại,TTR_35b20e5a78e2,Vì sao sản lượng sầu riêng Việt Nam vượt Thái Lan nhưng giá trị thu về lại thấp hơn?,train,1.0,Kinh doanh
+59,3,Xuất nhập khẩu và kim ngạch thương mại,TTR_8c13782922ea,"Châu Âu siết hạn ngạch thép, doanh nghiệp Việt chịu tác động ra sao?",train,1.0,Kinh doanh
+59,4,Xuất nhập khẩu và kim ngạch thương mại,TTR_d1877845cd5f,Chuyên gia nói gì về con số nhập siêu hơn 20 tỉ USD?,train,1.0,Kinh doanh
+59,5,Xuất nhập khẩu và kim ngạch thương mại,VNE_1167201f5d6f,Xuất khẩu rau quả 3 tháng liên tiếp vượt một tỷ USD,train,1.0,Kinh doanh
+60,1,Lionel Messi và bóng đá Argentina,TTR_0b788b5a20d6,Son Heung Min phát biểu 'sốc': Ronaldo là thần tượng của tôi nhưng Messi là GOAT,train,1.0,Thể thao
+60,2,Lionel Messi và bóng đá Argentina,TTR_48dda74dd93e,"Cả thế giới tiếc nuối, tri ân Messi trừ... Barca, người hâm mộ lên tiếng chỉ trích",train,1.0,Thể thao
+60,3,Lionel Messi và bóng đá Argentina,TTR_4ae866118ba3,"Liên đoàn Bóng đá Argentina cảm ơn Messi, người dân cảm thấy tiếc nuối và 'không muốn tin'",train,1.0,Thể thao
+60,4,Lionel Messi và bóng đá Argentina,TTR_4dd43920db5b,Chiến dịch tri ân trên toàn đất nước Argentina tôn vinh siêu sao Messi,train,1.0,Thể thao
+60,5,Lionel Messi và bóng đá Argentina,TTR_665aa5bdc471,Vì sao Messi khẳng định 'hoàn tất bóng đá' cùng tuyển Argentina?,train,1.0,Thể thao
+61,1,Thể thao vợt quốc tế,TTR_02ccca6bf0fd,"'Hot girl cầu lông' Thái Lan tạo địa chấn, vào chung kết Vietnam Open",train,1.0,Thể thao
+61,2,Thể thao vợt quốc tế,TTR_22db7d9ce53d,'Hot girl cầu lông' Thái Lan xúc động trước tình cảm của người hâm mộ Việt Nam,train,1.0,Thể thao
+61,3,Thể thao vợt quốc tế,TTR_2ba7378980c7,Em gái Kunlavut Vitidsarn: 'Tôi từng chịu áp lực vì phải giống anh trai',train,1.0,Thể thao
+61,4,Thể thao vợt quốc tế,TTR_52555587bd8e,Nữ kỳ thủ 11 tuổi gây sốt tại Olympiad cờ vua 2026,train,1.0,Thể thao
+61,5,Thể thao vợt quốc tế,TTR_976165ed08d2,"Đánh bại Sabalenka, Rybakina lần đầu vô địch Mỹ mở rộng và đoạt luôn ngôi số 1 thế giới",train,1.0,Thể thao
+62,1,Phim truyền hình Mùa hè năm ấy,VNE_86108a27d446,Vai người mẹ của Vân Dung trong 'Mùa hè năm ấy' gây tranh luận,train,1.0,Giải trí
+62,2,Phim truyền hình Mùa hè năm ấy,VNN_2255082a138e,'Mùa hè năm ấy' tập 17: Khánh từ chối nhận tiền của Phương sau biến cố gia đình,train,1.0,Giải trí
+62,3,Phim truyền hình Mùa hè năm ấy,VNN_2dbe0228255a,"'Mùa hè năm ấy' tập 13: Khánh xuống nước, lấy chuyện tình cảm để nhờ Phương giúp",train,1.0,Giải trí
+62,4,Phim truyền hình Mùa hè năm ấy,VNN_2e225c0bd68d,'Mùa hè năm ấy' tập 19: Phương cầu cứu Khánh giữa đêm,train,1.0,Giải trí
+62,5,Phim truyền hình Mùa hè năm ấy,VNN_35bf95be9de1,'Mùa hè năm ấy' tập 21: Tùng tái mặt khi biết Phương đã quay lại với Khánh,train,1.0,Giải trí
+63,1,Bóng đá Indonesia - Malaysia,TTR_418a53535095,"Dư luận Đông Nam Á chê Indonesia 'dùng toàn cầu thủ châu Âu, rồi cũng đá hệt xưa'",train,1.0,Thể thao
+63,2,Bóng đá Indonesia - Malaysia,TTR_4efde3cd3e2f,HLV Indonesia bị nhắc ngay trong bữa sáng phải thắng Malaysia,train,1.0,Thể thao
+63,3,Bóng đá Indonesia - Malaysia,TTR_696c2e0b4d50,CĐV Indonesia hỏi: 'Đây là sức mạnh thực sự khi Indonesia đá bằng đội hình A',train,1.0,Thể thao
+63,4,Bóng đá Indonesia - Malaysia,TTR_70a99b9a7c57,Truyền thông Indonesia gửi thông điệp cho HLV John Herdman: 'Phải đánh bại Malaysia bằng mọi giá',train,1.0,Thể thao
+63,5,Bóng đá Indonesia - Malaysia,TTR_af3d0266508a,Dự đoán tỉ số: Indonesia thắng sát nút Malaysia,train,1.0,Thể thao
+64,1,Bóng đá nam U23 tại ASIAD,TTR_0aed3ea422a4,"Đánh bại U23 Philippines, U23 Việt Nam mở toang cánh cửa đi tiếp ở Asiad 20",train,1.0,Thể thao
+64,2,Bóng đá nam U23 tại ASIAD,TTR_4a44f2d827ff,"Nhọc nhằn vượt qua Trung Quốc, U23 Hàn Quốc giành vé vào chung kết Asiad 20",train,1.0,Thể thao
+64,3,Bóng đá nam U23 tại ASIAD,TTR_862394e58147,Tìm ra đội bóng đầu tiên vào bán kết bóng đá nam Asiad 20,train,1.0,Thể thao
+64,4,Bóng đá nam U23 tại ASIAD,TTR_8adc9c0cbd2c,"Thắng kịch tính trên chấm luân lưu, U23 Nhật Bản giành vé chung kết Asiad 20",train,1.0,Thể thao
+64,5,Bóng đá nam U23 tại ASIAD,TTR_acdf332191a1,Lịch trực tiếp bóng đá nam Asiad 20 ngày 20-9: U23 Thái Lan đấu U23 Hong Kong,train,1.0,Thể thao
+65,1,Vi phạm và tin sai sự thật trên mạng xã hội,TTR_2893afbbf5ad,Khởi tố người đăng bài xúc phạm nhà văn Gào trên mạng xã hội,train,1.0,Pháp luật
+65,2,Vi phạm và tin sai sự thật trên mạng xã hội,TTR_317b67197fda,"Tung tin 'vỡ đê', người đàn ông bị phạt 15 triệu đồng",train,1.0,Pháp luật
+65,3,Vi phạm và tin sai sự thật trên mạng xã hội,TTR_4b115af0c1f8,Bị phạt 20 triệu đồng vì đăng căn cước của người khác lên mạng khi chưa được đồng ý,train,1.0,Pháp luật
+65,4,Vi phạm và tin sai sự thật trên mạng xã hội,TTR_8ce7d0825a62,"Từng gây chú ý trên mạng, người đàn ông bị phạt 12,5 triệu đồng vì livestream sai sự thật",train,1.0,Pháp luật
+65,5,Vi phạm và tin sai sự thật trên mạng xã hội,TTR_9608c57fd0e9,"Dùng chế độ ẩn danh đăng tin vu khống người khác trên mạng xã hội, bị phạt 12,5 triệu đồng",train,1.0,Pháp luật
+66,1,Chuyển nhượng bóng đá quốc tế,TTR_a04daddea358,"Các ngôi sao World Cup 2026 tạo ra hơn 3,3 tỉ USD phí chuyển nhượng",train,1.0,Thể thao
+66,2,Chuyển nhượng bóng đá quốc tế,TTR_a73f8d226dcd,Ngoại hạng Anh tạo kỷ lục chuyển nhượng không tưởng,train,1.0,Thể thao
+66,3,Chuyển nhượng bóng đá quốc tế,TTR_b7b7bb2c8e27,Man City tạo 'bom tấn' trong những giờ cuối của thị trường chuyển nhượng,train,1.0,Thể thao
+66,4,Chuyển nhượng bóng đá quốc tế,TTR_f1eb91eac66b,Xuất hiện bê bối mới liên quan Chủ tịch FIFA Infantino và một siêu sao làng bóng đá,train,1.0,Thể thao
+66,5,Chuyển nhượng bóng đá quốc tế,VNE_24eb8bb56e4d,Giggs bẽ mặt khi thuyết phục Anderson từ chối Man City,train,1.0,Thể thao
+67,1,"Văn hóa, di sản và nghệ thuật Việt",TTR_23e5bf9f2f1f,Nhạc sĩ nào 'ăn khách' nhất giai đoạn 1934 - 1954?,train,1.0,Giải trí
+67,2,"Văn hóa, di sản và nghệ thuật Việt",TTR_6bc455ed8ecf,Võ Minh Lâm đến Đình Sơn Trà làm MV mừng Trung thu,train,1.0,Giải trí
+67,3,"Văn hóa, di sản và nghệ thuật Việt",TTR_c9c049170d63,"Thương hiệu tôi yêu: Tủ thờ Gò Công, thương hiệu Việt trăm năm vẫn tràn đầy sức trẻ",train,1.0,Kinh doanh
+67,4,"Văn hóa, di sản và nghệ thuật Việt",VNE_19f27659eb29,Chuyện phố cổ Hà Nội,train,1.0,Giải trí
+67,5,"Văn hóa, di sản và nghệ thuật Việt",VNE_4f3f6345b8c4,Hành trình 33 năm Techcombank qua những tác phẩm nghệ thuật,train,1.0,Kinh doanh
+68,1,Tín dụng và cho vay doanh nghiệp,TTR_08de26f4b914,Hé lộ dư nợ bất động sản lĩnh vực du lịch trên địa bàn TP.HCM,train,1.0,Kinh doanh
+68,2,Tín dụng và cho vay doanh nghiệp,TTR_8bbc8b24092f,"Agribank giảm tới 1% lãi suất cho vay, hỗ trợ doanh nghiệp xây dựng",train,1.0,Kinh doanh
+68,3,Tín dụng và cho vay doanh nghiệp,TTR_a9eb400b1c5c,"Một công ty được cấp hạn mức tín dụng 11.150 tỉ, mượn nhà đất của tổng giám đốc để thế chấp",train,1.0,Kinh doanh
+68,4,Tín dụng và cho vay doanh nghiệp,VNE_09034f9b37a2,Chính phủ yêu cầu ngân hàng chấm dứt cho vay tập trung vào doanh nghiệp 'sân sau',train,1.0,Kinh doanh
+68,5,Tín dụng và cho vay doanh nghiệp,VNE_10957292586b,Bà Cao Thị Ngọc Dung và gia đình đã cho PNJ vay 700 tỷ đồng,train,1.0,Kinh doanh
+69,1,"Bán lẻ, dịch vụ và kinh doanh trực tuyến",TTR_12802137adcb,"Mùa nước nổi đưa ghe, xuồng lên 'chợ mạng' hút khách",train,1.0,Kinh doanh
+69,2,"Bán lẻ, dịch vụ và kinh doanh trực tuyến",TTR_161eebbe1017,"Grab đưa đặc sản Đà Nẵng lên ứng dụng, thêm kênh tiếp cận khách hàng",train,1.0,Kinh doanh
+69,3,"Bán lẻ, dịch vụ và kinh doanh trực tuyến",TTR_2044094fbc08,Huế tính phương án làm thêm phố đêm Đông Ba - Bạch Đằng,train,1.0,Kinh doanh
+69,4,"Bán lẻ, dịch vụ và kinh doanh trực tuyến",TTR_6a8b3caed1b1,TP.HCM có thêm cửa hàng cà phê do người khiếm thính vận hành,train,1.0,Kinh doanh
+69,5,"Bán lẻ, dịch vụ và kinh doanh trực tuyến",TTR_7ae5bf26267c,"Không chỉ ‘hút view’, nhà sáng tạo bán hàng cần sự chuẩn mực",train,1.0,Kinh doanh
+70,1,Hàng không và vận tải hành khách,TTR_00df197b0215,Vietnam Airlines thông tin chuyến bay từ TP.HCM đi London gặp sự cố không lưu,train,1.0,Kinh doanh
+70,2,Hàng không và vận tải hành khách,TTR_09ea34fec3db,"Vietnam Airlines tăng chuyến đến, đi Jakarta sau sự cố tro bụi núi lửa",train,1.0,Kinh doanh
+70,3,Hàng không và vận tải hành khách,TTR_494c8776478f,"Các hãng đua nhận máy bay, sẽ tăng thêm chuyến dịp Tết",train,1.0,Kinh doanh
+70,4,Hàng không và vận tải hành khách,TTR_73490fade395,"Tân Sơn Nhất, Nội Bài, Đà Nẵng cải thiện kết nối hàng không nổi bật châu Á",train,1.0,Kinh doanh
+70,5,Hàng không và vận tải hành khách,TTR_9a7cf434aba6,Vietjet thực hiện chuyến bay thẳng đầu tiên từ Matxcơva đến Khánh Hòa,train,1.0,Kinh doanh
+71,1,Kết quả Ngoại hạng Anh,TTR_bbcdb27d93b8,Man United thoát hiểm phút chót,train,1.0,Thể thao
+71,2,Kết quả Ngoại hạng Anh,TTR_bcb1aeeef786,Liverpool ngược dòng thắng Atletico Madrid,train,1.0,Thể thao
+71,3,Kết quả Ngoại hạng Anh,TTR_bf8bf07f4c2b,Saka giúp Arsenal thắng tuyệt đối ở Premier League,train,1.0,Thể thao
+71,4,Kết quả Ngoại hạng Anh,TTR_dd17792dfd2c,Man United đánh rơi chiến thắng trước Everton ở phút 90+6,train,1.0,Thể thao
+71,5,Kết quả Ngoại hạng Anh,VNE_29dad3628a1f,Arteta lý giải sự thăng hoa của Odegaard,train,1.0,Thể thao
+72,1,Nữ sinh và thành tích học tập,TTR_bb665be9fe55,"29,75 điểm, á khoa toàn quốc chọn thiết kế vi mạch vì tò mò",train,1.0,Giáo dục
+72,2,Nữ sinh và thành tích học tập,TTR_dc265e9b34dc,"5 học kỳ đạt xuất sắc, nữ sinh TP.HCM giành học bổng toàn phần thạc sĩ tại Ý",train,1.0,Giáo dục
+72,3,Nữ sinh và thành tích học tập,TTR_fc05e115f5a1,"Mẹ đi mua ve chai, con gái vừa học vừa làm tốt nghiệp xuất sắc",train,1.0,Giáo dục
+72,4,Nữ sinh và thành tích học tập,VNE_1ba6128f4d41,Nữ sinh Lạng Sơn đầu tiên vào top 3 cuộc thi Hán ngữ lớn nhất thế giới,train,1.0,Giáo dục
+72,5,Nữ sinh và thành tích học tập,VNE_4ed6caac56d5,Cô gái khiếm thị đỗ đầu kỳ thi thẩm phán,train,1.0,Giáo dục
+73,1,Vaccine và phòng chống bệnh truyền nhiễm,TTR_0c9db40c659b,"Mạng xã hội lan tin chưa kiểm chứng về Ebola, bác sĩ khuyến cáo",train,1.0,Sức khỏe
+73,2,Vaccine và phòng chống bệnh truyền nhiễm,TTR_1052181c0165,Gần 25.000 trẻ Việt Nam đã tiêm vắc xin phòng tay chân miệng tại VNVC,train,1.0,Sức khỏe
+73,3,Vaccine và phòng chống bệnh truyền nhiễm,TTR_480b2604192c,VNVC triển khai tiêm vắc xin tay chân miệng đầu tiên tại Việt Nam,train,1.0,Kinh doanh
+73,4,Vaccine và phòng chống bệnh truyền nhiễm,TTR_8dfb7b511364,4 người ở Đắk Lắk bị chó mắc bệnh dại cắn,train,1.0,Sức khỏe
+73,5,Vaccine và phòng chống bệnh truyền nhiễm,VNE_14982ef76955,Có nên để trẻ một tuổi mắc thủy đậu thay vì tiêm vaccine?,train,1.0,Sức khỏe
+74,1,Thị trường chứng khoán và cổ phiếu,TTR_3cf2d4b5176b,Làn sóng giảm giá nhà ở Mỹ lan rộng do dư cung và sức ép lãi suất,train,1.0,Kinh doanh
+74,2,Thị trường chứng khoán và cổ phiếu,TTR_5f3a6ce5f54b,"Đọc nhanh 29-9: Dow Jones mất 347 điểm khi lợi suất Mỹ tăng tiếp, Masan đăng ký bán 10% vốn MSR",train,1.0,Kinh doanh
+74,3,Thị trường chứng khoán và cổ phiếu,TTR_7eaf79afd03e,"Khối ngoại liên tục mua ròng, một mã ngân hàng tăng gần 50% trong một tháng",train,1.0,Kinh doanh
+74,4,Thị trường chứng khoán và cổ phiếu,TTR_90fcc1468ea9,"PNJ, Khang Điền cùng loạt cổ phiếu xuống đáy nhiều năm dù VN-Index vẫn quanh 1.800 điểm",train,1.0,Kinh doanh
+74,5,Thị trường chứng khoán và cổ phiếu,TTR_a3863e374b11,Khối ngoại bỏ nghìn tỉ 'gom hàng' trước ngày chứng khoán nâng hạng,train,1.0,Kinh doanh
+75,1,An toàn và bạo lực học đường,TTR_0c419d8e9baa,"Tân sinh viên rơi xuống cống thoát nước tử vong: Mồ côi cha, mới đi học 2 tuần",train,1.0,Giáo dục
+75,2,An toàn và bạo lực học đường,TTR_4d7567175ca1,Một người Hàn Quốc tử vong sau khi rơi từ tầng 17 khách sạn ở Lào Cai,train,1.0,Pháp luật
+75,3,An toàn và bạo lực học đường,TTR_53c5961fd8e3,Vụ nam sinh bị đánh hội đồng ở Trường cao đẳng Kỹ thuật - Công nghệ Vĩnh Phúc: Tạm giữ khẩn cấp một người,train,1.0,Pháp luật
+75,4,An toàn và bạo lực học đường,TTR_5b075a16a5d8,Lâm Đồng nói gì về tin học sinh ồ ạt chuyển trường vì vụ bạo lực học đường ở Di Linh?,train,1.0,Giáo dục
+75,5,An toàn và bạo lực học đường,TTR_61eb7b123c06,Học sinh lớp 8 bị nhóm bạn đánh bằng nón bảo hiểm trước cổng trường,train,1.0,Giáo dục
+76,1,Bệnh lý và điều trị mắt,TTR_438c6246e7d1,"Cụ bà 70 tuổi nhìn mờ, bất ngờ phát hiện đục thủy tinh thể ‘hình cây thông Noel’",train,1.0,Sức khỏe
+76,2,Bệnh lý và điều trị mắt,TTR_a8df33a3878a,"Con liên tục tăng độ cận, đổi kính thôi đã đủ?",train,1.0,Giáo dục
+76,3,Bệnh lý và điều trị mắt,VNE_192c1b9d7730,5 thay đổi ở mắt có thể cảnh báo rối loạn tuyến giáp,train,1.0,Sức khỏe
+76,4,Bệnh lý và điều trị mắt,VNE_26e4f5923914,Tăng nhãn áp do viêm màng bồ đào,train,1.0,Sức khỏe
+76,5,Bệnh lý và điều trị mắt,VNE_35b9446aa1f1,"Phẫu thuật '2 trong 1' chữa cận, lão thị",train,1.0,Sức khỏe
+77,1,Các khoản thu và quỹ phụ huynh,TTR_39cd21ad5c3b,"Nhiều trường ở TP.HCM không thu quỹ lớp, quỹ trường, quỹ hội phụ huynh",train,1.0,Giáo dục
+77,2,Các khoản thu và quỹ phụ huynh,TTR_47b03e4663f8,Có bao nhiêu khoản thu ngoài học phí ở trường công TP.HCM?,train,1.0,Giáo dục
+77,3,Các khoản thu và quỹ phụ huynh,TTR_4a922a861f3f,Trường công lập Hà Nội được phép thu những khoản tiền nào?,train,1.0,Giáo dục
+77,4,Các khoản thu và quỹ phụ huynh,TTR_4ce9525bd488,Không còn quỹ lớp: Phụ huynh tự bàn bạc cách hoạt động cho con,train,1.0,Giáo dục
+77,5,Các khoản thu và quỹ phụ huynh,TTR_568ae68cef74,Bộ Giáo dục và Đào tạo: Công khai tên trường vi phạm lạm thu trong 3 ngày,train,1.0,Giáo dục
+78,1,Bạo lực và kỷ luật trong bóng đá,TTR_0212aff7b28a,Chính thức: Huỳnh Tấn Sinh bị 'treo giò' 2 trận vì đá thô bạo với Đình Bắc,train,1.0,Thể thao
+78,2,Bạo lực và kỷ luật trong bóng đá,TTR_177aca45535c,Thợ lái xe lu mặt sân Thai League 1 cán qua chân ngôi sao bóng đá Anh,train,1.0,Thể thao
+78,3,Bạo lực và kỷ luật trong bóng đá,TTR_27c417a57870,"Người hâm mộ lên án lối đá bạo lực của Huỳnh Tấn Sinh, đề nghị phạt nặng",train,1.0,Thể thao
+78,4,Bạo lực và kỷ luật trong bóng đá,TTR_3a3c8177bc4f,"Bị Văn Hậu đạp thẳng vào chân, Doãn Ngọc Tân chấn thương nặng",train,1.0,Thể thao
+78,5,Bạo lực và kỷ luật trong bóng đá,TTR_661a57cbff53,NÓNG: Ban kỷ luật của VFF sẽ họp vụ Huỳnh Tấn Sinh đá thô bạo vào chân Đình Bắc,train,1.0,Thể thao
+79,1,Giao dịch cổ phiếu và cổ đông doanh nghiệp,TTR_06bcdc5bfbc9,PNJ muốn chào bán riêng lẻ tối đa 550 triệu cổ phiếu,train,1.0,Kinh doanh
+79,2,Giao dịch cổ phiếu và cổ đông doanh nghiệp,TTR_16601a7b851e,Hai con gái bà Cao Thị Ngọc Dung bán xong 25 triệu cổ phiếu PNJ,train,1.0,Kinh doanh
+79,3,Giao dịch cổ phiếu và cổ đông doanh nghiệp,TTR_26488de6eb1f,"‘Sơ suất’ đặt lệnh, sếp SeABank mua nhầm hơn 3.000 cổ phiếu khi đang bán",train,1.0,Kinh doanh
+79,4,Giao dịch cổ phiếu và cổ đông doanh nghiệp,TTR_2bad7f9251a2,18 cổ đông đang nắm hơn 56% vốn ABBank,train,1.0,Kinh doanh
+79,5,Giao dịch cổ phiếu và cổ đông doanh nghiệp,TTR_5e3fe227231d,"Một đại gia vừa rời danh sách tỉ phú USD, Việt Nam còn 7 người",train,1.0,Kinh doanh
+80,1,Thu nhập và điều kiện lao động tài xế,TTR_4a2208982960,"Tài xế Grab kêu gọi tắt app 2 ngày: 'Chạy cuốc xe 18,5km chỉ nhận được 46.900 đồng'",train,1.0,Kinh doanh
+80,2,Thu nhập và điều kiện lao động tài xế,TTR_5b51ca32df0d,Vụ kêu gọi tắt app Grab: Tài xế chạy một cuốc xe được hưởng bao nhiêu trên doanh thu?,train,1.0,Kinh doanh
+80,3,Thu nhập và điều kiện lao động tài xế,TTR_70a1c6166ea2,"Cho tài xế tự chọn quốc lộ hoặc cao tốc, doanh nghiệp vẫn ‘đỏ mắt’ tìm người lái",train,1.0,Kinh doanh
+80,4,Thu nhập và điều kiện lao động tài xế,TTR_72378548578d,Tài xế công nghệ kể góc khuất đằng sau thu nhập 15 triệu đồng/tháng,train,1.0,Kinh doanh
+80,5,Thu nhập và điều kiện lao động tài xế,TTR_769160c0013a,"Tài xế Grab chạy cuốc xe 18,5km nhận 46.900 đồng: App muốn phát triển phải để tài xế có thu nhập đủ sống",train,1.0,Kinh doanh
+81,1,FIFA ASEAN Cup và đội tuyển Việt Nam,TTR_1695fc14b492,Tuyển Việt Nam đá 3 trận giao hữu trước Asian Cup 2027,train,1.0,Thể thao
+81,2,FIFA ASEAN Cup và đội tuyển Việt Nam,TTR_2ff49e4b1dd3,Việt Nam có bản quyền FIFA ASEAN Cup 2026,train,1.0,Thể thao
+81,3,FIFA ASEAN Cup và đội tuyển Việt Nam,TTR_34d32c0eccc4,Hoàng Hên bị giữ lại kiểm tra an ninh trước giờ đội tuyển Việt Nam đi Indonesia,train,1.0,Thể thao
+81,4,FIFA ASEAN Cup và đội tuyển Việt Nam,TTR_5193fa0462ff,Chính thức: Việt Nam không có bản quyền FIFA ASEAN Cup 2026,train,1.0,Thể thao
+81,5,FIFA ASEAN Cup và đội tuyển Việt Nam,TTR_9155e8231a0f,FIFA ASEAN Cup 2026 giảm tiền thưởng từ 1 triệu USD xuống còn 650.000 USD,train,1.0,Thể thao
+82,1,Lãi suất tiền gửi và cho vay,TTR_52379f7668bf,"Lãi suất huy động tiền gửi cán mốc 9,46%/năm",train,1.0,Kinh doanh
+82,2,Lãi suất tiền gửi và cho vay,VNE_b012074a9921,"Lãi suất cho vay bình quân lên 10,7% một năm",train,1.0,Kinh doanh
+82,3,Lãi suất tiền gửi và cho vay,VNN_00ff07fa6494,Lãi suất ngân hàng hôm nay 24/9/2026: Thận trọng với lời chào lãi suất 14%/năm,train,1.0,Kinh doanh
+82,4,Lãi suất tiền gửi và cho vay,VNN_14522c45f5f2,"Chứng chỉ tiền gửi lãi suất cao hơn tiết kiệm, có nơi niêm yết 9%/năm",train,1.0,Kinh doanh
+82,5,Lãi suất tiền gửi và cho vay,VNN_2f82794b2a96,"Chủ khu du lịch quốc tế Đồi Rồng tăng lãi suất lên 13,6%, kéo dài kỳ hạn trái phiếu",train,1.0,Kinh doanh
+83,1,Pháp luật hình sự và tố tụng,TTR_0568193e0a28,"Từ vụ dì kiện cháu đòi 240 triệu, luật sư khuyến cáo cách tạo và lưu giữ chứng cứ ghi âm",train,1.0,Pháp luật
+83,2,Pháp luật hình sự và tố tụng,TTR_145537ee49ae,Giám sát điện tử là biện pháp ngăn chặn độc lập thay vì chỉ thay thế tạm giam,train,1.0,Pháp luật
+83,3,Pháp luật hình sự và tố tụng,TTR_1b4c696af2fd,HĐXX vụ ma túy VN10: Sai sót trong một số biên bản điều tra không làm thay đổi bản chất vụ án,train,1.0,Pháp luật
+83,4,Pháp luật hình sự và tố tụng,TTR_213eb52213f6,Tiêu hủy 35.735 cuốn sách vi phạm liên quan vụ án Nguyễn Trung Luật và đồng phạm,train,1.0,Pháp luật
+83,5,Pháp luật hình sự và tố tụng,TTR_25b4b5a63bec,"Chính phủ nêu lý do đề xuất bỏ tử hình với tội mua bán trái phép chất ma túy, hiếp dâm người dưới 16 tuổi",train,1.0,Pháp luật
+84,1,Robot hình người và tự động hóa,TTR_642fb2aac298,"Trung Quốc mở bán robot cá nhân biến hình, giá từ gần 3.000 USD, lắp ráp 2,5 phút",train,1.0,Khoa học công nghệ
+84,2,Robot hình người và tự động hóa,TTR_82de3b4f6a8e,"Robot 1,8m đấu YouTuber Mỹ, tung cú đá khiến đối thủ văng xa",train,1.0,Khoa học công nghệ
+84,3,Robot hình người và tự động hóa,TTR_a40b0689867f,Robot kêu gọi bảo vệ việc làm của con người,train,1.0,Khoa học công nghệ
+84,4,Robot hình người và tự động hóa,TTR_b418ca82902f,"Nhật Bản làm nhà có robot chạy trên trần, tự làm việc nhà",train,1.0,Khoa học công nghệ
+84,5,Robot hình người và tự động hóa,VNE_211d44f559c4,Sam Altman: OpenAI sẽ chế tạo robot hình người,train,1.0,Khoa học công nghệ
+85,1,Văn hóa và chế biến cà phê,TTR_0b58029fb10a,Khám phá 'chuẩn hoa hậu' của Robusta,train,1.0,Kinh doanh
+85,2,Văn hóa và chế biến cà phê,TTR_13d6b4bd4c4d,"Lên men cà phê: Ở đâu, khi nào và vì sao?",train,1.0,Kinh doanh
+85,3,Văn hóa và chế biến cà phê,TTR_25f27e9bc790,Khi sự không hoàn hảo làm nên bản sắc của phin cà phê Việt,train,1.0,Kinh doanh
+85,4,Văn hóa và chế biến cà phê,TTR_3a46a0fd3919,Tạp chí du lịch Mỹ nói gì về trải nghiệm uống cà phê ở Việt Nam?,train,1.0,Kinh doanh
+85,5,Văn hóa và chế biến cà phê,TTR_75ba5cab1a69,Vì sao Robusta gắn với cà phê hòa tan?,train,1.0,Kinh doanh
+86,1,Biến động lãnh đạo doanh nghiệp,TTR_24e4947499da,Ông Lê Thái Sâm trở lại ghế Chủ tịch Bamboo Airways,train,1.0,Kinh doanh
+86,2,Biến động lãnh đạo doanh nghiệp,TTR_a2f46826b71d,Nữ trợ lý cao cấp bất ngờ lên làm chủ tịch công ty chứng khoán 10 năm đổi tên 5 lần,train,1.0,Kinh doanh
+86,3,Biến động lãnh đạo doanh nghiệp,TTR_bb2eb77b91e2,Chủ tịch và 6 lãnh đạo một doanh nghiệp niêm yết đồng loạt xin từ nhiệm,train,1.0,Kinh doanh
+86,4,Biến động lãnh đạo doanh nghiệp,TTR_fb6b1caad63f,Giầy Thượng Đình có tổng giám đốc mới từ Vinaconex,train,1.0,Kinh doanh
+86,5,Biến động lãnh đạo doanh nghiệp,VNE_0fb076bf4213,Ông Lê Thái Sâm trở lại làm Chủ tịch Bamboo Airways,train,1.0,Kinh doanh
+87,1,Tranh cãi trọng tài tại Ngoại hạng Anh,TTR_0ef1ce047fe7,Cơ quan trọng tài Anh: Công nhận bàn thắng của Haaland là sai,train,1.0,Thể thao
+87,2,Tranh cãi trọng tài tại Ngoại hạng Anh,TTR_9aa6c7c8a574,HLV Arbeloa: Man United được hưởng lợi từ trọng tài,train,1.0,Thể thao
+87,3,Tranh cãi trọng tài tại Ngoại hạng Anh,VNE_120ca0ca3489,8 điểm nhấn vòng 4 Ngoại hạng Anh,train,1.0,Thể thao
+87,4,Tranh cãi trọng tài tại Ngoại hạng Anh,VNE_5a32c9b11489,Khi Haaland đang là thủ lĩnh của Man City,train,1.0,Thể thao
+87,5,Tranh cãi trọng tài tại Ngoại hạng Anh,VNE_65def785beea,Haaland: 'Tôi coi việc bị VAR nghi việt vị là chuyện cá nhân',train,1.0,Thể thao
+88,1,PUBG và thể thao điện tử,TTR_0cd77f559f28,"Trước khi bị phát hiện dùng doping, 'thiên thần cầu lông' Thái Lan chơi hay thế nào?",train,1.0,Thể thao
+88,2,PUBG và thể thao điện tử,TTR_17333921dc87,Himass viết tâm thư xúc động sau án phạt gây tranh cãi của PUBG,train,1.0,Thể thao
+88,3,PUBG và thể thao điện tử,TTR_495bddaa6503,"Game PUBG PC chưa được cấp phép, người chơi có bị phạt?",train,1.0,Pháp luật
+88,4,PUBG và thể thao điện tử,TTR_9e8775a904c5,Hai tuyển thủ PUBG Việt Nam bị cấm thi đấu vĩnh viễn,train,1.0,Thể thao
+88,5,PUBG và thể thao điện tử,TTR_a177f6453b18,Vì sao Giải PUBG châu Á nhanh chóng trở thành ‘thảm họa’?,train,1.0,Thể thao
+89,1,Dịch vụ tài chính cho doanh nghiệp,TTR_144f29baea3e,"Giải pháp giữ chân nhân tài, sao thị trường bảo hiểm hưu trí tự nguyện vẫn vắng?",train,1.0,Kinh doanh
+89,2,Dịch vụ tài chính cho doanh nghiệp,TTR_51b698b822fd,"Đăng ký tài khoản hộ kinh doanh Agribank, nhận ngay loa báo giao dịch",train,1.0,Kinh doanh
+89,3,Dịch vụ tài chính cho doanh nghiệp,TTR_79847618f4ac,VPBank SME CEO Bootcamp giúp doanh nghiệp tìm chỗ 'rò rỉ' tiền mỗi ngày,train,1.0,Kinh doanh
+89,4,Dịch vụ tài chính cho doanh nghiệp,VNE_2cc462afdea9,Cách tối ưu mỗi khoản chi với thẻ tín dụng VIB,train,1.0,Kinh doanh
+89,5,Dịch vụ tài chính cho doanh nghiệp,VNE_37c3fca6e8d3,"Sacombank hỗ trợ doanh nghiệp giảm chi phí, đơn giản hóa giao dịch",train,1.0,Kinh doanh
+90,1,Hoa hậu và người đẹp,TTR_595932944ef8,Khép lại chung kết Hoa hậu Doanh nhân Hương sắc Việt Nam 2026,train,1.0,Giải trí
+90,2,Hoa hậu và người đẹp,TTR_61da6a157bd6,Vì sao Nhật Bản không dùng tình nguyện viên Asiad trẻ đẹp như Trung Quốc?,train,1.0,Thể thao
+90,3,Hoa hậu và người đẹp,TTR_8ec9e4cf9574,Hoa hậu Đại dương Nguyễn Thanh Thảo làm gì sau một năm đội vương miện?,train,1.0,Giải trí
+90,4,Hoa hậu và người đẹp,TTR_ae4cf855cc7a,Miss Universe bị một hoa hậu kiện sau cú ngã xuyên sân khấu,train,1.0,Giải trí
+90,5,Hoa hậu và người đẹp,VNE_2e7e10b71bf3,Minh tinh Hoa ngữ tỏa sáng trong váy áo của NTK Việt,train,1.0,Giải trí
+91,1,Dịch vụ xe cấp cứu và chi phí y tế,TTR_0f41a8a40c7a,"Giá xe cấp cứu mỗi nơi một kiểu, người bệnh lãnh đủ",train,1.0,Sức khỏe
+91,2,Dịch vụ xe cấp cứu và chi phí y tế,TTR_1c1160093f41,Vụ đưa bệnh nhân về nhà 16km trả 9 triệu đồng: Bệnh viện giải thích lý do xe tư nhân vào trong,train,1.0,Sức khỏe
+91,3,Dịch vụ xe cấp cứu và chi phí y tế,TTR_7c7938b8dcb2,"Vụ đưa bệnh nhân về nhà 16km trả 9 triệu đồng: Công an đang xác minh xe cấp cứu từ bên ngoài lấy logo, gắn còi hú của bệnh viện",train,1.0,Sức khỏe
+91,4,Dịch vụ xe cấp cứu và chi phí y tế,TTR_b7962258ea53,"Đi 16km về nhà, gia đình bệnh nhân trả hơn 9 triệu đồng tiền xe cấp cứu và thuốc, Bộ Y tế yêu cầu làm rõ",train,1.0,Sức khỏe
+91,5,Dịch vụ xe cấp cứu và chi phí y tế,TTR_c07ec2c5721a,"Bệnh viện nói gì vụ gia đình trả hơn 9 triệu đồng tiền xe cấp cứu, thuốc đưa bệnh nhân về nhà 16km?",train,1.0,Sức khỏe
+92,1,Bảng xếp hạng huy chương ASIAD,TTR_1ae05a25e265,"Bảng xếp hạng huy chương Asiad 20 ngày 28-9: Trung Quốc cán mốc 130 HCV, Việt Nam hạng 21",train,1.0,Thể thao
+92,2,Bảng xếp hạng huy chương ASIAD,TTR_2feecbd83c23,"Bảng xếp hạng huy chương Asiad 20 ngày 29-9: Trung Quốc vượt mốc 250 huy chương, Thái Lan vững vàng tốp 5",train,1.0,Thể thao
+92,3,Bảng xếp hạng huy chương ASIAD,TTR_5d661f4670ba,"Bảng xếp hạng huy chương Asiad 19: Trung Quốc dẫn đầu, hơn Nhật Bản gần 150 HCV",train,1.0,Thể thao
+92,4,Bảng xếp hạng huy chương ASIAD,TTR_6214f308b653,Cuộc đua cường quốc ở Asiad: Đến lúc Nhật Bản vượt Trung Quốc?,train,1.0,Thể thao
+92,5,Bảng xếp hạng huy chương ASIAD,TTR_7bfe4215e086,Thể thao Việt Nam đứng ở đâu trong lịch sử Asiad?,train,1.0,Thể thao
+93,1,"Xâm hại và tội phạm đối với phụ nữ, trẻ em",TTR_1e763cf0c949,Hàng triệu trẻ vị thành niên bị phát tán hình ảnh nhạy cảm trên mạng xã hội,train,1.0,Sức khỏe
+93,2,"Xâm hại và tội phạm đối với phụ nữ, trẻ em",TTR_a161bb24927c,"Từ vụ án ma túy, phát hiện nam thanh niên quan hệ và cưới người chưa đủ 16 tuổi",train,1.0,Pháp luật
+93,3,"Xâm hại và tội phạm đối với phụ nữ, trẻ em",VNE_0bb904a9b4fd,Mẹ lĩnh án vì vô ý để con ngã tử vong từ cửa sổ tầng 5,train,1.0,Pháp luật
+93,4,"Xâm hại và tội phạm đối với phụ nữ, trẻ em",VNE_1e1cbc73f2e8,6 tuần bị 'bạn trai online' giam cầm trên gác mái,train,1.0,Pháp luật
+93,5,"Xâm hại và tội phạm đối với phụ nữ, trẻ em",VNE_1f16447d2b47,Dụ thiếu nữ sang Lào rồi trốn truy nã,train,1.0,Pháp luật
+94,1,AI trong toán học và nghiên cứu khoa học,TTR_00bd66dceca4,OpenAI tuyên bố AI đã giải được 1 trong 7 bài toán khó nhất thế giới,train,1.0,Khoa học công nghệ
+94,2,AI trong toán học và nghiên cứu khoa học,TTR_2d276e7b3a7b,"Robot AI Hàn Quốc tự tìm đường ở chỗ lạ, đi nhầm còn biết tìm lại",train,1.0,Khoa học công nghệ
+94,3,AI trong toán học và nghiên cứu khoa học,VNE_1079496ebec9,AI giải bài toán Thiên niên kỷ 1 triệu USD,train,1.0,Giáo dục
+94,4,AI trong toán học và nghiên cứu khoa học,VNE_3028576a7afe,Nhà vật lý đoạt giải Nobel: 'Tiến bộ khoa học bắt đầu từ việc đặt câu hỏi mới',train,1.0,Khoa học công nghệ
+94,5,AI trong toán học và nghiên cứu khoa học,VNE_3ab57702fba4,Tranh cãi AI 'hớt tay trên' lời giải bài toán Thiên niên kỷ của con người,train,1.0,Giáo dục
+95,1,"Giải thưởng và thương hiệu doanh nghiệp, ngân hàng",TTR_70964c8d767b,FRT lần thứ 2 liên tiếp được Forbes vinh danh trong top 50 công ty niêm yết tốt nhất 2026,train,1.0,Sức khỏe
+95,2,"Giải thưởng và thương hiệu doanh nghiệp, ngân hàng",TTR_99b16830c22f,Danh hiệu “Ngân hàng Bán lẻ tốt nhất châu Á” lần đầu tiên được trao cho một ngân hàng Việt Nam,train,1.0,Kinh doanh
+95,3,"Giải thưởng và thương hiệu doanh nghiệp, ngân hàng",VNE_1683fc7cc46d,Cake nhận giải Ngân hàng số tốt nhất Việt Nam 2026,train,1.0,Kinh doanh
+95,4,"Giải thưởng và thương hiệu doanh nghiệp, ngân hàng",VNE_43cfbfe85c69,VietinBank năm thứ tư được nhà đầu tư yêu thích về hoạt động IR,train,1.0,Kinh doanh
+95,5,"Giải thưởng và thương hiệu doanh nghiệp, ngân hàng",VNE_59c0dd054d55,HDBank tiếp tục vào Top 50 Forbes Việt Nam,train,1.0,Kinh doanh
