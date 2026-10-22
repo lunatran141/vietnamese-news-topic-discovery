@@ -34,7 +34,7 @@ Kết quả chính:
 | Train outlier rate | 0.2461 |
 | Validation outlier rate | 0.3587 |
 | Topic diversity | 0.6813 |
-| Runtime | 1159.69 giây |
+| Runtime pipeline mới nhất | 1086.07 giây |
 
 Việc lựa chọn không sử dụng test set. Test set vẫn được khóa theo protocol
 D05.
@@ -70,10 +70,17 @@ Artifact:
 
 ## 5. Topic labels
 
-Nhãn gợi ý ban đầu được tạo từ ba keyword đứng đầu của topic.
+Nhãn gợi ý ban đầu được tạo từ ba keyword đứng đầu của topic. Sau đó,
+96 nhãn dự thảo có ý nghĩa hơn được bổ sung tại:
 
-Các nhãn này có trạng thái `provisional`, nghĩa là nhãn tạm thời và cần
-được kiểm tra dựa trên keyword cùng các bài đại diện.
+`configs/bertopic_topic_labels.yaml`
+
+Nhãn dự thảo được đọc từ keyword và năm bài đại diện của từng topic.
+
+Các nhãn dự thảo có trạng thái `pending_human_review`. Trạng thái này
+không thay thế human evaluation: người phụ trách vẫn phải kiểm tra và
+E05 cần ít nhất hai người đánh giá độc lập trước khi đổi thành
+`approved`.
 
 Nhãn chỉ phục vụ hiển thị. Raw topic ID do BERTopic sinh ra luôn được giữ
 nguyên.
@@ -92,7 +99,7 @@ Bảng hỗ trợ review được xuất tại:
 
 `results/bertopic_m15/topic_review.csv`
 
-Các trường review gồm:
+Hiện bảng có đủ 96 nhãn dự thảo. Các trường review gồm:
 
 - nhãn đề xuất và nhãn cuối;
 - keyword;
@@ -102,6 +109,9 @@ Các trường review gồm:
 - topic rộng;
 - topic trùng;
 - ghi chú và trạng thái review.
+
+Để hoàn thành E05, cần ít nhất hai người đánh giá độc lập. Công cụ hỗ trợ
+tự động không được ghi nhận như một human rater.
 
 Không merge topic trực tiếp trong M15. Các đề xuất rename hoặc merge được
 lưu riêng để sử dụng ở task P07.
@@ -116,6 +126,12 @@ Thư mục `artifacts/bertopic/best_run/` gồm:
 - `run_metadata.json`;
 - `topic_display_mapping.json`;
 - `topic_keywords.json`.
+
+Common artifact dùng cho Streamlit còn nhận thêm:
+
+- `representative_docs.csv`;
+- `topic_display_mapping.json`;
+- `topic_summary.csv` với cả `topic_name` đã review và `raw_topic_name`.
 
 Model BERTopic gốc vẫn được giữ tại:
 

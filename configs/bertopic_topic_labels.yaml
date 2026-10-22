@@ -1,0 +1,139 @@
+run_id: e1_vietnamese_sbert
+review_status: pending_human_review
+review_note: >-
+  Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện.
+  Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người
+  đánh giá độc lập trước khi đổi trạng thái thành approved.
+
+labels:
+  0: Kinh tế, đầu tư và phát triển vùng
+  1: Điều tra và xét xử hình sự
+  2: Dinh dưỡng và sức khỏe
+  3: iPhone và sản phẩm Apple
+  4: Hệ thống bệnh viện và khám chữa bệnh
+  5: Thành tích thể thao tại ASIAD
+  6: Âm nhạc và nghệ sĩ Việt
+  7: Án mạng và hành vi bạo lực
+  8: Trường học và học sinh
+  9: Rủi ro và quản trị trí tuệ nhân tạo
+  10: Đội tuyển bóng đá nữ Việt Nam
+  11: An toàn và chất lượng bữa ăn bán trú
+  12: Cấp cứu tim mạch và ghép tạng
+  13: Pháp luật nhà ở, đất đai và tranh chấp
+  14: Tai nạn và vi phạm giao thông đường bộ
+  15: Bóng đá Việt Nam - Thái Lan
+  16: Chính sách tuyển sinh đại học
+  17: Sách giáo khoa và cung ứng học liệu
+  18: Đội tuyển bóng đá nam Việt Nam
+  19: Giải chạy marathon
+  20: Bệnh lý và chăm sóc sức khỏe
+  21: Thời trang hoàng gia và người nổi tiếng
+  22: Hôn nhân và đời sống nghệ sĩ
+  23: Giá nông sản và thực phẩm
+  24: Các cuộc thi sắc đẹp quốc tế
+  25: Giáo dục đại học và sinh viên
+  26: Thị trường xăng dầu
+  27: Quản trị và sắp xếp trường học
+  28: U20 Việt Nam tại vòng loại châu Á
+  29: Dự đoán và kết quả bóng đá châu Âu
+  30: Điện ảnh Việt Nam và doanh thu phòng vé
+  31: Anime và nhân vật truyện
+  32: U23 Việt Nam tại ASIAD
+  33: Biến động giá vàng
+  34: Sản khoa và sức khỏe sinh sản
+  35: Trộm cướp và tài sản
+  36: Giấc ngủ, vận động và sức khỏe lối sống
+  37: Real Madrid tại Champions League
+  38: Bóng đá câu lạc bộ Việt Nam
+  39: Kết quả Giải hạng Nhất và V-League
+  40: Doanh thu và kế hoạch kinh doanh doanh nghiệp
+  41: Thuế và pháp lý doanh nghiệp
+  42: Lợi nhuận và thua lỗ doanh nghiệp
+  43: Tranh chấp dân sự và tài sản
+  44: Xét xử các vụ án cán bộ và giáo dục
+  45: Quần vợt quốc tế và US Open
+  46: Thủ khoa và thành tích đại học
+  47: Bệnh truyền nhiễm và cấp cứu nhi khoa
+  48: Barcelona và cầu thủ nổi bật
+  49: Đào tạo bác sĩ nội trú
+  50: Diễn biến chỉ số VN-Index
+  51: Phim quốc tế và giải thưởng điện ảnh
+  52: Hợp tác và công nghệ điều trị y khoa
+  53: UAV, tên lửa và tác chiến hiện đại
+  54: Các vụ tử vong và án hình sự quốc tế
+  55: Khoa học và công nghệ không gian
+  56: Chính sách lãi suất của ngân hàng trung ương
+  57: Diễn viên và phim truyền hình châu Á
+  58: U23 Việt Nam chuẩn bị ASIAD
+  59: Xuất nhập khẩu và kim ngạch thương mại
+  60: Lionel Messi và bóng đá Argentina
+  61: Thể thao vợt quốc tế
+  62: Phim truyền hình Mùa hè năm ấy
+  63: Bóng đá Indonesia - Malaysia
+  64: Bóng đá nam U23 tại ASIAD
+  65: Vi phạm và tin sai sự thật trên mạng xã hội
+  66: Chuyển nhượng bóng đá quốc tế
+  67: Văn hóa, di sản và nghệ thuật Việt
+  68: Tín dụng và cho vay doanh nghiệp
+  69: Bán lẻ, dịch vụ và kinh doanh trực tuyến
+  70: Hàng không và vận tải hành khách
+  71: Kết quả Ngoại hạng Anh
+  72: Nữ sinh và thành tích học tập
+  73: Vaccine và phòng chống bệnh truyền nhiễm
+  74: Thị trường chứng khoán và cổ phiếu
+  75: An toàn và bạo lực học đường
+  76: Bệnh lý và điều trị mắt
+  77: Các khoản thu và quỹ phụ huynh
+  78: Bạo lực và kỷ luật trong bóng đá
+  79: Giao dịch cổ phiếu và cổ đông doanh nghiệp
+  80: Thu nhập và điều kiện lao động tài xế
+  81: FIFA ASEAN Cup và đội tuyển Việt Nam
+  82: Lãi suất tiền gửi và cho vay
+  83: Pháp luật hình sự và tố tụng
+  84: Robot hình người và tự động hóa
+  85: Văn hóa và chế biến cà phê
+  86: Biến động lãnh đạo doanh nghiệp
+  87: Tranh cãi trọng tài tại Ngoại hạng Anh
+  88: PUBG và thể thao điện tử
+  89: Dịch vụ tài chính cho doanh nghiệp
+  90: Hoa hậu và người đẹp
+  91: Dịch vụ xe cấp cứu và chi phí y tế
+  92: Bảng xếp hạng huy chương ASIAD
+  93: Xâm hại và tội phạm đối với phụ nữ, trẻ em
+  94: AI trong toán học và nghiên cứu khoa học
+  95: Giải thưởng và thương hiệu doanh nghiệp, ngân hàng
+
+# Những topic này cần đọc thêm bài trước khi người phụ trách xác nhận nhãn.
+broad_topics:
+  - 0
+  - 20
+  - 25
+  - 36
+  - 47
+  - 54
+  - 55
+  - 61
+  - 69
+  - 75
+  - 86
+  - 90
+  - 93
+  - 95
+
+# Đây chỉ là đề xuất ở tầng diễn giải P07, không thay đổi topic_id thô.
+merge_candidates:
+  - topics: [24, 90]
+    suggested_group: Các cuộc thi hoa hậu và sắc đẹp
+    reason: Cùng tập trung vào hoa hậu, cuộc thi sắc đẹp và người đẹp.
+  - topics: [32, 58]
+    suggested_group: U23 Việt Nam tại ASIAD
+    reason: Một cụm nói về thi đấu, một cụm nói về lực lượng chuẩn bị.
+  - topics: [38, 39]
+    suggested_group: Bóng đá câu lạc bộ Việt Nam
+    reason: Hai cụm đều phản ánh kết quả và hoạt động của các câu lạc bộ trong nước.
+  - topics: [50, 74]
+    suggested_group: Thị trường chứng khoán Việt Nam
+    reason: Cùng phản ánh VN-Index, cổ phiếu và diễn biến thị trường.
+  - topics: [56, 82]
+    suggested_group: Lãi suất và thị trường tiền tệ
+    reason: Liên quan lãi suất điều hành, tiền gửi và cho vay nhưng khác cấp độ phân tích.

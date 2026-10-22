@@ -7,8 +7,9 @@
     "reviewed_by": []
   },
   "0": {
-    "display_label": "doanh – doanh nghiệp – phát triển",
+    "display_label": "Kinh tế, đầu tư và phát triển vùng",
     "suggested_label": "doanh – doanh nghiệp – phát triển",
+    "final_label": "Kinh tế, đầu tư và phát triển vùng",
     "top_keywords": [
       "doanh",
       "doanh nghiệp",
@@ -16,12 +17,13 @@
       "sản",
       "việt nam"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "1": {
-    "display_label": "cáo – tội – điều tra",
+    "display_label": "Điều tra và xét xử hình sự",
     "suggested_label": "cáo – tội – điều tra",
+    "final_label": "Điều tra và xét xử hình sự",
     "top_keywords": [
       "cáo",
       "tội",
@@ -29,12 +31,13 @@
       "tra",
       "công an"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "2": {
-    "display_label": "ăn – uống – cơ thể",
+    "display_label": "Dinh dưỡng và sức khỏe",
     "suggested_label": "ăn – uống – cơ thể",
+    "final_label": "Dinh dưỡng và sức khỏe",
     "top_keywords": [
       "ăn",
       "uống",
@@ -42,12 +45,13 @@
       "thực phẩm",
       "béo"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "3": {
-    "display_label": "iphone – pro – apple",
+    "display_label": "iPhone và sản phẩm Apple",
     "suggested_label": "iphone – pro – apple",
+    "final_label": "iPhone và sản phẩm Apple",
     "top_keywords": [
       "iphone",
       "pro",
@@ -55,12 +59,13 @@
       "18 pro",
       "iphone 18"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "4": {
-    "display_label": "bệnh – bệnh viện – viện",
+    "display_label": "Hệ thống bệnh viện và khám chữa bệnh",
     "suggested_label": "bệnh – bệnh viện – viện",
+    "final_label": "Hệ thống bệnh viện và khám chữa bệnh",
     "top_keywords": [
       "bệnh",
       "bệnh viện",
@@ -68,12 +73,13 @@
       "khám",
       "thuốc"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "5": {
-    "display_label": "asiad – vđv – nữ",
+    "display_label": "Thành tích thể thao tại ASIAD",
     "suggested_label": "asiad – vđv – nữ",
+    "final_label": "Thành tích thể thao tại ASIAD",
     "top_keywords": [
       "asiad",
       "vđv",
@@ -81,12 +87,13 @@
       "nội dung",
       "dung"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "6": {
-    "display_label": "nhạc – ca – âm",
+    "display_label": "Âm nhạc và nghệ sĩ Việt",
     "suggested_label": "nhạc – ca – âm",
+    "final_label": "Âm nhạc và nghệ sĩ Việt",
     "top_keywords": [
       "nhạc",
       "ca",
@@ -94,12 +101,14 @@
       "âm nhạc",
       "hát"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "7": {
-    "display_label": "đức anh – công an – đức",
+    "display_label": "Án mạng và hành vi bạo lực",
     "suggested_label": "đức anh – công an – đức",
+    "final_label": "Án mạng và hành vi bạo lực",
     "top_keywords": [
       "đức anh",
       "công an",
@@ -107,12 +116,13 @@
       "vợ",
       "dao"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "8": {
-    "display_label": "học sinh – trú – giáo",
+    "display_label": "Trường học và học sinh",
     "suggested_label": "học sinh – trú – giáo",
+    "final_label": "Trường học và học sinh",
     "top_keywords": [
       "học sinh",
       "trú",
@@ -120,12 +130,13 @@
       "lớp",
       "tiểu học"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "9": {
-    "display_label": "openai – anthropic – mô hình",
+    "display_label": "Rủi ro và quản trị trí tuệ nhân tạo",
     "suggested_label": "openai – anthropic – mô hình",
+    "final_label": "Rủi ro và quản trị trí tuệ nhân tạo",
     "top_keywords": [
       "openai",
       "anthropic",
@@ -133,12 +144,13 @@
       "mô",
       "ceo"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "10": {
-    "display_label": "nữ việt – nữ – tuyển nữ",
+    "display_label": "Đội tuyển bóng đá nữ Việt Nam",
     "suggested_label": "nữ việt – nữ – tuyển nữ",
+    "final_label": "Đội tuyển bóng đá nữ Việt Nam",
     "top_keywords": [
       "nữ việt",
       "nữ",
@@ -146,12 +158,13 @@
       "tuyển",
       "đội"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "11": {
-    "display_label": "ăn – bán trú – thực phẩm",
+    "display_label": "An toàn và chất lượng bữa ăn bán trú",
     "suggested_label": "ăn – bán trú – thực phẩm",
+    "final_label": "An toàn và chất lượng bữa ăn bán trú",
     "top_keywords": [
       "ăn",
       "bán trú",
@@ -159,12 +172,13 @@
       "suất ăn",
       "bữa"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "12": {
-    "display_label": "bệnh – máu – mạch",
+    "display_label": "Cấp cứu tim mạch và ghép tạng",
     "suggested_label": "bệnh – máu – mạch",
+    "final_label": "Cấp cứu tim mạch và ghép tạng",
     "top_keywords": [
       "bệnh",
       "máu",
@@ -172,12 +186,13 @@
       "bệnh nhân",
       "viện"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "13": {
-    "display_label": "đất – án – luật",
+    "display_label": "Pháp luật nhà ở, đất đai và tranh chấp",
     "suggested_label": "đất – án – luật",
+    "final_label": "Pháp luật nhà ở, đất đai và tranh chấp",
     "top_keywords": [
       "đất",
       "án",
@@ -185,12 +200,13 @@
       "dự án",
       "cư"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "14": {
-    "display_label": "xe – xế – tài xế",
+    "display_label": "Tai nạn và vi phạm giao thông đường bộ",
     "suggested_label": "xe – xế – tài xế",
+    "final_label": "Tai nạn và vi phạm giao thông đường bộ",
     "top_keywords": [
       "xe",
       "xế",
@@ -198,12 +214,13 @@
       "giao thông",
       "lái"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "15": {
-    "display_label": "thái lan – lan – asean cup",
+    "display_label": "Bóng đá Việt Nam - Thái Lan",
     "suggested_label": "thái lan – lan – asean cup",
+    "final_label": "Bóng đá Việt Nam - Thái Lan",
     "top_keywords": [
       "thái lan",
       "lan",
@@ -211,12 +228,13 @@
       "cup",
       "asean"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "16": {
-    "display_label": "tuyển – xét tuyển – thí sinh",
+    "display_label": "Chính sách tuyển sinh đại học",
     "suggested_label": "tuyển – xét tuyển – thí sinh",
+    "final_label": "Chính sách tuyển sinh đại học",
     "top_keywords": [
       "tuyển",
       "xét tuyển",
@@ -224,12 +242,13 @@
       "thí",
       "tuyển sinh"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "17": {
-    "display_label": "giáo – sách – giáo dục",
+    "display_label": "Sách giáo khoa và cung ứng học liệu",
     "suggested_label": "giáo – sách – giáo dục",
+    "final_label": "Sách giáo khoa và cung ứng học liệu",
     "top_keywords": [
       "giáo",
       "sách",
@@ -237,12 +256,13 @@
       "dục",
       "sách giáo"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "18": {
-    "display_label": "tuyển việt – asean cup – asean",
+    "display_label": "Đội tuyển bóng đá nam Việt Nam",
     "suggested_label": "tuyển việt – asean cup – asean",
+    "final_label": "Đội tuyển bóng đá nam Việt Nam",
     "top_keywords": [
       "tuyển việt",
       "asean cup",
@@ -250,12 +270,13 @@
       "cup",
       "tuyển"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "19": {
-    "display_label": "runner – marathon – chạy",
+    "display_label": "Giải chạy marathon",
     "suggested_label": "runner – marathon – chạy",
+    "final_label": "Giải chạy marathon",
     "top_keywords": [
       "runner",
       "marathon",
@@ -263,12 +284,13 @@
       "cự ly",
       "cự"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "20": {
-    "display_label": "da – bệnh – bác sĩ",
+    "display_label": "Bệnh lý và chăm sóc sức khỏe",
     "suggested_label": "da – bệnh – bác sĩ",
+    "final_label": "Bệnh lý và chăm sóc sức khỏe",
     "top_keywords": [
       "da",
       "bệnh",
@@ -276,12 +298,13 @@
       "bác",
       "tổn thương"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "21": {
-    "display_label": "trang – áo – váy",
+    "display_label": "Thời trang hoàng gia và người nổi tiếng",
     "suggested_label": "trang – áo – váy",
+    "final_label": "Thời trang hoàng gia và người nổi tiếng",
     "top_keywords": [
       "trang",
       "áo",
@@ -289,12 +312,13 @@
       "cô",
       "màu"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "22": {
-    "display_label": "hôn – cưới – cô",
+    "display_label": "Hôn nhân và đời sống nghệ sĩ",
     "suggested_label": "hôn – cưới – cô",
+    "final_label": "Hôn nhân và đời sống nghệ sĩ",
     "top_keywords": [
       "hôn",
       "cưới",
@@ -302,12 +326,13 @@
       "diễn viên",
       "chồng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "23": {
-    "display_label": "đồng kg – kg – 000",
+    "display_label": "Giá nông sản và thực phẩm",
     "suggested_label": "đồng kg – kg – 000",
+    "final_label": "Giá nông sản và thực phẩm",
     "top_keywords": [
       "đồng kg",
       "kg",
@@ -315,12 +340,13 @@
       "000 đồng",
       "nuôi"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "24": {
-    "display_label": "miss – cô – đẹp",
+    "display_label": "Các cuộc thi sắc đẹp quốc tế",
     "suggested_label": "miss – cô – đẹp",
+    "final_label": "Các cuộc thi sắc đẹp quốc tế",
     "top_keywords": [
       "miss",
       "cô",
@@ -328,12 +354,13 @@
       "miss world",
       "hoa hậu"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "25": {
-    "display_label": "sinh viên – đại học – giáo dục",
+    "display_label": "Giáo dục đại học và sinh viên",
     "suggested_label": "sinh viên – đại học – giáo dục",
+    "final_label": "Giáo dục đại học và sinh viên",
     "top_keywords": [
       "sinh viên",
       "đại học",
@@ -341,12 +368,13 @@
       "giáo",
       "dục"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "26": {
-    "display_label": "dầu – xăng – giá dầu",
+    "display_label": "Thị trường xăng dầu",
     "suggested_label": "dầu – xăng – giá dầu",
+    "final_label": "Thị trường xăng dầu",
     "top_keywords": [
       "dầu",
       "xăng",
@@ -354,12 +382,13 @@
       "xăng dầu",
       "giá xăng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "27": {
-    "display_label": "giáo – hiệu trưởng – giáo dục",
+    "display_label": "Quản trị và sắp xếp trường học",
     "suggested_label": "giáo – hiệu trưởng – giáo dục",
+    "final_label": "Quản trị và sắp xếp trường học",
     "top_keywords": [
       "giáo",
       "hiệu trưởng",
@@ -367,12 +396,13 @@
       "dục",
       "sắp xếp"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "28": {
-    "display_label": "u20 – u20 việt – u20 châu",
+    "display_label": "U20 Việt Nam tại vòng loại châu Á",
     "suggested_label": "u20 – u20 việt – u20 châu",
+    "final_label": "U20 Việt Nam tại vòng loại châu Á",
     "top_keywords": [
       "u20",
       "u20 việt",
@@ -380,12 +410,13 @@
       "đội",
       "vòng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "29": {
-    "display_label": "trận – man – thắng",
+    "display_label": "Dự đoán và kết quả bóng đá châu Âu",
     "suggested_label": "trận – man – thắng",
+    "final_label": "Dự đoán và kết quả bóng đá châu Âu",
     "top_keywords": [
       "trận",
       "man",
@@ -393,12 +424,13 @@
       "mu",
       "đội"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "30": {
-    "display_label": "phim – điện ảnh – rạp",
+    "display_label": "Điện ảnh Việt Nam và doanh thu phòng vé",
     "suggested_label": "phim – điện ảnh – rạp",
+    "final_label": "Điện ảnh Việt Nam và doanh thu phòng vé",
     "top_keywords": [
       "phim",
       "điện ảnh",
@@ -406,12 +438,13 @@
       "doanh thu",
       "phòng vé"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "31": {
-    "display_label": "anime – nhân vật – vật",
+    "display_label": "Anime và nhân vật truyện",
     "suggested_label": "anime – nhân vật – vật",
+    "final_label": "Anime và nhân vật truyện",
     "top_keywords": [
       "anime",
       "nhân vật",
@@ -419,12 +452,13 @@
       "câu chuyện",
       "câu"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "32": {
-    "display_label": "u23 – u23 việt – kuwait",
+    "display_label": "U23 Việt Nam tại ASIAD",
     "suggested_label": "u23 – u23 việt – kuwait",
+    "final_label": "U23 Việt Nam tại ASIAD",
     "top_keywords": [
       "u23",
       "u23 việt",
@@ -432,12 +466,13 @@
       "việt nam",
       "asiad"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "33": {
-    "display_label": "vàng – giá vàng – đồng lượng",
+    "display_label": "Biến động giá vàng",
     "suggested_label": "vàng – giá vàng – đồng lượng",
+    "final_label": "Biến động giá vàng",
     "top_keywords": [
       "vàng",
       "giá vàng",
@@ -445,12 +480,13 @@
       "usd",
       "ounce"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "34": {
-    "display_label": "thai – tử cung – phôi",
+    "display_label": "Sản khoa và sức khỏe sinh sản",
     "suggested_label": "thai – tử cung – phôi",
+    "final_label": "Sản khoa và sức khỏe sinh sản",
     "top_keywords": [
       "thai",
       "tử cung",
@@ -458,12 +494,13 @@
       "tinh",
       "bác sĩ"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "35": {
-    "display_label": "cướp – công an – tài sản",
+    "display_label": "Trộm cướp và tài sản",
     "suggested_label": "cướp – công an – tài sản",
+    "final_label": "Trộm cướp và tài sản",
     "top_keywords": [
       "cướp",
       "công an",
@@ -471,12 +508,13 @@
       "phường",
       "cảnh sát"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "36": {
-    "display_label": "ngủ – giấc – giấc ngủ",
+    "display_label": "Giấc ngủ, vận động và sức khỏe lối sống",
     "suggested_label": "ngủ – giấc – giấc ngủ",
+    "final_label": "Giấc ngủ, vận động và sức khỏe lối sống",
     "top_keywords": [
       "ngủ",
       "giấc",
@@ -484,12 +522,13 @@
       "bệnh",
       "vận động"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "37": {
-    "display_label": "real – madrid – mourinho",
+    "display_label": "Real Madrid tại Champions League",
     "suggested_label": "real – madrid – mourinho",
+    "final_label": "Real Madrid tại Champions League",
     "top_keywords": [
       "real",
       "madrid",
@@ -497,12 +536,13 @@
       "real madrid",
       "trận"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "38": {
-    "display_label": "clb – trận – đội",
+    "display_label": "Bóng đá câu lạc bộ Việt Nam",
     "suggested_label": "clb – trận – đội",
+    "final_label": "Bóng đá câu lạc bộ Việt Nam",
     "top_keywords": [
       "clb",
       "trận",
@@ -510,12 +550,13 @@
       "league",
       "bóng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "39": {
-    "display_label": "bóng – clb – đội",
+    "display_label": "Kết quả Giải hạng Nhất và V-League",
     "suggested_label": "bóng – clb – đội",
+    "final_label": "Kết quả Giải hạng Nhất và V-League",
     "top_keywords": [
       "bóng",
       "clb",
@@ -523,12 +564,13 @@
       "bàn",
       "thắng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "40": {
-    "display_label": "doanh – tỷ – tỷ đồng",
+    "display_label": "Doanh thu và kế hoạch kinh doanh doanh nghiệp",
     "suggested_label": "doanh – tỷ – tỷ đồng",
+    "final_label": "Doanh thu và kế hoạch kinh doanh doanh nghiệp",
     "top_keywords": [
       "doanh",
       "tỷ",
@@ -536,12 +578,13 @@
       "ngân sách",
       "doanh nghiệp"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "41": {
-    "display_label": "thuế – doanh – nộp",
+    "display_label": "Thuế và pháp lý doanh nghiệp",
     "suggested_label": "thuế – doanh – nộp",
+    "final_label": "Thuế và pháp lý doanh nghiệp",
     "top_keywords": [
       "thuế",
       "doanh",
@@ -549,12 +592,13 @@
       "kinh doanh",
       "doanh nghiệp"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "42": {
-    "display_label": "tỷ đồng – tỷ – lợi nhuận",
+    "display_label": "Lợi nhuận và thua lỗ doanh nghiệp",
     "suggested_label": "tỷ đồng – tỷ – lợi nhuận",
+    "final_label": "Lợi nhuận và thua lỗ doanh nghiệp",
     "top_keywords": [
       "tỷ đồng",
       "tỷ",
@@ -562,12 +606,13 @@
       "nhuận",
       "lỗ"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "43": {
-    "display_label": "bà – tòa – bà ngọc",
+    "display_label": "Tranh chấp dân sự và tài sản",
     "suggested_label": "bà – tòa – bà ngọc",
+    "final_label": "Tranh chấp dân sự và tài sản",
     "top_keywords": [
       "bà",
       "tòa",
@@ -575,12 +620,13 @@
       "đất",
       "chấp"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "44": {
-    "display_label": "thẩm – án – tòa",
+    "display_label": "Xét xử các vụ án cán bộ và giáo dục",
     "suggested_label": "thẩm – án – tòa",
+    "final_label": "Xét xử các vụ án cán bộ và giáo dục",
     "top_keywords": [
       "thẩm",
       "án",
@@ -588,12 +634,13 @@
       "cáo",
       "bà"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "45": {
-    "display_label": "vợt – tay vợt – zverev",
+    "display_label": "Quần vợt quốc tế và US Open",
     "suggested_label": "vợt – tay vợt – zverev",
+    "final_label": "Quần vợt quốc tế và US Open",
     "top_keywords": [
       "vợt",
       "tay vợt",
@@ -601,12 +648,13 @@
       "tay",
       "set"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "46": {
-    "display_label": "khoa – thủ khoa – đh",
+    "display_label": "Thủ khoa và thành tích đại học",
     "suggested_label": "khoa – thủ khoa – đh",
+    "final_label": "Thủ khoa và thành tích đại học",
     "top_keywords": [
       "khoa",
       "thủ khoa",
@@ -614,12 +662,13 @@
       "kỳ thi",
       "đại học"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "47": {
-    "display_label": "sốt – bệnh – phổi",
+    "display_label": "Bệnh truyền nhiễm và cấp cứu nhi khoa",
     "suggested_label": "sốt – bệnh – phổi",
+    "final_label": "Bệnh truyền nhiễm và cấp cứu nhi khoa",
     "top_keywords": [
       "sốt",
       "bệnh",
@@ -627,12 +676,13 @@
       "xuất huyết",
       "huyết"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "48": {
-    "display_label": "barca – bàn – yamal",
+    "display_label": "Barcelona và cầu thủ nổi bật",
     "suggested_label": "barca – bàn – yamal",
+    "final_label": "Barcelona và cầu thủ nổi bật",
     "top_keywords": [
       "barca",
       "bàn",
@@ -640,12 +690,13 @@
       "raphinha",
       "thắng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "49": {
-    "display_label": "bác sĩ – bác – nội trú",
+    "display_label": "Đào tạo bác sĩ nội trú",
     "suggested_label": "bác sĩ – bác – nội trú",
+    "final_label": "Đào tạo bác sĩ nội trú",
     "top_keywords": [
       "bác sĩ",
       "bác",
@@ -653,12 +704,13 @@
       "sĩ nội",
       "chuyên ngành"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "50": {
-    "display_label": "index – cổ phiếu – vn index",
+    "display_label": "Diễn biến chỉ số VN-Index",
     "suggested_label": "index – cổ phiếu – vn index",
+    "final_label": "Diễn biến chỉ số VN-Index",
     "top_keywords": [
       "index",
       "cổ phiếu",
@@ -666,12 +718,13 @@
       "giảm",
       "vn"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "51": {
-    "display_label": "phim – đạo diễn – diễn viên",
+    "display_label": "Phim quốc tế và giải thưởng điện ảnh",
     "suggested_label": "phim – đạo diễn – diễn viên",
+    "final_label": "Phim quốc tế và giải thưởng điện ảnh",
     "top_keywords": [
       "phim",
       "đạo diễn",
@@ -679,12 +732,13 @@
       "vai",
       "đạo"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "52": {
-    "display_label": "bệnh – khoa – viện",
+    "display_label": "Hợp tác và công nghệ điều trị y khoa",
     "suggested_label": "bệnh – khoa – viện",
+    "final_label": "Hợp tác và công nghệ điều trị y khoa",
     "top_keywords": [
       "bệnh",
       "khoa",
@@ -692,12 +746,13 @@
       "bệnh viện",
       "điều trị"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "53": {
-    "display_label": "tên lửa – lửa – bay",
+    "display_label": "UAV, tên lửa và tác chiến hiện đại",
     "suggested_label": "tên lửa – lửa – bay",
+    "final_label": "UAV, tên lửa và tác chiến hiện đại",
     "top_keywords": [
       "tên lửa",
       "lửa",
@@ -705,12 +760,13 @@
       "tên",
       "máy bay"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "54": {
-    "display_label": "đời – presley – cô",
+    "display_label": "Các vụ tử vong và án hình sự quốc tế",
     "suggested_label": "đời – presley – cô",
+    "final_label": "Các vụ tử vong và án hình sự quốc tế",
     "top_keywords": [
       "đời",
       "presley",
@@ -718,12 +774,13 @@
       "chết",
       "levy"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "55": {
-    "display_label": "trái đất – mặt trăng – trăng",
+    "display_label": "Khoa học và công nghệ không gian",
     "suggested_label": "trái đất – mặt trăng – trăng",
+    "final_label": "Khoa học và công nghệ không gian",
     "top_keywords": [
       "trái đất",
       "mặt trăng",
@@ -731,12 +788,13 @@
       "mặt trời",
       "trời"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "56": {
-    "display_label": "lãi – lãi suất – suất",
+    "display_label": "Chính sách lãi suất của ngân hàng trung ương",
     "suggested_label": "lãi – lãi suất – suất",
+    "final_label": "Chính sách lãi suất của ngân hàng trung ương",
     "top_keywords": [
       "lãi",
       "lãi suất",
@@ -744,12 +802,13 @@
       "fed",
       "ngân hàng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "57": {
-    "display_label": "phim – diễn viên – cô",
+    "display_label": "Diễn viên và phim truyền hình châu Á",
     "suggested_label": "phim – diễn viên – cô",
+    "final_label": "Diễn viên và phim truyền hình châu Á",
     "top_keywords": [
       "phim",
       "diễn viên",
@@ -757,12 +816,13 @@
       "vai",
       "nữ"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "58": {
-    "display_label": "u23 – u23 việt – asiad",
+    "display_label": "U23 Việt Nam chuẩn bị ASIAD",
     "suggested_label": "u23 – u23 việt – asiad",
+    "final_label": "U23 Việt Nam chuẩn bị ASIAD",
     "top_keywords": [
       "u23",
       "u23 việt",
@@ -770,12 +830,13 @@
       "việt nam",
       "cầu thủ"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "59": {
-    "display_label": "khẩu – xuất khẩu – ngạch",
+    "display_label": "Xuất nhập khẩu và kim ngạch thương mại",
     "suggested_label": "khẩu – xuất khẩu – ngạch",
+    "final_label": "Xuất nhập khẩu và kim ngạch thương mại",
     "top_keywords": [
       "khẩu",
       "xuất khẩu",
@@ -783,12 +844,13 @@
       "usd",
       "kim ngạch"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "60": {
-    "display_label": "messi – miami – argentina",
+    "display_label": "Lionel Messi và bóng đá Argentina",
     "suggested_label": "messi – miami – argentina",
+    "final_label": "Lionel Messi và bóng đá Argentina",
     "top_keywords": [
       "messi",
       "miami",
@@ -796,12 +858,13 @@
       "inter",
       "bóng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "61": {
-    "display_label": "vợt – tay vợt – tay",
+    "display_label": "Thể thao vợt quốc tế",
     "suggested_label": "vợt – tay vợt – tay",
+    "final_label": "Thể thao vợt quốc tế",
     "top_keywords": [
       "vợt",
       "tay vợt",
@@ -809,12 +872,13 @@
       "zheng",
       "set"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "62": {
-    "display_label": "khánh – hè ấy – mẹ",
+    "display_label": "Phim truyền hình Mùa hè năm ấy",
     "suggested_label": "khánh – hè ấy – mẹ",
+    "final_label": "Phim truyền hình Mùa hè năm ấy",
     "top_keywords": [
       "khánh",
       "hè ấy",
@@ -822,12 +886,13 @@
       "bà ngọc",
       "mùa hè"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "63": {
-    "display_label": "indonesia – malaysia – fifa",
+    "display_label": "Bóng đá Indonesia - Malaysia",
     "suggested_label": "indonesia – malaysia – fifa",
+    "final_label": "Bóng đá Indonesia - Malaysia",
     "top_keywords": [
       "indonesia",
       "malaysia",
@@ -835,12 +900,13 @@
       "asean",
       "asean cup"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "64": {
-    "display_label": "u23 – u23 nhật – u23 thái",
+    "display_label": "Bóng đá nam U23 tại ASIAD",
     "suggested_label": "u23 – u23 nhật – u23 thái",
+    "final_label": "Bóng đá nam U23 tại ASIAD",
     "top_keywords": [
       "u23",
       "u23 nhật",
@@ -848,12 +914,13 @@
       "nhật bản",
       "nhật"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "65": {
-    "display_label": "đăng – vi – mạng",
+    "display_label": "Vi phạm và tin sai sự thật trên mạng xã hội",
     "suggested_label": "đăng – vi – mạng",
+    "final_label": "Vi phạm và tin sai sự thật trên mạng xã hội",
     "top_keywords": [
       "đăng",
       "vi",
@@ -861,12 +928,13 @@
       "công an",
       "công khai"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "66": {
-    "display_label": "man – chuyển nhượng – cầu thủ",
+    "display_label": "Chuyển nhượng bóng đá quốc tế",
     "suggested_label": "man – chuyển nhượng – cầu thủ",
+    "final_label": "Chuyển nhượng bóng đá quốc tế",
     "top_keywords": [
       "man",
       "chuyển nhượng",
@@ -874,12 +942,13 @@
       "nhượng",
       "chelsea"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "67": {
-    "display_label": "nghệ thuật – văn – nghệ",
+    "display_label": "Văn hóa, di sản và nghệ thuật Việt",
     "suggested_label": "nghệ thuật – văn – nghệ",
+    "final_label": "Văn hóa, di sản và nghệ thuật Việt",
     "top_keywords": [
       "nghệ thuật",
       "văn",
@@ -887,12 +956,13 @@
       "văn hóa",
       "di"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "68": {
-    "display_label": "tín dụng – tín – nợ",
+    "display_label": "Tín dụng và cho vay doanh nghiệp",
     "suggested_label": "tín dụng – tín – nợ",
+    "final_label": "Tín dụng và cho vay doanh nghiệp",
     "top_keywords": [
       "tín dụng",
       "tín",
@@ -900,12 +970,13 @@
       "ngân hàng",
       "vay"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "69": {
-    "display_label": "chợ – khách – cửa hàng",
+    "display_label": "Bán lẻ, dịch vụ và kinh doanh trực tuyến",
     "suggested_label": "chợ – khách – cửa hàng",
+    "final_label": "Bán lẻ, dịch vụ và kinh doanh trực tuyến",
     "top_keywords": [
       "chợ",
       "khách",
@@ -913,12 +984,13 @@
       "phẩm",
       "sản phẩm"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "70": {
-    "display_label": "bay – airlines – hãng",
+    "display_label": "Hàng không và vận tải hành khách",
     "suggested_label": "bay – airlines – hãng",
+    "final_label": "Hàng không và vận tải hành khách",
     "top_keywords": [
       "bay",
       "airlines",
@@ -926,12 +998,13 @@
       "hành khách",
       "khách"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "71": {
-    "display_label": "arsenal – bàn – rashford",
+    "display_label": "Kết quả Ngoại hạng Anh",
     "suggested_label": "arsenal – bàn – rashford",
+    "final_label": "Kết quả Ngoại hạng Anh",
     "top_keywords": [
       "arsenal",
       "bàn",
@@ -939,12 +1012,13 @@
       "bóng",
       "man"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "72": {
-    "display_label": "em – nữ sinh – cô",
+    "display_label": "Nữ sinh và thành tích học tập",
     "suggested_label": "em – nữ sinh – cô",
+    "final_label": "Nữ sinh và thành tích học tập",
     "top_keywords": [
       "em",
       "nữ sinh",
@@ -952,12 +1026,13 @@
       "tuệ anh",
       "thi"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "73": {
-    "display_label": "tiêm – vaccine – chân miệng",
+    "display_label": "Vaccine và phòng chống bệnh truyền nhiễm",
     "suggested_label": "tiêm – vaccine – chân miệng",
+    "final_label": "Vaccine và phòng chống bệnh truyền nhiễm",
     "top_keywords": [
       "tiêm",
       "vaccine",
@@ -965,12 +1040,13 @@
       "tay chân",
       "miệng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "74": {
-    "display_label": "cổ phiếu – phiếu – cổ",
+    "display_label": "Thị trường chứng khoán và cổ phiếu",
     "suggested_label": "cổ phiếu – phiếu – cổ",
+    "final_label": "Thị trường chứng khoán và cổ phiếu",
     "top_keywords": [
       "cổ phiếu",
       "phiếu",
@@ -978,12 +1054,13 @@
       "phiên",
       "chứng khoán"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "75": {
-    "display_label": "nam sinh – học sinh – em",
+    "display_label": "An toàn và bạo lực học đường",
     "suggested_label": "nam sinh – học sinh – em",
+    "final_label": "An toàn và bạo lực học đường",
     "top_keywords": [
       "nam sinh",
       "học sinh",
@@ -991,12 +1068,13 @@
       "sinh lớp",
       "nhà trường"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "76": {
-    "display_label": "mắt – thị lực – võng mạc",
+    "display_label": "Bệnh lý và điều trị mắt",
     "suggested_label": "mắt – thị lực – võng mạc",
+    "final_label": "Bệnh lý và điều trị mắt",
     "top_keywords": [
       "mắt",
       "thị lực",
@@ -1004,12 +1082,13 @@
       "mạc",
       "võng"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "77": {
-    "display_label": "phụ huynh – huynh – khoản",
+    "display_label": "Các khoản thu và quỹ phụ huynh",
     "suggested_label": "phụ huynh – huynh – khoản",
+    "final_label": "Các khoản thu và quỹ phụ huynh",
     "top_keywords": [
       "phụ huynh",
       "huynh",
@@ -1017,12 +1096,13 @@
       "khoản thu",
       "phụ"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "78": {
-    "display_label": "văn hậu – thẻ – tấn sinh",
+    "display_label": "Bạo lực và kỷ luật trong bóng đá",
     "suggested_label": "văn hậu – thẻ – tấn sinh",
+    "final_label": "Bạo lực và kỷ luật trong bóng đá",
     "top_keywords": [
       "văn hậu",
       "thẻ",
@@ -1030,12 +1110,13 @@
       "thẻ đỏ",
       "hậu"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "79": {
-    "display_label": "phiếu – cổ phiếu – cổ",
+    "display_label": "Giao dịch cổ phiếu và cổ đông doanh nghiệp",
     "suggested_label": "phiếu – cổ phiếu – cổ",
+    "final_label": "Giao dịch cổ phiếu và cổ đông doanh nghiệp",
     "top_keywords": [
       "phiếu",
       "cổ phiếu",
@@ -1043,12 +1124,13 @@
       "triệu cổ",
       "pnj"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "80": {
-    "display_label": "tài xế – xế – grab",
+    "display_label": "Thu nhập và điều kiện lao động tài xế",
     "suggested_label": "tài xế – xế – grab",
+    "final_label": "Thu nhập và điều kiện lao động tài xế",
     "top_keywords": [
       "tài xế",
       "xế",
@@ -1056,12 +1138,13 @@
       "xe",
       "cuốc"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "81": {
-    "display_label": "fifa – fifa asean – cup",
+    "display_label": "FIFA ASEAN Cup và đội tuyển Việt Nam",
     "suggested_label": "fifa – fifa asean – cup",
+    "final_label": "FIFA ASEAN Cup và đội tuyển Việt Nam",
     "top_keywords": [
       "fifa",
       "fifa asean",
@@ -1069,12 +1152,13 @@
       "cup 2026",
       "asean cup"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "82": {
-    "display_label": "lãi suất – lãi – suất",
+    "display_label": "Lãi suất tiền gửi và cho vay",
     "suggested_label": "lãi suất – lãi – suất",
+    "final_label": "Lãi suất tiền gửi và cho vay",
     "top_keywords": [
       "lãi suất",
       "lãi",
@@ -1082,12 +1166,13 @@
       "kỳ hạn",
       "tiền gửi"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "83": {
-    "display_label": "tội – thẩm – luật",
+    "display_label": "Pháp luật hình sự và tố tụng",
     "suggested_label": "tội – thẩm – luật",
+    "final_label": "Pháp luật hình sự và tố tụng",
     "top_keywords": [
       "tội",
       "thẩm",
@@ -1095,12 +1180,13 @@
       "án",
       "thẩm phán"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "84": {
-    "display_label": "robot – robot hình – trung quốc",
+    "display_label": "Robot hình người và tự động hóa",
     "suggested_label": "robot – robot hình – trung quốc",
+    "final_label": "Robot hình người và tự động hóa",
     "top_keywords": [
       "robot",
       "robot hình",
@@ -1108,12 +1194,13 @@
       "sản xuất",
       "điều khiển"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "85": {
-    "display_label": "cà phê – cà – phê",
+    "display_label": "Văn hóa và chế biến cà phê",
     "suggested_label": "cà phê – cà – phê",
+    "final_label": "Văn hóa và chế biến cà phê",
     "top_keywords": [
       "cà phê",
       "cà",
@@ -1121,12 +1208,13 @@
       "robusta",
       "hòa tan"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "86": {
-    "display_label": "vinfast – nhiệm – phạm nhật",
+    "display_label": "Biến động lãnh đạo doanh nghiệp",
     "suggested_label": "vinfast – nhiệm – phạm nhật",
+    "final_label": "Biến động lãnh đạo doanh nghiệp",
     "top_keywords": [
       "vinfast",
       "nhiệm",
@@ -1134,12 +1222,13 @@
       "chủ tịch",
       "tịch"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "87": {
-    "display_label": "man – haaland – man utd",
+    "display_label": "Tranh cãi trọng tài tại Ngoại hạng Anh",
     "suggested_label": "man – haaland – man utd",
+    "final_label": "Tranh cãi trọng tài tại Ngoại hạng Anh",
     "top_keywords": [
       "man",
       "haaland",
@@ -1147,12 +1236,13 @@
       "utd",
       "trọng tài"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "88": {
-    "display_label": "game – pubg – phát hành",
+    "display_label": "PUBG và thể thao điện tử",
     "suggested_label": "game – pubg – phát hành",
+    "final_label": "PUBG và thể thao điện tử",
     "top_keywords": [
       "game",
       "pubg",
@@ -1160,12 +1250,13 @@
       "pc",
       "chơi"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "89": {
-    "display_label": "dịch – giao dịch – doanh",
+    "display_label": "Dịch vụ tài chính cho doanh nghiệp",
     "suggested_label": "dịch – giao dịch – doanh",
+    "final_label": "Dịch vụ tài chính cho doanh nghiệp",
     "top_keywords": [
       "dịch",
       "giao dịch",
@@ -1173,12 +1264,13 @@
       "doanh nghiệp",
       "thanh toán"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "90": {
-    "display_label": "hoa hậu – hoa – hậu",
+    "display_label": "Hoa hậu và người đẹp",
     "suggested_label": "hoa hậu – hoa – hậu",
+    "final_label": "Hoa hậu và người đẹp",
     "top_keywords": [
       "hoa hậu",
       "hoa",
@@ -1186,12 +1278,13 @@
       "cô",
       "đẹp"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "91": {
-    "display_label": "bệnh – xe – bệnh viện",
+    "display_label": "Dịch vụ xe cấp cứu và chi phí y tế",
     "suggested_label": "bệnh – xe – bệnh viện",
+    "final_label": "Dịch vụ xe cấp cứu và chi phí y tế",
     "top_keywords": [
       "bệnh",
       "xe",
@@ -1199,12 +1292,13 @@
       "cấp cứu",
       "vận chuyển"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "92": {
-    "display_label": "hcv – huy chương – hcđ",
+    "display_label": "Bảng xếp hạng huy chương ASIAD",
     "suggested_label": "hcv – huy chương – hcđ",
+    "final_label": "Bảng xếp hạng huy chương ASIAD",
     "top_keywords": [
       "hcv",
       "huy chương",
@@ -1212,12 +1306,13 @@
       "asiad",
       "hcb"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "93": {
-    "display_label": "tình dục – nạn nhân – gary",
+    "display_label": "Xâm hại và tội phạm đối với phụ nữ, trẻ em",
     "suggested_label": "tình dục – nạn nhân – gary",
+    "final_label": "Xâm hại và tội phạm đối với phụ nữ, trẻ em",
     "top_keywords": [
       "tình dục",
       "nạn nhân",
@@ -1225,12 +1320,13 @@
       "cảnh sát",
       "điều tra"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "94": {
-    "display_label": "toán – bài toán – toán học",
+    "display_label": "AI trong toán học và nghiên cứu khoa học",
     "suggested_label": "toán – bài toán – toán học",
+    "final_label": "AI trong toán học và nghiên cứu khoa học",
     "top_keywords": [
       "toán",
       "bài toán",
@@ -1238,12 +1334,13 @@
       "bài",
       "nghiên cứu"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   },
   "95": {
-    "display_label": "doanh – doanh nghiệp – hdbank",
+    "display_label": "Giải thưởng và thương hiệu doanh nghiệp, ngân hàng",
     "suggested_label": "doanh – doanh nghiệp – hdbank",
+    "final_label": "Giải thưởng và thương hiệu doanh nghiệp, ngân hàng",
     "top_keywords": [
       "doanh",
       "doanh nghiệp",
@@ -1251,7 +1348,7 @@
       "ngân hàng",
       "forbes"
     ],
-    "status": "provisional",
-    "reviewed_by": []
+    "status": "pending_human_review",
+    "review_note": "Nhãn dự thảo được suy ra từ từ khóa c-TF-IDF và năm bài đại diện. Nhãn đang chờ người phụ trách kiểm tra; E05 cần tối thiểu hai người đánh giá độc lập trước khi đổi trạng thái thành approved."
   }
 }

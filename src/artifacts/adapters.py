@@ -940,6 +940,7 @@ def export_kmeans_artifacts(
 def export_bertopic_artifacts(
     source_dir: str | Path,
     output_dir: str | Path,
+    representation_dir: str | Path | None = None,
 ) -> ArtifactBundle:
     """Chuyển kết quả BERTopic sang artifact schema chung."""
     source_dir = Path(source_dir)
@@ -998,6 +999,71 @@ def export_bertopic_artifacts(
         }
     )
 
+    representative_docs: pd.DataFrame | None = None
+    display_mapping: dict[str, Any] | None = None
+
+    if representation_dir is not None:
+        representation_dir = Path(representation_dir)
+        representation_metadata = _read_json(
+            representation_dir / "run_metadata.json"
+        )
+        representation_run_id = str(
+            representation_metadata.get("run_id", "")
+        )
+        source_run_id = str(
+            metrics.get("run_id", source_dir.name)
+        )
+        if representation_run_id != source_run_id:
+            raise ValueError(
+                "Run ID của artifact M15 không khớp kết quả "
+                f"BERTopic: {representation_run_id} != {source_run_id}"
+            )
+
+        display_mapping = _read_json(
+            representation_dir / "topic_display_mapping.json"
+        )
+        reviewed_labels = {
+            int(topic_id): str(item.get("display_label", "")).strip()
+            for topic_id, item in display_mapping.items()
+            if str(topic_id) != "-1"
+            and str(item.get("display_label", "")).strip()
+        }
+        raw_topic_names = topic_summary["topic_name"].copy()
+        topic_summary["raw_topic_name"] = raw_topic_names
+        topic_summary["topic_name"] = (
+            topic_summary["topic_id"]
+            .map(reviewed_labels)
+            .fillna(raw_topic_names)
+        )
+        topic_summary["label_status"] = topic_summary[
+            "topic_id"
+        ].map(
+            {
+                int(topic_id): item.get("status", "provisional")
+                for topic_id, item in display_mapping.items()
+                if str(topic_id) != "-1"
+            }
+        )
+
+        representative_payload = _read_json(
+            representation_dir / "representative_docs.json"
+        )
+        representative_rows: list[dict[str, Any]] = []
+        for topic_id, documents in representative_payload.items():
+            for rank, document in enumerate(documents, start=1):
+                representative_rows.append(
+                    {
+                        "topic_id": int(topic_id),
+                        "rank": rank,
+                        "display_label": reviewed_labels.get(
+                            int(topic_id),
+                            "",
+                        ),
+                        **document,
+                    }
+                )
+        representative_docs = pd.DataFrame(representative_rows)
+
     output_dir.mkdir(
         parents=True,
         exist_ok=True,
@@ -1031,6 +1097,18 @@ def export_bertopic_artifacts(
         index=False,
         encoding="utf-8-sig",
     )
+
+    if representative_docs is not None:
+        representative_docs.to_csv(
+            output_dir / "representative_docs.csv",
+            index=False,
+            encoding="utf-8-sig",
+        )
+    if display_mapping is not None:
+        _write_json(
+            output_dir / "topic_display_mapping.json",
+            display_mapping,
+        )
 
     shutil.copy2(
         config_path,

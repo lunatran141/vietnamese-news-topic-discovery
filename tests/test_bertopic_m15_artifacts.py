@@ -117,6 +117,21 @@ def test_representatives_sorted_by_probability() -> None:
     )
 
 
+def test_representative_ties_are_sorted_by_article_id() -> None:
+    """Các xác suất bằng nhau phải có thứ tự tái lập được."""
+    documents = make_document_topics()
+    documents.loc[
+        documents["topic"].eq(0),
+        "topic_probability",
+    ] = 1.0
+    result = build_representative_documents(documents)
+
+    assert [
+        item["article_id"]
+        for item in result["0"]
+    ] == ["A001", "A002"]
+
+
 def test_suggested_label_uses_top_three_words() -> None:
     """Nhãn tạm được tạo từ tối đa ba keyword đầu."""
     keywords = [
@@ -144,3 +159,27 @@ def test_display_mapping_preserves_topic_ids() -> None:
     assert result["0"]["status"] == "provisional"
     assert result["0"]["display_label"]
     assert result["0"]["reviewed_by"] == []
+
+
+def test_display_mapping_applies_reviewed_label() -> None:
+    """Nhãn đã review được dùng để hiển thị nhưng vẫn giữ nhãn gợi ý."""
+    keywords = build_topic_keywords(
+        make_keyword_table()
+    )
+    review = {
+        "labels": {
+            0: "Ngân hàng và tín dụng",
+            1: "Bóng đá",
+        },
+        "review_status": "pending_human_review",
+        "reviewed_by": [],
+        "review_note": "Cần người phụ trách xác nhận.",
+    }
+
+    result = build_display_mapping(keywords, review)
+
+    assert result["0"]["display_label"] == "Ngân hàng và tín dụng"
+    assert result["0"]["suggested_label"] == "ngân hàng – lãi suất – tín dụng"
+    assert result["0"]["status"] == "pending_human_review"
+    assert result["0"]["reviewed_by"] == []
+    assert result["0"]["review_note"] == "Cần người phụ trách xác nhận."

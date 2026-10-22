@@ -12,6 +12,7 @@
   "topic_diversity": 0.68125,
   "keywords_per_topic": 10,
   "representative_docs_per_topic": 5,
-  "label_status": "provisional",
+  "label_status": "pending_human_review",
+  "label_review_path": "configs\\bertopic_topic_labels.yaml",
   "selection_reason": "Run có đầy đủ artifact và tỷ lệ outlier validation thấp nhất trong các run M14."
 }

@@ -35,6 +35,11 @@ OUTPUT_DIR = (
 KEYWORDS_PER_TOPIC = 10
 REPRESENTATIVES_PER_TOPIC = 5
 
+LABEL_REVIEW_PATH = (
+    Path("configs")
+    / "bertopic_topic_labels.yaml"
+)
+
 
 def write_json(
     path: Path,
@@ -96,8 +101,9 @@ def build_representative_documents(
     )
 
     valid_documents = valid_documents.sort_values(
-        ["topic", "topic_probability"],
-        ascending=[True, False],
+        ["topic", "topic_probability", "article_id"],
+        ascending=[True, False, True],
+        kind="stable",
     )
 
     result: dict[str, list[dict[str, Any]]] = {}
@@ -145,8 +151,29 @@ def make_suggested_label(
 
 def build_display_mapping(
     topic_keywords: dict[str, list[dict[str, Any]]],
+    label_review: dict[str, Any] | None = None,
 ) -> dict[str, dict[str, Any]]:
     """Tạo mapping nhãn hiển thị mà không đổi raw topic ID."""
+    label_review = label_review or {}
+    reviewed_labels = {
+        str(topic_id): str(label).strip()
+        for topic_id, label in (
+            label_review.get("labels", {}) or {}
+        ).items()
+    }
+    review_status = str(
+        label_review.get("review_status", "provisional")
+    )
+    reviewed_by = [
+        str(reviewer)
+        for reviewer in (
+            label_review.get("reviewed_by", []) or []
+        )
+    ]
+    review_note = str(
+        label_review.get("review_note", "")
+    ).strip()
+
     mapping: dict[str, dict[str, Any]] = {
         "-1": {
             "display_label": "Outlier / Chưa xác định",
@@ -161,16 +188,31 @@ def build_display_mapping(
         suggested_label = make_suggested_label(
             keyword_items
         )
+        final_label = reviewed_labels.get(topic_id, "")
 
         mapping[topic_id] = {
-            "display_label": suggested_label,
+            "display_label": final_label or suggested_label,
             "suggested_label": suggested_label,
+            "final_label": final_label,
             "top_keywords": [
                 item["word"]
                 for item in keyword_items[:5]
             ],
-            "status": "provisional",
-            "reviewed_by": [],
+            "status": (
+                review_status
+                if final_label
+                else "provisional"
+            ),
+            "reviewed_by": (
+                reviewed_by
+                if final_label
+                else []
+            ),
+            "review_note": (
+                review_note
+                if final_label
+                else ""
+            ),
         }
 
     return mapping
@@ -223,6 +265,18 @@ def main() -> None:
     ) as file:
         metrics = json.load(file)
 
+    with LABEL_REVIEW_PATH.open(
+        "r",
+        encoding="utf-8",
+    ) as file:
+        label_review = yaml.safe_load(file) or {}
+
+    if label_review.get("run_id") != RUN_ID:
+        raise ValueError(
+            "Run ID trong mapping nhãn không khớp "
+            f"{RUN_ID}: {label_review.get('run_id')}"
+        )
+
     topic_keywords = build_topic_keywords(
         keyword_table
     )
@@ -234,8 +288,44 @@ def main() -> None:
     )
 
     display_mapping = build_display_mapping(
-        topic_keywords
+        topic_keywords,
+        label_review,
     )
+
+    expected_topics = set(topic_keywords)
+    reviewed_topics = {
+        str(topic_id)
+        for topic_id in (
+            label_review.get("labels", {}) or {}
+        )
+    }
+    if reviewed_topics != expected_topics:
+        missing = sorted(
+            expected_topics - reviewed_topics,
+            key=int,
+        )
+        unexpected = sorted(
+            reviewed_topics - expected_topics,
+            key=int,
+        )
+        raise ValueError(
+            "Mapping nhãn phải bao phủ đúng toàn bộ topic. "
+            f"Thiếu={missing}; dư={unexpected}"
+        )
+
+    broad_topics = {
+        str(topic_id)
+        for topic_id in (
+            label_review.get("broad_topics", []) or []
+        )
+    }
+    merge_candidates = {
+        str(topic_id)
+        for candidate in (
+            label_review.get("merge_candidates", []) or []
+        )
+        for topic_id in candidate.get("topics", [])
+    }
 
     write_json(
         OUTPUT_DIR / "topic_keywords.json",
@@ -281,17 +371,27 @@ def main() -> None:
                 "suggested_label": mapping_item[
                     "suggested_label"
                 ],
-                "final_label": "",
+                "final_label": mapping_item.get(
+                    "final_label",
+                    "",
+                ),
                 "top_keywords": keyword_text,
                 "representative_titles": (
                     representative_titles
                 ),
                 "keyword_quality": "",
                 "representative_quality": "",
-                "is_broad": "",
-                "is_duplicate": "",
-                "review_note": "",
-                "review_status": "pending",
+                "is_broad": topic_id in broad_topics,
+                "is_duplicate": (
+                    topic_id in merge_candidates
+                ),
+                "review_note": mapping_item.get(
+                    "review_note",
+                    "",
+                ),
+                "review_status": mapping_item[
+                    "status"
+                ],
             }
         )
 
@@ -340,7 +440,11 @@ def main() -> None:
         "representative_docs_per_topic": (
             REPRESENTATIVES_PER_TOPIC
         ),
-        "label_status": "provisional",
+        "label_status": label_review.get(
+            "review_status",
+            "provisional",
+        ),
+        "label_review_path": str(LABEL_REVIEW_PATH),
         "selection_reason": (
             "Run có đầy đủ artifact và tỷ lệ outlier "
             "validation thấp nhất trong các run M14."
@@ -359,10 +463,10 @@ def main() -> None:
         index=False,
     )
 
-    print(f"Đã tạo artifact M15 tại: {OUTPUT_DIR}")
-    print(f"Số topic: {len(topic_keywords)}")
+    print(f"Created M15 artifacts at: {OUTPUT_DIR}")
+    print(f"Topic count: {len(topic_keywords)}")
     print(
-        "Số topic có bài đại diện: "
+        "Topics with representative documents: "
         f"{len(representative_documents)}"
     )
 

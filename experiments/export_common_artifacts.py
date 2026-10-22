@@ -22,6 +22,10 @@ DEFAULT_OUTPUT_DIR = Path(
     "e1_vietnamese_sbert"
 )
 
+DEFAULT_BERTOPIC_REPRESENTATION_DIR = Path(
+    "artifacts/bertopic/best_run"
+)
+
 DEFAULT_NMF_SOURCE_DIR = Path(
     "artifacts/nmf/nmf_p3_k10_seed42_v1"
 )
@@ -82,6 +86,9 @@ def main() -> None:
         bundle = export_bertopic_artifacts(
             source_dir=source_dir,
             output_dir=output_dir,
+            representation_dir=(
+                DEFAULT_BERTOPIC_REPRESENTATION_DIR
+            ),
         )
 
     print("Đã xuất common artifact thành công")
