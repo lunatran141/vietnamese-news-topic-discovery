@@ -1,0 +1,98 @@
+{
+  "run_id": "lda_k15_seed42",
+  "schema_version": "1.0",
+  "label_status": "proposed",
+  "review_note": "TV3 proposed labels; independent review pending.",
+  "mapping": {
+    "0": {
+      "suggest_label": "Giáo dục đại học và tuyển sinh",
+      "display_name": "Giáo dục đại học và tuyển sinh",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "1": {
+      "suggest_label": "Tài chính, ngân hàng và thị trường tiêu dùng",
+      "display_name": "Tài chính, ngân hàng và thị trường tiêu dùng",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "2": {
+      "suggest_label": "Dinh dưỡng và chăm sóc sức khỏe",
+      "display_name": "Dinh dưỡng và chăm sóc sức khỏe",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "3": {
+      "suggest_label": "Thể thao Việt Nam tại ASIAD",
+      "display_name": "Thể thao Việt Nam tại ASIAD",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "4": {
+      "suggest_label": "Tội phạm và điều tra hình sự",
+      "display_name": "Tội phạm và điều tra hình sự",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "5": {
+      "suggest_label": "Giải chạy Marathon và sự kiện chạy bộ",
+      "display_name": "Giải chạy Marathon và sự kiện chạy bộ",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "6": {
+      "suggest_label": "Bóng đá trong nước và quốc tế",
+      "display_name": "Bóng đá trong nước và quốc tế",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "7": {
+      "suggest_label": "Y tế, bệnh lý và điều trị",
+      "display_name": "Y tế, bệnh lý và điều trị",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "8": {
+      "suggest_label": "Thị trường vàng và biến động giá",
+      "display_name": "Thị trường vàng và biến động giá",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "9": {
+      "suggest_label": "Giáo dục phổ thông và quản lý trường học",
+      "display_name": "Giáo dục phổ thông và quản lý trường học",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "10": {
+      "suggest_label": "Thời trang và phong cách người nổi tiếng",
+      "display_name": "Thời trang và phong cách người nổi tiếng",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "11": {
+      "suggest_label": "Âm nhạc và hoạt động biểu diễn",
+      "display_name": "Âm nhạc và hoạt động biểu diễn",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "12": {
+      "suggest_label": "Trí tuệ nhân tạo và rủi ro an toàn AI",
+      "display_name": "Trí tuệ nhân tạo và rủi ro an toàn AI",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "13": {
+      "suggest_label": "Phát triển doanh nghiệp và công nghệ",
+      "display_name": "Phát triển doanh nghiệp và công nghệ",
+      "display_group_id": null,
+      "review_status": "proposed"
+    },
+    "14": {
+      "suggest_label": "Quản lý nhà nước và chính sách pháp lý",
+      "display_name": "Quản lý nhà nước và chính sách pháp lý",
+      "display_group_id": null,
+      "review_status": "proposed"
+    }
+  }
+}

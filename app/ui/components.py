@@ -43,31 +43,77 @@ def clean_topic_name(raw: str | None, keywords: str | None = None) -> str:
 
 
 def build_topic_labels(bundle, run_id: str) -> dict[int, str]:
-    """Ưu tiên tên trong phiên, rồi tên HDBSCAN đã duyệt."""
+    """Lấy tên topic từ mapping của từng mô hình, không sửa artifact gốc."""
     saved_mapping: dict[str, dict] = {}
 
+    root = Path(__file__).resolve().parents[2]
+
     if run_id == "minilm_title_content_eom_15_5":
-        root = Path(__file__).resolve().parents[2]
         path = (
             root
             / "artifacts/common/hdbscan"
             / run_id
             / "topic_display_mapping.json"
         )
+
         if path.is_file():
-            payload = json.loads(
-                path.read_text(encoding="utf-8")
-            )
+            payload = json.loads(path.read_text(encoding="utf-8-sig"))
+
             if payload.get("run_id") != run_id:
                 raise ValueError("Mapping HDBSCAN sai run_id")
+
             saved_mapping = payload["mapping"]
 
-    mapping = {
-        **saved_mapping,
-        **st.session_state.get(f"mapping_{run_id}", {}),
-    }
+    elif run_id == "lda_k15_seed42":
+        path = (
+            root
+            / "artifacts/common/lda"
+            / run_id
+            / "topic_display_mapping.json"
+        )
+
+        if not path.is_file():
+            raise FileNotFoundError(f"Không tìm thấy mapping LDA: {path}")
+
+        payload = json.loads(path.read_text(encoding="utf-8-sig"))
+
+        if payload.get("run_id") != run_id:
+            raise ValueError("Mapping LDA sai run_id")
+
+        if payload.get("schema_version") != "1.0":
+            raise ValueError("Mapping LDA sai schema_version")
+
+        entries = payload.get("mapping")
+
+        if not isinstance(entries, dict):
+            raise ValueError("Mapping LDA không hợp lệ")
+
+        if set(entries) != {str(i) for i in range(15)}:
+            raise ValueError("Mapping LDA phải chứa đúng 15 topic")
+
+        for topic_id, entry in entries.items():
+            if not isinstance(entry, dict):
+                raise ValueError(f"Topic {topic_id} thiếu dữ liệu mapping")
+
+            label = entry.get("display_name")
+
+            if not isinstance(label, str) or not label.strip():
+                raise ValueError(f"Topic {topic_id} thiếu display_name")
+
+        saved_mapping = entries
+
+    session_mapping = st.session_state.get(f"mapping_{run_id}", {})
+
+    if run_id == "lda_k15_seed42":
+        mapping = saved_mapping
+    else:
+        mapping = {
+            **saved_mapping,
+            **session_mapping,
+        }
 
     labels: dict[int, str] = {}
+
     for row in bundle.topic_summary.to_dict("records"):
         topic_id = int(row["topic_id"])
 
@@ -75,13 +121,13 @@ def build_topic_labels(bundle, run_id: str) -> dict[int, str]:
             labels[topic_id] = "Outlier"
             continue
 
-        custom = mapping.get(str(topic_id), {}).get(
-            "display_name"
-        )
+        custom = mapping.get(str(topic_id), {}).get("display_name")
+
         name = custom or clean_topic_name(
             row.get("topic_name"),
             row.get("top_keywords"),
         )
+
         labels[topic_id] = f"T{topic_id} · {name}"
 
     return labels

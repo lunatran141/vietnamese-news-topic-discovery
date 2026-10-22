@@ -1,0 +1,151 @@
+﻿topic_id,rank,article_id,split,title,topic_probability,second_topic_id,second_topic_probability,top_two_share_gap,category_gold
+0,1,VNN_b475d7f70aea,train,Thủ khoa của ngành có điểm chuẩn cao nhất cả nước,0.99794871301215,9,0.0001465206842457,0.9978021923279042,Giáo dục
+0,2,VNN_41d4dc5d45a8,train,"Loạt thí sinh 1600 điểm SAT, có huy chương quốc tế chọn Đại học Bách khoa Hà Nội",0.996666660617776,14,0.0002380960124224,0.9964285646053536,Giáo dục
+0,3,TTR_79f4b081c9ad,train,Lần đầu Đại học Bách khoa Hà Nội có 3 thủ khoa tốt nghiệp đạt GPA 4.0,0.9959595876615444,1,0.0002886011716399,0.9956709864899044,Giáo dục
+0,4,VNE_ddf70832f8a8,val,Top 20 trường có nhiều học sinh đỗ ĐH Khoa học Tự nhiên TP HCM,0.9854877480326824,4,0.0112169350857935,0.9742708129468888,Giáo dục
+0,5,VNE_b33dbbb99075,train,Ba thủ khoa toàn quốc chọn Đại học Y Dược TP HCM,0.964132939807433,1,0.0288778011728354,0.9352551386345976,Giáo dục
+0,6,VNN_c729b64a66c0,val,Lần đầu tiên ĐH Bách khoa Hà Nội có 3 thủ khoa cùng tốt nghiệp điểm tuyệt đối,0.9420899791546072,13,0.0477074560526321,0.8943825231019751,Giáo dục
+0,7,VNN_60b68c01d9c8,train,"Từng bỏ học đại học, nam sinh Gia Lai lập kỷ lục điểm thi, nhận 320 triệu",0.9267477132825797,9,0.0388074977974638,0.8879402154851157,Giáo dục
+0,8,VNE_1834602160bf,train,Ba sinh viên Bách khoa Hà Nội tốt nghiệp với điểm tuyệt đối 4.0,0.9077839055664492,12,0.0878167623579172,0.8199671432085318,Giáo dục
+0,9,VNE_d7aa40e833d2,train,40 đại học tuyển sinh năm 2027 bằng điểm thi SPT,0.9065812931047156,13,0.0459519936661493,0.8606292994385664,Giáo dục
+0,10,VNE_0e4b87f3faa5,train,Những người đẹp châu Á tranh vương miện Miss World,0.8989878638381951,10,0.0797674938200249,0.8192203700181702,Giải trí
+1,1,TTR_a3863e374b11,train,Khối ngoại bỏ nghìn tỉ 'gom hàng' trước ngày chứng khoán nâng hạng,0.9986131720057546,8,9.90592326170706e-05,0.9985141127731376,Kinh doanh
+1,2,VNE_ca3dca5ed351,train,Người Việt chi hơn 300 tỷ đồng 'đặt cọc' iPhone 18 Pro,0.9982188260611476,12,0.0001272267711604,0.9980915992899873,Khoa học công nghệ
+1,3,VNN_447bb6d20d6f,train,"Lãi suất ngân hàng hôm nay 10/9/2026: Cao nhất 10%/năm, phải gửi cả nghìn tỷ",0.9979928285703682,8,0.0001433695130111,0.997849459057357,Kinh doanh
+1,4,VNE_318668071fdf,train,"Người Việt chi hơn 1.500 tỷ đồng mua iPhone 18 Pro Max, 18 Pro ngày đầu",0.9979797926892662,0,0.0001443007286473,0.9978354919606188,Khoa học công nghệ
+1,5,VNN_9a8d6e92f287,train,Lãi suất cho vay bình quân tăng mạnh: Có ngân hàng lên hơn 11%/năm,0.9979621498357778,0,0.0001455610033956,0.997816588832382,Kinh doanh
+1,6,VNN_45890ebc32cb,train,"iPhone 17 Pro Max giảm hơn 3 triệu đồng, iPhone Air mất giá mạnh",0.9977935345308244,8,0.0001576054185935,0.9976359291122308,Kinh doanh
+1,7,TTR_c93fde4c83a2,train,Cổ phiếu nào được nhiều quỹ đầu tư nắm giữ nhất trong 27 mã Việt Nam thuộc FTSE All-Cap?,0.997600681390164,12,0.0001713800768178,0.9974293013133462,Kinh doanh
+1,8,VNN_d711be36a917,train,"Lãi suất ngân hàng hôm nay 25/9/2026: Nhận lãi ngay đầu kỳ, có thể mở thêm sổ",0.9974706352547258,3,0.0001806691440242,0.9972899661107016,Kinh doanh
+1,9,TTR_ba6211ec0124,val,Hai quỹ Dragon Capital mua lại gần 750.000 cổ phiếu PNJ chỉ một tháng sau khi bán hết,0.9972548963436634,8,0.0001960801150071,0.9970588162286562,Kinh doanh
+1,10,VNE_204504e1bcf6,train,iPhone lần đầu có giá trăm triệu đồng tại Việt Nam,0.9972139238024544,12,0.0001990055915511,0.9970149182109036,Khoa học công nghệ
+2,1,TTR_4ddc2c7d8971,val,6 loại thực phẩm nên hạn chế kết hợp,0.9985574418085612,10,0.0001030399611553,0.998454401847406,Sức khỏe
+2,2,VNE_465ea809b97e,train,Mẹo ăn sáng hỗ trợ ổn định đường huyết,0.9983122317294764,12,0.0001205553987354,0.9981916763307408,Sức khỏe
+2,3,TTR_1b197b9b775f,train,Các loại thịt cá thường dùng mang lại dinh dưỡng như thế nào?,0.9982999360593384,1,0.0001214332548362,0.9981785028045024,Sức khỏe
+2,4,TTR_eb53ba31bea5,train,Những điều cần lưu ý để bảo vệ sức khỏe của thận,0.998277978948552,12,0.0001230016654565,0.9981549772830954,Sức khỏe
+2,5,VNE_31153ad3f5ef,train,Điều gì xảy ra với đường huyết khi bạn ăn chuối?,0.998184172699602,12,0.0001297022469218,0.99805447045268,Sức khỏe
+2,6,VNE_c14aa994c934,train,Sai lầm trong ăn uống khiến huyết áp tăng,0.9979971363938516,12,0.0001430619997893,0.9978540743940624,Sức khỏe
+2,7,TTR_efa2bdc7b39c,train,"Ăn uống giúp giảm mùi cơ thể, có thể không?",0.99792592167051,7,0.0001481488644615,0.9977777728060484,Sức khỏe
+2,8,TTR_46194f6ecb6f,train,Thực phẩm nào chứa nhiều muối nhưng lại không có vị mặn?,0.9979026162257923,14,0.0001498133513925,0.9977528028743998,Sức khỏe
+2,9,VNE_8a65ea7ea0d6,train,Ăn gì giàu omega-3 tốt cho tim?,0.9977291134896118,5,0.0001622064010801,0.9975669070885316,Sức khỏe
+2,10,TTR_1b133b09aedd,train,"Vitamin D cần thiết, nhưng làm sao để tăng cường khả năng hấp thụ?",0.997701143087923,13,0.0001642042612332,0.9975369388266898,Sức khỏe
+3,1,VNN_1babe304b210,val,Asiad 2026 ngày 28/9: Việt Nam giành 1 HCĐ,0.9992305567431076,2,5.496029915325515e-05,0.9991755964439544,Thể thao
+3,2,VNN_dab46cfdd86e,train,Asiad 2026 ngày 27/9: Chạy 4x100m nữ Việt Nam vào chung kết,0.9991974760320472,11,5.732342726249452e-05,0.9991401526047848,Thể thao
+3,3,VNN_64d78336b45a,val,Asiad 2026 hôm nay 23/9: Việt Nam giành thêm 5 HCĐ,0.9991016990892148,5,6.416440062875588e-05,0.999037534688586,Thể thao
+3,4,TTR_51d82e619670,train,Thể thao Việt Nam có huy chương vàng đầu tiên tại Asiad 20 ngày 22-9,0.9990277764832178,11,6.944456146297133e-05,0.9989583319217548,Thể thao
+3,5,TTR_98a2e8c8211d,train,Asiad 20 ngày 26-9: Việt Nam chưa có thêm huy chương,0.9990039105300154,8,7.115038465321436e-05,0.998932760145362,Thể thao
+3,6,VNN_e6a780fdd847,train,ASIAD 2026 ngày 22/9: Karate mang HCV về cho Việt Nam,0.9989909879550736,14,7.207299378433837e-05,0.9989189149612892,Thể thao
+3,7,VNN_4e4523d4f879,train,ASIAD 2026 hôm nay (25/9): Việt Nam chỉ giành 1 HCĐ,0.9988902088714228,8,7.927082081426792e-05,0.9988109380506086,Thể thao
+3,8,VNE_bab1875c8889,train,Lịch đấu ASIAD 2026 ngày 24/9: Chờ HC vàng thứ hai,0.9987214587339442,0,9.132521689517856e-05,0.9986301335170492,Thể thao
+3,9,VNE_ca9da5a76183,train,Lịch đấu ngày 25/9 của Việt Nam ở ASIAD 2026,0.9986854437859798,0,9.389698385161474e-05,0.998591546802128,Thể thao
+3,10,VNN_2d6bcdd3983e,train,Asiad ngày 21/9: Thể thao Việt Nam giành thêm 1 HCĐ,0.9984921892700668,9,0.0001077009834281,0.9983844882866384,Thể thao
+4,1,VNE_caee9f2e1b46,train,Cựu trưởng Công an Phú Quốc bị đề nghị 14-16 năm tù,0.9983796252595828,8,0.0001157412313858,0.9982638840281968,Pháp luật
+4,2,TTR_20e0e6f3bd40,train,Cựu Trưởng Công an TP Phú Quốc bị đề nghị mức án 14 - 16 năm tù về tội lừa đảo chiếm đoạt tài sản,0.998232318694387,8,0.000126263206638,0.998106055487749,Pháp luật
+4,3,VNE_5a0319b5d94c,train,Người đánh chủ nhà hàng Hàn Quốc tử vong: 'Không tỉnh táo lúc gây án',0.9981106565504652,3,0.0001349534345674,0.997975703115898,Pháp luật
+4,4,VNN_fd15fbdb95f4,train,Cựu Trưởng Công an Phú Quốc bị đề nghị 14-16 năm tù,0.998087426205524,14,0.0001366126004183,0.9979508136051056,Pháp luật
+4,5,VNE_de5e1845f951,train,Người truy sát 2 thanh niên sau cuộc hỗn chiến bị tuyên tử hình,0.9974145830335944,3,0.0001846730008401,0.9972299100327544,Pháp luật
+4,6,TTR_59ca27d55a65,train,Bắt giam nhóm 7 người chuyên trộm cắp xe máy,0.9973856159164964,5,0.0001867419652184,0.997198873951278,Pháp luật
+4,7,TTR_864b39f1d41b,train,Khởi tố nhóm người dùng còng số 8 để bắt người đòi nợ ở Vĩnh Long,0.9970649824509014,11,0.0002096449578204,0.996855337493081,Pháp luật
+4,8,TTR_5ee5aed31edf,train,Tử vong khi đi gây rối vì nghe tin chủ quán karaoke rủ vợ dự khai trương,0.9968888824632228,8,0.0002222228716283,0.9966666595915944,Pháp luật
+4,9,TTR_e7e15350aac8,train,"Bênh vực bạn gái của ‘đàn anh’, thiếu niên 15 tuổi ở Vĩnh Long bị khởi tố về hành vi giết người",0.996825388775043,3,0.0002267584326439,0.996598630342399,Pháp luật
+4,10,VNN_1ab1c362df2f,train,"Vợ bị đòi tiền, chồng rủ người mang dao đến nhà truy sát chủ nợ",0.9965686191552294,7,0.0002451002445693,0.99632351891066,Pháp luật
+5,1,VNE_358ec101e356,train,Cung đường VnExpress Marathon Quy Nhơn 2026 ôm trọn tuyến ven biển,0.997984155880616,12,0.0001439891344404,0.9978401667461756,Thể thao
+5,2,VNE_dd6c465d73a7,train,Mốc thời gian cần nhớ tại VnExpress Marathon Quy Nhơn 2026,0.9979532108861638,3,0.0001461994511895,0.9978070114349744,Thể thao
+5,3,VNE_94cbf20580da,train,VnExpress Marathon Nghệ An phát bib ở Nhà Văn hóa Lao động tỉnh,0.9299891574163835,11,0.042098003544335,0.8878911538720486,Thể thao
+5,4,VNE_56265a4263bc,train,Nhiều quà tặng cho runner tại expo VnExpress Marathon Nghệ An 2026,0.8859969982886777,11,0.0665460215392335,0.8194509767494442,Thể thao
+5,5,VNE_f94cac65393a,train,Runner xếp hàng chờ nhận Bib VnExpress Marathon Quy Nhơn mùa 7,0.8840662667242248,10,0.0649298181116523,0.8191364486125725,Thể thao
+5,6,VNE_bccb8add7f76,val,Herbalife đồng hành cùng VnExpress Marathon Grand Tour Nghệ An,0.8670144484544198,13,0.1162983128318394,0.7507161356225803,Thể thao
+5,7,VNE_f67586ebacbe,train,Giải chạy đêm Hà Nội hội ngộ runner cuối tháng 11,0.8614303899611212,3,0.075533617596497,0.7858967723646242,Thể thao
+5,8,VNE_d80b6d1db0f1,train,VnExpress Marathon Grand Tour Nghệ An đóng cổng đăng ký hôm nay,0.8515599322639,11,0.0867937502173088,0.7647661820465912,Thể thao
+5,9,VNE_15f5f6df8c2c,train,Revive tiếp năng lượng cho runner tại Grand Tour Nghệ An,0.8448677666703039,2,0.0927258848407978,0.752141881829506,Thể thao
+5,10,VNE_036eb0779d7f,train,8.000 runner phủ kín những cung đường ven biển Quy Nhơn,0.8268373391701201,10,0.0937364376199357,0.7331009015501845,Thể thao
+6,1,VNN_f4ad49ae28a1,train,"Đình Bắc lập đại công, Việt Nam thắng nhọc trận ra quân FIFA ASEAN Cup",0.999034813180945,3,6.894210557183161e-05,0.9989658710753732,Thể thao
+6,2,VNN_85a5b84664ba,train,Malaysia thắng ‘3 sao’ trận mở màn FIFA ASEAN Cup 2026,0.998844882000891,3,8.25089194342862e-05,0.9987623730814568,Thể thao
+6,3,VNE_587a367c9378,train,Raphinha lại lập hat-trick cho Barca,0.9987438273430612,5,8.97275778800154e-05,0.9986540997651812,Thể thao
+6,4,VNN_4374133d52e7,val,Nhận định bóng đá Việt Nam vs Thái Lan: Nảy lửa tranh vé chung kết,0.9985018696577116,3,0.0001070094500411,0.9983948602076704,Thể thao
+6,5,VNE_4e285dbce9df,val,"Đình Bắc: 'Trong bóng đá, không thể thắng mãi được'",0.9984848453492594,7,0.0001082255402494,0.99837661980901,Thể thao
+6,6,VNE_f56deb0baedf,train,Raphinha lập hat-trick trong chiến thắng 7-2 của Barca,0.9984623807570496,8,0.0001098300092968,0.9983525507477528,Thể thao
+6,7,VNE_8d83854f039d,train,Yamal lập cú đúp giúp Barca đại thắng Valencia,0.9983963308706204,10,0.0001145479123128,0.9982817829583076,Thể thao
+6,8,TTR_f7bffed7ce14,train,Ai thay Xuân Son ở FIFA ASEAN Cup 2026?,0.998382434274418,7,0.0001155405963149,0.998266893678103,Thể thao
+6,9,VNE_dedbeb559730,train,PSG phô diễn sức mạnh ở Champions League,0.998290595275412,1,0.0001221004210676,0.9981684948543444,Thể thao
+6,10,TTR_85cbe661ba07,train,"Cựu tuyển thủ Tuấn Phong: Tuyển Việt Nam có trận đấu khó khăn, may mà tân binh thể hiện tốt",0.9982188254735048,3,0.0001272268696844,0.9980915986038204,Thể thao
+7,1,VNE_d74d542c81d2,val,Đặt ba stent khơi thông động mạch tắc hẹp,0.9985552078442632,10,0.0001031996723099,0.9984520081719532,Sức khỏe
+7,2,VNE_6c4b508a3939,train,5 biến chứng viêm phổi thường gặp,0.998469942983993,2,0.0001092900944507,0.9983606528895422,Sức khỏe
+7,3,VNE_7e633c5f8c11,train,Những bệnh hô hấp dễ mắc sau tuổi 50,0.998418075880656,13,0.0001129949662716,0.9983050809143842,Sức khỏe
+7,4,TTR_b6018547c4c6,train,"Sau 2 lần đặt túi ngực, người phụ nữ nhiễm vi khuẩn hiếm gặp",0.9980795564616451,10,0.0001371747195764,0.9979423817420688,Sức khỏe
+7,5,TTR_a3c5d2ec6524,train,"Nằm liệt giường, cụ bà 76 tuổi vẫn bị chó nhà tấn công phải nhập viện",0.99807162039268,12,0.000137741589052,0.997933878803628,Sức khỏe
+7,6,VNE_8dc3ae091af7,train,Bất ngờ phát hiện u nhầy ruột thừa sắp vỡ,0.9980595938244032,3,0.0001386005380561,0.9979209932863472,Sức khỏe
+7,7,TTR_e479c234fd16,train,"Mệt mỏi, rụng tóc, người phụ nữ 34 tuổi bất ngờ phát hiện ung thư tuyến giáp",0.9980350826138472,8,0.0001403513339729,0.9978947312798744,Sức khỏe
+7,8,TTR_d300a434f35f,train,"Yếu dần tay chân, nuốt khó, dấu hiệu bệnh thần kinh nguy hiểm bị nhầm với thoát vị đĩa đệm",0.9980099464232062,5,0.0001421468875282,0.997867799535678,Sức khỏe
+7,9,VNE_f9dd7bf8ba21,train,U mắt kèm ung thư tuyến tụy,0.9980056942077928,2,0.0001424505832579,0.9978632436245348,Sức khỏe
+7,10,VNE_68d12c36edad,train,"Cổ tử cung ngắn, làm gì để phòng sinh non?",0.9979928266862356,8,0.0001433696994397,0.9978494569867958,Sức khỏe
+8,1,TTR_c658c8c78858,train,Giá vàng tuần này sẽ lặp lại kịch bản tuần trước?,0.998169930953082,12,0.0001307194404837,0.9980392115125982,Kinh doanh
+8,2,TTR_6157b00b385e,train,Giá vàng chịu sức ép khi nhiều ngân hàng trung ương lớn bước vào chu kỳ thắt chặt,0.997504452063819,12,0.0001782535852301,0.9973261984785888,Kinh doanh
+8,3,TTR_543493db8420,train,"Bớt lo Fed tăng lãi suất, giá vàng hồi phục mạnh",0.9970085441844428,1,0.0002136759133168,0.996794868271126,Kinh doanh
+8,4,VNN_0fd3bda837f9,train,Giá vàng hôm nay 5/9/2026: Kết tuần vàng SJC và nhẫn trơn diễn biến trái chiều,0.9965272314389304,1,0.0027071605392666,0.9938200708996638,Kinh doanh
+8,5,TTR_292880869f97,train,Giá vàng thế giới giảm mạnh trước thềm cuộc họp của Fed,0.9938501204471828,1,0.004332965403683,0.9895171550434998,Kinh doanh
+8,6,VNN_d65863c8cdbd,train,"Giá vàng hôm nay 7/9/2026: Tuột dốc, vàng trong nước giảm hơn 1 triệu đồng/lượng",0.9909991526482264,1,0.0082472231942504,0.982751929453976,Kinh doanh
+8,7,VNN_cebf3a9abc36,train,"Giá vàng hôm nay 16/9/2026: SJC tăng 1,2 triệu đồng, thế giới vượt 4.330 USD",0.9888595423604012,1,0.0104059930916595,0.9784535492687416,Kinh doanh
+8,8,TTR_d0f749fe6c6d,train,Vì sao giá vàng thế giới vẫn đi lên dù Fed có thể sắp tăng lãi suất?,0.9870949156427696,1,0.0108942527860237,0.976200662856746,Kinh doanh
+8,9,VNN_c498e5198ba5,train,Giá vàng hôm nay 1/9/2026: Vàng nhẫn BTMC giảm 700 nghìn/lượng,0.9863693546055692,1,0.0127086578919684,0.9736606967136008,Kinh doanh
+8,10,VNN_9d2893ad2679,train,"Giá vàng hôm nay 14/9/2026: Liên tục biến động, SJC lại giảm sâu",0.9862555325208316,1,0.0130838971108561,0.9731716354099754,Kinh doanh
+9,1,TTR_d87109d69c2d,train,"Trường nội trú hơn 123 tỉ đồng đã sạch đẹp, HS vùng biên xứ Thanh háo hức chờ khai giảng",0.9969598178504442,1,0.0002171567582392,0.9967426610922048,Giáo dục
+9,2,VNE_8c1efc902271,val,Hà Tĩnh công bố 235 trường học sau sáp nhập,0.9939393804526274,1,0.0004329019693784,0.9935064784832488,Giáo dục
+9,3,TTR_c123bed55d37,val,Lãnh đạo tỉnh Nghệ An chỉ đạo giải quyết vụ 127 học sinh chưa tới trường,0.9898373717529042,5,0.0090237733654839,0.9808135983874202,Giáo dục
+9,4,TTR_f79340f76a1d,train,"Cận cảnh lớp học phải căng bạt, giám đốc sở 'giật mình' khi đi kiểm tra",0.9877758641151378,0,0.0100188732226668,0.9777569908924708,Giáo dục
+9,5,VNN_b611a8641392,val,Bộ GD-ĐT điều chỉnh chương trình khai giảng toàn quốc năm học 2026-2027,0.9720233974783812,13,0.0204906034645132,0.9515327940138678,Giáo dục
+9,6,VNN_cf1643fcfc8b,train,"Vùng cao năm học mới: Sửa trường sau lũ, bổ sung giáo viên, đón học sinh",0.9691726040922434,13,0.0290180657336051,0.9401545383586382,Giáo dục
+9,7,VNN_9d10fe5ed807,train,"Cận cảnh phòng học căng bạt, xà gồ mối mọt khiến Giám đốc Sở GD-ĐT ‘giật mình’",0.9690875038169832,5,0.0179400366426894,0.9511474671742938,Giáo dục
+9,8,TTR_bdc82fae3505,train,Vụ phụ huynh chưa đồng thuận giải thể điểm trường: Mới 27 học sinh đi học,0.949660588539674,5,0.0489788648208308,0.9006817237188433,Giáo dục
+9,9,TTR_0ab1d397fcf7,train,"Hiệu trưởng trường hơn 10.500 học sinh, 287 lớp: Hạn chế hội họp, quản trị bằng chuyển đổi số",0.9494938043191614,12,0.0432710404837977,0.9062227638353636,Giáo dục
+9,10,TTR_d271fa88e0e9,train,Trường mầm non Nha Trang gộp từ 13 trường và Trường THCS Nha Trang tới... 9.000 học sinh,0.949349381015524,12,0.0380590152909274,0.9112903657245968,Giáo dục
+10,1,VNE_783e52453541,train,Brooklyn Beckham chỉnh váy cho vợ trên thảm đỏ,0.9972789050214804,12,0.0001943641792278,0.9970845408422528,Giải trí
+10,2,VNN_c6f224ddfab7,train,Mỹ nhân phim nóng '50 sắc thái' mặc váy ren xuyên thấu khoe dáng đẹp,0.997119335186292,5,0.0002057627846011,0.9969135724016908,Giải trí
+10,3,VNN_ae2a561e4a87,train,Con dâu diễn viên nhà tỷ phú của Beckham hôn chồng đắm đuối trên thảm đỏ,0.9962059538106878,11,0.0002710035736978,0.99593495023699,Giải trí
+10,4,TTR_65c5a30b866a,train,'Sao đẹp nhất thế giới' chuộng phong cách khoe chân dài,0.9910235621127284,12,0.0073161541152174,0.9837074079975108,Giải trí
+10,5,VNE_cbfb5a6bda71,train,Vợ chồng Brooklyn Beckham thu hút trên thảm đỏ Venice,0.9866820118843656,2,0.0115161821337177,0.9751658297506478,Giải trí
+10,6,TTR_afe819c723e6,train,10 lần Hoàng tử George mặc giống hệt cha,0.985780367495245,3,0.0098645110867518,0.9759158564084932,Giải trí
+10,7,TTR_27212a90a2cf,train,Phong cách của bạn gái 'tổng tài' Tỉnh Bách Nhiên,0.9845066691847634,4,0.0140391881313302,0.9704674810534332,Giải trí
+10,8,VNE_315a87b8872f,val,Vợ chồng George Clooney bên dàn sao mở màn LHP Venice,0.9824357230185206,0,0.0137463520495102,0.9686893709690104,Giải trí
+10,9,VNE_6c4c2d3f8dbf,val,10 quý ông Hollywood 'càng già càng mặc đẹp',0.9814138758455287,8,0.0175161623365366,0.963897713508992,Giải trí
+10,10,VNE_c1a1aab13cbb,train,Phong cách thanh lịch của bà Bành Lệ Viên,0.9748228313769396,13,0.0229719034593313,0.9518509279176082,Giải trí
+11,1,TTR_92a12e7147e2,train,Kép trẻ Trọng Nhân làm MV Dấu nghệ tri ân tổ nghiệp,0.997246799585118,10,0.0001966574697259,0.997050142115392,Giải trí
+11,2,TTR_d4d3a8b63354,train,"Tạ Minh Tâm, Đan Trường, Isaac, Trang Pháp hát mừng Quốc khánh 2-9",0.9774281204596212,9,0.0130683512886722,0.9643597691709488,Giải trí
+11,3,VNN_93ccd31f35f5,val,Hòa nhạc Quốc gia Điều còn mãi 2026,0.9671583010465212,10,0.028614048091279,0.9385442529552422,Giải trí
+11,4,TTR_db4ba3b3db6b,train,Nhạc sĩ Nguyễn Văn Chung: Bây giờ tôi cũng không dám nghe bài hát Nhật ký của mẹ,0.9443917720005812,10,0.0446323804845986,0.8997593915159826,Giải trí
+11,5,VNE_c3252c65c9cc,train,Ký ức tuổi thơ trong 'Em mơ gặp Bác Hồ',0.9441430479790732,10,0.0269159234110967,0.9172271245679764,Giải trí
+11,6,VNN_37ecabcce68c,train,NSND Lê Khanh: 'Âm nhạc của Phú Quang có một ma lực kỳ lạ',0.9378880626233616,10,0.0606430074585961,0.8772450551647654,Giải trí
+11,7,TTR_37decbfd6d49,train,'Trễ giờ cơm' của đội Quang Hùng MasterD khiến khán giả nhớ bữa cơm nhà,0.9182624871502288,5,0.0348702734879514,0.8833922136622773,Giải trí
+11,8,VNN_215cda0e77d0,train,Ca sĩ Quang Lê bay gấp về Việt Nam viếng nhạc sĩ Sông Trà,0.9023321086878476,5,0.0378710796205731,0.8644610290672743,Giải trí
+11,9,TTR_f563c12b424a,train,Ca sĩ Đông Hùng mong những hình ảnh trong quá khứ được quên đi,0.8859952743797417,10,0.0609585909525799,0.8250366834271617,Giải trí
+11,10,TTR_6bc455ed8ecf,train,Võ Minh Lâm đến Đình Sơn Trà làm MV mừng Trung thu,0.8752068532930662,10,0.0686109960622733,0.8065958572307929,Giải trí
+12,1,VNN_d4bf21d5a738,train,Sai lầm phổ biến khi 'tâm sự' với ChatGPT,0.9822642920553732,13,0.0162336829874976,0.9660306090678756,Khoa học công nghệ
+12,2,VNE_2dd93c097ca2,train,"Gemini tấn công mạng, đoán mật khẩu người dùng",0.9706606868823277,13,0.0269048512747746,0.9437558356075528,Khoa học công nghệ
+12,3,TTR_d78c65d3165b,val,OpenAI phát hiện AI agent tự ý đưa 53 ảnh người dùng ChatGPT lên mạng,0.9552202218653536,14,0.0424118318743423,0.9128083899910112,Khoa học công nghệ
+12,4,VNE_6b896dfe20d4,train,Tác nhân OpenAI đăng ảnh người dùng ChatGPT lên mạng,0.9494479065824428,13,0.0486598042476509,0.900788102334792,Khoa học công nghệ
+12,5,VNN_a0d5125429a0,train,AI từ trợ lý đến ‘người gác cổng’: Ranh giới của sự hỗ trợ,0.9310259825690016,13,0.0589998679064699,0.8720261146625317,Giáo dục
+12,6,VNE_7e2bfdad5282,train,Nhân viên Google từ chức vì lo AI 'phát triển quá nhanh',0.9296201204390406,10,0.039051559737354,0.8905685607016866,Khoa học công nghệ
+12,7,VNE_4a1b24af2f45,train,Mô hình của OpenAI dạy phiên bản sau 'nói dối',0.929067172602998,13,0.0441165823839629,0.8849505902190349,Khoa học công nghệ
+12,8,TTR_b9a83aa80263,val,"Google nói về việc Gemini đã tấn công mạng, đoán mật khẩu người dùng",0.9145434530722604,13,0.0818303183439019,0.8327131347283585,Khoa học công nghệ
+12,9,TTR_d28efbe2e1da,train,Úc phát hiện tác nhân AI của OpenAI xâm nhập trang web chính phủ,0.91447545048114,14,0.0827378338690811,0.8317376166120587,Khoa học công nghệ
+12,10,VNN_03f4d1467b24,train,Những ai đang cảnh báo AI có thể khiến loài người 'tuyệt chủng' ?,0.9108938838903692,13,0.0872891994038269,0.8236046844865423,Khoa học công nghệ
+13,1,VNN_cbd1b2a820a1,train,Từ chuỗi giá trị dầu khí đến hệ sinh thái công nghiệp - năng lượng,0.921485896142614,8,0.0701668605765161,0.8513190355660978,Kinh doanh
+13,2,TTR_46c252ad5514,train,"AgriS triển khai OneHR cùng EY, xây nền nhân lực cho chiến lược toàn cầu",0.9211367841085432,11,0.0642152556705852,0.8569215284379581,Kinh doanh
+13,3,VNE_2ad4c4281433,train,Sắp diễn ra hội nghị đầu tư Techcombank tại Hà Nội,0.9058232608688014,11,0.057389359133894,0.8484339017349074,Kinh doanh
+13,4,VNN_d9ae9fd9f24f,train,Hội nghị ESG Symposium: Hợp tác ASEAN mở đường cho chuyển đổi xanh toàn diện,0.8998335338984115,5,0.0780459362413748,0.8217875976570366,Kinh doanh
+13,5,VNE_a3c9dc76fa12,train,"Việt Nam có thêm trung tâm nghiên cứu, phát triển công nghệ không gian",0.8937120310134165,11,0.0775081401297816,0.8162038908836348,Khoa học công nghệ
+13,6,TTR_8e27082f868f,train,"Thu hút vốn Mỹ và Canada: Chìa khóa từ công nghệ chiến lược, năng lượng sạch",0.8864553396172676,14,0.0585005017736129,0.8279548378436548,Kinh doanh
+13,7,VNN_d6a7256ebf3e,train,BEST Express hướng tới phát triển bền vững tại Việt Nam,0.8710543501754032,5,0.1078073856154724,0.7632469645599308,Kinh doanh
+13,8,VNE_0b0cddcb2a97,train,Tập đoàn Canada muốn hợp tác với Việt Nam trong lĩnh vực điện hạt nhân,0.8685008833018925,14,0.078343140095322,0.7901577432065704,Kinh doanh
+13,9,VNN_f3196b1ad69d,train,"Su-57 'lột xác' với siêu thuật toán tác chiến, tích hợp loạt vũ khí mới sau kinh nghiệm Ukraine",0.8604900388714576,12,0.0721450254204991,0.7883450134509584,Khoa học công nghệ
+13,10,VNE_84c8009232a5,val,Amazon được cấp phép mạng viễn thông dùng riêng cho vệ tinh tại Việt Nam,0.859246408578619,14,0.0917986224997268,0.7674477860788921,Khoa học công nghệ
+14,1,VNN_0fbfc699d785,val,Công bố kết luận thanh tra Ngân hàng Nhà nước chi nhánh Khu vực 8,0.9967019926556728,12,0.0002355725009728,0.9964664201547,Kinh doanh
+14,2,TTR_1e5fee700c03,train,Thu hồi đất của Công ty Thúy Sơn - HG đem cho thuê,0.9957957877852022,5,0.0003003010777206,0.9954954867074816,Kinh doanh
+14,3,TTR_f3aa80ec7f88,train,UBND TP.HCM cho bổ sung 2.141m² tại dự án khu nhà ở phường Tân Phú theo kết luận thanh tra,0.9931460104068224,12,0.0048662181373623,0.98827979226946,Kinh doanh
+14,4,VNN_3f0757cddcb9,train,"Gia Lai cập nhật 15 thủ tục xuất nhập khẩu, mở rộng làm trực tuyến toàn trình",0.9834228540283706,12,0.014337692218704,0.9690851618096666,Kinh doanh
+14,5,VNN_f594f97924a7,train,Hà Nội ban hành quy định mới về công tác cán bộ tại doanh nghiệp có vốn nhà nước,0.9792176963685348,12,0.0181952335114853,0.9610224628570494,Kinh doanh
+14,6,TTR_473bfd0f8584,train,"Những trường hợp nào được Khánh Hòa miễn, giảm tiền thuê nhà để làm trụ sở, kho, cửa hàng?",0.9677990192704224,9,0.0291385473583146,0.9386604719121076,Kinh doanh
+14,7,TTR_8ed142f336d7,train,"Hơn 130 dự án khó khăn, vướng mắc kéo dài ở Khánh Hòa được gỡ vướng ra sao?",0.9658305468938672,12,0.0241882114367752,0.941642335457092,Kinh doanh
+14,8,TTR_7237d37787b7,train,Cấp xã được quyết định giá bán nhà tái định cư tại TP.HCM,0.9657596532905932,8,0.0310540656689719,0.9347055876216211,Kinh doanh
+14,9,TTR_c9ad28050abb,train,"TP.HCM vận dụng Luật Phát triển đô thị, đẩy nhanh 9 dự án chiến lược theo hợp đồng BT",0.959463192527946,13,0.0355360999919699,0.9239270925359762,Kinh doanh
+14,10,TTR_65d90271c7e3,train,"Chính phủ bãi bỏ toàn bộ 18 nghị định, bỏ nhiều điều khoản trong 6 nghị định",0.9551222622277726,4,0.0364595535357646,0.918662708692008,Pháp luật
