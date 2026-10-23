@@ -1,0 +1,21 @@
+{
+  "dataset_manifest": "data/ood/oct2026/manifest.json",
+  "dataset_p0_sha256": "13bd0e5aee6f8346841adaa19572fe388a016e35cc01fdcb8e776d739b80bea7",
+  "embedding_run": "minilm_title_content",
+  "experiment": "eom_15_5",
+  "embedding_config": "artifacts/configs/embeddings.yaml",
+  "umap_model": "artifacts/hdbscan/validation/minilm_title_content_umap.joblib",
+  "umap_sha256": "325ebeea1d5e8b8ef45360f90383bd02c6609ca4c8b44bbd20ab09d882f8b30e",
+  "hdbscan_model": "artifacts/hdbscan/validation/minilm_title_content_eom_15_5_hdbscan.joblib",
+  "hdbscan_sha256": "6c9b54faa55950d1156b99b23baec67c37a18658b0b9cea654460d4041c5fe71",
+  "prediction_method": "predict_hdbscan_validation",
+  "fit_on_ood": false,
+  "ari_nmi_include_noise_label": true,
+  "output_sha256": {
+    "ood_assignments.csv": "2331a03cdfcdcdc24a9a44a7dd6381897f27b8588ede0953ebf5a0b286e6f103",
+    "ood_metrics.csv": "19e99a5349de92f52a240c6d5ada9f188d8657769a48b6061a9a1f7fc5408657",
+    "ood_by_source.csv": "7a60bf5724a776401422544f8033ce78a4a1890a87334031ccc25fb35627f371",
+    "ood_by_category.csv": "4e4da431098c3d1fb35a4e343790943558c4cf72c3c4bbb716ac01dccacc57a9",
+    "ood_review_candidates.csv": "dac2e314a6230e4726cf6aa86491837a057a5f13d3dc4428e34e929b2bc033f9"
+  }
+}

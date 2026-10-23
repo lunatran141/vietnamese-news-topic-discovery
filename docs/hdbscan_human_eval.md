@@ -38,7 +38,11 @@ Năm tiêu chí cấp cụm được chấm bằng số nguyên từ 1 đến 5:
 
 Ở cấp bài, `document_relevance_1_5` đo mức phù hợp của từng bài với nhãn chủ đề được đề xuất.
 
-**Nguồn phiếu:** R1 là phiếu do thành viên nhóm đọc và chấm. R2 là bản chấm của thành viên trong nhóm.
+**Người đánh giá:** 
+Hai thành viên trong nhóm đã đọc và chấm độc lập cùng bộ mẫu gồm 5 topic và 25 bài,
+sau đó mới đối chiếu kết quả. Người tạo hoặc chọn cấu hình mô hình
+không phải người chấm duy nhất. Các phiếu gốc của từng người được lưu
+riêng, không thay thế bằng điểm trung bình.
 
 ## 4. Kết quả điểm số
 
@@ -62,6 +66,21 @@ Hai bộ phiếu cho cùng điểm ở **22/25 bài**. Ba bài lệch 1 điểm 
 - **HS023 — `TTR_02e6c53cad15`:** R1 chấm 2, R2 chấm 3. Đây là tin về lễ kỷ niệm bệnh viện và thành tựu y khoa; bài thuộc lĩnh vực y tế nhưng khác thể loại với bài tư vấn hoặc điều trị bệnh.
 
 `disagreements.csv` không có dòng dữ liệu vì script chỉ đưa vào file này các lượt chấm lệch **từ 2 điểm trở lên**. Kết quả này không có lượt nào đạt ngưỡng đó. Vẫn có các lượt lệch 1 điểm: **10 lượt ở tiêu chí cấp cụm và 3 lượt ở cấp bài**.
+
+### Đánh giá topic trùng với topic khác
+
+R1 và R2 kiểm tra riêng 5 topic được lấy mẫu bằng hai phiếu
+`topic_overlap_R1.csv` và `topic_overlap_R2.csv`. Trường
+`overlaps_other_topic` ghi `yes` khi xác định topic trùng trọng tâm
+với một topic khác, `no` khi không xác định được sự trùng đó.
+`overlap_topic_ids` chỉ ghi ID topic thực sự trùng khi kết luận là
+`yes`; với `no`, trường này để trống.
+
+5 trên 5 topic có cùng kết luận
+giữa R1 và R2. 0 topic được xác định là trùng. Đây chỉ là
+kết quả trên 5 topic HDBSCAN được lấy mẫu, không chứng minh rằng
+toàn bộ 101 topic đều không trùng nhau. Bảng đối chiếu từng topic
+được lưu ở `results/hdbscan/human_eval/summary/overlap_agreement.csv`.
 
 ## 5. Phân tích các cụm và ca lỗi
 

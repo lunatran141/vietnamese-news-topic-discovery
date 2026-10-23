@@ -1,0 +1,2 @@
+﻿embedding_run,experiment,split,n_articles,n_noise,noise_percent,coverage_percent,n_clusters_assigned,ari,nmi
+minilm_title_content,eom_15_5,ood_oct2026,5136,1931,37.6,62.4,100,0.1895,0.4135
