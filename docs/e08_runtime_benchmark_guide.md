@@ -38,32 +38,3 @@
 | `python_version` | text | Phiên bản Python thực thi (ví dụ: Python 3.13.7) |
 | `n_repeats` | int | Số lần chạy lặp lại để lấy trung bình (ví dụ: 1 hoặc 3) |
 | `scope_notes` | text | Ghi chú ngắn gọn về các bước nằm trong phép đo |
-
----
-
-## 3. Mẫu tin nhắn TV1 gửi 4 thành viên trong nhóm
-
-Bạn có thể copy đoạn tin nhắn dưới đây để gửi vào kênh chat của nhóm:
-
-```markdown
-Chào các bạn (TV2, TV3, TV4, TV5),
-
-Để hoàn thiện Task E08 (Runtime & Resource Benchmark) cho bài báo cáo NCKH chung của nhóm theo đúng quy chuẩn Mục 7 trong docs/evaluation_protocol.md, mình (TV1) đã tạo biểu mẫu thu thập tại file:
-👉 results/runtime_benchmark/e08_runtime_template.csv
-
-Nhờ các bạn cung cấp số liệu thực tế của mô hình mình phụ trách:
-- TV1: KMeans (đã đo xong)
-- TV2: NMF
-- TV3: LDA
-- TV4: HDBSCAN
-- TV5: BERTopic
-
-Quy định khi điền số liệu:
-1. Ghi rõ thời gian từng bước (representation, fit, predict test, evaluation). Không so fit_seconds của mô hình này với total_pipeline của mô hình khác.
-2. Thời gian tải model lần đầu (setup_seconds) ghi riêng, không gộp vào total_pipeline.
-3. Nếu chưa đo được RAM hoặc Model size thì ghi N/A (tuyệt đối không điền số 0).
-4. Ghi kèm thông số cấu hình máy (CPU, RAM, GPU nếu có) và số lần chạy (n_repeats).
-
-Các bạn có thể mở file CSV trên hoặc gửi trực tiếp số liệu vào đây để mình tổng hợp vào bảng chung cho Paper nhé. Cảm ơn các bạn!
-```
-
