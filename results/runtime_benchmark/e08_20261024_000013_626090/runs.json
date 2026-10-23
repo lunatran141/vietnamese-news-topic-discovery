@@ -1,0 +1,326 @@
+{
+  "environment": {
+    "platform": "Windows-10-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 170 Stepping 4, GenuineIntel",
+    "ram_gb": 63.45771789550781,
+    "gpu": "NVIDIA GeForce RTX 4070 Laptop GPU",
+    "python": "3.11.9",
+    "torch": "2.10.0+cu128",
+    "cuda": "12.8",
+    "device": "cuda"
+  },
+  "runs": [
+    {
+      "representation_seconds": 22.4333129000006,
+      "fit_seconds": 8.365294399998675,
+      "predict_seconds": 0.00641650000034133,
+      "evaluation_seconds": 0.051933399998233654,
+      "test_metrics": {
+        "ari": 0.4756865264332114,
+        "nmi": 0.6268291648541686,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "kmeans",
+      "preprocessing_variant": "p2_segmented",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1514.703125,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 30.85695719999785,
+      "repeat": 1
+    },
+    {
+      "representation_seconds": 21.56226179999794,
+      "fit_seconds": 8.131733299996995,
+      "predict_seconds": 0.007861300000513438,
+      "evaluation_seconds": 0.009866000000329223,
+      "test_metrics": {
+        "ari": 0.4756865264332114,
+        "nmi": 0.6268291648541686,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "kmeans",
+      "preprocessing_variant": "p2_segmented",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1524.10546875,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 29.71172239999578,
+      "repeat": 2
+    },
+    {
+      "representation_seconds": 22.442891400009103,
+      "fit_seconds": 8.715339199996379,
+      "predict_seconds": 0.00691720000031637,
+      "evaluation_seconds": 0.007820099999662489,
+      "test_metrics": {
+        "ari": 0.4756865264332114,
+        "nmi": 0.6268291648541686,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "kmeans",
+      "preprocessing_variant": "p2_segmented",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1602.44140625,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 31.17296790000546,
+      "repeat": 3
+    },
+    {
+      "representation_seconds": 17.411039299993718,
+      "fit_seconds": 3.951155499999004,
+      "predict_seconds": 0.05711840000003576,
+      "evaluation_seconds": 0.012751700000080746,
+      "test_metrics": {
+        "ari": 0.5421672295649073,
+        "nmi": 0.6604135298100112,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "nmf",
+      "preprocessing_variant": "p3_no_stopwords",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1588.90625,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 21.432064899992838,
+      "repeat": 1
+    },
+    {
+      "representation_seconds": 16.487202199998137,
+      "fit_seconds": 3.5014281000039773,
+      "predict_seconds": 0.048632500001986045,
+      "evaluation_seconds": 0.011893199996848125,
+      "test_metrics": {
+        "ari": 0.5421672295649073,
+        "nmi": 0.6604135298100112,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "nmf",
+      "preprocessing_variant": "p3_no_stopwords",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1615.05078125,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 20.04915600000095,
+      "repeat": 2
+    },
+    {
+      "representation_seconds": 16.729734599997755,
+      "fit_seconds": 3.9244398000009824,
+      "predict_seconds": 0.07565519999479875,
+      "evaluation_seconds": 0.01974540000082925,
+      "test_metrics": {
+        "ari": 0.5421672295649073,
+        "nmi": 0.6604135298100112,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "nmf",
+      "preprocessing_variant": "p3_no_stopwords",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1632.3671875,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 20.749574999994365,
+      "repeat": 3
+    },
+    {
+      "representation_seconds": 5.427828699997917,
+      "fit_seconds": 27.727585200002068,
+      "predict_seconds": 0.25244409999868367,
+      "evaluation_seconds": 0.0173404999950435,
+      "test_metrics": {
+        "ari": 0.38756001015422503,
+        "nmi": 0.5617708277763812,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "lda",
+      "preprocessing_variant": "p2_segmented",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1354.93359375,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 33.42519849999371,
+      "repeat": 1
+    },
+    {
+      "representation_seconds": 5.098811100011517,
+      "fit_seconds": 15.039741699998558,
+      "predict_seconds": 0.2568628000008175,
+      "evaluation_seconds": 0.022922900003322866,
+      "test_metrics": {
+        "ari": 0.38756001015422503,
+        "nmi": 0.5617708277763812,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "lda",
+      "preprocessing_variant": "p2_segmented",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1527.171875,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 20.418338500014215,
+      "repeat": 2
+    },
+    {
+      "representation_seconds": 4.9687629000036395,
+      "fit_seconds": 14.637996500001464,
+      "predict_seconds": 0.24493209999491228,
+      "evaluation_seconds": 0.010576800006674603,
+      "test_metrics": {
+        "ari": 0.38756001015422503,
+        "nmi": 0.5617708277763812,
+        "outlier_rate": null
+      },
+      "representation_device": "cpu",
+      "method": "lda",
+      "preprocessing_variant": "p2_segmented",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 1539.140625,
+      "peak_gpu_allocated_mb": 0.0,
+      "runtime_seconds": 19.86226830000669,
+      "repeat": 3
+    },
+    {
+      "setup_seconds": 6.664858899996034,
+      "representation_seconds": 15.092225600004895,
+      "fit_seconds": 55.24471579999954,
+      "predict_seconds": 27.964388899999904,
+      "evaluation_seconds": 0.00917699999990873,
+      "test_metrics": {
+        "ari": 0.03270528628461323,
+        "nmi": 0.39453863670056144,
+        "outlier_rate": 0.3920863309352518
+      },
+      "representation_device": "cuda",
+      "batch_size": 16,
+      "method": "hdbscan",
+      "preprocessing_variant": "p0_minimal",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 2484.90625,
+      "peak_gpu_allocated_mb": 494.919921875,
+      "runtime_seconds": 98.31050730000425,
+      "repeat": 1
+    },
+    {
+      "setup_seconds": 5.672721599999932,
+      "representation_seconds": 14.644618999991508,
+      "fit_seconds": 14.97317369999655,
+      "predict_seconds": 3.1703191000051447,
+      "evaluation_seconds": 0.015936099996906705,
+      "test_metrics": {
+        "ari": 0.03270528628461323,
+        "nmi": 0.39453863670056144,
+        "outlier_rate": 0.3920863309352518
+      },
+      "representation_device": "cuda",
+      "batch_size": 16,
+      "method": "hdbscan",
+      "preprocessing_variant": "p0_minimal",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 3389.953125,
+      "peak_gpu_allocated_mb": 496.529296875,
+      "runtime_seconds": 32.80404789999011,
+      "repeat": 2
+    },
+    {
+      "setup_seconds": 6.487333100005344,
+      "representation_seconds": 15.521308000003046,
+      "fit_seconds": 14.032959000003757,
+      "predict_seconds": 2.864493899993249,
+      "evaluation_seconds": 0.00999720000254456,
+      "test_metrics": {
+        "ari": 0.03270528628461323,
+        "nmi": 0.39453863670056144,
+        "outlier_rate": 0.3920863309352518
+      },
+      "representation_device": "cuda",
+      "batch_size": 16,
+      "method": "hdbscan",
+      "preprocessing_variant": "p0_minimal",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 3524.625,
+      "peak_gpu_allocated_mb": 496.529296875,
+      "runtime_seconds": 32.4287581000026,
+      "repeat": 3
+    },
+    {
+      "setup_seconds": 1.1347459000025992,
+      "representation_seconds": 109.4897864999948,
+      "fit_seconds": 43.530647699997644,
+      "predict_seconds": 5.12964600000123,
+      "evaluation_seconds": 0.014931700003216974,
+      "test_metrics": {
+        "ari": 0.036736498611717135,
+        "nmi": 0.39111901654491193,
+        "outlier_rate": 0.41654676258992807
+      },
+      "representation_device": "cuda",
+      "batch_size": 32,
+      "method": "bertopic",
+      "preprocessing_variant": "p1_normalized",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 3319.98046875,
+      "peak_gpu_allocated_mb": 1265.89453125,
+      "runtime_seconds": 158.1650118999969,
+      "repeat": 1
+    },
+    {
+      "setup_seconds": 1.1135539000024437,
+      "representation_seconds": 102.27043059999414,
+      "fit_seconds": 32.199651599999925,
+      "predict_seconds": 4.9016023999938625,
+      "evaluation_seconds": 0.005710500001441687,
+      "test_metrics": {
+        "ari": 0.036736498611717135,
+        "nmi": 0.39111901654491193,
+        "outlier_rate": 0.41654676258992807
+      },
+      "representation_device": "cuda",
+      "batch_size": 32,
+      "method": "bertopic",
+      "preprocessing_variant": "p1_normalized",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 3591.7734375,
+      "peak_gpu_allocated_mb": 1781.3740234375,
+      "runtime_seconds": 139.37739509998937,
+      "repeat": 2
+    },
+    {
+      "setup_seconds": 0.8390346000014688,
+      "representation_seconds": 100.8565232999972,
+      "fit_seconds": 36.29384539999592,
+      "predict_seconds": 3.3603579999980866,
+      "evaluation_seconds": 0.009183900001517031,
+      "test_metrics": {
+        "ari": 0.036736498611717135,
+        "nmi": 0.39111901654491193,
+        "outlier_rate": 0.41654676258992807
+      },
+      "representation_device": "cuda",
+      "batch_size": 32,
+      "method": "bertopic",
+      "preprocessing_variant": "p1_normalized",
+      "train_count": 6493,
+      "test_count": 1390,
+      "peak_process_rss_mb": 3345.7890625,
+      "peak_gpu_allocated_mb": 1332.552734375,
+      "runtime_seconds": 140.51991059999273,
+      "repeat": 3
+    }
+  ]
+}

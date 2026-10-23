@@ -38,3 +38,43 @@
 | `python_version` | text | Phiên bản Python thực thi (ví dụ: Python 3.13.7) |
 | `n_repeats` | int | Số lần chạy lặp lại để lấy trung bình (ví dụ: 1 hoặc 3) |
 | `scope_notes` | text | Ghi chú ngắn gọn về các bước nằm trong phép đo |
+
+---
+
+## 3. Chạy benchmark chung cho năm mô hình
+
+Từ thư mục gốc dự án, dùng Python trong `.venv`. Script benchmark fit năm
+phương pháp trên 6.493 bài Train và suy diễn 1.390 bài Test. Mỗi lượt lặp chạy
+lại pipeline, không tái sử dụng vector của lượt trước. BERTopic E1 và HDBSCAN
+mã hóa văn bản trên CUDA; UMAP, HDBSCAN clustering và ba phương pháp từ vựng
+chạy trên CPU. Model Transformer cần có sẵn trong Hugging Face cache.
+
+Kiểm tra cấu hình và dữ liệu mà không chạy mô hình:
+
+```powershell
+.\.venv\Scripts\python.exe -m experiments.benchmark_all_models_runtime --models all --check
+```
+
+Đo ba lượt liên tiếp:
+
+```powershell
+.\.venv\Scripts\python.exe -m experiments.benchmark_all_models_runtime --models all --repeats 3 --device cuda
+```
+
+Có thể chọn từng mô hình để chẩn đoán, ví dụ `--models kmeans,nmf`. Mỗi lần
+gọi tạo thư mục mới `results/runtime_benchmark/e08_.../` với `runs.json`,
+`runs.csv` và `e08_runtime_summary.csv`; không sửa dataset hay artifact gốc.
+
+`runtime_seconds` trong đầu ra script tương ứng với `total_pipeline_seconds`
+trong biểu mẫu: tổng representation, fit, predict và evaluation. Script hiện
+chỉ tính ARI/NMI và tỷ lệ outlier ở bước evaluation, không tính coherence hay
+purity. `setup_seconds` của Transformer ghi riêng. `peak_process_rss_mb` là
+RSS đỉnh của cả tiến trình Python, lấy mẫu mỗi 50 ms, không phải RAM riêng của
+mô hình; `peak_gpu_allocated_mb` là bộ nhớ CUDA do PyTorch cấp phát ở đỉnh,
+không phải toàn bộ VRAM của máy. Chưa đo `model_size_mb` nên để N/A, không suy
+ra từ RSS. Bảng tổng hợp có trung bình từng giai đoạn và độ lệch chuẩn runtime.
+
+Kết quả này dùng giao thức Train → Test, khác một số artifact final dùng
+Train+Val → Test. Không ghi đè runtime trong common artifact hay thay số báo
+cáo cũ nếu chưa giải thích khác biệt giao thức. Giữ điều kiện cache, nguồn điện
+và ứng dụng nền ổn định khi diễn giải ba lượt chạy.
