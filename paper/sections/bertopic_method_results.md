@@ -1,290 +1,161 @@
 # Khám phá chủ đề bằng BERTopic
 
-## Phương pháp
+## 1. Phương pháp nghiên cứu
 
-### Tổng quan
+Nghiên cứu sử dụng Dataset v1.0 gồm 9.274 bài báo tiếng Việt, được chia cố
+định thành Train (6.493 bài), Validation (1.391 bài) và Test (1.390 bài). Dữ
+liệu đầu vào của BERTopic là biến thể tiền xử lý P1 (`p1_normalized`); mỗi văn
+bản được tạo bằng cách nối tiêu đề với nội dung bài báo. Việc giữ nguyên phép
+chia dữ liệu và cấu hình thực nghiệm giúp hạn chế rò rỉ dữ liệu, đồng thời bảo
+đảm khả năng tái lập kết quả.
 
-BERTopic là phương pháp mô hình hóa chủ đề dựa trên biểu diễn ngữ nghĩa, kết
-hợp bốn thành phần chính: sentence embeddings, giảm chiều UMAP, phân cụm mật
-độ HDBSCAN và biểu diễn từ khóa bằng class-based TF-IDF (c-TF-IDF). Khác với
-các mô hình xác suất như LDA, BERTopic không giả định mỗi tài liệu được sinh
-ra từ một phân phối xác suất trên các chủ đề. Thay vào đó, tài liệu được ánh xạ
-vào không gian vector ngữ nghĩa, sau đó các vùng có mật độ cao được xác định
-như những cụm chủ đề. Các tài liệu không thuộc vùng mật độ đủ ổn định có thể
-được giữ lại dưới dạng ngoại lai thay vì bị buộc vào một chủ đề không phù hợp
-[Grootendorst, 2022].
+Quy trình BERTopic gồm bốn thành phần chính. Trước tiên, Sentence-BERT chuyển
+mỗi bài báo thành một vector ngữ nghĩa. UMAP sau đó giảm số chiều của vector để
+hỗ trợ phân cụm. HDBSCAN phát hiện các vùng có mật độ cao và gán nhãn `-1` cho
+những bài không thuộc cụm đủ rõ. Cuối cùng, c-TF-IDF trích xuất các từ khóa nổi
+bật để diễn giải nội dung của từng topic (Grootendorst, 2022; McInnes et al.,
+2017; McInnes et al., 2018; Reimers & Gurevych, 2019).
 
-Pipeline được sử dụng trong nghiên cứu gồm năm bước:
+Cấu hình E1 sử dụng mô hình biểu diễn `keepitreal/vietnamese-sbert`; UMAP với
+`n_neighbors=15`, `n_components=5`, `min_dist=0`, độ đo cosine và seed 42;
+HDBSCAN với `min_cluster_size=15`, `min_samples=5`, độ đo Euclidean và phương
+pháp chọn cụm EOM. Mô hình chỉ được fit trên Train, Validation được dùng để
+chọn cấu hình và Test chỉ được mở sau khi E1 đã được chốt.
 
-\[
-\text{Văn bản}
-\rightarrow \text{Sentence Embedding}
-\rightarrow \text{UMAP}
-\rightarrow \text{HDBSCAN}
-\rightarrow \text{c-TF-IDF}.
-\]
+*Nguồn thực nghiệm:* `results/bertopic_experiments/e1_vietnamese_sbert/config_used.yaml`;
+`src/models/bertopic_pipeline.py`; `experiments/run_bertopic_experiments.py`.
 
-Cách tổ chức mô-đun này cho phép thay đổi mô hình embedding và tham số phân
-cụm mà không phải thay đổi toàn bộ pipeline. Đây là đặc điểm phù hợp với mục
-tiêu khảo sát ảnh hưởng của biểu diễn ngôn ngữ chuyên biệt tiếng Việt, cấu
-trúc lân cận của UMAP và kích thước cụm tối thiểu của HDBSCAN.
+## 2. Lựa chọn cấu hình
 
-### Dữ liệu đầu vào
+Bốn cấu hình E0–E3 được so sánh trên Validation. E0 sử dụng MiniLM đa ngôn
+ngữ; E1 thay mô hình biểu diễn bằng Vietnamese SBERT; E2 tăng UMAP
+`n_neighbors` lên 30; E3 tăng HDBSCAN `min_cluster_size` lên 30. Tỷ lệ outlier
+tương ứng là 42,27%, 35,87%, 51,91% và 39,11%.
 
-Các thí nghiệm sử dụng Dataset v1.0 sau bước chuẩn hóa P1. Mỗi bài báo được
-định danh bằng `article_id` và liên kết với một tập chia cố định. Tập train gồm
-6.493 bài được sử dụng để huấn luyện mô hình, trong khi tập validation gồm
-1.391 bài được dùng để lựa chọn cấu hình. Tập test được giữ khóa trong giai
-đoạn điều chỉnh tham số nhằm hạn chế rò rỉ dữ liệu.
+E3 giảm số topic từ 96 xuống 57 và đạt NMI = 0,4266, NPMI = -0,0494. Tuy
+nhiên, E1 có tỷ lệ outlier thấp nhất và coverage cao nhất, bằng 64,13%, nên giữ
+lại được nhiều bài báo có topic hơn. Vì mục tiêu của hệ thống là bao phủ phần
+lớn kho tin trong khi vẫn duy trì chất lượng ngữ nghĩa chấp nhận được, E1 được
+chọn làm cấu hình cuối. Kết quả này không có nghĩa E1 vượt trội ở mọi chỉ số,
+mà phản ánh sự đánh đổi giữa số topic, coverage, coherence và khả năng diễn
+giải. Cách diễn giải theo nhiều tiêu chí cũng phù hợp với nhận xét của Janssens
+et al. (2025) về sự đánh đổi khi điều chỉnh số lượng topic trong BERTopic.
 
-Đầu vào chính là chuỗi được tạo bằng cách ghép tiêu đề với nội dung bài báo đã
-chuẩn hóa. Văn bản không bị loại stopword trước khi tạo embedding nhằm bảo
-toàn ngữ cảnh câu. Danh sách stopword chỉ được áp dụng tại bước c-TF-IDF để
-giảm các từ ít thông tin trong phần mô tả chủ đề. Ngoài cấu hình đầu vào đầy
-đủ, một thí nghiệm ablation chỉ sử dụng tiêu đề đã được thực hiện để đánh giá
-vai trò của phần nội dung.
+*Nguồn thực nghiệm:* `results/bertopic_experiments/summary.csv`;
+`docs/bertopic_final_evaluation.md`.
 
-### Biểu diễn ngữ nghĩa
+## 3. Nghiên cứu loại bỏ thành phần và độ ổn định
 
-Với mỗi tài liệu \(d_i\), mô hình sentence-transformer tạo một vector ngữ
-nghĩa:
+Thử nghiệm E4 sử dụng cùng mô hình Vietnamese SBERT và cùng tham số
+UMAP–HDBSCAN như E1, nhưng chỉ dùng tiêu đề bài báo thay vì tiêu đề kết hợp nội
+dung. E4 tạo 93 topic, đạt topic diversity = 0,8602 và runtime = 139,31 giây.
+Tuy nhiên, tỷ lệ outlier trên Validation tăng lên 46,66%, trong khi ARI =
+0,0288, NMI = 0,3088 và NPMI = -0,1066. Kết quả cho thấy tiêu đề đơn lẻ chưa
+cung cấp đủ ngữ cảnh để phân biệt nhiều chủ đề tin tức có từ ngữ tương tự; vì
+vậy, đầu vào tiêu đề kết hợp nội dung của E1 được giữ lại.
 
-\[
-\mathbf{e}_i=f_{\theta}(d_i),
-\]
+Các thử nghiệm E2 và E3 cũng cho thấy số topic và tỷ lệ outlier nhạy với tham
+số của UMAP và HDBSCAN. Nghiên cứu chưa chạy lặp BERTopic với nhiều random
+seed, nên chưa thể đưa ra kết luận thống kê đầy đủ về độ ổn định. Đây là một
+giới hạn cần được bổ sung trong nghiên cứu tiếp theo.
 
-trong đó \(f_{\theta}\) là mô hình embedding đã được huấn luyện trước. Nghiên
-cứu khảo sát hai mô hình: `paraphrase-multilingual-MiniLM-L12-v2`, được sử
-dụng làm baseline đa ngôn ngữ, và `keepitreal/vietnamese-sbert`, được huấn
-luyện chuyên biệt cho tiếng Việt. Các vector được chuẩn hóa trước khi đưa vào
-bước giảm chiều.
+*Nguồn thực nghiệm:* `results/bertopic_experiments/summary.csv`;
+`results/bertopic_experiments/e4_vietnamese_sbert_title_only/metrics.json`.
 
-### Giảm chiều và phân cụm mật độ
+## 4. Kết quả đánh giá cuối
 
-Embedding ban đầu có số chiều lớn nên được chiếu xuống không gian 5 chiều bằng
-UMAP. Cấu hình cơ sở sử dụng `n_neighbors=15`, `n_components=5`,
-`min_dist=0.0`, khoảng cách cosine và seed 42. Tham số `n_neighbors` kiểm soát
-mức độ cân bằng giữa cấu trúc cục bộ và cấu trúc rộng hơn của không gian dữ
-liệu. Một cấu hình bổ sung tăng giá trị này lên 30 để khảo sát ảnh hưởng của
-vùng lân cận lớn hơn.
+Sau khi E1 được lựa chọn bằng Validation, mô hình được đánh giá một lần trên
+Test độc lập gồm 1.390 bài. Trong đó, 875 bài được gán vào topic và 515 bài
+nhận nhãn outlier, tương ứng coverage = 62,95% và tỷ lệ outlier = 37,05%. Mô
+hình tạo 96 topic trên tập Train.
 
-Sau UMAP, HDBSCAN được sử dụng để xác định các vùng có mật độ cao mà không cần
-quy định trước số lượng topic. Cấu hình cơ sở sử dụng
-`min_cluster_size=15`, `min_samples=5`, khoảng cách Euclidean và phương pháp
-chọn cụm Excess of Mass. Một thí nghiệm khác tăng `min_cluster_size` lên 30
-nhằm đánh giá tác động của việc ưu tiên các cụm lớn hơn. Những tài liệu không
-thuộc cụm ổn định được gán nhãn \(-1\). Trong nghiên cứu này, các tài liệu đó
-được xem là ứng viên ngoại lai; chúng có thể là nhiễu, bài hiếm, bài đa chủ đề
-hoặc nội dung mới chưa hình thành cụm rõ ràng.
+So với chuyên mục tham chiếu, mô hình đạt ARI = 0,0559 và NMI = 0,4072. Hai
+chỉ số này đo mức tương ứng giữa cấu trúc cụm và chuyên mục có sẵn, không phải
+độ chính xác tuyệt đối của tên topic. NPMI trên Test bằng -0,0767, cho thấy một
+số nhóm từ khóa chưa thường xuyên đồng xuất hiện trong cùng ngữ cảnh; do đó,
+khả năng bao phủ tương đối tốt chưa đồng nghĩa mọi topic đều mạch lạc về ngữ
+nghĩa (Röder et al., 2015).
 
-### Biểu diễn từ khóa bằng c-TF-IDF
+Tổng runtime được ghi nhận là 1.191,65 giây, gồm tải mô hình 24,56 giây, tạo
+biểu diễn 1.084,73 giây, fit 57,50 giây, dự đoán Validation 23,48 giây và dự
+đoán Test 1,38 giây. Thời gian đánh giá 21,54 giây được ghi riêng. Kết quả cho
+thấy bước tạo embedding chiếm phần lớn chi phí tính toán của pipeline; tổng
+runtime không nên được diễn giải là riêng thời gian huấn luyện BERTopic.
 
-Sau khi phân cụm, toàn bộ tài liệu thuộc cùng một topic được ghép thành một
-siêu tài liệu. Trọng số c-TF-IDF của từ \(t\) trong topic \(c\) được mô tả
-khái quát như sau:
+*Nguồn thực nghiệm:* `results/bertopic_experiments/e1_vietnamese_sbert/metrics.json`;
+`results/bertopic_experiments/e1_vietnamese_sbert/test_assignments.csv`.
 
-\[
-w_{t,c}=tf_{t,c}\log\left(1+\frac{\bar{A}}{tf_t}\right),
-\]
+## 5. Khả năng diễn giải topic
 
-trong đó \(tf_{t,c}\) là tần suất của từ \(t\) trong siêu tài liệu của topic
-\(c\), \(tf_t\) là tần suất của từ đó trên toàn bộ các topic và \(\bar{A}\)
-là độ dài trung bình của các siêu tài liệu. Vectorizer sử dụng unigram và
-bigram với `min_df=2`, `max_df=0.95`. Mười từ có trọng số cao nhất được dùng
-để diễn giải mỗi topic.
+Mỗi topic được mô tả bằng 10 từ khóa c-TF-IDF và tối đa năm bài báo đại diện.
+Một số topic có nội dung tương đối rõ: Topic 0 liên quan đến doanh nghiệp, đầu
+tư và phát triển; Topic 1 tập trung vào điều tra, tội phạm và công an; Topic 2
+mô tả dinh dưỡng, thực phẩm và sức khỏe.
 
-Đối với từng topic, hệ thống đồng thời lưu tối đa năm bài báo đại diện. Tên
-topic gợi ý được hình thành từ các từ khóa có trọng số cao, sau đó được đối
-chiếu với tiêu đề và nội dung của các bài đại diện. Việc đổi tên chỉ tác động
-đến lớp trình bày, không thay đổi assignment hay output gốc của mô hình.
+Tuy nhiên, một số cụm vẫn pha trộn nhiều nội dung. Chẳng hạn, Topic 3 chủ yếu
+nói về iPhone và Apple nhưng có bài liên quan đến CT; Topic 4 nghiêng về y tế
+nhưng chứa bài về thuốc lá điện tử. Các trường hợp này cho thấy sự tương đồng
+từ vựng hoặc ngữ nghĩa cục bộ có thể khiến bài báo được xếp vào cụm chưa hoàn
+toàn phù hợp.
 
-## Thiết lập thực nghiệm
+Tên topic hiện được đề xuất tự động từ từ khóa và bài đại diện, sau đó lưu
+trong file mapping để hiển thị trên giao diện. Việc đổi tên hoặc gộp nhóm hiển
+thị không thay đổi nhãn gốc hay các metric của BERTopic. Các tên vẫn được đánh
+dấu `pending_human_review`; vì vậy, chúng là nhãn hỗ trợ diễn giải, chưa phải
+nhãn chuẩn đã được xác nhận.
 
-Năm cấu hình BERTopic được xây dựng để khảo sát riêng tác động của embedding,
-UMAP, HDBSCAN và loại văn bản đầu vào. Các thí nghiệm sử dụng cùng dataset,
-split và seed 42; mỗi thí nghiệm chỉ thay đổi thành phần được quan tâm.
+*Nguồn thực nghiệm:* `artifacts/common/bertopic/e1_vietnamese_sbert/topic_keywords.csv`;
+`representative_docs.csv`; `topic_display_mapping.json`;
+`results/bertopic_experiments/e1_vietnamese_sbert/topic_name_review.csv`.
 
-| Run | Mục tiêu | Embedding | `n_neighbors` | `min_cluster_size` | Đầu vào |
-|---|---|---|---:|---:|---|
-| E0 | Baseline đa ngôn ngữ | Multilingual MiniLM | 15 | 15 | Tiêu đề + nội dung |
-| E1 | Embedding tiếng Việt | Vietnamese SBERT | 15 | 15 | Tiêu đề + nội dung |
-| E2 | Khảo sát vùng lân cận rộng hơn | Vietnamese SBERT | 30 | 15 | Tiêu đề + nội dung |
-| E3 | Khảo sát cụm tối thiểu lớn hơn | Vietnamese SBERT | 15 | 30 | Tiêu đề + nội dung |
-| E4 | Ablation loại văn bản đầu vào | Vietnamese SBERT | 15 | 15 | Chỉ tiêu đề |
+## 6. Thảo luận và hạn chế
 
-Các mô hình được đánh giá bằng số lượng topic, tỷ lệ ngoại lai, độ phủ, topic
-diversity, NPMI coherence, Adjusted Rand Index (ARI) và Normalized Mutual
-Information (NMI). Độ phủ được xác định bởi:
+BERTopic có ưu điểm là khai thác biểu diễn ngữ nghĩa tiếng Việt, không yêu cầu
+ấn định trước số topic và có khả năng nhận diện outlier. Việc kết hợp từ khóa
+c-TF-IDF với bài báo đại diện cũng hỗ trợ người dùng hiểu nội dung từng cụm.
+Tuy nhiên, kết quả cho thấy ba đánh đổi chính.
 
-\[
-\text{Coverage}=1-\text{Outlier Rate}.
-\]
+Thứ nhất, tham số phân cụm nhỏ tạo nhiều topic chi tiết nhưng làm giao diện khó
+theo dõi; tăng `min_cluster_size` giúp giảm số topic nhưng có thể làm tăng số
+bài bị loại. Thứ hai, coverage và coherence không nhất thiết tăng đồng thời:
+mô hình có thể gán được nhiều bài nhưng từ khóa trong một số topic vẫn thiếu
+tính gắn kết. Thứ ba, tên topic tự động có thể chưa phản ánh đầy đủ các bài nằm
+ở ranh giới giữa nhiều chủ đề.
 
-Topic diversity đo tỷ lệ từ khóa không trùng lặp trong tập các từ khóa đứng
-đầu, trong khi NPMI phản ánh mức đồng xuất hiện của từ khóa trên tập
-validation. ARI và NMI được tính theo `category_gold`. Do `category_gold` là
-chuyên mục báo chí rộng chứ không phải nhãn chủ đề chi tiết, hai chỉ số này
-chỉ được xem là tín hiệu tham chiếu bên ngoài, không được diễn giải như độ
-chính xác phân loại.
+Các hướng phát triển tiếp theo gồm chạy nhiều random seed để đo độ ổn định,
+thử các giá trị trung gian của `min_cluster_size`, hoàn thiện đánh giá tên topic
+bởi nhiều người chấm, phân tích sâu các bài đa chủ đề và chuẩn hóa cùng một
+giao thức benchmark cho cả năm phương pháp. Các cải tiến này cần được thực
+hiện trên Validation trước khi đánh giá lại trên Test.
 
-Runtime được đo cho toàn bộ pipeline, bao gồm tải embedding model, tạo biểu
-diễn, khởi tạo mô hình, huấn luyện và dự đoán trên validation. Vì vậy, runtime
-không đồng nhất với thời gian fit của BERTopic.
-
-## Kết quả và thảo luận
-
-### So sánh các cấu hình
-
-Bảng dưới trình bày kết quả của năm cấu hình trên tập validation. Các giá trị
-test không được sử dụng trong quá trình lựa chọn mô hình.
-
-| Run | Số topic | Outlier train | Outlier validation | Coverage | Diversity | ARI | NMI | NPMI | Runtime (s) |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| E0 | 111 | 31,14% | 42,27% | 57,73% | 0,7000 | 0,0205 | 0,3827 | -0,0681 | 186,02 |
-| E1 | 96 | 24,61% | **35,87%** | **64,13%** | 0,6813 | 0,0720 | 0,4213 | -0,0668 | 1.086,07 |
-| E2 | 93 | 33,61% | 51,91% | 48,09% | 0,6978 | 0,0201 | 0,3689 | -0,0753 | 1.070,10 |
-| E3 | 57 | 29,59% | 39,11% | 60,89% | 0,7456 | **0,0732** | **0,4266** | **-0,0494** | 1.747,92 |
-| E4 | 93 | 34,88% | 46,66% | 53,34% | **0,8602** | 0,0288 | 0,3088 | -0,1066 | 139,31 |
-
-### Ảnh hưởng của mô hình embedding
-
-So với baseline đa ngôn ngữ E0, việc sử dụng Vietnamese SBERT trong E1 làm
-giảm tỷ lệ ngoại lai validation từ 42,27% xuống 35,87%, tương ứng tăng độ phủ
-từ 57,73% lên 64,13%. NMI tăng từ 0,3827 lên 0,4213 và ARI tăng từ 0,0205 lên
-0,0720. Kết quả cho thấy biểu diễn chuyên biệt tiếng Việt giúp tạo ra không
-gian thuận lợi hơn cho HDBSCAN trong các cấu hình được khảo sát. Tuy nhiên,
-topic diversity của E1 thấp hơn nhẹ so với E0, cho thấy độ phủ được cải thiện
-không đồng nghĩa với mức độ khác biệt từ khóa giữa các topic luôn tăng.
-
-E1 được chọn làm cấu hình đại diện do có tỷ lệ ngoại lai validation thấp nhất
-trong nhóm E0-E3. Tiêu chí này phù hợp với mục tiêu ứng dụng, trong đó hệ thống
-cần cung cấp topic cho tỷ lệ bài báo lớn hơn nhưng vẫn cho phép từ chối các
-trường hợp chưa thuộc cụm ổn định. Việc lựa chọn E1 không hàm ý rằng cấu hình
-này vượt trội trên mọi chỉ số.
-
-### Ảnh hưởng của UMAP và HDBSCAN
-
-Khi tăng `n_neighbors` từ 15 lên 30 trong E2, số topic giảm nhẹ từ 96 xuống
-93, nhưng tỷ lệ ngoại lai validation tăng lên 51,91%. ARI, NMI và NPMI cũng
-giảm so với E1. Trong trường hợp này, việc mở rộng vùng lân cận UMAP không tạo
-ra biểu diễn thuận lợi hơn cho cấu hình HDBSCAN hiện tại. Kết quả nhấn mạnh
-rằng tham số UMAP và HDBSCAN có quan hệ phụ thuộc và không nên được tối ưu
-hoàn toàn tách biệt.
-
-E3 tăng `min_cluster_size` từ 15 lên 30, làm số topic giảm từ 96 xuống 57.
-Topic diversity tăng từ 0,6813 lên 0,7456; ARI, NMI và NPMI cũng cao hơn nhẹ
-so với E1. Đổi lại, tỷ lệ ngoại lai validation tăng từ 35,87% lên 39,11%.
-Điều này thể hiện sự đánh đổi giữa mức độ khái quát và độ phủ: E3 tạo ít topic
-hơn với từ khóa phân biệt hơn, trong khi E1 gán topic cho nhiều bài báo hơn.
-Do đó, việc lựa chọn cấu hình phụ thuộc vào mục tiêu sử dụng thay vì một chỉ
-số đơn lẻ.
-
-### Ảnh hưởng của tiêu đề và nội dung
-
-E4 giữ nguyên cấu hình mô hình của E1 nhưng chỉ sử dụng tiêu đề. So với E1,
-độ phủ validation của E4 giảm từ 64,13% xuống 53,34%; NMI giảm từ 0,4213
-xuống 0,3088; ARI giảm từ 0,0720 xuống 0,0288; và NPMI giảm từ -0,0668 xuống
--0,1066. Kết quả cho thấy tiêu đề không cung cấp đủ ngữ cảnh để tái tạo cấu
-trúc chủ đề của tập tin tức, đồng thời làm tăng số tài liệu không được gán vào
-cụm ổn định.
-
-E4 đạt topic diversity 0,8602, cao hơn E1. Tuy nhiên, diversity cao cần được
-đọc đồng thời với coherence và coverage. Các topic có thể sử dụng những từ
-khóa ít trùng nhau nhưng không nhất thiết có mức liên kết nội tại hoặc độ phủ
-tốt hơn. Do đó, kết quả ablation không ủng hộ việc thay thế nội dung đầy đủ
-bằng tiêu đề trong bài toán khám phá chủ đề tổng quát.
-
-### Khả năng diễn giải chủ đề
-
-Từ khóa và bài đại diện cho thấy BERTopic phát hiện được cả chủ đề rộng lẫn
-những nhóm gắn với sự kiện hoặc sản phẩm cụ thể. Các nhóm tiêu biểu liên quan
-đến điều tra - pháp luật, sức khỏe - dinh dưỡng, giáo dục, bóng đá nữ, âm
-nhạc, thiết bị iPhone và trí tuệ nhân tạo. Topic theo sự kiện hoặc sản phẩm có
-thể hữu ích đối với khám phá tin tức ngắn hạn, nhưng thường nhạy hơn với sự
-thay đổi của phân phối dữ liệu theo thời gian.
-
-Các run BERTopic đều có NPMI âm. Kết quả này cho thấy sự khác biệt từ khóa
-giữa các topic không đồng nghĩa với mức đồng xuất hiện cao của từ khóa trong
-cùng topic. Một số nguyên nhân có thể gồm số topic lớn, sự xuất hiện của các
-topic sự kiện hẹp và cách tính đồng xuất hiện ở mức tài liệu. Vì vậy, đánh giá
-BERTopic cần kết hợp metric tự động với đánh giá con người dựa trên từ khóa
-và bài báo đại diện.
-
-### Chi phí tính toán
-
-Thời gian tạo embedding chiếm phần lớn runtime của các cấu hình sử dụng
-Vietnamese SBERT. Kết quả này cho thấy việc cache embedding là cần thiết khi
-khảo sát tham số UMAP hoặc HDBSCAN. Đồng thời, runtime cần được tách thành các
-thành phần representation, fit và prediction để tránh nhầm tổng thời gian
-pipeline với thời gian huấn luyện mô hình.
-
-Các giá trị runtime trong bảng được thu nhận từ từng lần chạy pipeline, chưa
-phải benchmark lặp lại trên cùng trạng thái cache và tải hệ thống. Vì vậy,
-chúng được sử dụng để nhận diện thành phần tốn thời gian, không được dùng để
-kết luận chính xác rằng một cấu hình nhanh hơn cấu hình khác theo tỷ lệ tương
-ứng.
-
-### Đánh giá cuối trên tập test
-
-Sau khi lựa chọn E1 hoàn toàn bằng kết quả validation, cấu hình này được giữ
-nguyên và chạy một lần trên 1.390 bài thuộc tập test. Mô hình đạt tỷ lệ outlier
-37,05%, tương ứng coverage 62,95%; ARI đạt 0,0559, NMI đạt 0,4072 và NPMI đạt
--0,0767. Các giá trị test gần với validation (outlier 35,87%, ARI 0,0720, NMI
-0,4213 và NPMI -0,0668), cho thấy chất lượng không suy giảm đột ngột trên phần
-dữ liệu được giữ khóa. Tuy nhiên, ARI/NMI vẫn chỉ đối chiếu với chuyên mục báo
-rộng và NPMI vẫn âm, nên kết quả test không loại bỏ nhu cầu đánh giá thủ công.
-
-Thời gian pipeline của lượt đánh giá cuối là 1.191,65 giây, trong đó bước tạo
-embedding chiếm 1.084,73 giây, fit BERTopic 57,50 giây, dự đoán validation
-23,48 giây và dự đoán test 1,38 giây. Runtime này bao gồm cả train,
-validation và test embedding; vì vậy không được diễn giải là riêng thời gian
-huấn luyện.
-
-## Tích hợp vào hệ thống
-
-Kết quả BERTopic được chuyển sang một schema artifact chung gồm
-`manifest.json`, `config_used.yaml`, `model_summary.json`,
-`document_topics.csv`, `topic_keywords.csv` và `topic_summary.csv`. Cấu trúc
-này tách giao diện khỏi object mô hình trong bộ nhớ và cho phép Streamlit đọc
-kết quả của BERTopic cùng các phương pháp K-Means, NMF, LDA và HDBSCAN theo
-một hợp đồng dữ liệu thống nhất.
-
-Giao diện hỗ trợ xem tổng quan mô hình, khám phá chi tiết topic, tìm kiếm bài
-báo, trực quan hóa phép chiếu hai chiều, theo dõi phân bố theo thời gian, so
-sánh run và xem các trường hợp cần phân tích lỗi. Tên hiển thị và nhóm topic
-được lưu dưới dạng mapping riêng, do đó không làm thay đổi kết quả phân cụm
-gốc. Cách thiết kế này bảo toàn khả năng tái lập và cho phép đối chiếu trực
-tiếp giữa giao diện với artifact thực nghiệm.
-
-API nội bộ hiện cung cấp endpoint kiểm tra trạng thái hệ thống. Chức năng suy
-luận cho bài báo mới chỉ được xem là hoàn chỉnh khi endpoint dự đoán, model đã
-lưu và kiểm thử đầu-cuối được xác nhận. Các chức năng phát hiện sự kiện hoặc
-xu hướng cũng không được xem là kết quả nghiên cứu của BERTopic nếu chưa có
-thuật toán và quy trình đánh giá độc lập.
-
-## Hạn chế
-
-Thứ nhất, chỉ E1 được đánh giá trên test sau khi khóa cấu hình. E0, E2, E3 và
-E4 vẫn chỉ là các thí nghiệm lựa chọn/ablation trên validation; không được dùng
-kết quả test để xếp hạng lại hoặc chọn cấu hình khác.
-
-Thứ hai, nhãn chuyên mục của nguồn báo chỉ phản ánh lĩnh vực rộng và không đại
-diện hoàn toàn cho cấu trúc topic hoặc sự kiện. ARI và NMI vì thế chỉ cung cấp
-một góc nhìn tham chiếu. Thứ ba, các cấu hình E0-E3 tạo từ 57 đến 111 topic,
-làm tăng chi phí đánh giá thủ công và có nguy cơ sinh các chủ đề quá hẹp.
-
-Thứ tư, tỷ lệ ngoại lai validation vẫn dao động từ 35,87% đến 51,91%. Một số
-ngoại lai có thể là dữ liệu nhiễu, nhưng một số khác có thể là bài hiếm hoặc
-bài đa chủ đề hợp lệ. Việc phân loại thủ công là cần thiết trước khi xem toàn
-bộ nhóm ngoại lai là lỗi. Cuối cùng, tên topic hiện được gợi ý từ từ khóa và
-bài đại diện; chất lượng tên vẫn phụ thuộc vào đánh giá con người và cần được
-xác nhận bởi nhiều người đánh giá độc lập.
+*Nguồn thực nghiệm:* `docs/bertopic_final_evaluation.md`;
+`results/bertopic_experiments/e1_vietnamese_sbert/error_analysis_cases.csv`;
+`results/bertopic_experiments/e1_vietnamese_sbert/topic_name_review.csv`.
 
 ## Tài liệu tham khảo
 
-- Grootendorst, M. (2022). *BERTopic: Neural topic modeling with a
-  class-based TF-IDF procedure*. arXiv:2203.05794.
-  https://doi.org/10.48550/arXiv.2203.05794
-- Janssens, R., Carlee, J., Herten, M., Meyer, F., & Fuchs, G. (2025).
-  *BERTopic for topic modeling of Dutch legislative proceedings*. PeerJ
-  Computer Science, 11, e2778. https://doi.org/10.7717/peerj-cs.2778
+Grootendorst, M. (2022). *BERTopic: Neural topic modeling with a class-based
+TF-IDF procedure* [Preprint]. arXiv.
+https://doi.org/10.48550/arXiv.2203.05794
+
+Janssens, W., Bogaert, M., & Van den Poel, D. (2025). A comparative analysis
+of topic reduction techniques for BERTopic. *IEEE Access, 13*, 204087–204103.
+https://doi.org/10.1109/ACCESS.2025.3638956
+
+McInnes, L., Healy, J., & Astels, S. (2017). hdbscan: Hierarchical density
+based clustering. *Journal of Open Source Software, 2*(11), Article 205.
+https://doi.org/10.21105/joss.00205
+
+McInnes, L., Healy, J., & Melville, J. (2018). *UMAP: Uniform manifold
+approximation and projection for dimension reduction* [Preprint]. arXiv.
+https://arxiv.org/abs/1802.03426
+
+Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using
+Siamese BERT-networks. In *Proceedings of the 2019 Conference on Empirical
+Methods in Natural Language Processing* (pp. 3982–3992). Association for
+Computational Linguistics. https://doi.org/10.18653/v1/D19-1410
+
+Röder, M., Both, A., & Hinneburg, A. (2015). Exploring the space of topic
+coherence measures. In *Proceedings of the Eighth ACM International Conference
+on Web Search and Data Mining* (pp. 399–408). Association for Computing
+Machinery. https://doi.org/10.1145/2684822.2685324
