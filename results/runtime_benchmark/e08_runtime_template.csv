@@ -1,0 +1,7 @@
+method,run_id,fit_split,n_train,n_eval,representation_seconds,fit_seconds,predict_seconds,evaluation_seconds,total_pipeline_seconds,setup_seconds,ram_peak_mb,model_size_mb,hardware,python_version,n_repeats,scope_notes
+KMeans (TF-IDF),kmeans_baseline,train,6493,1390,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,TF-IDF fit train + KMeans fit train + predict test + eval
+NMF,nmf_p3_k10_seed42_dashboard_v2,train+val,7884,1390,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,TF-IDF + NMF fit_transform train+val + transform test + eval
+LDA,lda_k15_seed42,train+val,7884,1390,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,BoW + LDA fit train+val + test inference + eval
+HDBSCAN,minilm_title_content_eom_15_5,train,6493,1390,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,MiniLM encode test + UMAP transform + approx predict test
+BERTopic,e1_vietnamese_sbert,train,6493,1390,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,SBERT embed + UMAP + HDBSCAN + c-TF-IDF + test predict
+
