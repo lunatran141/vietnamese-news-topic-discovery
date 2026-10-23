@@ -90,3 +90,11 @@ Số liệu ở Bảng 3.2 cho thấy tỷ lệ các chuyên mục được gi�
 3. **Trên tập Test:** 1.390 bài của tập Test được giữ độc lập hoàn toàn và chỉ được chạy đánh giá một lần duy nhất sau khi cấu hình tốt nhất của từng mô hình đã được chốt trên tập Validation.
 
 **[HÌNH/BẢNG: Hình 3.4 — Phân bố tỷ lệ 7 chuyên mục biên tập trên ba tập Train, Validation và Test.]**
+
+---
+
+# Tài liệu tham khảo (Phần tiền xử lý)
+
+[1] A. Z. Broder, "On the resemblance and containment of documents," in *Proc. Compression and Complexity of SEQUENCES 1997*, Positano, Italy, 1997, pp. 21–29. https://doi.org/10.1109/SEQUEN.1997.666900
+
+[2] T. Vu, D. Q. Nguyen, D. Q. Nguyen, M. Dras, and M. Johnson, "VnCoreNLP: A Vietnamese natural language processing toolkit," in *Proc. 2018 Conf. North American Chapter of the Association for Computational Linguistics: Demonstrations (NAACL-HLT)*, New Orleans, LA, USA, 2018, pp. 56–60. https://doi.org/10.18653/v1/N18-5012
