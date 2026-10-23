@@ -19,7 +19,6 @@ from app.data_service import (
     get_hdbscan_split_summary,
     load_hdbscan_error_cases,
     load_hdbscan_experiment_comparison,
-    load_hdbscan_human_reviews,
     load_hdbscan_projection,
     load_hdbscan_runtime,
     load_hdbscan_stability,
@@ -789,78 +788,6 @@ def _render_representative_documents(
         width="stretch",
     )
 
-
-def _render_human_evaluation(
-    artifact_dir: str,
-) -> None:
-    """Hiển thị human evaluation khi có kết quả."""
-
-    st.subheader("Human evaluation")
-
-    reviews = load_hdbscan_human_reviews(
-        artifact_dir
-    )
-
-    if reviews.empty:
-        st.info(
-            "N/A — đang chờ kết quả đánh giá "
-            "độc lập từ R1 và R2."
-        )
-        st.caption(
-            "Không suy ra hoặc tự động điền các nhãn "
-            "outlier_correct, topic_consistent và "
-            "is_boundary_or_mixed."
-        )
-        return
-
-    first_row = st.columns(3)
-
-    first_row[0].metric(
-        "Số phiếu",
-        f"{len(reviews):,}",
-    )
-
-    reviewer_count = (
-        reviews["reviewer"].nunique()
-        if "reviewer" in reviews.columns
-        else None
-    )
-
-    first_row[1].metric(
-        "Người đánh giá",
-        (
-            f"{reviewer_count:,}"
-            if reviewer_count is not None
-            else "N/A"
-        ),
-    )
-
-    completed_count = None
-
-    if "review_status" in reviews.columns:
-        completed_count = int(
-            reviews["review_status"]
-            .astype(str)
-            .str.lower()
-            .eq("completed")
-            .sum()
-        )
-
-    first_row[2].metric(
-        "Phiếu hoàn thành",
-        (
-            f"{completed_count:,}"
-            if completed_count is not None
-            else "N/A"
-        ),
-    )
-
-    st.dataframe(
-        reviews,
-        hide_index=True,
-        width="stretch",
-    )
-
 def _render_experiment_comparison(
     artifact_dir: str,
 ) -> None:
@@ -1380,7 +1307,6 @@ def render_hdbscan_details(
             "Stability",
             "Hard cases",
             "Bài đại diện",
-            "Human evaluation",
             "Tên 101 chủ đề",
         ]
     )
@@ -1423,8 +1349,4 @@ def render_hdbscan_details(
         )
 
     with tabs[8]:
-        _render_human_evaluation(
-            artifact_dir
-        )
-    with tabs[9]:
         _render_topic_naming(bundle)
