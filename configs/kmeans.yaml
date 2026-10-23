@@ -1,0 +1,47 @@
+# Cấu hình K-Means clustering pipeline cho TV1 (Task M02).
+# Sử dụng trực tiếp TF-IDF sparse matrix từ Task M01.
+
+dataset:
+  split_manifest_path: "data/splits/split_manifest.csv"
+  processed_dataset_path: "data/processed/p2_segmented.csv"
+  tfidf_artifacts_dir: "artifacts/tfidf"
+  data_version: "v1.0"
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+
+clustering:
+  algorithm: "kmeans"
+  k_search_range:
+    - 3
+    - 5
+    - 7
+    - 9
+    - 11
+    - 14
+    - 18
+  default_k: 7
+  # K cuối cùng, chọn sau khi xem chỉ số nội tại, độ ổn định, kích thước cụm và đánh giá thủ công.
+  # null nghĩa là dùng K có composite_score cao nhất (chỉ tham khảo, thiên về K lớn).
+  selected_k: 9
+  # Các seed dùng để đo độ ổn định (không dùng category_gold).
+  stability_seeds:
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+  # Cụm có ít hơn ngưỡng này (trên tập Val) được tính là cụm nhỏ.
+  small_cluster_threshold: 30
+  init: "k-means++"
+  n_init: 10
+  max_iter: 300
+  random_state: 42
+
+topics:
+  top_n_keywords: 15
+  representative_docs_per_cluster: 5
+
+output:
+  artifacts_dir: "artifacts/kmeans"
+  results_dir: "results/kmeans"

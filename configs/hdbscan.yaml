@@ -1,0 +1,64 @@
+# M11: HDBSCAN tren embedding cua tap train Dataset v1.0
+dataset:
+  path: "data/processed/p0_minimal.csv"
+  split_manifest_path: "data/splits/split_manifest.csv"
+  split: "train"
+  expected_articles: 6493
+
+embedding_artifacts:
+  minilm_title_content: "artifacts/embeddings/m10_v1_train_minilm.npz"
+  mpnet_title_content: "artifacts/embeddings/m10_v1_train_mpnet.npz"
+  minilm_title_only: "artifacts/embeddings/m10_v1_train_title_only_minilm.npz"
+  mpnet_title_only: "artifacts/embeddings/m10_v1_train_title_only_mpnet.npz"
+
+umap:
+  n_neighbors: 15
+  n_components: 5
+  min_dist: 0.0
+  metric: "cosine"
+  random_state: 42
+
+hdbscan:
+  metric: "euclidean"
+  experiments:
+    - name: "eom_15_5"
+      min_cluster_size: 15
+      min_samples: 5
+      cluster_selection_method: "eom"
+
+    - name: "eom_15_10"
+      min_cluster_size: 15
+      min_samples: 10
+      cluster_selection_method: "eom"
+
+    - name: "eom_30_5"
+      min_cluster_size: 30
+      min_samples: 5
+      cluster_selection_method: "eom"
+
+    - name: "eom_30_10"
+      min_cluster_size: 30
+      min_samples: 10
+      cluster_selection_method: "eom"
+
+    - name: "eom_50_5"
+      min_cluster_size: 50
+      min_samples: 5
+      cluster_selection_method: "eom"
+
+    - name: "eom_50_10"
+      min_cluster_size: 50
+      min_samples: 10
+      cluster_selection_method: "eom"
+
+    - name: "leaf_15_5"
+      min_cluster_size: 15
+      min_samples: 5
+      cluster_selection_method: "leaf"
+
+    - name: "leaf_30_10"
+      min_cluster_size: 30
+      min_samples: 10
+      cluster_selection_method: "leaf"
+
+output_dir: "results/hdbscan"

@@ -1,0 +1,32 @@
+# Cấu hình phân chia tập dữ liệu huấn luyện, kiểm định và kiểm thử (D05 Dataset Splits Config)
+split:
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42
+  stratify_column: "category_gold"
+  id_column: "article_id"
+  source_column: "source"
+  timestamp_column: "published_at"
+
+  # Chống rò rỉ dữ liệu cùng cụm sự kiện (Event Clustering / Group-aware Split)
+  event_grouping:
+    enabled: true
+    candidates_file: "results/dedup_data/dedup_candidates_review.csv"
+    content_similarity_threshold: 0.60
+    title_similarity_threshold: 0.60
+    algorithm: "connected_components"
+
+  # Thư mục đầu ra và danh mục file chỉ mục
+  output_dir: "data/splits"
+  train_file: "train_ids.csv"
+  val_file: "validation_ids.csv"
+  test_file: "test_ids.csv"
+  manifest_file: "split_manifest.csv"
+
+  # Chính sách Khóa Test (Test Set Lock)
+  test_policy:
+    lock_test_set: true
+    allow_hyperparameter_tuning_on_test: false
+    allow_model_selection_on_test: false
+    description: "Tập Test được đóng băng nghiêm ngặt, chỉ dùng để đánh giá hiệu năng cuối cùng (Final Evaluation). Mọi grid search, tinh chỉnh siêu tham số và chọn số cụm K phải thực hiện trên tập Validation."

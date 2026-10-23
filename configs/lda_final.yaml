@@ -1,0 +1,44 @@
+
+# Task 3.7 - LDA Final Evaluation & NMF Comparison
+# TV3 - LDA
+# Config preparation only; Test is locked until K is approved.
+
+base_config: "configs/lda.yaml"
+
+dataset:
+  path: "data/processed/p2_segmented.csv"
+  split_manifest_path: "data/splits/split_manifest.csv"
+  data_version: "v1.0"
+  preprocessing_variant: "p2_segmented"
+  text_variant: "text"
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+
+selection:
+  selected_n_topics: 15
+  selection_source: "docs/m08_lda_experiments.md"
+  stability_source: "docs/m09_lda_stability.md"
+  comparison_k: 20
+  approval_status: "approved"
+
+model:
+  random_state: 42
+  top_n_words: 10
+
+evaluation:
+  fit_split: "train+val"
+  evaluation_split: "test"
+  metrics:
+    - c_v
+    - c_npmi
+    - topic_diversity
+    - ari
+    - nmi
+
+safety:
+  allow_test: false
+
+outputs:
+  artifacts_dir: "artifacts/lda/final"
+  results_dir: "results/lda/final"

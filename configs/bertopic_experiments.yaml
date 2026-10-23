@@ -1,0 +1,135 @@
+# Cấu hình thí nghiệm embedding và tham số BERTopic cho task M14.
+
+experiment:
+  seed: 42
+  fit_split: "train"
+  evaluation_split: "val"
+  test_split_locked: true
+  output_dir: "results/bertopic_experiments"
+
+evaluation:
+  metrics:
+    - "topic_count"
+    - "train_outlier_rate"
+    - "validation_outlier_rate"
+    - "topic_diversity"
+    - "validation_adjusted_rand_index"
+    - "validation_normalized_mutual_info"
+    - "validation_npmi_coherence"
+    - "model_load_seconds"
+    - "representation_seconds"
+    - "model_init_seconds"
+    - "fit_seconds"
+    - "validation_predict_seconds"
+    - "evaluation_seconds"
+    - "runtime_seconds"
+
+runs:
+  # Baseline của M13.
+  - run_id: "e0_multilingual_minilm"
+    description: "Baseline dùng multilingual MiniLM."
+    embedding:
+      model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+      batch_size: 32
+      normalize_embeddings: true
+      device: null
+    umap:
+      n_neighbors: 15
+      n_components: 5
+      min_dist: 0.0
+      metric: "cosine"
+      random_state: 42
+    hdbscan:
+      min_cluster_size: 15
+      min_samples: 5
+      metric: "euclidean"
+      cluster_selection_method: "eom"
+      prediction_data: true
+
+  # Chỉ thay embedding để so sánh công bằng với baseline.
+  - run_id: "e1_vietnamese_sbert"
+    description: "Thử embedding được huấn luyện cho tiếng Việt."
+    input_text_column: "text"
+    input_text_label: "title_content"
+    embedding:
+      model_name: "keepitreal/vietnamese-sbert"
+      batch_size: 32
+      normalize_embeddings: true
+      device: null
+    umap:
+      n_neighbors: 15
+      n_components: 5
+      min_dist: 0.0
+      metric: "cosine"
+      random_state: 42
+    hdbscan:
+      min_cluster_size: 15
+      min_samples: 5
+      metric: "euclidean"
+      cluster_selection_method: "eom"
+      prediction_data: true
+
+  # Giữ Vietnamese SBERT và chỉ tăng số láng giềng của UMAP.
+  - run_id: "e2_vietnamese_sbert_neighbors30"
+    description: "Thử UMAP n_neighbors bằng 30."
+    embedding:
+      model_name: "keepitreal/vietnamese-sbert"
+      batch_size: 32
+      normalize_embeddings: true
+      device: null
+    umap:
+      n_neighbors: 30
+      n_components: 5
+      min_dist: 0.0
+      metric: "cosine"
+      random_state: 42
+    hdbscan:
+      min_cluster_size: 15
+      min_samples: 5
+      metric: "euclidean"
+      cluster_selection_method: "eom"
+      prediction_data: true
+
+  # Giữ Vietnamese SBERT và chỉ tăng kích thước cụm tối thiểu.
+  - run_id: "e3_vietnamese_sbert_cluster30"
+    description: "Thử HDBSCAN min_cluster_size bằng 30."
+    embedding:
+      model_name: "keepitreal/vietnamese-sbert"
+      batch_size: 32
+      normalize_embeddings: true
+      device: null
+    umap:
+      n_neighbors: 15
+      n_components: 5
+      min_dist: 0.0
+      metric: "cosine"
+      random_state: 42
+    hdbscan:
+      min_cluster_size: 30
+      min_samples: 5
+      metric: "euclidean"
+      cluster_selection_method: "eom"
+      prediction_data: true
+
+  # Ablation đầu vào: giữ nguyên toàn bộ cấu hình E1, chỉ dùng tiêu đề.
+  - run_id: "e4_vietnamese_sbert_title_only"
+    description: "Ablation chỉ dùng tiêu đề đã chuẩn hóa; đối chiếu với E1 title+content."
+    input_text_column: "processed_title"
+    input_text_label: "title_only"
+    embedding:
+      model_name: "keepitreal/vietnamese-sbert"
+      batch_size: 32
+      normalize_embeddings: true
+      device: null
+    umap:
+      n_neighbors: 15
+      n_components: 5
+      min_dist: 0.0
+      metric: "cosine"
+      random_state: 42
+    hdbscan:
+      min_cluster_size: 15
+      min_samples: 5
+      metric: "euclidean"
+      cluster_selection_method: "eom"
+      prediction_data: true

@@ -1,0 +1,30 @@
+
+# M09 - LDA Stability Experiments
+# TV3 - LDA
+
+base_config: "configs/lda.yaml"
+
+dataset:
+  path: "data/processed/p2_segmented.csv"
+  split_manifest_path: "data/splits/split_manifest.csv"
+  data_version: "v1.0"
+  preprocessing_variant: "p2_segmented"
+  text_variant: "text"
+  train_split: "train"
+  val_split: "val"
+
+stability:
+  n_topics: 15
+  random_seeds: [42, 52, 62, 72, 82]
+  reference_seed: 42
+  top_n_words: 10
+
+evaluation:
+  topic_matching: "hungarian"
+  keyword_similarity: "jaccard"
+  document_topic_stability: true
+  evaluation_split: "val"
+
+outputs:
+  artifacts_dir: "artifacts/lda/m09"
+  results_dir: "results/lda/m09"

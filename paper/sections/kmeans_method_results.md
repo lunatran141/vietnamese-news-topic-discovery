@@ -22,13 +22,13 @@ Trên không gian đặc trưng TF-IDF đã chuẩn hóa, thuật toán K-Means 
 
 $$\mathcal{J}(\mathcal{C}, \{\boldsymbol{\mu}_k\}_{k=1}^K) = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} \|\mathbf{x}_i - \boldsymbol{\mu}_k\|_2^2, \qquad \text{với } \boldsymbol{\mu}_k = \frac{1}{|C_k|} \sum_{\mathbf{x}_i \in C_k} \mathbf{x}_i \quad (4.3)$$
 
-Mặc dù K-Means sử dụng khoảng cách Euclid, việc áp dụng trên các vector đã chuẩn hóa $\ell_2$ ($\|\mathbf{x}_i\|_2 = 1$) tạo ra một tính chất hình học quan trọng. Cụ thể, với hai vector đơn vị $\mathbf{x}_i$ và $\mathbf{x}_j$ bất kỳ, bình phương khoảng cách Euclid giữa chúng có mối quan hệ tuyến tính nghịch biến với độ tương đồng Cosine [1]:
+Mặc dù K-Means sử dụng khoảng cách Euclid, việc áp dụng trên các vector đã chuẩn hóa $\ell_2$ ($\|\mathbf{x}_i\|_2 = 1$) tạo ra một tính chất hình học quan trọng. Cụ thể, với hai vector đơn vị $\mathbf{x}_i$ và $\mathbf{x}_j$ bất kỳ, bình phương khoảng cách Euclid giữa chúng có mối quan hệ tuyến tính nghịch biến với độ tương đồng Cosine (Steinbach et al., 2000):
 
 $$\|\mathbf{x}_i - \mathbf{x}_j\|_2^2 = \|\mathbf{x}_i\|_2^2 + \|\mathbf{x}_j\|_2^2 - 2\mathbf{x}_i^\top \mathbf{x}_j = 2\left(1 - \cos(\mathbf{x}_i, \mathbf{x}_j)\right) \quad (4.4)$$
 
-Tương tự, khi xét khoảng cách từ một văn bản $\mathbf{x}_i$ đến tâm cụm $\boldsymbol{\mu}_k$, ta có $\|\mathbf{x}_i - \boldsymbol{\mu}_k\|_2^2 = 1 + \|\boldsymbol{\mu}_k\|_2^2 - 2\|\boldsymbol{\mu}_k\|_2 \cos(\mathbf{x}_i, \boldsymbol{\mu}_k)$. Như vậy, việc gán văn bản vào tâm cụm có khoảng cách Euclid ngắn nhất cũng tương ứng với việc gom các bài báo có hướng ngữ nghĩa gần nhau nhất theo góc Cosine [1].
+Tương tự, khi xét khoảng cách từ một văn bản $\mathbf{x}_i$ đến tâm cụm $\boldsymbol{\mu}_k$, ta có $\|\mathbf{x}_i - \boldsymbol{\mu}_k\|_2^2 = 1 + \|\boldsymbol{\mu}_k\|_2^2 - 2\|\boldsymbol{\mu}_k\|_2 \cos(\mathbf{x}_i, \boldsymbol{\mu}_k)$. Như vậy, việc gán văn bản vào tâm cụm có khoảng cách Euclid ngắn nhất cũng tương ứng với việc gom các bài báo có hướng ngữ nghĩa gần nhau nhất theo góc Cosine (Steinbach et al., 2000).
 
-Để hạn chế việc thuật toán hội tụ về các cực tiểu cục bộ kém chất lượng trên không gian thưa nhiều chiều, nhóm sử dụng phương pháp khởi tạo tâm cụm `k-means++`. Các tâm cụm ban đầu được chọn ngẫu nhiên có trọng số tỷ lệ thuận với bình phương khoảng cách tới tâm gần nhất đã chọn, giúp các tâm khởi tạo phân bố trải đều khắp không gian từ vựng trước khi thực hiện vòng lặp cập nhật Lloyd. Sau khi mô hình hội tụ, các từ khóa đại diện cho mỗi chủ đề $k$ được trích xuất trực tiếp bằng cách xếp hạng các chiều từ vựng có giá trị lớn nhất trong vector tâm cụm $\boldsymbol{\mu}_k$.
+Để hạn chế việc thuật toán hội tụ về các cực tiểu cục bộ kém chất lượng trên không gian thưa nhiều chiều, nhóm sử dụng phương pháp khởi tạo tâm cụm `k-means++` (Arthur & Vassilvitskii, 2007). Các tâm cụm ban đầu được chọn ngẫu nhiên có trọng số tỷ lệ thuận với bình phương khoảng cách tới tâm gần nhất đã chọn, giúp các tâm khởi tạo phân bố trải đều khắp không gian từ vựng trước khi thực hiện vòng lặp cập nhật Lloyd. Sau khi mô hình hội tụ, các từ khóa đại diện cho mỗi chủ đề $k$ được trích xuất trực tiếp bằng cách xếp hạng các chiều từ vựng có giá trị lớn nhất trong vector tâm cụm $\boldsymbol{\mu}_k$.
 
 ---
 
@@ -199,11 +199,11 @@ Từ toàn bộ kết quả thực nghiệm, có thể rút ra những nhận đ
 
 ---
 
-# Tài liệu tham khảo (Phần của TV1)
+## References — Tài liệu tham khảo (APA 7)
 
-[1] M. Steinbach, G. Karypis, and V. Kumar, "A comparison of document clustering techniques," in *Proc. KDD Workshop on Text Mining*, Boston, MA, USA, 2000, pp. 1–20.
+Arthur, D., & Vassilvitskii, S. (2007). k-means++: The advantages of careful seeding. In *Proceedings of the Eighteenth Annual ACM-SIAM Symposium on Discrete Algorithms* (pp. 1027–1035). Society for Industrial and Applied Mathematics. https://theory.stanford.edu/~sergei/papers/kMeansPP-soda.pdf
 
-[2] T. Vu, D. Q. Nguyen, D. Q. Nguyen, M. Dras, and M. Johnson, "VnCoreNLP: A Vietnamese natural language processing toolkit," in *Proc. 2018 Conf. North American Chapter of the Association for Computational Linguistics: Demonstrations (NAACL-HLT)*, New Orleans, LA, USA, 2018, pp. 56–60.
+Steinbach, M., Karypis, G., & Kumar, V. (2000). A comparison of document clustering techniques. In *KDD Workshop on Text Mining* (pp. 1–20). Boston, MA, USA. https://hdl.handle.net/11299/215421
 
-[3] D. Arthur and S. Vassilvitskii, "k-means++: The advantages of careful seeding," in *Proc. 18th Annu. ACM-SIAM Symp. Discrete Algorithms (SODA)*, New Orleans, LA, USA, 2007, pp. 1027–1035. [Online]. Available: https://theory.stanford.edu/~sergei/papers/kMeansPP-soda.pdf
+Vu, T., Nguyen, D. Q., Nguyen, D. Q., Dras, M., & Johnson, M. (2018). VnCoreNLP: A Vietnamese natural language processing toolkit. In *Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Demonstrations* (pp. 56–60). Association for Computational Linguistics. https://doi.org/10.18653/v1/N18-5012
 

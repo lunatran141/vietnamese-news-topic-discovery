@@ -1,0 +1,27 @@
+# Cấu hình phân tích outlier — Task M12
+dataset:
+  path: "data/processed/p0_minimal.csv"
+  split_manifest_path: "data/splits/split_manifest.csv"
+  split: "train"
+  expected_articles: 6493
+
+m11:
+  summary_path: "results/hdbscan/m11_summary.csv"
+  assignment_paths:
+    minilm_title_content: "results/hdbscan/minilm_title_content_assignments.csv"
+    minilm_title_only: "results/hdbscan/minilm_title_only_assignments.csv"
+    mpnet_title_content: "results/hdbscan/mpnet_title_content_assignments.csv"
+    mpnet_title_only: "results/hdbscan/mpnet_title_only_assignments.csv"
+
+# Hai run dùng để chọn bài và nhận xét thủ công
+case_review:
+  embedding_run: "mpnet_title_content"
+  experiments:
+    - "eom_15_5"
+    - "leaf_15_5"
+  embedding_path: "artifacts/embeddings/m10_v1_train_mpnet.npz"
+  sample_size_per_experiment: 30
+  random_state: 42
+
+output:
+  directory: "results/hdbscan/outlier_analysis"
