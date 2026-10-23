@@ -26,6 +26,12 @@ NPMI được tính từ sự đồng xuất hiện của 10 feature có trọng
 | **10** | **0,4493** | **1,0000** | 0,9595 |
 | 12 | 0,4403 | 0,9917 | **0,9568** |
 
+Hình 1 minh họa các chỉ số trên tập Validation theo số chủ đề. NPMI đạt cao nhất tại K=10, còn sai số tái tạo giảm khi K tăng và thấp nhất ở K=12. Topic diversity đạt 1,0000 tại K=6, 8 và 10.
+
+![Các chỉ số Validation theo số chủ đề K](../../results/nmf/nmf_p3_select_review_seed42_v1/topic_count_selection.png)
+
+*Hình 1. NPMI, topic diversity và sai số tái tạo chuẩn hóa trên Validation với K = 4, 6, 8, 10 và 12. Nguồn: `topic_count_metrics.csv`.*
+
 K=10 đạt NPMI cao nhất, trong khi K=12 có sai số tái tạo thấp nhất. Nhóm chọn K=10 theo thứ tự ưu tiên đã cài đặt: NPMI, topic diversity, rồi sai số tái tạo. Do đó, K=10 là lựa chọn định lượng theo kết quả Validation, chưa phải kết luận rằng đây là số chủ đề tối ưu theo đánh giá của con người. Phiếu review từ khóa và bài đại diện hiện chưa có điểm hoặc nhận xét của reviewer.
 
 *Nguồn: `configs/nmf.yaml`; `results/nmf/nmf_p3_select_review_seed42_v1/topic_count_metrics.csv`; `docs/m05_nmf_experiments.md`.*
@@ -48,6 +54,8 @@ Sau khi chọn K=10, vectorizer và NMF được huấn luyện lại trên Trai
 | Normalized Mutual Information (NMI) | 0,651373 |
 
 NPMI được tính từ đồng xuất hiện feature ở cấp tài liệu theo cách triển khai của nhóm. ARI và NMI đối chiếu chủ đề có trọng số cao nhất của mỗi bài với `category_gold`. Vì đây là chuyên mục báo, không phải nhãn chủ đề chuẩn, ARI và NMI phản ánh mức tương ứng giữa topic chính với chuyên mục; chúng không phải độ chính xác phân loại hay phép đo trực tiếp chất lượng topic.
+
+Trong cùng tập Test gồm 1.390 bài, NMF (TF-IDF/P3, K=10) đạt NPMI 0,440680, topic diversity 1,000000, ARI 0,539079 và NMI 0,651373; LDA (BoW/P2, K=15) lần lượt đạt 0,147094, 0,653333, 0,406466 và 0,572713. Hai mô hình dùng cùng cách tính NPMI `document_binary_common`, nhưng khác biểu diễn đầu vào và số chủ đề; đây là so sánh giữa hai pipeline đã chọn, không cô lập ảnh hưởng riêng của thuật toán.
 
 Kết quả cho thấy các từ khóa có mức độ đa dạng tối đa theo định nghĩa topic diversity đang dùng. Sai số tái tạo chuẩn hóa cho biết mức chênh lệch giữa ma trận TF-IDF và ma trận được NMF tái tạo. Các metric này mô tả những khía cạnh khác nhau và cần được đọc cùng từ khóa, bài đại diện và phân tích nội dung.
 
