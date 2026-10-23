@@ -1,0 +1,50 @@
+{
+  "method": "KMeans (TF-IDF)",
+  "run_id": "kmeans_baseline",
+  "fit_split": "train",
+  "n_train": 6493,
+  "n_eval": 1390,
+  "n_repeats": 3,
+  "representation_seconds": 22.091,
+  "representation_seconds_std": 1.718,
+  "fit_seconds": 4.866,
+  "fit_seconds_std": 0.522,
+  "predict_seconds": 0.015,
+  "predict_seconds_std": 0.003,
+  "evaluation_seconds": 0.004,
+  "evaluation_seconds_std": 0.001,
+  "total_pipeline_seconds": 26.976,
+  "total_pipeline_seconds_std": 1.723,
+  "setup_seconds": 0.0,
+  "ram_peak_mb": 58.9,
+  "model_size_mb": 2.25,
+  "hardware": "16 vCPUs, 13.76 GB RAM, Windows",
+  "python_version": "3.13.7",
+  "scope_notes": "TF-IDF fit Train + transform Val/Test + KMeans fit Train + predict Val/Test + eval Test; excludes disk I/O & plotting",
+  "raw_runs": [
+    {
+      "representation_seconds": 23.037587600003462,
+      "fit_seconds": 5.497372700003325,
+      "predict_seconds": 0.018529799999669194,
+      "evaluation_seconds": 0.005390400008764118,
+      "total_pipeline_seconds": 28.55888050001522,
+      "peak_ram_mb": 59.06285095214844
+    },
+    {
+      "representation_seconds": 23.55653240000538,
+      "fit_seconds": 4.217914200009545,
+      "predict_seconds": 0.011491199998999946,
+      "evaluation_seconds": 0.0024978000001283363,
+      "total_pipeline_seconds": 27.788435600014054,
+      "peak_ram_mb": 58.778276443481445
+    },
+    {
+      "representation_seconds": 19.680305400004727,
+      "fit_seconds": 4.881882899993798,
+      "predict_seconds": 0.014681499989819713,
+      "evaluation_seconds": 0.0026938999944832176,
+      "total_pipeline_seconds": 24.579563699982828,
+      "peak_ram_mb": 58.77646732330322
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "task": "E07",
+  "dataset": "oct2026_01_15",
+  "date_from": "2026-10-01",
+  "date_to": "2026-10-15",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "collected_at_utc": "2026-10-21T14:13:18.345918+00:00",
+  "n_articles": 5136,
+  "n_articles_before_september_filter": 5138,
+  "n_excluded_september_overlap": 2,
+  "source_counts_before_merge": {
+    "vnexpress": 1865,
+    "tuoitre": 1898,
+    "vietnamnet": 1375
+  },
+  "source_counts_after_merge": {
+    "tuoitre": 1898,
+    "vnexpress": 1865,
+    "vietnamnet": 1373
+  },
+  "counts_by_date": {
+    "2026-10-01": 356,
+    "2026-10-02": 409,
+    "2026-10-03": 282,
+    "2026-10-04": 246,
+    "2026-10-05": 352,
+    "2026-10-06": 390,
+    "2026-10-07": 371,
+    "2026-10-08": 386,
+    "2026-10-09": 346,
+    "2026-10-10": 284,
+    "2026-10-11": 237,
+    "2026-10-12": 347,
+    "2026-10-13": 394,
+    "2026-10-14": 361,
+    "2026-10-15": 375
+  },
+  "preprocessing": "clean_text_p0 on title and content",
+  "september_reference": "data/raw/news_articles.csv",
+  "september_sha256": "548b35953368857373e8f26639531b96ab83b742ed6432bff0b6462661b5077a",
+  "max_pages_per_category": {
+    "vnexpress": 25,
+    "tuoitre": 40,
+    "vietnamnet": 18
+  },
+  "files": {
+    "news_articles.csv": "86f8a8155eb08ed294e25722fb288651c6bf0554e43b4e4b23dfa65d80e8941c",
+    "news_articles_p0.csv": "13bd0e5aee6f8346841adaa19572fe388a016e35cc01fdcb8e776d739b80bea7",
+    "excluded_september_overlap.csv": "6edbd33c09b05b42aa783b316e2f10f28500153e137af4eb1434913f8eb71e4d",
+    "vnexpress_articles.csv": "9dda769bd11bdfeb8649b6dc97853c3d279c5a2df27b41672805fe9ac56dd113",
+    "tuoitre_articles.csv": "adabcc5cd20af464618180e90199c561acafb6aefd987f8da19d7f626929725d",
+    "vietnamnet_articles.csv": "77880bdd244001df7f7d2d26812317132a64f0e4b17999f0af3be11448b45f8d"
+  }
+}

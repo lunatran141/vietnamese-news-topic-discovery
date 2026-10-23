@@ -1,0 +1,6 @@
+reviewer_id,blind_topic_id,overlaps_other_topic,overlap_topic_ids,overlap_reason
+R1,T01,no,,"HS003 và HS005 tập trung iPhone Duo; T5 nói thị trường/mở bán iPhone 18 và T12 nói iPhone 18 Pro trước ra mắt. HS001/HS004 là vụ kiện Taptic Engine bị lẫn vào T01, không chứng minh T01 trùng T5/T12."
+R1,T02,no,,"HS006/HS008/HS010 theo vụ cựu hiệu trưởng THCS Ba Đình; HS007/HS009 theo vụ cựu Bộ trưởng Kim Tiến. T84 cũng có tin xét xử nhưng chủ yếu các bản án vụ khác, không cùng trọng tâm; T02 tự gộp hai vụ, chưa thấy topic khác trùng nó."
+R1,T03,no,,"HS012 và HS014 nói metro/đường sắt; HS011 và HS015 nói Luật Phát triển đô thị. T93 nói khu công nghệ cao, logistics và đầu tư công nghệ; T60 nói pháp lý nhà đất. Có giao thoa phát triển đô thị nhưng chưa phải cùng trọng tâm topic."
+R1,T04,no,,"HS017-HS020 đều theo giá vàng trong nước/thế giới. HS016 còn nhắc Fed và chứng khoán; T74 tập trung chính sách lãi suất Fed, T94 tập trung VN-Index. Một bài giao thoa thị trường không làm các topic này trùng T04."
+R1,T05,no,,"HS021 nói ảnh hưởng của uống nhiều nước, HS022/HS025 nói ung thư; HS023 là sự kiện bệnh viện, HS024 là tin trẻ bị bỏ rơi. T32 tập trung ngộ độc thực phẩm, T39 tập trung bữa ăn/an toàn thực phẩm trường học; cùng miền sức khỏe nhưng chưa trùng trọng tâm T05. T05 quá rộng là vấn đề khác."
