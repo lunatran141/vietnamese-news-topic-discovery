@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="648pt" viewBox="0 0 1152 648" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-24T23:53:48.408131</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 648 
+L 1152 648 
+L 1152 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 73.728 530.064 
+L 548.352 530.064 
+Q 562.176 530.064 562.176 522.288 
+L 562.176 132.192 
+Q 562.176 124.416 548.352 124.416 
+L 73.728 124.416 
+Q 59.904 124.416 59.904 132.192 
+L 59.904 522.288 
+Q 59.904 530.064 73.728 530.064 
+z
+" clip-path="url(#p0e12a7edeb)" style="fill: #eff4f8"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 615.168 530.064 
+L 1089.792 530.064 
+Q 1103.616 530.064 1103.616 522.288 
+L 1103.616 132.192 
+Q 1103.616 124.416 1089.792 124.416 
+L 615.168 124.416 
+Q 601.344 124.416 601.344 132.192 
+L 601.344 522.288 
+Q 601.344 530.064 615.168 530.064 
+z
+" clip-path="url(#p0e12a7edeb)" style="fill: #eff4f8"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Arial'; text-anchor: start; fill: #182b42" x="92.16" y="174.250625" transform="rotate(-0 92.16 174.250625)">Khám xét nhà nữ diễn viên 37 tuổi</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 11px; font-family: 'Arial'; text-anchor: start; fill: #52657b" x="92.16" y="226.8" transform="rotate(-0 92.16 226.8)">VNN_93c346ff1800</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 13px; font-family: 'Arial'; text-anchor: start; fill: #245c9c" x="92.16" y="366.12" transform="rotate(-0 92.16 366.12)">NMF_02 — Điều tra / pháp luật: 0.4141</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 13px; font-family: 'Arial'; text-anchor: start; fill: #d78125" x="92.16" y="395.28" transform="rotate(-0 92.16 395.28)">NMF_05 — Giải trí: 0.4096</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: start; fill: #52657b" x="92.16" y="424.44" transform="rotate(-0 92.16 424.44)">Xám: các topic còn lại (0.1763)</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: start; fill: #182b42" x="92.16" y="460.08" transform="rotate(-0 92.16 460.08)">Giao thoa có căn cứ sơ bộ</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 12px; font-family: 'Arial'; fill: #52657b" transform="translate(92.16 486.984375)">Cần xác nhận cả hai mảng có phải</text>
+    <text style="font-size: 12px; font-family: 'Arial'; fill: #52657b" transform="translate(92.16 499.8735)">trọng tâm nội dung hay không.</text>
+   </g>
+   <g id="text_8">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Arial'; fill: #182b42" transform="translate(633.6 174.675625)">Green SM mở cơ hội gia nhập</text>
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Arial'; fill: #182b42" transform="translate(633.6 192.855531)">cho tài xế mới</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11px; font-family: 'Arial'; text-anchor: start; fill: #52657b" x="633.6" y="226.8" transform="rotate(-0 633.6 226.8)">VNE_1e32ccbe78ad</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 13px; font-family: 'Arial'; text-anchor: start; fill: #245c9c" x="633.6" y="366.12" transform="rotate(-0 633.6 366.12)">NMF_02 — Điều tra / pháp luật: 0.2250</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 13px; font-family: 'Arial'; text-anchor: start; fill: #d78125" x="633.6" y="395.28" transform="rotate(-0 633.6 395.28)">NMF_00 — Doanh nghiệp: 0.2237</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: start; fill: #52657b" x="633.6" y="424.44" transform="rotate(-0 633.6 424.44)">Xám: các topic còn lại (0.5513)</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: start; fill: #182b42" x="633.6" y="460.08" transform="rotate(-0 633.6 460.08)">Topic pháp luật có dấu hiệu lệch nội dung</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 12px; font-family: 'Arial'; fill: #52657b" transform="translate(633.6 486.984375)">Hai trọng số gần nhau chưa đủ</text>
+    <text style="font-size: 12px; font-family: 'Arial'; fill: #52657b" transform="translate(633.6 501.8445)">để xác nhận bài có nhiều chủ đề.</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_4">
+    <path d="M 92.16 317.52 
+L 529.92 317.52 
+L 529.92 268.92 
+L 92.16 268.92 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 92.16 315.310909 
+L 273.433318 315.310909 
+L 273.433318 271.129091 
+L 92.16 271.129091 
+z
+" clip-path="url(#pd520ce8fdf)" style="fill: #245c9c"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 273.433318 315.310909 
+L 452.730656 315.310909 
+L 452.730656 271.129091 
+L 273.433318 271.129091 
+z
+" clip-path="url(#pd520ce8fdf)" style="fill: #d78125"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 452.730656 315.310909 
+L 529.92 315.310909 
+L 529.92 271.129091 
+L 452.730656 271.129091 
+z
+" clip-path="url(#pd520ce8fdf)" style="fill: #d9e3ec"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <defs>
+       <path id="mfd372023ca" d="M 0 0 
+L 0 3.5 
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#mfd372023ca" x="92.16" y="317.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_15">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="92.16" y="333.109375" transform="rotate(-0 92.16 333.109375)">0%</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2">
+      <g>
+       <use xlink:href="#mfd372023ca" x="311.04" y="317.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_16">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="311.04" y="333.109375" transform="rotate(-0 311.04 333.109375)">50%</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3">
+      <g>
+       <use xlink:href="#mfd372023ca" x="529.92" y="317.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_17">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="529.92" y="333.109375" transform="rotate(-0 529.92 333.109375)">100%</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2"/>
+   <g id="patch_8">
+    <path d="M 92.16 317.52 
+L 529.92 317.52 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="182.796659" y="296.330625" transform="rotate(-0 182.796659 296.330625)">41.41%</text>
+   </g>
+   <g id="text_19">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="363.081987" y="296.330625" transform="rotate(-0 363.081987 296.330625)">40.96%</text>
+   </g>
+   <g id="text_20">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: middle; fill: #182b42" x="491.325328" y="296.330625" transform="rotate(-0 491.325328 296.330625)">17.63%</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_9">
+    <path d="M 633.6 317.52 
+L 1071.36 317.52 
+L 1071.36 268.92 
+L 633.6 268.92 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 633.6 315.310909 
+L 732.095188 315.310909 
+L 732.095188 271.129091 
+L 633.6 271.129091 
+z
+" clip-path="url(#p28ed816673)" style="fill: #245c9c"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 732.095188 315.310909 
+L 830.034126 315.310909 
+L 830.034126 271.129091 
+L 732.095188 271.129091 
+z
+" clip-path="url(#p28ed816673)" style="fill: #d78125"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 830.034126 315.310909 
+L 1071.36 315.310909 
+L 1071.36 271.129091 
+L 830.034126 271.129091 
+z
+" clip-path="url(#p28ed816673)" style="fill: #d9e3ec"/>
+   </g>
+   <g id="matplotlib.axis_3">
+    <g id="xtick_4">
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#mfd372023ca" x="633.6" y="317.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_21">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="633.6" y="333.109375" transform="rotate(-0 633.6 333.109375)">0%</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5">
+      <g>
+       <use xlink:href="#mfd372023ca" x="852.48" y="317.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_22">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="852.48" y="333.109375" transform="rotate(-0 852.48 333.109375)">50%</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#mfd372023ca" x="1071.36" y="317.52" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_23">
+      <text style="font-size: 12px; font-family: 'Arial'; text-anchor: middle" x="1071.36" y="333.109375" transform="rotate(-0 1071.36 333.109375)">100%</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_4"/>
+   <g id="patch_13">
+    <path d="M 633.6 317.52 
+L 1071.36 317.52 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_24">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="682.847594" y="296.330625" transform="rotate(-0 682.847594 296.330625)">22.50%</text>
+   </g>
+   <g id="text_25">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: middle; fill: #ffffff" x="781.064657" y="296.330625" transform="rotate(-0 781.064657 296.330625)">22.37%</text>
+   </g>
+   <g id="text_26">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'Arial'; text-anchor: middle; fill: #182b42" x="950.697063" y="296.330625" transform="rotate(-0 950.697063 296.330625)">55.13%</text>
+   </g>
+  </g>
+  <g id="text_27">
+   <text style="font-weight: 700; font-size: 27px; font-family: 'Arial'; text-anchor: start; fill: #182b42" x="63.36" y="42.12" transform="rotate(-0 63.36 42.12)">Bài đa chủ đề: minh họa và trường hợp cần kiểm tra</text>
+  </g>
+  <g id="text_28">
+   <text style="font-size: 14px; font-family: 'Arial'; text-anchor: start; fill: #52657b" x="63.36" y="73.224" transform="rotate(-0 63.36 73.224)">523/1390 bài Test là ứng viên — topic share lớn thứ hai ≥ 0.20; chưa xác nhận đa chủ đề</text>
+  </g>
+  <g id="text_29">
+   <text style="font-size: 10px; font-family: 'Arial'; fill: #52657b" transform="translate(63.36 610.40625)">Topic share là trọng số tương đối, không phải xác suất nhãn đúng. Nhận xét sơ bộ còn chờ reviewer độc lập.</text>
+   <text style="font-size: 10px; font-family: 'Arial'; fill: #52657b" transform="translate(63.36 623.215312)">Nguồn: multi_topic_cases.csv và document_topics.parquet, run nmf_p3_k10_seed42_v1.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p0e12a7edeb">
+   <rect x="0" y="0" width="1152" height="648"/>
+  </clipPath>
+  <clipPath id="pd520ce8fdf">
+   <rect x="92.16" y="268.92" width="437.76" height="48.6"/>
+  </clipPath>
+  <clipPath id="p28ed816673">
+   <rect x="633.6" y="268.92" width="437.76" height="48.6"/>
+  </clipPath>
+ </defs>
+</svg>
