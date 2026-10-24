@@ -17,6 +17,13 @@ from app.ui.context import AnalysisContext
 
 API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000").rstrip("/")
 REVIEW_TYPES = ["Outlier", "Topic quá rộng", "Bài đa chủ đề", "Topic chồng lấn"]
+INFERENCE_MODELS = {
+    "BERTopic": "bertopic",
+    "HDBSCAN": "hdbscan",
+    "K-Means": "kmeans",
+    "NMF": "nmf",
+    "LDA": "lda",
+}
 
 
 def render(ctx: AnalysisContext) -> None:
@@ -129,26 +136,38 @@ def _render_review(ctx: AnalysisContext, labels: dict[int, str]) -> None:
 def _render_new_article() -> None:
     note("Trang này dùng API nội bộ và model đã lưu. Không huấn luyện lại khi gửi bài.")
     with st.form("new_article_form"):
+        model_label = st.selectbox("Mô hình dự đoán", list(INFERENCE_MODELS))
         title = st.text_input("Tiêu đề")
         content = st.text_area("Nội dung bài báo", height=220)
         submitted = st.form_submit_button("Phân tích bài báo")
     if not submitted:
-        st.info("API hiện có `/health`; chức năng dự đoán chỉ sẵn sàng khi endpoint `/predict` cùng model inference được bàn giao.")
+        st.info(
+            "Chọn mô hình và nhập tiêu đề hoặc nội dung để phân tích. "
+            "Lần dự đoán đầu có thể lâu hơn do API cần nạp model vào bộ nhớ."
+        )
         return
     if not title.strip() and not content.strip():
         st.warning("Nhập tiêu đề hoặc nội dung bài báo.")
         return
     try:
-        response = requests.post(
-            f"{API_BASE_URL}/predict",
-            json={"title": title.strip(), "content": content.strip()},
-            timeout=60,
-        )
+        with st.spinner("Đang tải model và phân tích bài báo..."):
+            response = requests.post(
+                f"{API_BASE_URL}/predict",
+                json={"title": title.strip(), "content": content.strip(), "model": INFERENCE_MODELS[model_label]},
+                timeout=180,
+            )
     except requests.RequestException as error:
         st.error(f"Không gọi được API: {error}")
         return
     if response.status_code in (404, 501, 503):
-        st.warning("API dự đoán chưa được triển khai cho model đã lưu. Cần hoàn thành P10A trước khi demo bài mới.")
+        try:
+            detail = response.json().get("detail")
+        except ValueError:
+            detail = None
+        st.warning(
+            detail
+            or "API dự đoán chưa sẵn sàng cho model đã lưu."
+        )
         return
     try:
         response.raise_for_status()
@@ -156,7 +175,52 @@ def _render_new_article() -> None:
     except (requests.RequestException, ValueError) as error:
         st.error(f"API trả về lỗi: {error}")
         return
-    st.json(result)
+    topic_id = result.get("topic_id")
+    confidence = result.get("confidence")
+    confidence_label = (
+        f"{float(confidence):.1%}" if confidence is not None else "Không có"
+    )
+    kpi_row(
+        [
+            ("Topic", f"T{topic_id}", None),
+            ("Mức gắn topic", confidence_label, None),
+            (
+                "Thời gian dự đoán",
+                f"{float(result.get('inference_seconds', 0)):.3f} giây",
+                None,
+            ),
+        ]
+    )
+    if result.get("is_outlier"):
+        st.warning("Bài báo được xác định là outlier và chưa có topic đủ rõ.")
+    else:
+        st.success(f"Chủ đề dự đoán: {result.get('topic_name', f'Topic {topic_id}')}")
+    st.caption(
+        "Mức gắn topic (nếu có) là điểm tương đối của mô hình, không phải "
+        "xác suất dự đoán đúng đã được hiệu chỉnh. K-Means không xuất điểm này. "
+        f"Model: {result.get('model', 'BERTopic')} · "
+        f"Run: {result.get('run_id', 'không xác định')} · "
+        f"Tiền xử lý: {result.get('preprocessing_variant', 'không xác định')}."
+    )
+
+    keywords = result.get("keywords") or []
+    if keywords:
+        st.markdown("**Từ khóa giải thích:** " + " · ".join(map(str, keywords)))
+
+    representatives = result.get("representative_articles") or []
+    if representatives:
+        st.markdown("**Bài báo đại diện của topic:**")
+        representative_table = pd.DataFrame(representatives).rename(
+            columns={
+                "article_id": "Mã bài",
+                "title": "Tiêu đề",
+                "split": "Tập dữ liệu",
+            }
+        )
+        data_table(representative_table, height=190)
+
+    with st.expander("Xem JSON đầy đủ"):
+        st.json(result)
     st.download_button(
         "Tải kết quả JSON",
         json.dumps(result, ensure_ascii=False, indent=2).encode("utf-8"),
