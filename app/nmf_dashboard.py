@@ -10,11 +10,67 @@ import json
 
 import pandas as pd
 import streamlit as st
+import plotly.graph_objects as go
+
+from app.ui import charts
 
 from app.data_service import (
     discover_model_runs, filter_documents, get_article_distribution,
     get_split_metrics, load_dashboard_bundle, load_optional_table,
 )
+
+
+def _render_topic_visuals(bundle) -> None:
+    """Compute split counts from the selected run, rather than another run's figures."""
+    st.subheader("Phân bố chủ đề và trọng số từ khóa")
+    docs = bundle.document_topics
+    splits = [s for s in ("train", "val", "test") if s in set(docs["split"])]
+    if not splits:
+        st.info("Chưa có dữ liệu split để vẽ phân bố chủ đề.")
+        return
+    split = st.selectbox("Split phân bố chủ đề", splits, key="nmf_topic_visual_split")
+    counts = docs.loc[docs["split"].eq(split), "topic_id"].value_counts()
+    topics = bundle.topic_summary.copy()
+    topics["document_count"] = topics["topic_id"].map(counts).fillna(0).astype(int)
+    topics = topics.sort_values("document_count", ascending=False)
+    labels = {int(r.topic_id): f"T{int(r.topic_id)} · {r.topic_name}"
+              for r in topics.itertuples()}
+    left, right = st.columns(2)
+    with left:
+        st.plotly_chart(charts.topic_distribution_bar(topics, labels),
+                        width="stretch", config=charts.PLOT_CONFIG)
+        st.caption(f"Đếm topic chính trên {len(docs.loc[docs['split'].eq(split)]):,} bài thuộc {split}.")
+    with right:
+        ids = sorted(labels)
+        if not ids:
+            st.info("Chưa có chủ đề để hiển thị.")
+            return
+        topic = st.selectbox("Chọn topic xem từ khóa", ids,
+                             format_func=lambda t: labels[t], key="nmf_keyword_visual_topic")
+        words = bundle.topic_keywords
+        words = words.loc[words["topic_id"].eq(topic)].sort_values("rank").head(10).copy()
+        if "weight" in words:
+            words["weight"] = pd.to_numeric(words["weight"], errors="coerce")
+            st.plotly_chart(charts.keyword_bar(words, "weight", "Trọng số từ khóa trong H"),
+                            width="stretch", config=charts.PLOT_CONFIG)
+        else:
+            st.info("Run này chưa xuất trọng số từ khóa.")
+        st.caption("Trọng số H dùng để xếp hạng từ trong từng topic, không phải xác suất. Tên topic là gợi ý, chưa phải nhãn đã duyệt.")
+
+
+def _render_overlap_visuals(docs: pd.DataFrame, threshold: float) -> None:
+    if docs.empty or "second_topic_share" not in docs:
+        return
+    shares = pd.to_numeric(docs["second_topic_share"], errors="coerce").dropna()
+    figure = go.Figure(go.Histogram(x=shares, xbins=dict(start=0, end=1, size=0.025),
+                                    marker_color="#397A96"))
+    figure.add_vline(x=threshold, line_dash="dash", line_color="#B65D38",
+                     annotation_text=f"Ngưỡng {threshold:.2f}")
+    figure.update_layout(template="plotly_white", height=280,
+                         xaxis_title="Share của topic đứng thứ hai", yaxis_title="Số bài",
+                         xaxis_range=[0, 1], margin=dict(l=20, r=20, t=30, b=20))
+    st.plotly_chart(figure, width="stretch", config=charts.PLOT_CONFIG)
+    st.caption("Phân bố trên các bài đang lọc. Vượt ngưỡng chỉ tạo ứng viên đa chủ đề; cần đọc bài để xác nhận.")
 
 
 def render_nmf_details(bundle, artifact_dir: str) -> None:
@@ -24,7 +80,12 @@ def render_nmf_details(bundle, artifact_dir: str) -> None:
 
     with tabs[0]:
         st.subheader("Kết quả theo split")
-        st.dataframe(get_split_metrics(bundle), hide_index=True, width="stretch")
+        split_metrics = get_split_metrics(bundle)
+        st.dataframe(split_metrics, hide_index=True, width="stretch")
+        available = [c for c in ("ari", "nmi", "npmi", "topic_diversity")
+                     if c in split_metrics and split_metrics[c].notna().any()]
+        if available:
+            st.bar_chart(split_metrics.set_index("split")[available])
         st.caption("Validation: fit trên train. Test: fit trên train+validation. ARI/NMI đối chiếu chuyên mục báo; reconstruction error càng thấp càng tốt, các metric còn lại càng cao càng tốt.")
         timings = pd.DataFrame([
             {"Công đoạn": name, "Giây": metrics.get(name)} for name in (
@@ -42,13 +103,14 @@ def render_nmf_details(bundle, artifact_dir: str) -> None:
         st.caption("Các bài ở đây dùng mô hình final fit trên train+validation. Dòng val thuộc development; metric validation độc lập ở tab trước dùng một mô hình chỉ fit trên train.")
         split = st.selectbox("Tập bài báo", ["val", "train", "test"], key="nmf_split")
         threshold = float(analysis.get("secondary_topic_min_share", 0.20))
-        multi_only = st.checkbox(f"Chỉ bài đa chủ đề: topic phụ có share ≥ {threshold:.2f}")
+        multi_only = st.checkbox(f"Chỉ ứng viên đa chủ đề: topic phụ có share ≥ {threshold:.2f}")
         close_only = st.checkbox("Lọc thêm bài có hai topic gần nhau")
         gap = st.slider("Gap tối đa giữa hai topic", 0.0, 1.0,
                         float(analysis.get("top_two_gap_filter", 0.10)), 0.01)
         query = st.text_input("Tìm tiêu đề hoặc mã bài")
         docs = filter_documents(bundle, split, multi_only, gap if close_only else None, query)
         st.caption(f"{len(docs):,} bài phù hợp. Bộ lọc gap không thay đổi nhãn đa chủ đề đã xuất.")
+        _render_overlap_visuals(docs, threshold)
         columns = [name for name in (
             "article_id", "title", "topic_id", "topic_share", "second_topic_id",
             "second_topic_share", "top_two_share_gap", "topic_entropy",
@@ -70,6 +132,7 @@ def render_nmf_details(bundle, artifact_dir: str) -> None:
             st.write("Từ khóa topic chính: " + ", ".join(keywords["keyword"].astype(str)))
 
     with tabs[2]:
+        _render_topic_visuals(bundle)
         reps = load_optional_table(artifact_dir, "representative_docs.csv")
         st.subheader("Bài đại diện")
         if reps.empty:

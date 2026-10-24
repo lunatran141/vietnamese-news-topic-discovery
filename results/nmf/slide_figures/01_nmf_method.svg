@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="648pt" viewBox="0 0 1152 648" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-24T23:53:47.706844</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 648 
+L 1152 648 
+L 1152 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 85.248 374.544 
+L 364.032 374.544 
+Q 377.856 374.544 377.856 366.768 
+L 377.856 184.032 
+Q 377.856 176.256 364.032 176.256 
+L 85.248 176.256 
+Q 71.424 176.256 71.424 184.032 
+L 71.424 366.768 
+Q 71.424 374.544 85.248 374.544 
+z
+" clip-path="url(#p07a9d0fc9d)" style="fill: #eff4f8; stroke: #245c9c; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 499.968 374.544 
+L 675.072 374.544 
+Q 688.896 374.544 688.896 366.768 
+L 688.896 184.032 
+Q 688.896 176.256 675.072 176.256 
+L 499.968 176.256 
+Q 486.144 176.256 486.144 184.032 
+L 486.144 366.768 
+Q 486.144 374.544 499.968 374.544 
+z
+" clip-path="url(#p07a9d0fc9d)" style="fill: #eff4f8; stroke: #087f8c; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 811.008 374.544 
+L 1078.272 374.544 
+Q 1092.096 374.544 1092.096 366.768 
+L 1092.096 184.032 
+Q 1092.096 176.256 1078.272 176.256 
+L 811.008 176.256 
+Q 797.184 176.256 797.184 184.032 
+L 797.184 366.768 
+Q 797.184 374.544 811.008 374.544 
+z
+" clip-path="url(#p07a9d0fc9d)" style="fill: #eff4f8; stroke: #d78125; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 79.488 568.944 
+L 1072.512 568.944 
+Q 1086.336 568.944 1086.336 561.168 
+L 1086.336 488.592 
+Q 1086.336 480.816 1072.512 480.816 
+L 79.488 480.816 
+Q 65.664 480.816 65.664 488.592 
+L 65.664 561.168 
+Q 65.664 568.944 79.488 568.944 
+z
+" clip-path="url(#p07a9d0fc9d)" style="fill: #eff4f8"/>
+   </g>
+   <g id="line2d_1">
+    <path d="M 80.64 338.04 
+L 368.64 338.04 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 80.64 306.72 
+L 368.64 306.72 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 80.64 275.4 
+L 368.64 275.4 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 80.64 244.08 
+L 368.64 244.08 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_5">
+    <path d="M 80.64 212.76 
+L 368.64 212.76 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 109.44 369.36 
+L 109.44 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_7">
+    <path d="M 138.24 369.36 
+L 138.24 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 167.04 369.36 
+L 167.04 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_9">
+    <path d="M 195.84 369.36 
+L 195.84 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_10">
+    <path d="M 224.64 369.36 
+L 224.64 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_11">
+    <path d="M 253.44 369.36 
+L 253.44 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_12">
+    <path d="M 282.24 369.36 
+L 282.24 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_13">
+    <path d="M 311.04 369.36 
+L 311.04 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_14">
+    <path d="M 339.84 369.36 
+L 339.84 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_15">
+    <path d="M 495.36 338.04 
+L 679.68 338.04 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_16">
+    <path d="M 495.36 306.72 
+L 679.68 306.72 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_17">
+    <path d="M 495.36 275.4 
+L 679.68 275.4 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_18">
+    <path d="M 495.36 244.08 
+L 679.68 244.08 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_19">
+    <path d="M 495.36 212.76 
+L 679.68 212.76 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_20">
+    <path d="M 541.44 369.36 
+L 541.44 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_21">
+    <path d="M 587.52 369.36 
+L 587.52 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_22">
+    <path d="M 633.6 369.36 
+L 633.6 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_23">
+    <path d="M 806.4 322.38 
+L 1082.88 322.38 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_24">
+    <path d="M 806.4 275.4 
+L 1082.88 275.4 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_25">
+    <path d="M 806.4 228.42 
+L 1082.88 228.42 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_26">
+    <path d="M 834.048 369.36 
+L 834.048 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_27">
+    <path d="M 861.696 369.36 
+L 861.696 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_28">
+    <path d="M 889.344 369.36 
+L 889.344 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_29">
+    <path d="M 916.992 369.36 
+L 916.992 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_30">
+    <path d="M 944.64 369.36 
+L 944.64 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_31">
+    <path d="M 972.288 369.36 
+L 972.288 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_32">
+    <path d="M 999.936 369.36 
+L 999.936 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_33">
+    <path d="M 1027.584 369.36 
+L 1027.584 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_34">
+    <path d="M 1055.232 369.36 
+L 1055.232 181.44 
+" clip-path="url(#p07a9d0fc9d)" style="fill: none; stroke: #ffffff; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 43px; font-family: 'Arial'; text-anchor: middle; fill: #245c9c" x="224.64" y="286.546406" transform="rotate(-0 224.64 286.546406)">X</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 16px; font-family: 'Arial'; text-anchor: middle; fill: #182b42" x="224.64" y="405" transform="rotate(-0 224.64 405)">Bài báo × Đặc trưng</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 15px; font-family: 'Arial'; text-anchor: middle; fill: #52657b" x="224.64" y="430.92" transform="rotate(-0 224.64 430.92)">D × V</text>
+   </g>
+   <g id="text_4">
+    <text style="font-weight: 700; font-size: 43px; font-family: 'Arial'; text-anchor: middle; fill: #087f8c" x="587.52" y="286.546406" transform="rotate(-0 587.52 286.546406)">W</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 16px; font-family: 'Arial'; text-anchor: middle; fill: #182b42" x="587.52" y="405" transform="rotate(-0 587.52 405)">Bài báo × Chủ đề</text>
+   </g>
+   <g id="text_6">
+    <text style="font-size: 15px; font-family: 'Arial'; text-anchor: middle; fill: #52657b" x="587.52" y="430.92" transform="rotate(-0 587.52 430.92)">D × K</text>
+   </g>
+   <g id="text_7">
+    <text style="font-weight: 700; font-size: 43px; font-family: 'Arial'; text-anchor: middle; fill: #d78125" x="944.64" y="286.546406" transform="rotate(-0 944.64 286.546406)">H</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 16px; font-family: 'Arial'; text-anchor: middle; fill: #182b42" x="944.64" y="405" transform="rotate(-0 944.64 405)">Chủ đề × Đặc trưng</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 15px; font-family: 'Arial'; text-anchor: middle; fill: #52657b" x="944.64" y="430.92" transform="rotate(-0 944.64 430.92)">K × V</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 42px; font-family: 'Arial'; text-anchor: middle; fill: #182b42" x="429.696" y="286.257656" transform="rotate(-0 429.696 286.257656)">≈</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 37px; font-family: 'Arial'; text-anchor: middle; fill: #182b42" x="744.192" y="284.965078" transform="rotate(-0 744.192 284.965078)">×</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Arial'; text-anchor: start; fill: #245c9c" x="80.64" y="142.56" transform="rotate(-0 80.64 142.56)">TF-IDF đầu vào</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Arial'; text-anchor: start; fill: #087f8c" x="495.36" y="142.56" transform="rotate(-0 495.36 142.56)">Trọng số chủ đề</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 17px; font-family: 'Arial'; text-anchor: start; fill: #d78125" x="806.4" y="142.56" transform="rotate(-0 806.4 142.56)">Từ khóa chủ đề</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 15px; font-family: 'Arial'; text-anchor: start; fill: #182b42" x="97.92" y="512.568" transform="rotate(-0 97.92 512.568)">P3: chuẩn hóa · tách từ PyVi · loại stopword</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 15px; font-family: 'Arial'; text-anchor: start; fill: #182b42" x="97.92" y="540.432" transform="rotate(-0 97.92 540.432)">TF-IDF unigram + bigram · tối đa 50.000 đặc trưng</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 12px; font-family: 'Arial'; text-anchor: end; fill: #52657b" x="1077.12" y="584.496" transform="rotate(-0 1077.12 584.496)">Coordinate Descent · Frobenius loss · tối đa 500 vòng · seed 42</text>
+   </g>
+  </g>
+  <g id="text_18">
+   <text style="font-weight: 700; font-size: 27px; font-family: 'Arial'; text-anchor: start; fill: #182b42" x="63.36" y="42.12" transform="rotate(-0 63.36 42.12)">NMF: từ TF-IDF đến các chủ đề</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 14px; font-family: 'Arial'; text-anchor: start; fill: #52657b" x="63.36" y="73.224" transform="rotate(-0 63.36 73.224)">Sơ đồ nguyên lý X ≈ W × H — W và H có các phần tử không âm</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 10px; font-family: 'Arial'; text-anchor: start; fill: #52657b" x="63.36" y="623.215312" transform="rotate(-0 63.36 623.215312)">Sơ đồ minh họa: số ô không biểu diễn dữ liệu thực. D: số bài; V: số đặc trưng; K: số chủ đề. Cấu hình triển khai: configs/nmf.yaml.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p07a9d0fc9d">
+   <rect x="0" y="0" width="1152" height="648"/>
+  </clipPath>
+ </defs>
+</svg>
