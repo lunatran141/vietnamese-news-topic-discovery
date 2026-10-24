@@ -28,7 +28,9 @@ Một vấn đề quan trọng khác là chất lượng những từ khóa đ�
 
 Röder et al. (2015) đề xuất một khung thống nhất để nghiên cứu các thước đo topic coherence, bao gồm các bước phân chia tập từ cần so sánh, ước lượng xác suất, đo mức độ liên hệ và tổng hợp kết quả. Công trình khảo sát nhiều cấu hình đánh giá và đối chiếu với nhận xét của con người về khả năng diễn giải chủ đề. Các thước đo như C_V và NPMI vì vậy có cơ sở để sử dụng trong thực nghiệm. Tuy nhiên, giá trị coherence còn phụ thuộc vào corpus tham chiếu, cách tiền xử lý và phương pháp ước lượng xác suất; đây không phải phép đo đầy đủ mọi khía cạnh của chất lượng mô hình.
 
-Những nghiên cứu trên hình thành cơ sở cho việc xây dựng và đánh giá NMF, LDA trong đồ án. Trên cùng bộ dữ liệu tin tức tiếng Việt, nhóm xem xét chất lượng các từ khóa chủ đề, phân bố tài liệu theo chủ đề, các chỉ số định lượng phù hợp, độ đa dạng và tính ổn định của kết quả. Việc phân tích tài liệu đại diện và đánh giá của con người cũng cần được xem xét bổ sung, bởi một mô hình có điểm coherence tốt chưa chắc tạo ra mọi chủ đề đều rõ nghĩa trong thực tế.
+Các nghiên cứu trên cung cấp cơ sở phương pháp, nhưng kết quả trên những corpus tiếng Anh chưa xác định được sự phù hợp của NMF và LDA với tập tin tức tiếng Việt của nhóm. Đồ án vì vậy khảo sát từ khóa, tài liệu đại diện, độ đa dạng và sự thay đổi kết quả qua các seed trên Dataset v1.0. Đây là phạm vi kiểm chứng thực nghiệm của đồ án, không phải khẳng định rằng chưa có nghiên cứu topic modeling cho tiếng Việt.
+
+NMF và LDA đều cho phép một tài liệu liên quan đến nhiều chủ đề, nhưng trọng số NMF sau chuẩn hóa không có cùng diễn giải xác suất với phân phối chủ đề của LDA. Ngoài ra, các pipeline của nhóm dùng biểu diễn đầu vào và số chủ đề khác nhau; chênh lệch metric chưa cô lập ảnh hưởng riêng của thuật toán. Phân tích tài liệu đại diện và review độc lập cần bổ sung cho các chỉ số tự động, đồng thời những nhãn chưa được xác nhận phải được giữ ở trạng thái đề xuất.
 
 ## 2.3 Semantic Topic Discovery — Khám phá chủ đề dựa trên ngữ nghĩa
 

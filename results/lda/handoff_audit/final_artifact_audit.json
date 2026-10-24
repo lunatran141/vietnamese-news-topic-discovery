@@ -1,0 +1,37 @@
+{
+  "checks": {
+    "effective_model_k15_seed42": true,
+    "vocabulary_15000": true,
+    "metadata_protocol": true,
+    "metadata_matches_effective_config": true,
+    "split_counts": true,
+    "common_unique_ids": true,
+    "common_split_alignment": true,
+    "representatives_150_development_only": true,
+    "proposed_labels_retained": true,
+    "test_metrics_match_common": true
+  },
+  "all_checks_passed": true,
+  "load_warnings": [],
+  "historical_test_metrics": {
+    "n_topics": 15,
+    "npmi_coherence": 0.14709446410016874,
+    "npmi_definition": "document_binary_common",
+    "topic_diversity": 0.6533333333333333,
+    "adjusted_rand_index": 0.40646609063623057,
+    "normalized_mutual_info": 0.5727127152837649,
+    "test_documents": 1390
+  },
+  "stability_scopes": {
+    "all_10_pairs_keyword_jaccard": 0.4556854926978766,
+    "four_reference_pairs_keyword_jaccard": 0.4433506838305599,
+    "common_ui_stability_mean": 0.4433506838305599
+  },
+  "scope": "Read-only structural audit; no retraining or recomputation of Final Test metrics.",
+  "source_sha256": {
+    "artifacts/lda/final/lda_pipeline.joblib": "e0cf35de55a0e0c8740a3fb512a352f4f5668c3bf1f3e071716f54d8bac170bb",
+    "artifacts/lda/final/config.json": "25bd7deff959d5b3c27cd660a938d697df7b662acce6bd9a96ee11b109ab0a88",
+    "artifacts/lda/final/run_metadata.json": "b1dae2bead1e2043e7d2372323521626717cabf4d328d50689b063436f010b2f",
+    "results/lda/final/test_metrics.json": "7758b5c2c1716c480250d2832e25feb9fd291eb1361e98d3c697b60efa542f0c"
+  }
+}

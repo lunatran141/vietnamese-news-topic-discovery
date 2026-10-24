@@ -2,8 +2,6 @@
 """Evaluation metrics for M08 LDA topic experiments."""
 
 import numpy as np
-from gensim.corpora import Dictionary
-from gensim.models.coherencemodel import CoherenceModel
 
 
 def extract_topic_words(model, feature_names, top_n=10):
@@ -37,6 +35,8 @@ def topic_diversity(topics):
 
 def prepare_coherence_corpus(texts, vectorizer):
     """Tokenize validation texts using the trained BoW vocabulary."""
+    from gensim.corpora import Dictionary
+
     analyzer = vectorizer.build_analyzer()
     vocabulary = set(vectorizer.get_feature_names_out())
 
@@ -65,6 +65,8 @@ def calculate_coherence(
     """Calculate coherence with Gensim on validation documents."""
     if metric not in {"c_v", "c_npmi"}:
         raise ValueError(f"Unsupported coherence metric: {metric}")
+
+    from gensim.models.coherencemodel import CoherenceModel
 
     valid_topics = [
         [word for word in topic if word in dictionary.token2id]
