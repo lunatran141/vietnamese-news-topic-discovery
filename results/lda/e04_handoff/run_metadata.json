@@ -1,0 +1,46 @@
+{
+  "status": "supplementary_run_pending_review",
+  "dataset_version": "v1.0",
+  "fit_split": "train",
+  "evaluation_split": "val",
+  "preprocessing": "p2_segmented",
+  "n_topics": 15,
+  "seeds": [
+    42,
+    52,
+    62,
+    72,
+    82
+  ],
+  "n_jobs": 1,
+  "python": "3.14.0",
+  "sklearn": "1.8.0",
+  "numpy": "2.3.5",
+  "vectorizer": {
+    "max_features": 15000,
+    "min_df": 3,
+    "max_df": 0.85,
+    "ngram_range": [
+      1,
+      1
+    ],
+    "token_pattern": "(?u)\\b\\w\\w+\\b"
+  },
+  "model": {
+    "n_components": 15,
+    "learning_method": "batch",
+    "max_iter": 20,
+    "random_state": 42,
+    "evaluate_every": -1,
+    "n_jobs": 1
+  },
+  "npmi_definition": "document_binary_common",
+  "keyword_matching": "hungarian_top10_jaccard",
+  "input_sha256": {
+    "configs/lda.yaml": "f7823f856c47adc49fe07d8ce6cd0938a34c26e14a8057516b38686e33b4657b",
+    "configs/lda_stability.yaml": "9346540b877ad1b78e36e69d1b462bba347dc790afcb3c65ee9dd94882df74fd",
+    "data/processed/p2_segmented.csv": "be99ead1f6608976c86b172ad885e2676a0d25f6f55e2d732a9f15cf62a2add5",
+    "data/splits/split_manifest.csv": "387e815af3cb6c0f20967cfa6aeffbd61f2b447d201f3eeda1173eedda8e1455"
+  },
+  "test_used_for_fit_or_evaluation": false
+}

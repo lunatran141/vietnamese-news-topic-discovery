@@ -1,0 +1,19 @@
+{
+  "fit_split": "train",
+  "evaluation_split": "val",
+  "n_documents": 1391,
+  "outlier_policy": "all-document ARI includes -1; also report common-non-outlier ARI and retained fraction",
+  "standard_deviation": "sample, ddof=1; descriptive only; seed pairs are dependent",
+  "seed_policy": "retain submitted seed sets; no claim of shared-seed protocol",
+  "sources_sha256": {
+    "configs/e04_stability.yaml": "27d04631dd55951f96e7b359958e237d04ae56fbbf92d08d7da253be23b57cc9",
+    "data/splits/split_manifest.csv": "387e815af3cb6c0f20967cfa6aeffbd61f2b447d201f3eeda1173eedda8e1455",
+    "results\\lda\\e04_handoff\\per_seed.csv": "0b57d47fbc1280cc1d73eb650827b71161699a970688faefc949b74c8044329f",
+    "results\\lda\\e04_handoff\\validation_assignments.csv": "c12b6aa7d4377af073091ee9439559badd40edaf094a67080bd649a3b528c5f2",
+    "results\\lda\\e04_handoff\\run_metadata.json": "b12b404077314126e611e9d6a0c704fbde93aff21baf9059197a7bfcc500fcbd",
+    "results\\lda\\e04_handoff\\pairwise.csv": "e19f254273a44605fa326e8c4a8b41e85f51d1ef60c9c174b11829e0112e8cfb",
+    "results\\hdbscan\\stability\\minilm_title_content_eom_15_5_seeds42_51\\validation_assignments.csv": "a6830c638d467e33d04d223dcc1889dc11c1000bde87c4b2a13b16d9b40c4e4e",
+    "results\\hdbscan\\stability\\minilm_title_content_eom_15_5_seeds42_51\\validation_seed_metrics.csv": "afd2be481423053db80f6d5bb48ec5f89a608a7e492307f4faefa918df7e23d5",
+    "results\\hdbscan\\stability\\minilm_title_content_eom_15_5_seeds42_51\\train_seed_metrics.csv": "12c9d0284e11bfff950cf743d8a972dad3e82f4eaba684bb5b9351fd59206b5f"
+  }
+}

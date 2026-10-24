@@ -1,0 +1,19 @@
+# Separate source protocols remain visible; seed numbers are not harmonized retroactively.
+evaluation_split: val
+output_dir: results/stability/e04
+sources:
+  LDA:
+    kind: standard
+    directory: results/lda/e04_handoff
+  HDBSCAN:
+    kind: hdbscan
+    directory: results/hdbscan/stability/minilm_title_content_eom_15_5_seeds42_51
+  KMeans:
+    kind: standard
+    directory: results/stability/submissions/kmeans
+  NMF:
+    kind: standard
+    directory: results/stability/submissions/nmf
+  BERTopic:
+    kind: standard
+    directory: results/stability/submissions/bertopic
