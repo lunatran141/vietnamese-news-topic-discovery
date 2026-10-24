@@ -11,7 +11,7 @@ import streamlit as st
 
 from app.data_service import enrich_documents, get_document_table, get_model_overview
 from app.ui.components import (
-    build_topic_labels, data_table, kpi_row, label_of, note, page_header, table_download,
+    build_topic_labels, data_table, kpi_row, label_of, page_header, table_download,
 )
 from app.ui.context import AnalysisContext
 
@@ -77,7 +77,6 @@ def _filter_articles(ctx: AnalysisContext, labels: dict[int, str]) -> pd.DataFra
 
 
 def _render_search(ctx: AnalysisContext, labels: dict[int, str]) -> None:
-    note("Tìm trong các bài đã có artifact; bộ lọc nguồn và ngày lấy từ metadata corpus gốc.")
     documents = _filter_articles(ctx, labels)
     kpi_row([("Bài phù hợp", f"{len(documents):,}", None)])
     st.write("")
@@ -184,25 +183,21 @@ def _render_review(ctx: AnalysisContext, labels: dict[int, str]) -> None:
             )
             return
         cases = _select_review_cases(documents, selected)
-        note("Các bài có topic -1 theo artifact; cần đánh giá thủ công trước khi gọi là lỗi.")
     elif selected == "Bài đa chủ đề":
         if "is_multi_topic" not in documents:
             st.info("Run này chưa xuất dấu hiệu bài đa chủ đề.")
             return
         cases = _select_review_cases(documents, selected)
-        note("Artifact của mô hình đánh dấu bài có nhiều topic đủ trọng số; đây là trường hợp cần xem xét, không tự động là lỗi.")
     elif selected == "Topic chồng lấn":
         if "top_two_share_gap" not in documents:
             st.info("Run này chưa xuất khoảng cách giữa hai topic mạnh nhất.")
             return
         cases = _select_review_cases(documents, selected)
-        note("Hai topic mạnh nhất có tỷ trọng gần nhau (chênh lệch ≤ 0,1); cần đọc bài để xác định có chồng lấn thực sự hay không.")
     else:
         cases = _select_review_cases(documents, selected)
         if cases.empty:
             st.info("Không có topic để phân tích.")
             return
-        note("Các topic thuộc nhóm 10% lớn nhất theo số bài. Kích thước lớn là tín hiệu để kiểm tra, chưa chứng minh topic sai.")
     left, right = st.columns(2)
     query = left.text_input("Tìm tiêu đề hoặc article ID", key="review_query").strip()
     available_topics = sorted(cases["topic_id"].dropna().astype(int).unique()) if "topic_id" in cases else []
@@ -226,7 +221,6 @@ def _render_review(ctx: AnalysisContext, labels: dict[int, str]) -> None:
 
 
 def _render_new_article() -> None:
-    note("Trang này dùng API nội bộ và model đã lưu. Không huấn luyện lại khi gửi bài.")
     with st.form("new_article_form"):
         model_label = st.selectbox("Mô hình dự đoán", list(INFERENCE_MODELS))
         title = st.text_input("Tiêu đề")
