@@ -1,19 +1,9 @@
 # vietnamese-news-topic-discovery
 Vietnamese news topic discovery using five NLP methods
-## Chạy ứng dụng bằng Docker
 
-### Yêu cầu
+Ứng dụng khám phá chủ đề tin tức tiếng Việt với K-Means, NMF, LDA, HDBSCAN và BERTopic. Giao diện Streamlit gọi API FastAPI để phân loại bài báo mới bằng các mô hình đã lưu.
 
-- Cài Docker Desktop và bật Docker Engine.
-- Cài Git và Git LFS.
-- Có mạng khi build image và khi tải embedding model lần đầu.
-- Có đủ RAM và dung lượng đĩa để nạp các mô hình NLP.
-
-Không cần cài Python hoặc các thư viện Python trực tiếp trên máy: Docker cài chúng từ `requirements.txt`.
-
-### 1. Lấy mã nguồn và dữ liệu
-
-Mở PowerShell:
+## Chuẩn bị mã nguồn
 
 ```powershell
 git clone https://github.com/lunatran141/vietnamese-news-topic-discovery.git
@@ -23,99 +13,34 @@ git lfs install
 git lfs pull
 ```
 
-Nếu đã clone repo trước đó:
+Nếu đã clone trước đó, chạy `git pull origin develop` và `git lfs pull` trong thư mục repository. Git LFS cần thiết cho một số dữ liệu và model. Chạy các lệnh dưới đây từ **thư mục gốc repository**.
 
-```powershell
-git switch develop
-git pull origin develop
-git lfs pull
-```
+> **Artifact BERTopic:** Model E1 tại `artifacts/bertopic/experiments/e1_vietnamese_sbert/model/` chưa được đưa lên GitHub. Để dùng chức năng dự đoán BERTopic trên máy mới, hãy nhận thư mục model này từ người phụ trách và đặt đúng đường dẫn. Trên PowerShell, dùng `Test-Path .\artifacts\bertopic\experiments\e1_vietnamese_sbert\model\config.json` để kiểm tra; kết quả phải là `True`. HDBSCAN cũng có thể cần kết nối mạng để tải embedding model lần đầu. Giao diện và các chức năng đọc artifact vẫn có thể mở khi chưa có model BERTopic.
 
-**Lưu ý về BERTopic:** model E1 cần có tại
-`artifacts/bertopic/experiments/e1_vietnamese_sbert/model/`.
-Thư mục model này hiện không có trong GitHub; cần nhận từ người phụ trách
-BERTopic và đặt đúng đường dẫn trên trước khi dùng chức năng dự đoán BERTopic.
-Có thể kiểm tra bằng:
+## Cách 1: Chạy bằng Docker
 
-```powershell
-Test-Path .\artifacts\bertopic\experiments\e1_vietnamese_sbert\model\config.json
-```
-
-Kết quả phải là `True`. Không tự huấn luyện lại model để thay thế model E1
-đã dùng trong báo cáo.
-
-### 2. Khởi chạy API và Streamlit
-
-Chạy tại thư mục gốc repository:
+Cài và mở Docker Desktop. Không cần cài Python hay từng thư viện Python trên máy; Docker image cài dependencies từ `requirements.txt`.
 
 ```powershell
 docker compose up --build -d
 docker compose ps
 ```
 
-Docker tạo hai dịch vụ:
-
-- Giao diện Streamlit: http://localhost:8501
-- API và tài liệu endpoint: http://localhost:8000/docs
-- Kiểm tra API: http://localhost:8000/health
-
-Lần build đầu tiên có thể lâu vì Docker phải tải và cài các thư viện.
-Lần dự đoán đầu tiên cũng có thể lâu vì model được nạp vào bộ nhớ.
-
-### 3. Kiểm tra chương trình
+Mở giao diện tại <http://localhost:8501>. API ở <http://localhost:8000>; tài liệu endpoint ở <http://localhost:8000/docs>. Kiểm tra API:
 
 ```powershell
 Invoke-RestMethod http://localhost:8000/health
-docker compose ps
+```
+
+Lần sau, nếu không đổi code hoặc dependencies, có thể chạy `docker compose up -d`. Xem lỗi và dừng chương trình:
+
+```powershell
 docker compose logs --tail=100 api
 docker compose logs --tail=100 app
-```
-
-API hoạt động khi `/health` trả về `{"status":"ok"}`. Sau đó mở
-http://localhost:8501, vào trang bài báo mới, nhập tiêu đề/nội dung và
-chọn mô hình để dự đoán.
-
-Có thể thử trực tiếp endpoint `/predict`:
-
-```powershell
-$body = @{
-    title = "Giá vàng trong nước tăng"
-    content = "Giá vàng miếng và giá vàng nhẫn tăng theo diễn biến thị trường."
-    model = "kmeans"
-} | ConvertTo-Json
-
-Invoke-RestMethod `
-    -Uri "http://localhost:8000/predict" `
-    -Method Post `
-    -ContentType "application/json; charset=utf-8" `
-    -Body ([Text.Encoding]::UTF8.GetBytes($body))
-```
-
-Giá trị `model` có thể là `kmeans`, `nmf`, `lda`, `hdbscan` hoặc `bertopic`.
-Mỗi mô hình cần các artifact/model đã lưu tương ứng. HDBSCAN có thể cần tải
-embedding model từ Hugging Face ở lần chạy đầu. Nếu thiếu model hoặc không có
-mạng để tải, API sẽ báo lỗi thay vì huấn luyện lại.
-
-### 4. Dừng hoặc khởi động lại
-
-```powershell
 docker compose down
-docker compose up -d
 ```
 
-Khi cập nhật code hoặc `requirements.txt`:
-
-```powershell
-git pull origin develop
-git lfs pull
-docker compose up --build -d
-```
-
-Không dùng `docker compose down -v` nếu chưa kiểm tra các volume/dữ liệu cần giữ.
-
-### 5. Nếu cổng 8000 hoặc 8501 đang được sử dụng
-
-Trong PowerShell, đặt cổng khác trước khi chạy:
+Nếu cổng 8000 hoặc 8501 đã được sử dụng, đặt cổng host khác trước khi chạy:
 
 ```powershell
 $env:API_PORT = "8001"
@@ -123,13 +48,41 @@ $env:STREAMLIT_PORT = "8502"
 docker compose up --build -d
 ```
 
-Khi đó mở giao diện tại http://localhost:8502 và API tại
-http://localhost:8001. Streamlit trong Docker vẫn kết nối API qua mạng nội bộ
-Docker, nên không cần đổi `API_BASE_URL`.
+Khi đó mở Streamlit tại <http://localhost:8502> và API tại <http://localhost:8001>.
 
-### 6. Kết quả E08
+## Cách 2: Chạy không dùng Docker (Windows PowerShell)
 
-Kết quả benchmark đã có trong `results/runtime_benchmark/`. **Không cần chạy
-lại benchmark để mở giao diện.** Nếu muốn tái lập E08 trên máy khác, xem
-`docs/e08_runtime_benchmark_guide.md`. Kết quả đo trên máy khác phải ghi
-riêng cấu hình CPU/GPU và không thay trực tiếp số liệu của đợt đo gốc.
+Cài Python 3.11 và Git LFS. Tạo môi trường riêng rồi cài thư viện một lần:
+
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+Mở **hai cửa sổ PowerShell**, đều ở thư mục gốc repository. Giữ cả hai cửa sổ chạy khi sử dụng ứng dụng.
+
+Cửa sổ 1 — API:
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn src.api.main:app --host 127.0.0.1 --port 8001
+```
+
+Cửa sổ 2 — Streamlit:
+
+```powershell
+$env:API_BASE_URL = "http://127.0.0.1:8001"
+.\.venv\Scripts\python.exe -m streamlit run app\streamlit_app.py
+```
+
+Mở <http://localhost:8501>. Kiểm tra API bằng `Invoke-RestMethod http://127.0.0.1:8001/health`. Nhấn `Ctrl+C` ở mỗi cửa sổ để dừng. Nếu cổng 8001 đã được sử dụng, đổi `--port` ở cửa sổ API và đổi cùng số cổng trong `API_BASE_URL`.
+
+## Kiểm thử và kết quả E08
+
+Khi chạy không dùng Docker, có thể kiểm tra API mà không cần tải model nặng:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests\test_api.py -q
+```
+
+Kết quả benchmark E08 đã được lưu trong `results/runtime_benchmark/`; không cần chạy lại benchmark để mở giao diện. Cách tái lập phép đo và giới hạn so sánh được ghi tại [hướng dẫn E08](docs/e08_runtime_benchmark_guide.md).
