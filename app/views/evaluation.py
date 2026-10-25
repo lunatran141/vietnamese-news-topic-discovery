@@ -156,7 +156,7 @@ def comparison_table(runs: list[ArtifactRun], split: str) -> pd.DataFrame:
         nmi = overview["normalized_mutual_info"]
         coherence = overview["coherence"]
 
-        if bundle.model_summary.algorithm.strip().lower() == "hdbscan":
+        if ari is None or bundle.model_summary.algorithm.strip().lower() == "hdbscan":
             metric_docs = bundle.document_topics
             if split != "all":
                 metric_docs = metric_docs.loc[
@@ -593,7 +593,9 @@ def _render_bertopic_config(
     keywords[score_column] = pd.to_numeric(keywords[score_column], errors="coerce")
     st.plotly_chart(
         charts.keyword_bar(keywords, score_column, "Điểm c-TF-IDF"),
-        width="stretch", config=charts.PLOT_CONFIG,
+        width="stretch",
+        config=charts.PLOT_CONFIG,
+        key=f"bertopic_exp_keywords_{topic_id}",
     )
     data_table(keywords)
     st.caption("c-TF-IDF cao nghĩa là từ đặc trưng cho topic so với các topic khác; không phải xác suất xuất hiện của từ.")
@@ -750,6 +752,7 @@ def _render_bertopic_deep_dive(ctx: AnalysisContext) -> None:
                 charts.keyword_bar(keywords, score_column, "Điểm c-TF-IDF"),
                 width="stretch",
                 config=charts.PLOT_CONFIG,
+                key=f"bertopic_deep_keywords_{topic_id}",
             )
             data_table(keywords)
     with right:

@@ -126,21 +126,31 @@ def get_model_overview(
     topic_count = int(documents.loc[~outlier, "topic_id"].nunique())
 
     metric_split = "test" if split == "test" else "validation"
-    adjusted_rand_index = summary.metrics.get(
-        f"{metric_split}_adjusted_rand_index"
+    adjusted_rand_index = (
+        summary.metrics.get(f"{metric_split}_adjusted_rand_index")
+        or summary.metrics.get(f"{metric_split}_ari")
+        or summary.metrics.get("adjusted_rand_index")
+        or summary.metrics.get("ari")
     )
-    normalized_mutual_info = summary.metrics.get(
-        f"{metric_split}_normalized_mutual_info"
+    normalized_mutual_info = (
+        summary.metrics.get(f"{metric_split}_normalized_mutual_info")
+        or summary.metrics.get(f"{metric_split}_nmi")
+        or summary.metrics.get("normalized_mutual_info")
+        or summary.metrics.get("nmi")
     )
     if metric_split == "test":
-        coherence = summary.metrics.get(
-            "test_npmi_coherence",
-            summary.metrics.get("npmi_coherence"),
+        coherence = (
+            summary.metrics.get("test_npmi_coherence")
+            or summary.metrics.get("test_npmi")
+            or summary.metrics.get("npmi_coherence")
+            or summary.metrics.get("npmi")
         )
     else:
-        coherence = summary.metrics.get(
-            "validation_npmi_coherence",
-            summary.metrics.get("npmi_coherence"),
+        coherence = (
+            summary.metrics.get("validation_npmi_coherence")
+            or summary.metrics.get("validation_npmi")
+            or summary.metrics.get("npmi_coherence")
+            or summary.metrics.get("npmi")
         )
 
     fit_seconds = summary.metrics.get("fit_seconds")
