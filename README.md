@@ -15,7 +15,15 @@ git lfs pull
 
 Nếu đã clone trước đó, chạy `git pull origin develop` và `git lfs pull` trong thư mục repository. Git LFS cần thiết cho một số dữ liệu và model. Chạy các lệnh dưới đây từ **thư mục gốc repository**.
 
-> **Artifact BERTopic:** Model E1 tại `artifacts/bertopic/experiments/e1_vietnamese_sbert/model/` chưa được đưa lên GitHub. Để dùng chức năng dự đoán BERTopic trên máy mới, hãy nhận thư mục model này từ người phụ trách và đặt đúng đường dẫn. Trên PowerShell, dùng `Test-Path .\artifacts\bertopic\experiments\e1_vietnamese_sbert\model\config.json` để kiểm tra; kết quả phải là `True`. HDBSCAN cũng có thể cần kết nối mạng để tải embedding model lần đầu. Giao diện và các chức năng đọc artifact vẫn có thể mở khi chưa có model BERTopic.
+> **Artifact BERTopic:** Model E1 được quản lý bằng Git LFS tại `artifacts/bertopic/experiments/e1_vietnamese_sbert/model/`. Sau `git lfs pull`, kiểm tra bằng `Test-Path .\artifacts\bertopic\experiments\e1_vietnamese_sbert\model\config.json`; kết quả phải là `True`. Model tham chiếu embedding `keepitreal/vietnamese-sbert` trên Hugging Face nên lần chạy đầu cần mạng để tải trọng số, trừ khi máy đã có cache. HDBSCAN cũng có thể cần tải embedding model lần đầu.
+
+Để kiểm tra dự đoán BERTopic E1 sau khi cài dependencies, chạy từ thư mục gốc:
+
+```powershell
+.\.venv\Scripts\python.exe -c "from src.api.inference_service import BERTopicInferenceService; r = BERTopicInferenceService().predict('Giá vàng trong nước tăng', 'Giá vàng miếng tăng theo diễn biến thị trường thế giới.'); print(r.model, r.run_id, r.topic_id)"
+```
+
+Kết quả cần có `BERTopic e1_vietnamese_sbert` và một topic ID; topic cụ thể phụ thuộc nội dung bài. Nếu `git lfs pull` báo thiếu quyền tải hoặc không tìm thấy model, cần kiểm tra quyền truy cập Git LFS của repository trước khi demo.
 
 ## Cách 1: Chạy bằng Docker
 
