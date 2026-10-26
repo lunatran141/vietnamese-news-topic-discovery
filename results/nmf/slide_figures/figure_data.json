@@ -1,0 +1,263 @@
+{
+  "run_id": "nmf_p3_k10_seed42_v1",
+  "figure_01": "Conceptual schematic; matrix cells are not measured data.",
+  "selection": [
+    {
+      "n_topics": 4,
+      "npmi_coherence": 0.3582710108061928,
+      "topic_diversity": 0.975,
+      "normalized_reconstruction_error": 0.972712572423128,
+      "mean_primary_topic_share": 0.7411893242042352,
+      "n_iter": 71,
+      "converged": true,
+      "fit_split": "train",
+      "evaluation_split": "val"
+    },
+    {
+      "n_topics": 6,
+      "npmi_coherence": 0.3737848520485728,
+      "topic_diversity": 1.0,
+      "normalized_reconstruction_error": 0.9675323563458756,
+      "mean_primary_topic_share": 0.71429192511436,
+      "n_iter": 60,
+      "converged": true,
+      "fit_split": "train",
+      "evaluation_split": "val"
+    },
+    {
+      "n_topics": 8,
+      "npmi_coherence": 0.4293009428938719,
+      "topic_diversity": 1.0,
+      "normalized_reconstruction_error": 0.9633416931247328,
+      "mean_primary_topic_share": 0.6819479455930483,
+      "n_iter": 55,
+      "converged": true,
+      "fit_split": "train",
+      "evaluation_split": "val"
+    },
+    {
+      "n_topics": 10,
+      "npmi_coherence": 0.4492573838558329,
+      "topic_diversity": 1.0,
+      "normalized_reconstruction_error": 0.9594766436933756,
+      "mean_primary_topic_share": 0.6684340023886606,
+      "n_iter": 41,
+      "converged": true,
+      "fit_split": "train",
+      "evaluation_split": "val"
+    },
+    {
+      "n_topics": 12,
+      "npmi_coherence": 0.4402515042816677,
+      "topic_diversity": 0.9916666666666668,
+      "normalized_reconstruction_error": 0.9567848519079976,
+      "mean_primary_topic_share": 0.6309698083000004,
+      "n_iter": 31,
+      "converged": true,
+      "fit_split": "train",
+      "evaluation_split": "val"
+    }
+  ],
+  "test_metrics": {
+    "n_topics": 10,
+    "npmi_coherence": 0.44068035848390225,
+    "topic_diversity": 1.0,
+    "normalized_reconstruction_error": 0.9590277041827524,
+    "mean_primary_topic_share": 0.6687956294161916,
+    "n_iter": 44,
+    "converged": true,
+    "adjusted_rand_index": 0.5390789913596382,
+    "normalized_mutual_info": 0.651372590995637
+  },
+  "keywords": [
+    {
+      "topic_id": "NMF_02",
+      "keywords": [
+        {
+          "term": "công_an",
+          "weight": 0.5188225343466855
+        },
+        {
+          "term": "điều_tra",
+          "weight": 0.46663175219941694
+        },
+        {
+          "term": "vụ",
+          "weight": 0.357265710148655
+        },
+        {
+          "term": "án",
+          "weight": 0.35711442683997896
+        },
+        {
+          "term": "cơ_quan",
+          "weight": 0.33243952340820443
+        },
+        {
+          "term": "cảnh_sát",
+          "weight": 0.303009948800002
+        },
+        {
+          "term": "hành_vi",
+          "weight": 0.297752439729505
+        },
+        {
+          "term": "vụ án",
+          "weight": 0.29589335679764583
+        },
+        {
+          "term": "tỉnh",
+          "weight": 0.2952772206699024
+        },
+        {
+          "term": "tiền",
+          "weight": 0.287194596843964
+        }
+      ],
+      "npmi_coherence": 0.4631047530283993,
+      "manual_label": "",
+      "interpretability_rating_1_to_5": null,
+      "review_notes": ""
+    },
+    {
+      "topic_id": "NMF_03",
+      "keywords": [
+        {
+          "term": "bác_sĩ",
+          "weight": 0.459055821271071
+        },
+        {
+          "term": "bệnh",
+          "weight": 0.38021812701726493
+        },
+        {
+          "term": "người_bệnh",
+          "weight": 0.34715672346238036
+        },
+        {
+          "term": "điều_trị",
+          "weight": 0.3415706338456942
+        },
+        {
+          "term": "bệnh_viện",
+          "weight": 0.3123374583241657
+        },
+        {
+          "term": "hoặc",
+          "weight": 0.2954962848980649
+        },
+        {
+          "term": "máu",
+          "weight": 0.26994421941560837
+        },
+        {
+          "term": "khám",
+          "weight": 0.26316462855458683
+        },
+        {
+          "term": "nguy_cơ",
+          "weight": 0.25648082213935114
+        },
+        {
+          "term": "thuốc",
+          "weight": 0.2550423470084225
+        }
+      ],
+      "npmi_coherence": 0.46869259181927025,
+      "manual_label": "",
+      "interpretability_rating_1_to_5": null,
+      "review_notes": ""
+    },
+    {
+      "topic_id": "NMF_04",
+      "keywords": [
+        {
+          "term": "trường",
+          "weight": 0.6077014580904732
+        },
+        {
+          "term": "học_sinh",
+          "weight": 0.5324070872453707
+        },
+        {
+          "term": "giáo_dục",
+          "weight": 0.4366263603882146
+        },
+        {
+          "term": "học",
+          "weight": 0.371419011867287
+        },
+        {
+          "term": "đào_tạo",
+          "weight": 0.3251479994387912
+        },
+        {
+          "term": "nhà_trường",
+          "weight": 0.2892250243451174
+        },
+        {
+          "term": "giáo_viên",
+          "weight": 0.2819098071800862
+        },
+        {
+          "term": "năm_học",
+          "weight": 0.28109619388864593
+        },
+        {
+          "term": "đại_học",
+          "weight": 0.2758276319214704
+        },
+        {
+          "term": "lớp",
+          "weight": 0.2593816876451192
+        }
+      ],
+      "npmi_coherence": 0.4399064918285552,
+      "manual_label": "",
+      "interpretability_rating_1_to_5": null,
+      "review_notes": ""
+    }
+  ],
+  "cases": [
+    {
+      "article_id": "VNE_1e32ccbe78ad",
+      "title": "Green SM mở cơ hội gia nhập cho tài xế mới",
+      "primary_topic_share": 0.2249981462153864,
+      "secondary_topic_share": 0.2237274699754973
+    },
+    {
+      "article_id": "VNN_93c346ff1800",
+      "title": "Khám xét nhà nữ diễn viên 37 tuổi",
+      "primary_topic_share": 0.4140929227330682,
+      "secondary_topic_share": 0.4095790804511913
+    }
+  ],
+  "test_document_count": 1390,
+  "candidate_count": 523,
+  "sources": {
+    "config": {
+      "path": "configs/nmf.yaml",
+      "sha256": "af8b15b4fd0e7eca86377f2225fb4f6ac1f58bbe884d98c50c93e3fb355928c3"
+    },
+    "selection": {
+      "path": "results/nmf/nmf_p3_select_review_seed42_v1/topic_count_metrics.csv",
+      "sha256": "a94cb0b1ec8891ffe82f9cd06c887ff7c29a18aa0a99a097176e1d34420b1894"
+    },
+    "metrics": {
+      "path": "results/nmf/nmf_p3_k10_seed42_v1/test_metrics.json",
+      "sha256": "a8a78609ff7e290943242db5c82db643ae7f4345b23bcdae70f765dc27799f34"
+    },
+    "keywords": {
+      "path": "artifacts/nmf/nmf_p3_k10_seed42_v1/topic_keywords.json",
+      "sha256": "6ce932229b1cd483be6ac75b5f5b2b648d51f2845491de92d315e0f4a29f3b71"
+    },
+    "cases": {
+      "path": "results/nmf/nmf_p3_k10_seed42_v1/multi_topic_cases.csv",
+      "sha256": "bdb6bbc376ce0b2a2bde1243ab990176a217b202951b79b18e157efc909bc952"
+    },
+    "assignments": {
+      "path": "artifacts/nmf/nmf_p3_k10_seed42_v1/document_topics.parquet",
+      "sha256": "4f6b6b69110f1655ef751cb0b03935f59471a3c5db4371cd1e3b09b5f84d6a9a"
+    }
+  }
+}

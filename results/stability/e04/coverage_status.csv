@@ -1,0 +1,6 @@
+﻿method,status,n_seeds,seeds,missing
+LDA,available,5,42;52;62;72;82,
+HDBSCAN,available,10,42;43;44;45;46;47;48;49;50;51,
+KMeans,missing_submission,0,,results\stability\submissions\kmeans\per_seed.csv; results\stability\submissions\kmeans\validation_assignments.csv; results\stability\submissions\kmeans\run_metadata.json
+NMF,missing_submission,0,,results\stability\submissions\nmf\per_seed.csv; results\stability\submissions\nmf\validation_assignments.csv; results\stability\submissions\nmf\run_metadata.json
+BERTopic,missing_submission,0,,results\stability\submissions\bertopic\per_seed.csv; results\stability\submissions\bertopic\validation_assignments.csv; results\stability\submissions\bertopic\run_metadata.json

@@ -1,0 +1,6 @@
+reviewer_id,blind_topic_id,overlaps_other_topic,overlap_topic_ids,overlap_reason
+R2,T01,no,,HS003 so giá iPhone Duo với Galaxy Z Fold 8 và HS005 phân tích thiết kế iPhone Duo; T5/T12 chủ yếu nói thị trường hoặc tính năng iPhone 18 Pro. Một số bài Apple khác lẫn vào T01 nhưng không tạo ra topic trùng với T5/T12.
+R2,T02,no,,"HS006/HS008/HS010 nói phiên phúc thẩm vụ cựu hiệu trưởng THCS Ba Đình, còn HS007/HS009 nói vụ Nguyễn Thị Kim Tiến. T84 là các bản án hình sự thuộc vụ khác; điểm chung về tòa án chưa đủ để coi hai topic trùng nhau."
+R2,T03,no,,"HS012 nêu bồi thường giải phóng mặt bằng tuyến metro và HS015 nêu bãi xe theo Luật Phát triển đô thị. T93 có tin khu công nghệ cao Cần Thơ và logistics, T60 về pháp lý nhà đất; có giao thoa quy hoạch/đất nhưng trọng tâm khác."
+R2,T04,no,,"HS017-HS020 theo diễn biến giá vàng. HS016 có thêm Fed và chứng khoán Mỹ, nhưng T74 bàn chính sách lãi suất Fed và T94 bàn VN-Index; giao thoa ở một bài đa chủ đề không đồng nghĩa trùng topic giá vàng."
+R2,T05,no,,"HS021 bàn tác động uống quá nhiều nước, HS025 bàn ung thư tuyến tiền liệt, HS023 là sự kiện bệnh viện; HS024 chủ yếu là tin trẻ bị bỏ rơi. T32 tập trung vụ ngộ độc thực phẩm, T39 tập trung bữa ăn trường học; T05 rộng nhưng chưa thấy cặp topic trùng trọng tâm."

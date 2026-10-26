@@ -1,0 +1,39 @@
+# Cấu hình embedding M10 - Dataset v1.0, toàn bộ tập train
+dataset:
+  path: "data/processed/p0_minimal.csv"
+  split_manifest_path: "data/splits/split_manifest.csv"
+  split: "train"
+  data_version: "v1.0"
+  sample_size: null
+  sample_random_state: 42
+  title_col: "processed_title"
+  content_col: "processed_content"
+
+encoding:
+  batch_size: 16
+  normalize_embeddings: true
+
+runs:
+  minilm_title_content:
+    model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    content_words: 60
+    expected_dimensions: 384
+    artifact_path: "artifacts/embeddings/m10_v1_train_minilm.npz"
+
+  mpnet_title_content:
+    model_name: "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+    content_words: 60
+    expected_dimensions: 768
+    artifact_path: "artifacts/embeddings/m10_v1_train_mpnet.npz"
+
+  minilm_title_only:
+    model_name: "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    content_words: 0
+    expected_dimensions: 384
+    artifact_path: "artifacts/embeddings/m10_v1_train_title_only_minilm.npz"
+
+  mpnet_title_only:
+    model_name: "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
+    content_words: 0
+    expected_dimensions: 768
+    artifact_path: "artifacts/embeddings/m10_v1_train_title_only_mpnet.npz"

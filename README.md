@@ -1,4 +1,5 @@
 # vietnamese-news-topic-discovery
+Vietnamese news topic discovery using five NLP methods
 
 Ứng dụng khám phá chủ đề tin tức tiếng Việt với K-Means, NMF, LDA, HDBSCAN và BERTopic. Giao diện Streamlit gọi API FastAPI để phân loại bài báo mới bằng các mô hình đã lưu.
 

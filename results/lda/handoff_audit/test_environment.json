@@ -1,0 +1,26 @@
+{
+  "python_executable": "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\venv\\Scripts\\python.exe",
+  "python": "3.12.10",
+  "packages": {
+    "gensim": "4.4.0",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "pytest": "9.1.1"
+  },
+  "tests": 73,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "duration_seconds": 15.255,
+  "test_scope": [
+    "tests/test_lda_*.py",
+    "tests/test_e04_stability_summary.py"
+  ],
+  "warnings": {
+    "count": 26,
+    "source": "experiments/human_eval/summarize_lda_nmf.py:30",
+    "description": "Pandas4Warning for fillna with a string in float64 columns"
+  }
+}

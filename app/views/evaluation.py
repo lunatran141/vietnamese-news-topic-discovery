@@ -33,7 +33,10 @@ FIGURES = {
         ("Title-only và Title+Content", "results/kmeans/figures/m03a_metrics_comparison.png"),
     ],
     "nmf": [
-        ("Chọn số topic", "results/nmf/nmf_p3_select_review_seed42_v1/topic_count_selection.png"),
+        ("Chọn K — Validation v1 (K=4/6/8/10/12)", "results/nmf/figures/02_nmf_select_k.png"),
+        ("Final Test và từ khóa", "results/nmf/figures/03_nmf_test_keywords.png"),
+        ("Nguyên lý phân rã X ≈ WH ", "results/nmf/slide_figures/01_nmf_method.png"),
+        ("Ứng viên đa chủ đề, chưa xác nhận thủ công", "results/nmf/slide_figures/04_nmf_multi_topic_cases.png"),
     ],
     "lda": [
         (
@@ -153,7 +156,7 @@ def comparison_table(runs: list[ArtifactRun], split: str) -> pd.DataFrame:
         nmi = overview["normalized_mutual_info"]
         coherence = overview["coherence"]
 
-        if bundle.model_summary.algorithm.strip().lower() == "hdbscan":
+        if ari is None or bundle.model_summary.algorithm.strip().lower() == "hdbscan":
             metric_docs = bundle.document_topics
             if split != "all":
                 metric_docs = metric_docs.loc[
@@ -473,6 +476,10 @@ def _render_hdbscan_m12_charts(frame: pd.DataFrame) -> None:
 
 def _render_experiments(run: ArtifactRun) -> None:
     note("Hình và bảng kết quả đã được nhóm xuất trong repo. Các phép đo có protocol riêng cho từng phương pháp.")
+    if run.method == "nmf":
+        note("Hình thực nghiệm bên dưới thuộc các run v1 ghi trong tiêu đề, không tự đổi theo run đang chọn. "
+             "Xem Chuyên sâu theo phương pháp để xem biểu đồ tương tác của run hiện tại. "
+             "Sơ đồ X ≈ WH minh họa nguyên lý, không biểu diễn giá trị ma trận thực.")
     for title, relative_path in FIGURES.get(run.method, []):
         path = REPO_ROOT / relative_path
         if path.is_file():
@@ -586,7 +593,9 @@ def _render_bertopic_config(
     keywords[score_column] = pd.to_numeric(keywords[score_column], errors="coerce")
     st.plotly_chart(
         charts.keyword_bar(keywords, score_column, "Điểm c-TF-IDF"),
-        width="stretch", config=charts.PLOT_CONFIG,
+        width="stretch",
+        config=charts.PLOT_CONFIG,
+        key=f"bertopic_exp_keywords_{topic_id}",
     )
     data_table(keywords)
     st.caption("c-TF-IDF cao nghĩa là từ đặc trưng cho topic so với các topic khác; không phải xác suất xuất hiện của từ.")
@@ -743,6 +752,7 @@ def _render_bertopic_deep_dive(ctx: AnalysisContext) -> None:
                 charts.keyword_bar(keywords, score_column, "Điểm c-TF-IDF"),
                 width="stretch",
                 config=charts.PLOT_CONFIG,
+                key=f"bertopic_deep_keywords_{topic_id}",
             )
             data_table(keywords)
     with right:
