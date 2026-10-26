@@ -1,2 +1,3 @@
 data/processed/*.csv filter=lfs diff=lfs merge=lfs -text
 artifacts/lda/final/lda_pipeline.joblib filter=lfs diff=lfs merge=lfs -text
+artifacts/bertopic/experiments/e1_vietnamese_sbert/model/* filter=lfs diff=lfs merge=lfs -text
