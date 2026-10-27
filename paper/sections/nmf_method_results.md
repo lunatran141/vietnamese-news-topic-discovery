@@ -8,7 +8,7 @@ Văn bản được biểu diễn bằng TF-IDF gồm unigram và bigram, tối 
 
 Non-negative Matrix Factorization (NMF) phân rã ma trận bài–từ không âm X thành hai ma trận không âm W và H, sao cho X được xấp xỉ bởi W × H. X có D hàng là bài báo và V cột là feature; W có kích thước D × K, còn H có kích thước K × V. W[d,k] biểu thị mức đóng góp của chủ đề k vào bài d, trong khi H[k,v] biểu thị mức đóng góp của feature v vào chủ đề k. Mô hình tối thiểu hóa một nửa bình phương sai số Frobenius giữa X và W × H. Sai số Frobenius là căn bậc hai của tổng bình phương chênh lệch giữa các phần tử tương ứng của hai ma trận. Tính không âm khiến phép tái tạo có tính cộng, nhờ đó một bài có thể nhận trọng số từ nhiều chủ đề (Lee & Seung, 1999).
 
-Mô hình được khởi tạo bằng `nndsvda`, tối ưu bằng Coordinate Descent với hàm mất mát Frobenius, tối đa 500 vòng lặp, tolerance 0,0001 và seed 42. Khi trình bày mức độ liên quan của một bài với các chủ đề, hàng tương ứng trong W được chuẩn hóa để tổng bằng 1. Các giá trị này được gọi là topic share; chúng là trọng số tương đối, không phải xác suất nhãn đúng đã được hiệu chuẩn.
+Mô hình được khởi tạo bằng `nndsvda`, tối ưu bằng Coordinate Descent với hàm mất mát Frobenius, tối đa 500 vòng lặp và tolerance 0,0001. Thí nghiệm lựa chọn K và mô hình Final sử dụng seed 42; đánh giá stability bổ sung giữ K=10 và lặp lại với năm seed 42, 52, 62, 72, 82. Khi trình bày mức độ liên quan của một bài với các chủ đề, hàng tương ứng trong W được chuẩn hóa để tổng bằng 1. Các giá trị này được gọi là topic share; chúng là trọng số tương đối, không phải xác suất nhãn đúng đã được hiệu chuẩn.
 
 *Nguồn: `configs/nmf.yaml`; `src/models/nmf.py`; Lee & Seung (1999).*
 
@@ -38,7 +38,27 @@ K=10 đạt NPMI cao nhất, trong khi K=12 có sai số tái tạo thấp nhấ
 
 ## 3. Đánh giá độ ổn định của NMF
 
-Trong cấu hình được báo cáo, NMF sử dụng seed 42. Nhóm chưa thực hiện thí nghiệm huấn luyện lặp lại với nhiều random seeds và chưa tính độ tương đồng giữa các bộ từ khóa hoặc phân phối topic qua các lần chạy. Vì vậy, hiện chưa có kết quả để kết luận độ ổn định của NMF. Việc đánh giá độ nhạy theo seed là cần thiết trước khi xác định mức độ nhất quán của các topic.
+Nhóm thực hiện thí nghiệm bổ sung với năm seed 42, 52, 62, 72 và 82, giữ cố định K=10 cùng cấu hình TF-IDF/P3 và các tham số NMF đã chọn. TF-IDF được khớp một lần trên 6.493 bài Train, sau đó dùng chung từ vựng và IDF cho tất cả seed. Mỗi mô hình NMF được học trên Train và suy diễn topic share cho cùng 1.391 bài Validation theo `article_id`. Test không được biến đổi hoặc tính metric trong thí nghiệm stability; không chọn lại K hay seed tốt nhất từ kết quả này.
+
+Độ nhất quán được đánh giá trên toàn bộ 10 cặp seed khác nhau, không tính cặp tự so sánh. Với mỗi cặp, thuật toán Hungarian ghép một-một các topic sao cho tổng Jaccard của các tập top-10 từ khóa là lớn nhất. Trung bình Jaccard của các topic đã ghép đo độ nhất quán từ khóa. Cosine được tính giữa hai vector topic share của từng bài sau khi sắp xếp các cột theo phép ghép đó, rồi lấy trung bình trên Validation. ARI giữa các lần chạy so sánh hai vector topic chính của cùng các bài; chỉ số này không cần ghép số thứ tự topic và không đối chiếu `category_gold` như ARI trong bảng Test.
+
+| Chỉ số | Đơn vị thống kê | Trung bình ± độ lệch chuẩn mẫu |
+|---|---|---:|
+| NPMI Validation | 5 seed | 0,449257 ± 0,000000 |
+| Topic Diversity | 5 seed | 1,000000 ± 0,000000 |
+| Jaccard top-10 sau ghép topic | 10 cặp seed | 1,000000 ± 0,000000 |
+| ARI giữa các lần chạy | 10 cặp seed | 1,000000 ± 0,000000 |
+| Cosine của topic share đã ghép | 10 cặp seed | 0,9999999616 ± 0,0000000226 |
+
+Cả năm lần chạy đều hội tụ sau 41 vòng lặp, không có cảnh báo hội tụ và không có bài Validation có toàn bộ trọng số topic bằng 0. Top-10 từ khóa sau ghép và phân nhóm theo topic chính trùng nhau hoàn toàn trong các cặp đã khảo sát. Topic share vẫn có sai khác nhỏ: Cosine trung bình của từng cặp nằm trong khoảng 0,9999999162–0,9999999879, nên không diễn giải giá trị làm tròn 1,000000 là các trọng số giống hệt nhau. Sai số tái tạo chuẩn hóa trung bình là 0,9594766436, với độ lệch chuẩn mẫu khoảng 3,63 × 10⁻¹⁰. NPMI của seed 42 khớp kết quả Validation K=10 đã lưu ở M05.
+
+![Độ ổn định NMF qua năm seed trên Validation](../../results/stability/submissions/nmf/stability.png)
+
+*Hình 2. NPMI theo seed, Jaccard từ khóa và ARI/Cosine giữa 10 cặp seed. Đây là thí nghiệm Train/Validation với K cố định, tách biệt với đánh giá Final trên Test.*
+
+Kết quả cho thấy cấu hình NMF đang báo cáo ít nhạy với năm seed đã thử trên phân hoạch dữ liệu cố định. Kết luận chỉ áp dụng cho pipeline dùng khởi tạo `nndsvda`; chưa đánh giá các kiểu khởi tạo khác, thay đổi mẫu dữ liệu hoặc dữ liệu ở thời điểm khác. Trong phiên bản scikit-learn được sử dụng, bước NNDSVD gọi randomized SVD với `random_state`, còn các số 0 của `nndsvda` được điền bằng trung bình của X. Vì vậy đây là đánh giá thay đổi seed của đúng cấu hình hiện có, không phải khảo sát khởi tạo hoàn toàn ngẫu nhiên. Độ lệch chuẩn dùng ddof=1 và chỉ có ý nghĩa mô tả; 10 cặp seed dùng chung các mô hình thành phần nên không độc lập. Mức ổn định cao cũng không thay thế đánh giá khả năng diễn giải hay xác nhận các bài đa chủ đề.
+
+*Nguồn: `configs/nmf_stability.yaml`; `experiments/nmf/run_stability.py`; `results/stability/submissions/nmf/per_seed.csv`, `pairwise.csv`, `summary.csv` và `run_metadata.json`.*
 
 ## 4. Kết quả đánh giá cuối trên tập Test
 
@@ -89,6 +109,6 @@ Kết quả lựa chọn K phụ thuộc tiêu chí ưu tiên: K=10 có NPMI Val
 
 Kết quả NMF và LDA cần được so sánh thận trọng. NMF sử dụng TF-IDF trên P3, trong khi LDA sử dụng Bag-of-Words trên P2; hai mô hình cũng dùng số topic khác nhau. Vì vậy, chênh lệch metric giữa hai pipeline không thể quy riêng cho thuật toán. Việc so sánh nên ghi rõ biểu diễn đầu vào, tập dữ liệu, số topic và giao thức tính metric.
 
-Các hạn chế chính gồm: (1) chưa đánh giá độ ổn định qua nhiều random seeds; (2) chưa hoàn tất review thủ công độc lập về khả năng diễn giải topic và các bài đa chủ đề; (3) một số topic có thể phụ thuộc sự kiện hoặc thương hiệu trong giai đoạn thu thập dữ liệu; và (4) `category_gold` là chuyên mục báo, không phải ground-truth topic. Ngoài ra, test đã được dùng để tính metric và chọn ví dụ minh họa sau khi cấu hình được chốt; không nên dùng các nhận xét này để điều chỉnh K hoặc ngưỡng rồi tiếp tục báo cáo trên cùng test như một đánh giá độc lập.
+Các hạn chế chính gồm: (1) đánh giá stability mới giới hạn ở năm seed, một kiểu khởi tạo và một phân hoạch dữ liệu cố định; (2) chưa hoàn tất review thủ công độc lập về khả năng diễn giải topic và các bài đa chủ đề; (3) một số topic có thể phụ thuộc sự kiện hoặc thương hiệu trong giai đoạn thu thập dữ liệu; và (4) `category_gold` là chuyên mục báo, không phải ground-truth topic. Ngoài ra, test đã được dùng để tính metric và chọn ví dụ minh họa sau khi cấu hình được chốt; không nên dùng các nhận xét này để điều chỉnh K hoặc ngưỡng rồi tiếp tục báo cáo trên cùng test như một đánh giá độc lập.
 
-Trong nghiên cứu tiếp theo, nhóm có thể lặp lại NMF với nhiều seeds, hoàn tất đánh giá thủ công bằng nhiều reviewer và kiểm tra độ ổn định của các topic trên dữ liệu thu thập ở thời điểm khác.
+Trong nghiên cứu tiếp theo, nhóm có thể mở rộng bộ seed, khảo sát các kiểu khởi tạo khác, hoàn tất đánh giá thủ công bằng nhiều reviewer và kiểm tra độ ổn định của các topic trên dữ liệu thu thập ở thời điểm khác.

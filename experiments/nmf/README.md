@@ -34,3 +34,24 @@ python -m experiments.export_common_artifacts --model nmf
 Exporter đọc Parquet gốc, tạo bundle tại
 `artifacts/common/nmf/<run_id>/` và kiểm tra bundle bằng
 `load_artifact_bundle()`.
+
+## Đánh giá stability với K cố định
+
+```powershell
+.\.venv\Scripts\python.exe -B -u -m experiments.nmf.run_stability
+.\.venv\Scripts\python.exe -B -m experiments.summarize_e04_stability
+```
+
+Cấu hình `configs/nmf_stability.yaml` giữ K=10 và dùng seed 42, 52, 62, 72,
+82. TF-IDF được fit một lần trên Train; NMF được fit lại theo seed và đánh giá
+trên Validation. Thí nghiệm không biến đổi hoặc tính metric trên Test.
+
+Kết quả và bằng chứng nằm ở `results/stability/submissions/nmf/`. Runner từ
+chối ghi đè thư mục đã tồn tại. Để chạy lại, dùng thư mục mới, ví dụ:
+
+```powershell
+.\.venv\Scripts\python.exe -B -u -m experiments.nmf.run_stability --output results/nmf/stability_rerun_01
+```
+
+Xem `docs/nmf_stability.md` để đọc metric, cách ghép topic, các giới hạn và
+cách trỏ E04 sang kết quả chạy lại. Mô hình Final vẫn dùng seed 42.

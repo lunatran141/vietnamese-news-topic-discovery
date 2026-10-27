@@ -44,7 +44,7 @@ Nguồn: results/stability/e04. LDA có 5 seed; HDBSCAN có 10 seed 42–51. Đ�
 
 ARI toàn bộ bài của HDBSCAN bao gồm nhãn -1. ARI trên tập bài không phải outlier trong cả hai lần chạy có mean 0,795243; tập con này chỉ giữ trung bình khoảng 50,88% số bài. Không dùng điểm tập con để so trực tiếp với ARI toàn bộ bài. LDA và HDBSCAN dùng pipeline, số topic và bộ seed khác nhau nên bảng này không đủ để kết luận mô hình nào ổn định nhất. SD của các cặp là thống kê mô tả; các cặp không độc lập.
 
-coverage_status.csv đánh dấu KMeans, NMF và BERTopic là missing_submission theo schema E04. Điều này nói rằng công cụ chưa nhận đủ bộ đầu vào phù hợp, không có nghĩa những mô hình đó chưa được triển khai hoặc không có kết quả thực nghiệm khác trong repo. Xem docs/e04_stability_protocol.md để chuẩn bị đầu vào hoặc đổi đường dẫn nguồn trong configs/e04_stability.yaml.
+Sau khi bổ sung thí nghiệm NMF, coverage_status.csv đánh dấu LDA, HDBSCAN và NMF là available; KMeans và BERTopic vẫn là missing_submission theo schema E04. NMF dùng năm seed 42, 52, 62, 72, 82 với K=10, đạt ARI giữa các lần chạy 1,000000 ± 0,000000 trên Validation; chi tiết và giới hạn xem docs/nmf_stability.md. Bảng hai phương pháp phía trên giữ số liệu của lượt bàn giao LDA trước đó; bảng tổng hợp hiện tại nằm ở results/stability/e04/summary.csv. Điều này nói rằng công cụ chưa nhận đủ bộ đầu vào phù hợp, không có nghĩa những mô hình đó chưa được triển khai hoặc không có kết quả thực nghiệm khác trong repo. Xem docs/e04_stability_protocol.md để chuẩn bị đầu vào hoặc đổi đường dẫn nguồn trong configs/e04_stability.yaml.
 
 ## Kiểm thử local sau khi cài Gensim
 

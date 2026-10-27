@@ -1,0 +1,22 @@
+2026-10-27 10:32:59,013 Fit TF-IDF once on 6493 Train articles; evaluate 1391 Validation articles
+2026-10-27 10:33:08,634 Training NMF K=10 init=nndsvda seed=42
+2026-10-27 10:33:10,830 Completed seed 42: NPMI=0.449257384 diversity=1.000000 n_iter=41 warnings=0
+2026-10-27 10:33:10,831 Training NMF K=10 init=nndsvda seed=52
+2026-10-27 10:33:12,965 Completed seed 52: NPMI=0.449257384 diversity=1.000000 n_iter=41 warnings=0
+2026-10-27 10:33:12,966 Training NMF K=10 init=nndsvda seed=62
+2026-10-27 10:33:14,860 Completed seed 62: NPMI=0.449257384 diversity=1.000000 n_iter=41 warnings=0
+2026-10-27 10:33:14,860 Training NMF K=10 init=nndsvda seed=72
+2026-10-27 10:33:17,551 Completed seed 72: NPMI=0.449257384 diversity=1.000000 n_iter=41 warnings=0
+2026-10-27 10:33:17,552 Training NMF K=10 init=nndsvda seed=82
+2026-10-27 10:33:19,791 Completed seed 82: NPMI=0.449257384 diversity=1.000000 n_iter=41 warnings=0
+2026-10-27 10:33:20,822 Completed 5 seeds / 10 distinct pairs. Results: D:\Document UEH\NLP\Project Final\vietnamese-news-topic-discovery\results\stability\submissions\nmf
+2026-10-27 10:33:20,830 
+method      unit                          metric  count      mean   sample_std       min       max        range
+   NMF      seed                       coherence      5  0.449257 0.000000e+00  0.449257  0.449257 0.000000e+00
+   NMF      seed                 topic_diversity      5  1.000000 0.000000e+00  1.000000  1.000000 0.000000e+00
+   NMF      seed normalized_reconstruction_error      5  0.959477 3.629933e-10  0.959477  0.959477 8.297247e-10
+   NMF      seed                          n_iter      5 41.000000 0.000000e+00 41.000000 41.000000 0.000000e+00
+   NMF      seed                        coverage      5  1.000000 0.000000e+00  1.000000  1.000000 0.000000e+00
+   NMF seed_pair                ari_between_runs     10  1.000000 0.000000e+00  1.000000  1.000000 0.000000e+00
+   NMF seed_pair                 keyword_jaccard     10  1.000000 0.000000e+00  1.000000  1.000000 0.000000e+00
+   NMF seed_pair                 document_cosine     10  1.000000 2.262980e-08  1.000000  1.000000 7.168269e-08
