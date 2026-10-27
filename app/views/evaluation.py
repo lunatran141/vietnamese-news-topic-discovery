@@ -35,6 +35,7 @@ FIGURES = {
     "nmf": [
         ("Chọn K — Validation v1 (K=4/6/8/10/12)", "results/nmf/figures/02_nmf_select_k.png"),
         ("Final Test và từ khóa", "results/nmf/figures/03_nmf_test_keywords.png"),
+        ("Độ ổn định qua 5 seed — Validation, K=10", "results/stability/submissions/nmf/stability.png"),
         ("Nguyên lý phân rã X ≈ WH ", "results/nmf/slide_figures/01_nmf_method.png"),
         ("Ứng viên đa chủ đề, chưa xác nhận thủ công", "results/nmf/slide_figures/04_nmf_multi_topic_cases.png"),
     ],
@@ -89,6 +90,9 @@ TABLES = {
     ],
     "nmf": [
         "results/nmf/nmf_p3_select_review_seed42_v1/topic_count_metrics.csv",
+        "results/stability/submissions/nmf/per_seed.csv",
+        "results/stability/submissions/nmf/pairwise.csv",
+        "results/stability/submissions/nmf/summary.csv",
         "results/nmf/nmf_p3_k10_seed42_dashboard_v2/split_metrics.csv",
         "results/nmf/nmf_p3_k10_seed42_dashboard_v2/runtime_by_stage.csv",
         "results/nmf/nmf_p3_k10_seed42_dashboard_v2/multi_topic_cases.csv",

@@ -1,0 +1,13 @@
+# Supplement the selected NMF pipeline; do not search K or choose a best seed.
+base_config: configs/nmf.yaml
+
+stability:
+  n_topics: 10
+  random_seeds: [42, 52, 62, 72, 82]
+  top_n_words: 10
+  fit_split: train
+  evaluation_split: val
+  thread_limit: 2
+
+outputs:
+  directory: results/stability/submissions/nmf

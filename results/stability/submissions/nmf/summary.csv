@@ -1,0 +1,9 @@
+﻿method,unit,metric,count,mean,sample_std,min,max,range
+NMF,seed,coherence,5,0.44925738385583297,0.0,0.44925738385583297,0.44925738385583297,0.0
+NMF,seed,topic_diversity,5,1.0,0.0,1.0,1.0,0.0
+NMF,seed,normalized_reconstruction_error,5,0.9594766435892284,3.6299334306541285e-10,0.9594766431602424,0.9594766439899671,8.297247333644009e-10
+NMF,seed,n_iter,5,41.0,0.0,41.0,41.0,0.0
+NMF,seed,coverage,5,1.0,0.0,1.0,1.0,0.0
+NMF,seed_pair,ari_between_runs,10,1.0,0.0,1.0,1.0,0.0
+NMF,seed_pair,keyword_jaccard,10,1.0,0.0,1.0,1.0,0.0
+NMF,seed_pair,document_cosine,10,0.9999999616309119,2.262980149578453e-08,0.9999999162165331,0.9999999878992224,7.168268933988031e-08

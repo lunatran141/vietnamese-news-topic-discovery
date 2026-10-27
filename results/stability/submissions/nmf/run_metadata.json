@@ -1,0 +1,118 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-10-27T03:32:58.433635+00:00",
+  "dataset_version": "v1.0",
+  "fit_split": "train",
+  "evaluation_split": "val",
+  "test_used_for_fit_or_evaluation": false,
+  "preprocessing": "p3_no_stopwords",
+  "text_column": "text",
+  "n_topics": 10,
+  "top_n_words": 10,
+  "seeds": [
+    42,
+    52,
+    62,
+    72,
+    82
+  ],
+  "n_train": 6493,
+  "n_validation": 1391,
+  "python": "3.14.0",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "numpy": "2.3.5",
+  "scipy": "1.16.3",
+  "sklearn": "1.8.0",
+  "pandas": "2.3.3",
+  "representation": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 3,
+    "max_df": 0.95,
+    "max_features": 50000,
+    "sublinear_tf": true,
+    "token_pattern": "(?u)\\b\\w\\w+\\b"
+  },
+  "model": {
+    "init": "nndsvda",
+    "solver": "cd",
+    "beta_loss": "frobenius",
+    "max_iter": 500,
+    "tolerance": 0.0001
+  },
+  "seed_parameter": "NMF.random_state; NNDSVD initialization uses randomized SVD in the installed sklearn implementation",
+  "fixed_steps": "P3 text, article_id splits, row order, Train TF-IDF vocabulary/IDF, K and all non-seed NMF parameters",
+  "seed_selection": "none; seed 42 remains the reported Final model",
+  "npmi_definition": "document_binary_common",
+  "keyword_matching": "hungarian_top10_jaccard",
+  "document_cosine": "mean per-document cosine after the same keyword-based topic permutation; zero vector contributes 0",
+  "ari_definition": "pairwise Validation primary-topic assignments, without category_gold",
+  "unassigned_policy": "zero topic-weight rows receive topic_id=-1",
+  "standard_deviation": "sample, ddof=1; descriptive only; seed pairs are dependent",
+  "thread_limit": 2,
+  "input_sha256": {
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\configs\\nmf_stability.yaml": "abd971b698f33fd2a07150963911d335149502167ab2001ce82aedd49fefca0a",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\configs\\nmf.yaml": "af8b15b4fd0e7eca86377f2225fb4f6ac1f58bbe884d98c50c93e3fb355928c3",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\data\\processed\\p3_no_stopwords.csv": "663a34f309ef1f6d8d2dc61a68fd041d5f7aac71aa930dccb74841847a7d6710",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\data\\processed\\dataset_manifest.json": "46865c09f42d0a66542929bea9581a5942b2ad118d9008c5079172425466aa55",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\data\\splits\\split_manifest.csv": "387e815af3cb6c0f20967cfa6aeffbd61f2b447d201f3eeda1173eedda8e1455"
+  },
+  "source_sha256": {
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\experiments\\nmf\\run_stability.py": "bd43ecaecf9cbfd56634afdeb3f12c6eb9c06ba3e5dc562ddb446fe2fda63313",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\experiments\\nmf\\run_experiment.py": "03e6862401a01a6172e583b84012819479037e964db9868791907da7f7e23989",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\experiments\\nmf\\metrics.py": "7704d253f66624f1b7b2ec47f7765aa064be2e468fc71cc78191c353739531b6",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\src\\models\\nmf.py": "4066f033c4b6dd6e5a0dc6929f8a3905badab068677620386c57d7152e347459",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\src\\evaluation\\lda_stability.py": "fc2ed5c33cd074f84b806c26bd822a1de418e0a77362a74c76caa4b6fb918d25",
+    "D:\\Document UEH\\NLP\\Project Final\\vietnamese-news-topic-discovery\\src\\evaluation\\stability_summary.py": "ae945346a62d34bae9690ec1f22dc6771cb3c170a4f4f30b41d142e3004f593e"
+  },
+  "threadpools": [
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 2,
+      "prefix": "libscipy_openblas",
+      "filepath": "C:\\Users\\nguye\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\numpy.libs\\libscipy_openblas64_-9e3e5a4229c1ca39f10dc82bba9e2b2b.dll",
+      "version": "0.3.30",
+      "threading_layer": "pthreads",
+      "architecture": "SkylakeX"
+    },
+    {
+      "user_api": "openmp",
+      "internal_api": "openmp",
+      "num_threads": 2,
+      "prefix": "vcomp",
+      "filepath": "C:\\Users\\nguye\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\sklearn\\.libs\\vcomp140.dll",
+      "version": null
+    },
+    {
+      "user_api": "blas",
+      "internal_api": "openblas",
+      "num_threads": 2,
+      "prefix": "libscipy_openblas",
+      "filepath": "C:\\Users\\nguye\\AppData\\Local\\Programs\\Python\\Python314\\Lib\\site-packages\\scipy.libs\\libscipy_openblas-48c358d105077551cc9cc3ba79387ed5.dll",
+      "version": "0.3.29.dev",
+      "threading_layer": "pthreads",
+      "architecture": "SkylakeX"
+    }
+  ],
+  "representation_seconds": 9.600845899999968,
+  "n_features": 50000,
+  "finished_at_utc": "2026-10-27T03:33:20.616205+00:00",
+  "n_seed_pairs": 10,
+  "all_fit_converged": true,
+  "any_convergence_warning": false,
+  "output_sha256": {
+    "config_used.json": "bdb1ceaf8a3d15d2d0fb47045a2855506527b233f8d510ffd719b41737dcc25a",
+    "feature_names.json": "11c489017a32d9c3414ea456dbbdb8d44fbc2f2bb9313c0978fb943e8e31cca4",
+    "pairwise.csv": "20ea8b2a07700005b5d392febbf9dacc84883da8f1144467d16764a10f4da3b5",
+    "per_seed.csv": "ffa91ed29e12145d4496e39c7509a9007f3f7cec5873e0661b8684d3039fa498",
+    "stability.png": "4aab94f137b79f75493cda3ee4109e0c43484f8a10904ec1d101e8154a5fe09c",
+    "summary.csv": "c89dd3ad54bed58583375a16a999284fbe914efd16cfa88741f7d7eb63d25c13",
+    "topic_keywords.csv": "8e052e5d1b202e803e027fcd83264d7397ec8e2547c99345c80b0140b97ab41e",
+    "topic_matches.csv": "793a51baa1f82e7e089dfa21a204b1611d013b761e87aace514385cfdd3f6a88",
+    "validation_assignments.csv": "cdbf6cb1541f04b98f0a548c16ce07e3c7ad993ea9a16cc223549625554c6fa5",
+    "validation_distributions.npz": "d65266c77cac6771ccc4d6b8fd1a33c44c4e59dfe2e05e901e2faf351e6b6d86"
+  }
+}
